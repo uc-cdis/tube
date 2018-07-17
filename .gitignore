@@ -105,3 +105,6 @@ ENV/
 # jwt keys
 keys
 tests/resources/keys/*.pem
+
+# PyCharm
+.idea

@@ -1,59 +1,61 @@
-import os
 import subprocess
 import psycopg2
+from tube.utils import list_to_file, get_sql_to_hdfs_config, make_sure_hdfs_path_exist
 
 
-def get_all_tables(pydbc):
-    conn = psycopg2.connect(pydbc)
-    cursor = conn.cursor()
-    cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'")
-    tables = list(map(lambda i: i[0], cursor.fetchall()))
-    cursor.close()
-    conn.close()
-    return tables
+class SqlToHDFS(object):
+    def __init__(self, config, formatter):
+        self.config = config
+        self.formatter = formatter
 
+    def get_all_tables(self):
+        conn = psycopg2.connect(self.config.PYDBC)
+        cursor = conn.cursor()
+        cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'")
+        tables = list(map(lambda i: i[0], cursor.fetchall()))
+        list_to_file(tables, self.config.LIST_TABLES_FILES)
+        cursor.close()
+        conn.close()
+        return tables
 
-def import_table_from_sql(tb, jdbc, username, password, output_dir):
-    myenv = os.environ.copy()
-    execs = [
-        'sqoop', 'import',
-        '--direct', '--connect', jdbc,
-        '--username', username,
-        '--password', password,
-        '--table', tb,
-        '--m', '1',
-        '--target-dir', output_dir + '/{}'.format(tb),
-        '--map-column-java', '_props=String,acl=String,_sysan=String'
-    ]
-    sp = subprocess.Popen(execs, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    return sp
+    @classmethod
+    def import_table_from_sql(cls, tb, jdbc, username, password, output_dir, m):
+        optional_fields = 'node_id=String,' if tb.startswith('node_') else 'src_id=String,dst_id=String,'
+        execs = [
+            'sqoop', 'import',
+            '--direct', '--connect', jdbc,
+            '--username', username,
+            '--password', password,
+            '--table', tb,
+            '--m', '{}'.format(m),
+            '--target-dir', output_dir + '/{}'.format(tb),
+            '--outdir', 'temp',
+            '--enclosed-by', '"',
+            '--map-column-java', '_props=String,acl=String,_sysan=String,{}'.format(optional_fields)
+        ]
+        sp = subprocess.Popen(execs, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        return sp
 
+    def generate_import_all_tables(self):
+        config = get_sql_to_hdfs_config(self.config.__dict__)
+        tables = self.get_all_tables()
+        output = make_sure_hdfs_path_exist(config['output'])
 
-def generate_sp(sp):
-    line = sp.stdout.readline()
-    while line != '':
-        yield line
-        line = sp.stdout.readline()
-
-
-def generate_import(tables, config):
-    input = config['input']
-    output = config['output']
-
-    for tb in tables:
-        if 'node' not in tb and 'edge' not in tb:
-            continue
-        yield tb + '<br/>\n'
-        sp = import_table_from_sql(
+        for tb in tables:
+            if 'node' not in tb and 'edge' not in tb:
+                continue
+            yield self.formatter.format_line(tb)
+            sp = SqlToHDFS.import_table_from_sql(
                 tb,
-                input['jdbc'],
-                input['username'],
-                input['password'],
-                output)
+                config['input']['jdbc'],
+                config['input']['username'],
+                config['input']['password'],
+                output, self.config.PARALLEL_JOBS
+            )
 
-        line = sp.stdout.readline()
-        while line != '':
-            yield line + '<br/>\n'
             line = sp.stdout.readline()
-            if line == '':
-                line = sp.stderr.readline()
+            while line != '':
+                yield self.formatter.format_line(line)
+                line = sp.stdout.readline()
+                if line == '':
+                    line = sp.stderr.readline()

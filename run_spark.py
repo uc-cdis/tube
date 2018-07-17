@@ -29,7 +29,7 @@ def main():
     sc = make_spark_context(config)
 
     etl = Gen3Translator(sc, config)
-    etl.run_etl(config)
+    etl.run_etl()
 
     # Tear down actions
     sc.stop()
