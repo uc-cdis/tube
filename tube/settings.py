@@ -14,3 +14,11 @@ except ImportError:
         print('finished importing')
     except IOError:
         logger.warn("local_settings is not found")
+
+HDFS_DIR = '/result'
+APP_NAME = 'Gen3 ETL'
+# Three modes: Test, Dev, Prod
+RUNNING_MODE = 'Dev'
+SPARK_MASTER = 'local[1]'
+LIST_TABLES_FILES = 'tables.txt'
+PARALLEL_JOBS = 2

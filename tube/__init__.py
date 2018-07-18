@@ -26,4 +26,3 @@ def app_register_blueprints(app):
             'import endpoint': '/import'
         }
         return flask.jsonify(endpoints)
-
