@@ -10,7 +10,9 @@ We decided to use python instead of scala because cdis dev teams are much more c
 Learning all the options that one of our collabators -OICR tried (posted [here](https://softeng.oicr.on.ca/grant_guo/2017/08/14/spark/) ). We decided to go with similar strategy - dump postgres to HDFS and load HDFS to rdd/SPARK.
 We decided to use [SQOOP](https://github.com/apache/sqoop) to dump the postgres database to HDFS. In order to dump postgresql database, SQOOP calls [CopyManager](https://jdbc.postgresql.org/documentation/publicapi/org/postgresql/copy/CopyManager.html).
 
-# Installation Guide
+# Local Development Installation Guide
+The installation guide below is only tested on OSX.
+
 ### Prerequisite
 
 - Install Java and remember to configure JAVA\_HOME in the `~/.bash\_profile` or `~/.bashrc`
@@ -30,7 +32,7 @@ export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
 export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
 ```
 
-I installed HADOOP via `brew`, so my `HADOOP_HOME=hadoop/3.1.0/libexec/`
+I installed HADOOP via `brew`, so my `HADOOP_HOME=/usr/local/Cellar/hadoop/3.1.0/libexec/`
 
 #### Configure Hadoop configuration
 You can find all the Hadoop configuration files in the location `$HADOOP_HOME/etc/hadoop`. You need to make suitable changes in those configuration files according to your Hadoop infrastructure.
@@ -83,12 +85,21 @@ You can find all the Hadoop configuration files in the location `$HADOOP_HOME/et
 <configuration>
 <!-- Site specific YARN configuration properties -->
    <property>
-      <name>mapreduce.framework.name</name>
-      <value>yarn</value>
+        <name>mapreduce.framework.name</name>
+        <value>yarn</value>
+        <name>yarn.resourcemanager.address</name>
+        <value>127.0.0.1:8032</value>
+        </property>
+        <property>
+        <name>yarn.resourcemanager.scheduler.address</name>
+        <value>127.0.0.1:8030</value>
+        </property>
+        <property>
+        <name>yarn.resourcemanager.resource-tracker.address</name>
+        <value>127.0.0.1:8031</value>
    </property>
-</configuration>
+</configuration>```
 
-```
 * `hadoop-env.sh`
 In this bash file, change the following line:
 ```
@@ -106,27 +117,15 @@ esac
 export HDFS_NAMENODE_OPTS="-Dhadoop.security.logger=INFO,RFAS"
 export HDFS_SECONDARYNAMENODE_OPTS="-Dhadoop.security.logger=INFO,RFAS"
 export HDFS_DATANODE_OPTS="-Dhadoop.security.logger=ERROR,RFAS"
-export HDFS_NAMENODE_USER=your_user_node_name
-export HDFS_DATANODE_USER=your_user_node_name
-export HDFS_SECONDATRYNAMENODE_USER=your_user_node_name
+export HDFS_NAMENODE_USER=YOUR_USER_NODE_NAME
+export HDFS_DATANODE_USER=YOUR_USER_NODE_NAME
+export HDFS_SECONDATRYNAMENODE_USER=YOUR_USER_NODE_NAME
 ```
 
 #### Enable SSH service locally
-Configure your `sshd` service by running command `vi /System/Library/LaunchDaemons/ssh.plist` and add the following entry to sockets:
+configure your environment to allow localhost ssh by adding the pub key to authorized list:
 ```
-<key>Sockets</key>
-<dict>
-    <key>Listeners</key>
-    <dict>
-        <key>SockServiceName</key>
-        <string>ssh</string>
-        <key>Bonjour</key>
-        <array>
-            <string>ssh</string>
-            <string>sftp-ssh</string>
-        </array>
-    </dict>
-</dict>
+cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 ```
 
 Check if you can ssh to the localhost without passphrase by running `ssh localhost`.
