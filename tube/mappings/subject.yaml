@@ -1,0 +1,50 @@
+subject:
+  _props:
+    - id
+  _flattend_props:
+    - path: virus_infections
+      _props:
+        - virus_type
+    - path: demographics
+      _props:
+        - virus_type
+        - gender
+        - race
+        - ethnicity
+        - vita_status
+        - year_of_birth
+  _aggregated_props:
+    - name: _follow_ups_count
+      path: follow_ups
+      function: count
+    - name: _summary_drug_uses_count
+      path: follow_ups.summary_drug_uses
+      function: count
+    - name: _summary_lab_results_on_follow_up_count
+      path: follow_ups.summary_lab_result
+      function: count
+    - name: _samples_count
+      path: samples
+      function: count
+    - name: _aliquots_count
+      path: samples.aliquots
+      function: count
+    - name: _summary_lab_results_on_sample_count
+      path: samples.summary_lab_results
+      function: count
+    - name: _mRNA_microarrays_count
+      path: samples.aliquots.mRNA_microarrays
+      function: count
+    - name: _miRNA_microarrays_count
+      path: samples.aliquots.miRNA_microarrays
+      function: count
+    - name: _lipid_mass_spectrometries_count
+      path: samples.aliquots.lipid_mass_spectrometries
+      function: count
+    - name: _protein_mass_spectrometries_count
+      path: samples.aliquots.protein_mass_spectrometries
+      function: count
+    - name: _metabolite_mass_spectrometries_count
+      path: samples.aliquots.metabolite_mass_spectrometries
+      function: count
+#      target_field: field_name
