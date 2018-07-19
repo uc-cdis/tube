@@ -3,6 +3,7 @@ import tube.settings as config
 
 from tube.spark import make_spark_context
 from tube.spark.translator import Gen3Translator
+from tube.spark.parser import Parser
 from cdislogging import get_logger
 
 logger = get_logger(__name__)
@@ -26,13 +27,14 @@ def main():
 
     config.RUNNING_MODE = args.config
 
-    sc = make_spark_context(config)
+    parser = Parser('tube/mappings/subject.yaml', config.DICTIONARY_URL)
 
-    etl = Gen3Translator(sc, config)
-    etl.run_etl()
-
-    # Tear down actions
-    sc.stop()
+    # sc = make_spark_context(config)
+    #
+    # etl = Gen3Translator(sc, config)
+    # etl.run_etl()
+    #
+    # sc.stop()
 
 
 if __name__ == '__main__':

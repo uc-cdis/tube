@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='fence',
-    version='0.2.0',
+    name='tube',
+    version='0.0.1',
     install_requires=[
         "Authlib[crypto]",
         "oauth2client<4.0dev,>=2.0.0",

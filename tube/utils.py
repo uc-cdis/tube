@@ -1,5 +1,6 @@
 import tube.settings as config
 from pyspark import SparkConf, SparkContext
+from dictionaryutils import DataDictionary, dictionary
 
 
 def get_sql_to_hdfs_config(config):
@@ -52,3 +53,17 @@ def make_sure_hdfs_path_exist(path, sc=None):
     if not fs.exists(opath(path)):
         fs.mkdirs(opath(path))
     return path
+
+
+def init_dictionary(url):
+    d = DataDictionary(url=url)
+    dictionary.init(d)
+    # the gdcdatamodel expects dictionary initiated on load, so this can't be
+    # imported on module level
+    from gdcdatamodel import models as md
+    return d, md
+
+
+def get_edge(models, target, edge_name):
+    node = models.Node.get_subclass(target)
+    return getattr(node, edge_name).target_class.__tablename__
