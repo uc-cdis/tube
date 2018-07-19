@@ -149,10 +149,19 @@ Edit two following lines in `$SQOOP_HOME/sqoop-env.sh`:
 export HADOOP_COMMON_HOME=YOUR_HADOOP_HOME 
 export HADOOP_MAPRED_HOME=YOUR_HADOOP_HOME
 ```
+Add sqoop path to your bash profile:
+```
+export SQOOP_HOME=YOUR_SCOPE_HOME
+export PATH=$SQOOP_HOME/bin:$PATH
+```
+
+Download [postgresql jar file](https://jdbc.postgresql.org/download.html) to SQOOP_HOME/lib/
 
 ### Clone this repository to your local PC
 `mv local_settings.example.py local_settings.py`
 
 Change the configuration keys to suitable values.
+
+Start hadoop if it's stopped: `$HADOOP_HOME/sbin/start-dfs.sh`
 1. Run `python run_import.py` to import data from a SQL database to HDFS.
 2. Run `python run_spark.py` to import data from the HDFS files to RDD.
