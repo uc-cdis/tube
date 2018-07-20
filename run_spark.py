@@ -29,12 +29,12 @@ def main():
 
     parser = Parser('tube/mappings/subject.yaml', config.DICTIONARY_URL)
 
-    # sc = make_spark_context(config)
-    #
-    # etl = Gen3Translator(sc, config)
-    # etl.run_etl()
-    #
-    # sc.stop()
+    sc = make_spark_context(config)
+
+    etl = Gen3Translator(sc, parser, config)
+    etl.run_etl()
+
+    sc.stop()
 
 
 if __name__ == '__main__':
