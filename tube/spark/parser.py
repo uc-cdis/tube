@@ -1,37 +1,33 @@
 import yaml
-from tube.utils import init_dictionary
+from tube.spark.node import Node, Reducer
+from tube.utils import init_dictionary, get_edge_table, get_node_label, object_to_string
 
 
-class MapReducePath(object):
-    def __init__(self, current):
-        self.parent = set()
-        self.children = set()
-        self.name = current
-        self.non_leaf_children_count = 0
+class Path(object):
+    def __init__(self, prop_name, leaf, path_name, fn):
+        self.name = prop_name
+        self.fn = fn
+        self.leaf = leaf
+        self.path = Path.create_path(path_name)
 
-    def update_none_leaves_count(self, leaves):
-        count = 0
-        for n in self.children:
-            if n not in leaves:
-                count += 1
-        self.non_leaf_children_count = count
+    @classmethod
+    def create_path(cls, s_path):
+        return tuple(s_path.split('.'))
+
+    def __key__(self):
+        return self.path + (self.leaf,) + (self.fn,)
+
+    def __hash__(self):
+        return hash(self.__key__())
 
     def __str__(self):
-        if len(self.children) > 0:
-            return '<name: {0}, parent: {1}, children: {2}, non_leaf_children_count: {3}>'\
-                .format(self.name, self.parent, self.children, self.non_leaf_children_count)
-        else:
-            return '<name: {0}, parent: {1}>' \
-                .format(self.name, self.parent)
+        return object_to_string(self)
 
     def __repr__(self):
-        return self.__str__()
-
-    def __lt__(self, other):
-        return self.non_leaf_children_count < other.non_leaf_children_count
+        return str(self.__key__())
 
     def __eq__(self, other):
-        return self.non_leaf_children_count == other.non_leaf_children_count
+        return self.__key__() == other.__key__()
 
 
 class Parser(object):
@@ -41,56 +37,73 @@ class Parser(object):
     def __init__(self, file_path, url):
         stream = file(file_path)
         self.mapping = yaml.load(stream)
+        self.root = list(self.mapping.keys())[0]
         self.dictionary, self.models = init_dictionary(url)
-        self.reversed_index = {}
-        self.paths = []
-        self.leaves = {}
+        self.nodes = []
         self.load_parser_from_dict()
 
     def load_parser_from_dict(self):
         flat_paths = self.create_paths()
-        self.reversed_index, list_paths, self.leaves = self.construct_reversed_parsing_tree(flat_paths)
+        print('flat_paths:\n{}\n'.format('\n'.join(str(i) for i in flat_paths)))
+        list_nodes, leaves = self.construct_reversed_parsing_tree(flat_paths)
 
-        self.paths = [l for l in list_paths if l.name not in self.leaves]
+        self.nodes = [l for l in list_nodes if l not in leaves]
 
-        for p in self.paths:
-            p.non_leaf_children_count = self.non_leaves_count(p.children, self.leaves)
-        self.paths.sort()
-        self.refresh_reversed_indices()
-        # print('leaves: {}\n'.format(self.leaves))
-        # print('paths: {}\n'.format(self.paths))
+        for p in self.nodes:
+            p.non_leaf_children_count = self.non_leaves_count(p.children, leaves)
+        self.nodes.sort()
+        # self.refresh_reversed_indices()
+        print('list of nodes:\n{}\n'.format('\n'.join(str(i) for i in self.nodes)))
+        print('leaves:\n{}\n'.format('\n'.join(str(i) for i in leaves)))
         # print('reversed indices: {}\n'.format(self.reversed_index))
 
-    def refresh_reversed_indices(self):
-        self.reversed_index = {}
-        for i in range(0, len(self.paths)):
-            self.reversed_index[self.paths[i].current] = i
+    # def refresh_reversed_indices(self):
+    #     self.reversed_index = {}
+    #     for i in range(0, len(self.paths)):
+    #         self.reversed_index[(self.paths[i].name, self.paths[i].edge_up_tbl)] = i
 
     def construct_reversed_parsing_tree(self, flat_paths):
         reversed_index = {}
-        list_paths = []
-        for p in flat_paths:
-            p_range = list(reversed(range(1, len(list(p)))))
+        list_nodes = []
+        for path in flat_paths:
+            n_name = path.leaf
+            p = path.path
+            p_range = list(reversed(range(0, len(list(p)))))
             for i in p_range:
-                n_child = list_paths[reversed_index[p[i]]] if p[i] in reversed_index else MapReducePath(p[i])
-                n_parent = list_paths[reversed_index[p[i-1]]] if p[i-1] in reversed_index else MapReducePath(p[i-1])
+                parent, edge_up_tbl = get_edge_table(self.models, n_name, p[i])
+                parent_name = get_node_label(self.models, parent)
+                n = list_nodes[reversed_index[(n_name, edge_up_tbl)]] \
+                    if (n_name, edge_up_tbl) in reversed_index \
+                    else Node(n_name, edge_up_tbl)
 
-                n_child.parent.add(p[i-1])
-                n_parent.children.add(p[i])
-                if p[i] not in reversed_index:
-                    list_paths.append(n_child)
-                    reversed_index[p[i]] = len(list_paths) - 1
-                if p[i-1] not in reversed_index:
-                    list_paths.append(n_parent)
-                    reversed_index[p[i-1]] = len(list_paths) - 1
+                if n_name == path.leaf:
+                    n.reducer = Reducer(None, path.fn, path.name)
 
-        return reversed_index, list_paths, self.get_leaves(list_paths)
+                if (i > 0):
+                    _, parent_edge_up_tbl = get_edge_table(self.models, parent_name, p[i-1])
+                else:
+                    parent_edge_up_tbl = None
+                n_parent = list_nodes[reversed_index[(parent_name, parent_edge_up_tbl)]] \
+                    if (parent_name, parent_edge_up_tbl) in reversed_index \
+                    else Node(parent_name, parent_edge_up_tbl)
+                n_parent.add_child(n)
+                n.parent = n_parent
+
+                if (n_name, edge_up_tbl) not in reversed_index:
+                    list_nodes.append(n)
+                    reversed_index[(n_name, edge_up_tbl)] = len(list_nodes) - 1
+                if (parent_name, parent_edge_up_tbl) not in reversed_index:
+                    list_nodes.append(n_parent)
+                    reversed_index[(parent_name, parent_edge_up_tbl)] = len(list_nodes) - 1
+                n_name = parent_name
+
+        return list_nodes, self.get_leaves(list_nodes)
 
     def get_leaves(self, list_paths):
-        leaves = {}
+        leaves = set([])
         for l in list_paths:
             if len(l.children) == 0:
-                leaves[l.current] = l
+                leaves.add(l)
         return leaves
 
     def non_leaves_count(self, set_to_count, leaves):
@@ -105,5 +118,12 @@ class Parser(object):
         flat_paths = set()
         aggregated_nodes = self.mapping[root_key]['_aggregated_props']
         for n in aggregated_nodes:
-            flat_paths.add(tuple([root_key] + n['path'].split('.')))
+            path = Path(n['name'], n['leaf'], n['path'], n['fn'])
+            flat_paths.add(path)
         return flat_paths
+
+    def get_mapping_func(self, leaf_func):
+        if leaf_func == 'count':
+            return 'sum'
+        else:
+            return leaf_func

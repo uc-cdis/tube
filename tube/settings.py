@@ -1,5 +1,3 @@
-import os
-
 from cdislogging import get_logger
 
 logger = get_logger(__name__)
@@ -21,4 +19,4 @@ APP_NAME = 'Gen3 ETL'
 RUNNING_MODE = 'Dev'
 SPARK_MASTER = 'local[1]'
 LIST_TABLES_FILES = 'tables.txt'
-PARALLEL_JOBS = 2
+PARALLEL_JOBS = 1

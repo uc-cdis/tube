@@ -64,6 +64,17 @@ def init_dictionary(url):
     return d, md
 
 
-def get_edge(models, target, edge_name):
-    node = models.Node.get_subclass(target)
-    return getattr(node, edge_name).target_class.__tablename__
+def get_edge_table(models, node_name, edge_name):
+    node = models.Node.get_subclass(node_name)
+    edge = getattr(node, edge_name)
+    parent = edge.target_class.__dst_class__
+    return parent, edge.target_class.__tablename__
+
+
+def get_node_label(models, node_name):
+    return models.Node.get_subclass_named(node_name).get_label()
+
+
+def object_to_string(obj):
+    # s = ','.join('{}: {}'.format(k, obj.__getattr__(k)) for k in obj.__dict__)
+    return '<{}>'.format(obj.__dict__)
