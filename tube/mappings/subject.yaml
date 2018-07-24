@@ -16,46 +16,46 @@ subject:
   _aggregated_props:
     - name: _follow_ups_count
       leaf: follow_up
-      path: subjects
+      path: follow_ups
       fn: count
     - name: _summary_drug_uses_count
       leaf: summary_drug_use
-      path: subjects.follow_ups
+      path: follow_ups.summary_drug_uses
       fn: count
     - name: _summary_lab_results_on_follow_up_count
       leaf: summary_lab_result
-      path: subjects.follow_ups
+      path: follow_ups.summary_lab_results
       fn: count
     - name: _samples_count
       leaf: sample
-      path: subjects
+      path: samples
       fn: count
     - name: _aliquots_count
       leaf: aliquot
-      path: subjects.samples
+      path: samples.aliquots
       fn: count
     - name: _summary_lab_results_on_sample_count
       leaf: summary_lab_result
-      path: subjects.samples
+      path: samples.summary_lab_results
       fn: count
     - name: _mRNA_microarrays_count
       leaf: mRNA_microarray
-      path: subjects.samples.aliquots
+      path: samples.aliquots.mRNA_microarrays
       fn: count
     - name: _miRNA_microarrays_count
       leaf: miRNA_microarray
-      path: subjects.samples.aliquots
+      path: samples.aliquots.miRNA_microarrays
       fn: count
     - name: _lipid_mass_spectrometries_count
       leaf: lipid_mass_spectrometry
-      path: subjects.samples.aliquots
+      path: samples.aliquots.lipid_mass_spectrometries
       fn: count
     - name: _protein_mass_spectrometries_count
       leaf: protein_mass_spectrometry
-      path: subjects.samples.aliquots
+      path: samples.aliquots.protein_mass_spectrometries
       fn: count
     - name: _metabolite_mass_spectrometries_count
       leaf: metabolite_mass_spectrometry
-      path: subjects.samples.aliquots
+      path: samples.aliquots.metabolite_mass_spectrometries
       fn: count
 #      target_field: field_name

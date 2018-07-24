@@ -13,7 +13,9 @@ class Node(object):
         self.no_children_to_map = 0
 
     def __key__(self):
-        return (self.name, self.edge_up_tbl)
+        if self.edge_up_tbl is not None:
+            return (self.name, self.edge_up_tbl)
+        return self.name
 
     def __hash__(self):
         return hash(self.__key__())

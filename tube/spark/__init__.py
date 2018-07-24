@@ -18,6 +18,6 @@ def make_spark_context(config):
 
     # Configure logging
     log4j = sc._jvm.org.apache.log4j
-    log4j.LogManager.getRootLogger().setLevel(log4j.Level.FATAL)
+    log4j.LogManager.getRootLogger().setLevel(log4j.Level.WARN)
 
     return sc
