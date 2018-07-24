@@ -38,13 +38,13 @@ def make_spark_context(config):
     return sc
 
 
-def get_hdfs_file_handler(sc=None):
+def get_hdfs_file_handler(sc=None, hdfs=None):
     if sc is None:
         sc = make_spark_context(config)
     uri = sc._gateway.jvm.java.net.URI
     opath = sc._gateway.jvm.org.apache.hadoop.fs.Path
     file_system = sc._gateway.jvm.org.apache.hadoop.fs.FileSystem
-    fs = file_system.get(uri("hdfs://localhost:9000"), sc._jsc.hadoopConfiguration())
+    fs = file_system.get(uri(config.HADOOP_URL), sc._jsc.hadoopConfiguration())
     return fs, opath
 
 
@@ -67,12 +67,24 @@ def init_dictionary(url):
 def get_edge_table(models, node_name, edge_name):
     node = models.Node.get_subclass(node_name)
     edge = getattr(node, edge_name)
-    parent = edge.target_class.__dst_class__
-    return parent, edge.target_class.__tablename__
+    parent = edge.target_class.__src_class__
+    return get_node_label(models, parent), edge.target_class.__tablename__
+
+
+def get_child_table(models, node_name, edge_name):
+    node = models.Node.get_subclass(node_name)
+    edge = getattr(node, edge_name)
+    return models.Node.get_subclass_named(edge.target_class.__src_class__).__tablename__
 
 
 def get_node_label(models, node_name):
-    return models.Node.get_subclass_named(node_name).get_label()
+    node = models.Node.get_subclass_named(node_name)
+    return node.get_label()
+
+
+def get_node_table_name(models, node_name):
+    node = models.Node.get_subclass(node_name)
+    return node.__tablename__
 
 
 def object_to_string(obj):
