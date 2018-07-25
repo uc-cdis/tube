@@ -24,6 +24,7 @@ Download the latest version of HADOOP to install HADOOP locally. Then, configure
 
 ```
 export HADOOP_HOME=YOUR_LOCAL_HADOOP_FOLDER/<VERSION_NUMBER>/libexec/
+export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 export HADOOP_MAPRED_HOME=$HADOOP_HOME
 export HADOOP_COMMON_HOME=$HADOOP_HOME
 export HADOOP_HDFS_HOME=$HADOOP_HOME
@@ -98,7 +99,8 @@ You can find all the Hadoop configuration files in the location `$HADOOP_HOME/et
         <name>yarn.resourcemanager.resource-tracker.address</name>
         <value>127.0.0.1:8031</value>
    </property>
-</configuration>```
+</configuration>
+```
 
 * `hadoop-env.sh`
 In this bash file, change the following line:
