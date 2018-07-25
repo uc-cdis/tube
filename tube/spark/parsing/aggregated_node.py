@@ -1,9 +1,10 @@
 from tube.utils import object_to_string
 
 
-class Node(object):
-    def __init__(self, name, edge_up_tbl):
+class AggregatedNode(object):
+    def __init__(self, name, tbl_name, edge_up_tbl):
         self.name = name
+        self.tbl_name = tbl_name
         self.parent = None
         self.edge_up_tbl = edge_up_tbl
         self.children = set([])
@@ -14,7 +15,7 @@ class Node(object):
 
     def __key__(self):
         if self.edge_up_tbl is not None:
-            return (self.name, self.edge_up_tbl)
+            return self.name, self.edge_up_tbl
         return self.name
 
     def __hash__(self):

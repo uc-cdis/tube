@@ -1,13 +1,13 @@
 import yaml
-from tube.spark.node import Node, Reducer
-from tube.utils import init_dictionary, get_edge_table, object_to_string
+from tube.utils import init_dictionary, get_edge_table, object_to_string, get_child_table, get_node_table_name
+from .aggregated_node import AggregatedNode, Reducer
+from .direct_node import DirectNode
 
 
 class Path(object):
-    def __init__(self, prop_name, leaf, path_name, fn):
+    def __init__(self, prop_name, path_name, fn):
         self.name = prop_name
         self.fn = fn
-        self.leaf = leaf
         self.path = Path.create_path(path_name)
 
     @classmethod
@@ -15,7 +15,7 @@ class Path(object):
         return tuple(s_path.split('.'))
 
     def __key__(self):
-        return self.path + (self.leaf,) + (self.fn,)
+        return self.path + (self.fn,)
 
     def __hash__(self):
         return hash(self.__key__())
@@ -37,21 +37,25 @@ class Parser(object):
     def __init__(self, file_path, url):
         stream = file(file_path)
         self.mapping = yaml.load(stream)
-        self.root = list(self.mapping.keys())[0].strip('\n')
+        self.root = list(self.mapping.keys())[0]
         self.dictionary, self.models = init_dictionary(url)
-        self.nodes = []
+        self.aggregated_nodes = []
+        self.flatten_props = self.get_direct_children()
+        self.props = []
+        self.root_table = get_node_table_name(self.models, self.root)
+        self.root_fields = self.mapping[self.root]['_props']
         self.load_parser_from_dict()
+        print(self.flatten_props)
 
     def load_parser_from_dict(self):
         flat_paths = self.create_paths()
-        print('flat_paths:\n{}\n'.format('\n'.join(str(i) for i in flat_paths)))
         list_nodes, leaves = self.construct_reversed_parsing_tree(flat_paths)
 
-        self.nodes = [l for l in list_nodes if l not in leaves]
+        self.aggregated_nodes = [l for l in list_nodes if l not in leaves]
 
-        for p in self.nodes:
+        for p in self.aggregated_nodes:
             p.non_leaf_children_count = self.non_leaves_count(p.children, leaves)
-        self.nodes.sort()
+        self.aggregated_nodes.sort()
 
     def construct_reversed_parsing_tree(self, flat_paths):
         reversed_index = {}
@@ -59,11 +63,11 @@ class Parser(object):
         for path in flat_paths:
             n_name = self.root
             current_parent_edge = None
-            for p in path.path:
+            for i, p in enumerate(path.path):
                 if (n_name, current_parent_edge) in reversed_index:
                     n_current = list_nodes[reversed_index[(n_name, current_parent_edge)]]
                 else:
-                    n_current = Node(n_name, current_parent_edge)
+                    n_current = AggregatedNode(n_name, get_node_table_name(self.models, n_name), current_parent_edge)
                     list_nodes.append(n_current)
                     reversed_index[(n_name, current_parent_edge)] = len(list_nodes) - 1
 
@@ -71,9 +75,9 @@ class Parser(object):
 
                 n_child = list_nodes[reversed_index[(child_name, edge_tbl)]] \
                     if (child_name, edge_tbl) in reversed_index \
-                    else Node(child_name, edge_tbl)
+                    else AggregatedNode(child_name, get_node_table_name(self.models, child_name), edge_tbl)
                 n_child.parent = n_current
-                if child_name == path.leaf:
+                if i == len(path.path)-1:
                     n_child.reducer = Reducer(None, path.fn, path.name)
 
                 n_current.add_child(n_child)
@@ -101,10 +105,19 @@ class Parser(object):
         return count
 
     def create_paths(self):
-        root_key = list(self.mapping.keys())[0]
         flat_paths = set()
-        aggregated_nodes = self.mapping[root_key]['_aggregated_props']
+        aggregated_nodes = self.mapping[self.root]['_aggregated_props']
         for n in aggregated_nodes:
-            path = Path(n['name'], n['leaf'], n['path'], n['fn'])
+            path = Path(n['name'], n['path'], n['fn'])
             flat_paths.add(path)
         return flat_paths
+
+    def get_direct_children(self):
+        children = self.mapping[self.root]['_flatten_props']
+        nodes = []
+        for child in children:
+            _, edge = get_edge_table(self.models, self.root, child['path'])
+            child_name = get_child_table(self.models, self.root, child['path'])
+            props = child['_props']
+            nodes.append(DirectNode(child_name, edge, props))
+        return nodes

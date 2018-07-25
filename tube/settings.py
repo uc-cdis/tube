@@ -20,3 +20,4 @@ RUNNING_MODE = 'Dev'
 SPARK_MASTER = 'local[1]'
 LIST_TABLES_FILES = 'tables.txt'
 PARALLEL_JOBS = 1
+LINK_TO_ES_HADOOP_JAR = '/Users/thanhnd/Workspace/es/elasticsearch-hadoop-6.3.0/dist/elasticsearch-spark-20_2.11-6.3.0.jar pyspark-shell'

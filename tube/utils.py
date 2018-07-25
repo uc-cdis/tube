@@ -71,9 +71,20 @@ def get_edge_table(models, node_name, edge_name):
     return get_node_label(models, parent), edge.target_class.__tablename__
 
 
+def get_child_table(models, node_name, edge_name):
+    node = models.Node.get_subclass(node_name)
+    edge = getattr(node, edge_name)
+    return models.Node.get_subclass_named(edge.target_class.__src_class__).__tablename__
+
+
 def get_node_label(models, node_name):
     node = models.Node.get_subclass_named(node_name)
     return node.get_label()
+
+
+def get_node_table_name(models, node_name):
+    node = models.Node.get_subclass(node_name)
+    return node.__tablename__
 
 
 def object_to_string(obj):
