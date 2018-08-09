@@ -35,7 +35,7 @@ class Parser(object):
     The main entry point into the index export process for the mutation indices
     """
     def __init__(self, file_path, url):
-        stream = file(file_path)
+        stream = open(file_path)
         self.mapping = yaml.load(stream)
         self.root = list(self.mapping.keys())[0]
         self.dictionary, self.models = init_dictionary(url)
@@ -45,7 +45,6 @@ class Parser(object):
         self.root_table = get_node_table_name(self.models, self.root)
         self.root_fields = self.mapping[self.root]['_props']
         self.load_parser_from_dict()
-        print(self.flatten_props)
 
     def load_parser_from_dict(self):
         flat_paths = self.create_paths()

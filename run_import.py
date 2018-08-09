@@ -2,9 +2,6 @@ import argparse
 import tube.settings as config
 from tube.importers.sql_to_hdfs import SqlToHDFS
 from tube.formatters import BaseFormatter
-from cdislogging import get_logger
-
-logger = get_logger(__name__)
 
 
 def main():

@@ -3,7 +3,7 @@ from cdislogging import get_logger
 logger = get_logger(__name__)
 try:
     # Import everything from ``local_settings``, if it exists.
-    from local_settings import *
+    from tube.local_settings import *
 except ImportError:
     # If it doesn't, look in ``/var/www/tube``.
     try:
@@ -20,4 +20,4 @@ RUNNING_MODE = 'Dev'
 SPARK_MASTER = 'local[1]'
 LIST_TABLES_FILES = 'tables.txt'
 PARALLEL_JOBS = 1
-LINK_TO_ES_HADOOP_JAR = '/Users/thanhnd/Workspace/es/elasticsearch-hadoop-6.3.0/dist/elasticsearch-spark-20_2.11-6.3.0.jar pyspark-shell'
+LINK_TO_ES_HADOOP_JAR = '/Users/thanhnd/Workspace/es/elasticsearch-hadoop-6.3.0/dist/elasticsearch-spark-20_2.11-6.3.0.jar'

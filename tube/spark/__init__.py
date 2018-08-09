@@ -1,8 +1,5 @@
 import os
 from pyspark import SparkConf, SparkContext
-from cdislogging import get_logger
-
-logger = get_logger(__name__)
 
 
 def make_spark_context(config):
@@ -10,7 +7,7 @@ def make_spark_context(config):
     Makes a spark and sqlContext
     '''
     os.environ['PYSPARK_SUBMIT_ARGS'] = \
-        '--jars {}'.format(config.LINK_TO_ES_HADOOP_JAR)
+        '--jars {} pyspark-shell'.format(config.LINK_TO_ES_HADOOP_JAR)
     conf = SparkConf().setAppName(config.APP_NAME)
     if config.RUNNING_MODE == 'Dev':
         # We should only use the value of `config.spark_master` in
