@@ -38,13 +38,13 @@ def make_spark_context(config):
     return sc
 
 
-def get_hdfs_file_handler(sc=None):
+def get_hdfs_file_handler(sc=None, hdfs=None):
     if sc is None:
         sc = make_spark_context(config)
     uri = sc._gateway.jvm.java.net.URI
     opath = sc._gateway.jvm.org.apache.hadoop.fs.Path
     file_system = sc._gateway.jvm.org.apache.hadoop.fs.FileSystem
-    fs = file_system.get(uri("hdfs://localhost:9000"), sc._jsc.hadoopConfiguration())
+    fs = file_system.get(uri(config.HADOOP_URL), sc._jsc.hadoopConfiguration())
     return fs, opath
 
 

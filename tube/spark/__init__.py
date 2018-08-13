@@ -7,7 +7,8 @@ def make_spark_context(config):
     Makes a spark and sqlContext
     '''
     os.environ['PYSPARK_SUBMIT_ARGS'] = \
-        '--jars {} pyspark-shell'.format(config.LINK_TO_ES_HADOOP_JAR)
+        '--jars {}/dist/elasticsearch-spark-20_2.11-{}.jar pyspark-shell'\
+            .format(config.ES_HADOOP_HOME_BIN, config.ES_HADOOP_VERSION)
     conf = SparkConf().setAppName(config.APP_NAME)
     if config.RUNNING_MODE == 'Dev':
         # We should only use the value of `config.spark_master` in

@@ -8,7 +8,7 @@ except ImportError:
     # If it doesn't, look in ``/var/www/tube``.
     try:
         import imp
-        imp.load_source('local_settings', '/var/www/tube/local_settings.py')
+        imp.load_source('local_settings', '/tube/tube/local_settings.py')
         print('finished importing')
     except IOError:
         logger.warn("local_settings is not found")
