@@ -3,7 +3,7 @@ from tube.spark.spark_base import SparkBase
 
 
 def json_export(x):
-    x[1]['id'] = x[0]
+    x[1]['node_id'] = x[0]
     return (x[0], json.dumps(x[1]))
 
 

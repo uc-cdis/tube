@@ -117,6 +117,10 @@ class Parser(object):
         return count
 
     def create_paths(self):
+        """
+        create all possible paths from mapping file.
+        :return:
+        """
         flat_paths = set()
         aggregated_nodes = self.mapping[self.root]['_aggregated_props']
         for n in aggregated_nodes:
