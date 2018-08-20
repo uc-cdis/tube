@@ -1,0 +1,58 @@
+[
+  {
+    "data_category": "iWkIAsJKRAQW",
+    "data_type": "7ZbDB0ayKeqF",
+    "data_format": "hqu0vjaP4aNo",
+    "experimental_strategy": "dUQWEeHhNOeO",
+    "md5sum": "12dc808759f008e14e8da9210f8f248f",
+    "file_size": 7,
+    "file_name": "vZfZxWzPuSvX",
+    "type": "submitted_copy_number",
+    "submitter_id": "submitted_copy_number_001",
+    "aliquots": {
+      "submitter_id": "aliquot_001"
+    }
+  },
+  {
+    "data_category": "OX1AFnuKgHeI",
+    "data_type": "8Hgt0sPu9VMg",
+    "data_format": "x5mtKqppcEcs",
+    "experimental_strategy": "9Ns1MGMCMMoh",
+    "md5sum": "0ba4e8ad22da6c68f7a9b68841ec1594",
+    "file_size": 5,
+    "file_name": "QiBuPQR5cY82",
+    "type": "submitted_copy_number",
+    "submitter_id": "submitted_copy_number_002",
+    "aliquots": {
+      "submitter_id": "aliquot_002"
+    }
+  },
+  {
+    "data_category": "pnXZujGqyVgU",
+    "data_type": "oEPAHDgTX0g3",
+    "data_format": "kkOm0UbtKZuB",
+    "experimental_strategy": "irSNVMp3AT11",
+    "md5sum": "4017dda8cebf1294b737eafabb40407c",
+    "file_size": 5,
+    "file_name": "OOIt52BQzAHW",
+    "type": "submitted_copy_number",
+    "submitter_id": "submitted_copy_number_003",
+    "aliquots": {
+      "submitter_id": "aliquot_003"
+    }
+  },
+  {
+    "data_category": "JNRVbpw03Evk",
+    "data_type": "ITGQmAArjjLw",
+    "data_format": "SZ7Dkaxto3Qk",
+    "experimental_strategy": "6ikEGJUsABfX",
+    "md5sum": "bc6e027ffaf23a73e514e9909f6ee7d6",
+    "file_size": 4,
+    "file_name": "GKrAfFOHw5Pz",
+    "type": "submitted_copy_number",
+    "submitter_id": "submitted_copy_number_004",
+    "aliquots": {
+      "submitter_id": "aliquot_004"
+    }
+  }
+]

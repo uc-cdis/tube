@@ -1,0 +1,58 @@
+[
+  {
+    "data_type": "Lipid Mass Spectrometry",
+    "data_category": "Lipid Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "CSV",
+    "md5sum": "850987ab787f070525890fa367416645",
+    "file_size": 6,
+    "file_name": "UaclQynYOQJq",
+    "type": "lipid_mass_spectrometry",
+    "submitter_id": "lipid_mass_spectrometry_001",
+    "aliquots": {
+      "submitter_id": "aliquot_001"
+    }
+  },
+  {
+    "data_type": "Lipid Mass Spectrometry",
+    "data_category": "Lipid Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "TXT",
+    "md5sum": "893422f4d07f863032be8e4111bbc3b9",
+    "file_size": 3,
+    "file_name": "Mdstml90JD9o",
+    "type": "lipid_mass_spectrometry",
+    "submitter_id": "lipid_mass_spectrometry_002",
+    "aliquots": {
+      "submitter_id": "aliquot_002"
+    }
+  },
+  {
+    "data_type": "Lipid Mass Spectrometry",
+    "data_category": "Lipid Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "TXT",
+    "md5sum": "c1a9ec33f9abf8903021d0821480e587",
+    "file_size": 3,
+    "file_name": "sVVWPGwpjAz3",
+    "type": "lipid_mass_spectrometry",
+    "submitter_id": "lipid_mass_spectrometry_003",
+    "aliquots": {
+      "submitter_id": "aliquot_003"
+    }
+  },
+  {
+    "data_type": "Lipid Mass Spectrometry",
+    "data_category": "Lipid Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "TSV",
+    "md5sum": "a495b952cf741e9a8f59cb8acb096d33",
+    "file_size": 7,
+    "file_name": "vi56KUBXEuMJ",
+    "type": "lipid_mass_spectrometry",
+    "submitter_id": "lipid_mass_spectrometry_004",
+    "aliquots": {
+      "submitter_id": "aliquot_004"
+    }
+  }
+]

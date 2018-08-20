@@ -1,0 +1,82 @@
+[
+  {
+    "virus_subtype": "Ih0DgYf9kdzV",
+    "mutation_status": false,
+    "virus_volume": 8.7037,
+    "strain": "Qyom4DlqKNZO",
+    "moi": 13.0629,
+    "infection_buffer": "1DdLxWHe8ORi",
+    "virus_titer_in_stock": 4,
+    "post_infection_TPCK": 8.1798,
+    "post_infection_BSA_percentage": 13.5,
+    "post_infection_medium": "33xUlb3IYz70",
+    "virus_type": "jV9nYSmxpiAu",
+    "mutation": "TwGA8WFvMAdt",
+    "infection_dose": 11.0564,
+    "type": "virus_infection",
+    "submitter_id": "virus_infection_001",
+    "subjects": {
+      "submitter_id": "subject_001"
+    }
+  },
+  {
+    "virus_subtype": "D75jVPU0ryHn",
+    "mutation_status": true,
+    "virus_volume": 15.5879,
+    "strain": "7gBu8qQGyVi5",
+    "moi": 15.589,
+    "infection_buffer": "VeMPMAU4Y0cv",
+    "virus_titer_in_stock": 3,
+    "post_infection_TPCK": 7.2862,
+    "post_infection_BSA_percentage": 11.2321,
+    "post_infection_medium": "gtcFArflCLvG",
+    "virus_type": "E815buLJzPll",
+    "mutation": "4oEHKhnHpPkc",
+    "infection_dose": 10.9459,
+    "type": "virus_infection",
+    "submitter_id": "virus_infection_002",
+    "subjects": {
+      "submitter_id": "subject_002"
+    }
+  },
+  {
+    "virus_subtype": "d9UcvqdxFvKv",
+    "mutation_status": false,
+    "virus_volume": 10.3869,
+    "strain": "lXM6fMppxlCv",
+    "moi": 7.653,
+    "infection_buffer": "L10tQQwLkLYZ",
+    "virus_titer_in_stock": 5,
+    "post_infection_TPCK": 7.5666,
+    "post_infection_BSA_percentage": 4.8911,
+    "post_infection_medium": "T3vVC94V6vcC",
+    "virus_type": "tC8b0JCSgFWN",
+    "mutation": "9FuFZRJXhCBc",
+    "infection_dose": 8.0399,
+    "type": "virus_infection",
+    "submitter_id": "virus_infection_003",
+    "subjects": {
+      "submitter_id": "subject_003"
+    }
+  },
+  {
+    "virus_subtype": "n6eLO8aOKWH5",
+    "mutation_status": true,
+    "virus_volume": 11.042,
+    "strain": "TRYZ7ZNlYjmz",
+    "moi": 9.8815,
+    "infection_buffer": "z0ak9J2Bxhwu",
+    "virus_titer_in_stock": 3,
+    "post_infection_TPCK": 12.2693,
+    "post_infection_BSA_percentage": 14.0927,
+    "post_infection_medium": "onbyzXCYh2TX",
+    "virus_type": "PHegH2Tlqr9N",
+    "mutation": "k7D9bnNrwBBn",
+    "infection_dose": 10.4059,
+    "type": "virus_infection",
+    "submitter_id": "virus_infection_004",
+    "subjects": {
+      "submitter_id": "subject_004"
+    }
+  }
+]

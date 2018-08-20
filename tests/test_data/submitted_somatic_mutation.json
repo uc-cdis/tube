@@ -1,0 +1,62 @@
+[
+  {
+    "data_type": "xNGvRSIpUAqU",
+    "data_format": "s8llPViIrtue",
+    "data_category": "gnO9nkuBMDyt",
+    "experimental_strategy": "ABzsJkh0Zg8Q",
+    "total_variants": 4,
+    "md5sum": "db690acc8eb3f0e54f2fae4c6a19961d",
+    "file_size": 0,
+    "file_name": "OYJJwMI6fCvh",
+    "type": "submitted_somatic_mutation",
+    "submitter_id": "submitted_somatic_mutation_001",
+    "read_groups": {
+      "submitter_id": "read_group_001"
+    }
+  },
+  {
+    "data_type": "et6xKxKUaddi",
+    "data_format": "3WWABMHZQoJl",
+    "data_category": "J6YEERrK6Uws",
+    "experimental_strategy": "g4JGfRAhlGl4",
+    "total_variants": 5,
+    "md5sum": "a2e65c91e5e82e52838d412db3b24922",
+    "file_size": 2,
+    "file_name": "xBPNCuVJMjGi",
+    "type": "submitted_somatic_mutation",
+    "submitter_id": "submitted_somatic_mutation_002",
+    "read_groups": {
+      "submitter_id": "read_group_002"
+    }
+  },
+  {
+    "data_type": "uCgnGUaKrXdb",
+    "data_format": "Hnkx8fsADNMJ",
+    "data_category": "lrBZNlPf1PBe",
+    "experimental_strategy": "8rfvMtSxFuJC",
+    "total_variants": 3,
+    "md5sum": "5281aa3f227deb0c5c8ff2f918d11654",
+    "file_size": 2,
+    "file_name": "2k1rpDjfxkwF",
+    "type": "submitted_somatic_mutation",
+    "submitter_id": "submitted_somatic_mutation_003",
+    "read_groups": {
+      "submitter_id": "read_group_003"
+    }
+  },
+  {
+    "data_type": "MlprBiubWNK9",
+    "data_format": "yjMHQeEZEoHn",
+    "data_category": "Rk6lKWHR2KF6",
+    "experimental_strategy": "9bo9J3pREO6l",
+    "total_variants": 4,
+    "md5sum": "8d34c52e7447eb26375c57ab25b6bc1a",
+    "file_size": 0,
+    "file_name": "3StY0XlYtXvk",
+    "type": "submitted_somatic_mutation",
+    "submitter_id": "submitted_somatic_mutation_004",
+    "read_groups": {
+      "submitter_id": "read_group_004"
+    }
+  }
+]

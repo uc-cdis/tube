@@ -1,0 +1,58 @@
+[
+  {
+    "data_category": "Raw Sequencing Data",
+    "data_type": "Aligned Reads",
+    "experimental_strategy": "Total RNA-Seq",
+    "data_format": "BAM",
+    "md5sum": "586fae75d2442b4baa26695196506041",
+    "file_size": 2,
+    "file_name": "dQNIYlqRgvPz",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_001",
+    "read_groups": {
+      "submitter_id": "read_group_001"
+    }
+  },
+  {
+    "data_category": "Sequencing Reads",
+    "data_type": "Aligned Reads",
+    "experimental_strategy": "RNA-Seq",
+    "data_format": "BAM",
+    "md5sum": "625cebd233508f28a7ae4bf9500c37d8",
+    "file_size": 2,
+    "file_name": "m5pYkOXrmrae",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_002",
+    "read_groups": {
+      "submitter_id": "read_group_002"
+    }
+  },
+  {
+    "data_category": "Sequencing Reads",
+    "data_type": "Aligned Reads",
+    "experimental_strategy": "Total RNA-Seq",
+    "data_format": "BED",
+    "md5sum": "cbfc9b0fa524b70fe7cc2ad579394939",
+    "file_size": 3,
+    "file_name": "8nDiqhjBBF8I",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_003",
+    "read_groups": {
+      "submitter_id": "read_group_003"
+    }
+  },
+  {
+    "data_category": "Sequencing Reads",
+    "data_type": "Aligned Reads",
+    "experimental_strategy": "miRNA-Seq",
+    "data_format": "BED",
+    "md5sum": "261cedcb0f0da659dc2390f92918250c",
+    "file_size": 2,
+    "file_name": "OIb1eVRfWTNl",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_004",
+    "read_groups": {
+      "submitter_id": "read_group_004"
+    }
+  }
+]

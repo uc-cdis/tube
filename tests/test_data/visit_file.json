@@ -1,0 +1,54 @@
+[
+  {
+    "data_type": "WKq3MstWWICu",
+    "data_format": "X0lhOB4ti7hM",
+    "data_category": "Drug Use Questionnaire",
+    "md5sum": "bdde653bb113591ba0f5971fbba27a42",
+    "file_size": 4,
+    "file_name": "lo4lq14u5mOE",
+    "type": "visit_file",
+    "submitter_id": "visit_file_001",
+    "laboratory_results": {
+      "submitter_id": "laboratory_result_001"
+    }
+  },
+  {
+    "data_type": "by9do1PGOjYb",
+    "data_format": "VSXvh2UZQczO",
+    "data_category": "Socio-Demographic Questionnaire",
+    "md5sum": "f0ba76de4ffef7bdde2e82ac6b5b6263",
+    "file_size": 3,
+    "file_name": "tUddaqITiH7W",
+    "type": "visit_file",
+    "submitter_id": "visit_file_002",
+    "laboratory_results": {
+      "submitter_id": "laboratory_result_002"
+    }
+  },
+  {
+    "data_type": "etbECSwZtYL9",
+    "data_format": "5lIBbwbecrDw",
+    "data_category": "Behavior Questionnaire",
+    "md5sum": "98fef1d82398ec1e217958d7c657a6f4",
+    "file_size": 5,
+    "file_name": "rGDMJbHnxkoV",
+    "type": "visit_file",
+    "submitter_id": "visit_file_003",
+    "laboratory_results": {
+      "submitter_id": "laboratory_result_003"
+    }
+  },
+  {
+    "data_type": "BLjf5iDzmazO",
+    "data_format": "94fUMJFeafJ2",
+    "data_category": "Drug Use Questionnaire",
+    "md5sum": "907b7ba81d55623c503dcc50eed562b0",
+    "file_size": 4,
+    "file_name": "C1pFxYkO49xf",
+    "type": "visit_file",
+    "submitter_id": "visit_file_004",
+    "laboratory_results": {
+      "submitter_id": "laboratory_result_004"
+    }
+  }
+]

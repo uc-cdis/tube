@@ -1,0 +1,58 @@
+[
+  {
+    "data_category": "Raw Sequencing Data",
+    "data_type": "Unaligned Reads",
+    "experimental_strategy": "Low Pass WGS",
+    "data_format": "BAM",
+    "md5sum": "2760da2d2bd7f8572a365f7410535cc6",
+    "file_size": 2,
+    "file_name": "bbBwYFljgR7L",
+    "type": "submitted_unaligned_reads",
+    "submitter_id": "submitted_unaligned_reads_001",
+    "read_groups": {
+      "submitter_id": "read_group_001"
+    }
+  },
+  {
+    "data_category": "Sequencing Reads",
+    "data_type": "Unaligned Reads",
+    "experimental_strategy": "DNA Panel",
+    "data_format": "FASTQ",
+    "md5sum": "9feb242f6aed393144583b61d25e3dba",
+    "file_size": 9,
+    "file_name": "pPuODpb3DaTk",
+    "type": "submitted_unaligned_reads",
+    "submitter_id": "submitted_unaligned_reads_002",
+    "read_groups": {
+      "submitter_id": "read_group_002"
+    }
+  },
+  {
+    "data_category": "Sequencing Data",
+    "data_type": "Unaligned Reads",
+    "experimental_strategy": "DNA Panel",
+    "data_format": "FASTQ",
+    "md5sum": "1929f1975f11789a1e6e04303e6da987",
+    "file_size": 4,
+    "file_name": "qNZcT9CD2heV",
+    "type": "submitted_unaligned_reads",
+    "submitter_id": "submitted_unaligned_reads_003",
+    "read_groups": {
+      "submitter_id": "read_group_003"
+    }
+  },
+  {
+    "data_category": "Sequencing Data",
+    "data_type": "Unaligned Reads",
+    "experimental_strategy": "Low Pass WGS",
+    "data_format": "FASTQ",
+    "md5sum": "c0f7bcd9a95b88940247afe02bc7a0c0",
+    "file_size": 7,
+    "file_name": "LI7jn6EZtoTX",
+    "type": "submitted_unaligned_reads",
+    "submitter_id": "submitted_unaligned_reads_004",
+    "read_groups": {
+      "submitter_id": "read_group_004"
+    }
+  }
+]
