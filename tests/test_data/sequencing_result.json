@@ -1,0 +1,58 @@
+[
+  {
+    "data_category": "Microbial Analysis",
+    "data_type": "cfDNA Sequencing OTU Results",
+    "experimental_strategy": "Sequencing Experiment",
+    "data_format": "TXT",
+    "md5sum": "cd841e07b2828a23a85c2c4b340461f1",
+    "file_size": 5,
+    "file_name": "YxVWhVPWWCkl",
+    "type": "sequencing_result",
+    "submitter_id": "sequencing_result_001",
+    "experiments": {
+      "submitter_id": "experiment_001"
+    }
+  },
+  {
+    "data_category": "Microbial Analysis",
+    "data_type": "16s Ribosome Sequencing OTU Results",
+    "experimental_strategy": "Ribosome Sequencing Experiment",
+    "data_format": "TSV",
+    "md5sum": "85f88569f2fc55098d4404b8527385bb",
+    "file_size": 4,
+    "file_name": "5aHF5z3xRs3R",
+    "type": "sequencing_result",
+    "submitter_id": "sequencing_result_002",
+    "experiments": {
+      "submitter_id": "experiment_002"
+    }
+  },
+  {
+    "data_category": "Microbial Analysis",
+    "data_type": "16s Ribosome Sequencing OTU Results",
+    "experimental_strategy": "Targeted Sequencing Experiment",
+    "data_format": "CSV",
+    "md5sum": "6d5ae96c9cc13bc8315d6ea84c111586",
+    "file_size": 2,
+    "file_name": "FIDdYj5U1FJB",
+    "type": "sequencing_result",
+    "submitter_id": "sequencing_result_003",
+    "experiments": {
+      "submitter_id": "experiment_003"
+    }
+  },
+  {
+    "data_category": "Microbial Analysis",
+    "data_type": "16s Ribosome Sequencing OTU Results",
+    "experimental_strategy": "Sequencing Experiment",
+    "data_format": "CSV",
+    "md5sum": "5cfa347ebdf07e7ffb550c65f92dad64",
+    "file_size": 3,
+    "file_name": "3G5WAnWx6M7e",
+    "type": "sequencing_result",
+    "submitter_id": "sequencing_result_004",
+    "experiments": {
+      "submitter_id": "experiment_004"
+    }
+  }
+]
