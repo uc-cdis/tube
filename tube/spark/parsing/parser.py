@@ -45,6 +45,7 @@ class Parser(object):
         self.root_table = get_node_table_name(self.models, self.root)
         self.root_fields = self.mapping[self.root]['_props']
         self.load_parser_from_dict()
+        print(self.aggregated_nodes)
 
     def load_parser_from_dict(self):
         flat_paths = self.create_paths()
@@ -54,6 +55,7 @@ class Parser(object):
 
         for p in self.aggregated_nodes:
             p.non_leaf_children_count = self.non_leaves_count(p.children, leaves)
+        print(self.aggregated_nodes)
         self.aggregated_nodes.sort()
 
     def construct_reversed_parsing_tree(self, flat_paths):
@@ -62,11 +64,13 @@ class Parser(object):
         for path in flat_paths:
             n_name = self.root
             current_parent_edge = None
+            level = 0
             for i, p in enumerate(path.path):
                 if (n_name, current_parent_edge) in reversed_index:
                     n_current = list_nodes[reversed_index[(n_name, current_parent_edge)]]
                 else:
-                    n_current = AggregatedNode(n_name, get_node_table_name(self.models, n_name), current_parent_edge)
+                    n_current = AggregatedNode(n_name, get_node_table_name(self.models, n_name),
+                                               current_parent_edge, level)
                     list_nodes.append(n_current)
                     reversed_index[(n_name, current_parent_edge)] = len(list_nodes) - 1
 
@@ -74,7 +78,7 @@ class Parser(object):
 
                 n_child = list_nodes[reversed_index[(child_name, edge_tbl)]] \
                     if (child_name, edge_tbl) in reversed_index \
-                    else AggregatedNode(child_name, get_node_table_name(self.models, child_name), edge_tbl)
+                    else AggregatedNode(child_name, get_node_table_name(self.models, child_name), edge_tbl, level + 1)
                 n_child.parent = n_current
                 if i == len(path.path)-1:
                     n_child.reducer = Reducer(None, path.fn, path.name)

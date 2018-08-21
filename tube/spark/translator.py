@@ -110,8 +110,11 @@ class Gen3Translator(object):
             for child in n.children:
                 if child.no_children_to_map == 0:
                     edge_df = key_df.leftOuterJoin(self.translate_edge(child.edge_up_tbl)).mapValues(lambda x: x[1])
-                    count_df = edge_df.groupByKey().mapValues(lambda x: len([i for i in x if i is not None]))\
-                        .mapValues(intermediate_frame(child.reducer.output))
+                    if child.reducer is None:
+                        count_df = edge_df.groupByKey().mapValues(lambda x: ())
+                    else:
+                        count_df = edge_df.groupByKey().mapValues(lambda x: len([i for i in x if i is not None]))\
+                            .mapValues(intermediate_frame(child.reducer.output))
 
                     df = count_df if df is None else df.leftOuterJoin(count_df).mapValues(lambda x: x[0] + x[1])
                     # print(df.collect())
@@ -120,6 +123,8 @@ class Gen3Translator(object):
                                                                                      swap_key_value(edge_df))) \
                         .mapValues(lambda x: x[0] + x[1])
                     n.no_children_to_map -= 1
+                else:
+                    df = key_df
             aggregated_dfs[n.__key__()] = df
         return aggregated_dfs[self.parser.root].mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
 

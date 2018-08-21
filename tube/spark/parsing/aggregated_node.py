@@ -2,7 +2,7 @@ from tube.utils import object_to_string
 
 
 class AggregatedNode(object):
-    def __init__(self, name, tbl_name, edge_up_tbl):
+    def __init__(self, name, tbl_name, edge_up_tbl, level):
         self.name = name
         self.tbl_name = tbl_name
         self.parent = None
@@ -12,6 +12,7 @@ class AggregatedNode(object):
         self.non_leaf_children_count = 0
         self.done = False
         self.no_children_to_map = 0
+        self.level = level
 
     def __key__(self):
         if self.edge_up_tbl is not None:
@@ -25,13 +26,16 @@ class AggregatedNode(object):
         return object_to_string(self)
 
     def __repr__(self):
-        return str(self.__key__())
+        return '({}; {})'.format(str(self.__key__()), self.level)
 
     def __eq__(self, other):
-        return self.non_leaf_children_count == other.non_leaf_children_count
+        return self.level == other.level and \
+               self.non_leaf_children_count == other.non_leaf_children_count
 
     def __lt__(self, other):
-        return self.non_leaf_children_count < other.non_leaf_children_count
+        return self.level > other.level or (
+            self.level == other.level and self.non_leaf_children_count < other.non_leaf_children_count
+        )
 
     def add_child(self, node):
         self.children.add(node)
