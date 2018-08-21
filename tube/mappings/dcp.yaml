@@ -1,0 +1,37 @@
+case:
+  _props:
+    - submitter_id
+    - project_id
+  _flatten_props:
+    - path: demographics
+      _props:
+        - gender
+        - race
+        - ethnicity
+        - age_at_index
+    - path: medical_histories
+      _props:
+        - diabetes
+        - hypertension
+        - cerebrovascular_disease
+        - chronic_respiratory_disease
+        - coronary_artery_disease
+  _aggregated_props:
+    - name: _samples_count
+      path: samples
+      fn: count
+    - name: _aliquots_count
+      path: samples.aliquots
+      fn: count
+    - name: _submitted_snp_array_files_count
+      path: samples.aliquots.submitted_snp_array_files
+      fn: count
+    - name: _submitted_unaligned_reads_files_count
+      path: samples.aliquots.read_groups.submitted_unaligned_reads_files
+      fn: count
+    - name: _submitted_aligned_reads_files_count
+      path: samples.aliquots.read_groups.submitted_aligned_reads_files
+      fn: count
+    - name: _simple_germline_variations_count
+      path: samples.aliquots.read_groups.simple_germline_variations
+      fn: count
