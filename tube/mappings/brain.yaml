@@ -1,0 +1,42 @@
+case:
+  _props:
+    - submitter_id
+    - project_id
+    - experimental_group
+  _flatten_props:
+    - path: demographics
+      _props:
+        - gender
+        - race
+        - ethnicity
+    - path: diagnoses
+      _props:
+        - alcohol_use_score
+        - depression_diagnosis
+        - depression_severity
+        - tbi_diagnosis
+        - total_tbi
+        - childhood_trauma_diagnosis
+        - childhood_trauma_score
+  _aggregated_props:
+    - name: _mri_images_count
+      path: mri_exams.mri_images
+      fn: count
+    - name: _samples_count
+      path: biospecimens.samples
+      fn: count
+    - name: _aliquots_count
+      path: biospecimens.samples.aliquots
+      fn: count
+    - name: _analytes_count
+      path: biospecimens.samples.aliquots.analytes
+      fn: count
+    - name: _submitted_expression_array_files_count
+      path: biospecimens.samples.aliquots.analytes.submitted_expression_array_files
+      fn: count
+    - name: _read_groups_count
+      path: biospecimens.samples.aliquots.analytes.read_groups
+      fn: count
+    - name: _submitted_unaligned_reads_files_count
+      path: biospecimens.samples.aliquots.analytes.read_groups.submitted_unaligned_reads_files
+      fn: count

@@ -59,6 +59,14 @@ class Parser(object):
         self.aggregated_nodes.sort()
 
     def construct_reversed_parsing_tree(self, flat_paths):
+        """
+        Construct the parsing tree that have the path to the parent node.
+        The tree constructed from the set of flat paths.
+        For every flat_path, this function parses though all the edges and creates a node of ()
+        Args:
+            - flat_paths: set of aggregation paths in the output document.
+
+        """
         reversed_index = {}
         list_nodes = []
         for path in flat_paths:
@@ -90,6 +98,7 @@ class Parser(object):
 
                 n_name = child_name
                 current_parent_edge = edge_tbl
+                level+=1
 
         return list_nodes, self.get_leaves(list_nodes)
 
