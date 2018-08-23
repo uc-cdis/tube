@@ -103,6 +103,13 @@ class Gen3Translator(object):
                                       merge_aggregate_with_reducer)
 
     def aggregate_nested_properties(self):
+        """
+        Create aggregated nodes from the deepest level of the aggregation tree.
+        A map/reduce step will be performed for an aggregated node when the map/reduce step in all its children nodes
+        were done.
+        :return:
+            A dataframe including all the aggregated fields
+        """
         aggregated_dfs = {}
         for n in self.parser.aggregated_nodes:
             df = None

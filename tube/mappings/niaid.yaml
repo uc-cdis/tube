@@ -33,10 +33,10 @@ subject:
       path: samples.summary_lab_results
       fn: count
     - name: _mRNA_microarrays_count
-      path: samples.aliquots.mRNA_microarrays
+      path: samples.aliquots.mrna_microarrays
       fn: count
     - name: _miRNA_microarrays_count
-      path: samples.aliquots.miRNA_microarrays
+      path: samples.aliquots.mirna_microarrays
       fn: count
     - name: _lipid_mass_spectrometries_count
       path: samples.aliquots.lipid_mass_spectrometries

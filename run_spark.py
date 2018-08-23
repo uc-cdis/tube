@@ -25,7 +25,7 @@ def main():
 
     config.RUNNING_MODE = args.config
 
-    parser = Parser('tube/mappings/dcp.yaml', config.DICTIONARY_URL)
+    parser = Parser('tube/mappings/brain.yaml', config.DICTIONARY_URL)
 
     sc = make_spark_context(config)
     writer = ESWriter(sc, config)
