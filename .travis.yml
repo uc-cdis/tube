@@ -57,7 +57,16 @@ before_script:
       "db_password": "postgres",
       "db_database": "metadata_db"
     }
-    ' > ./configs/creds.json
+    ' > ~/.local/share/gen3/tube/creds.json
+  - |
+    echo '
+    {
+      "db_host": "'$HOST_IP_ADDRESS'",
+      "db_username": "postgres",
+      "db_password": "postgres",
+      "db_database": "metadata_db"
+    }
+    ' > configs/creds.json
   - sed -i "s/'3.7'/'2'/g" docker-compose.yml
   - sudo sysctl -w vm.max_map_count=262144
   - docker-compose -f docker-compose.yml -f elasticsearch.yml up -d spark elasticsearch
