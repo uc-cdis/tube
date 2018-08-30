@@ -1,4 +1,6 @@
 import json
+
+from tube.spark.plugins import post_process_plugins
 from tube.spark.spark_base import SparkBase
 
 
@@ -13,6 +15,9 @@ class ESWriter(SparkBase):
         self.es_config = self.config.ES
 
     def write_df(self, df, doc_name):
+        for plugin in post_process_plugins:
+            df = df.map(lambda x: plugin(x))
+
         df = df.map(lambda x: json_export(x))
         es_config = self.es_config
         es_config['es.resource'] = es_config['es.resource'] + '/{}'.format(doc_name)
