@@ -1,0 +1,50 @@
+[
+  {
+    "relationship_primary_diagnosis": "MM0hjz6ufE9B",
+    "relationship_gender": "female",
+    "relationship_type": "57uOLPTj38e7",
+    "relationship_age_at_diagnosis": 7.5163,
+    "relative_with_hiv_history": "unknown",
+    "type": "family_history",
+    "submitter_id": "family_history_001",
+    "subjects": {
+      "submitter_id": "subject_001"
+    }
+  },
+  {
+    "relationship_primary_diagnosis": "t066moq0Z7D7",
+    "relationship_gender": "female",
+    "relationship_type": "Ri0J2iodMUNc",
+    "relationship_age_at_diagnosis": 9.0012,
+    "relative_with_hiv_history": "yes",
+    "type": "family_history",
+    "submitter_id": "family_history_002",
+    "subjects": {
+      "submitter_id": "subject_002"
+    }
+  },
+  {
+    "relationship_primary_diagnosis": "JIAVLEXKQnzC",
+    "relationship_gender": "unknown",
+    "relationship_type": "b9H2ki8Jverv",
+    "relationship_age_at_diagnosis": 12.9214,
+    "relative_with_hiv_history": "no",
+    "type": "family_history",
+    "submitter_id": "family_history_003",
+    "subjects": {
+      "submitter_id": "subject_003"
+    }
+  },
+  {
+    "relationship_primary_diagnosis": "ECEzFwhQRM1s",
+    "relationship_gender": "male",
+    "relationship_type": "N3hntKy2q7eO",
+    "relationship_age_at_diagnosis": 3.0486,
+    "relative_with_hiv_history": "unknown",
+    "type": "family_history",
+    "submitter_id": "family_history_004",
+    "subjects": {
+      "submitter_id": "subject_004"
+    }
+  }
+]

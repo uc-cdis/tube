@@ -1,0 +1,126 @@
+[
+  {
+    "percent_aligned": 30,
+    "adapter_content": "FAIL",
+    "encoding": "V6zfiZ2QJJGb",
+    "per_base_sequence_quality": "WARN",
+    "sequence_duplication_levels": "PASS",
+    "fastq_name": "w1l8yp4CXOBd",
+    "basic_statistics": "FAIL",
+    "per_base_sequence_content": "FAIL",
+    "kmer_content": "FAIL",
+    "percent_gc_content": 64,
+    "total_sequences": 3,
+    "workflow_type": "Read Group Quality Control",
+    "total_aligned_reads": 5,
+    "sequence_length_distribution": "FAIL",
+    "per_sequence_quality_score": "PASS",
+    "per_tile_sequence_quality": "WARN",
+    "per_sequence_gc_content": "PASS",
+    "per_base_n_content": "FAIL",
+    "overrepresented_sequences": "WARN",
+    "workflow_version": "yLrF5Oagd7Bm",
+    "workflow_link": "ETLrtxYnqBmN",
+    "type": "read_group_qc",
+    "submitter_id": "read_group_qc_001",
+    "read_groups": {
+      "submitter_id": "read_group_001"
+    },
+    "submitted_aligned_reads_files": {
+      "submitter_id": "submitted_aligned_reads_001"
+    }
+  },
+  {
+    "percent_aligned": 60,
+    "adapter_content": "WARN",
+    "encoding": "wDvgJAmpf7Wg",
+    "per_base_sequence_quality": "WARN",
+    "sequence_duplication_levels": "WARN",
+    "fastq_name": "delnJiElMPI5",
+    "basic_statistics": "WARN",
+    "per_base_sequence_content": "FAIL",
+    "kmer_content": "PASS",
+    "percent_gc_content": 54,
+    "total_sequences": 6,
+    "workflow_type": "Read Group Quality Control",
+    "total_aligned_reads": 3,
+    "sequence_length_distribution": "FAIL",
+    "per_sequence_quality_score": "WARN",
+    "per_tile_sequence_quality": "WARN",
+    "per_sequence_gc_content": "WARN",
+    "per_base_n_content": "PASS",
+    "overrepresented_sequences": "PASS",
+    "workflow_version": "Y4VKh0XzFMBd",
+    "workflow_link": "VvLKDAGOjkdN",
+    "type": "read_group_qc",
+    "submitter_id": "read_group_qc_002",
+    "read_groups": {
+      "submitter_id": "read_group_002"
+    },
+    "submitted_aligned_reads_files": {
+      "submitter_id": "submitted_aligned_reads_002"
+    }
+  },
+  {
+    "percent_aligned": 57,
+    "adapter_content": "PASS",
+    "encoding": "CPiPh0KWE19l",
+    "per_base_sequence_quality": "WARN",
+    "sequence_duplication_levels": "WARN",
+    "fastq_name": "Qow9LGhkTZSe",
+    "basic_statistics": "WARN",
+    "per_base_sequence_content": "FAIL",
+    "kmer_content": "FAIL",
+    "percent_gc_content": 39,
+    "total_sequences": 7,
+    "workflow_type": "Read Group Quality Control",
+    "total_aligned_reads": 3,
+    "sequence_length_distribution": "WARN",
+    "per_sequence_quality_score": "PASS",
+    "per_tile_sequence_quality": "PASS",
+    "per_sequence_gc_content": "FAIL",
+    "per_base_n_content": "FAIL",
+    "overrepresented_sequences": "WARN",
+    "workflow_version": "MNpWxZd8TCnt",
+    "workflow_link": "fFnmpXTVmXjt",
+    "type": "read_group_qc",
+    "submitter_id": "read_group_qc_003",
+    "read_groups": {
+      "submitter_id": "read_group_003"
+    },
+    "submitted_aligned_reads_files": {
+      "submitter_id": "submitted_aligned_reads_003"
+    }
+  },
+  {
+    "percent_aligned": 50,
+    "adapter_content": "FAIL",
+    "encoding": "CHfvMCaermDo",
+    "per_base_sequence_quality": "WARN",
+    "sequence_duplication_levels": "FAIL",
+    "fastq_name": "CnMhNgiy1Hub",
+    "basic_statistics": "FAIL",
+    "per_base_sequence_content": "FAIL",
+    "kmer_content": "FAIL",
+    "percent_gc_content": 53,
+    "total_sequences": 3,
+    "workflow_type": "Read Group Quality Control",
+    "total_aligned_reads": 5,
+    "sequence_length_distribution": "WARN",
+    "per_sequence_quality_score": "PASS",
+    "per_tile_sequence_quality": "WARN",
+    "per_sequence_gc_content": "PASS",
+    "per_base_n_content": "PASS",
+    "overrepresented_sequences": "FAIL",
+    "workflow_version": "6SSVQcWri0Bf",
+    "workflow_link": "RwGZ20sP1EPI",
+    "type": "read_group_qc",
+    "submitter_id": "read_group_qc_004",
+    "read_groups": {
+      "submitter_id": "read_group_004"
+    },
+    "submitted_aligned_reads_files": {
+      "submitter_id": "submitted_aligned_reads_004"
+    }
+  }
+]

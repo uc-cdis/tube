@@ -1,0 +1,89 @@
+sudo: required
+
+language: python
+
+python:
+  - "2.7"
+  - "3.6"
+
+matrix:
+ allow_failures:
+   - python: "3.6"
+
+cache: pip
+
+addons:
+  postgresql: "9.6"
+
+services:
+  - postgresql
+  - docker
+
+install:
+  - pip uninstall -y six || true
+  - pip install -r dev-requirements.txt
+  - pip install -r requirements.txt
+  - psql -c 'SELECT version();' -U postgres
+  - psql -U postgres -c "create database metadata_db;"
+  - psql -U postgres -f metadata_db.sql metadata_db
+  - sudo sed -i "s|#listen_addresses = 'localhost'|listen_addresses = '*'|g" /etc/postgresql/9.6/main/postgresql.conf
+  - sudo sed -i "s|# DO NOT DISABLE!|host all all 0.0.0.0/0 trust\n\n# DO NOT DISABLE!|g" /etc/postgresql/9.6/main/pg_hba.conf
+  - sudo service postgresql restart 9.6
+
+before_script:
+  - git clone https://github.com/uc-cdis/compose-etl.git --branch master --single-branch
+  - cp elasticsearch/docker-compose.yml compose-etl/elasticsearch.yml
+  - cd compose-etl
+  - export XDG_DATA_HOME="$HOME/.local/share"
+  - echo $XDG_DATA_HOME
+  - export HOST_IP_ADDRESS="$(ip -f inet -o addr show docker0 | cut -d\  -f 7 | cut -d/ -f 1)"
+  - export ES_URL="elasticsearch"
+  - export ES_INDEX_NAME="etl"
+  - mkdir -p $XDG_DATA_HOME/gen3/tube
+  - |
+    echo '
+    {
+      "db_host": "localhost",
+      "db_username": "postgres",
+      "db_password": "postgres",
+      "db_database": "metadata_db"
+    }
+    ' > $XDG_DATA_HOME/gen3/tube/creds.json
+  - |
+    echo '
+    {
+      "db_host": "'$HOST_IP_ADDRESS'",
+      "db_username": "postgres",
+      "db_password": "postgres",
+      "db_database": "metadata_db"
+    }
+    ' > ~/.local/share/gen3/tube/creds.json
+  - |
+    echo '
+    {
+      "db_host": "'$HOST_IP_ADDRESS'",
+      "db_username": "postgres",
+      "db_password": "postgres",
+      "db_database": "metadata_db"
+    }
+    ' > configs/creds.json
+  - sed -i "s/'3.7'/'2'/g" docker-compose.yml
+  - sudo sysctl -w vm.max_map_count=262144
+  - docker-compose -f docker-compose.yml -f elasticsearch.yml up -d spark elasticsearch
+  - sleep 60
+  - docker-compose -f docker-compose.yml -f elasticsearch.yml logs
+  - curl -XGET localhost:9200
+  - docker-compose -f docker-compose.yml -f elasticsearch.yml run tube bash -c "python run_config.py; python run_import.py"
+  - docker-compose -f docker-compose.yml -f elasticsearch.yml run tube bash -c "curl -XGET $ES_URL:9200"
+  - docker-compose -f docker-compose.yml -f elasticsearch.yml run tube bash -c "python run_config.py; python run_spark.py"
+  - cd -
+  - cp tests/niaid.yaml $XDG_DATA_HOME/gen3/tube/etlMapping.yaml
+  - echo $XDG_DATA_HOME/gen3/tube/creds.json
+  - echo $XDG_DATA_HOME/gen3/tube/etlMapping.yaml
+
+script:
+  - python -m pytest tests
+#  - py.test -vv --cov=fence --cov-report xml tests
+
+#after_script:
+#  - python-codacy-coverage -r coverage.xml

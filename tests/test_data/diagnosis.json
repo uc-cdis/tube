@@ -1,0 +1,74 @@
+[
+  {
+    "year_of_diagnosis": 11.5079,
+    "classification_of_tumor": "metastasis",
+    "tumor_grade": "uIZ4j1XDYTlq",
+    "tumor_stage": "anIAHU8o4alH",
+    "prior_treatment": "Not Reported",
+    "primary_diagnosis": "hhdWYCAHjAHq",
+    "tissue_or_organ_of_origin": "isyAGUgyq40a",
+    "visit_id": 3,
+    "progression_or_recurrence": "yes",
+    "morphology": "40nsOo5xNRVd",
+    "version_data": 7,
+    "type": "diagnosis",
+    "submitter_id": "diagnosis_001",
+    "subjects": {
+      "submitter_id": "subject_001"
+    }
+  },
+  {
+    "year_of_diagnosis": 10.9036,
+    "classification_of_tumor": "other",
+    "tumor_grade": "hDI1Kvv6M3q8",
+    "tumor_stage": "D8dPvlK264vf",
+    "prior_treatment": "Not Reported",
+    "primary_diagnosis": "i9DO6WBo7Ldf",
+    "tissue_or_organ_of_origin": "IXOWTHn4BLeV",
+    "visit_id": 3,
+    "progression_or_recurrence": "no",
+    "morphology": "VmC7RUZuIwzo",
+    "version_data": 5,
+    "type": "diagnosis",
+    "submitter_id": "diagnosis_002",
+    "subjects": {
+      "submitter_id": "subject_002"
+    }
+  },
+  {
+    "year_of_diagnosis": 11.1839,
+    "classification_of_tumor": "other",
+    "tumor_grade": "uOWItB7HHBkq",
+    "tumor_stage": "sfLq0ohZo1QI",
+    "prior_treatment": "Not Allowed To Collect",
+    "primary_diagnosis": "tBUThxkuyasd",
+    "tissue_or_organ_of_origin": "3ohWHTGphrWy",
+    "visit_id": 1,
+    "progression_or_recurrence": "Not Allowed To Collect",
+    "morphology": "jDn0R8RsoxoV",
+    "version_data": 6,
+    "type": "diagnosis",
+    "submitter_id": "diagnosis_003",
+    "subjects": {
+      "submitter_id": "subject_003"
+    }
+  },
+  {
+    "year_of_diagnosis": 11.375,
+    "classification_of_tumor": "metastasis",
+    "tumor_grade": "w1BHCxbfo9vx",
+    "tumor_stage": "61u3nhZajV1n",
+    "prior_treatment": "No",
+    "primary_diagnosis": "gptSIldadxYM",
+    "tissue_or_organ_of_origin": "tKXMBc4giJVU",
+    "visit_id": 3,
+    "progression_or_recurrence": "not reported",
+    "morphology": "G5NCsxFNaFut",
+    "version_data": 5,
+    "type": "diagnosis",
+    "submitter_id": "diagnosis_004",
+    "subjects": {
+      "submitter_id": "subject_004"
+    }
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "aliquot_volume": 14.447,
+    "analyte_type": "nxsxiLiPCaas",
+    "concentration": 10.8131,
+    "analyte_type_id": "W",
+    "aliquot_quantity": 11.1515,
+    "aliquot_description": "0EoNLfNcLE0v",
+    "amount": 5.5627,
+    "source_center": "aiAJD0jLJuui",
+    "type": "aliquot",
+    "submitter_id": "aliquot_001",
+    "samples": {
+      "submitter_id": "sample_001"
+    }
+  },
+  {
+    "aliquot_volume": 11.4519,
+    "analyte_type": "WIa5fDNw4u9u",
+    "concentration": 15.9751,
+    "analyte_type_id": "Y",
+    "aliquot_quantity": 11.0146,
+    "aliquot_description": "ad1mPZhG3uPU",
+    "amount": 10.4316,
+    "source_center": "Bh1ynry0N0p2",
+    "type": "aliquot",
+    "submitter_id": "aliquot_002",
+    "samples": {
+      "submitter_id": "sample_002"
+    }
+  },
+  {
+    "aliquot_volume": 5.9163,
+    "analyte_type": "q4GGrdMcc6Di",
+    "concentration": 8.0166,
+    "analyte_type_id": "S",
+    "aliquot_quantity": 11.0739,
+    "aliquot_description": "bGBAAjI4Zjhd",
+    "amount": 9.9225,
+    "source_center": "HzewAk1kl4LO",
+    "type": "aliquot",
+    "submitter_id": "aliquot_003",
+    "samples": {
+      "submitter_id": "sample_003"
+    }
+  },
+  {
+    "aliquot_volume": 8.2799,
+    "analyte_type": "6DdjRd3TeHNp",
+    "concentration": 10.8803,
+    "analyte_type_id": "T",
+    "aliquot_quantity": 13.3694,
+    "aliquot_description": "JrdFN6hZZMMb",
+    "amount": 7.9105,
+    "source_center": "619RSM6Ef2ej",
+    "type": "aliquot",
+    "submitter_id": "aliquot_004",
+    "samples": {
+      "submitter_id": "sample_004"
+    }
+  }
+]

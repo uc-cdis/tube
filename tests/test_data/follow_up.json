@@ -1,0 +1,98 @@
+[
+  {
+    "weight": 12.7514,
+    "bmi": 11.041,
+    "drug_used": "Refusal",
+    "tint": 1,
+    "days_to_follow_up": 0,
+    "height": 10.4883,
+    "visit_number": 4,
+    "visit_type": "Abbreviated Visit (Record in ABRV file)",
+    "visit_name": "xg507UUM5k9E",
+    "weight_percentage": 3.4303,
+    "health_insurance": true,
+    "visit_date": 4,
+    "age_at_visit": 2,
+    "visit_id": 6,
+    "pregnancy_status": false,
+    "ever_transferred": "Transferred",
+    "version_data": "aDmQuQigjumE",
+    "type": "follow_up",
+    "submitter_id": "follow_up_001",
+    "subjects": {
+      "submitter_id": "subject_001"
+    }
+  },
+  {
+    "weight": 9.0393,
+    "bmi": 13.8784,
+    "drug_used": "Don't know",
+    "tint": 7,
+    "days_to_follow_up": 5,
+    "height": 9.9368,
+    "visit_number": 3,
+    "visit_type": "Follow-up Visit",
+    "visit_name": "dmc1ONqAuJG3",
+    "weight_percentage": 9.3378,
+    "health_insurance": true,
+    "visit_date": 5,
+    "age_at_visit": 5,
+    "visit_id": 4,
+    "pregnancy_status": false,
+    "ever_transferred": "Never transferred",
+    "version_data": "bbZ9zvYNH4Gk",
+    "type": "follow_up",
+    "submitter_id": "follow_up_002",
+    "subjects": {
+      "submitter_id": "subject_002"
+    }
+  },
+  {
+    "weight": 8.9385,
+    "bmi": 8.1381,
+    "drug_used": "Refusal",
+    "tint": 8,
+    "days_to_follow_up": 1,
+    "height": 12.6557,
+    "visit_number": 3,
+    "visit_type": "Follow-up Visit",
+    "visit_name": "ADQwG4s6SgGT",
+    "weight_percentage": 9.6187,
+    "health_insurance": true,
+    "visit_date": 5,
+    "age_at_visit": 5,
+    "visit_id": 6,
+    "pregnancy_status": false,
+    "ever_transferred": "Never transferred",
+    "version_data": "agC6SShOteCL",
+    "type": "follow_up",
+    "submitter_id": "follow_up_003",
+    "subjects": {
+      "submitter_id": "subject_003"
+    }
+  },
+  {
+    "weight": 10.4921,
+    "bmi": 10.2002,
+    "drug_used": "No",
+    "tint": 7,
+    "days_to_follow_up": 6,
+    "height": 11.7009,
+    "visit_number": 4,
+    "visit_type": "Follow-up Visit",
+    "visit_name": "LAZ5f62RO46r",
+    "weight_percentage": 9.7361,
+    "health_insurance": false,
+    "visit_date": 5,
+    "age_at_visit": 5,
+    "visit_id": 6,
+    "pregnancy_status": false,
+    "ever_transferred": "Transferred",
+    "version_data": "aRPLq0Q53GYy",
+    "type": "follow_up",
+    "submitter_id": "follow_up_004",
+    "subjects": {
+      "submitter_id": "subject_004"
+    }
+  }
+]

@@ -1,4 +1,7 @@
 # ETL process from postgres to ES
+
+[![Build Status](https://travis-ci.com/uc-cdis/tube.svg?branch=feat/test-travis)](https://travis-ci.com/uc-cdis/tube)
+
 We decided to use spark for running the ETL process, because:
 1. It was used in our previous projects so we have familiarity with the framework and a certain level of confidence that it will work.
 2. It scales very well with the data. We don't need to change any code when the data scale changes.

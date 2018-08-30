@@ -1,0 +1,50 @@
+[
+  {
+    "highest_education": "four years of college and got a degree",
+    "dominand_hand": "Left",
+    "employment_status": "Working full-time",
+    "rodent_weight": 10.2902,
+    "insurance_coverage": false,
+    "type": "exposure",
+    "submitter_id": "exposure_001",
+    "subjects": {
+      "submitter_id": "subject_001"
+    }
+  },
+  {
+    "highest_education": "at least one year of college but not degree",
+    "dominand_hand": "Right",
+    "employment_status": "Working full-time",
+    "rodent_weight": 6.2733,
+    "insurance_coverage": true,
+    "type": "exposure",
+    "submitter_id": "exposure_002",
+    "subjects": {
+      "submitter_id": "subject_002"
+    }
+  },
+  {
+    "highest_education": "four years of college and got a degree",
+    "dominand_hand": "Left",
+    "employment_status": "Working part-time",
+    "rodent_weight": 5.5818,
+    "insurance_coverage": true,
+    "type": "exposure",
+    "submitter_id": "exposure_003",
+    "subjects": {
+      "submitter_id": "subject_003"
+    }
+  },
+  {
+    "highest_education": "four years of college and got a degree",
+    "dominand_hand": "Right",
+    "employment_status": "Disability",
+    "rodent_weight": 11.3893,
+    "insurance_coverage": false,
+    "type": "exposure",
+    "submitter_id": "exposure_004",
+    "subjects": {
+      "submitter_id": "subject_004"
+    }
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "data_type": "miRNA Expression Quantification",
+    "data_category": "Transcriptome Profiling",
+    "experimental_strategy": "RNA-microarray",
+    "data_format": "TSV",
+    "md5sum": "afe8326ed3714fd95a11387ba60b484a",
+    "file_size": 3,
+    "file_name": "RU6S68bGx03l",
+    "type": "mirna_microarray",
+    "submitter_id": "mirna_microarray_001",
+    "aliquots": {
+      "submitter_id": "aliquot_001"
+    }
+  },
+  {
+    "data_type": "miRNA Expression Quantification",
+    "data_category": "Transcriptome Profiling",
+    "experimental_strategy": "RNA-microarray",
+    "data_format": "CSV",
+    "md5sum": "173af580786b7186aa8e37da47ea5655",
+    "file_size": 4,
+    "file_name": "eRYO2nBUvqbU",
+    "type": "mirna_microarray",
+    "submitter_id": "mirna_microarray_002",
+    "aliquots": {
+      "submitter_id": "aliquot_002"
+    }
+  },
+  {
+    "data_type": "miRNA Expression Quantification",
+    "data_category": "Transcriptome Profiling",
+    "experimental_strategy": "RNA-microarray",
+    "data_format": "TXT",
+    "md5sum": "d063a2f10561b845a4c5d31af21d3d4b",
+    "file_size": 2,
+    "file_name": "en9yFJ8z6xt0",
+    "type": "mirna_microarray",
+    "submitter_id": "mirna_microarray_003",
+    "aliquots": {
+      "submitter_id": "aliquot_003"
+    }
+  },
+  {
+    "data_type": "miRNA Expression Quantification",
+    "data_category": "Transcriptome Profiling",
+    "experimental_strategy": "RNA-microarray",
+    "data_format": "CSV",
+    "md5sum": "b65be2daa225f66f63613519067cd673",
+    "file_size": 5,
+    "file_name": "8qgRvcTcJskP",
+    "type": "mirna_microarray",
+    "submitter_id": "mirna_microarray_004",
+    "aliquots": {
+      "submitter_id": "aliquot_004"
+    }
+  }
+]
