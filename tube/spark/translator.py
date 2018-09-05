@@ -41,7 +41,7 @@ def merge_aggregate_with_reducer(x, y):
     res = []
     for i in range(0, len(x)):
         res.append((x[i][0], x[i][1], get_aggregation_func_by_name(x[i][0], True)(x[i][2], y[i][2])))
-    return res
+    return tuple(res)
 
 
 def intermediate_frame(output_name):
