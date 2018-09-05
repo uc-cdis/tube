@@ -14,10 +14,6 @@ LIST_TABLES_FILES = 'tables.txt'
 #    and setup $XDG_DATA_HOME/.local/share/gen3/tube/creds.json
 #
 conf_data = load_json('creds.json', 'tube')
-
-print(os.getenv('XDG_DATA_HOME'))
-print(conf_data)
-
 DB_HOST = conf_data.get( 'db_host', 'localhost' )
 DB_DATABASE = conf_data.get( 'db_database', 'gdcdb' )
 DB_USERNAME = conf_data.get( 'db_username', 'peregrine' )
