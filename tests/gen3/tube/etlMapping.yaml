@@ -1,6 +1,7 @@
 subject:
   _props:
     - submitter_id
+    - project_id
   _flatten_props:
     - path: virus_infections
       _props:
