@@ -1,5 +1,5 @@
 from cdislogging import get_logger
-from config_helper import *
+from tube.config_helper import *
 
 
 logger = get_logger(__name__)
