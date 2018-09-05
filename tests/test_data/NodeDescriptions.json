@@ -1,0 +1,308 @@
+[
+  {
+    "NODE": "study",
+    "ORDER": 1,
+    "TARGET": ["project"],
+    "CATEGORY": "administrative"
+  },
+  {
+    "NODE": "subject",
+    "ORDER": 2,
+    "TARGET": ["study"],
+    "CATEGORY": "administrative"
+  },
+  {
+    "NODE": "follow_up",
+    "ORDER": 3,
+    "TARGET": ["subject"],
+    "CATEGORY": "clinical"
+  },
+  {
+    "NODE": "neurocognitive_test",
+    "ORDER": 4,
+    "TARGET": ["follow_up"],
+    "CATEGORY": "clinical"
+  },
+  {
+    "NODE": "sample",
+    "ORDER": 5,
+    "TARGET": ["subject"],
+    "CATEGORY": "biospecimen"
+  },
+  {
+    "NODE": "aliquot",
+    "ORDER": 6,
+    "TARGET": ["sample"],
+    "CATEGORY": "biospecimen"
+  },
+  {
+    "NODE": "metabolite_mass_spectrometry",
+    "ORDER": 7,
+    "TARGET": ["aliquot"],
+    "CATEGORY": "data_file"
+  },
+  {
+    "NODE": "data_collection",
+    "ORDER": 8,
+    "TARGET": ["project"],
+    "CATEGORY": "administrative"
+  },
+  {
+    "NODE": "core_metadata",
+    "ORDER": 9,
+    "TARGET": ["data_collection"],
+    "CATEGORY": "administrative"
+  },
+  {
+    "NODE": "mutation_panel",
+    "ORDER": 10,
+    "TARGET": ["subject", "core_metadata"],
+    "CATEGORY": "data_file"
+  },
+  {
+    "NODE": "bgm_simulation",
+    "ORDER": 11,
+    "TARGET": ["mutation_panel", "core_metadata"],
+    "CATEGORY": "data_file"
+  },
+  {
+    "NODE": "diagnosis",
+    "ORDER": 12,
+    "TARGET": ["subject"],
+    "CATEGORY": "clinical"
+  },
+  {
+    "NODE": "treatment",
+    "ORDER": 13,
+    "TARGET": ["diagnosis"],
+    "CATEGORY": "clinical"
+  },
+  {
+    "NODE": "read_group",
+    "ORDER": 14,
+    "TARGET": ["aliquot"],
+    "CATEGORY": "biospecimen"
+  },
+  {
+    "NODE": "submitted_unaligned_reads",
+    "ORDER": 15,
+    "TARGET": ["read_group"],
+    "CATEGORY": "data_file"
+  },
+  {
+    "NODE": "submitted_aligned_reads",
+    "ORDER": 16,
+    "TARGET": ["read_group"],
+    "CATEGORY": "data_file"
+  },
+  {
+    "NODE": "demographic",
+    "ORDER": 17,
+    "TARGET": ["subject"],
+    "CATEGORY": "clinical"
+  },
+  {
+    "NODE": "experiment",
+    "ORDER": 18,
+    "TARGET": ["aliquot"],
+    "CATEGORY": "notation"
+  },
+  {
+    "NODE": "read_group_qc",
+    "ORDER": 19,
+    "TARGET": ["read_group", "submitted_aligned_reads"],
+    "CATEGORY": "notation"
+  },
+  {
+    "NODE": "summary_socio_demographic",
+    "ORDER": 20,
+    "TARGET": ["follow_up"],
+    "CATEGORY": "clinical"
+  },
+  {
+    "NODE": "publication",
+    "ORDER": 21,
+    "TARGET": ["study"],
+    "CATEGORY": "administrative"
+  },
+  {
+    "NODE": "elisa_assay",
+    "ORDER": 22,
+    "TARGET": ["experiment"],
+    "CATEGORY": "notation"
+  },
+  {
+    "NODE": "behavior_questionnaire",
+    "ORDER": 23,
+    "TARGET": ["follow_up"],
+    "CATEGORY": "clinical"
+  },
+  {
+    "NODE": "mrna_microarray",
+    "ORDER": 24,
+    "TARGET": ["aliquot"],
+    "CATEGORY": "data_file"
+  },
+  {
+    "NODE": "mrna_expression",
+    "ORDER": 25,
+    "TARGET": ["mrna_microarray"],
+    "CATEGORY": "data_file"
+  },
+  {
+    "NODE": "physical_exam",
+    "ORDER": 26,
+    "TARGET": ["follow_up"],
+    "CATEGORY": "clinical"
+  },
+  {
+    "NODE": "hiv_history",
+    "ORDER": 27,
+    "TARGET": ["subject"],
+    "CATEGORY": "clinical"
+  },
+  {
+    "NODE": "protein_expression",
+    "ORDER": 28,
+    "TARGET": ["aliquot"],
+    "CATEGORY": "data_file"
+  },
+  {
+    "NODE": "acknowledgement",
+    "ORDER": 29,
+    "TARGET": ["project"],
+    "CATEGORY": "administrative"
+  },
+  {
+    "NODE": "gynecological_exam",
+    "ORDER": 30,
+    "TARGET": ["follow_up"],
+    "CATEGORY": "clinical"
+  },
+  {
+    "NODE": "submitted_copy_number",
+    "ORDER": 31,
+    "TARGET": ["aliquot"],
+    "CATEGORY": "data_file"
+  },
+  {
+    "NODE": "laboratory_result",
+    "ORDER": 32,
+    "TARGET": ["follow_up"],
+    "CATEGORY": "clinical"
+  },
+  {
+    "NODE": "family_history",
+    "ORDER": 33,
+    "TARGET": ["subject"],
+    "CATEGORY": "clinical"
+  },
+  {
+    "NODE": "supplementary_file",
+    "ORDER": 34,
+    "TARGET": ["study"],
+    "CATEGORY": "metadata_file"
+  },
+  {
+    "NODE": "exposure",
+    "ORDER": 35,
+    "TARGET": ["subject"],
+    "CATEGORY": "clinical"
+  },
+  {
+    "NODE": "summary_lab_result",
+    "ORDER": 36,
+    "TARGET": ["follow_up", "sample"],
+    "CATEGORY": "clinical"
+  },
+  {
+    "NODE": "sequencing_result",
+    "ORDER": 37,
+    "TARGET": ["experiment"],
+    "CATEGORY": "data_file"
+  },
+  {
+    "NODE": "protocol",
+    "ORDER": 38,
+    "TARGET": ["study"],
+    "CATEGORY": "metadata_file"
+  },
+  {
+    "NODE": "lipid_mass_spectrometry",
+    "ORDER": 39,
+    "TARGET": ["aliquot"],
+    "CATEGORY": "data_file"
+  },
+  {
+    "NODE": "visit_file",
+    "ORDER": 40,
+    "TARGET": ["laboratory_result"],
+    "CATEGORY": "data_file"
+  },
+  {
+    "NODE": "submitted_methylation",
+    "ORDER": 41,
+    "TARGET": ["aliquot"],
+    "CATEGORY": "data_file"
+  },
+  {
+    "NODE": "mental_health_questionnaire",
+    "ORDER": 42,
+    "TARGET": ["follow_up"],
+    "CATEGORY": "clinical"
+  },
+  {
+    "NODE": "aligned_reads_index",
+    "ORDER": 43,
+    "TARGET": ["submitted_aligned_reads"],
+    "CATEGORY": "index_file"
+  },
+  {
+    "NODE": "peptide_expression",
+    "ORDER": 44,
+    "TARGET": ["aliquot"],
+    "CATEGORY": "data_file"
+  },
+  {
+    "NODE": "virus_infection",
+    "ORDER": 45,
+    "TARGET": ["subject"],
+    "CATEGORY": "clinical"
+  },
+  {
+    "NODE": "protein_mass_spectrometry",
+    "ORDER": 46,
+    "TARGET": ["aliquot"],
+    "CATEGORY": "data_file"
+  },
+  {
+    "NODE": "health_questionnaire",
+    "ORDER": 47,
+    "TARGET": ["follow_up"],
+    "CATEGORY": "clinical"
+  },
+  {
+    "NODE": "keyword",
+    "ORDER": 48,
+    "TARGET": ["study"],
+    "CATEGORY": "administrative"
+  },
+  {
+    "NODE": "mirna_microarray",
+    "ORDER": 49,
+    "TARGET": ["aliquot"],
+    "CATEGORY": "data_file"
+  },
+  {
+    "NODE": "submitted_somatic_mutation",
+    "ORDER": 50,
+    "TARGET": ["read_group"],
+    "CATEGORY": "data_file"
+  },
+  {
+    "NODE": "summary_drug_use",
+    "ORDER": 51,
+    "TARGET": ["follow_up"],
+    "CATEGORY": "clinical"
+  }
+]

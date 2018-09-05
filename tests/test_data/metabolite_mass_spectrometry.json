@@ -1,0 +1,58 @@
+[
+  {
+    "data_type": "Metabolite Mass Spectrometry",
+    "data_category": "Metabolite Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "TSV",
+    "md5sum": "8f4d88904efb30e701dcf245be4c089e",
+    "file_size": 2,
+    "file_name": "xW3p7gfC52r2",
+    "type": "metabolite_mass_spectrometry",
+    "submitter_id": "metabolite_mass_spectrometry_001",
+    "aliquots": {
+      "submitter_id": "aliquot_001"
+    }
+  },
+  {
+    "data_type": "Metabolite Mass Spectrometry",
+    "data_category": "Metabolite Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "TAR",
+    "md5sum": "53d9c53b3a25800c3184315ca0105e80",
+    "file_size": 4,
+    "file_name": "SROZwvauD8FE",
+    "type": "metabolite_mass_spectrometry",
+    "submitter_id": "metabolite_mass_spectrometry_002",
+    "aliquots": {
+      "submitter_id": "aliquot_002"
+    }
+  },
+  {
+    "data_type": "Metabolite Mass Spectrometry",
+    "data_category": "Metabolite Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "TSV",
+    "md5sum": "bf5d7a95cbeb71fb9712c8b27a9f8f67",
+    "file_size": 4,
+    "file_name": "hEAJCOSXPWzq",
+    "type": "metabolite_mass_spectrometry",
+    "submitter_id": "metabolite_mass_spectrometry_003",
+    "aliquots": {
+      "submitter_id": "aliquot_003"
+    }
+  },
+  {
+    "data_type": "Metabolite Mass Spectrometry",
+    "data_category": "Metabolite Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "RAW",
+    "md5sum": "28d65e438ebdd3d1aab59a03ea691dbc",
+    "file_size": 4,
+    "file_name": "ISmxfOsSaesU",
+    "type": "metabolite_mass_spectrometry",
+    "submitter_id": "metabolite_mass_spectrometry_004",
+    "aliquots": {
+      "submitter_id": "aliquot_004"
+    }
+  }
+]

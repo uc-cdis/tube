@@ -1,0 +1,42 @@
+[
+  {
+    "measurement_technique": "ZAlngXWtyIGD",
+    "experiment_type": "g2RJsBYShtju",
+    "experiment_description": "MvK0SyXqCGR4",
+    "type": "experiment",
+    "submitter_id": "experiment_001",
+    "aliquots": {
+      "submitter_id": "aliquot_001"
+    }
+  },
+  {
+    "measurement_technique": "k69QlJ8CuABl",
+    "experiment_type": "WJ3G2Q229lZh",
+    "experiment_description": "HkwC9D5kmIn1",
+    "type": "experiment",
+    "submitter_id": "experiment_002",
+    "aliquots": {
+      "submitter_id": "aliquot_002"
+    }
+  },
+  {
+    "measurement_technique": "H0r7WdJ8yw2d",
+    "experiment_type": "uybOFdCl9rAM",
+    "experiment_description": "5YQOshPK0feQ",
+    "type": "experiment",
+    "submitter_id": "experiment_003",
+    "aliquots": {
+      "submitter_id": "aliquot_003"
+    }
+  },
+  {
+    "measurement_technique": "jsoWwnrhuLJV",
+    "experiment_type": "bItp3rlI3cjc",
+    "experiment_description": "9UFQ5KWLDnLH",
+    "type": "experiment",
+    "submitter_id": "experiment_004",
+    "aliquots": {
+      "submitter_id": "aliquot_004"
+    }
+  }
+]

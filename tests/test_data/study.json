@@ -1,0 +1,78 @@
+[
+  {
+    "study_release_version": "I4r3ucR0dtuB",
+    "data_description": "DCKIhqnAErEw",
+    "study_design": "McXne5ixTdmV",
+    "study_organization": "cYR97v4G2W6p",
+    "study_description": "NEBFma0t4YBc",
+    "study_doi": "Hv6CnRdxi30W",
+    "age_unit": "d.p.c.",
+    "study_completeness": "0",
+    "study_release_date": "6lY0nwH4LGc5",
+    "is_clinical_trial": false,
+    "study_setup": "YDyHDr8O2FPd",
+    "study_objective": "5IbvQ1suugjL",
+    "type": "study",
+    "submitter_id": "study_001",
+    "projects": {
+      "code": "test"
+    }
+  },
+  {
+    "study_release_version": "vw5xlCIg3K0b",
+    "data_description": "hMXVcLBV7uIH",
+    "study_design": "UqzvYQOGym8m",
+    "study_organization": "nULIbci7F8mr",
+    "study_description": "9Jr3NNB6iszb",
+    "study_doi": "Gpcr3bXI2u6Z",
+    "age_unit": "d.p.c.",
+    "study_completeness": "1",
+    "study_release_date": "SXqCFKdniNXa",
+    "is_clinical_trial": true,
+    "study_setup": "T2Eybw0UvYJv",
+    "study_objective": "9VSqR2VOt3Tq",
+    "type": "study",
+    "submitter_id": "study_002",
+    "projects": {
+      "code": "test"
+    }
+  },
+  {
+    "study_release_version": "XFAByqfZy8G4",
+    "data_description": "gCP5l724ciVB",
+    "study_design": "FoUGuuSgxcoO",
+    "study_organization": "QU2oo0fb6W74",
+    "study_description": "rX81Bnd7So9l",
+    "study_doi": "EUTrN8aoz4q5",
+    "age_unit": "Weeks",
+    "study_completeness": "1",
+    "study_release_date": "bz1kZzDQipvK",
+    "is_clinical_trial": true,
+    "study_setup": "2KihH332h8AC",
+    "study_objective": "uSuT0fYFo8OV",
+    "type": "study",
+    "submitter_id": "study_003",
+    "projects": {
+      "code": "test"
+    }
+  },
+  {
+    "study_release_version": "mgMMt9aSackI",
+    "data_description": "pU2mmdW9SnTf",
+    "study_design": "WEfN3YMQm6yA",
+    "study_organization": "ADlGRm0JlFcg",
+    "study_description": "MFw0Kyecmajb",
+    "study_doi": "Ut37fjK4lju9",
+    "age_unit": "Hours",
+    "study_completeness": "2",
+    "study_release_date": "nOyaRDFmYPWY",
+    "is_clinical_trial": false,
+    "study_setup": "k38SycK6y5sN",
+    "study_objective": "C0osjog276OQ",
+    "type": "study",
+    "submitter_id": "study_004",
+    "projects": {
+      "code": "test"
+    }
+  }
+]

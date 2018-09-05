@@ -1,0 +1,66 @@
+[
+  {
+    "last_macs_visit_haart_free": 4,
+    "treatment_type": "vCy8pGeSJ6vC",
+    "year_of_last_haart_free": 10.1402,
+    "first_macs_visit_haart": 11.1275,
+    "therapeutic_agents": "vXmesqDHAqGM",
+    "regimen_or_line_of_therapy": "ixxtVSxrJiYy",
+    "year_of_treatment": 10.2124,
+    "treatment_outcome": "Unknown",
+    "treatment_intent_type": "ybM0GF1zSNTt",
+    "type": "treatment",
+    "submitter_id": "treatment_001",
+    "diagnoses": {
+      "submitter_id": "diagnosis_001"
+    }
+  },
+  {
+    "last_macs_visit_haart_free": 1,
+    "treatment_type": "RxDMqg4WVmlU",
+    "year_of_last_haart_free": 11.8258,
+    "first_macs_visit_haart": 13.3958,
+    "therapeutic_agents": "mW7MCIufkXIj",
+    "regimen_or_line_of_therapy": "fGKAfxojmvz3",
+    "year_of_treatment": 5.9603,
+    "treatment_outcome": "Unknown",
+    "treatment_intent_type": "aAscQMUV2SIB",
+    "type": "treatment",
+    "submitter_id": "treatment_002",
+    "diagnoses": {
+      "submitter_id": "diagnosis_002"
+    }
+  },
+  {
+    "last_macs_visit_haart_free": 7,
+    "treatment_type": "cmRqjWjDvUNG",
+    "year_of_last_haart_free": 15.4239,
+    "first_macs_visit_haart": 8.7765,
+    "therapeutic_agents": "5DzCDLd4qAhE",
+    "regimen_or_line_of_therapy": "GrYNXScoaV06",
+    "year_of_treatment": 7.5481,
+    "treatment_outcome": "Complete Response",
+    "treatment_intent_type": "7gf6RsasBara",
+    "type": "treatment",
+    "submitter_id": "treatment_003",
+    "diagnoses": {
+      "submitter_id": "diagnosis_003"
+    }
+  },
+  {
+    "last_macs_visit_haart_free": 2,
+    "treatment_type": "Nbngcmm6p8To",
+    "year_of_last_haart_free": 9.3265,
+    "first_macs_visit_haart": 5.8487,
+    "therapeutic_agents": "Ol1OyCRjK9Gh",
+    "regimen_or_line_of_therapy": "KnP7CObeDyfj",
+    "year_of_treatment": 13.5488,
+    "treatment_outcome": "Partial Response",
+    "treatment_intent_type": "wre2lG5Be6ZZ",
+    "type": "treatment",
+    "submitter_id": "treatment_004",
+    "diagnoses": {
+      "submitter_id": "diagnosis_004"
+    }
+  }
+]
