@@ -60,10 +60,24 @@ def get_fields(fields):
     return lambda x: {k: v for (k, v) in x.items() if k in fields}
 
 
+def get_fields_empty_values(fields):
+    return {k: None for k in fields}
+
+
 def merge_dictionary(d1, d2):
     d0 = d1.copy()
     d0.update(d2)
     return d0
+
+
+def merge_and_fill_empty_fields(item, fields):
+    if item[1] is None and item[0] is None:
+        return {}
+    if item[0] is None:
+        return item[1]
+    if item[1] is None:
+        return merge_dictionary(item[0], get_fields_empty_values(fields))
+    return merge_dictionary(item[0], item[1])
 
 
 class Gen3Translator(object):
@@ -87,6 +101,8 @@ class Gen3Translator(object):
                 df = self.sc.parallelize([('__BLANK_ID__', '__BLANK_VALUE__')])  # to create the frame for empty node
             return df.mapValues(lambda x: [])
         if fields is not None:
+            if df.isEmpty():
+                return df.mapValues(get_fields_empty_values(fields))
             return df.mapValues(get_fields(fields))
         return df
 
@@ -124,7 +140,6 @@ class Gen3Translator(object):
                             .mapValues(intermediate_frame(child.reducer.output))
 
                     df = count_df if df is None else df.leftOuterJoin(count_df).mapValues(lambda x: x[0] + x[1])
-                    # print(df.collect())
                     df = df if child.__key__() not in aggregated_dfs \
                         else df.leftOuterJoin(self.aggregate_intermediate_data_frame(aggregated_dfs[child.__key__()],
                                                                                      swap_key_value(edge_df))) \
@@ -137,11 +152,12 @@ class Gen3Translator(object):
 
     def get_direct_children(self, root_df):
         for n in self.parser.flatten_props:
+            # edge_df = root_df.leftOuterJoin(self.translate_edge(n.edge)).mapValues(lambda x: x[1])
             edge_df = self.translate_edge(n.edge)
             reversed_df = swap_key_value(edge_df)
             child_df = self.translate_table(n.tbl_name, fields=n.fields)
             child_df = reversed_df.join(child_df).map(lambda x: tuple([x[1][0], x[1][1]]))
-            root_df = root_df.join(child_df).mapValues(lambda x: merge_dictionary(x[0], x[1]))
+            root_df = root_df.leftOuterJoin(child_df).mapValues(lambda x: merge_and_fill_empty_fields(x, n.fields))
         return root_df
 
     def run_etl(self):

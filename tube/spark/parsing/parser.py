@@ -98,7 +98,7 @@ class Parser(object):
 
                 n_name = child_name
                 current_parent_edge = edge_tbl
-                level+=1
+                level += 1
 
         return list_nodes, self.get_leaves(list_nodes)
 
