@@ -1,0 +1,58 @@
+[
+  {
+    "protocol_description": "55le3y9uySQy",
+    "data_category": "Hzlh8U0BICl5",
+    "data_type": "Protocol File",
+    "data_format": "TcjlDCAvS4AA",
+    "md5sum": "0e8c213b2f07a6df7547e591623ccd22",
+    "file_size": 5,
+    "file_name": "1UBPIaOr3UDs",
+    "type": "protocol",
+    "submitter_id": "protocol_001",
+    "studies": {
+      "submitter_id": "study_001"
+    }
+  },
+  {
+    "protocol_description": "R5ghvFdmC5PI",
+    "data_category": "9mJq8wbr3z4y",
+    "data_type": "Protocol File",
+    "data_format": "6MBPGWUFkPCr",
+    "md5sum": "60cdce9500322f6edceea36027be553c",
+    "file_size": 3,
+    "file_name": "VjNSAW5yZj7H",
+    "type": "protocol",
+    "submitter_id": "protocol_002",
+    "studies": {
+      "submitter_id": "study_002"
+    }
+  },
+  {
+    "protocol_description": "lJiujTDMqvOS",
+    "data_category": "nkB15cl2A5Ny",
+    "data_type": "Protocol File",
+    "data_format": "gY4DUFOFX9Er",
+    "md5sum": "4ff02bb04f3f64e088fb5d713f2ae4ca",
+    "file_size": 6,
+    "file_name": "ymydM9z7nQkS",
+    "type": "protocol",
+    "submitter_id": "protocol_003",
+    "studies": {
+      "submitter_id": "study_003"
+    }
+  },
+  {
+    "protocol_description": "v37HYr1hx6LT",
+    "data_category": "B0E9GAjVQr4X",
+    "data_type": "Protocol File",
+    "data_format": "TWXcIekC9IPl",
+    "md5sum": "7ec21d5c0ffd2866aac79a2d5ea34167",
+    "file_size": 5,
+    "file_name": "QWEJIQq946xA",
+    "type": "protocol",
+    "submitter_id": "protocol_004",
+    "studies": {
+      "submitter_id": "study_004"
+    }
+  }
+]

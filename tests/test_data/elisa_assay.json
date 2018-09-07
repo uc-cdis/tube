@@ -1,0 +1,58 @@
+[
+  {
+    "comment": "2WwgvZSim2gH",
+    "analyte_preferred": "8XFZkBrWIt9f",
+    "value_reported": "G3O6NTvPLC5S",
+    "unit_preferred": "mU2MF20IqDhF",
+    "unit_reported": "8UUcSzOnSadu",
+    "analyte_reported": "mYUg4dcUCOcv",
+    "value_preferred": 7.6499,
+    "type": "elisa_assay",
+    "submitter_id": "elisa_assay_001",
+    "experiments": {
+      "submitter_id": "experiment_001"
+    }
+  },
+  {
+    "comment": "We8XWRsDmZuo",
+    "analyte_preferred": "fqI5ivvVTAqp",
+    "value_reported": "BswPVdHHARvi",
+    "unit_preferred": "J8LHjcA9bAbP",
+    "unit_reported": "9L54d6d6CqpT",
+    "analyte_reported": "y1NxYajqBp3z",
+    "value_preferred": 14.495,
+    "type": "elisa_assay",
+    "submitter_id": "elisa_assay_002",
+    "experiments": {
+      "submitter_id": "experiment_002"
+    }
+  },
+  {
+    "comment": "FQM2vKkEHypy",
+    "analyte_preferred": "eF9xycVKI71Y",
+    "value_reported": "7xs6J11KOtMd",
+    "unit_preferred": "RDFplfy3vKDX",
+    "unit_reported": "yQ9alspeAVPl",
+    "analyte_reported": "tBw7IcQhvWg9",
+    "value_preferred": 11.615,
+    "type": "elisa_assay",
+    "submitter_id": "elisa_assay_003",
+    "experiments": {
+      "submitter_id": "experiment_003"
+    }
+  },
+  {
+    "comment": "Dhr9qsPcEjpp",
+    "analyte_preferred": "cNP1cIC7kZ0p",
+    "value_reported": "nBH1v3O5lk7K",
+    "unit_preferred": "tinhaTex7RxO",
+    "unit_reported": "U8RLRCYgw4HO",
+    "analyte_reported": "SrCORS2kLKhU",
+    "value_preferred": 6.3294,
+    "type": "elisa_assay",
+    "submitter_id": "elisa_assay_004",
+    "experiments": {
+      "submitter_id": "experiment_004"
+    }
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "protocol_description": "TYBMW0RHdy6T",
+    "file_description": "INqb3Snb4Ady",
+    "data_type": "Assessment Results",
+    "data_category": "PXTBdMh8foeZ",
+    "data_format": "d5rrKZoygPSr",
+    "md5sum": "499cf816ba7e5f600204a89ff7a70192",
+    "file_size": 3,
+    "file_name": "wjdpDoTWNeVJ",
+    "type": "supplementary_file",
+    "submitter_id": "supplementary_file_001",
+    "studies": {
+      "submitter_id": "study_001"
+    }
+  },
+  {
+    "protocol_description": "ERaEL6yFW1SO",
+    "file_description": "R6LFr36RvGG1",
+    "data_type": "Lab Test Results",
+    "data_category": "euyxMJ0BGLO5",
+    "data_format": "gbkAmtcpy0b8",
+    "md5sum": "0a339d266be38fc11a6e08ae9cbada92",
+    "file_size": 6,
+    "file_name": "68JFUdGwRyJd",
+    "type": "supplementary_file",
+    "submitter_id": "supplementary_file_002",
+    "studies": {
+      "submitter_id": "study_002"
+    }
+  },
+  {
+    "protocol_description": "qrWHwkSMoIsv",
+    "file_description": "oT8V8oVdw8Xj",
+    "data_type": "Adverse Events",
+    "data_category": "s58LcXVmwpx5",
+    "data_format": "pvAxVYCKs53c",
+    "md5sum": "fcf31ad3c4ee89525e9622ac3af4aa5a",
+    "file_size": 5,
+    "file_name": "rj8tWcu291KC",
+    "type": "supplementary_file",
+    "submitter_id": "supplementary_file_003",
+    "studies": {
+      "submitter_id": "study_003"
+    }
+  },
+  {
+    "protocol_description": "eLpwKVB1iAz9",
+    "file_description": "EtsCjkg5iRH3",
+    "data_type": "Substance Use",
+    "data_category": "701tHkZhnxOO",
+    "data_format": "apgv9xf3CvF6",
+    "md5sum": "c144fe2f0fd5ff22dc8f73c49babf85d",
+    "file_size": 5,
+    "file_name": "g2dpRWdSxdgT",
+    "type": "supplementary_file",
+    "submitter_id": "supplementary_file_004",
+    "studies": {
+      "submitter_id": "study_004"
+    }
+  }
+]

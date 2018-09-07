@@ -1,4 +1,7 @@
 # ETL process from postgres to ES
+
+[![Build Status](https://travis-ci.com/uc-cdis/tube.svg?branch=feat/test-travis)](https://travis-ci.com/uc-cdis/tube)
+
 We decided to use spark for running the ETL process, because:
 1. It was used in our previous projects so we have familiarity with the framework and a certain level of confidence that it will work.
 2. It scales very well with the data. We don't need to change any code when the data scale changes.
@@ -7,7 +10,7 @@ We decided to use spark for running the ETL process, because:
 We decided to use python instead of scala because cdis dev teams are much more comfortable with python programming. And since all the computation will be done in spark, we won't do any manipulation on the python level, the performance won't be a huge difference.
 
 ## Loading postgres data to spark RDD
-Learning all the options that one of our collabators -OICR tried (posted [here](https://softeng.oicr.on.ca/grant_guo/2017/08/14/spark/) ). We decided to go with similar strategy - dump postgres to HDFS and load HDFS to rdd/SPARK.
+Learning all the options that one of our collabators OICR tried (posted [here](https://softeng.oicr.on.ca/grant_guo/2017/08/14/spark/) ). We decided to go with similar strategy - dump postgres to HDFS and load HDFS to rdd/SPARK.
 We decided to use [SQOOP](https://github.com/apache/sqoop) to dump the postgres database to HDFS. In order to dump postgresql database, SQOOP calls [CopyManager](https://jdbc.postgresql.org/documentation/publicapi/org/postgresql/copy/CopyManager.html).
 
 # Local Development Installation Guide

@@ -1,0 +1,62 @@
+[
+  {
+    "cohort_id": 4,
+    "hiv_status": true,
+    "index_date": "Study Enrollment",
+    "strain": "W8XYm8G3CV3p",
+    "cohort_name": "HldGEIWC0egg",
+    "study_center": "Washington",
+    "primary_site": "Pyriform sinus",
+    "species": "Rattus rattus",
+    "type": "subject",
+    "submitter_id": "subject_001",
+    "studies": {
+      "submitter_id": "study_001"
+    }
+  },
+  {
+    "cohort_id": 2,
+    "hiv_status": false,
+    "index_date": "Other",
+    "strain": "xYPrcZdn4yIf",
+    "cohort_name": "5yvTIZQexDLH",
+    "study_center": "Brooklyn",
+    "primary_site": "Other and unspecified parts of tongue",
+    "species": "Mus musculus",
+    "type": "subject",
+    "submitter_id": "subject_002",
+    "studies": {
+      "submitter_id": "study_002"
+    }
+  },
+  {
+    "cohort_id": 3,
+    "hiv_status": true,
+    "index_date": "First Patient Visit",
+    "strain": "dPcMkNE5IsOX",
+    "cohort_name": "rZAhAMkboKiV",
+    "study_center": "Brooklyn",
+    "primary_site": "Stomach",
+    "species": "Mustela putorius furo",
+    "type": "subject",
+    "submitter_id": "subject_003",
+    "studies": {
+      "submitter_id": "study_003"
+    }
+  },
+  {
+    "cohort_id": 2,
+    "hiv_status": false,
+    "index_date": "Other",
+    "strain": "zJZCB35BXDlL",
+    "cohort_name": "nQyhoOw9O99Q",
+    "study_center": "Chicago",
+    "primary_site": "Nasal cavity and middle ear",
+    "species": "Homo sapiens",
+    "type": "subject",
+    "submitter_id": "subject_004",
+    "studies": {
+      "submitter_id": "study_004"
+    }
+  }
+]

@@ -1,5 +1,6 @@
 import tube.settings as config
 from pyspark import SparkConf, SparkContext
+from dictionaryutils import DataDictionary, dictionary
 
 
 def get_sql_to_hdfs_config(config):
@@ -37,13 +38,13 @@ def make_spark_context(config):
     return sc
 
 
-def get_hdfs_file_handler(sc=None):
+def get_hdfs_file_handler(sc=None, hdfs=None):
     if sc is None:
         sc = make_spark_context(config)
     uri = sc._gateway.jvm.java.net.URI
     opath = sc._gateway.jvm.org.apache.hadoop.fs.Path
     file_system = sc._gateway.jvm.org.apache.hadoop.fs.FileSystem
-    fs = file_system.get(uri("hdfs://localhost:9000"), sc._jsc.hadoopConfiguration())
+    fs = file_system.get(uri(config.HADOOP_URL), sc._jsc.hadoopConfiguration())
     return fs, opath
 
 
@@ -52,3 +53,40 @@ def make_sure_hdfs_path_exist(path, sc=None):
     if not fs.exists(opath(path)):
         fs.mkdirs(opath(path))
     return path
+
+
+def init_dictionary(url):
+    d = DataDictionary(url=url)
+    dictionary.init(d)
+    # the gdcdatamodel expects dictionary initiated on load, so this can't be
+    # imported on module level
+    from gdcdatamodel import models as md
+    return d, md
+
+
+def get_edge_table(models, node_name, edge_name):
+    node = models.Node.get_subclass(node_name)
+    edge = getattr(node, edge_name)
+    parent = edge.target_class.__src_class__
+    return get_node_label(models, parent), edge.target_class.__tablename__
+
+
+def get_child_table(models, node_name, edge_name):
+    node = models.Node.get_subclass(node_name)
+    edge = getattr(node, edge_name)
+    return models.Node.get_subclass_named(edge.target_class.__src_class__).__tablename__
+
+
+def get_node_label(models, node_name):
+    node = models.Node.get_subclass_named(node_name)
+    return node.get_label()
+
+
+def get_node_table_name(models, node_name):
+    node = models.Node.get_subclass(node_name)
+    return node.__tablename__
+
+
+def object_to_string(obj):
+    # s = ','.join('{}: {}'.format(k, obj.__getattr__(k)) for k in obj.__dict__)
+    return '<{}>'.format(obj.__dict__)

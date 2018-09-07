@@ -1,0 +1,38 @@
+[
+  {
+    "keyword_name": "75bd7G3IiiyQ",
+    "keyword_definition": "NClIZXGgYR79",
+    "type": "keyword",
+    "submitter_id": "keyword_001",
+    "studies": {
+      "submitter_id": "study_001"
+    }
+  },
+  {
+    "keyword_name": "41ldKuWu0h3O",
+    "keyword_definition": "nHFE1aglkPSV",
+    "type": "keyword",
+    "submitter_id": "keyword_002",
+    "studies": {
+      "submitter_id": "study_002"
+    }
+  },
+  {
+    "keyword_name": "YQyyXw2Bffhp",
+    "keyword_definition": "fBQGMZZ7S3gb",
+    "type": "keyword",
+    "submitter_id": "keyword_003",
+    "studies": {
+      "submitter_id": "study_003"
+    }
+  },
+  {
+    "keyword_name": "fYqowftvPmGn",
+    "keyword_definition": "YXXYsXl9k61M",
+    "type": "keyword",
+    "submitter_id": "keyword_004",
+    "studies": {
+      "submitter_id": "study_004"
+    }
+  }
+]

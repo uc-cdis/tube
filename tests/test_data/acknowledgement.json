@@ -1,0 +1,34 @@
+[
+  {
+    "acknowledgee": "3JAwNgYWH6Wq",
+    "type": "acknowledgement",
+    "submitter_id": "acknowledgement_001",
+    "projects": {
+      "code": "test"
+    }
+  },
+  {
+    "acknowledgee": "qHcsGSckx2yg",
+    "type": "acknowledgement",
+    "submitter_id": "acknowledgement_002",
+    "projects": {
+      "code": "test"
+    }
+  },
+  {
+    "acknowledgee": "cHhrrJjKubOG",
+    "type": "acknowledgement",
+    "submitter_id": "acknowledgement_003",
+    "projects": {
+      "code": "test"
+    }
+  },
+  {
+    "acknowledgee": "NwBqjYtNUCrx",
+    "type": "acknowledgement",
+    "submitter_id": "acknowledgement_004",
+    "projects": {
+      "code": "test"
+    }
+  }
+]

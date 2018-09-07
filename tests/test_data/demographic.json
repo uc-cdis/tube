@@ -1,0 +1,74 @@
+[
+  {
+    "caribbean_islander": "Not Caribbean island origin",
+    "rodent_age_at_index": 9.7823,
+    "gender": "not reported",
+    "year_of_birth": 10.918,
+    "sexual_orientation": "Don't know",
+    "human_age_at_index": 8.6559,
+    "race": "Asian",
+    "country_of_birth": "oMmBEQfcd2Uk",
+    "vital_status": "Dead",
+    "ethnicity": "Other",
+    "year_of_death": 12.1409,
+    "type": "demographic",
+    "submitter_id": "demographic_001",
+    "subjects": {
+      "submitter_id": "subject_001"
+    }
+  },
+  {
+    "caribbean_islander": "Caribbean island origin",
+    "rodent_age_at_index": 10.8313,
+    "gender": "unknown",
+    "year_of_birth": 10.8466,
+    "sexual_orientation": "Refusal",
+    "human_age_at_index": 12.6532,
+    "race": "Asian",
+    "country_of_birth": "V9IzHog3LpXo",
+    "vital_status": "Lost to Follow-up",
+    "ethnicity": "Other",
+    "year_of_death": 11.861,
+    "type": "demographic",
+    "submitter_id": "demographic_002",
+    "subjects": {
+      "submitter_id": "subject_002"
+    }
+  },
+  {
+    "caribbean_islander": "Not Caribbean island origin",
+    "rodent_age_at_index": 13.984,
+    "gender": "female",
+    "year_of_birth": 14.3519,
+    "sexual_orientation": "Other",
+    "human_age_at_index": 6.5256,
+    "race": "White",
+    "country_of_birth": "5Kg0XTeoUjYX",
+    "vital_status": "Dead",
+    "ethnicity": "Other",
+    "year_of_death": 11.8537,
+    "type": "demographic",
+    "submitter_id": "demographic_003",
+    "subjects": {
+      "submitter_id": "subject_003"
+    }
+  },
+  {
+    "caribbean_islander": "Caribbean island origin",
+    "rodent_age_at_index": 12.9004,
+    "gender": "unspecified",
+    "year_of_birth": 5.3066,
+    "sexual_orientation": "Refusal",
+    "human_age_at_index": 8.0947,
+    "race": "Unknown",
+    "country_of_birth": "FjAydVmLXhKV",
+    "vital_status": "Alive",
+    "ethnicity": "Other",
+    "year_of_death": 13.7566,
+    "type": "demographic",
+    "submitter_id": "demographic_004",
+    "subjects": {
+      "submitter_id": "subject_004"
+    }
+  }
+]

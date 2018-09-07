@@ -3,9 +3,8 @@ import tube.settings as config
 
 from tube.spark import make_spark_context
 from tube.spark.translator import Gen3Translator
-from cdislogging import get_logger
-
-logger = get_logger(__name__)
+from tube.spark.parsing.parser import Parser
+from tube.spark.es_writer import ESWriter
 
 
 def main():
@@ -26,12 +25,13 @@ def main():
 
     config.RUNNING_MODE = args.config
 
-    sc = make_spark_context(config)
+    parser = Parser(config.MAPPING_FILE, config.DICTIONARY_URL)
 
-    etl = Gen3Translator(sc, config)
+    sc = make_spark_context(config)
+    writer = ESWriter(sc, config)
+    etl = Gen3Translator(sc, parser, writer, config)
     etl.run_etl()
 
-    # Tear down actions
     sc.stop()
 
 

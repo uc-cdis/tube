@@ -42,7 +42,7 @@ class SqlToHDFS(object):
         output = make_sure_hdfs_path_exist(config['output'])
 
         for tb in tables:
-            if 'node' not in tb and 'edge' not in tb:
+            if not tb.startswith('node') and not tb.startswith('edge'):
                 continue
             yield self.formatter.format_line(tb)
             sp = SqlToHDFS.import_table_from_sql(
