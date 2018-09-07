@@ -25,7 +25,7 @@ install:
   - pip install -r requirements.txt
   - psql -c 'SELECT version();' -U postgres
   - psql -U postgres -c "create database metadata_db;"
-  - psql -U postgres -f metadata_db.sql metadata_db
+  - psql -U postgres -f tests/metadata_db.sql metadata_db
   - sudo sed -i "s|#listen_addresses = 'localhost'|listen_addresses = '*'|g" /etc/postgresql/9.6/main/postgresql.conf
   - sudo sed -i "s|# DO NOT DISABLE!|host all all 0.0.0.0/0 trust\n\n# DO NOT DISABLE!|g" /etc/postgresql/9.6/main/pg_hba.conf
   - sudo service postgresql restart 9.6
@@ -46,7 +46,7 @@ before_script:
     }
     ' > configs/creds.json
   - sed -i "s/'3.7'/'2'/g" docker-compose.yml
-  - sed -i "s/tube:feat_parser/tube:feat_es-mapping/g" docker-compose.yml
+  - sed -i "s/tube:feat_parser/tube:feat_tests/g" docker-compose.yml
   - sudo sysctl -w vm.max_map_count=262144
   - docker-compose -f docker-compose.yml -f elasticsearch.yml up -d spark elasticsearch
   - sleep 60

@@ -1,7 +1,7 @@
 [
   {
-    "cohort_id": 4,
-    "hiv_status": true,
+    "cohort_id": 7,
+    "hiv_status": false,
     "index_date": "Study Enrollment",
     "strain": "W8XYm8G3CV3p",
     "cohort_name": "HldGEIWC0egg",
@@ -9,54 +9,279 @@
     "primary_site": "Pyriform sinus",
     "species": "Rattus rattus",
     "type": "subject",
+    "submitter_id": "subject_000",
+    "studies": {
+      "submitter_id": "study_0014"
+    }
+  },
+  {
+    "cohort_id": 7,
+    "hiv_status": false,
+    "index_date": "Postmenstrual",
+    "strain": "ynuhU08DWM7T",
+    "cohort_name": "pBLL1xwk49Va",
+    "study_center": "Miami",
+    "primary_site": "Other and unspecified parts of biliary tract",
+    "species": "Mus musculus",
+    "type": "subject",
     "submitter_id": "subject_001",
+    "studies": {
+      "submitter_id": "study_0014"
+    }
+  },
+  {
+    "cohort_id": 3,
+    "hiv_status": true,
+    "index_date": "Diagnosis",
+    "strain": "t3fzExGOH3xv",
+    "cohort_name": "mZgrRPnjkdZU",
+    "study_center": "Birmingham",
+    "primary_site": "Other and unspecified major salivary glands",
+    "species": "Sus scrofa",
+    "type": "subject",
+    "submitter_id": "subject_002",
     "studies": {
       "submitter_id": "study_001"
     }
   },
   {
     "cohort_id": 2,
-    "hiv_status": false,
-    "index_date": "Other",
-    "strain": "xYPrcZdn4yIf",
-    "cohort_name": "5yvTIZQexDLH",
-    "study_center": "Brooklyn",
-    "primary_site": "Other and unspecified parts of tongue",
-    "species": "Mus musculus",
-    "type": "subject",
-    "submitter_id": "subject_002",
-    "studies": {
-      "submitter_id": "study_002"
-    }
-  },
-  {
-    "cohort_id": 3,
     "hiv_status": true,
-    "index_date": "First Patient Visit",
-    "strain": "dPcMkNE5IsOX",
-    "cohort_name": "rZAhAMkboKiV",
-    "study_center": "Brooklyn",
-    "primary_site": "Stomach",
-    "species": "Mustela putorius furo",
+    "index_date": "Not Specified",
+    "strain": "XhIR2EWYTjoZ",
+    "cohort_name": "6uIuAIVYEouK",
+    "study_center": "Bronx",
+    "primary_site": "Kidney",
+    "species": "Sus scrofa",
     "type": "subject",
     "submitter_id": "subject_003",
     "studies": {
-      "submitter_id": "study_003"
+      "submitter_id": "study_0019"
     }
   },
   {
     "cohort_id": 2,
     "hiv_status": false,
-    "index_date": "Other",
-    "strain": "zJZCB35BXDlL",
-    "cohort_name": "nQyhoOw9O99Q",
-    "study_center": "Chicago",
-    "primary_site": "Nasal cavity and middle ear",
-    "species": "Homo sapiens",
+    "index_date": "Initial Treatment",
+    "strain": "iyGnaYSHiGGB",
+    "cohort_name": "SU6zZtv1K91w",
+    "study_center": "Bronx",
+    "primary_site": "Vulva",
+    "species": "Mus musculus",
     "type": "subject",
     "submitter_id": "subject_004",
     "studies": {
       "submitter_id": "study_004"
+    }
+  },
+  {
+    "cohort_id": 6,
+    "hiv_status": false,
+    "index_date": "First Patient Visit",
+    "strain": "NhLbv280IloT",
+    "cohort_name": "mOrmAISQNG5X",
+    "study_center": "Chicago",
+    "primary_site": "Renal pelvis",
+    "species": "Drosophila melanogaster",
+    "type": "subject",
+    "submitter_id": "subject_005",
+    "studies": {
+      "submitter_id": "study_0015"
+    }
+  },
+  {
+    "cohort_id": 10,
+    "hiv_status": true,
+    "index_date": "First Patient Visit",
+    "strain": "1IWK4mOZNfIY",
+    "cohort_name": "XR9jyJkfIO6L",
+    "study_center": "Los Angeles",
+    "primary_site": "Uterus",
+    "species": "Mus musculus",
+    "type": "subject",
+    "submitter_id": "subject_006",
+    "studies": {
+      "submitter_id": "study_0017"
+    }
+  },
+  {
+    "cohort_id": 4,
+    "hiv_status": false,
+    "index_date": "Not Specified",
+    "strain": "ct3LiGUgfHLl",
+    "cohort_name": "W1VsYW7jwPgB",
+    "study_center": "Atlanta",
+    "primary_site": "Eye",
+    "species": "Sus scrofa",
+    "type": "subject",
+    "submitter_id": "subject_007",
+    "studies": {
+      "submitter_id": "study_009"
+    }
+  },
+  {
+    "cohort_id": 4,
+    "hiv_status": false,
+    "index_date": "First Patient Visit",
+    "strain": "8RW5UNNq80Zt",
+    "cohort_name": "zQxWSgwAmjJG",
+    "study_center": "Washington",
+    "primary_site": "Bile Duct",
+    "species": "Mustela putorius furo",
+    "type": "subject",
+    "submitter_id": "subject_008",
+    "studies": {
+      "submitter_id": "study_0011"
+    }
+  },
+  {
+    "cohort_id": 5,
+    "hiv_status": false,
+    "index_date": "Baseline Visit",
+    "strain": "mLsAVdVXNhDW",
+    "cohort_name": "wvlBnTrGHuFj",
+    "study_center": "Los Angeles",
+    "primary_site": "Prostate gland",
+    "species": "Drosophila melanogaster",
+    "type": "subject",
+    "submitter_id": "subject_009",
+    "studies": {
+      "submitter_id": "study_0014"
+    }
+  },
+  {
+    "cohort_id": 3,
+    "hiv_status": false,
+    "index_date": "Infection",
+    "strain": "KB4WgULftz32",
+    "cohort_name": "mNoC5fdAz1JV",
+    "study_center": "Chicago",
+    "primary_site": "Unknown primary site",
+    "species": "Mustela putorius furo",
+    "type": "subject",
+    "submitter_id": "subject_0010",
+    "studies": {
+      "submitter_id": "study_007"
+    }
+  },
+  {
+    "cohort_id": 3,
+    "hiv_status": false,
+    "index_date": "Baseline Visit",
+    "strain": "9bxLAGLmQZol",
+    "cohort_name": "Gwd5GdgDHvxJ",
+    "study_center": "Los Angeles",
+    "primary_site": "Soft Tissue",
+    "species": "Homo sapiens",
+    "type": "subject",
+    "submitter_id": "subject_0011",
+    "studies": {
+      "submitter_id": "study_009"
+    }
+  },
+  {
+    "cohort_id": 1,
+    "hiv_status": false,
+    "index_date": "Not Specified",
+    "strain": "UChUDr71BhtW",
+    "cohort_name": "TWhmzQrxqdAk",
+    "study_center": "Chicago",
+    "primary_site": "Other and ill-defined sites within respiratory system and intrathoracic organs",
+    "species": "Mustela putorius furo",
+    "type": "subject",
+    "submitter_id": "subject_0012",
+    "studies": {
+      "submitter_id": "study_001"
+    }
+  },
+  {
+    "cohort_id": 5,
+    "hiv_status": false,
+    "index_date": "Diagnosis",
+    "strain": "cLVQWK5q9Y4C",
+    "cohort_name": "NuccMXFjh4dk",
+    "study_center": "Baltimore",
+    "primary_site": "Rectosigmoid junction",
+    "species": "Mustela putorius furo",
+    "type": "subject",
+    "submitter_id": "subject_0013",
+    "studies": {
+      "submitter_id": "study_0010"
+    }
+  },
+  {
+    "cohort_id": 2,
+    "hiv_status": false,
+    "index_date": "Not Specified",
+    "strain": "4FTf88LKwo0w",
+    "cohort_name": "C5VifTpVzZWV",
+    "study_center": "Los Angeles",
+    "primary_site": "Adrenal Gland",
+    "species": "Homo sapiens",
+    "type": "subject",
+    "submitter_id": "subject_0014",
+    "studies": {
+      "submitter_id": "study_0013"
+    }
+  },
+  {
+    "cohort_id": 2,
+    "hiv_status": false,
+    "index_date": "Initial Treatment",
+    "strain": "bpPo1Nl7RxCk",
+    "cohort_name": "vCrDvSRuUsqe",
+    "study_center": "Atlanta",
+    "primary_site": "Colorectal",
+    "species": "Mus musculus",
+    "type": "subject",
+    "submitter_id": "subject_0015",
+    "studies": {
+      "submitter_id": "study_0013"
+    }
+  },
+  {
+    "cohort_id": 6,
+    "hiv_status": false,
+    "index_date": "First Patient Visit",
+    "strain": "bR1fH9pMF4Mq",
+    "cohort_name": "u5XF4RmzoH1s",
+    "study_center": "Baltimore",
+    "primary_site": "Adrenal gland",
+    "species": "Drosophila melanogaster",
+    "type": "subject",
+    "submitter_id": "subject_0016",
+    "studies": {
+      "submitter_id": "study_0016"
+    }
+  },
+  {
+    "cohort_id": 2,
+    "hiv_status": true,
+    "index_date": "Diagnosis",
+    "strain": "LRRtL6Yv22e9",
+    "cohort_name": "cxqQ44iaatk1",
+    "study_center": "Bronx",
+    "primary_site": "Liver",
+    "species": "Homo sapiens",
+    "type": "subject",
+    "submitter_id": "subject_0017",
+    "studies": {
+      "submitter_id": "study_0020"
+    }
+  },
+  {
+    "cohort_id": 4,
+    "hiv_status": false,
+    "index_date": "Study Enrollment",
+    "strain": "dC3EqvvTgM2O",
+    "cohort_name": "1Eme66ZBdSak",
+    "study_center": "Birmingham",
+    "primary_site": "Parotid gland",
+    "species": "Drosophila melanogaster",
+    "type": "subject",
+    "submitter_id": "subject_0018",
+    "studies": {
+      "submitter_id": "study_001"
     }
   }
 ]

@@ -3,9 +3,9 @@
     "data_category": "BGM Simulation",
     "data_type": "BGM Simulation",
     "data_format": "TXT",
-    "md5sum": "ce769c45703a69fc33109fd6960204bb",
-    "file_size": 8,
-    "file_name": "Y4klklmRSeII",
+    "md5sum": "aad79de51a4599298ebba9ff2956c8f9",
+    "file_size": 5,
+    "file_name": "ijh8sKaG6tZB",
     "type": "bgm_simulation",
     "submitter_id": "bgm_simulation_001",
     "mutation_panels": {
@@ -18,10 +18,10 @@
   {
     "data_category": "BGM Simulation",
     "data_type": "BGM Simulation",
-    "data_format": "TSV",
-    "md5sum": "d8e63a20de53049838ccfa79bb9bc980",
-    "file_size": 0,
-    "file_name": "AgYtFGFl4QTN",
+    "data_format": "CSV",
+    "md5sum": "e0b45d82388a1961a981241a07e74d1c",
+    "file_size": 3,
+    "file_name": "6jM1tuzad5Lf",
     "type": "bgm_simulation",
     "submitter_id": "bgm_simulation_002",
     "mutation_panels": {
@@ -34,10 +34,10 @@
   {
     "data_category": "BGM Simulation",
     "data_type": "BGM Simulation",
-    "data_format": "CSV",
-    "md5sum": "1cd45522edcfd67c2dad2d37a20b662f",
-    "file_size": 5,
-    "file_name": "rorLB2rlvAZT",
+    "data_format": "TXT",
+    "md5sum": "1c7a90b0fd2be61cbc23b664a12b2906",
+    "file_size": 2,
+    "file_name": "rJ3axeduZ3bZ",
     "type": "bgm_simulation",
     "submitter_id": "bgm_simulation_003",
     "mutation_panels": {
@@ -50,10 +50,10 @@
   {
     "data_category": "BGM Simulation",
     "data_type": "BGM Simulation",
-    "data_format": "PNG",
-    "md5sum": "e85228631f30f08ce07a6b21e36fb232",
-    "file_size": 5,
-    "file_name": "lfOxCSCW1WcM",
+    "data_format": "CSV",
+    "md5sum": "1f8dbf2be5e4e30b747557e28e90b95a",
+    "file_size": 3,
+    "file_name": "9DgutSaWG9L2",
     "type": "bgm_simulation",
     "submitter_id": "bgm_simulation_004",
     "mutation_panels": {
@@ -61,6 +61,214 @@
     },
     "core_metadata_records": {
       "submitter_id": "core_metadata_004"
+    }
+  },
+  {
+    "data_category": "BGM Simulation",
+    "data_type": "BGM Simulation",
+    "data_format": "TXT",
+    "md5sum": "6e9a6d9de4860ee00bd3fadcc0896b07",
+    "file_size": 1,
+    "file_name": "PKpvMnRWCe2U",
+    "type": "bgm_simulation",
+    "submitter_id": "bgm_simulation_005",
+    "mutation_panels": {
+      "submitter_id": "mutation_panel_005"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_005"
+    }
+  },
+  {
+    "data_category": "BGM Simulation",
+    "data_type": "BGM Simulation",
+    "data_format": "TXT",
+    "md5sum": "880a65562dd32558227edc69f18cb7fe",
+    "file_size": 2,
+    "file_name": "uY8HzyyB3aj9",
+    "type": "bgm_simulation",
+    "submitter_id": "bgm_simulation_006",
+    "mutation_panels": {
+      "submitter_id": "mutation_panel_006"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_006"
+    }
+  },
+  {
+    "data_category": "BGM Simulation",
+    "data_type": "BGM Simulation",
+    "data_format": "TXT",
+    "md5sum": "7448937c50a0016ff5ffea1ec327a1ca",
+    "file_size": 5,
+    "file_name": "qixiRDQroXNo",
+    "type": "bgm_simulation",
+    "submitter_id": "bgm_simulation_007",
+    "mutation_panels": {
+      "submitter_id": "mutation_panel_007"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_007"
+    }
+  },
+  {
+    "data_category": "BGM Simulation",
+    "data_type": "BGM Simulation",
+    "data_format": "PNG",
+    "md5sum": "af0eb3d569af8d5d7152e6b43bd99880",
+    "file_size": 8,
+    "file_name": "jVrnCkmWXAnR",
+    "type": "bgm_simulation",
+    "submitter_id": "bgm_simulation_008",
+    "mutation_panels": {
+      "submitter_id": "mutation_panel_008"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_008"
+    }
+  },
+  {
+    "data_category": "BGM Simulation",
+    "data_type": "BGM Simulation",
+    "data_format": "CSV",
+    "md5sum": "104b38ad9b4f2e14403791a58c61d977",
+    "file_size": 1,
+    "file_name": "g94LBcc8dENE",
+    "type": "bgm_simulation",
+    "submitter_id": "bgm_simulation_009",
+    "mutation_panels": {
+      "submitter_id": "mutation_panel_009"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_009"
+    }
+  },
+  {
+    "data_category": "BGM Simulation",
+    "data_type": "BGM Simulation",
+    "data_format": "TXT",
+    "md5sum": "d69ff32c51c78e1de534bb3b05bfa591",
+    "file_size": 3,
+    "file_name": "BhBwAm8lDI6m",
+    "type": "bgm_simulation",
+    "submitter_id": "bgm_simulation_0010",
+    "mutation_panels": {
+      "submitter_id": "mutation_panel_0010"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_0010"
+    }
+  },
+  {
+    "data_category": "BGM Simulation",
+    "data_type": "BGM Simulation",
+    "data_format": "CSV",
+    "md5sum": "01e003f030344649d909b99d293a38bf",
+    "file_size": 5,
+    "file_name": "v8KOVDNlw9Sp",
+    "type": "bgm_simulation",
+    "submitter_id": "bgm_simulation_0011",
+    "mutation_panels": {
+      "submitter_id": "mutation_panel_0011"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_0011"
+    }
+  },
+  {
+    "data_category": "BGM Simulation",
+    "data_type": "BGM Simulation",
+    "data_format": "CSV",
+    "md5sum": "25934f8f4335e082b6f91eee2a9fc012",
+    "file_size": 6,
+    "file_name": "ywQnmcLfGDPk",
+    "type": "bgm_simulation",
+    "submitter_id": "bgm_simulation_0012",
+    "mutation_panels": {
+      "submitter_id": "mutation_panel_0012"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_0012"
+    }
+  },
+  {
+    "data_category": "BGM Simulation",
+    "data_type": "BGM Simulation",
+    "data_format": "TXT",
+    "md5sum": "6ee6cdee954503803a94af0729798893",
+    "file_size": 3,
+    "file_name": "P6ZYlh7gDCfp",
+    "type": "bgm_simulation",
+    "submitter_id": "bgm_simulation_0013",
+    "mutation_panels": {
+      "submitter_id": "mutation_panel_0013"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_0013"
+    }
+  },
+  {
+    "data_category": "BGM Simulation",
+    "data_type": "BGM Simulation",
+    "data_format": "CSV",
+    "md5sum": "df02949ad456b1f3f17386d2ab3a815f",
+    "file_size": 5,
+    "file_name": "1K7wvYn020HS",
+    "type": "bgm_simulation",
+    "submitter_id": "bgm_simulation_0014",
+    "mutation_panels": {
+      "submitter_id": "mutation_panel_0014"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_0014"
+    }
+  },
+  {
+    "data_category": "BGM Simulation",
+    "data_type": "BGM Simulation",
+    "data_format": "CSV",
+    "md5sum": "3553e25388baf0137ef1749c0c49f72b",
+    "file_size": 9,
+    "file_name": "SPvBHbJGK4sO",
+    "type": "bgm_simulation",
+    "submitter_id": "bgm_simulation_0015",
+    "mutation_panels": {
+      "submitter_id": "mutation_panel_0015"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_0015"
+    }
+  },
+  {
+    "data_category": "BGM Simulation",
+    "data_type": "BGM Simulation",
+    "data_format": "PNG",
+    "md5sum": "9588d3ccad65696ea09a17087da1e481",
+    "file_size": 6,
+    "file_name": "V1PkAtRz2Bew",
+    "type": "bgm_simulation",
+    "submitter_id": "bgm_simulation_0016",
+    "mutation_panels": {
+      "submitter_id": "mutation_panel_0016"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_0016"
+    }
+  },
+  {
+    "data_category": "BGM Simulation",
+    "data_type": "BGM Simulation",
+    "data_format": "PNG",
+    "md5sum": "79d97e2bdfd29974efc7619186ac082d",
+    "file_size": 4,
+    "file_name": "MNCYKATSaxYc",
+    "type": "bgm_simulation",
+    "submitter_id": "bgm_simulation_0017",
+    "mutation_panels": {
+      "submitter_id": "mutation_panel_0017"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_0017"
     }
   }
 ]

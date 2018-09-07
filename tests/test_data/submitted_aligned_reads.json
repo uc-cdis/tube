@@ -1,12 +1,12 @@
 [
   {
-    "data_category": "Raw Sequencing Data",
-    "data_type": "Aligned Reads",
-    "experimental_strategy": "Total RNA-Seq",
-    "data_format": "BAM",
-    "md5sum": "586fae75d2442b4baa26695196506041",
-    "file_size": 2,
-    "file_name": "dQNIYlqRgvPz",
+    "data_category": "Sequencing Data",
+    "data_type": "Alignment Coordinates",
+    "experimental_strategy": "Low Pass WGS",
+    "data_format": "BED",
+    "md5sum": "5102debcdcfa3acf473fd8b299cd9751",
+    "file_size": 6,
+    "file_name": "7uFNunCTiUUz",
     "type": "submitted_aligned_reads",
     "submitter_id": "submitted_aligned_reads_001",
     "read_groups": {
@@ -14,13 +14,13 @@
     }
   },
   {
-    "data_category": "Sequencing Reads",
+    "data_category": "Sequencing Data",
     "data_type": "Aligned Reads",
-    "experimental_strategy": "RNA-Seq",
+    "experimental_strategy": "DNA Panel",
     "data_format": "BAM",
-    "md5sum": "625cebd233508f28a7ae4bf9500c37d8",
-    "file_size": 2,
-    "file_name": "m5pYkOXrmrae",
+    "md5sum": "abda4517eb54aa27ef80dcf60512698c",
+    "file_size": 4,
+    "file_name": "JDmrNiukTJb4",
     "type": "submitted_aligned_reads",
     "submitter_id": "submitted_aligned_reads_002",
     "read_groups": {
@@ -30,11 +30,11 @@
   {
     "data_category": "Sequencing Reads",
     "data_type": "Aligned Reads",
-    "experimental_strategy": "Total RNA-Seq",
+    "experimental_strategy": "RNA-Seq",
     "data_format": "BED",
-    "md5sum": "cbfc9b0fa524b70fe7cc2ad579394939",
-    "file_size": 3,
-    "file_name": "8nDiqhjBBF8I",
+    "md5sum": "7cff1b3e4dce5a4bb1f3858d19eefd12",
+    "file_size": 4,
+    "file_name": "GH5HIERtKg3d",
     "type": "submitted_aligned_reads",
     "submitter_id": "submitted_aligned_reads_003",
     "read_groups": {
@@ -43,16 +43,240 @@
   },
   {
     "data_category": "Sequencing Reads",
-    "data_type": "Aligned Reads",
-    "experimental_strategy": "miRNA-Seq",
+    "data_type": "Alignment Coordinates",
+    "experimental_strategy": "Validation",
     "data_format": "BED",
-    "md5sum": "261cedcb0f0da659dc2390f92918250c",
-    "file_size": 2,
-    "file_name": "OIb1eVRfWTNl",
+    "md5sum": "641d16186fb0e3cd52fe94684a178f5d",
+    "file_size": 4,
+    "file_name": "FM6gggatN6oj",
     "type": "submitted_aligned_reads",
     "submitter_id": "submitted_aligned_reads_004",
     "read_groups": {
       "submitter_id": "read_group_004"
+    }
+  },
+  {
+    "data_category": "Sequencing Reads",
+    "data_type": "Aligned Reads",
+    "experimental_strategy": "RNA-Seq",
+    "data_format": "BED",
+    "md5sum": "0b6e180157f8c8167e6feada8bee9de5",
+    "file_size": 4,
+    "file_name": "XBhTO69sFo29",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_005",
+    "read_groups": {
+      "submitter_id": "read_group_005"
+    }
+  },
+  {
+    "data_category": "Sequencing Data",
+    "data_type": "Aligned Reads",
+    "experimental_strategy": "Low Pass WGS",
+    "data_format": "BAM",
+    "md5sum": "03b8a5db20e09ff1d1130b4bdaaff242",
+    "file_size": 4,
+    "file_name": "zkqM741gIWjC",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_006",
+    "read_groups": {
+      "submitter_id": "read_group_006"
+    }
+  },
+  {
+    "data_category": "Sequencing Reads",
+    "data_type": "Alignment Coordinates",
+    "experimental_strategy": "RNA-Seq",
+    "data_format": "BAM",
+    "md5sum": "55e4e03a0d9fda28fe95a9d1c0ee7d57",
+    "file_size": 4,
+    "file_name": "U3BpnhUQ8X7X",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_007",
+    "read_groups": {
+      "submitter_id": "read_group_007"
+    }
+  },
+  {
+    "data_category": "Sequencing Data",
+    "data_type": "Alignment Coordinates",
+    "experimental_strategy": "WGS",
+    "data_format": "BAM",
+    "md5sum": "1caa14d0a507ce410fc4791132147042",
+    "file_size": 6,
+    "file_name": "9KegLQCb25YP",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_008",
+    "read_groups": {
+      "submitter_id": "read_group_008"
+    }
+  },
+  {
+    "data_category": "Raw Sequencing Data",
+    "data_type": "Alignment Coordinates",
+    "experimental_strategy": "RNA-Seq",
+    "data_format": "BED",
+    "md5sum": "3a06591058c0775ad41a2a60fab21d53",
+    "file_size": 3,
+    "file_name": "kYlPLhKIo3mn",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_009",
+    "read_groups": {
+      "submitter_id": "read_group_009"
+    }
+  },
+  {
+    "data_category": "Raw Sequencing Data",
+    "data_type": "Alignment Coordinates",
+    "experimental_strategy": "Low Pass WGS",
+    "data_format": "BED",
+    "md5sum": "9311ddcbeb328605c4c9d445e122d204",
+    "file_size": 3,
+    "file_name": "L6xBSgwL9Jzh",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_0010",
+    "read_groups": {
+      "submitter_id": "read_group_0010"
+    }
+  },
+  {
+    "data_category": "Raw Sequencing Data",
+    "data_type": "Alignment Coordinates",
+    "experimental_strategy": "WGS",
+    "data_format": "BED",
+    "md5sum": "94899b4e0dac375fb2ae1aaa5b3ceb17",
+    "file_size": 5,
+    "file_name": "5xQimvyLnWRN",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_0011",
+    "read_groups": {
+      "submitter_id": "read_group_0011"
+    }
+  },
+  {
+    "data_category": "Sequencing Reads",
+    "data_type": "Alignment Coordinates",
+    "experimental_strategy": "Total RNA-Seq",
+    "data_format": "BAM",
+    "md5sum": "84143e7f04929fe7ee0cbb1a6ce56448",
+    "file_size": 5,
+    "file_name": "b9ldtoV33zxy",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_0012",
+    "read_groups": {
+      "submitter_id": "read_group_0012"
+    }
+  },
+  {
+    "data_category": "Sequencing Reads",
+    "data_type": "Alignment Coordinates",
+    "experimental_strategy": "WGS",
+    "data_format": "BED",
+    "md5sum": "246bf424d1436c7a1c40cbb5a2043b2d",
+    "file_size": 7,
+    "file_name": "URFqTwu1i8fu",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_0013",
+    "read_groups": {
+      "submitter_id": "read_group_0013"
+    }
+  },
+  {
+    "data_category": "Sequencing Reads",
+    "data_type": "Alignment Coordinates",
+    "experimental_strategy": "DNA Panel",
+    "data_format": "BED",
+    "md5sum": "e4d8b5c7e72db90b25e5cd84e6de4de0",
+    "file_size": 3,
+    "file_name": "iKwak8hCiywf",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_0014",
+    "read_groups": {
+      "submitter_id": "read_group_0014"
+    }
+  },
+  {
+    "data_category": "Sequencing Reads",
+    "data_type": "Aligned Reads",
+    "experimental_strategy": "Low Pass WGS",
+    "data_format": "BED",
+    "md5sum": "3a45a218564e63e1494be6c0fe70f9af",
+    "file_size": 7,
+    "file_name": "uYKr31xDhn3U",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_0015",
+    "read_groups": {
+      "submitter_id": "read_group_0015"
+    }
+  },
+  {
+    "data_category": "Raw Sequencing Data",
+    "data_type": "Alignment Coordinates",
+    "experimental_strategy": "Validation",
+    "data_format": "BED",
+    "md5sum": "05d58edc96b617c5cfeeb9c5e34b2bfa",
+    "file_size": 4,
+    "file_name": "nELMty8LU3Es",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_0016",
+    "read_groups": {
+      "submitter_id": "read_group_0016"
+    }
+  },
+  {
+    "data_category": "Raw Sequencing Data",
+    "data_type": "Aligned Reads",
+    "experimental_strategy": "Validation",
+    "data_format": "BAM",
+    "md5sum": "389ee97753d0ac7ea8a0c9155c0163b7",
+    "file_size": 3,
+    "file_name": "8YGzwcS6HLUm",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_0017",
+    "read_groups": {
+      "submitter_id": "read_group_0017"
+    }
+  },
+  {
+    "data_category": "Sequencing Data",
+    "data_type": "Aligned Reads",
+    "experimental_strategy": "Validation",
+    "data_format": "BAM",
+    "md5sum": "dd8d80f80ea81697ddcdafa1008f4a73",
+    "file_size": 3,
+    "file_name": "6pkqZl6xfuKA",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_0018",
+    "read_groups": {
+      "submitter_id": "read_group_0018"
+    }
+  },
+  {
+    "data_category": "Sequencing Reads",
+    "data_type": "Aligned Reads",
+    "experimental_strategy": "Total RNA-Seq",
+    "data_format": "BAM",
+    "md5sum": "db40c6927ff2e95ee265098276929234",
+    "file_size": 5,
+    "file_name": "hYDFVKR9TuzE",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_0019",
+    "read_groups": {
+      "submitter_id": "read_group_0019"
+    }
+  },
+  {
+    "data_category": "Sequencing Data",
+    "data_type": "Aligned Reads",
+    "experimental_strategy": "WXS",
+    "data_format": "BED",
+    "md5sum": "a546a3e5a8b61e82f53e01f1f9d3561d",
+    "file_size": 7,
+    "file_name": "qnBQae7Lh3DP",
+    "type": "submitted_aligned_reads",
+    "submitter_id": "submitted_aligned_reads_0020",
+    "read_groups": {
+      "submitter_id": "read_group_0020"
     }
   }
 ]

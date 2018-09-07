@@ -3,12 +3,54 @@
     "data_type": "Protein Mass Spectrometry",
     "data_category": "Protein Profiling",
     "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
-    "data_format": "TXT",
-    "md5sum": "970152abeaf4a24835edba6671b26e5d",
-    "file_size": 3,
-    "file_name": "UXTmcZQcbsQH",
+    "data_format": "CSV",
+    "md5sum": "ce8b8cf18c1700ab3807a1b9cf25274e",
+    "file_size": 5,
+    "file_name": "wA7PJjFuaidp",
     "type": "protein_mass_spectrometry",
     "submitter_id": "protein_mass_spectrometry_001",
+    "aliquots": {
+      "submitter_id": "aliquot_0018"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "TSV",
+    "md5sum": "2443bf1924992feebbdf4cf8e6d9d01b",
+    "file_size": 4,
+    "file_name": "uEHjGGBfze2j",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_002",
+    "aliquots": {
+      "submitter_id": "aliquot_0012"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "CSV",
+    "md5sum": "8fda9143216ceef76e9fb6c6a4c7f024",
+    "file_size": 3,
+    "file_name": "H6FzK7G1czwx",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_003",
+    "aliquots": {
+      "submitter_id": "aliquot_0014"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "TSV",
+    "md5sum": "32822ea1ad044339407d88e9aae96700",
+    "file_size": 3,
+    "file_name": "ESnmlCbUAxYc",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_004",
     "aliquots": {
       "submitter_id": "aliquot_001"
     }
@@ -17,12 +59,96 @@
     "data_type": "Protein Mass Spectrometry",
     "data_category": "Protein Profiling",
     "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
-    "data_format": "CSV",
-    "md5sum": "9d1f12eac883a6c1b83c67a71d0f2a4d",
-    "file_size": 3,
-    "file_name": "XArgljw1Iqfx",
+    "data_format": "RAW",
+    "md5sum": "2533664d2e293f43e543699a70d2b9ac",
+    "file_size": 2,
+    "file_name": "ukaZXU5kklhI",
     "type": "protein_mass_spectrometry",
-    "submitter_id": "protein_mass_spectrometry_002",
+    "submitter_id": "protein_mass_spectrometry_005",
+    "aliquots": {
+      "submitter_id": "aliquot_007"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "CSV",
+    "md5sum": "68f2734e94e7a57067b1c447206e08a2",
+    "file_size": 6,
+    "file_name": "nRLf1zj2AsRa",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_006",
+    "aliquots": {
+      "submitter_id": "aliquot_0013"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "RAW",
+    "md5sum": "9f8e0db4a52e1a902ea669f12c388a36",
+    "file_size": 2,
+    "file_name": "St5sf61gPKES",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_007",
+    "aliquots": {
+      "submitter_id": "aliquot_004"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "TSV",
+    "md5sum": "f67cc59c0ed91299d4a1140d9041604d",
+    "file_size": 1,
+    "file_name": "QbywQNPeTYKm",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_008",
+    "aliquots": {
+      "submitter_id": "aliquot_0017"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "CSV",
+    "md5sum": "766f6d7b3fc8426ef45e53f68fdbcfd1",
+    "file_size": 6,
+    "file_name": "yuhXDzDnQLj0",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_009",
+    "aliquots": {
+      "submitter_id": "aliquot_0013"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "TXT",
+    "md5sum": "f0c69a98640a18a88183c214827bf508",
+    "file_size": 3,
+    "file_name": "eAdau0iLAu1J",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_0010",
+    "aliquots": {
+      "submitter_id": "aliquot_008"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "RAW",
+    "md5sum": "94678e1747f26af7d3af39ee1d3f8f1d",
+    "file_size": 7,
+    "file_name": "sjwSLUgfDPB7",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_0011",
     "aliquots": {
       "submitter_id": "aliquot_002"
     }
@@ -31,14 +157,28 @@
     "data_type": "Protein Mass Spectrometry",
     "data_category": "Protein Profiling",
     "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
-    "data_format": "CSV",
-    "md5sum": "befc1918d9245bec76256ffd2a58855b",
-    "file_size": 2,
-    "file_name": "45MDgOfyjljS",
+    "data_format": "RAW",
+    "md5sum": "a835b0f25bce03f2eac6a0687344c689",
+    "file_size": 3,
+    "file_name": "bYrYPsRRC7zS",
     "type": "protein_mass_spectrometry",
-    "submitter_id": "protein_mass_spectrometry_003",
+    "submitter_id": "protein_mass_spectrometry_0012",
     "aliquots": {
-      "submitter_id": "aliquot_003"
+      "submitter_id": "aliquot_0016"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "CSV",
+    "md5sum": "1d3caa56bf6442cdc49331d6e42f0f88",
+    "file_size": 7,
+    "file_name": "CRraw1Ymndap",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_0013",
+    "aliquots": {
+      "submitter_id": "aliquot_006"
     }
   },
   {
@@ -46,13 +186,153 @@
     "data_category": "Protein Profiling",
     "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
     "data_format": "TXT",
-    "md5sum": "f38ff83753a98c963cd5d1623ec7bc43",
-    "file_size": 7,
-    "file_name": "GSLQf8PJ25Ee",
+    "md5sum": "362e3c5031635e01a85d46b07197f073",
+    "file_size": 4,
+    "file_name": "sWUILFVC7qXK",
     "type": "protein_mass_spectrometry",
-    "submitter_id": "protein_mass_spectrometry_004",
+    "submitter_id": "protein_mass_spectrometry_0014",
     "aliquots": {
-      "submitter_id": "aliquot_004"
+      "submitter_id": "aliquot_0015"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "TXT",
+    "md5sum": "e98cf2182fdc47285cbb79ac7e02a74e",
+    "file_size": 3,
+    "file_name": "EvxsMrxgUdQB",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_0015",
+    "aliquots": {
+      "submitter_id": "aliquot_008"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "RAW",
+    "md5sum": "e8510466f64d117ad1ed9224a7197aa9",
+    "file_size": 1,
+    "file_name": "F3FNcTexEywH",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_0016",
+    "aliquots": {
+      "submitter_id": "aliquot_005"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "RAW",
+    "md5sum": "e090d9a65356fde0b763a48dae299a86",
+    "file_size": 4,
+    "file_name": "7v8jYQWcafHb",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_0017",
+    "aliquots": {
+      "submitter_id": "aliquot_008"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "TXT",
+    "md5sum": "da46e99a912f2910601f21878f80ec02",
+    "file_size": 6,
+    "file_name": "PecjJxgq42Sy",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_0018",
+    "aliquots": {
+      "submitter_id": "aliquot_007"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "TSV",
+    "md5sum": "c183d4391d7fa45ba6fe4a164a143876",
+    "file_size": 4,
+    "file_name": "ei1L5MwNexCJ",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_0019",
+    "aliquots": {
+      "submitter_id": "aliquot_002"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "RAW",
+    "md5sum": "870b4dba1e888586aeac82ca3dc8df72",
+    "file_size": 3,
+    "file_name": "1D6LhMMPNLTp",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_0020",
+    "aliquots": {
+      "submitter_id": "aliquot_0014"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "CSV",
+    "md5sum": "a566d84921c761e2b864feaa56e30af5",
+    "file_size": 3,
+    "file_name": "N9mMdJiG6aLu",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_0021",
+    "aliquots": {
+      "submitter_id": "aliquot_002"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "TSV",
+    "md5sum": "5c68ca64669ad7ff3a804b0bbdd4a7fe",
+    "file_size": 6,
+    "file_name": "xl7tWiatcw73",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_0022",
+    "aliquots": {
+      "submitter_id": "aliquot_001"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "TXT",
+    "md5sum": "f7ed6ae0a7354789fcbba01fd8e96ed7",
+    "file_size": 2,
+    "file_name": "k2J4Ap2MthWD",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_0023",
+    "aliquots": {
+      "submitter_id": "aliquot_0011"
+    }
+  },
+  {
+    "data_type": "Protein Mass Spectrometry",
+    "data_category": "Protein Profiling",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "data_format": "TSV",
+    "md5sum": "59720d0da429a1de26a6aa1924a5dda4",
+    "file_size": 5,
+    "file_name": "wQVpcq1k8axc",
+    "type": "protein_mass_spectrometry",
+    "submitter_id": "protein_mass_spectrometry_0024",
+    "aliquots": {
+      "submitter_id": "aliquot_003"
     }
   }
 ]

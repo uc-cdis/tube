@@ -1,50 +1,278 @@
 [
   {
-    "highest_education": "four years of college and got a degree",
-    "dominand_hand": "Left",
-    "employment_status": "Working full-time",
-    "rodent_weight": 10.2902,
+    "highest_education": "12th grade (high school graduate or a GED)",
+    "dominand_hand": "Right",
+    "employment_status": "Disability",
+    "rodent_weight": 5.8046,
     "insurance_coverage": false,
     "type": "exposure",
     "submitter_id": "exposure_001",
     "subjects": {
-      "submitter_id": "subject_001"
+      "submitter_id": "subject_0018"
+    }
+  },
+  {
+    "highest_education": "a graduate program and got a post-graduate degree",
+    "dominand_hand": "Right",
+    "employment_status": "Working part-time",
+    "rodent_weight": 6.7645,
+    "insurance_coverage": false,
+    "type": "exposure",
+    "submitter_id": "exposure_002",
+    "subjects": {
+      "submitter_id": "subject_0010"
+    }
+  },
+  {
+    "highest_education": "12th grade (high school graduate or a GED)",
+    "dominand_hand": "Left",
+    "employment_status": "Unemployed not seeking work",
+    "rodent_weight": 10.5515,
+    "insurance_coverage": false,
+    "type": "exposure",
+    "submitter_id": "exposure_003",
+    "subjects": {
+      "submitter_id": "subject_0010"
+    }
+  },
+  {
+    "highest_education": "12th grade (high school graduate or a GED)",
+    "dominand_hand": "Right",
+    "employment_status": "Retired",
+    "rodent_weight": 8.703,
+    "insurance_coverage": true,
+    "type": "exposure",
+    "submitter_id": "exposure_004",
+    "subjects": {
+      "submitter_id": "subject_0012"
+    }
+  },
+  {
+    "highest_education": "9th 10th or 11th grade",
+    "dominand_hand": "Right",
+    "employment_status": "Working part-time",
+    "rodent_weight": 12.9378,
+    "insurance_coverage": true,
+    "type": "exposure",
+    "submitter_id": "exposure_005",
+    "subjects": {
+      "submitter_id": "subject_005"
     }
   },
   {
     "highest_education": "at least one year of college but not degree",
     "dominand_hand": "Right",
-    "employment_status": "Working full-time",
-    "rodent_weight": 6.2733,
+    "employment_status": "Disability",
+    "rodent_weight": 14.1046,
+    "insurance_coverage": false,
+    "type": "exposure",
+    "submitter_id": "exposure_006",
+    "subjects": {
+      "submitter_id": "subject_006"
+    }
+  },
+  {
+    "highest_education": "9th 10th or 11th grade",
+    "dominand_hand": "Right",
+    "employment_status": "Disability",
+    "rodent_weight": 11.2031,
     "insurance_coverage": true,
     "type": "exposure",
-    "submitter_id": "exposure_002",
+    "submitter_id": "exposure_007",
+    "subjects": {
+      "submitter_id": "subject_0015"
+    }
+  },
+  {
+    "highest_education": "12th grade (high school graduate or a GED)",
+    "dominand_hand": "Right",
+    "employment_status": "Unemployed not seeking work",
+    "rodent_weight": 11.1512,
+    "insurance_coverage": true,
+    "type": "exposure",
+    "submitter_id": "exposure_008",
+    "subjects": {
+      "submitter_id": "subject_008"
+    }
+  },
+  {
+    "highest_education": "some graduate school",
+    "dominand_hand": "Right",
+    "employment_status": "Student",
+    "rodent_weight": 14.1857,
+    "insurance_coverage": false,
+    "type": "exposure",
+    "submitter_id": "exposure_009",
+    "subjects": {
+      "submitter_id": "subject_002"
+    }
+  },
+  {
+    "highest_education": "9th 10th or 11th grade",
+    "dominand_hand": "Right",
+    "employment_status": "Student",
+    "rodent_weight": 9.7784,
+    "insurance_coverage": true,
+    "type": "exposure",
+    "submitter_id": "exposure_0010",
+    "subjects": {
+      "submitter_id": "subject_0015"
+    }
+  },
+  {
+    "highest_education": "12th grade (high school graduate or a GED)",
+    "dominand_hand": "Left",
+    "employment_status": "Disability",
+    "rodent_weight": 13.2562,
+    "insurance_coverage": false,
+    "type": "exposure",
+    "submitter_id": "exposure_0011",
+    "subjects": {
+      "submitter_id": "subject_0011"
+    }
+  },
+  {
+    "highest_education": "8th grade (or less)",
+    "dominand_hand": "Right",
+    "employment_status": "Working part-time",
+    "rodent_weight": 12.1607,
+    "insurance_coverage": true,
+    "type": "exposure",
+    "submitter_id": "exposure_0012",
+    "subjects": {
+      "submitter_id": "subject_0018"
+    }
+  },
+  {
+    "highest_education": "at least one year of college but not degree",
+    "dominand_hand": "Left",
+    "employment_status": "Student",
+    "rodent_weight": 8.0671,
+    "insurance_coverage": false,
+    "type": "exposure",
+    "submitter_id": "exposure_0013",
+    "subjects": {
+      "submitter_id": "subject_002"
+    }
+  },
+  {
+    "highest_education": "12th grade (high school graduate or a GED)",
+    "dominand_hand": "Left",
+    "employment_status": "Working part-time",
+    "rodent_weight": 9.5898,
+    "insurance_coverage": true,
+    "type": "exposure",
+    "submitter_id": "exposure_0014",
+    "subjects": {
+      "submitter_id": "subject_0010"
+    }
+  },
+  {
+    "highest_education": "9th 10th or 11th grade",
+    "dominand_hand": "Right",
+    "employment_status": "Disability",
+    "rodent_weight": 13.0388,
+    "insurance_coverage": false,
+    "type": "exposure",
+    "submitter_id": "exposure_0015",
+    "subjects": {
+      "submitter_id": "subject_005"
+    }
+  },
+  {
+    "highest_education": "9th 10th or 11th grade",
+    "dominand_hand": "Left",
+    "employment_status": "Working full-time",
+    "rodent_weight": 7.865,
+    "insurance_coverage": false,
+    "type": "exposure",
+    "submitter_id": "exposure_0016",
+    "subjects": {
+      "submitter_id": "subject_002"
+    }
+  },
+  {
+    "highest_education": "12th grade (high school graduate or a GED)",
+    "dominand_hand": "Right",
+    "employment_status": "Unemployed not seeking work",
+    "rodent_weight": 6.6026,
+    "insurance_coverage": true,
+    "type": "exposure",
+    "submitter_id": "exposure_0017",
+    "subjects": {
+      "submitter_id": "subject_007"
+    }
+  },
+  {
+    "highest_education": "8th grade (or less)",
+    "dominand_hand": "Left",
+    "employment_status": "Disability",
+    "rodent_weight": 13.3576,
+    "insurance_coverage": true,
+    "type": "exposure",
+    "submitter_id": "exposure_0018",
+    "subjects": {
+      "submitter_id": "subject_0013"
+    }
+  },
+  {
+    "highest_education": "8th grade (or less)",
+    "dominand_hand": "Right",
+    "employment_status": "Working part-time",
+    "rodent_weight": 5.042,
+    "insurance_coverage": true,
+    "type": "exposure",
+    "submitter_id": "exposure_0019",
+    "subjects": {
+      "submitter_id": "subject_001"
+    }
+  },
+  {
+    "highest_education": "9th 10th or 11th grade",
+    "dominand_hand": "Right",
+    "employment_status": "Disability",
+    "rodent_weight": 11.5887,
+    "insurance_coverage": true,
+    "type": "exposure",
+    "submitter_id": "exposure_0020",
+    "subjects": {
+      "submitter_id": "subject_004"
+    }
+  },
+  {
+    "highest_education": "9th 10th or 11th grade",
+    "dominand_hand": "Left",
+    "employment_status": "Unemployed but seeking work",
+    "rodent_weight": 10.3594,
+    "insurance_coverage": true,
+    "type": "exposure",
+    "submitter_id": "exposure_0021",
     "subjects": {
       "submitter_id": "subject_002"
     }
   },
   {
     "highest_education": "four years of college and got a degree",
-    "dominand_hand": "Left",
-    "employment_status": "Working part-time",
-    "rodent_weight": 5.5818,
-    "insurance_coverage": true,
+    "dominand_hand": "Right",
+    "employment_status": "Retired",
+    "rodent_weight": 8.0572,
+    "insurance_coverage": false,
     "type": "exposure",
-    "submitter_id": "exposure_003",
+    "submitter_id": "exposure_0022",
     "subjects": {
-      "submitter_id": "subject_003"
+      "submitter_id": "subject_0012"
     }
   },
   {
-    "highest_education": "four years of college and got a degree",
+    "highest_education": "9th 10th or 11th grade",
     "dominand_hand": "Right",
-    "employment_status": "Disability",
-    "rodent_weight": 11.3893,
+    "employment_status": "Student",
+    "rodent_weight": 4.7018,
     "insurance_coverage": false,
     "type": "exposure",
-    "submitter_id": "exposure_004",
+    "submitter_id": "exposure_0023",
     "subjects": {
-      "submitter_id": "subject_004"
+      "submitter_id": "subject_0014"
     }
   }
 ]

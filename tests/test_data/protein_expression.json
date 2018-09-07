@@ -2,11 +2,11 @@
   {
     "data_category": "Protein Profiling",
     "data_type": "Protein Expression Quantification",
-    "data_format": "TXT",
+    "data_format": "TSV",
     "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
-    "md5sum": "5507bda7968ab24fb4c43b5464431992",
+    "md5sum": "23e2128863c68ae392c5f801df1a01de",
     "file_size": 3,
-    "file_name": "QVQg6F0Mdsfh",
+    "file_name": "hwwhanyl0WIz",
     "type": "protein_expression",
     "submitter_id": "protein_expression_001",
     "aliquots": {
@@ -18,9 +18,9 @@
     "data_type": "Protein Expression Quantification",
     "data_format": "CSV",
     "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
-    "md5sum": "105f629daae443bd462a8ed7547e3a43",
-    "file_size": 3,
-    "file_name": "H6TNzOxY3ccm",
+    "md5sum": "da50e7e39072a063df0449eb9ede3207",
+    "file_size": 5,
+    "file_name": "Yce8C51eWIc4",
     "type": "protein_expression",
     "submitter_id": "protein_expression_002",
     "aliquots": {
@@ -30,11 +30,11 @@
   {
     "data_category": "Protein Profiling",
     "data_type": "Protein Expression Quantification",
-    "data_format": "TXT",
+    "data_format": "TSV",
     "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
-    "md5sum": "52d39fa78277387cf4993c52c78ccee2",
-    "file_size": 5,
-    "file_name": "WKrgyp8hgtgw",
+    "md5sum": "c18fe2aa056b9f8ed7a1e2c0e5e1d7ab",
+    "file_size": 4,
+    "file_name": "sRSqjbvBbuRV",
     "type": "protein_expression",
     "submitter_id": "protein_expression_003",
     "aliquots": {
@@ -44,15 +44,211 @@
   {
     "data_category": "Protein Profiling",
     "data_type": "Protein Expression Quantification",
-    "data_format": "TSV",
+    "data_format": "CSV",
     "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
-    "md5sum": "e2b2eb515c03c5acdbb492ab771bfa68",
-    "file_size": 7,
-    "file_name": "wkQrraVqUkg2",
+    "md5sum": "4ccfceea4eb5b4c87666ff9e935d84c3",
+    "file_size": 4,
+    "file_name": "PbrsWLhLIHHr",
     "type": "protein_expression",
     "submitter_id": "protein_expression_004",
     "aliquots": {
       "submitter_id": "aliquot_004"
+    }
+  },
+  {
+    "data_category": "Protein Profiling",
+    "data_type": "Protein Expression Quantification",
+    "data_format": "TXT",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "md5sum": "43e89d3d605db5043abef842c8c14586",
+    "file_size": 2,
+    "file_name": "VBQqfqchYMwr",
+    "type": "protein_expression",
+    "submitter_id": "protein_expression_005",
+    "aliquots": {
+      "submitter_id": "aliquot_005"
+    }
+  },
+  {
+    "data_category": "Protein Profiling",
+    "data_type": "Protein Expression Quantification",
+    "data_format": "TSV",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "md5sum": "bbe50699a55fbd3480ed8ab1ee669f6d",
+    "file_size": 3,
+    "file_name": "66KFQlJA1FuT",
+    "type": "protein_expression",
+    "submitter_id": "protein_expression_006",
+    "aliquots": {
+      "submitter_id": "aliquot_006"
+    }
+  },
+  {
+    "data_category": "Protein Profiling",
+    "data_type": "Protein Expression Quantification",
+    "data_format": "TXT",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "md5sum": "2128a4d6d574696c2df953ac97b8cc98",
+    "file_size": 2,
+    "file_name": "XBYTYWwPBFc1",
+    "type": "protein_expression",
+    "submitter_id": "protein_expression_007",
+    "aliquots": {
+      "submitter_id": "aliquot_007"
+    }
+  },
+  {
+    "data_category": "Protein Profiling",
+    "data_type": "Protein Expression Quantification",
+    "data_format": "CSV",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "md5sum": "a28e1d07d4406b8f166592fd41d2b40f",
+    "file_size": 6,
+    "file_name": "sKDPu7LsfDAm",
+    "type": "protein_expression",
+    "submitter_id": "protein_expression_008",
+    "aliquots": {
+      "submitter_id": "aliquot_008"
+    }
+  },
+  {
+    "data_category": "Protein Profiling",
+    "data_type": "Protein Expression Quantification",
+    "data_format": "TSV",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "md5sum": "ba8288506652f9eb656659ca04f531da",
+    "file_size": 2,
+    "file_name": "A1OKo8LqRYsJ",
+    "type": "protein_expression",
+    "submitter_id": "protein_expression_009",
+    "aliquots": {
+      "submitter_id": "aliquot_009"
+    }
+  },
+  {
+    "data_category": "Protein Profiling",
+    "data_type": "Protein Expression Quantification",
+    "data_format": "TSV",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "md5sum": "04a6249a201cbc74e9d3e095088d4dc0",
+    "file_size": 8,
+    "file_name": "LkPyL7tDhIxS",
+    "type": "protein_expression",
+    "submitter_id": "protein_expression_0010",
+    "aliquots": {
+      "submitter_id": "aliquot_0010"
+    }
+  },
+  {
+    "data_category": "Protein Profiling",
+    "data_type": "Protein Expression Quantification",
+    "data_format": "TSV",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "md5sum": "7d469bd02fd097863dcf638cb574284c",
+    "file_size": 6,
+    "file_name": "bl00eY3Bair8",
+    "type": "protein_expression",
+    "submitter_id": "protein_expression_0011",
+    "aliquots": {
+      "submitter_id": "aliquot_0011"
+    }
+  },
+  {
+    "data_category": "Protein Profiling",
+    "data_type": "Protein Expression Quantification",
+    "data_format": "TXT",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "md5sum": "e5487748de42fd8f7770506343cb28ea",
+    "file_size": 5,
+    "file_name": "cy7mzZATQRXr",
+    "type": "protein_expression",
+    "submitter_id": "protein_expression_0012",
+    "aliquots": {
+      "submitter_id": "aliquot_0012"
+    }
+  },
+  {
+    "data_category": "Protein Profiling",
+    "data_type": "Protein Expression Quantification",
+    "data_format": "CSV",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "md5sum": "e35c59001a3f2553cadd4141c46ff4bb",
+    "file_size": 1,
+    "file_name": "jTbfTAM71osT",
+    "type": "protein_expression",
+    "submitter_id": "protein_expression_0013",
+    "aliquots": {
+      "submitter_id": "aliquot_0013"
+    }
+  },
+  {
+    "data_category": "Protein Profiling",
+    "data_type": "Protein Expression Quantification",
+    "data_format": "TSV",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "md5sum": "c65153d03e28b9fb7f9ad1abd809a187",
+    "file_size": 2,
+    "file_name": "5EpV0M1Uc3by",
+    "type": "protein_expression",
+    "submitter_id": "protein_expression_0014",
+    "aliquots": {
+      "submitter_id": "aliquot_0014"
+    }
+  },
+  {
+    "data_category": "Protein Profiling",
+    "data_type": "Protein Expression Quantification",
+    "data_format": "TSV",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "md5sum": "6731ca40f17f1f9385d643fefd1be15a",
+    "file_size": 2,
+    "file_name": "CVyMxqDEgvWy",
+    "type": "protein_expression",
+    "submitter_id": "protein_expression_0015",
+    "aliquots": {
+      "submitter_id": "aliquot_0015"
+    }
+  },
+  {
+    "data_category": "Protein Profiling",
+    "data_type": "Protein Expression Quantification",
+    "data_format": "CSV",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "md5sum": "0edbd6a87020a5e96ab4de8e52853c0e",
+    "file_size": 2,
+    "file_name": "RxxyWKvfPh3l",
+    "type": "protein_expression",
+    "submitter_id": "protein_expression_0016",
+    "aliquots": {
+      "submitter_id": "aliquot_0016"
+    }
+  },
+  {
+    "data_category": "Protein Profiling",
+    "data_type": "Protein Expression Quantification",
+    "data_format": "TXT",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "md5sum": "8608c66c89e9f13fc54b3cb16a62f837",
+    "file_size": 5,
+    "file_name": "vMqnbEykk0vk",
+    "type": "protein_expression",
+    "submitter_id": "protein_expression_0017",
+    "aliquots": {
+      "submitter_id": "aliquot_0017"
+    }
+  },
+  {
+    "data_category": "Protein Profiling",
+    "data_type": "Protein Expression Quantification",
+    "data_format": "TXT",
+    "experimental_strategy": "Liquid chromatography-tandem mass spectrometry",
+    "md5sum": "19c20d947821cf50cadedf0cb7d7a43a",
+    "file_size": 1,
+    "file_name": "aytIM7JxcC2Z",
+    "type": "protein_expression",
+    "submitter_id": "protein_expression_0018",
+    "aliquots": {
+      "submitter_id": "aliquot_0018"
     }
   }
 ]
