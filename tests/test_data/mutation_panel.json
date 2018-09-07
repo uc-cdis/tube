@@ -2,10 +2,10 @@
   {
     "data_category": "Aggregated Mutation Panel",
     "data_type": "Mutation Panel",
-    "data_format": "CSV",
-    "md5sum": "28233a19e6a2770968e57505d0ec1e55",
+    "data_format": "TSV",
+    "md5sum": "3db2e6466fc34b303e8c45c44a5181b2",
     "file_size": 5,
-    "file_name": "9tqPqrnqtdrD",
+    "file_name": "GG4ovxayK2T5",
     "type": "mutation_panel",
     "submitter_id": "mutation_panel_001",
     "subjects": {
@@ -16,12 +16,12 @@
     }
   },
   {
-    "data_category": "Aggregated Mutation Panel",
+    "data_category": "Individual Mutation Panel",
     "data_type": "Mutation Panel",
     "data_format": "CSV",
-    "md5sum": "6ccdf412032caf41ee4d64f350f2494d",
-    "file_size": 5,
-    "file_name": "jNwqUvnoPo4z",
+    "md5sum": "5487365f5bfb1773021d415b4a864644",
+    "file_size": 2,
+    "file_name": "Exbq96Indnsj",
     "type": "mutation_panel",
     "submitter_id": "mutation_panel_002",
     "subjects": {
@@ -34,10 +34,10 @@
   {
     "data_category": "Aggregated Mutation Panel",
     "data_type": "Mutation Panel",
-    "data_format": "TSV",
-    "md5sum": "9318a92dcf49d6eba134c693fd4a7d6c",
-    "file_size": 5,
-    "file_name": "V5bjmQgpMhIu",
+    "data_format": "TXT",
+    "md5sum": "677a0871430775f02cd3e02e43898e3b",
+    "file_size": 4,
+    "file_name": "7yIxlJUqqNw7",
     "type": "mutation_panel",
     "submitter_id": "mutation_panel_003",
     "subjects": {
@@ -48,12 +48,12 @@
     }
   },
   {
-    "data_category": "Aggregated Mutation Panel",
+    "data_category": "Individual Mutation Panel",
     "data_type": "Mutation Panel",
-    "data_format": "TSV",
-    "md5sum": "6cab7c084fe72dc67d5fa31a4c2507d8",
-    "file_size": 6,
-    "file_name": "dSrOo1WGM0ax",
+    "data_format": "CSV",
+    "md5sum": "047271a9d2c80991b4bf1e19ed16f36c",
+    "file_size": 4,
+    "file_name": "jpgjJI2uBiDW",
     "type": "mutation_panel",
     "submitter_id": "mutation_panel_004",
     "subjects": {
@@ -61,6 +61,214 @@
     },
     "core_metadata_records": {
       "submitter_id": "core_metadata_004"
+    }
+  },
+  {
+    "data_category": "Aggregated Mutation Panel",
+    "data_type": "Mutation Panel",
+    "data_format": "CSV",
+    "md5sum": "1fbb753890ba2948ccdb9eb4a3cccebd",
+    "file_size": 5,
+    "file_name": "CkMNDhnF6Ily",
+    "type": "mutation_panel",
+    "submitter_id": "mutation_panel_005",
+    "subjects": {
+      "submitter_id": "subject_005"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_005"
+    }
+  },
+  {
+    "data_category": "Aggregated Mutation Panel",
+    "data_type": "Mutation Panel",
+    "data_format": "CSV",
+    "md5sum": "2ba5f4ec85b797725a598e5371a19ccd",
+    "file_size": 5,
+    "file_name": "jrFCaRsC6uxg",
+    "type": "mutation_panel",
+    "submitter_id": "mutation_panel_006",
+    "subjects": {
+      "submitter_id": "subject_006"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_006"
+    }
+  },
+  {
+    "data_category": "Aggregated Mutation Panel",
+    "data_type": "Mutation Panel",
+    "data_format": "TSV",
+    "md5sum": "04ba5e4c97064ce7e5d4bc24065cb08b",
+    "file_size": 2,
+    "file_name": "DHuqXwjHB9uF",
+    "type": "mutation_panel",
+    "submitter_id": "mutation_panel_007",
+    "subjects": {
+      "submitter_id": "subject_007"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_007"
+    }
+  },
+  {
+    "data_category": "Individual Mutation Panel",
+    "data_type": "Mutation Panel",
+    "data_format": "TSV",
+    "md5sum": "5f7aefc384692566e008ec026c63a415",
+    "file_size": 9,
+    "file_name": "ZaAVVL7G3D1v",
+    "type": "mutation_panel",
+    "submitter_id": "mutation_panel_008",
+    "subjects": {
+      "submitter_id": "subject_008"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_008"
+    }
+  },
+  {
+    "data_category": "Individual Mutation Panel",
+    "data_type": "Mutation Panel",
+    "data_format": "TSV",
+    "md5sum": "2601911dab150f6550aabea168e8f5db",
+    "file_size": 3,
+    "file_name": "Aw6dZOekSVHW",
+    "type": "mutation_panel",
+    "submitter_id": "mutation_panel_009",
+    "subjects": {
+      "submitter_id": "subject_009"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_009"
+    }
+  },
+  {
+    "data_category": "Individual Mutation Panel",
+    "data_type": "Mutation Panel",
+    "data_format": "CSV",
+    "md5sum": "11b46736f5b1ea6609e3ef7f4ec2eba3",
+    "file_size": 3,
+    "file_name": "xmpn3K2XjfH0",
+    "type": "mutation_panel",
+    "submitter_id": "mutation_panel_0010",
+    "subjects": {
+      "submitter_id": "subject_0010"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_0010"
+    }
+  },
+  {
+    "data_category": "Aggregated Mutation Panel",
+    "data_type": "Mutation Panel",
+    "data_format": "CSV",
+    "md5sum": "dab622a0d5a80244df628cad4c1434dd",
+    "file_size": 2,
+    "file_name": "anqV2xR9nLKN",
+    "type": "mutation_panel",
+    "submitter_id": "mutation_panel_0011",
+    "subjects": {
+      "submitter_id": "subject_0011"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_0011"
+    }
+  },
+  {
+    "data_category": "Individual Mutation Panel",
+    "data_type": "Mutation Panel",
+    "data_format": "CSV",
+    "md5sum": "6f59849d1ac94bf041b949accb81aff2",
+    "file_size": 5,
+    "file_name": "gKOgBuxqDnei",
+    "type": "mutation_panel",
+    "submitter_id": "mutation_panel_0012",
+    "subjects": {
+      "submitter_id": "subject_0012"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_0012"
+    }
+  },
+  {
+    "data_category": "Aggregated Mutation Panel",
+    "data_type": "Mutation Panel",
+    "data_format": "TSV",
+    "md5sum": "857602e8bccb9533a864f8fc81b14b86",
+    "file_size": 2,
+    "file_name": "iRsfKU8uQ0ed",
+    "type": "mutation_panel",
+    "submitter_id": "mutation_panel_0013",
+    "subjects": {
+      "submitter_id": "subject_0013"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_0013"
+    }
+  },
+  {
+    "data_category": "Individual Mutation Panel",
+    "data_type": "Mutation Panel",
+    "data_format": "TXT",
+    "md5sum": "96c4308d3b01125d708e7b93472c3eca",
+    "file_size": 3,
+    "file_name": "xugfYOki1MH7",
+    "type": "mutation_panel",
+    "submitter_id": "mutation_panel_0014",
+    "subjects": {
+      "submitter_id": "subject_0014"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_0014"
+    }
+  },
+  {
+    "data_category": "Aggregated Mutation Panel",
+    "data_type": "Mutation Panel",
+    "data_format": "TXT",
+    "md5sum": "e5a924c4ad2914bda39d3bebf634f97b",
+    "file_size": 4,
+    "file_name": "3rZsXUQBtcUb",
+    "type": "mutation_panel",
+    "submitter_id": "mutation_panel_0015",
+    "subjects": {
+      "submitter_id": "subject_0015"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_0015"
+    }
+  },
+  {
+    "data_category": "Aggregated Mutation Panel",
+    "data_type": "Mutation Panel",
+    "data_format": "CSV",
+    "md5sum": "fc098f329d861f7cec123f09f717e0e8",
+    "file_size": 5,
+    "file_name": "ooY9KVOZmmlB",
+    "type": "mutation_panel",
+    "submitter_id": "mutation_panel_0016",
+    "subjects": {
+      "submitter_id": "subject_0016"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_0016"
+    }
+  },
+  {
+    "data_category": "Aggregated Mutation Panel",
+    "data_type": "Mutation Panel",
+    "data_format": "TXT",
+    "md5sum": "a7779d0f2857dfdbc4fed06af611b5a5",
+    "file_size": 2,
+    "file_name": "CF4OyyWy9wIb",
+    "type": "mutation_panel",
+    "submitter_id": "mutation_panel_0017",
+    "subjects": {
+      "submitter_id": "subject_0017"
+    },
+    "core_metadata_records": {
+      "submitter_id": "core_metadata_0017"
     }
   }
 ]

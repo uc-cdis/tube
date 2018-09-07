@@ -94,7 +94,7 @@ def total_subjects_in_file():
 def test_subject_number_equal_file_es(total_subjects_in_file):
     es = Elasticsearch([{"host": "localhost", "port": 9200}])
     s = Search(using=es, index="etl")
-    response = s.execute()
-    total_subjects_in_es = len(response)
+    query = s.query()
+    total_subjects_in_es = query.count()
 
     assert total_subjects_in_file == total_subjects_in_es

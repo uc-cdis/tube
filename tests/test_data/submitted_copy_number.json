@@ -1,12 +1,12 @@
 [
   {
-    "data_category": "iWkIAsJKRAQW",
-    "data_type": "7ZbDB0ayKeqF",
-    "data_format": "hqu0vjaP4aNo",
-    "experimental_strategy": "dUQWEeHhNOeO",
-    "md5sum": "12dc808759f008e14e8da9210f8f248f",
-    "file_size": 7,
-    "file_name": "vZfZxWzPuSvX",
+    "data_category": "eILOqkv85B79",
+    "data_type": "c28Fvvk89LOI",
+    "data_format": "QzLszeOLdbbE",
+    "experimental_strategy": "bbdKoBiF0fkm",
+    "md5sum": "ff9a8f75c9a1ce9e090c7128de9cf44b",
+    "file_size": 4,
+    "file_name": "QgU5B1cPSvYV",
     "type": "submitted_copy_number",
     "submitter_id": "submitted_copy_number_001",
     "aliquots": {
@@ -14,13 +14,13 @@
     }
   },
   {
-    "data_category": "OX1AFnuKgHeI",
-    "data_type": "8Hgt0sPu9VMg",
-    "data_format": "x5mtKqppcEcs",
-    "experimental_strategy": "9Ns1MGMCMMoh",
-    "md5sum": "0ba4e8ad22da6c68f7a9b68841ec1594",
-    "file_size": 5,
-    "file_name": "QiBuPQR5cY82",
+    "data_category": "5cGVCm9tbyuE",
+    "data_type": "KscgysewTQGP",
+    "data_format": "MGwiODuFLIfP",
+    "experimental_strategy": "NyeQj5nnODlC",
+    "md5sum": "0fbf229b951101eab86b6d75ec6f9413",
+    "file_size": 11,
+    "file_name": "HVCDgY4tCHMr",
     "type": "submitted_copy_number",
     "submitter_id": "submitted_copy_number_002",
     "aliquots": {
@@ -28,13 +28,13 @@
     }
   },
   {
-    "data_category": "pnXZujGqyVgU",
-    "data_type": "oEPAHDgTX0g3",
-    "data_format": "kkOm0UbtKZuB",
-    "experimental_strategy": "irSNVMp3AT11",
-    "md5sum": "4017dda8cebf1294b737eafabb40407c",
-    "file_size": 5,
-    "file_name": "OOIt52BQzAHW",
+    "data_category": "cjGjIjRE2NUb",
+    "data_type": "UxrgKrUhVouO",
+    "data_format": "DgodVIm8YOaH",
+    "experimental_strategy": "zdUj9nWTlRQG",
+    "md5sum": "14d9e67715773026fb25c26405ce536a",
+    "file_size": 3,
+    "file_name": "2aBl4ME7uipk",
     "type": "submitted_copy_number",
     "submitter_id": "submitted_copy_number_003",
     "aliquots": {
@@ -42,17 +42,199 @@
     }
   },
   {
-    "data_category": "JNRVbpw03Evk",
-    "data_type": "ITGQmAArjjLw",
-    "data_format": "SZ7Dkaxto3Qk",
-    "experimental_strategy": "6ikEGJUsABfX",
-    "md5sum": "bc6e027ffaf23a73e514e9909f6ee7d6",
-    "file_size": 4,
-    "file_name": "GKrAfFOHw5Pz",
+    "data_category": "1Le452Y65NgG",
+    "data_type": "4F3JXHNQz32h",
+    "data_format": "ZMIZHZjdokB3",
+    "experimental_strategy": "L5hS9U5u1Uqx",
+    "md5sum": "6ea6ff79b4423573ea5899e8b2afaaab",
+    "file_size": 2,
+    "file_name": "xD4RO2sAMHj6",
     "type": "submitted_copy_number",
     "submitter_id": "submitted_copy_number_004",
     "aliquots": {
       "submitter_id": "aliquot_004"
+    }
+  },
+  {
+    "data_category": "UC3HBW8BZIIk",
+    "data_type": "e0NTxCfknydX",
+    "data_format": "jegpWLH3LnKI",
+    "experimental_strategy": "h1xgCMGsB49v",
+    "md5sum": "d1c65993af999cc8b77a751c6a589cc8",
+    "file_size": 5,
+    "file_name": "hNVhrpNDWeJT",
+    "type": "submitted_copy_number",
+    "submitter_id": "submitted_copy_number_005",
+    "aliquots": {
+      "submitter_id": "aliquot_005"
+    }
+  },
+  {
+    "data_category": "jFJ1WKfC6Prq",
+    "data_type": "VQLN8rm45Jab",
+    "data_format": "MCvrGNcfk3Pv",
+    "experimental_strategy": "jF5kwz68JROT",
+    "md5sum": "e254976736af2db172bd82aa339247ff",
+    "file_size": 1,
+    "file_name": "l18LqSDCEPnA",
+    "type": "submitted_copy_number",
+    "submitter_id": "submitted_copy_number_006",
+    "aliquots": {
+      "submitter_id": "aliquot_006"
+    }
+  },
+  {
+    "data_category": "1OOdM3Zfm15q",
+    "data_type": "EoEEawvtbYVT",
+    "data_format": "pBniNuEAZgPP",
+    "experimental_strategy": "gBfGwNNBCjrG",
+    "md5sum": "4e5d2be7a38cee11f98635fd89ac0185",
+    "file_size": 2,
+    "file_name": "2xGBcmyZLin0",
+    "type": "submitted_copy_number",
+    "submitter_id": "submitted_copy_number_007",
+    "aliquots": {
+      "submitter_id": "aliquot_007"
+    }
+  },
+  {
+    "data_category": "4N8I6tIV1jfR",
+    "data_type": "6cDfibamFiD6",
+    "data_format": "eouKoFxUqWqx",
+    "experimental_strategy": "T8zwR3LvaoAc",
+    "md5sum": "d57e1cfcffb473f708f14ca73da401b0",
+    "file_size": 3,
+    "file_name": "627i3k5s3OA7",
+    "type": "submitted_copy_number",
+    "submitter_id": "submitted_copy_number_008",
+    "aliquots": {
+      "submitter_id": "aliquot_008"
+    }
+  },
+  {
+    "data_category": "NRDaoEmbVGOl",
+    "data_type": "vyQEy7bG6gac",
+    "data_format": "1iv0B6ien9ZB",
+    "experimental_strategy": "AVxJu4Xfe7DV",
+    "md5sum": "14313a10ae20df554280fcc3d914fe26",
+    "file_size": 5,
+    "file_name": "oXuXb6E1aiC8",
+    "type": "submitted_copy_number",
+    "submitter_id": "submitted_copy_number_009",
+    "aliquots": {
+      "submitter_id": "aliquot_009"
+    }
+  },
+  {
+    "data_category": "R5RrDtA6kbPu",
+    "data_type": "9vf13b7i2cBY",
+    "data_format": "XDXPhKaI9rDi",
+    "experimental_strategy": "2ypqO3Vs9W0B",
+    "md5sum": "e03765f00803c1a37fce552c00ebcfb7",
+    "file_size": 9,
+    "file_name": "AdaQm1uaevpT",
+    "type": "submitted_copy_number",
+    "submitter_id": "submitted_copy_number_0010",
+    "aliquots": {
+      "submitter_id": "aliquot_0010"
+    }
+  },
+  {
+    "data_category": "3ZnLuk0j5xts",
+    "data_type": "33h83afLjn78",
+    "data_format": "whQias6dOSOE",
+    "experimental_strategy": "VkRUDJPfUUrv",
+    "md5sum": "c850248faaf2c3ad195c7723f3b1a561",
+    "file_size": 3,
+    "file_name": "k2Oo6H79fIga",
+    "type": "submitted_copy_number",
+    "submitter_id": "submitted_copy_number_0011",
+    "aliquots": {
+      "submitter_id": "aliquot_0011"
+    }
+  },
+  {
+    "data_category": "PgX6cOh9i4el",
+    "data_type": "2EyqVGq8AISO",
+    "data_format": "GmfrBY8G18xN",
+    "experimental_strategy": "3GFpDwz6XSsj",
+    "md5sum": "67f8e8bc6bcfa99fe368d03f185cd51d",
+    "file_size": 3,
+    "file_name": "6LRClHKtKSs1",
+    "type": "submitted_copy_number",
+    "submitter_id": "submitted_copy_number_0012",
+    "aliquots": {
+      "submitter_id": "aliquot_0012"
+    }
+  },
+  {
+    "data_category": "8zO7ZWlGokty",
+    "data_type": "0q82ONi17nkZ",
+    "data_format": "aPe6Wr0A7aSI",
+    "experimental_strategy": "kWityol3npjw",
+    "md5sum": "a6f08311228315531407b13c7189d24a",
+    "file_size": 2,
+    "file_name": "aY8SsgHSBWWs",
+    "type": "submitted_copy_number",
+    "submitter_id": "submitted_copy_number_0013",
+    "aliquots": {
+      "submitter_id": "aliquot_0013"
+    }
+  },
+  {
+    "data_category": "zwDwgJb4zP7w",
+    "data_type": "u5fagnSn3qHX",
+    "data_format": "xaJdnSB59NCb",
+    "experimental_strategy": "yAcwcjZQBkOw",
+    "md5sum": "9cc4dcc0db9ef1cd0cd04b6f7b7f7a5b",
+    "file_size": 7,
+    "file_name": "cXTnAXqWcS1g",
+    "type": "submitted_copy_number",
+    "submitter_id": "submitted_copy_number_0014",
+    "aliquots": {
+      "submitter_id": "aliquot_0014"
+    }
+  },
+  {
+    "data_category": "19jSgkMVJ68d",
+    "data_type": "WslHkkWI2KTq",
+    "data_format": "4gZ1fYXLU8SD",
+    "experimental_strategy": "s5ufC28wLjQ1",
+    "md5sum": "7919b73f1ea0dc0dc3b842b575df0040",
+    "file_size": 3,
+    "file_name": "Lfstqx4UPH8G",
+    "type": "submitted_copy_number",
+    "submitter_id": "submitted_copy_number_0015",
+    "aliquots": {
+      "submitter_id": "aliquot_0015"
+    }
+  },
+  {
+    "data_category": "Vp8fFUyAdz6h",
+    "data_type": "tNn3KGMouA9O",
+    "data_format": "IxZLGaB8xc8M",
+    "experimental_strategy": "CDgIQcf85Dnn",
+    "md5sum": "d16ec9d90d0a2b94b93c133cbc503feb",
+    "file_size": 6,
+    "file_name": "2SYIY08kDM55",
+    "type": "submitted_copy_number",
+    "submitter_id": "submitted_copy_number_0016",
+    "aliquots": {
+      "submitter_id": "aliquot_0016"
+    }
+  },
+  {
+    "data_category": "EIhEAs9qSZ32",
+    "data_type": "wJ1E3bLeaGok",
+    "data_format": "7Gra7YYAdSyE",
+    "experimental_strategy": "FjeWd4TrPqA5",
+    "md5sum": "9e01ddba40debb5c78bb0d7e7d6938d9",
+    "file_size": 4,
+    "file_name": "79ScjL8TpMPS",
+    "type": "submitted_copy_number",
+    "submitter_id": "submitted_copy_number_0017",
+    "aliquots": {
+      "submitter_id": "aliquot_0017"
     }
   }
 ]

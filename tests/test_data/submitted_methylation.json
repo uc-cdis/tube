@@ -3,16 +3,16 @@
     "assay_method": "Methylation Array",
     "data_category": "Methylation Data",
     "data_type": "Methylation Intensity Values",
-    "assay_instrument_model": "Illumina Infinium HumanMethylation450K",
+    "assay_instrument_model": "Illumina Infinium HumanMethylation450",
     "data_format": "IDAT",
     "assay_instrument": "Illumina",
-    "md5sum": "d9d74ce9d056d7313cf5f4669ccc080a",
-    "file_size": 9,
-    "file_name": "HyXVZTOSh8Vl",
+    "md5sum": "0ba1ee05173ee3364a58db7299b26cf3",
+    "file_size": 1,
+    "file_name": "SHWGrwZA5Wtz",
     "type": "submitted_methylation",
     "submitter_id": "submitted_methylation_001",
     "aliquots": {
-      "submitter_id": "aliquot_001"
+      "submitter_id": "aliquot_0016"
     }
   },
   {
@@ -22,13 +22,13 @@
     "assay_instrument_model": "Illumina Infinium HumanMethylation450K",
     "data_format": "IDAT",
     "assay_instrument": "Illumina",
-    "md5sum": "92cc3e7286908a868c289edd44354f67",
-    "file_size": 3,
-    "file_name": "Qje4NbB0YSDM",
+    "md5sum": "812d96f6dc0765d5067e70e2934eecae",
+    "file_size": 6,
+    "file_name": "mYuMjFne8RDA",
     "type": "submitted_methylation",
     "submitter_id": "submitted_methylation_002",
     "aliquots": {
-      "submitter_id": "aliquot_002"
+      "submitter_id": "aliquot_0017"
     }
   },
   {
@@ -38,9 +38,9 @@
     "assay_instrument_model": "Illumina Infinium HumanMethylation450",
     "data_format": "IDAT",
     "assay_instrument": "Illumina",
-    "md5sum": "2c04f0a6b445b6244ee429a10627d948",
-    "file_size": 5,
-    "file_name": "NPTJaWVbgUps",
+    "md5sum": "339793c6d6d58fdfa9feb20a8ba8e4c6",
+    "file_size": 3,
+    "file_name": "MqOKqp0t0JlQ",
     "type": "submitted_methylation",
     "submitter_id": "submitted_methylation_003",
     "aliquots": {
@@ -51,16 +51,272 @@
     "assay_method": "Methylation Array",
     "data_category": "Methylation Data",
     "data_type": "Methylation Intensity Values",
-    "assay_instrument_model": "Illumina Infinium HumanMethylation450K",
+    "assay_instrument_model": "Illumina Infinium HumanMethylation450",
     "data_format": "IDAT",
     "assay_instrument": "Illumina",
-    "md5sum": "2dc268e1d2094e8c950ded991d14aeca",
+    "md5sum": "52ecebc83d6c5c8f0c9d99afc28fa511",
     "file_size": 2,
-    "file_name": "k0Z3VJJAqDrP",
+    "file_name": "UNr00ez9I9kl",
     "type": "submitted_methylation",
     "submitter_id": "submitted_methylation_004",
     "aliquots": {
+      "submitter_id": "aliquot_0012"
+    }
+  },
+  {
+    "assay_method": "Methylation Array",
+    "data_category": "Methylation Data",
+    "data_type": "Methylation Intensity Values",
+    "assay_instrument_model": "Illumina Infinium HumanMethylation450K",
+    "data_format": "IDAT",
+    "assay_instrument": "Illumina",
+    "md5sum": "4d24a06e911d6c22397f9603f9a1f441",
+    "file_size": 4,
+    "file_name": "gdwPYeQRjacm",
+    "type": "submitted_methylation",
+    "submitter_id": "submitted_methylation_005",
+    "aliquots": {
+      "submitter_id": "aliquot_0015"
+    }
+  },
+  {
+    "assay_method": "Methylation Array",
+    "data_category": "Methylation Data",
+    "data_type": "Methylation Intensity Values",
+    "assay_instrument_model": "Illumina Infinium HumanMethylation450K",
+    "data_format": "IDAT",
+    "assay_instrument": "Illumina",
+    "md5sum": "77a077b000bd5af01830735160b406e8",
+    "file_size": 4,
+    "file_name": "buAvTKGHvlYB",
+    "type": "submitted_methylation",
+    "submitter_id": "submitted_methylation_006",
+    "aliquots": {
+      "submitter_id": "aliquot_008"
+    }
+  },
+  {
+    "assay_method": "Methylation Array",
+    "data_category": "Methylation Data",
+    "data_type": "Methylation Intensity Values",
+    "assay_instrument_model": "Illumina Infinium HumanMethylation450K",
+    "data_format": "IDAT",
+    "assay_instrument": "Illumina",
+    "md5sum": "9e9e4c3b34c3ac7f833829160700c3bf",
+    "file_size": 4,
+    "file_name": "3Ku0cp3SDHTp",
+    "type": "submitted_methylation",
+    "submitter_id": "submitted_methylation_007",
+    "aliquots": {
       "submitter_id": "aliquot_004"
+    }
+  },
+  {
+    "assay_method": "Methylation Array",
+    "data_category": "Methylation Data",
+    "data_type": "Methylation Intensity Values",
+    "assay_instrument_model": "Illumina Infinium HumanMethylation450",
+    "data_format": "IDAT",
+    "assay_instrument": "Illumina",
+    "md5sum": "cc4e01e00eced653eaf2d993406a2a9b",
+    "file_size": 2,
+    "file_name": "OdndwHPKHkjY",
+    "type": "submitted_methylation",
+    "submitter_id": "submitted_methylation_008",
+    "aliquots": {
+      "submitter_id": "aliquot_0015"
+    }
+  },
+  {
+    "assay_method": "Methylation Array",
+    "data_category": "Methylation Data",
+    "data_type": "Methylation Intensity Values",
+    "assay_instrument_model": "Illumina Infinium HumanMethylation450K",
+    "data_format": "IDAT",
+    "assay_instrument": "Illumina",
+    "md5sum": "1dd7e97c2b10fb032897c786d0e28ec9",
+    "file_size": 3,
+    "file_name": "Q9JvI2hFguvy",
+    "type": "submitted_methylation",
+    "submitter_id": "submitted_methylation_009",
+    "aliquots": {
+      "submitter_id": "aliquot_002"
+    }
+  },
+  {
+    "assay_method": "Methylation Array",
+    "data_category": "Methylation Data",
+    "data_type": "Methylation Intensity Values",
+    "assay_instrument_model": "Illumina Infinium HumanMethylation450K",
+    "data_format": "IDAT",
+    "assay_instrument": "Illumina",
+    "md5sum": "83e7d878f237a0b05b9931b5195a8ac1",
+    "file_size": 4,
+    "file_name": "SDUXZFueS5rc",
+    "type": "submitted_methylation",
+    "submitter_id": "submitted_methylation_0010",
+    "aliquots": {
+      "submitter_id": "aliquot_0010"
+    }
+  },
+  {
+    "assay_method": "Methylation Array",
+    "data_category": "Methylation Data",
+    "data_type": "Methylation Intensity Values",
+    "assay_instrument_model": "Illumina Infinium HumanMethylation450K",
+    "data_format": "IDAT",
+    "assay_instrument": "Illumina",
+    "md5sum": "1b91e3831a3fee267794fb324453b6d9",
+    "file_size": 2,
+    "file_name": "3wiKltpHD4Xb",
+    "type": "submitted_methylation",
+    "submitter_id": "submitted_methylation_0011",
+    "aliquots": {
+      "submitter_id": "aliquot_0014"
+    }
+  },
+  {
+    "assay_method": "Methylation Array",
+    "data_category": "Methylation Data",
+    "data_type": "Methylation Intensity Values",
+    "assay_instrument_model": "Illumina Infinium HumanMethylation450",
+    "data_format": "IDAT",
+    "assay_instrument": "Illumina",
+    "md5sum": "cc72850f417913f360347f34dae51f36",
+    "file_size": 2,
+    "file_name": "tP2Jkot4rT1G",
+    "type": "submitted_methylation",
+    "submitter_id": "submitted_methylation_0012",
+    "aliquots": {
+      "submitter_id": "aliquot_005"
+    }
+  },
+  {
+    "assay_method": "Methylation Array",
+    "data_category": "Methylation Data",
+    "data_type": "Methylation Intensity Values",
+    "assay_instrument_model": "Illumina Infinium HumanMethylation450",
+    "data_format": "IDAT",
+    "assay_instrument": "Illumina",
+    "md5sum": "bc4c9dbe827be86be3c0182b8dcde152",
+    "file_size": 5,
+    "file_name": "LpFqDxzyhkVy",
+    "type": "submitted_methylation",
+    "submitter_id": "submitted_methylation_0013",
+    "aliquots": {
+      "submitter_id": "aliquot_0010"
+    }
+  },
+  {
+    "assay_method": "Methylation Array",
+    "data_category": "Methylation Data",
+    "data_type": "Methylation Intensity Values",
+    "assay_instrument_model": "Illumina Infinium HumanMethylation450K",
+    "data_format": "IDAT",
+    "assay_instrument": "Illumina",
+    "md5sum": "130c74dfe85c199488c52bd3043bb446",
+    "file_size": 8,
+    "file_name": "qqZzJajfRcDu",
+    "type": "submitted_methylation",
+    "submitter_id": "submitted_methylation_0014",
+    "aliquots": {
+      "submitter_id": "aliquot_0011"
+    }
+  },
+  {
+    "assay_method": "Methylation Array",
+    "data_category": "Methylation Data",
+    "data_type": "Methylation Intensity Values",
+    "assay_instrument_model": "Illumina Infinium HumanMethylation450K",
+    "data_format": "IDAT",
+    "assay_instrument": "Illumina",
+    "md5sum": "9688e68e5b7ff010f51f86e7aaf078d1",
+    "file_size": 4,
+    "file_name": "d2iD3XWS4pvy",
+    "type": "submitted_methylation",
+    "submitter_id": "submitted_methylation_0015",
+    "aliquots": {
+      "submitter_id": "aliquot_004"
+    }
+  },
+  {
+    "assay_method": "Methylation Array",
+    "data_category": "Methylation Data",
+    "data_type": "Methylation Intensity Values",
+    "assay_instrument_model": "Illumina Infinium HumanMethylation450K",
+    "data_format": "IDAT",
+    "assay_instrument": "Illumina",
+    "md5sum": "c2865ec4f49d1cc86a3838e37272709b",
+    "file_size": 5,
+    "file_name": "cHNSmrx6oFma",
+    "type": "submitted_methylation",
+    "submitter_id": "submitted_methylation_0016",
+    "aliquots": {
+      "submitter_id": "aliquot_009"
+    }
+  },
+  {
+    "assay_method": "Methylation Array",
+    "data_category": "Methylation Data",
+    "data_type": "Methylation Intensity Values",
+    "assay_instrument_model": "Illumina Infinium HumanMethylation450K",
+    "data_format": "IDAT",
+    "assay_instrument": "Illumina",
+    "md5sum": "65911a3332077bff20c0c289adae396c",
+    "file_size": 7,
+    "file_name": "Hmdc77HbmjAP",
+    "type": "submitted_methylation",
+    "submitter_id": "submitted_methylation_0017",
+    "aliquots": {
+      "submitter_id": "aliquot_0017"
+    }
+  },
+  {
+    "assay_method": "Methylation Array",
+    "data_category": "Methylation Data",
+    "data_type": "Methylation Intensity Values",
+    "assay_instrument_model": "Illumina Infinium HumanMethylation450",
+    "data_format": "IDAT",
+    "assay_instrument": "Illumina",
+    "md5sum": "dc4575e0bd828151572eff1303e53bf7",
+    "file_size": 3,
+    "file_name": "G898QkE159yS",
+    "type": "submitted_methylation",
+    "submitter_id": "submitted_methylation_0018",
+    "aliquots": {
+      "submitter_id": "aliquot_0018"
+    }
+  },
+  {
+    "assay_method": "Methylation Array",
+    "data_category": "Methylation Data",
+    "data_type": "Methylation Intensity Values",
+    "assay_instrument_model": "Illumina Infinium HumanMethylation450K",
+    "data_format": "IDAT",
+    "assay_instrument": "Illumina",
+    "md5sum": "cc41670a472c4e91556f3c6ffc730089",
+    "file_size": 2,
+    "file_name": "Hct3XCiwtKCJ",
+    "type": "submitted_methylation",
+    "submitter_id": "submitted_methylation_0019",
+    "aliquots": {
+      "submitter_id": "aliquot_0011"
+    }
+  },
+  {
+    "assay_method": "Methylation Array",
+    "data_category": "Methylation Data",
+    "data_type": "Methylation Intensity Values",
+    "assay_instrument_model": "Illumina Infinium HumanMethylation450K",
+    "data_format": "IDAT",
+    "assay_instrument": "Illumina",
+    "md5sum": "b8a91198c363991677c0a87531ff24bd",
+    "file_size": 2,
+    "file_name": "3ARpx5fEFpfW",
+    "type": "submitted_methylation",
+    "submitter_id": "submitted_methylation_0020",
+    "aliquots": {
+      "submitter_id": "aliquot_008"
     }
   }
 ]

@@ -1,42 +1,232 @@
 [
   {
-    "measurement_technique": "ZAlngXWtyIGD",
-    "experiment_type": "g2RJsBYShtju",
-    "experiment_description": "MvK0SyXqCGR4",
+    "measurement_technique": "MvUXsuxLKfzb",
+    "experiment_type": "r5pcHjQcLrm1",
+    "experiment_description": "gVIQfV6xTu5t",
     "type": "experiment",
     "submitter_id": "experiment_001",
     "aliquots": {
-      "submitter_id": "aliquot_001"
+      "submitter_id": "aliquot_0015"
     }
   },
   {
-    "measurement_technique": "k69QlJ8CuABl",
-    "experiment_type": "WJ3G2Q229lZh",
-    "experiment_description": "HkwC9D5kmIn1",
+    "measurement_technique": "RpvB0elV8gJr",
+    "experiment_type": "jukvDu417bN2",
+    "experiment_description": "pMZouNiH6BSK",
     "type": "experiment",
     "submitter_id": "experiment_002",
+    "aliquots": {
+      "submitter_id": "aliquot_0012"
+    }
+  },
+  {
+    "measurement_technique": "hONzfXHAYnRy",
+    "experiment_type": "fJfmJPi6AAZW",
+    "experiment_description": "7h7gHoYsbaFa",
+    "type": "experiment",
+    "submitter_id": "experiment_003",
+    "aliquots": {
+      "submitter_id": "aliquot_0017"
+    }
+  },
+  {
+    "measurement_technique": "Ynyex5EYB1oa",
+    "experiment_type": "3bNO23hE2rbF",
+    "experiment_description": "5kj0UdLdlouF",
+    "type": "experiment",
+    "submitter_id": "experiment_004",
+    "aliquots": {
+      "submitter_id": "aliquot_006"
+    }
+  },
+  {
+    "measurement_technique": "L1Fsph7o7oyr",
+    "experiment_type": "QY5jH9oQg3YM",
+    "experiment_description": "G4h1lzMXssTr",
+    "type": "experiment",
+    "submitter_id": "experiment_005",
+    "aliquots": {
+      "submitter_id": "aliquot_0017"
+    }
+  },
+  {
+    "measurement_technique": "yPOWeWmKpUuv",
+    "experiment_type": "lXDhxh0SJ9cr",
+    "experiment_description": "9wSzX59QXZxV",
+    "type": "experiment",
+    "submitter_id": "experiment_006",
+    "aliquots": {
+      "submitter_id": "aliquot_008"
+    }
+  },
+  {
+    "measurement_technique": "br01jPdMswIH",
+    "experiment_type": "VXXaXMRbsjIf",
+    "experiment_description": "VwzgxtkF6NL9",
+    "type": "experiment",
+    "submitter_id": "experiment_007",
+    "aliquots": {
+      "submitter_id": "aliquot_0010"
+    }
+  },
+  {
+    "measurement_technique": "OilLm1ITwgWQ",
+    "experiment_type": "dx3va5KwCptN",
+    "experiment_description": "GvODR0fNlLsC",
+    "type": "experiment",
+    "submitter_id": "experiment_008",
+    "aliquots": {
+      "submitter_id": "aliquot_009"
+    }
+  },
+  {
+    "measurement_technique": "9jjcDyjxfnS5",
+    "experiment_type": "MUyqLW7F9Jmh",
+    "experiment_description": "VhxfzIf0LADt",
+    "type": "experiment",
+    "submitter_id": "experiment_009",
     "aliquots": {
       "submitter_id": "aliquot_002"
     }
   },
   {
-    "measurement_technique": "H0r7WdJ8yw2d",
-    "experiment_type": "uybOFdCl9rAM",
-    "experiment_description": "5YQOshPK0feQ",
+    "measurement_technique": "9zkWMxMzRvQL",
+    "experiment_type": "f2uip8svQl0A",
+    "experiment_description": "mkcNfITrx2id",
     "type": "experiment",
-    "submitter_id": "experiment_003",
+    "submitter_id": "experiment_0010",
+    "aliquots": {
+      "submitter_id": "aliquot_0017"
+    }
+  },
+  {
+    "measurement_technique": "MGpKLFkscvG3",
+    "experiment_type": "26ucQjildH9G",
+    "experiment_description": "dSXJDJVBclng",
+    "type": "experiment",
+    "submitter_id": "experiment_0011",
+    "aliquots": {
+      "submitter_id": "aliquot_0010"
+    }
+  },
+  {
+    "measurement_technique": "E6ilvraofrfT",
+    "experiment_type": "yK1drtGLeEDm",
+    "experiment_description": "kZmvXfBnFLuo",
+    "type": "experiment",
+    "submitter_id": "experiment_0012",
+    "aliquots": {
+      "submitter_id": "aliquot_0016"
+    }
+  },
+  {
+    "measurement_technique": "Izcx6cRpp5oR",
+    "experiment_type": "Pk92JEf8qU2s",
+    "experiment_description": "S0VmoAzQbBGA",
+    "type": "experiment",
+    "submitter_id": "experiment_0013",
+    "aliquots": {
+      "submitter_id": "aliquot_0016"
+    }
+  },
+  {
+    "measurement_technique": "Wjn6haRGt9nQ",
+    "experiment_type": "uuZgasxBgct5",
+    "experiment_description": "bbUfQImoFrcR",
+    "type": "experiment",
+    "submitter_id": "experiment_0014",
+    "aliquots": {
+      "submitter_id": "aliquot_0015"
+    }
+  },
+  {
+    "measurement_technique": "FbdlPrVnJ7Ks",
+    "experiment_type": "g2Jwt2DtpplN",
+    "experiment_description": "GwxItnjsg7kn",
+    "type": "experiment",
+    "submitter_id": "experiment_0015",
+    "aliquots": {
+      "submitter_id": "aliquot_009"
+    }
+  },
+  {
+    "measurement_technique": "Mcat7NhLNXIK",
+    "experiment_type": "FrtmMQT0KzH7",
+    "experiment_description": "bbw6dUsR7kP3",
+    "type": "experiment",
+    "submitter_id": "experiment_0016",
+    "aliquots": {
+      "submitter_id": "aliquot_0018"
+    }
+  },
+  {
+    "measurement_technique": "SKiX9PSndHzO",
+    "experiment_type": "0eAnzSdUz3Mw",
+    "experiment_description": "jiJTHZJjER82",
+    "type": "experiment",
+    "submitter_id": "experiment_0017",
+    "aliquots": {
+      "submitter_id": "aliquot_006"
+    }
+  },
+  {
+    "measurement_technique": "SjzC3Z38FhA1",
+    "experiment_type": "INYfXE7oMORt",
+    "experiment_description": "DVn5j2y1e6Mw",
+    "type": "experiment",
+    "submitter_id": "experiment_0018",
     "aliquots": {
       "submitter_id": "aliquot_003"
     }
   },
   {
-    "measurement_technique": "jsoWwnrhuLJV",
-    "experiment_type": "bItp3rlI3cjc",
-    "experiment_description": "9UFQ5KWLDnLH",
+    "measurement_technique": "32YWHzoAzJKi",
+    "experiment_type": "Mev1cGxli229",
+    "experiment_description": "b1soChtMznPn",
     "type": "experiment",
-    "submitter_id": "experiment_004",
+    "submitter_id": "experiment_0019",
     "aliquots": {
-      "submitter_id": "aliquot_004"
+      "submitter_id": "aliquot_007"
+    }
+  },
+  {
+    "measurement_technique": "adN1U4XqaN01",
+    "experiment_type": "tvEcBvIPHyRg",
+    "experiment_description": "By8x0S2UjxmK",
+    "type": "experiment",
+    "submitter_id": "experiment_0020",
+    "aliquots": {
+      "submitter_id": "aliquot_009"
+    }
+  },
+  {
+    "measurement_technique": "2FTiEGSoWCm2",
+    "experiment_type": "yHuTEo2Q0RbB",
+    "experiment_description": "aXlKaW9edbv2",
+    "type": "experiment",
+    "submitter_id": "experiment_0021",
+    "aliquots": {
+      "submitter_id": "aliquot_0017"
+    }
+  },
+  {
+    "measurement_technique": "pVwg9Th1PkKF",
+    "experiment_type": "6vM2OnViXFOs",
+    "experiment_description": "MKovzRTPjE2W",
+    "type": "experiment",
+    "submitter_id": "experiment_0022",
+    "aliquots": {
+      "submitter_id": "aliquot_006"
+    }
+  },
+  {
+    "measurement_technique": "udZSJodLepG6",
+    "experiment_type": "X9zstAAvRHTv",
+    "experiment_description": "6Uy4n9YNkO6H",
+    "type": "experiment",
+    "submitter_id": "experiment_0023",
+    "aliquots": {
+      "submitter_id": "aliquot_002"
     }
   }
 ]

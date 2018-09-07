@@ -1,16 +1,16 @@
 [
   {
     "caribbean_islander": "Not Caribbean island origin",
-    "rodent_age_at_index": 9.7823,
-    "gender": "not reported",
-    "year_of_birth": 10.918,
-    "sexual_orientation": "Don't know",
-    "human_age_at_index": 8.6559,
+    "rodent_age_at_index": 8.6561,
+    "gender": "unknown",
+    "year_of_birth": 11.7338,
+    "sexual_orientation": "Lesbian/Gay",
+    "human_age_at_index": 9.4807,
     "race": "Asian",
-    "country_of_birth": "oMmBEQfcd2Uk",
-    "vital_status": "Dead",
+    "country_of_birth": "uqQcMsf3D5mh",
+    "vital_status": "Alive",
     "ethnicity": "Other",
-    "year_of_death": 12.1409,
+    "year_of_death": 9.7303,
     "type": "demographic",
     "submitter_id": "demographic_001",
     "subjects": {
@@ -18,17 +18,17 @@
     }
   },
   {
-    "caribbean_islander": "Caribbean island origin",
-    "rodent_age_at_index": 10.8313,
+    "caribbean_islander": "Not Caribbean island origin",
+    "rodent_age_at_index": 4.3227,
     "gender": "unknown",
-    "year_of_birth": 10.8466,
-    "sexual_orientation": "Refusal",
-    "human_age_at_index": 12.6532,
-    "race": "Asian",
-    "country_of_birth": "V9IzHog3LpXo",
+    "year_of_birth": 12.8103,
+    "sexual_orientation": "Unknown",
+    "human_age_at_index": 12.8969,
+    "race": "Asian/Pacific Islander",
+    "country_of_birth": "PdFCzoYTIWtu",
     "vital_status": "Lost to Follow-up",
     "ethnicity": "Other",
-    "year_of_death": 11.861,
+    "year_of_death": 6.6617,
     "type": "demographic",
     "submitter_id": "demographic_002",
     "subjects": {
@@ -37,16 +37,16 @@
   },
   {
     "caribbean_islander": "Not Caribbean island origin",
-    "rodent_age_at_index": 13.984,
-    "gender": "female",
-    "year_of_birth": 14.3519,
-    "sexual_orientation": "Other",
-    "human_age_at_index": 6.5256,
+    "rodent_age_at_index": 8.8791,
+    "gender": "unspecified",
+    "year_of_birth": 8.3232,
+    "sexual_orientation": "Bisexual",
+    "human_age_at_index": 10.6794,
     "race": "White",
-    "country_of_birth": "5Kg0XTeoUjYX",
-    "vital_status": "Dead",
-    "ethnicity": "Other",
-    "year_of_death": 11.8537,
+    "country_of_birth": "Maj6uQK6yIwO",
+    "vital_status": "Unknown",
+    "ethnicity": "Hispanic or Latino",
+    "year_of_death": 5.7031,
     "type": "demographic",
     "submitter_id": "demographic_003",
     "subjects": {
@@ -55,20 +55,272 @@
   },
   {
     "caribbean_islander": "Caribbean island origin",
-    "rodent_age_at_index": 12.9004,
-    "gender": "unspecified",
-    "year_of_birth": 5.3066,
-    "sexual_orientation": "Refusal",
-    "human_age_at_index": 8.0947,
-    "race": "Unknown",
-    "country_of_birth": "FjAydVmLXhKV",
-    "vital_status": "Alive",
-    "ethnicity": "Other",
-    "year_of_death": 13.7566,
+    "rodent_age_at_index": 2.92,
+    "gender": "not reported",
+    "year_of_birth": 12.3743,
+    "sexual_orientation": "Heterosexual",
+    "human_age_at_index": 10.2426,
+    "race": "Other",
+    "country_of_birth": "buwddkRAb1iz",
+    "vital_status": "Dead",
+    "ethnicity": "Hispanic or Latino",
+    "year_of_death": 10.2806,
     "type": "demographic",
     "submitter_id": "demographic_004",
     "subjects": {
       "submitter_id": "subject_004"
+    }
+  },
+  {
+    "caribbean_islander": "Caribbean island origin",
+    "rodent_age_at_index": 13.8689,
+    "gender": "male",
+    "year_of_birth": 9.8571,
+    "sexual_orientation": "Heterosexual",
+    "human_age_at_index": 17.4817,
+    "race": "White",
+    "country_of_birth": "KF2KFk9loEsG",
+    "vital_status": "Lost to Follow-up",
+    "ethnicity": "Hispanic or Latino",
+    "year_of_death": 11.6967,
+    "type": "demographic",
+    "submitter_id": "demographic_005",
+    "subjects": {
+      "submitter_id": "subject_005"
+    }
+  },
+  {
+    "caribbean_islander": "Caribbean island origin",
+    "rodent_age_at_index": 10.4426,
+    "gender": "female",
+    "year_of_birth": 8.0046,
+    "sexual_orientation": "Bisexual",
+    "human_age_at_index": 15.5803,
+    "race": "White",
+    "country_of_birth": "CcDeVHfMSylw",
+    "vital_status": "Lost to Follow-up",
+    "ethnicity": "Other",
+    "year_of_death": 12.9904,
+    "type": "demographic",
+    "submitter_id": "demographic_006",
+    "subjects": {
+      "submitter_id": "subject_006"
+    }
+  },
+  {
+    "caribbean_islander": "Caribbean island origin",
+    "rodent_age_at_index": 9.3301,
+    "gender": "not reported",
+    "year_of_birth": 12.056,
+    "sexual_orientation": "Unknown",
+    "human_age_at_index": 12.2891,
+    "race": "Unknown",
+    "country_of_birth": "hvZ58rXHKbL1",
+    "vital_status": "Alive",
+    "ethnicity": "Other",
+    "year_of_death": 12.4659,
+    "type": "demographic",
+    "submitter_id": "demographic_007",
+    "subjects": {
+      "submitter_id": "subject_007"
+    }
+  },
+  {
+    "caribbean_islander": "Not Caribbean island origin",
+    "rodent_age_at_index": 2.0688,
+    "gender": "not reported",
+    "year_of_birth": 6.452,
+    "sexual_orientation": "Refusal",
+    "human_age_at_index": 11.684,
+    "race": "Unknown",
+    "country_of_birth": "M5oU10ICbCvu",
+    "vital_status": "Alive",
+    "ethnicity": "Hispanic or Latino",
+    "year_of_death": 14.7305,
+    "type": "demographic",
+    "submitter_id": "demographic_008",
+    "subjects": {
+      "submitter_id": "subject_008"
+    }
+  },
+  {
+    "caribbean_islander": "Not Caribbean island origin",
+    "rodent_age_at_index": 8.8877,
+    "gender": "male",
+    "year_of_birth": 9.7052,
+    "sexual_orientation": "Heterosexual",
+    "human_age_at_index": 8.3183,
+    "race": "Asian/Pacific Islander",
+    "country_of_birth": "fVh1zwCYnhge",
+    "vital_status": "Dead",
+    "ethnicity": "Not Hispanic or Latino",
+    "year_of_death": 6.2104,
+    "type": "demographic",
+    "submitter_id": "demographic_009",
+    "subjects": {
+      "submitter_id": "subject_009"
+    }
+  },
+  {
+    "caribbean_islander": "Not Caribbean island origin",
+    "rodent_age_at_index": 10.9478,
+    "gender": "female",
+    "year_of_birth": 10.6248,
+    "sexual_orientation": "Bisexual",
+    "human_age_at_index": 6.2531,
+    "race": "Asian/Pacific Islander",
+    "country_of_birth": "hB6peL3tUPBt",
+    "vital_status": "Dead",
+    "ethnicity": "Hispanic or Latino",
+    "year_of_death": 11.0142,
+    "type": "demographic",
+    "submitter_id": "demographic_0010",
+    "subjects": {
+      "submitter_id": "subject_0010"
+    }
+  },
+  {
+    "caribbean_islander": "Not Caribbean island origin",
+    "rodent_age_at_index": 8.782,
+    "gender": "unknown",
+    "year_of_birth": 8.406,
+    "sexual_orientation": "Unknown",
+    "human_age_at_index": 11.822,
+    "race": "Unknown",
+    "country_of_birth": "AhrpvT2qSPM5",
+    "vital_status": "Unknown",
+    "ethnicity": "Unknown",
+    "year_of_death": 12.0908,
+    "type": "demographic",
+    "submitter_id": "demographic_0011",
+    "subjects": {
+      "submitter_id": "subject_0011"
+    }
+  },
+  {
+    "caribbean_islander": "Not Caribbean island origin",
+    "rodent_age_at_index": 9.2262,
+    "gender": "male",
+    "year_of_birth": 8.9127,
+    "sexual_orientation": "Other",
+    "human_age_at_index": 9.8417,
+    "race": "Black",
+    "country_of_birth": "4N5XR5YYrwa6",
+    "vital_status": "Dead",
+    "ethnicity": "Not Hispanic or Latino",
+    "year_of_death": 18.4245,
+    "type": "demographic",
+    "submitter_id": "demographic_0012",
+    "subjects": {
+      "submitter_id": "subject_0012"
+    }
+  },
+  {
+    "caribbean_islander": "Not Caribbean island origin",
+    "rodent_age_at_index": 13.483,
+    "gender": "male",
+    "year_of_birth": 10.3487,
+    "sexual_orientation": "Lesbian/Gay",
+    "human_age_at_index": 7.4702,
+    "race": "Black",
+    "country_of_birth": "wQPC2Is3m8dP",
+    "vital_status": "Unknown",
+    "ethnicity": "Not Hispanic or Latino",
+    "year_of_death": 7.0559,
+    "type": "demographic",
+    "submitter_id": "demographic_0013",
+    "subjects": {
+      "submitter_id": "subject_0013"
+    }
+  },
+  {
+    "caribbean_islander": "Caribbean island origin",
+    "rodent_age_at_index": 8.3338,
+    "gender": "female",
+    "year_of_birth": 3.8442,
+    "sexual_orientation": "Heterosexual",
+    "human_age_at_index": 8.5452,
+    "race": "Unknown",
+    "country_of_birth": "2LATrrmjS1nT",
+    "vital_status": "Alive",
+    "ethnicity": "Unknown",
+    "year_of_death": 8.9518,
+    "type": "demographic",
+    "submitter_id": "demographic_0014",
+    "subjects": {
+      "submitter_id": "subject_0014"
+    }
+  },
+  {
+    "caribbean_islander": "Not Caribbean island origin",
+    "rodent_age_at_index": 10.7255,
+    "gender": "male",
+    "year_of_birth": 5.0931,
+    "sexual_orientation": "Heterosexual",
+    "human_age_at_index": 14.3621,
+    "race": "Other",
+    "country_of_birth": "w8x4V3QadDqS",
+    "vital_status": "Unknown",
+    "ethnicity": "Hispanic or Latino",
+    "year_of_death": 12.3074,
+    "type": "demographic",
+    "submitter_id": "demographic_0015",
+    "subjects": {
+      "submitter_id": "subject_0015"
+    }
+  },
+  {
+    "caribbean_islander": "Caribbean island origin",
+    "rodent_age_at_index": 5.5881,
+    "gender": "unknown",
+    "year_of_birth": 9.3051,
+    "sexual_orientation": "Heterosexual",
+    "human_age_at_index": 10.2457,
+    "race": "Unknown",
+    "country_of_birth": "32trvpd9xixg",
+    "vital_status": "Dead",
+    "ethnicity": "Hispanic or Latino",
+    "year_of_death": 11.8832,
+    "type": "demographic",
+    "submitter_id": "demographic_0016",
+    "subjects": {
+      "submitter_id": "subject_0016"
+    }
+  },
+  {
+    "caribbean_islander": "Not Caribbean island origin",
+    "rodent_age_at_index": 4.6275,
+    "gender": "unknown",
+    "year_of_birth": 7.0039,
+    "sexual_orientation": "Unknown",
+    "human_age_at_index": 14.135,
+    "race": "Other",
+    "country_of_birth": "HRkHDYBVdqQr",
+    "vital_status": "Unknown",
+    "ethnicity": "Other",
+    "year_of_death": 13.979,
+    "type": "demographic",
+    "submitter_id": "demographic_0017",
+    "subjects": {
+      "submitter_id": "subject_0017"
+    }
+  },
+  {
+    "caribbean_islander": "Not Caribbean island origin",
+    "rodent_age_at_index": 10.6609,
+    "gender": "unknown",
+    "year_of_birth": 9.6956,
+    "sexual_orientation": "Other",
+    "human_age_at_index": 11.7871,
+    "race": "Unknown",
+    "country_of_birth": "nRYJp79ytMRI",
+    "vital_status": "Unknown",
+    "ethnicity": "Other",
+    "year_of_death": 13.9207,
+    "type": "demographic",
+    "submitter_id": "demographic_0018",
+    "subjects": {
+      "submitter_id": "subject_0018"
     }
   }
 ]
