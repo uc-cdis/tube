@@ -25,7 +25,7 @@ def main():
     sql_to_hdfs = SqlToHDFS(config, BaseFormatter())
     stream = sql_to_hdfs.generate_import_all_tables()
     for line in stream:
-        print(line)
+        print(line.rstrip())
 
 
 if __name__ == '__main__':
