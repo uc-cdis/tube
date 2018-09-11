@@ -30,6 +30,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libffi-dev \
     # dependency for cryptography
     libssl-dev \
+    vim \
     && rm -rf /var/lib/apt/lists/*
 
 #RUN pip install pip==9.0.3
