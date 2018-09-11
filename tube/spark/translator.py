@@ -57,7 +57,7 @@ def swap_key_value(df):
 
 
 def get_fields(fields):
-    return lambda x: {k: v for (k, v) in x.items() if k in fields}
+    return lambda x: {k: x[k] if k in x.keys() else None for k in fields}
 
 
 def get_fields_empty_values(fields):
