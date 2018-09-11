@@ -45,8 +45,6 @@ before_script:
       "db_database": "metadata_db"
     }
     ' > configs/creds.json
-  - sed -i "s/'3.7'/'2'/g" docker-compose.yml
-  - sed -i "s/tube:feat_parser/tube:feat_dockerfile/g" docker-compose.yml
   - sudo sysctl -w vm.max_map_count=262144
   - docker-compose -f docker-compose.yml -f elasticsearch.yml up -d spark elasticsearch
   - sleep 60
