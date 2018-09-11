@@ -26,9 +26,13 @@ class ESWriter(SparkBase):
         item = df.first()
         json_data = item[1]
         string_fields = []
+        # tuple of Python types that needs to be "keyword" in Elasticsearch
+        keyword_types = (basestring,  # for string and "basestring" subclasses
+                         type(None),  # "None" values
+                         tuple, list, dict, set  # all container type
+                         )
         for key, value in json_data.items():
-            # 'None' and string values will be of type "keyword" in Elasticsearch
-            if isinstance(value, basestring) or isinstance(value, type(None)):
+            if isinstance(value, keyword_types):
                 string_fields.append(key)
 
         return string_fields
