@@ -31,8 +31,10 @@ install:
   - sudo service postgresql restart 9.6
 
 before_script:
+  - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+  - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
+  - git clone https://github.com/uc-cdis/compose-es.git --branch master --single-branch
   - git clone https://github.com/uc-cdis/compose-etl.git --branch master --single-branch
-  - cp elasticsearch/docker-compose.yml compose-etl/elasticsearch.yml
   - cp -f tests/gen3/tube/etlMapping.yaml compose-etl/configs/etlMapping.yaml
   - cd compose-etl
   - export HOST_IP_ADDRESS="$(ip -f inet -o addr show docker0 | cut -d\  -f 7 | cut -d/ -f 1)"
@@ -45,12 +47,13 @@ before_script:
       "db_database": "metadata_db"
     }
     ' > configs/creds.json
+  - sed -i "s/tube:master/tube:${BRANCH//\//_}/g" docker-compose.yml
   - sudo sysctl -w vm.max_map_count=262144
-  - docker-compose -f docker-compose.yml -f elasticsearch.yml up -d spark elasticsearch
+  - docker-compose -f docker-compose.yml -f ../compose-es/docker-compose.yml up -d spark elasticsearch
   - sleep 60
-  - docker-compose -f docker-compose.yml -f elasticsearch.yml logs
-  - docker-compose -f docker-compose.yml -f elasticsearch.yml run tube bash -c "python run_config.py; python run_import.py"
-  - docker-compose -f docker-compose.yml -f elasticsearch.yml run tube bash -c "python run_config.py; python run_spark.py"
+  - docker-compose -f docker-compose.yml -f ../compose-es/docker-compose.yml logs
+  - docker-compose -f docker-compose.yml -f ../compose-es/docker-compose.yml run tube bash -c "python run_config.py; python run_import.py"
+  - docker-compose -f docker-compose.yml -f ../compose-es/docker-compose.yml run tube bash -c "python run_config.py; python run_spark.py"
   - cd -
   - export XDG_DATA_HOME="$HOME/.local/share"
   - export ES_URL="localhost"
