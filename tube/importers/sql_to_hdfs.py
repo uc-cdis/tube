@@ -19,6 +19,23 @@ class SqlToHDFS(object):
         return tables
 
     @classmethod
+    def import_all_tables_from_sql(cls, jdbc, username, password, output_dir, m):
+        execs = [
+            'sqoop', 'import-all-tables',
+            '--direct', '--connect', jdbc,
+            '--username', username,
+            '--password', password,
+            '--m', '{}'.format(m),
+            '--warehouse-dir', output_dir,
+            '--outdir', 'temp',
+            '--enclosed-by', '"',
+            '--exclude-tables', 'transaction_documents,transaction_logs,transaction_snapshots,_voided_edges,_voided_nodes',
+            '--map-column-java', '_props=String,acl=String,_sysan=String'
+        ]
+        sp = subprocess.Popen(execs, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        return sp
+
+    @classmethod
     def import_table_from_sql(cls, tb, jdbc, username, password, output_dir, m):
         optional_fields = 'node_id=String,' if tb.startswith('node_') else 'src_id=String,dst_id=String,'
         execs = [
@@ -37,6 +54,22 @@ class SqlToHDFS(object):
         return sp
 
     def generate_import_all_tables(self):
+        config = get_sql_to_hdfs_config(self.config.__dict__)
+        output = make_sure_hdfs_path_exist(config['output'])
+
+        sp = SqlToHDFS.import_all_tables_from_sql(
+                config['input']['jdbc'],
+                config['input']['username'],
+                config['input']['password'],
+                output, self.config.PARALLEL_JOBS
+            )
+
+        line = sp.stdout.readline()
+        while line != '':
+            yield self.formatter.format_line(line)
+            line = sp.stdout.readline()
+
+    def generate_import_all_tables_gradually(self):
         config = get_sql_to_hdfs_config(self.config.__dict__)
         tables = self.get_all_tables()
         output = make_sure_hdfs_path_exist(config['output'])
