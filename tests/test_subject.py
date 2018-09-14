@@ -1,6 +1,7 @@
 import itertools
 import json
 import os
+from itertools import chain
 from operator import itemgetter
 
 import psycopg2
@@ -207,7 +208,7 @@ def get_path_by_name(p, name):
             if filtered:
                 filtered[0]["fn"] = "_get"
                 return filtered[0]
-            
+
         if k == "_props":
             filtered = filter(lambda i: name == i, v)
             if filtered:
@@ -215,9 +216,19 @@ def get_path_by_name(p, name):
     return None
 
 
-def get_from_elasticsearch():
+def get_all_from_elasticsearch():
     es = Elasticsearch([{"host": config.ES["es.nodes"], "port": config.ES["es.port"]}])
     s = Search(using=es, index="etl")
+    total = s.count()
+    s = s[0:total]
+    results = s.execute()
+    return results
+
+
+def get_subject_from_elasticsearch(subject):
+    es = Elasticsearch([{"host": config.ES["es.nodes"], "port": config.ES["es.port"]}])
+    s = Search(using=es, index="etl") \
+        .query("match", submitter_id=subject)
     total = s.count()
     s = s[0:total]
     results = s.execute()
@@ -229,30 +240,50 @@ def order_table_list(table_list):
     return table_list
 
 
-# @pytest.mark.parametrize("path", paths)
-def test_get_list_from_path(init_parser):
+def get_names(p):
+    mapping = p.mapping
+
+    root = mapping.keys()[0]
+
+    names = []
+
+    for k, v in mapping[root].items():
+        if k == "_aggregated_props":
+            names.extend([i["name"] for i in v])
+
+        if k == "_flatten_props":
+            names.extend(chain(*[i["_props"] for i in v]))
+
+        if k == "_props":
+            names.extend(v)
+
+    return names
+
+
+@pytest.mark.parametrize("subject", [v["submitter_id"] for v in items_in_file("subject")[1]])
+@pytest.mark.parametrize("name", get_names(init_parser()))
+def test_get_list_from_path(init_parser, subject, name):
     p = init_parser
 
-    results = get_from_elasticsearch()
+    results = get_subject_from_elasticsearch(subject)
 
-    for i in results:
-        for j in i:
-            name = j
-            value = i[j]
-            print("name: {}".format(name))
-            print("value: {}".format(value))
+    assert len(results) == 1
 
-            path = get_path_by_name(p, name)
-            if not path:
-                continue
-            fn = path["fn"]
+    result = results[0]
 
-            table_list = get_table_list_from_path(p, "subject", path["path"])
-            table_list_in_order = order_table_list(table_list)
+    if name in result:
+        value = result.__getattr__(name)
+    else:
+        value = None
 
-            sql = generate_sql_from_table_list(table_list_in_order, fn, name, i.submitter_id)
-            val = execute_sql_query(sql)
+    path = get_path_by_name(p, name)
 
-            print("db value: {}".format(val))
+    fn = path["fn"]
 
-            assert i.__getattr__(name) == val
+    table_list = get_table_list_from_path(p, "subject", path["path"])
+    table_list_in_order = order_table_list(table_list)
+
+    sql = generate_sql_from_table_list(table_list_in_order, fn, name, subject)
+    val = execute_sql_query(sql)
+
+    assert value == val
