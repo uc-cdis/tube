@@ -1,85 +1,11 @@
-import ast
-import json
 import os
-
 from tube.utils import make_sure_hdfs_path_exist
-
-
-def extract_metadata(str_value):
-    str_value = str_value.replace("'", "##")
-    str_value = str_value.replace('\\""', "##")
-    strs = ast.literal_eval(str_value.replace('""', "'"))
-    props = json.loads(strs[3].replace("'", '"').replace("##", "'"))
-    return tuple([strs[4], props])
-
-
-def extract_link(str_value):
-    strs = ast.literal_eval(str_value)
-    return (strs[5], strs[4])
-
-
-def flatten_files_to_lists(pair):
-    f, text = pair
-    return [line for line in text.splitlines()]
-
-
-def get_aggregation_func_by_name(func_name, is_merging=False):
-    if func_name == 'count':
-        if is_merging:
-            return lambda x, y: x + y
-        return lambda x, y: x + 1
-    if func_name == 'sum':
-        return lambda x, y: x + y
-
-
-def seq_aggregate_with_reducer(x, y):
-    res = []
-    for i in range(0, len(x)):
-        res.append((x[i][0], x[i][1], get_aggregation_func_by_name(x[i][0])(x[i][2], y[i][2])))
-    return tuple(res)
-
-
-def merge_aggregate_with_reducer(x, y):
-    res = []
-    for i in range(0, len(x)):
-        res.append((x[i][0], x[i][1], get_aggregation_func_by_name(x[i][0], True)(x[i][2], y[i][2])))
-    return tuple(res)
-
-
-def intermediate_frame(output_name):
-    return lambda x: (('sum', output_name, x),)
-
-
-def intermediate_zero_frame(output_name):
-    return lambda x: (('sum', output_name, 0),)
-
-
-def swap_key_value(df):
-    return df.map(lambda x: (x[1], x[0]))
-
-
-def get_fields(fields):
-    return lambda x: {k: x[k] if k in x.keys() else None for k in fields}
-
-
-def get_fields_empty_values(fields):
-    return {k: None for k in fields}
-
-
-def merge_dictionary(d1, d2):
-    d0 = d1.copy()
-    d0.update(d2)
-    return d0
-
-
-def merge_and_fill_empty_fields(item, fields):
-    if item[1] is None and item[0] is None:
-        return {}
-    if item[0] is None:
-        return item[1]
-    if item[1] is None:
-        return merge_dictionary(item[0], get_fields_empty_values(fields))
-    return merge_dictionary(item[0], item[1])
+from .base.lambdas import extract_metadata, extract_link, \
+    flatten_files_to_lists, merge_dictionary, merge_and_fill_empty_fields, \
+    swap_key_value, get_fields, get_fields_empty_values
+from .aggregator.lambdas import intermediate_frame, merge_aggregate_with_reducer, \
+    seq_aggregate_with_reducer
+from .collector.nodes.collecting_node import LeafNode
 
 
 class Gen3Translator(object):
@@ -162,6 +88,58 @@ class Gen3Translator(object):
             child_df = reversed_df.join(child_df).map(lambda x: tuple([x[1][0], x[1][1]]))
             root_df = root_df.leftOuterJoin(child_df).mapValues(lambda x: merge_and_fill_empty_fields(x, n.fields))
         return root_df
+
+    def collect_child(self, child, edge_df, collected_dfs):
+        if edge_df.isEmpty():
+            child.is_empty = True
+            return
+        child_df = collected_dfs[child.name] if child.name in collected_dfs else \
+            self.translate_table(child.tbl_name,
+                                 self.parser.common_targeting_fields
+                                 if type(child) is LeafNode
+                                 else [])
+        child_df = child_df.leftOuterJoin(edge_df)
+        child.no_parent_to_map -= 1
+        if child.no_parent_to_map == 0:
+            child.done = True
+        if child.name not in collected_dfs:
+            collected_dfs[child.name] = child_df
+
+    def merge_roots_to_children(self):
+        collected_dfs = {}
+        for root in self.parser.roots:
+            df = self.translate_table(root.tbl_name)
+            for child in root.children:
+                edge_df = df.rightOuterJoin(self.translate_edge(child.edge_up_tbl))\
+                    .map(lambda x: (x[1][1], ({'{}_id'.format(root.name): x[0]},) + x[1][0]))\
+                    .mapValues(lambda x: merge_and_fill_empty_fields(x, []))
+                self.collect_child(child, edge_df, collected_dfs)
+        return collected_dfs
+
+    def merge_collectors(self, collected_dfs):
+        for collector in self.parser.collectors:
+            if collector.no_parent_to_map == 0:
+                df = collected_dfs[collector.name]
+                for child in collector.children:
+                    edge_df = df.rightOuterJoin(self.translate_edge(child.edge_up_tbl)) \
+                        .map(lambda x: (x[1][1], x[1][0]))
+                    self.collect_child(child, edge_df, collected_dfs)
+
+    def get_leaves(self, collected_dfs):
+        for leaf in self.parser.leaves:
+            if not leaf.done:
+                for parent in leaf.parents:
+                    if parent.name not in collected_dfs.keys():
+                        continue
+                    df = collected_dfs[parent.name]
+                    edge_df = df.rightOuterJoin(self.translate_edge(leaf.edge_up_tbl))\
+                        .map(lambda x: (x[1][1], x[1][0]))
+                    self.collect_child(leaf, edge_df, collected_dfs)
+
+    def collect_files(self):
+        collected_dfs = self.merge_roots_to_children()
+        self.merge_collectors(collected_dfs)
+        self.get_leaves(collected_dfs)
 
     def run_etl(self):
         root_df = self.translate_table(self.parser.root_table, fields=self.parser.root_fields)

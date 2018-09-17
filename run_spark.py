@@ -2,8 +2,9 @@ import argparse
 import tube.settings as config
 
 from tube.spark import make_spark_context
-from tube.spark.translator import Gen3Translator
-from tube.spark.parsing.parser import Parser
+from tube.spark.indexers.translator import Gen3Translator
+from tube.spark.indexers.aggregator.parser import Parser
+from tube.spark.indexers.collector.parser import Parser as CollectingParser
 from tube.spark.es_writer import ESWriter
 
 
@@ -25,14 +26,14 @@ def main():
 
     config.RUNNING_MODE = args.config
 
-    parser = Parser(config.MAPPING_FILE, config.DICTIONARY_URL)
+    parser = CollectingParser(config.MAPPING_FILE, config.DICTIONARY_URL)
 
-    sc = make_spark_context(config)
-    writer = ESWriter(sc, config)
-    etl = Gen3Translator(sc, parser, writer, config)
-    etl.run_etl()
-
-    sc.stop()
+    # sc = make_spark_context(config)
+    # writer = ESWriter(sc, config)
+    # etl = Gen3Translator(sc, parser, writer, config)
+    # etl.run_etl()
+    #
+    # sc.stop()
 
 
 if __name__ == '__main__':

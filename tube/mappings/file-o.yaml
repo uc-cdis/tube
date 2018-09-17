@@ -1,0 +1,39 @@
+file:
+  _collecting_props:
+    _common_targeting_props:
+      - object_id
+      - md5sum
+      - file_name
+      - file_size
+      - file_state
+    _common_aggregating_props:
+      subject:
+        _props:
+          - id
+    _target_nodes:
+      - name: mutation_panel
+        path: subjects
+      - name: bgm_simulation
+        path: mutation_panels.subjects
+      - name: mrna_microarray
+        path: aliquots.samples.subjects
+      - name: mirna_microarray
+        path: aliquots.samples.subjects
+      - name: lipid_mass_spectrometry
+        path: aliquots.samples.subjects
+      - name: protein_mass_spectrometry
+        path: aliquots.samples.subjects
+      - name: metabolite_mass_spectrometry
+        path: aliquots.samples.subjects
+      - name: submitted_copy_number
+        path: aliquots.samples.subjects
+      - name: submitted_methylation
+        path: aliquots.samples.subjects
+      - name: submitted_aligned_reads
+        path: read_groups.aliquots.samples.subjects
+      - name: submitted_unaligned_reads
+        path: read_groups.aliquots.samples.subjects
+      - name: submitted_genomic_profile
+        path: read_groups.aliquots.samples.subjects
+      - name: submitted_somatic_mutation
+        path: read_groups.aliquots.samples.subjects

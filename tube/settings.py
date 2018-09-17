@@ -14,10 +14,10 @@ LIST_TABLES_FILES = 'tables.txt'
 #    and setup $XDG_DATA_HOME/.local/share/gen3/tube/creds.json
 #
 conf_data = load_json('creds.json', 'tube')
-DB_HOST = conf_data.get( 'db_host', 'localhost' )
-DB_DATABASE = conf_data.get( 'db_database', 'gdcdb' )
-DB_USERNAME = conf_data.get( 'db_username', 'peregrine' )
-DB_PASSWORD = conf_data.get( 'db_password', 'unknown' )
+DB_HOST = conf_data.get('db_host', 'localhost')
+DB_DATABASE = conf_data.get('db_database', 'gdcdb')
+DB_USERNAME = conf_data.get('db_username', 'peregrine')
+DB_PASSWORD = conf_data.get('db_password', 'unknown')
 JDBC = 'jdbc:postgresql://{}/{}'.format(DB_HOST, DB_DATABASE)
 PYDBC = 'postgresql://{}:{}@{}:5432/{}'.format(DB_USERNAME, DB_PASSWORD, DB_HOST, DB_DATABASE)
 DICTIONARY_URL = os.getenv('DICTIONARY_URL', 'https://s3.amazonaws.com/dictionary-artifacts/datadictionary/develop/schema.json')
@@ -41,7 +41,7 @@ ES = {
 }
 
 if 'null' == ES['es.resource']:
-  raise Exception('ES_INDEX_NAME environment not defined')
+    raise Exception('ES_INDEX_NAME environment not defined')
 
 HADOOP_HOME = os.getenv('HADOOP_HOME', '/usr/local/Cellar/hadoop/3.1.0/libexec/')
 JAVA_HOME = os.getenv('JAVA_HOME', '/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home')
@@ -50,6 +50,7 @@ ES_HADOOP_VERSION = os.getenv("ES_HADOOP_VERSION", "")
 ES_HADOOP_HOME_BIN = '{}/elasticsearch-hadoop-{}'.format(os.getenv("ES_HADOOP_HOME", ""), os.getenv("ES_HADOOP_VERSION", ""))
 HADOOP_HOST = os.getenv("HADOOP_HOST", "spark-service")
 # Searches same folders as load_json above
-MAPPING_FILE = find_paths("etlMapping.yaml", 'tube')[0]
-SPARK_MASTER = os.getenv('SPARK_MASTER', 'local[1]') #'spark-service') 
+
+MAPPING_FILE = 'tube/mappings/file-o.yaml'  # find_paths("etlMapping.yaml", 'tube')[0]
+SPARK_MASTER = os.getenv('SPARK_MASTER', 'local[1]')  # 'spark-service'
 APP_NAME = 'Gen3 ETL'

@@ -1,9 +1,7 @@
 import yaml
-
-from tube.utils import init_dictionary, get_edge_table, object_to_string, get_child_table, get_node_table_name, \
-    get_properties_types, get_attribute_from_path, select_widest_types, get_multiplicity
-from .aggregated_node import AggregatedNode, Reducer
-from .direct_node import DirectNode
+from tube.utils import init_dictionary, get_edge_table, object_to_string, get_child_table, get_node_table_name, get_node_label
+from tube.spark.indexers.aggregator.nodes.aggregated_node import AggregatedNode, Reducer
+from tube.spark.indexers.aggregator.nodes.direct_node import DirectNode
 
 
 class Path(object):
@@ -43,34 +41,35 @@ class Parser(object):
         self.root = list(self.mapping.keys())[0]
         self.dictionary, self.models = init_dictionary(url)
         self.aggregated_nodes = []
-        self.flatten_props = self.get_direct_children()
+        self.flatten_props = self.get_direct_children() if '_flatten_props' in self.mapping[self.root] else []
         self.props = []
         self.root_table = get_node_table_name(self.models, self.root)
         self.root_fields = self.mapping[self.root]['_props']
-        self.load_parser_from_dict()
         self.types = self.get_types()
+        if '_aggregated_props' in self.mapping[self.root]:
+            self.get_aggregation_nodes()
         print(self.aggregated_nodes)
 
-    def load_parser_from_dict(self):
+    def get_aggregation_nodes(self):
         flat_paths = self.create_paths()
         list_nodes, leaves = self.construct_reversed_parsing_tree(flat_paths)
 
         self.aggregated_nodes = [l for l in list_nodes if l not in leaves]
 
         for p in self.aggregated_nodes:
-            p.non_leaf_children_count = self.non_leaves_count(p.children, leaves)
+            p.non_leaf_children_count = Parser.non_leaves_count(p.children, leaves)
         print(self.aggregated_nodes)
         self.aggregated_nodes.sort()
 
-    def construct_reversed_parsing_tree(self, flat_paths):
-        """
-        Construct the parsing tree that have the path to the parent node.
-        The tree constructed from the set of flat paths.
-        For every flat_path, this function parses though all the edges and creates a node of ()
-        Args:
-            - flat_paths: set of aggregation paths in the output document.
+    """
+    Construct the parsing tree that have the path to the parent node.
+    The tree constructed from the set of flat paths.
+    For every flat_path, this function parses though all the edges and creates a node of ()
+    Args:
+        - flat_paths: set of aggregation paths in the output document.
 
-        """
+    """
+    def construct_reversed_parsing_tree(self, flat_paths):
         reversed_index = {}
         list_nodes = []
         for path in flat_paths:
@@ -104,15 +103,17 @@ class Parser(object):
                 current_parent_edge = edge_tbl
                 level += 1
 
-        return list_nodes, self.get_leaves(list_nodes)
+        return list_nodes, Parser.get_leaves(list_nodes)
 
-    def get_leaves(self, list_paths):
+    @classmethod
+    def get_leaves(cls, list_paths):
         leaves = set([])
         for l in list_paths:
             if len(l.children) == 0:
                 leaves.add(l)
         return leaves
 
+    @classmethod
     def non_leaves_count(self, set_to_count, leaves):
         count = 0
         for n in set_to_count:

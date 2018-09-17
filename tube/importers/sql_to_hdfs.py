@@ -74,30 +74,21 @@ class SqlToHDFS(object):
         tables = self.get_all_tables()
         output = make_sure_hdfs_path_exist(config['output'])
 
-        sp = SqlToHDFS.import_all_tables_from_sql(
+        for tb in tables:
+            if not tb.startswith('node') and not tb.startswith('edge'):
+                continue
+            yield self.formatter.format_line(tb)
+            sp = SqlToHDFS.import_table_from_sql(
+                tb,
                 config['input']['jdbc'],
                 config['input']['username'],
                 config['input']['password'],
                 output, self.config.PARALLEL_JOBS
             )
 
-        return sp
-
-        # for tb in tables:
-        #     if not tb.startswith('node') and not tb.startswith('edge'):
-        #         continue
-        #     yield self.formatter.format_line(tb)
-        #     sp = SqlToHDFS.import_table_from_sql(
-        #         tb,
-        #         config['input']['jdbc'],
-        #         config['input']['username'],
-        #         config['input']['password'],
-        #         output, self.config.PARALLEL_JOBS
-        #     )
-        #
-        #     line = sp.stdout.readline()
-        #     while line != '':
-        #         yield self.formatter.format_line(line)
-        #         line = sp.stdout.readline()
-        #         if line == '':
-        #             line = sp.stderr.readline()
+            line = sp.stdout.readline()
+            while line != '':
+                yield self.formatter.format_line(line)
+                line = sp.stdout.readline()
+                if line == '':
+                    line = sp.stderr.readline()
