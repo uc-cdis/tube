@@ -6,6 +6,7 @@ from tube.utils import make_sure_hdfs_path_exist
 
 def extract_metadata(str_value):
     str_value = str_value.replace("'", "##")
+    str_value = str_value.replace('\\""', "##")
     strs = ast.literal_eval(str_value.replace('""', "'"))
     props = json.loads(strs[3].replace("'", '"').replace("##", "'"))
     return tuple([strs[4], props])
