@@ -51,6 +51,6 @@ ES_HADOOP_HOME_BIN = '{}/elasticsearch-hadoop-{}'.format(os.getenv("ES_HADOOP_HO
 HADOOP_HOST = os.getenv("HADOOP_HOST", "spark-service")
 # Searches same folders as load_json above
 
-MAPPING_FILE = 'tube/mappings/file-o.yaml'  # find_paths("etlMapping.yaml", 'tube')[0]
+MAPPING_FILE = 'tube/mappings/etl.yaml'  # find_paths("etlMapping.yaml", 'tube')[0]
 SPARK_MASTER = os.getenv('SPARK_MASTER', 'local[1]')  # 'spark-service'
 APP_NAME = 'Gen3 ETL'

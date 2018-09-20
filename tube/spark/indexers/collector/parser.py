@@ -1,7 +1,7 @@
-import yaml
-from tube.utils import init_dictionary, get_edge_table, \
-    object_to_string, get_node_table_name, get_node_label, get_parent_name, get_parent_label
+from tube.utils import get_edge_table, get_node_table_name, get_node_label, get_parent_name, get_parent_label, \
+    get_properties_types, object_to_string, select_widest_types, select_widest_type
 from tube.spark.indexers.collector.nodes.collecting_node import CollectingNode, RootNode, LeafNode
+from ..base.parser import Parser as BaseParser
 
 
 class Path(object):
@@ -30,17 +30,29 @@ class Path(object):
         return self.__key__() == other.__key__()
 
 
-class Parser(object):
-    def __init__(self, file_path, url):
-        stream = open(file_path)
-        self.mapping = yaml.load(stream)
-        self.root = list(self.mapping.keys())[0]
-        self.dictionary, self.models = init_dictionary(url)
-        self.common_targeting_fields = self.mapping[self.root]['_collecting_props']['_common_targeting_props']
+class Parser(BaseParser):
+    def __init__(self, mapping, model):
+        super(Parser, self).__init__(mapping, model)
+        self.props = self.mapping['_props']
+        self.final_fields = self.props
+        self.final_types = self.get_props_types()
+
         self.leaves = set([])
         self.collectors = []
-        self.roots = {}
+        self.roots = set([])
         self.get_collecting_nodes()
+        self.types = self.get_types()
+
+    def get_props_types(self):
+        types = {}
+        for k, v in self.mapping.items():
+            if k == '_target_nodes' and len(v) > 0:
+                a = get_properties_types(self.model, v[0]['name'])
+                for j in self.mapping['_props']:
+                    types[j] = a[j]
+
+        types = select_widest_types(types)
+        return types
 
     def get_collecting_nodes(self):
         flat_paths = self.create_collecting_paths()
@@ -48,19 +60,11 @@ class Parser(object):
         self.update_level()
         self.collectors.sort()
 
-        print(self.leaves)
-        print('Collecting')
-        for v in self.collectors:
-            print(str(v))
-        print('Root')
-        for (k, v) in self.roots.items():
-            print(str(v))
-
     def update_level(self):
         level = 1
         assigned_levels = set([])
         just_assigned = set([])
-        for root in self.roots.values():
+        for root in self.roots:
             for child in root.children:
                 if type(child) is LeafNode or child in just_assigned:
                     continue
@@ -83,20 +87,34 @@ class Parser(object):
             assigned_levels = assigned_levels.union(new_assigned)
             level += 1
 
+    def update_final_fields(self, root_name):
+        for f in self.mapping['_injecting_props'][root_name]['_props']:
+            if f == 'id':
+                f_type = str
+                f_field_name = '{}_{}'.format(root_name, f)
+            else:
+                f_type = select_widest_type(get_properties_types(self.model, root_name))
+                f_field_name = f
+            self.final_fields.append(f_field_name)
+            self.final_types[f_field_name] = f_type
+
     def add_root_node(self, child, roots, segment):
-        root_name = get_node_label(self.models, get_parent_name(self.models, child.name, segment))
-        root_tbl_name = get_node_table_name(self.models, get_parent_label(self.models, child.name, segment))
+        root_name = get_node_label(self.model, get_parent_name(self.model, child.name, segment))
+        root_tbl_name = get_node_table_name(self.model, get_parent_label(self.model, child.name, segment))
         top_node = roots[root_name] if root_name in roots \
             else RootNode(root_name, root_tbl_name,
-                          self.mapping[self.root]['_collecting_props']['_common_aggregating_props'][root_name]['_props']
+                          self.mapping['_injecting_props'][root_name]['_props']
                           )
         child.add_parent(top_node)
         top_node.add_child(child)
+        if root_name not in roots:
+            self.update_final_fields(root_name)
+
         roots[root_name] = top_node
 
     def add_collecting_node(self, child, collectors, fst, snd):
-        parent_name = get_node_label(self.models, get_parent_name(self.models, child.name, fst))
-        _, edge_up_tbl = get_edge_table(self.models, parent_name, snd)
+        parent_name = get_node_label(self.model, get_parent_name(self.model, child.name, fst))
+        _, edge_up_tbl = get_edge_table(self.model, parent_name, snd)
         collecting_node = collectors[parent_name] if parent_name in collectors \
             else CollectingNode(parent_name, edge_up_tbl)
         collecting_node.add_child(child)
@@ -105,8 +123,8 @@ class Parser(object):
         return collecting_node
 
     def add_leaf_node(self, name, leaves, segment):
-        leaf_tbl_name = get_node_table_name(self.models, name)
-        edge_up_tbl = get_edge_table(self.models, name, segment)
+        leaf_tbl_name = get_node_table_name(self.model, name)
+        _, edge_up_tbl = get_edge_table(self.model, name, segment)
         leaf_node = LeafNode(name, leaf_tbl_name, edge_up_tbl)
         leaves.add(leaf_node)
         return leaf_node
@@ -124,12 +142,15 @@ class Parser(object):
                 for fst, snd in looping_list:
                     child = self.add_collecting_node(child, collectors, fst, snd)
             self.add_root_node(child, roots, segments[-1])
-        return leaves, collectors.values(), roots
+        return leaves, collectors.values(), roots.values()
 
     def create_collecting_paths(self):
         flat_paths = set()
-        target_nodes = self.mapping[self.root]['_collecting_props']['_target_nodes']
+        target_nodes = self.mapping['_target_nodes']
         for n in target_nodes:
             path = Path(n['name'], n['path'], None)
             flat_paths.add(path)
         return flat_paths
+
+    def get_types(self):
+        return self.final_types

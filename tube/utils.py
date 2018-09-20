@@ -123,18 +123,21 @@ def object_to_string(obj):
 
 def select_widest_types(types):
     for k, v in types.items():
-        if str in v:
-            v = str
-        elif float in v:
-            v = float
-        elif long in v:
-            v = long
-        elif int in v:
-            v = int
-        else:
-            v = str
-        types[k] = v
+        types[k] = select_widest_type(v)
     return types
+
+
+def select_widest_type(types):
+    if str in types:
+        return str
+    elif float in types:
+        return float
+    elif long in types:
+        return long
+    elif int in types:
+        return int
+    else:
+        return str
 
 
 def generate_mapping(doc_name, field_types):
