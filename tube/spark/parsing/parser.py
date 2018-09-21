@@ -1,5 +1,6 @@
 import yaml
-from tube.utils import init_dictionary, get_edge_table, object_to_string, get_child_table, get_node_table_name
+
+from tube.utils import init_dictionary, get_edge_table, object_to_string, get_child_table, get_node_table_name, get_properties_types, get_attribute_from_path, select_widest_types
 from .aggregated_node import AggregatedNode, Reducer
 from .direct_node import DirectNode
 
@@ -34,6 +35,7 @@ class Parser(object):
     """
     The main entry point into the index export process for the mutation indices
     """
+
     def __init__(self, file_path, url):
         stream = open(file_path)
         self.mapping = yaml.load(stream)
@@ -45,6 +47,7 @@ class Parser(object):
         self.root_table = get_node_table_name(self.models, self.root)
         self.root_fields = self.mapping[self.root]['_props']
         self.load_parser_from_dict()
+        self.types = self.get_types()
         print(self.aggregated_nodes)
 
     def load_parser_from_dict(self):
@@ -88,7 +91,7 @@ class Parser(object):
                     if (child_name, edge_tbl) in reversed_index \
                     else AggregatedNode(child_name, get_node_table_name(self.models, child_name), edge_tbl, level + 1)
                 n_child.parent = n_current
-                if i == len(path.path)-1:
+                if i == len(path.path) - 1:
                     n_child.reducer = Reducer(None, path.fn, path.name)
 
                 n_current.add_child(n_child)
@@ -137,3 +140,27 @@ class Parser(object):
             props = child['_props']
             nodes.append(DirectNode(child_name, edge, props))
         return nodes
+
+    def get_types(self):
+        mapping = self.mapping
+        models = self.models
+        root = self.root
+
+        types = {}
+
+        for k, v in mapping[root].items():
+            if k == '_aggregated_props':
+                types.update({i['name']: (float,) for i in v})
+
+            if k == '_flatten_props':
+                for i in v:
+                    a = get_properties_types(models, get_attribute_from_path(models, root, i['path']))
+                    for j in i['_props']:
+                        types[j] = a[j]
+
+            if k == '_props':
+                types.update({w: get_properties_types(models, root)[w] for w in v})
+
+        types = select_widest_types(types)
+
+        return types

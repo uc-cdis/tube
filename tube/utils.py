@@ -98,32 +98,49 @@ def object_to_string(obj):
     return '<{}>'.format(obj.__dict__)
 
 
-def generate_mapping(field_types, doc_name):
+def select_widest_types(types):
+    for k, v in types.items():
+        if str in v:
+            v = str
+        elif float in v:
+            v = float
+        elif long in v:
+            v = long
+        elif int in v:
+            v = int
+        else:
+            v = str
+        types[k] = v
+    return types
+
+
+def generate_mapping(doc_name, field_types):
     """
+    :param doc_name: name of the Elasticsearch document to create mapping for
     :param field_types: dictionary of field and their types
     :return: JSON with proper mapping to be used in Elasticsearch
     """
     es_type = {
-        str: "keyword",
-        float: "float",
-        long: "long",
-        int: "integer"
+        str: 'keyword',
+        float: 'float',
+        long: 'long',
+        int: 'integer'
     }
 
-    properties = {k: {"type": es_type[v]} for k, v in field_types.items()}
+    properties = {k: {'type': es_type[v]} for k, v in field_types.items()}
 
-    # explicitly mapping for add "node_id"
-    properties["node_id"] = {"type": "keyword"}
+    # explicitly mapping 'node_id'
+    properties['node_id'] = {'type': 'keyword'}
 
-    mapping = {"mappings": {
-        doc_name: {"properties": properties}
+    mapping = {'mappings': {
+        doc_name: {'properties': properties}
     }}
     return mapping
 
 
 def get_attribute_from_path(models, root, path):
-    if path != "":
-        splitted_path = path.split(".")
+    if path != '':
+        splitted_path = path.split('.')
     else:
         splitted_path = []
 

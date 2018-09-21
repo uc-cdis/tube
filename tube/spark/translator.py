@@ -2,7 +2,7 @@ import ast
 import json
 import os
 
-from tube.utils import make_sure_hdfs_path_exist, get_properties_types, get_attribute_from_path
+from tube.utils import make_sure_hdfs_path_exist
 
 
 def extract_metadata(str_value):
@@ -163,44 +163,8 @@ class Gen3Translator(object):
             root_df = root_df.leftOuterJoin(child_df).mapValues(lambda x: merge_and_fill_empty_fields(x, n.fields))
         return root_df
 
-    def get_types(self):
-        mapping = self.parser.mapping
-        models = self.parser.models
-        root = self.parser.root
-
-        types = {}
-
-        for k, v in mapping[root].items():
-            if k == "_aggregated_props":
-                types.update({i["name"]: (float,) for i in v})
-
-            if k == "_flatten_props":
-                for i in v:
-                    a = get_properties_types(models, get_attribute_from_path(models, root, i['path']))
-                    for j in i['_props']:
-                        types[j] = a[j]
-
-            if k == "_props":
-                types.update({w: get_properties_types(models, root)[w] for w in v})
-
-        for k, v in types.items():
-            if str in v:
-                v = str
-            elif float in v:
-                v = float
-            elif long in v:
-                v = long
-            elif int in v:
-                v = int
-            else:
-                v = str
-            types[k] = v
-
-        return types
-
     def run_etl(self):
-        types = self.get_types()
         root_df = self.translate_table(self.parser.root_table, fields=self.parser.root_fields)
         root_df = self.get_direct_children(root_df)
         root_df = root_df.join(self.aggregate_nested_properties()).mapValues(lambda x: merge_dictionary(x[0], x[1]))
-        self.writer.write_df(root_df, self.parser.root, types=types)
+        self.writer.write_df(root_df, self.parser.root, self.parser.types)

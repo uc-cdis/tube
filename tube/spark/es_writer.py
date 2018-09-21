@@ -23,11 +23,11 @@ class ESWriter(SparkBase):
         :param mapping: mapping for index
         :return:
         """
-        es_hosts = self.es_config["es.nodes"]
-        es_port = self.es_config["es.port"]
-        es_resource = self.es_config["es.resource"]
+        es_hosts = self.es_config['es.nodes']
+        es_port = self.es_config['es.port']
+        es_resource = self.es_config['es.resource']
 
-        es = Elasticsearch([{"host": es_hosts, "port": es_port}])
+        es = Elasticsearch([{'host': es_hosts, 'port': es_port}])
         indices = client.IndicesClient(es)
 
         if not indices.exists(index=es_resource):
@@ -39,7 +39,7 @@ class ESWriter(SparkBase):
             df = df.map(lambda x: plugin(x))
 
         types = add_auth_resource_path_mapping(types)
-        mapping = generate_mapping(types, doc_name)
+        mapping = generate_mapping(doc_name, types)
         self.create_index(mapping)
 
         df = df.map(lambda x: json_export(x))
@@ -47,7 +47,7 @@ class ESWriter(SparkBase):
         es_config['es.resource'] = es_config['es.resource'] + '/{}'.format(doc_name)
         # df.saveAsTextFile('{}/output'.format(self.config.HDFS_DIR))
         df.saveAsNewAPIHadoopFile(path='-',
-                                  outputFormatClass="org.elasticsearch.hadoop.mr.EsOutputFormat",
-                                  keyClass="org.apache.hadoop.io.NullWritable",
-                                  valueClass="org.elasticsearch.hadoop.mr.LinkedMapWritable",
+                                  outputFormatClass='org.elasticsearch.hadoop.mr.EsOutputFormat',
+                                  keyClass='org.apache.hadoop.io.NullWritable',
+                                  valueClass='org.elasticsearch.hadoop.mr.LinkedMapWritable',
                                   conf=es_config)
