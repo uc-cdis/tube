@@ -1,6 +1,7 @@
-import os
 import ast
 import json
+import os
+
 from tube.utils import make_sure_hdfs_path_exist
 
 
@@ -85,6 +86,7 @@ class Gen3Translator(object):
     """
     The main entry point into the index export process for the mutation indices
     """
+
     def __init__(self, sc, parser, writer, config):
         self.sc = sc
         self.parser = parser
@@ -113,7 +115,7 @@ class Gen3Translator(object):
 
     def aggregate_intermediate_data_frame(self, child_df, edge_df):
         frame_zero = tuple([(i[0], i[1], 0) for i in child_df.first()[1]])
-        temp_df = edge_df.leftOuterJoin(child_df).map(lambda x: (x[1][0], x[1][1]))\
+        temp_df = edge_df.leftOuterJoin(child_df).map(lambda x: (x[1][0], x[1][1])) \
             .mapValues(lambda x: x if x is not None else frame_zero)
         return temp_df.aggregateByKey(frame_zero,
                                       seq_aggregate_with_reducer,
@@ -137,7 +139,7 @@ class Gen3Translator(object):
                     if child.reducer is None:
                         count_df = edge_df.groupByKey().mapValues(lambda x: ())
                     else:
-                        count_df = edge_df.groupByKey().mapValues(lambda x: len([i for i in x if i is not None]))\
+                        count_df = edge_df.groupByKey().mapValues(lambda x: len([i for i in x if i is not None])) \
                             .mapValues(intermediate_frame(child.reducer.output))
 
                     df = count_df if df is None else df.leftOuterJoin(count_df).mapValues(lambda x: x[0] + x[1])
@@ -165,4 +167,4 @@ class Gen3Translator(object):
         root_df = self.translate_table(self.parser.root_table, fields=self.parser.root_fields)
         root_df = self.get_direct_children(root_df)
         root_df = root_df.join(self.aggregate_nested_properties()).mapValues(lambda x: merge_dictionary(x[0], x[1]))
-        self.writer.write_df(root_df, self.parser.root)
+        self.writer.write_df(root_df, self.parser.root, self.parser.types)

@@ -1,6 +1,7 @@
-import tube.settings as config
-from pyspark import SparkConf, SparkContext
 from dictionaryutils import DataDictionary, dictionary
+from pyspark import SparkConf, SparkContext
+
+import tube.settings as config
 
 
 def get_sql_to_hdfs_config(config):
@@ -87,6 +88,62 @@ def get_node_table_name(models, node_name):
     return node.__tablename__
 
 
+def get_properties_types(models, node_name):
+    node = models.Node.get_subclass(node_name)
+    return node.__pg_properties__
+
+
 def object_to_string(obj):
     # s = ','.join('{}: {}'.format(k, obj.__getattr__(k)) for k in obj.__dict__)
     return '<{}>'.format(obj.__dict__)
+
+
+def select_widest_types(types):
+    for k, v in types.items():
+        if str in v:
+            v = str
+        elif float in v:
+            v = float
+        elif long in v:
+            v = long
+        elif int in v:
+            v = int
+        else:
+            v = str
+        types[k] = v
+    return types
+
+
+def generate_mapping(doc_name, field_types):
+    """
+    :param doc_name: name of the Elasticsearch document to create mapping for
+    :param field_types: dictionary of field and their types
+    :return: JSON with proper mapping to be used in Elasticsearch
+    """
+    es_type = {
+        str: 'keyword',
+        float: 'float',
+        long: 'long',
+        int: 'integer'
+    }
+
+    properties = {k: {'type': es_type[v]} for k, v in field_types.items()}
+
+    # explicitly mapping 'node_id'
+    properties['node_id'] = {'type': 'keyword'}
+
+    mapping = {'mappings': {
+        doc_name: {'properties': properties}
+    }}
+    return mapping
+
+
+def get_attribute_from_path(models, root, path):
+    if path != '':
+        splitted_path = path.split('.')
+    else:
+        splitted_path = []
+
+    for i in splitted_path:
+        root, node = get_edge_table(models, root, i)
+    return root
