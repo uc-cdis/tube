@@ -147,3 +147,20 @@ def get_attribute_from_path(models, root, path):
     for i in splitted_path:
         root, node = get_edge_table(models, root, i)
     return root
+
+
+def get_multiplicity(dictionary, root, parent):
+    schema = dictionary.schema
+
+    links = schema[parent]['links']
+
+    for link in links:
+        if 'subgroup' in link:
+            for l in link['subgroup']:
+                if l['target_type'] == root:
+                    return l['multiplicity']
+        else:
+            if link['target_type'] == root:
+                return link['multiplicity']
+
+    return
