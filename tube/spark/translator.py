@@ -1,7 +1,8 @@
-import os
 import ast
 import json
-from tube.utils import make_sure_hdfs_path_exist
+import os
+
+from tube.utils import make_sure_hdfs_path_exist, get_properties_types, get_attribute_from_path
 
 
 def extract_metadata(str_value):
@@ -85,6 +86,7 @@ class Gen3Translator(object):
     """
     The main entry point into the index export process for the mutation indices
     """
+
     def __init__(self, sc, parser, writer, config):
         self.sc = sc
         self.parser = parser
@@ -113,7 +115,7 @@ class Gen3Translator(object):
 
     def aggregate_intermediate_data_frame(self, child_df, edge_df):
         frame_zero = tuple([(i[0], i[1], 0) for i in child_df.first()[1]])
-        temp_df = edge_df.leftOuterJoin(child_df).map(lambda x: (x[1][0], x[1][1]))\
+        temp_df = edge_df.leftOuterJoin(child_df).map(lambda x: (x[1][0], x[1][1])) \
             .mapValues(lambda x: x if x is not None else frame_zero)
         return temp_df.aggregateByKey(frame_zero,
                                       seq_aggregate_with_reducer,
@@ -137,7 +139,7 @@ class Gen3Translator(object):
                     if child.reducer is None:
                         count_df = edge_df.groupByKey().mapValues(lambda x: ())
                     else:
-                        count_df = edge_df.groupByKey().mapValues(lambda x: len([i for i in x if i is not None]))\
+                        count_df = edge_df.groupByKey().mapValues(lambda x: len([i for i in x if i is not None])) \
                             .mapValues(intermediate_frame(child.reducer.output))
 
                     df = count_df if df is None else df.leftOuterJoin(count_df).mapValues(lambda x: x[0] + x[1])
@@ -161,8 +163,44 @@ class Gen3Translator(object):
             root_df = root_df.leftOuterJoin(child_df).mapValues(lambda x: merge_and_fill_empty_fields(x, n.fields))
         return root_df
 
+    def get_types(self):
+        mapping = self.parser.mapping
+        models = self.parser.models
+        root = self.parser.root
+
+        types = {}
+
+        for k, v in mapping[root].items():
+            if k == "_aggregated_props":
+                types.update({i["name"]: (float,) for i in v})
+
+            if k == "_flatten_props":
+                for i in v:
+                    a = get_properties_types(models, get_attribute_from_path(models, root, i['path']))
+                    for j in i['_props']:
+                        types[j] = a[j]
+
+            if k == "_props":
+                types.update({w: get_properties_types(models, root)[w] for w in v})
+
+        for k, v in types.items():
+            if str in v:
+                v = str
+            elif float in v:
+                v = float
+            elif long in v:
+                v = long
+            elif int in v:
+                v = int
+            else:
+                v = str
+            types[k] = v
+
+        return types
+
     def run_etl(self):
+        types = self.get_types()
         root_df = self.translate_table(self.parser.root_table, fields=self.parser.root_fields)
         root_df = self.get_direct_children(root_df)
         root_df = root_df.join(self.aggregate_nested_properties()).mapValues(lambda x: merge_dictionary(x[0], x[1]))
-        self.writer.write_df(root_df, self.parser.root)
+        self.writer.write_df(root_df, self.parser.root, types=types)
