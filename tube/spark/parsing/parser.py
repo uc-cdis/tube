@@ -1,6 +1,7 @@
 import yaml
 
-from tube.utils import init_dictionary, get_edge_table, object_to_string, get_child_table, get_node_table_name, get_properties_types, get_attribute_from_path, select_widest_types
+from tube.utils import init_dictionary, get_edge_table, object_to_string, get_child_table, get_node_table_name, \
+    get_properties_types, get_attribute_from_path, select_widest_types, get_multiplicity
 from .aggregated_node import AggregatedNode, Reducer
 from .direct_node import DirectNode
 
@@ -135,10 +136,22 @@ class Parser(object):
         children = self.mapping[self.root]['_flatten_props']
         nodes = []
         for child in children:
-            _, edge = get_edge_table(self.models, self.root, child['path'])
+            parent, edge = get_edge_table(self.models, self.root, child['path'])
             child_name = get_child_table(self.models, self.root, child['path'])
             props = child['_props']
-            nodes.append(DirectNode(child_name, edge, props))
+
+            multiplicity = get_multiplicity(self.dictionary, self.root, parent)
+
+            if multiplicity == 'one_to_one':
+                nodes.append(DirectNode(child_name, edge, props))
+            else:
+                raise Exception("something bad has just happened\n"
+                                "the properties '{}' for '{}'\n"
+                                "for parent '{}'\n"
+                                "has multiplicity '{}'\n"
+                                "you can't use on in '_flatten_props'\n".format(props, child['path'], parent,
+                                                                                multiplicity))
+
         return nodes
 
     def get_types(self):
@@ -156,7 +169,10 @@ class Parser(object):
                 for i in v:
                     a = get_properties_types(models, get_attribute_from_path(models, root, i['path']))
                     for j in i['_props']:
-                        types[j] = a[j]
+                        if j in a:
+                            types[j] = a[j]
+                        else:
+                            types[j] = (str,)
 
             if k == '_props':
                 types.update({w: get_properties_types(models, root)[w] for w in v})
