@@ -1,0 +1,70 @@
+mappings:
+  - name: kidsfirst
+    doc_type: participant
+    type: aggregator
+    root: participant
+    _props:
+      - submitter_id
+      - project_id
+      - consent_type
+    _flatten_props:
+      - path: demographics
+        _props:
+          - gender
+          - race
+          - ethnicity
+    _aggregated_props:
+      - name: _samples_count
+        path: samples
+        fn: count
+      - name: _aliquots_count
+        path: samples.aliquots
+        fn: count
+      - name: _read_groups_count
+        path: samples.aliquots.read_groups
+        fn: count
+      - name: _submitted_aligned_reads_files_count
+        path: samples.aliquots.read_groups.submitted_aligned_reads_files
+        fn: count
+  - name: file
+    doc_type: file
+    type: collector
+    root: None
+    _props:
+      - object_id
+      - md5sum
+      - file_name
+      - file_size
+      - state
+    _injecting_props:
+      subject:
+        _props:
+          - id
+          - project_id
+    _target_nodes:
+      - name: mutation_panel
+        path: subjects
+      - name: bgm_simulation
+        path: mutation_panels.subjects
+      - name: mrna_microarray
+        path: aliquots.samples.subjects
+      - name: mirna_microarray
+        path: aliquots.samples.subjects
+      - name: lipid_mass_spectrometry
+        path: aliquots.samples.subjects
+      - name: protein_mass_spectrometry
+        path: aliquots.samples.subjects
+      - name: metabolite_mass_spectrometry
+        path: aliquots.samples.subjects
+      - name: submitted_copy_number
+        path: aliquots.samples.subjects
+      - name: submitted_methylation
+        path: aliquots.samples.subjects
+      - name: submitted_aligned_reads
+        path: read_groups.aliquots.samples.subjects
+      - name: submitted_unaligned_reads
+        path: read_groups.aliquots.samples.subjects
+#      - name: submitted_genomic_profile
+#        path: read_groups.aliquots.samples.subjects
+      - name: submitted_somatic_mutation
+        path: read_groups.aliquots.samples.subjects
