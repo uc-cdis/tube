@@ -65,7 +65,18 @@ def init_dictionary(url):
     return d, md
 
 
+# There are two important things of a node in a model:
+# - label ( which does not include the prefix)
+# - table_name: includes the prefix and in plural
+
+
 def get_edge_table(models, node_name, edge_name):
+    '''
+    :param models: the model which node and edge belong to
+    :param node_name: the label of a node
+    :param edge_name: the back_ref label of an edge
+    :return: (label of the source node, table name of edge specified by edge_name)
+    '''
     node = models.Node.get_subclass(node_name)
     edge = getattr(node, edge_name)
     parent = edge.target_class.__src_class__
@@ -76,6 +87,18 @@ def get_child_table(models, node_name, edge_name):
     node = models.Node.get_subclass(node_name)
     edge = getattr(node, edge_name)
     return models.Node.get_subclass_named(edge.target_class.__src_class__).__tablename__
+
+
+def get_parent_name(models, node_name, edge_name):
+    node = models.Node.get_subclass(node_name)
+    edge = getattr(node, edge_name)
+    return models.Node.get_subclass_named(edge.target_class.__dst_class__).__name__
+
+
+def get_parent_label(models, node_name, edge_name):
+    node = models.Node.get_subclass(node_name)
+    edge = getattr(node, edge_name)
+    return models.Node.get_subclass_named(edge.target_class.__dst_class__).get_label()
 
 
 def get_node_label(models, node_name):
@@ -100,18 +123,21 @@ def object_to_string(obj):
 
 def select_widest_types(types):
     for k, v in types.items():
-        if str in v:
-            v = str
-        elif float in v:
-            v = float
-        elif long in v:
-            v = long
-        elif int in v:
-            v = int
-        else:
-            v = str
-        types[k] = v
+        types[k] = select_widest_type(v)
     return types
+
+
+def select_widest_type(types):
+    if str in types:
+        return str
+    elif float in types:
+        return float
+    elif long in types:
+        return long
+    elif int in types:
+        return int
+    else:
+        return str
 
 
 def generate_mapping(doc_name, field_types):

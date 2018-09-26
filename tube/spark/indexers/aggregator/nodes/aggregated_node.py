@@ -1,18 +1,18 @@
 from tube.utils import object_to_string
+from tube.spark.indexers.base.node import BaseNode
 
 
-class AggregatedNode(object):
+class AggregatedNode(BaseNode):
     def __init__(self, name, tbl_name, edge_up_tbl, level):
+        super(AggregatedNode, self).__init__()
         self.name = name
         self.tbl_name = tbl_name
-        self.parent = None
         self.edge_up_tbl = edge_up_tbl
-        self.children = set([])
-        self.reducer = None
-        self.non_leaf_children_count = 0
-        self.done = False
-        self.no_children_to_map = 0
         self.level = level
+        self.parent = None
+        self.non_leaf_children_count = 0
+        self.reducer = None
+        self.done = False
 
     def __key__(self):
         if self.edge_up_tbl is not None:
@@ -21,9 +21,6 @@ class AggregatedNode(object):
 
     def __hash__(self):
         return hash(self.__key__())
-
-    def __str__(self):
-        return object_to_string(self)
 
     def __repr__(self):
         return '({}; {})'.format(str(self.__key__()), self.level)
@@ -36,10 +33,6 @@ class AggregatedNode(object):
         return self.level > other.level or (
             self.level == other.level and self.non_leaf_children_count < other.non_leaf_children_count
         )
-
-    def add_child(self, node):
-        self.children.add(node)
-        self.no_children_to_map = len(self.children)
 
 
 class Reducer(object):
