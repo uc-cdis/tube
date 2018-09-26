@@ -32,16 +32,12 @@ PARALLEL_JOBS = 1
 ES = {
     "es.nodes": ES_URL,
     "es.port": '9200',
-    "es.resource": os.getenv('ES_INDEX_NAME', 'null'),
     "es.input.json": 'yes',
     "es.nodes.client.only": 'false',
     "es.nodes.discovery": 'false',
     "es.nodes.data.only": 'false',
     "es.nodes.wan.only": 'true'
 }
-
-if 'null' == ES['es.resource']:
-    raise Exception('ES_INDEX_NAME environment not defined')
 
 HADOOP_HOME = os.getenv('HADOOP_HOME', '/usr/local/Cellar/hadoop/3.1.0/libexec/')
 JAVA_HOME = os.getenv('JAVA_HOME', '/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home')
@@ -51,6 +47,6 @@ ES_HADOOP_HOME_BIN = '{}/elasticsearch-hadoop-{}'.format(os.getenv("ES_HADOOP_HO
 HADOOP_HOST = os.getenv("HADOOP_HOST", "spark-service")
 # Searches same folders as load_json above
 
-MAPPING_FILE = 'tube/mappings/etl.yaml'  # find_paths("etlMapping.yaml", 'tube')[0]
+MAPPING_FILE = find_paths("etlMapping.yaml", 'tube')[0]
 SPARK_MASTER = os.getenv('SPARK_MASTER', 'local[1]')  # 'spark-service'
 APP_NAME = 'Gen3 ETL'
