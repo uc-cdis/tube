@@ -90,7 +90,5 @@ mappings:
         path: read_groups.aliquots.samples.subjects
       - name: submitted_unaligned_reads
         path: read_groups.aliquots.samples.subjects
-#      - name: submitted_genomic_profile
-#        path: read_groups.aliquots.samples.subjects
       - name: submitted_somatic_mutation
         path: read_groups.aliquots.samples.subjects
