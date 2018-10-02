@@ -30,18 +30,18 @@ def get_path_by_name(p, name):
     mapping = p.mapping
 
     for k, v in mapping.items():
-        if k == "_aggregated_props":
+        if k == "aggregated_props":
             filtered = filter(lambda i: name == i["name"], v)
             if filtered:
                 return filtered[0]
 
-        if k == "_flatten_props":
-            filtered = filter(lambda i: name in i["_props"], v)
+        if k == "flatten_props":
+            filtered = filter(lambda i: name in i["props"], v)
             if filtered:
                 filtered[0]["fn"] = "_get"
                 return filtered[0]
 
-        if k == "_props":
+        if k == "props":
             filtered = filter(lambda i: name == i, v)
             if filtered:
                 return {"path": "", "fn": "_get"}
@@ -68,16 +68,17 @@ def get_names(p):
     names = []
 
     for k, v in mapping.items():
-        if k == "_aggregated_props":
+        if k == "aggregated_props":
             names.extend([i["name"] for i in v])
 
-        if k == "_flatten_props":
-            names.extend(chain(*[i["_props"] for i in v]))
+        if k == "flatten_props":
+            names.extend(chain(*[i["props"] for i in v]))
 
-        if k == "_props":
+        if k == "props":
             names.extend(v)
-
-    return names
+    res = [v['name'] for v in names]
+    print(res)
+    return res
 
 
 def get_doc_types(interpreter):

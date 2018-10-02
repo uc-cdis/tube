@@ -1,13 +1,14 @@
 from tube.utils import object_to_string
 from tube.spark.indexers.base.node import BaseNode
+from tube.spark.indexers.base.prop import PropFactory
 
 
 class RootNode(BaseNode):
-    def __init__(self, name, tbl_name, fields):
+    def __init__(self, name, tbl_name, props):
         super(RootNode, self).__init__()
         self.name = name
         self.tbl_name = tbl_name
-        self.fields = fields
+        self.props = PropFactory.create_props_from_json(props)
 
     def __repr__(self):
         return self.name
@@ -53,7 +54,7 @@ class LeafNode(object):
         self.name = name
         self.tbl_name = tbl_name
         self.edge_up_tbl = edge_up_tbl
-        self.fields = fields
+        self.props = fields
         self.parents = set([])
         self.done = False
         self.no_parent_to_map = 0
