@@ -70,23 +70,29 @@ def init_dictionary(url):
 # - table_name: includes the prefix and in plural
 
 
-def get_edge_table(models, node_name, edge_name):
+def get_edge_table(models, node_label, edge_name):
     '''
     :param models: the model which node and edge belong to
-    :param node_name: the label of a node
+    :param node_label: the label of a node
     :param edge_name: the back_ref label of an edge
     :return: (label of the source node, table name of edge specified by edge_name)
     '''
-    node = models.Node.get_subclass(node_name)
+    node = models.Node.get_subclass(node_label)
     edge = getattr(node, edge_name)
-    parent = edge.target_class.__src_class__
-    return get_node_label(models, parent), edge.target_class.__tablename__
+    parent_label = get_node_label(models, edge.target_class.__src_class__)
+    if node_label == parent_label:
+        parent_label = get_node_label(models, edge.target_class.__dst_class__)
+    return parent_label, edge.target_class.__tablename__
 
 
 def get_child_table(models, node_name, edge_name):
     node = models.Node.get_subclass(node_name)
     edge = getattr(node, edge_name)
-    return models.Node.get_subclass_named(edge.target_class.__src_class__).__tablename__
+    src_class = edge.target_class.__src_class__
+    src_label = get_node_label(models, src_class)
+    if src_label != node_name:
+        return models.Node.get_subclass_named(src_class).__tablename__, True
+    return models.Node.get_subclass_named(edge.target_class.__dst_class__).__tablename__, False
 
 
 def get_parent_name(models, node_name, edge_name):

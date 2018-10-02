@@ -1,4 +1,4 @@
-from tube.spark.indexers.base.lambdas import merge_and_fill_empty_fields, merge_dictionary, swap_key_value
+from tube.spark.indexers.base.lambdas import merge_and_fill_empty_props, merge_dictionary, swap_key_value
 from tube.spark.indexers.base.translator import Translator as BaseTranslator
 from tube.utils import get_node_table_name
 from .lambdas import intermediate_frame, merge_aggregate_with_reducer, seq_aggregate_with_reducer
@@ -53,15 +53,15 @@ class Translator(BaseTranslator):
     def get_direct_children(self, root_df):
         for n in self.parser.flatten_props:
             edge_df = self.translate_edge(n.edge)
-            reversed_df = swap_key_value(edge_df)
-            child_df = self.translate_table(n.tbl_name, fields=n.fields)
+            reversed_df = swap_key_value(edge_df) if n.props_from_child else edge_df
+            child_df = self.translate_table(n.tbl_name, props=n.props)
             child_df = reversed_df.join(child_df).map(lambda x: tuple([x[1][0], x[1][1]]))
-            root_df = root_df.leftOuterJoin(child_df).mapValues(lambda x: merge_and_fill_empty_fields(x, n.fields))
+            root_df = root_df.leftOuterJoin(child_df).mapValues(lambda x: merge_and_fill_empty_props(x, n.props))
         return root_df
 
     def translate(self):
         root_tbl = get_node_table_name(self.parser.model, self.parser.root)
-        root_df = self.translate_table(root_tbl, fields=self.parser.props)
+        root_df = self.translate_table(root_tbl, props=self.parser.props)
         root_df = self.get_direct_children(root_df)
         root_df = root_df.join(self.aggregate_nested_properties()).mapValues(lambda x: merge_dictionary(x[0], x[1]))
         self.writer.write_df(root_df, self.parser.name, self.parser.doc_type, self.parser.types)

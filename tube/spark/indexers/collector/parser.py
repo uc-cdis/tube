@@ -2,6 +2,7 @@ from tube.utils import get_edge_table, get_node_table_name, get_node_label, get_
     get_properties_types, object_to_string, select_widest_types, select_widest_type
 from tube.spark.indexers.collector.nodes.collecting_node import CollectingNode, RootNode, LeafNode
 from ..base.parser import Parser as BaseParser
+from ..base.prop import Prop, PropFactory
 
 
 class Path(object):
@@ -33,8 +34,8 @@ class Path(object):
 class Parser(BaseParser):
     def __init__(self, mapping, model):
         super(Parser, self).__init__(mapping, model)
-        self.props = self.mapping['_props']
-        self.final_fields = self.props
+        self.props = PropFactory.create_props_from_json(self.mapping['props'])
+        self.final_fields = [p.name for p in self.props]
         self.final_types = self.get_props_types()
 
         self.leaves = set([])
@@ -46,10 +47,10 @@ class Parser(BaseParser):
     def get_props_types(self):
         types = {}
         for k, v in self.mapping.items():
-            if k == '_target_nodes' and len(v) > 0:
+            if k == 'target_nodes' and len(v) > 0:
                 a = get_properties_types(self.model, v[0]['name'])
-                for j in self.mapping['_props']:
-                    types[j] = a[j]
+                for j in self.mapping['props']:
+                    types[j['name']] = a[j['name']]
 
         types = select_widest_types(types)
         return types
@@ -88,22 +89,22 @@ class Parser(BaseParser):
             level += 1
 
     def update_final_fields(self, root_name):
-        for f in self.mapping['_injecting_props'][root_name]['_props']:
-            if f == 'id':
-                f_type = str
-                f_field_name = '{}_{}'.format(root_name, f)
+        for f in self.mapping['injecting_props'][root_name]['props']:
+            src = f['src'] if 'src' in f else f['name']
+            p = Prop(f['name'], src, [])
+            if p.src != 'id':
+                f_type = select_widest_type(get_properties_types(self.model, root_name)[p.src])
             else:
-                f_type = select_widest_type(get_properties_types(self.model, root_name))
-                f_field_name = f
-            self.final_fields.append(f_field_name)
-            self.final_types[f_field_name] = f_type
+                f_type = str
+            self.final_fields.append(p.name)
+            self.final_types[p.name] = f_type
 
     def add_root_node(self, child, roots, segment):
         root_name = get_node_label(self.model, get_parent_name(self.model, child.name, segment))
         root_tbl_name = get_node_table_name(self.model, get_parent_label(self.model, child.name, segment))
         top_node = roots[root_name] if root_name in roots \
             else RootNode(root_name, root_tbl_name,
-                          self.mapping['_injecting_props'][root_name]['_props']
+                          self.mapping['injecting_props'][root_name]['props']
                           )
         child.add_parent(top_node)
         top_node.add_child(child)
@@ -146,7 +147,7 @@ class Parser(BaseParser):
 
     def create_collecting_paths(self):
         flat_paths = set()
-        target_nodes = self.mapping['_target_nodes']
+        target_nodes = self.mapping['target_nodes']
         for n in target_nodes:
             path = Path(n['name'], n['path'], None)
             flat_paths.add(path)
