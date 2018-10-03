@@ -26,6 +26,13 @@ def get_table_list_from_path(p, root, path):
     return r
 
 
+def convert_mappings(value, value_mappings):
+    for v in value_mappings:
+        if value == v.final:
+            return v.original
+    return value
+
+
 def get_path_by_name(p, name):
     mapping = p.mapping
 
@@ -33,18 +40,20 @@ def get_path_by_name(p, name):
         if k == "aggregated_props":
             filtered = filter(lambda i: name == i["name"], v)
             if filtered:
-                return filtered[0]
+                return filtered[0], None
 
         if k == "flatten_props":
-            filtered = filter(lambda i: name in i["props"], v)
+            filtered = filter(lambda i: name in [j['name'] for j in i["props"]], v)
+            value_mapping = filter(lambda x: name == x.name, chain(*(x.props for x in p.flatten_props)))
             if filtered:
                 filtered[0]["fn"] = "_get"
-                return filtered[0]
+                return filtered[0], value_mapping[0]
 
         if k == "props":
-            filtered = filter(lambda i: name == i, v)
+            filtered = filter(lambda i: name == i['name'], v)
+            value_mapping = filter(lambda x: name == x.name, p.props)
             if filtered:
-                return {"path": "", "fn": "_get"}
+                return {"path": "", "fn": "_get"}, value_mapping[0]
     return None
 
 
@@ -69,7 +78,7 @@ def get_names(p):
 
     for k, v in mapping.items():
         if k == "aggregated_props":
-            names.extend([i["name"] for i in v])
+            names.extend([{'name': i["name"]} for i in v])
 
         if k == "flatten_props":
             names.extend(chain(*[i["props"] for i in v]))

@@ -7,7 +7,7 @@ import tube.settings as config
 from tests.utils import items_in_file
 from tests.utils_db import execute_sql_query
 from tests.utils_es import get_item_from_elasticsearch, get_path_by_name, get_table_list_from_path, order_table_list, \
-    get_names
+    get_names, convert_mappings
 from tests.utils_sql import generate_sql_from_table_list
 from tube.spark.indexers.interpreter import Interpreter
 
@@ -86,7 +86,7 @@ def test_get_list_from_path(init_interpreter, doc_type):
         for name in names:
             value = result.__getattr__(name) if name in result else None
 
-            path = get_path_by_name(parser, name)
+            path, value_mapping = get_path_by_name(parser, name)
 
             fn = path["fn"]
 
@@ -95,6 +95,10 @@ def test_get_list_from_path(init_interpreter, doc_type):
 
             sql = generate_sql_from_table_list(table_list_in_order, fn, name, submitter_id)
             val = execute_sql_query(sql)
+
+            if value_mapping:
+                if value_mapping.value_mappings:
+                    value = convert_mappings(value, value_mapping.value_mappings)
 
             if value != val:
                 fails.append('{doc_type} with submitter_id={item} has field {name} '
