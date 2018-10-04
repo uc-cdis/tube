@@ -135,12 +135,16 @@ class Parser(BaseParser):
     def get_direct_children(self):
         children = self.mapping['flatten_props']
         nodes = []
+        bypass = self.mapping.get(
+            'settings', {}).get('bypass_multiplicity_check')
         for child in children:
             parent, edge = get_edge_table(self.model, self.root, child['path'])
             child_name, is_child = get_child_table(self.model, self.root, child['path'])
             multiplicity = get_multiplicity(self.dictionary, self.root, parent) if is_child else \
                 get_multiplicity(self.dictionary, parent, self.root)
-            if multiplicity != 'one_to_one' and multiplicity != 'one_to_many':
+            if (not bypass
+                    and multiplicity != 'one_to_one'
+                    and multiplicity != 'one_to_many'):
                 raise Exception("something bad has just happened\n"
                                 "the properties '{}' for '{}'\n"
                                 "for parent '{}'\n"
