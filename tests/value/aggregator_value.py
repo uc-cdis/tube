@@ -1,13 +1,13 @@
 from itertools import chain
 
-from tests.utils_db import SQLQuery
 from tests.value.value import Value
 from tube.utils import get_edge_table, get_node_table_name
 
 
 class AggregatorValue(Value):
-    def __init__(self, parser, submitter_id, doc_type, names):
+    def __init__(self, sql, parser, submitter_id, doc_type, names):
         super(AggregatorValue, self).__init__(parser, submitter_id, doc_type, names)
+        self.sql = sql
         self.parser = parser
         self.submitter_id = submitter_id
         self.doc_type = doc_type
@@ -23,7 +23,7 @@ class AggregatorValue(Value):
         fn = path["fn"]
 
         tables = self.get_table_list_from_path(self.parser, self.doc_type, path["path"])
-        val = SQLQuery(tables, fn, name, self.submitter_id).val
+        val = self.sql[tables, fn, name, self.submitter_id]
 
         if value_mapping:
             if value_mapping.value_mappings:

@@ -40,20 +40,41 @@ def execute_sql_query(sql):
 
 
 class SQLQuery:
-    def __init__(self, tables, aggregator, prop, submitter_id):
-        """
+    def __init__(self):
+        self.select_clauses = {}
+        self.join_clauses = {}
 
-        :param tables:
-        :param aggregator:
-        :param prop:
-        :param submitter_id:
-        """
-        self.tables = self.order_tables(tables)
-        self.aggregator = aggregator
-        self.property = prop
-        self.submitter_id = submitter_id
-        self.sql = self.generate_sql_from_tables()
-        self.val = execute_sql_query(self.sql)
+    def __getitem__(self, item):
+        tables, fn, name, submitter_id = item
+        tables = self.order_tables(tables)
+
+        if (tuple(tables), fn) in self.join_clauses:
+            sql_join = self.join_clauses[(tuple(tables), fn)]
+        else:
+            query = "FROM {joins}"
+            joins = self.generate_join_clauses(tables)
+            sql_join = SQL(query).format(joins=SQL(" ").join(joins))
+
+            self.join_clauses[(tuple(tables), fn, name)] = sql_join
+
+        if name in self.select_clauses:
+            sql_select = self.select_clauses[name]
+        else:
+            query = "SELECT {gather}"
+            gather = self.generate_gather_clause(fn, tables[0], name)
+            sql_select = SQL(query).format(gather=gather)
+
+            self.select_clauses[name] = sql_select
+
+        submitter_json = '{{"submitter_id": "{}"}}'.format(submitter_id)
+        sql_where = SQL("WHERE {last_node}.{_props} @> {submitter};").format(last_node=Identifier(tables[-1]),
+                                                                             _props=Identifier("_props"),
+                                                                             submitter=Literal(submitter_json))
+
+        sql = SQL(" ").join([sql_select, sql_join, sql_where])
+        val = execute_sql_query(sql)
+
+        return val
 
     @staticmethod
     def generate_join_clauses(tables):
@@ -117,19 +138,3 @@ class SQLQuery:
         """
         tables.reverse()
         return tables
-
-    def generate_sql_from_tables(self):
-        """
-
-        :return:
-        """
-        joins = self.generate_join_clauses(self.tables)
-        gather = self.generate_gather_clause(self.aggregator, self.tables[0], self.property)
-        query = "SELECT {gather} FROM {joins} WHERE {last_node}.{_props} @> {submitter};"
-        submitter_json = '{{"submitter_id": "{}"}}'.format(self.submitter_id)
-        sql = SQL(query).format(gather=gather,
-                                joins=SQL(" ").join(joins),
-                                last_node=Identifier(self.tables[-1]),
-                                _props=Identifier("_props"),
-                                submitter=Literal(submitter_json))
-        return sql
