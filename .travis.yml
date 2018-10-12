@@ -29,6 +29,7 @@ install:
   - sudo sed -i "s|#listen_addresses = 'localhost'|listen_addresses = '*'|g" /etc/postgresql/9.6/main/postgresql.conf
   - sudo sed -i "s|# DO NOT DISABLE!|host all all 0.0.0.0/0 trust\n\n# DO NOT DISABLE!|g" /etc/postgresql/9.6/main/pg_hba.conf
   - sudo service postgresql restart 9.6
+  - sudo apt update
   - sudo apt install -y jq
 
 before_script:
