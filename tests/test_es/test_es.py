@@ -5,10 +5,11 @@ from elasticsearch_dsl import Search
 
 import tube.settings as config
 from tests.utils import items_in_file
-from tests.utils_db import execute_sql_query
-from tests.utils_es import get_item_from_elasticsearch, get_path_by_name, get_table_list_from_path, order_table_list, \
-    get_names
-from tests.utils_sql import generate_sql_from_table_list
+from tests.utils_db import SQLQuery
+from tests.utils_es import get_names
+from tests.value.aggregator_value import AggregatorValue
+from tests.value.es_value import ESValue
+from tests.value.value import value_diff
 from tube.spark.indexers.interpreter import Interpreter
 
 
@@ -60,44 +61,38 @@ def test_es_types(init_interpreter, doc_type):
         assert t["type"] != "text"
 
 
-# @pytest.mark.parametrize("doc_type", [dt.parser.doc_type for dt in init_interpreter().translators.values()])
-# def test_get_list_from_path(init_interpreter, doc_type):
-#     if doc_type == 'file':
-#         return
-#     interpreter = init_interpreter
-#     items = items_in_file(doc_type)[2]
-#     parser = interpreter.translators[doc_type].parser
-#     names = get_names(parser)
-#
-#     fails = []
-#     for item in items:
-#         submitter_id = item['submitter_id']
-#         results = get_item_from_elasticsearch(parser.name, doc_type, submitter_id)
-#         result_length = len(results)
-#         if result_length != 1:
-#             if result_length < 1:
-#                 fails.append('Not exist expected {doc_type} with submitter_id {item} in ES'
-#                              .format(doc_type=doc_type, item=submitter_id))
-#             else:
-#                 fails.append('Duplicated {doc_type} with submitter_id {item} in ES'
-#                              .format(doc_type=doc_type, item=submitter_id))
-#             continue
-#         result = results[0]
-#         for name in names:
-#             value = result.__getattr__(name) if name in result else None
-#
-#             path = get_path_by_name(parser, name)
-#
-#             fn = path["fn"]
-#
-#             table_list = get_table_list_from_path(parser, doc_type, path["path"])
-#             table_list_in_order = order_table_list(table_list)
-#
-#             sql = generate_sql_from_table_list(table_list_in_order, fn, name, submitter_id)
-#             val = execute_sql_query(sql)
-#
-#             if value != val:
-#                 fails.append('{doc_type} with submitter_id={item} has field {name} '
-#                              'with {val} in database and {value} in ES'
-#                              .format(doc_type=doc_type, item=submitter_id, name=name, val=val, value=value))
-#     assert fails == []
+@pytest.mark.parametrize("doc_type", [dt.parser.doc_type for dt in init_interpreter().translators.values()])
+def test_get_list_from_path(init_interpreter, doc_type):
+    if doc_type == 'file':
+        return
+    interpreter = init_interpreter
+    items = items_in_file(doc_type)[2]
+    parser = interpreter.translators[doc_type].parser
+    names = get_names(parser)
+
+    # SQL query instance for query memoization
+    sql = SQLQuery()
+
+    fails = []
+    for item in items:
+        submitter_id = item['submitter_id']
+
+        results = ESValue(parser, submitter_id, doc_type, names)
+
+        result_length = results.length
+
+        if result_length != 1:
+            if result_length < 1:
+                fails.append('Not exist expected {doc_type} with submitter_id {item} in ES'
+                             .format(doc_type=doc_type, item=submitter_id))
+            else:
+                fails.append('Duplicated {doc_type} with submitter_id {item} in ES'
+                             .format(doc_type=doc_type, item=submitter_id))
+
+        value = AggregatorValue(sql, parser, submitter_id, doc_type, names)
+
+        equal, diff = value_diff(results, value)
+        if not equal:
+            fails.append(diff)
+
+    assert fails == []
