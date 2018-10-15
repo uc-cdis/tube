@@ -24,10 +24,6 @@ mappings:
           - name: ethnicity
           - name: vital_status
           - name: year_of_birth
-#      - path: studies
-#        props:
-#          - name: study_submitter_id
-#            src: submitter_id
     aggregated_props:
       - name: _follow_ups_count
         path: follow_ups
