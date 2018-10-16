@@ -35,19 +35,20 @@ def swap_key_value(df):
     return df.map(lambda x: (x[1], x[0]))
 
 
-def get_fields(fields):
-    return lambda x: {k: v for (k, v) in x.items() if k in fields}
+def get_props(names, values):
+    return lambda x: {names[src]: values[src][v] if src in values and v in values[src] else v
+                      for (src, v) in x.items() if src in names.keys()}
 
 
-def get_fields_empty_values(fields):
-    return {k: None for k in fields}
+def get_props_empty_values(props):
+    return {k.name: None for k in props}
 
 
-def merge_and_fill_empty_fields(item, fields):
+def merge_and_fill_empty_props(item, props):
     if item[1] is None and item[0] is None:
         return {}
     if item[0] is None:
         return item[1]
     if item[1] is None:
-        return merge_dictionary(item[0], get_fields_empty_values(fields))
+        return merge_dictionary(item[0], get_props_empty_values(props))
     return merge_dictionary(item[0], item[1])

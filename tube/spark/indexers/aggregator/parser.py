@@ -3,6 +3,7 @@ from tube.utils import get_attribute_from_path, get_edge_table, get_child_table,
 from .nodes.aggregated_node import AggregatedNode, Reducer
 from .nodes.direct_node import DirectNode
 from ..base.parser import Parser as BaseParser
+from ..base.prop import PropFactory
 
 
 class Path(object):
@@ -39,14 +40,14 @@ class Parser(BaseParser):
         super(Parser, self).__init__(mapping, model)
         self.dictionary = dictionary
         self.props = self.get_root_props()
-        self.flatten_props = self.get_direct_children() if '_flatten_props' in mapping else []
+        self.flatten_props = self.get_direct_children() if 'flatten_props' in mapping else []
         self.aggregated_nodes = []
-        if '_aggregated_props' in self.mapping:
+        if 'aggregated_props' in self.mapping:
             self.aggregated_nodes = self.get_aggregation_nodes()
         self.types = self.get_types()
 
     def get_root_props(self):
-        return self.mapping['_props']
+        return PropFactory.create_props_from_json(self.mapping['props'])
 
     def get_aggregation_nodes(self):
         flat_paths = self.create_paths()
@@ -125,31 +126,32 @@ class Parser(BaseParser):
         :return:
         """
         flat_paths = set()
-        aggregated_nodes = self.mapping['_aggregated_props']
+        aggregated_nodes = self.mapping['aggregated_props']
         for n in aggregated_nodes:
             path = Path(n['name'], n['path'], n['fn'])
             flat_paths.add(path)
         return flat_paths
 
     def get_direct_children(self):
-        children = self.mapping['_flatten_props']
+        children = self.mapping['flatten_props']
         nodes = []
+        bypass = self.mapping.get(
+            'settings', {}).get('bypass_multiplicity_check')
         for child in children:
             parent, edge = get_edge_table(self.model, self.root, child['path'])
-            child_name = get_child_table(self.model, self.root, child['path'])
-            props = child['_props']
-
-            multiplicity = get_multiplicity(self.dictionary, self.root, parent)
-
-            if multiplicity == 'one_to_one':
-                nodes.append(DirectNode(child_name, edge, props))
-            else:
+            child_name, is_child = get_child_table(self.model, self.root, child['path'])
+            multiplicity = get_multiplicity(self.dictionary, self.root, parent) if is_child else \
+                get_multiplicity(self.dictionary, parent, self.root)
+            if (not bypass
+                    and multiplicity != 'one_to_one'
+                    and multiplicity != 'one_to_many'):
                 raise Exception("something bad has just happened\n"
                                 "the properties '{}' for '{}'\n"
                                 "for parent '{}'\n"
                                 "has multiplicity '{}'\n"
-                                "you can't use on in '_flatten_props'\n".format(props, child['path'], parent,
-                                                                                multiplicity))
+                                "you can't use on in 'flatten_props'\n".format(child['props'], child['path'], parent,
+                                                                               multiplicity))
+            nodes.append(DirectNode(child_name, edge, child['props'], is_child))
         return nodes
 
     def get_types(self):
@@ -160,20 +162,22 @@ class Parser(BaseParser):
         types = {}
 
         for k, v in mapping.items():
-            if k == '_aggregated_props':
+            if k == 'aggregated_props':
                 types.update({i['name']: (float,) for i in v})
 
-            if k == '_flatten_props':
+            if k == 'flatten_props':
                 for i in v:
                     a = get_properties_types(model, get_attribute_from_path(model, root, i['path']))
-                    for j in i['_props']:
-                        if j in a:
-                            types[j] = a[j]
+                    for j in i['props']:
+                        p = self.get_prop(j)
+                        if p.src in a:
+                            types[p.name] = a[p.src]
                         else:
-                            types[j] = (str,)
+                            types[p.name] = (str,)
 
-            if k == '_props':
-                types.update({w: get_properties_types(model, root)[w] for w in v})
+            if k == 'props':
+                props = [self.get_prop(p_in_json) for p_in_json in v]
+                types.update({p.name: get_properties_types(model, root)[p.src] for p in props})
 
         types = select_widest_types(types)
 

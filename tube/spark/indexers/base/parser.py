@@ -1,4 +1,4 @@
-from tube.utils import get_attribute_from_path, get_properties_types, select_widest_types
+from ..base.prop import Prop
 
 
 class Parser(object):
@@ -14,3 +14,7 @@ class Parser(object):
 
     def get_types(self):
         pass
+
+    def get_prop(self, p):
+        src = p['src'] if 'src' in p else p['name']
+        return Prop(p['name'], src, [])

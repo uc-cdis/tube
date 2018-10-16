@@ -1,4 +1,4 @@
-from tube.spark.indexers.base.lambdas import merge_and_fill_empty_fields
+from tube.spark.indexers.base.lambdas import merge_and_fill_empty_props
 from tube.spark.indexers.base.translator import Translator as BaseTranslator
 from .nodes.collecting_node import LeafNode
 from .parser import Parser
@@ -14,10 +14,10 @@ class Translator(BaseTranslator):
             return
         if type(child) is LeafNode:
             child_df = collected_dfs[child.name] if child.name in collected_dfs else\
-                self.translate_table(child.tbl_name, fields=self.parser.props)
-            fields = self.parser.final_fields
+                self.translate_table(child.tbl_name, props=self.parser.props)
+            props = self.parser.final_fields
             child_df = child_df.leftOuterJoin(edge_df).mapValues(
-                lambda x: merge_and_fill_empty_fields(x, fields))
+                lambda x: merge_and_fill_empty_props(x, props))
             child.no_parent_to_map -= 1
             if child.no_parent_to_map == 0:
                 child.done = True
@@ -35,13 +35,13 @@ class Translator(BaseTranslator):
     def merge_roots_to_children(self):
         collected_dfs = {}
         for root in self.parser.roots:
-            df = self.translate_table(root.tbl_name, fields=root.fields)
+            df = self.translate_table(root.tbl_name, props=root.props)
             root_name = root.name
-            fields = root.fields + self.parser.props
+            props = root.props + self.parser.props
             for child in root.children:
                 edge_df = df.rightOuterJoin(self.translate_edge(child.edge_up_tbl))\
                     .map(lambda x: (x[1][1], ({'{}_id'.format(root_name): x[0]},) + (x[1][0],)))\
-                    .mapValues(lambda x: merge_and_fill_empty_fields(x, fields))
+                    .mapValues(lambda x: merge_and_fill_empty_props(x, props))
                 self.collect_child(child, edge_df, collected_dfs)
         return collected_dfs
 
