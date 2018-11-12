@@ -54,10 +54,11 @@ def test_es_types(init_interpreter, doc_type):
     es = Elasticsearch([{"host": config.ES["es.nodes"], "port": config.ES['es.port']}])
 
     indices = client.IndicesClient(es)
+    index_name = indices.get_alias(name=parser.name).keys()[0]
 
-    mapping = indices.get_mapping(index=parser.name)
+    mapping = indices.get_mapping(index=index_name)
 
-    for k, t in mapping[parser.name]["mappings"][doc_type]["properties"].items():
+    for k, t in mapping[index_name]["mappings"][doc_type]["properties"].items():
         assert t["type"] != "text"
 
 
