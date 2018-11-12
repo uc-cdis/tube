@@ -27,7 +27,7 @@ def get_backup_alias(index):
 
 
 def get_backup_version(index_name):
-    res = re.match('.?([0-9]+)*', index_name)
+    res = re.match('^[0-9]+', index_name)
     if res is not None:
         return int(res.group()) + 1
     return 0
