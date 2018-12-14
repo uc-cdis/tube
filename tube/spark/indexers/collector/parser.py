@@ -62,6 +62,10 @@ class Parser(BaseParser):
         self.collectors.sort()
 
     def update_level(self):
+        """
+        Update the level of nodes in the parsing tree
+        :return:
+        """
         level = 1
         assigned_levels = set([])
         just_assigned = set([])

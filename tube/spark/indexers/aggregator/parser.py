@@ -132,26 +132,38 @@ class Parser(BaseParser):
             flat_paths.add(path)
         return flat_paths
 
+    def parse_sorting(self, child):
+        sorts = child['sorted_by'] if 'sorted_by' in child else None
+        if sorts is None:
+            return None, None
+        sorts = sorts.split(",")
+        if len(sorts) > 1:
+            desc_order = sorts[1].strip() == 'desc'
+        else:
+            desc_order = False
+        return sorts[0], desc_order
+
     def get_direct_children(self):
+        """
+        Parse etlMapping file and return a list of direct children from the root
+        """
         children = self.mapping['flatten_props']
         nodes = []
         bypass = self.mapping.get(
             'settings', {}).get('bypass_multiplicity_check')
         for child in children:
-            parent, edge = get_edge_table(self.model, self.root, child['path'])
+            child_node, edge = get_edge_table(self.model, self.root, child['path'])
             child_name, is_child = get_child_table(self.model, self.root, child['path'])
-            multiplicity = get_multiplicity(self.dictionary, self.root, parent) if is_child else \
-                get_multiplicity(self.dictionary, parent, self.root)
-            if (not bypass
-                    and multiplicity != 'one_to_one'
-                    and multiplicity != 'one_to_many'):
+            multiplicity = get_multiplicity(self.dictionary, self.root, child_node) if is_child else \
+                get_multiplicity(self.dictionary, child_node, self.root)
+            sorted_by, desc_order = self.parse_sorting(child)
+            if not bypass and sorted_by is None and multiplicity != 'one_to_one' and multiplicity != 'one_to_many':
                 raise Exception("something bad has just happened\n"
                                 "the properties '{}' for '{}'\n"
                                 "for parent '{}'\n"
-                                "has multiplicity '{}'\n"
-                                "you can't use on in 'flatten_props'\n".format(child['props'], child['path'], parent,
-                                                                               multiplicity))
-            nodes.append(DirectNode(child_name, edge, child['props'], is_child))
+                                "has multiplicity '{}' that cannot be used on in 'flatten_props'"
+                                "\n".format(child['props'], child['path'], child_node, multiplicity))
+            nodes.append(DirectNode(child_name, edge, child['props'], sorted_by, desc_order, is_child))
         return nodes
 
     def get_types(self):
@@ -164,7 +176,6 @@ class Parser(BaseParser):
         for k, v in mapping.items():
             if k == 'aggregated_props':
                 types.update({i['name']: (float,) for i in v})
-
             if k == 'flatten_props':
                 for i in v:
                     a = get_properties_types(model, get_attribute_from_path(model, root, i['path']))

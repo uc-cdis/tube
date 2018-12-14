@@ -86,6 +86,13 @@ def get_edge_table(models, node_label, edge_name):
 
 
 def get_child_table(models, node_name, edge_name):
+    """
+    Return the a table name indicated by node's name and edge name. Work as bidirectional link
+    :param models: considering model
+    :param node_name: known node name
+    :param edge_name: link from/to node_name
+    :return:
+    """
     node = models.Node.get_subclass(node_name)
     edge = getattr(node, edge_name)
     src_class = edge.target_class.__src_class__
@@ -181,18 +188,18 @@ def get_attribute_from_path(models, root, path):
     return root
 
 
-def get_multiplicity(dictionary, root, parent):
+def get_multiplicity(dictionary, parent, child):
     schema = dictionary.schema
 
-    links = schema[parent]['links']
+    links = schema[child]['links']
 
     for link in links:
         if 'subgroup' in link:
             for l in link['subgroup']:
-                if l['target_type'] == root:
+                if l['target_type'] == parent:
                     return l['multiplicity']
         else:
-            if link['target_type'] == root:
+            if link['target_type'] == parent:
                 return link['multiplicity']
 
     return

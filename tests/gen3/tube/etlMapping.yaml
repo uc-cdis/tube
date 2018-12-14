@@ -24,6 +24,7 @@ mappings:
           - name: ethnicity
           - name: vital_status
           - name: year_of_birth
+        sorted_by: updated_datetime, desc
     aggregated_props:
       - name: _follow_ups_count
         path: follow_ups

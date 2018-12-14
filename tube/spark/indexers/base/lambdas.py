@@ -17,6 +17,11 @@ def extract_metadata(str_value):
 
 def extract_link(str_value):
     strs = ast.literal_eval(str_value)
+    return (strs[4], strs[5])
+
+
+def extract_link_reverse(str_value):
+    strs = ast.literal_eval(str_value)
     return (strs[5], strs[4])
 
 
@@ -52,3 +57,9 @@ def merge_and_fill_empty_props(item, props):
     if item[1] is None:
         return merge_dictionary(item[0], get_props_empty_values(props))
     return merge_dictionary(item[0], item[1])
+
+
+def sort_by_field(x, field, reversed):
+    if not reversed:
+        return sorted(x, key=lambda k: k[field])
+    return sorted(x, key=lambda k: k[field], reverse=reversed)
