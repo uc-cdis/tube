@@ -19,6 +19,15 @@ class PropFactory(object):
             res.append(Prop(p['name'], src, PropFactory.create_value_mappings(value_mappings)))
         return res
 
+    @staticmethod
+    def add_sorting_field_to_props(props, sorting_field):
+        ps = [p.name for p in props]
+        if sorting_field is not None and sorting_field not in ps:
+            field = '_{}_'.format(sorting_field)
+            props.append(Prop(field, sorting_field, []))
+            return field
+        return sorting_field
+
 
 class ValueMapping(object):
     def __init__(self, original, final):

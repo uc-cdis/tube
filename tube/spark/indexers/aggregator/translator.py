@@ -2,6 +2,7 @@ from tube.spark.indexers.base.lambdas import merge_and_fill_empty_props, merge_d
 from tube.spark.indexers.base.translator import Translator as BaseTranslator
 from tube.utils import get_node_table_name
 from .lambdas import intermediate_frame, merge_aggregate_with_reducer, seq_aggregate_with_reducer
+from ..base.lambdas import sort_by_field
 from .parser import Parser
 
 
@@ -51,12 +52,22 @@ class Translator(BaseTranslator):
         return aggregated_dfs[self.parser.root].mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
 
     def get_direct_children(self, root_df):
+        """
+        Get data of all directed nodes and attach to root node
+        :param root_df:
+        :return:
+        """
         for n in self.parser.flatten_props:
-            edge_df = self.translate_edge(n.edge)
-            reversed_df = swap_key_value(edge_df) if n.props_from_child else edge_df
+            # if n is a child of root node, we don't need to swap order of the pair ids
+            edge_df = self.translate_edge(n.edge, not n.props_from_child)
             child_df = self.translate_table(n.tbl_name, props=n.props)
-            child_df = reversed_df.join(child_df).map(lambda x: tuple([x[1][0], x[1][1]]))
-            root_df = root_df.leftOuterJoin(child_df).mapValues(lambda x: merge_and_fill_empty_props(x, n.props))
+            child_by_root = edge_df.join(child_df).map(lambda x: tuple([x[1][0], x[1][1]]))
+            if n.sorted_by is not None:
+                child_by_root = child_by_root.groupByKey()
+                child_by_root = child_by_root.mapValues(lambda it: sort_by_field(it, n.sorted_by, n.desc_order)[0])
+                child_by_root = child_by_root.mapValues(lambda x: {(k, v) for (k, v) in x.items()
+                                                                   if not (k.startswith('_') and k.endswith('_'))})
+            root_df = root_df.leftOuterJoin(child_by_root).mapValues(lambda x: merge_and_fill_empty_props(x, n.props))
         return root_df
 
     def translate(self):

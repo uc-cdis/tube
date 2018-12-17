@@ -1,5 +1,5 @@
 import os
-from .lambdas import extract_metadata, extract_link, flatten_files_to_lists, get_props, get_props_empty_values
+from .lambdas import extract_metadata, extract_link, extract_link_reverse, flatten_files_to_lists, get_props, get_props_empty_values
 
 
 class Translator(object):
@@ -27,6 +27,13 @@ class Translator(object):
             return df.mapValues(get_props(names, values))
         return df
 
-    def translate_edge(self, table_name):
+    def translate_edge(self, table_name, reversed=True):
+        """
+        Return the edge table that has two columns.
+        :param table_name:
+        :return: [(child_node_id, parent_node_id)] if not reversed other wise [(parent_node_id, child_node_id)]
+        """
         df = self.sc.wholeTextFiles(os.path.join(self.hdfs_path, table_name)).flatMap(flatten_files_to_lists)
+        if reversed:
+            return df.map(extract_link_reverse)
         return df.map(extract_link)
