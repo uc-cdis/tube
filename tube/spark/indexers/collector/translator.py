@@ -69,4 +69,7 @@ class Translator(BaseTranslator):
         collected_dfs = self.merge_roots_to_children()
         self.merge_collectors(collected_dfs)
         self.get_leaves(collected_dfs)
-        self.writer.write_df(collected_dfs['final'], self.parser.name, self.parser.doc_type, self.parser.types)
+        if 'final' in collected_dfs:
+            self.writer.write_df(collected_dfs['final'], self.parser.name, self.parser.doc_type, self.parser.types)
+        else:
+            self.writer.write_df(self.sc.parallelize([]), self.parser.name, self.parser.doc_type, self.parser.types)
