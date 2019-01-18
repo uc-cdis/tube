@@ -45,7 +45,7 @@ class SQLQuery:
         self.join_clauses = {}
 
     def __getitem__(self, item):
-        tables, fn, name, submitter_id = item
+        tables, fn, name, submitter_id, root = item
         tables = self.order_tables(tables)
 
         if (tuple(tables), fn) in self.join_clauses:
@@ -57,11 +57,12 @@ class SQLQuery:
 
             self.join_clauses[(tuple(tables), fn, name)] = sql_join
 
+        group = None
         if name in self.select_clauses:
             sql_select = self.select_clauses[name]
         else:
             query = "SELECT {gather}"
-            gather = self.generate_gather_clause(fn, tables[0], name)
+            gather, group = self.generate_gather_clause(fn, tables[0], name, root)
             sql_select = SQL(query).format(gather=gather)
 
             self.select_clauses[name] = sql_select
@@ -71,7 +72,10 @@ class SQLQuery:
                                                                              _props=Identifier("_props"),
                                                                              submitter=Literal(submitter_json))
 
-        sql = SQL(" ").join([sql_select, sql_join, sql_where])
+        if group:
+            sql = SQL(" ").join([sql_select, sql_join, sql_where, group])
+        else:
+            sql = SQL(" ").join([sql_select, sql_join, sql_where])
         val = execute_sql_query(sql)
 
         return val
@@ -109,7 +113,7 @@ class SQLQuery:
         return joins
 
     @staticmethod
-    def generate_gather_clause(aggregator, table=None, prop=None):
+    def generate_gather_clause(aggregator, table=None, prop=None, root=None):
         """
 
         :param aggregator:
@@ -117,15 +121,28 @@ class SQLQuery:
         :param prop:
         :return:
         """
+        group = None
         if aggregator == "_get":
             select = SQL("{table}.{column} -> {field}").format(table=Identifier(table),
                                                                column=Identifier("_props"),
                                                                field=Literal(prop))
         elif aggregator == "count":
             select = SQL("COUNT(*)")
+        elif aggregator == "set":
+            select = SQL("array_agg({table}.{column} -> {field}), {root}.{node_id}").format(
+                table=Identifier(table),
+                column=Identifier("_props"),
+                field=Literal(prop),
+                root=Identifier(root),
+                node_id=Identifier("node_id")
+            )
+            group = SQL("GROUP BY {root}.{field} ORDER_BY {root}.{node_id}").format(
+                root=Identifier(root),
+                node_id=Identifier("node_id")
+            )
         else:
             select = SQL("*")
-        return select
+        return select, group
 
     @staticmethod
     def order_tables(tables):

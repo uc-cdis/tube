@@ -23,7 +23,7 @@ class AggregatorValue(Value):
         fn = path["fn"]
 
         tables = self.get_table_list_from_path(self.parser, self.doc_type, path["path"])
-        val = self.sql[tables, fn, name, self.submitter_id]
+        val = self.sql[tables, fn, name, self.submitter_id, self.doc_type]
 
         if value_mapping:
             if value_mapping.value_mappings:
