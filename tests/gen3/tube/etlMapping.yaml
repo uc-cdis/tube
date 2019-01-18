@@ -59,6 +59,22 @@ mappings:
       - name: _metabolite_mass_spectrometries_count
         path: samples.aliquots.metabolite_mass_spectrometries
         fn: count
+      - name: _regimen_or_line_of_therapies
+        src: regimen_or_line_of_therapy
+        path: diagnoses.treatments
+        fn: set
+      - name: _type_of_resistances
+        src: type_of_resistance
+        path: diagnoses
+        fn: set
+      - name: _x_ray_count
+        src: x_ray_count
+        path: imaging_studies
+        fn: sum
+      - name: _ct_count
+        src: ct_count
+        path: imaging_studies
+        fn: sum
   - name: file
     doc_type: file
     type: collector
