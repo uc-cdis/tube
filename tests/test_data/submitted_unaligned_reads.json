@@ -1,296 +1,1090 @@
 [
-  {
-    "data_category": "Raw Sequencing Data",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "DNA Panel",
-    "data_format": "FASTQ",
-    "md5sum": "d7f39601b374af62c1b408deff18651a",
-    "file_size": 5,
-    "file_name": "xsS78pdn3Fui",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_001",
-    "read_groups": {
-      "submitter_id": "read_group_003"
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9fa2a916b0"
+        }, 
+        "data_category": "Sequencing Reads", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "9bad19f3f2", 
+        "file_size": 4, 
+        "md5sum": "1e0bb1006b6f089be46494bc030fbcb6", 
+        "mycobacterium_tuberculosis_lineage": "Unknown", 
+        "octal_spoligotype": "3f6aca3c1f", 
+        "source_organism": "9bf8ff079b", 
+        "submitter_id": "submitted_unaligned_reads_481ffa1bf3", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8d1ba44b26"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Low Pass WGS", 
+        "file_name": "43fb22cee0", 
+        "file_size": 83, 
+        "md5sum": "146d8f370981d8a2064d9105f62d1752", 
+        "mycobacterium_tuberculosis_lineage": "Unknown", 
+        "octal_spoligotype": "97108e9119", 
+        "source_organism": "9fc83a88ec", 
+        "submitter_id": "submitted_unaligned_reads_a1f7edc148", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_85903f277a"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "miRNA-Seq", 
+        "file_name": "2c19a0390c", 
+        "file_size": 15, 
+        "md5sum": "b4d778ba0bb56ed8937708c6d24debc2", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "934242029d", 
+        "source_organism": "ea4799d5b8", 
+        "submitter_id": "submitted_unaligned_reads_dc53817962", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2f2872593c"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "85906523b6", 
+        "file_size": 100, 
+        "md5sum": "4e2c6fd99cebba44828e48e699bf6282", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "4924704a82", 
+        "source_organism": "5c76c041fa", 
+        "submitter_id": "submitted_unaligned_reads_e3704fc0f5", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_c4a745aedb"
+        }, 
+        "data_category": "Sequencing Reads", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "07ba9b0c0f", 
+        "file_size": 27, 
+        "md5sum": "89e3e9ee973ce2ddba8e7d956ea52406", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "5bf5c1446e", 
+        "source_organism": "864be54c7d", 
+        "submitter_id": "submitted_unaligned_reads_96a2e26291", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_65cf0dc203"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "ce0e234b6f", 
+        "file_size": 11, 
+        "md5sum": "cc1b7a672f965a41bb6ddb91e70ec827", 
+        "mycobacterium_tuberculosis_lineage": "Unknown", 
+        "octal_spoligotype": "3437752d8c", 
+        "source_organism": "5c184b233f", 
+        "submitter_id": "submitted_unaligned_reads_83b7eb65dd", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_3975abef9f"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Low Pass WGS", 
+        "file_name": "6f57239345", 
+        "file_size": 22, 
+        "md5sum": "c3220f512ccbfd3280748667f3f23eac", 
+        "mycobacterium_tuberculosis_lineage": "Unknown", 
+        "octal_spoligotype": "b883724c64", 
+        "source_organism": "83d320fed1", 
+        "submitter_id": "submitted_unaligned_reads_d74d48c896", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a3da392eb2"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Validation", 
+        "file_name": "af3ba1a9e7", 
+        "file_size": 15, 
+        "md5sum": "1f4cf6f8249fa39be4465d5683f3f405", 
+        "mycobacterium_tuberculosis_lineage": "T1", 
+        "octal_spoligotype": "18e68085c3", 
+        "source_organism": "4c986fa6ef", 
+        "submitter_id": "submitted_unaligned_reads_3c978fa61b", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_376ed10db2"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "WXS", 
+        "file_name": "46f21d808b", 
+        "file_size": 12, 
+        "md5sum": "6d099aec101cf33ea234b29668e3925c", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "997e5f5872", 
+        "source_organism": "574be68346", 
+        "submitter_id": "submitted_unaligned_reads_3a9b30d7dd", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_db3c1a52a2"
+        }, 
+        "data_category": "Sequencing Reads", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Low Pass WGS", 
+        "file_name": "aa185d16e2", 
+        "file_size": 56, 
+        "md5sum": "7473b2f578997a00a0da585f89cbf92c", 
+        "mycobacterium_tuberculosis_lineage": "T5-RUS1", 
+        "octal_spoligotype": "f0dae07693", 
+        "source_organism": "a781091918", 
+        "submitter_id": "submitted_unaligned_reads_d27e095483", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1a28f4fce4"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "06332fa5d3", 
+        "file_size": 59, 
+        "md5sum": "caa9bb512270658540e6734e5c51e00d", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "5875919b4c", 
+        "source_organism": "463cd595ca", 
+        "submitter_id": "submitted_unaligned_reads_8c64bb0c52", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_57071bd3bf"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Validation", 
+        "file_name": "7f6a718db9", 
+        "file_size": 3, 
+        "md5sum": "b6cd3b4960c2872e6d47d03b60db3755", 
+        "mycobacterium_tuberculosis_lineage": "T5-RUS1", 
+        "octal_spoligotype": "e807a22310", 
+        "source_organism": "28cab7acf2", 
+        "submitter_id": "submitted_unaligned_reads_0ec2d20e3c", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1f5129d17f"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "RNA-Seq", 
+        "file_name": "62ca054ee4", 
+        "file_size": 75, 
+        "md5sum": "39a86f45a00b658033824cece7f3dbda", 
+        "mycobacterium_tuberculosis_lineage": "T5-RUS1", 
+        "octal_spoligotype": "58eae94f06", 
+        "source_organism": "8faa942689", 
+        "submitter_id": "submitted_unaligned_reads_b4fc136fa7", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9fa2a916b0"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "WXS", 
+        "file_name": "f86cd84725", 
+        "file_size": 97, 
+        "md5sum": "2d3f68481562d91713e4e5be6811bdaa", 
+        "mycobacterium_tuberculosis_lineage": "T5-RUS1", 
+        "octal_spoligotype": "2b9be69494", 
+        "source_organism": "92d54863f9", 
+        "submitter_id": "submitted_unaligned_reads_1f49cb85e3", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_80fb876198"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "DNA Panel", 
+        "file_name": "a7909a410b", 
+        "file_size": 47, 
+        "md5sum": "6ed71b811f80f525c71a74930cdeea57", 
+        "mycobacterium_tuberculosis_lineage": "Unknown", 
+        "octal_spoligotype": "2e74e4fa1d", 
+        "source_organism": "b8a88f696b", 
+        "submitter_id": "submitted_unaligned_reads_decd5726b1", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_e74f11ea34"
+        }, 
+        "data_category": "Sequencing Reads", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Low Pass WGS", 
+        "file_name": "95264084c9", 
+        "file_size": 55, 
+        "md5sum": "dfc4b6a381d3c666aba7128ef0c47559", 
+        "mycobacterium_tuberculosis_lineage": "T5-RUS1", 
+        "octal_spoligotype": "9693152ba5", 
+        "source_organism": "1e3dd6960a", 
+        "submitter_id": "submitted_unaligned_reads_a08efd4ec5", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_3b85557510"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "RNA-Seq", 
+        "file_name": "3e3d7de778", 
+        "file_size": 90, 
+        "md5sum": "c865f956398ada9e7366a159d347ccf1", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "368945725e", 
+        "source_organism": "c6cf2aba07", 
+        "submitter_id": "submitted_unaligned_reads_c0928c8167", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_01f3aa5ac0"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "RNA-Seq", 
+        "file_name": "e8d3cd7378", 
+        "file_size": 43, 
+        "md5sum": "a2c176211d16ea73bd72ec205f1ba3e0", 
+        "mycobacterium_tuberculosis_lineage": "T5-RUS1", 
+        "octal_spoligotype": "364c86a41f", 
+        "source_organism": "c933641507", 
+        "submitter_id": "submitted_unaligned_reads_1f8b0e35b6", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a3d0256ed5"
+        }, 
+        "data_category": "Sequencing Reads", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "RNA-Seq", 
+        "file_name": "e5fa868e3f", 
+        "file_size": 11, 
+        "md5sum": "0c37827fea23031eb8663e4730048ef1", 
+        "mycobacterium_tuberculosis_lineage": "T1", 
+        "octal_spoligotype": "c8ae557087", 
+        "source_organism": "2497919b2f", 
+        "submitter_id": "submitted_unaligned_reads_d797156d9c", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9fa2a916b0"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Low Pass WGS", 
+        "file_name": "da310080aa", 
+        "file_size": 99, 
+        "md5sum": "0e20b9e70f9241db937c9abd8662239e", 
+        "mycobacterium_tuberculosis_lineage": "Unknown", 
+        "octal_spoligotype": "6cb77d1f3b", 
+        "source_organism": "86109130c7", 
+        "submitter_id": "submitted_unaligned_reads_3be1e4e17b", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1a28f4fce4"
+        }, 
+        "data_category": "Sequencing Reads", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "RNA-Seq", 
+        "file_name": "673a8ca5d4", 
+        "file_size": 95, 
+        "md5sum": "df97f8f42c630515e190b33a709e30e0", 
+        "mycobacterium_tuberculosis_lineage": "Unknown", 
+        "octal_spoligotype": "4e476044be", 
+        "source_organism": "e8c648ec59", 
+        "submitter_id": "submitted_unaligned_reads_fb03ce4cb2", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_bfeaa8476f"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Validation", 
+        "file_name": "b3c5cf6f8d", 
+        "file_size": 11, 
+        "md5sum": "7a87d5f33b7421448c239628532f38a1", 
+        "mycobacterium_tuberculosis_lineage": "Unknown", 
+        "octal_spoligotype": "dc0cc56efd", 
+        "source_organism": "c1bbdfedfa", 
+        "submitter_id": "submitted_unaligned_reads_b6f5d3c17d", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9fc4e81f11"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "miRNA-Seq", 
+        "file_name": "6e94e7fddc", 
+        "file_size": 76, 
+        "md5sum": "7f4da619d8d5bae819626c309851fb1a", 
+        "mycobacterium_tuberculosis_lineage": "Unknown", 
+        "octal_spoligotype": "b4a07cb2aa", 
+        "source_organism": "39914671bd", 
+        "submitter_id": "submitted_unaligned_reads_064496e9d7", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9e9289954a"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Low Pass WGS", 
+        "file_name": "3b2301c0e1", 
+        "file_size": 86, 
+        "md5sum": "ec0fabd86474077a32da68a142a3cefa", 
+        "mycobacterium_tuberculosis_lineage": "T1", 
+        "octal_spoligotype": "ac47c80f70", 
+        "source_organism": "1d96873249", 
+        "submitter_id": "submitted_unaligned_reads_0ac67874cc", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8d1ba44b26"
+        }, 
+        "data_category": "Sequencing Reads", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "miRNA-Seq", 
+        "file_name": "9c919bfad8", 
+        "file_size": 6, 
+        "md5sum": "b78d35c461c27fec40c9086528a572d5", 
+        "mycobacterium_tuberculosis_lineage": "Unknown", 
+        "octal_spoligotype": "7f8b602063", 
+        "source_organism": "41dbc30b1d", 
+        "submitter_id": "submitted_unaligned_reads_1fcc64ad37", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1f5129d17f"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "miRNA-Seq", 
+        "file_name": "860d53ca56", 
+        "file_size": 43, 
+        "md5sum": "f71389225f2c8632b7608874a7fcc230", 
+        "mycobacterium_tuberculosis_lineage": "T1", 
+        "octal_spoligotype": "bf8a1f1dbe", 
+        "source_organism": "af2abc0eb4", 
+        "submitter_id": "submitted_unaligned_reads_06b088c1a3", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a3da392eb2"
+        }, 
+        "data_category": "Sequencing Reads", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "WXS", 
+        "file_name": "8393640616", 
+        "file_size": 23, 
+        "md5sum": "c30a4a9c3773fd81f5c560c4ed7c429c", 
+        "mycobacterium_tuberculosis_lineage": "T5-RUS1", 
+        "octal_spoligotype": "c7f990e993", 
+        "source_organism": "d17585ec3c", 
+        "submitter_id": "submitted_unaligned_reads_0152f3a8df", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_687c809f58"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "WGS", 
+        "file_name": "fd0d754b48", 
+        "file_size": 29, 
+        "md5sum": "56306137243e2d7e87ab1b082c0c3b1c", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "4cd55991c2", 
+        "source_organism": "c9c634b11e", 
+        "submitter_id": "submitted_unaligned_reads_d68e3d4f64", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b20b632a1b"
+        }, 
+        "data_category": "Sequencing Reads", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "miRNA-Seq", 
+        "file_name": "b148b0b5a4", 
+        "file_size": 6, 
+        "md5sum": "2889116c7f4e460958402a720490dcef", 
+        "mycobacterium_tuberculosis_lineage": "T1", 
+        "octal_spoligotype": "c82d3865b2", 
+        "source_organism": "4ccc7c6d1a", 
+        "submitter_id": "submitted_unaligned_reads_aa24f17944", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a0ee4dbbd4"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "1169df8b18", 
+        "file_size": 69, 
+        "md5sum": "686122ff8218bf48207cdeae4a386a44", 
+        "mycobacterium_tuberculosis_lineage": "Unknown", 
+        "octal_spoligotype": "532ac772a6", 
+        "source_organism": "06fb7d3736", 
+        "submitter_id": "submitted_unaligned_reads_651934aeda", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_f708f3beaa"
+        }, 
+        "data_category": "Sequencing Reads", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "DNA Panel", 
+        "file_name": "2267c326d3", 
+        "file_size": 96, 
+        "md5sum": "42e7ff0c1b019bbea012c7240354fcfd", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "84bac35f23", 
+        "source_organism": "79d4464231", 
+        "submitter_id": "submitted_unaligned_reads_a2a68849b9", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_457807d927"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "DNA Panel", 
+        "file_name": "33a49a9981", 
+        "file_size": 60, 
+        "md5sum": "a9eaed8d17bbd513108e275fea6f2f74", 
+        "mycobacterium_tuberculosis_lineage": "Unknown", 
+        "octal_spoligotype": "501116c2f3", 
+        "source_organism": "a04d8aab8a", 
+        "submitter_id": "submitted_unaligned_reads_1da9072052", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_0d509bedcd"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "DNA Panel", 
+        "file_name": "4f7f00ef70", 
+        "file_size": 77, 
+        "md5sum": "9b3fe31ae49e1084059469debe6e7fea", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "77864eabec", 
+        "source_organism": "0616594afd", 
+        "submitter_id": "submitted_unaligned_reads_29a860fd01", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_c4a745aedb"
+        }, 
+        "data_category": "Sequencing Reads", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "RNA-Seq", 
+        "file_name": "f125c80fb2", 
+        "file_size": 1, 
+        "md5sum": "99e3d1b6a620005cf41d074209d5c054", 
+        "mycobacterium_tuberculosis_lineage": "T5-RUS1", 
+        "octal_spoligotype": "7a79e9bf3e", 
+        "source_organism": "b51e710c2b", 
+        "submitter_id": "submitted_unaligned_reads_dd8fc33db7", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_bef2e8df82"
+        }, 
+        "data_category": "Sequencing Reads", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "RNA-Seq", 
+        "file_name": "55bfa0b051", 
+        "file_size": 27, 
+        "md5sum": "f1e40fa1f0111176da2a9d0319fe458b", 
+        "mycobacterium_tuberculosis_lineage": "T5-RUS1", 
+        "octal_spoligotype": "dc01fdf6e2", 
+        "source_organism": "f6d14ffaa1", 
+        "submitter_id": "submitted_unaligned_reads_47a9a94c97", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2c4453ff06"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Low Pass WGS", 
+        "file_name": "fe0466d557", 
+        "file_size": 4, 
+        "md5sum": "7c41d744780d21dcbea98f6d9009bb50", 
+        "mycobacterium_tuberculosis_lineage": "T5-RUS1", 
+        "octal_spoligotype": "500aebb197", 
+        "source_organism": "1025f75d1b", 
+        "submitter_id": "submitted_unaligned_reads_77b6c4fbfb", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9fc4e81f11"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "miRNA-Seq", 
+        "file_name": "e55b9578b4", 
+        "file_size": 73, 
+        "md5sum": "a09f11c88ffe31625d765a2cfb270680", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "241b87f078", 
+        "source_organism": "f5bf40116b", 
+        "submitter_id": "submitted_unaligned_reads_ecafd7e169", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1a28f4fce4"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "miRNA-Seq", 
+        "file_name": "378f0ad50c", 
+        "file_size": 47, 
+        "md5sum": "0ef02df280bbaf5ebe10e6124248cadc", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "711533c24b", 
+        "source_organism": "e678cac952", 
+        "submitter_id": "submitted_unaligned_reads_9dcc7cd9a8", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_7728dd70cc"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "WXS", 
+        "file_name": "7fa448a903", 
+        "file_size": 78, 
+        "md5sum": "8d48a0b08c5db379a26b6f88fd3f94c1", 
+        "mycobacterium_tuberculosis_lineage": "T5-RUS1", 
+        "octal_spoligotype": "51e81d25a8", 
+        "source_organism": "c94f5652ea", 
+        "submitter_id": "submitted_unaligned_reads_24328ae7c3", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_420fed97f8"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Low Pass WGS", 
+        "file_name": "206fbdcba3", 
+        "file_size": 13, 
+        "md5sum": "70ed0de883c75b9ebc375240f391e068", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "19aa353787", 
+        "source_organism": "044140d11d", 
+        "submitter_id": "submitted_unaligned_reads_0aee0095c9", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2f865cfb95"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "miRNA-Seq", 
+        "file_name": "15b3b91b2e", 
+        "file_size": 9, 
+        "md5sum": "f10fb9f2d933ee54d0ff5160f8875942", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "96af3b077c", 
+        "source_organism": "33e0cc90e4", 
+        "submitter_id": "submitted_unaligned_reads_b107fb4570", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d69262a9ea"
+        }, 
+        "data_category": "Sequencing Reads", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Validation", 
+        "file_name": "9aaf097b0d", 
+        "file_size": 19, 
+        "md5sum": "7fda32bc32ee0000d151ba4abbe68933", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "55fd4e8885", 
+        "source_organism": "e950616898", 
+        "submitter_id": "submitted_unaligned_reads_8a5bcecf92", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_034fb2331c"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "f452f49ac8", 
+        "file_size": 96, 
+        "md5sum": "bc2ae36a40110114136b94720141852f", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "83b9a9a26e", 
+        "source_organism": "5487458f42", 
+        "submitter_id": "submitted_unaligned_reads_7f8c7c3613", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9fc4e81f11"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "cddd5f5e27", 
+        "file_size": 98, 
+        "md5sum": "e01b593edc804a6c2dfac391832ac5dc", 
+        "mycobacterium_tuberculosis_lineage": "Unknown", 
+        "octal_spoligotype": "87b8d4a9a7", 
+        "source_organism": "c8af3e7d46", 
+        "submitter_id": "submitted_unaligned_reads_a16f364e3d", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_3975abef9f"
+        }, 
+        "data_category": "Sequencing Reads", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "c8c3695d57", 
+        "file_size": 40, 
+        "md5sum": "fa1a1ec8088643b08bcb922494152687", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "668cc06c4a", 
+        "source_organism": "12a8d13876", 
+        "submitter_id": "submitted_unaligned_reads_7a58b40daa", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a0ee4dbbd4"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "RNA-Seq", 
+        "file_name": "848a6ba8d0", 
+        "file_size": 42, 
+        "md5sum": "c5625dab7ddd1b542ba25cd23ac4ec08", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "979735fe60", 
+        "source_organism": "a0cae06f2c", 
+        "submitter_id": "submitted_unaligned_reads_9942abe287", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_cfb673cd63"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "e282903351", 
+        "file_size": 88, 
+        "md5sum": "dae9d215933fb451c2421a970b8d0c0f", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "b0bbe968b5", 
+        "source_organism": "f1f1a89caa", 
+        "submitter_id": "submitted_unaligned_reads_0f5879948b", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b46e7e9524"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "1d1676f925", 
+        "file_size": 74, 
+        "md5sum": "2791d8bd206d06bef913b63989aeff07", 
+        "mycobacterium_tuberculosis_lineage": "Unknown", 
+        "octal_spoligotype": "531596620c", 
+        "source_organism": "76dbea293a", 
+        "submitter_id": "submitted_unaligned_reads_4b99202405", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_e1e3de70ac"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "WXS", 
+        "file_name": "ed9c37924b", 
+        "file_size": 98, 
+        "md5sum": "a17d039060c50507669942a87e02b6c4", 
+        "mycobacterium_tuberculosis_lineage": "Unknown", 
+        "octal_spoligotype": "1f40d9f4f3", 
+        "source_organism": "1348c6b675", 
+        "submitter_id": "submitted_unaligned_reads_acf2d417fa", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_45b9ccf2e1"
+        }, 
+        "data_category": "Sequencing Reads", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "miRNA-Seq", 
+        "file_name": "a30887f914", 
+        "file_size": 94, 
+        "md5sum": "34a4bb61ed57db1fb2ff233c0a3e1a7e", 
+        "mycobacterium_tuberculosis_lineage": "Unknown", 
+        "octal_spoligotype": "1c615b9cbc", 
+        "source_organism": "2631b7a781", 
+        "submitter_id": "submitted_unaligned_reads_7632c68852", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b94b7f9edf"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "WGS", 
+        "file_name": "4e6747a1b0", 
+        "file_size": 69, 
+        "md5sum": "e74f84b7a6c5f15940d9c9145a1bbeb0", 
+        "mycobacterium_tuberculosis_lineage": "T5-RUS1", 
+        "octal_spoligotype": "afae1958ff", 
+        "source_organism": "52ba92df2e", 
+        "submitter_id": "submitted_unaligned_reads_10a7db33d1", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_f978503490"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "DNA Panel", 
+        "file_name": "7ab1665ddd", 
+        "file_size": 64, 
+        "md5sum": "3e5b26c5079cf4acb67c2c7d26b0a458", 
+        "mycobacterium_tuberculosis_lineage": "T5-RUS1", 
+        "octal_spoligotype": "e768ec2001", 
+        "source_organism": "c7f8cb3476", 
+        "submitter_id": "submitted_unaligned_reads_d9616fc9e9", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_376ed10db2"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "2758d3ade0", 
+        "file_size": 100, 
+        "md5sum": "65263a7d85508eb5f3516571b5741127", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "f4fc8a4581", 
+        "source_organism": "8cdd185b19", 
+        "submitter_id": "submitted_unaligned_reads_a90eca404c", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_db3c1a52a2"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "RNA-Seq", 
+        "file_name": "0e22a8ed92", 
+        "file_size": 17, 
+        "md5sum": "7f5e525285346ba68928eadadbae50ba", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "7cf2816f18", 
+        "source_organism": "45b600125c", 
+        "submitter_id": "submitted_unaligned_reads_38e7b907c0", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d68fd01d93"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "DNA Panel", 
+        "file_name": "95de8de6a5", 
+        "file_size": 55, 
+        "md5sum": "f89fbb0e11721bd45f2b756d1fdda112", 
+        "mycobacterium_tuberculosis_lineage": "Unknown", 
+        "octal_spoligotype": "9d2fbe1ccd", 
+        "source_organism": "a71290ac5b", 
+        "submitter_id": "submitted_unaligned_reads_4dd675f781", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_83a0afebd2"
+        }, 
+        "data_category": "Sequencing Reads", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "81fd69ed5e", 
+        "file_size": 58, 
+        "md5sum": "58c530c0157d5a26d83a602e8366821e", 
+        "mycobacterium_tuberculosis_lineage": "T5-RUS1", 
+        "octal_spoligotype": "0731e9a92a", 
+        "source_organism": "9d09cb19e3", 
+        "submitter_id": "submitted_unaligned_reads_25f4a11040", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_376ed10db2"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "WGS", 
+        "file_name": "dab0ce7952", 
+        "file_size": 93, 
+        "md5sum": "39c19d5f8f979a604c4aaadfd7d87054", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "7ccbdb6563", 
+        "source_organism": "b59b66b5c8", 
+        "submitter_id": "submitted_unaligned_reads_d19df254b8", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_3975abef9f"
+        }, 
+        "data_category": "Sequencing Reads", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "DNA Panel", 
+        "file_name": "97aa0b1675", 
+        "file_size": 85, 
+        "md5sum": "6c03f4db549993cf175a3aa9644b159d", 
+        "mycobacterium_tuberculosis_lineage": "T1", 
+        "octal_spoligotype": "47a7538497", 
+        "source_organism": "7ee329584d", 
+        "submitter_id": "submitted_unaligned_reads_4d5741028e", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a3d0256ed5"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Validation", 
+        "file_name": "61b8142752", 
+        "file_size": 37, 
+        "md5sum": "a3407d8e11086c802ed9837e01bcce88", 
+        "mycobacterium_tuberculosis_lineage": "T1", 
+        "octal_spoligotype": "a205be8bda", 
+        "source_organism": "bad3b486ea", 
+        "submitter_id": "submitted_unaligned_reads_adfa4123b3", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_db3c1a52a2"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "WGS", 
+        "file_name": "e1c468be69", 
+        "file_size": 97, 
+        "md5sum": "e4568580adadd44126d07e21460574ab", 
+        "mycobacterium_tuberculosis_lineage": "Beijing", 
+        "octal_spoligotype": "c35ad3b575", 
+        "source_organism": "697fe44577", 
+        "submitter_id": "submitted_unaligned_reads_5eb1dcc953", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_e1e3de70ac"
+        }, 
+        "data_category": "Sequencing Reads", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "DNA Panel", 
+        "file_name": "56bd858cb8", 
+        "file_size": 96, 
+        "md5sum": "02a5426230445f47b5b5ec8a36ccb9d8", 
+        "mycobacterium_tuberculosis_lineage": "Unknown", 
+        "octal_spoligotype": "4c6398b3fd", 
+        "source_organism": "d6eb8ac80d", 
+        "submitter_id": "submitted_unaligned_reads_2881c478f6", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a3da392eb2"
+        }, 
+        "data_category": "Sequencing Data", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "7a2f25fe3e", 
+        "file_size": 12, 
+        "md5sum": "be921b5a0abf08c93137f225b6cf30c0", 
+        "mycobacterium_tuberculosis_lineage": "T1", 
+        "octal_spoligotype": "058eb97aca", 
+        "source_organism": "f1ec9fcb48", 
+        "submitter_id": "submitted_unaligned_reads_9ef517677d", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d68fd01d93"
+        }, 
+        "data_category": "Sequencing Reads", 
+        "data_format": "BAM", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "RNA-Seq", 
+        "file_name": "82fdfbd649", 
+        "file_size": 86, 
+        "md5sum": "6f6eea210de7dd8f9da09ef3f019c0ea", 
+        "mycobacterium_tuberculosis_lineage": "T5-RUS1", 
+        "octal_spoligotype": "424630da31", 
+        "source_organism": "a738b2db73", 
+        "submitter_id": "submitted_unaligned_reads_4f1f79edef", 
+        "type": "submitted_unaligned_reads"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_27d251a833"
+        }, 
+        "data_category": "Raw Sequencing Data", 
+        "data_format": "FASTQ", 
+        "data_type": "Unaligned Reads", 
+        "experimental_strategy": "Validation", 
+        "file_name": "7fef630843", 
+        "file_size": 63, 
+        "md5sum": "38b6451bdcc9348a1a10923250c73384", 
+        "mycobacterium_tuberculosis_lineage": "T1", 
+        "octal_spoligotype": "1c93b93d47", 
+        "source_organism": "91184d4485", 
+        "submitter_id": "submitted_unaligned_reads_dad3485e83", 
+        "type": "submitted_unaligned_reads"
     }
-  },
-  {
-    "data_category": "Raw Sequencing Data",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "RNA-Seq",
-    "data_format": "BAM",
-    "md5sum": "271f731a9eb8d2abb7ed3b0004753b93",
-    "file_size": 7,
-    "file_name": "ca1SBKoc89ao",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_002",
-    "read_groups": {
-      "submitter_id": "read_group_0021"
-    }
-  },
-  {
-    "data_category": "Raw Sequencing Data",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "DNA Panel",
-    "data_format": "FASTQ",
-    "md5sum": "bb009e8a811326db046069cf2a86e17c",
-    "file_size": 5,
-    "file_name": "Yj8Af3NOlmBp",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_003",
-    "read_groups": {
-      "submitter_id": "read_group_0016"
-    }
-  },
-  {
-    "data_category": "Sequencing Data",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "Low Pass WGS",
-    "data_format": "FASTQ",
-    "md5sum": "2538ec6e2bda8805db19bb6228adba1f",
-    "file_size": 5,
-    "file_name": "DX4hsHX8aZSh",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_004",
-    "read_groups": {
-      "submitter_id": "read_group_008"
-    }
-  },
-  {
-    "data_category": "Sequencing Reads",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "Validation",
-    "data_format": "FASTQ",
-    "md5sum": "23fbed078c997e661c2853cb5e62f666",
-    "file_size": 6,
-    "file_name": "9yWpk0PzrSMG",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_005",
-    "read_groups": {
-      "submitter_id": "read_group_0022"
-    }
-  },
-  {
-    "data_category": "Sequencing Reads",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "WXS",
-    "data_format": "FASTQ",
-    "md5sum": "b3834fe6d154327f8395a8475b09eafe",
-    "file_size": 3,
-    "file_name": "1PScVtIAPao6",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_006",
-    "read_groups": {
-      "submitter_id": "read_group_0019"
-    }
-  },
-  {
-    "data_category": "Sequencing Reads",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "Validation",
-    "data_format": "BAM",
-    "md5sum": "6690853d9102895f87c21b1bc262c88c",
-    "file_size": 4,
-    "file_name": "Ehy32cDVsWLe",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_007",
-    "read_groups": {
-      "submitter_id": "read_group_0022"
-    }
-  },
-  {
-    "data_category": "Sequencing Reads",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "Validation",
-    "data_format": "BAM",
-    "md5sum": "daeea32301fa51f957d5affb6c6fa5f8",
-    "file_size": 4,
-    "file_name": "5d5I13q8R9E8",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_008",
-    "read_groups": {
-      "submitter_id": "read_group_009"
-    }
-  },
-  {
-    "data_category": "Sequencing Data",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "miRNA-Seq",
-    "data_format": "BAM",
-    "md5sum": "7f783e737e479ab7e9e3dde69372a0cb",
-    "file_size": 8,
-    "file_name": "GLn5qL9PHPa2",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_009",
-    "read_groups": {
-      "submitter_id": "read_group_0017"
-    }
-  },
-  {
-    "data_category": "Raw Sequencing Data",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "RNA-Seq",
-    "data_format": "BAM",
-    "md5sum": "777d509873d56ed4a5306db2b30f1b4f",
-    "file_size": 8,
-    "file_name": "OXOwgQ1sQXpc",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_0010",
-    "read_groups": {
-      "submitter_id": "read_group_0022"
-    }
-  },
-  {
-    "data_category": "Sequencing Reads",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "WXS",
-    "data_format": "FASTQ",
-    "md5sum": "e27129ede5492e94d860a49dea14feab",
-    "file_size": 4,
-    "file_name": "zYH5qa08Ckl8",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_0011",
-    "read_groups": {
-      "submitter_id": "read_group_004"
-    }
-  },
-  {
-    "data_category": "Raw Sequencing Data",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "Validation",
-    "data_format": "FASTQ",
-    "md5sum": "c19736822fb48fde48bc13603f770c91",
-    "file_size": 6,
-    "file_name": "KosQnSX03Wud",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_0012",
-    "read_groups": {
-      "submitter_id": "read_group_001"
-    }
-  },
-  {
-    "data_category": "Sequencing Data",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "Validation",
-    "data_format": "BAM",
-    "md5sum": "7cdee2e9500713f6bd407738402b2c91",
-    "file_size": 3,
-    "file_name": "AMqwEuJ77JBJ",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_0013",
-    "read_groups": {
-      "submitter_id": "read_group_0021"
-    }
-  },
-  {
-    "data_category": "Raw Sequencing Data",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "WGS",
-    "data_format": "BAM",
-    "md5sum": "ab02af83cfce8a3942885d2441da3090",
-    "file_size": 2,
-    "file_name": "YtVyTH8MDdFb",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_0014",
-    "read_groups": {
-      "submitter_id": "read_group_001"
-    }
-  },
-  {
-    "data_category": "Raw Sequencing Data",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "WXS",
-    "data_format": "BAM",
-    "md5sum": "8a0c3369abb563e7c8a7dc47d5defe81",
-    "file_size": 4,
-    "file_name": "QCAHTHaQ9NG2",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_0015",
-    "read_groups": {
-      "submitter_id": "read_group_0013"
-    }
-  },
-  {
-    "data_category": "Raw Sequencing Data",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "Total RNA-Seq",
-    "data_format": "FASTQ",
-    "md5sum": "644c0b496acfa0c1f2677ad70a9fa404",
-    "file_size": 3,
-    "file_name": "zv8Y1pV16ddq",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_0016",
-    "read_groups": {
-      "submitter_id": "read_group_0018"
-    }
-  },
-  {
-    "data_category": "Sequencing Reads",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "RNA-Seq",
-    "data_format": "FASTQ",
-    "md5sum": "1051ca5332dc39c9a6a1d013d1079e2b",
-    "file_size": 5,
-    "file_name": "PgQcFg1XKPWS",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_0017",
-    "read_groups": {
-      "submitter_id": "read_group_008"
-    }
-  },
-  {
-    "data_category": "Sequencing Data",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "WXS",
-    "data_format": "BAM",
-    "md5sum": "a48bb97a33dac84c744e749ea48f9cb5",
-    "file_size": 2,
-    "file_name": "WRvHHgA50LRT",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_0018",
-    "read_groups": {
-      "submitter_id": "read_group_003"
-    }
-  },
-  {
-    "data_category": "Sequencing Data",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "miRNA-Seq",
-    "data_format": "FASTQ",
-    "md5sum": "3f1d92f80c459e5f2a00fc6a0109a840",
-    "file_size": 5,
-    "file_name": "OSizNRRwcT9L",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_0019",
-    "read_groups": {
-      "submitter_id": "read_group_005"
-    }
-  },
-  {
-    "data_category": "Sequencing Reads",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "DNA Panel",
-    "data_format": "FASTQ",
-    "md5sum": "b976a9470689104c2d1e6b56f7252d40",
-    "file_size": 4,
-    "file_name": "MwEAcxNCVtCP",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_0020",
-    "read_groups": {
-      "submitter_id": "read_group_001"
-    }
-  },
-  {
-    "data_category": "Sequencing Data",
-    "data_type": "Unaligned Reads",
-    "experimental_strategy": "Total RNA-Seq",
-    "data_format": "FASTQ",
-    "md5sum": "470b76143f6ea1edebb6d0820a2510f2",
-    "file_size": 4,
-    "file_name": "BKI5TxvLELmf",
-    "type": "submitted_unaligned_reads",
-    "submitter_id": "submitted_unaligned_reads_0021",
-    "read_groups": {
-      "submitter_id": "read_group_0017"
-    }
-  }
 ]

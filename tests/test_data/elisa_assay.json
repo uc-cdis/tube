@@ -1,310 +1,1066 @@
 [
-  {
-    "comment": "taAnwsfjx0i3",
-    "analyte_preferred": "Pw8fvea0mwLs",
-    "value_reported": "tp8E0uB7yXLK",
-    "unit_preferred": "YmGNXfJMuSZV",
-    "unit_reported": "rIBrpIHme1t5",
-    "analyte_reported": "8wa0cvuCge8M",
-    "value_preferred": 12.6131,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_001",
-    "experiments": {
-      "submitter_id": "experiment_0022"
+    {
+        "analyte_preferred": "dd71dba54d", 
+        "analyte_reported": "66d94ebfed", 
+        "comment": "defd15adca", 
+        "experiments": {
+            "submitter_id": "experiment_6ad0de2c08"
+        }, 
+        "submitter_id": "elisa_assay_3d16852d72", 
+        "type": "elisa_assay", 
+        "unit_preferred": "cd44a9951e", 
+        "unit_reported": "2c861d6602", 
+        "value_preferred": 32.07743375953178, 
+        "value_reported": "2fc760333e"
+    }, 
+    {
+        "analyte_preferred": "d0a7a2b8f1", 
+        "analyte_reported": "7b7f2cbfac", 
+        "comment": "e28f52f267", 
+        "experiments": {
+            "submitter_id": "experiment_22c400b62b"
+        }, 
+        "submitter_id": "elisa_assay_ffb7146994", 
+        "type": "elisa_assay", 
+        "unit_preferred": "f8a5c6677c", 
+        "unit_reported": "7e7d26efc8", 
+        "value_preferred": 94.60088563973365, 
+        "value_reported": "1375785eea"
+    }, 
+    {
+        "analyte_preferred": "4776aef0ea", 
+        "analyte_reported": "45cab0f880", 
+        "comment": "bb38682fcf", 
+        "experiments": {
+            "submitter_id": "experiment_5d38ed1a50"
+        }, 
+        "submitter_id": "elisa_assay_4e35b436d5", 
+        "type": "elisa_assay", 
+        "unit_preferred": "991aa400aa", 
+        "unit_reported": "e5dfc35f70", 
+        "value_preferred": 38.88008541093315, 
+        "value_reported": "4cbe67f9e9"
+    }, 
+    {
+        "analyte_preferred": "12ab45baed", 
+        "analyte_reported": "ddffa54a05", 
+        "comment": "dad3f585d2", 
+        "experiments": {
+            "submitter_id": "experiment_8ae3bf3829"
+        }, 
+        "submitter_id": "elisa_assay_b949481c6e", 
+        "type": "elisa_assay", 
+        "unit_preferred": "0fdfda2b95", 
+        "unit_reported": "df58dc0ce7", 
+        "value_preferred": 59.09960277502726, 
+        "value_reported": "b27e280c26"
+    }, 
+    {
+        "analyte_preferred": "f0a7cf419f", 
+        "analyte_reported": "e4b857d248", 
+        "comment": "bb670e50f7", 
+        "experiments": {
+            "submitter_id": "experiment_8372292b73"
+        }, 
+        "submitter_id": "elisa_assay_f55946dabb", 
+        "type": "elisa_assay", 
+        "unit_preferred": "deee9c2d67", 
+        "unit_reported": "671931d13c", 
+        "value_preferred": 39.60825512785932, 
+        "value_reported": "74c9296ac3"
+    }, 
+    {
+        "analyte_preferred": "035a4d95bc", 
+        "analyte_reported": "a97e117635", 
+        "comment": "10b03376b8", 
+        "experiments": {
+            "submitter_id": "experiment_0d3e72cda0"
+        }, 
+        "submitter_id": "elisa_assay_6c2c4d9028", 
+        "type": "elisa_assay", 
+        "unit_preferred": "2555a6017e", 
+        "unit_reported": "8db728bedd", 
+        "value_preferred": 55.16534573663503, 
+        "value_reported": "638aafedc3"
+    }, 
+    {
+        "analyte_preferred": "e0d3d015ea", 
+        "analyte_reported": "18e47ec6b1", 
+        "comment": "44df120396", 
+        "experiments": {
+            "submitter_id": "experiment_cc6111a891"
+        }, 
+        "submitter_id": "elisa_assay_5bb318c514", 
+        "type": "elisa_assay", 
+        "unit_preferred": "77b953f996", 
+        "unit_reported": "5f604a3e91", 
+        "value_preferred": 47.148912618800345, 
+        "value_reported": "e480254e7f"
+    }, 
+    {
+        "analyte_preferred": "e09ac65408", 
+        "analyte_reported": "301336f2e7", 
+        "comment": "1e34c22c94", 
+        "experiments": {
+            "submitter_id": "experiment_652073ebc7"
+        }, 
+        "submitter_id": "elisa_assay_8a6e67ed1b", 
+        "type": "elisa_assay", 
+        "unit_preferred": "1047009387", 
+        "unit_reported": "7d3c8b4ec8", 
+        "value_preferred": 17.492286687516124, 
+        "value_reported": "905787705d"
+    }, 
+    {
+        "analyte_preferred": "b1bb65558d", 
+        "analyte_reported": "f595c8d653", 
+        "comment": "d95d650ed7", 
+        "experiments": {
+            "submitter_id": "experiment_286fe979fe"
+        }, 
+        "submitter_id": "elisa_assay_cf54289b06", 
+        "type": "elisa_assay", 
+        "unit_preferred": "e07edb2344", 
+        "unit_reported": "797cd129cd", 
+        "value_preferred": 18.632287033578855, 
+        "value_reported": "f14ee24b6d"
+    }, 
+    {
+        "analyte_preferred": "cc01c6a29f", 
+        "analyte_reported": "507da324fe", 
+        "comment": "4905fd5db0", 
+        "experiments": {
+            "submitter_id": "experiment_bbbbabf843"
+        }, 
+        "submitter_id": "elisa_assay_244e97aefe", 
+        "type": "elisa_assay", 
+        "unit_preferred": "2cbfd5d9dd", 
+        "unit_reported": "c869ed1c53", 
+        "value_preferred": 14.534425456652865, 
+        "value_reported": "28da0ddc85"
+    }, 
+    {
+        "analyte_preferred": "d2153831cd", 
+        "analyte_reported": "8a1c6ad1c5", 
+        "comment": "9e5b555f8d", 
+        "experiments": {
+            "submitter_id": "experiment_c20c36e57a"
+        }, 
+        "submitter_id": "elisa_assay_e77279522b", 
+        "type": "elisa_assay", 
+        "unit_preferred": "fee67f1acb", 
+        "unit_reported": "011f6881ee", 
+        "value_preferred": 18.86694572606483, 
+        "value_reported": "207d7731b1"
+    }, 
+    {
+        "analyte_preferred": "ac8ac89743", 
+        "analyte_reported": "4e99ad461d", 
+        "comment": "085753911c", 
+        "experiments": {
+            "submitter_id": "experiment_1399f7a739"
+        }, 
+        "submitter_id": "elisa_assay_70ecabbdb8", 
+        "type": "elisa_assay", 
+        "unit_preferred": "2415ce9844", 
+        "unit_reported": "12d726ef84", 
+        "value_preferred": 27.975451693262478, 
+        "value_reported": "cdb76f95df"
+    }, 
+    {
+        "analyte_preferred": "be12425073", 
+        "analyte_reported": "7f3a0adcda", 
+        "comment": "6d7621a003", 
+        "experiments": {
+            "submitter_id": "experiment_de042de4f2"
+        }, 
+        "submitter_id": "elisa_assay_4de0f1ee23", 
+        "type": "elisa_assay", 
+        "unit_preferred": "44fe680ca3", 
+        "unit_reported": "36681fcfba", 
+        "value_preferred": 4.159776216322797, 
+        "value_reported": "6abaff581e"
+    }, 
+    {
+        "analyte_preferred": "7ff6be5613", 
+        "analyte_reported": "581a2f3641", 
+        "comment": "1b7ede9783", 
+        "experiments": {
+            "submitter_id": "experiment_2e88d74f87"
+        }, 
+        "submitter_id": "elisa_assay_459fa51ce8", 
+        "type": "elisa_assay", 
+        "unit_preferred": "f5e653e042", 
+        "unit_reported": "4b838e67db", 
+        "value_preferred": 46.91130888734083, 
+        "value_reported": "d6444da9e7"
+    }, 
+    {
+        "analyte_preferred": "7cf7d73fb1", 
+        "analyte_reported": "191e5826fa", 
+        "comment": "9d91c3fd2f", 
+        "experiments": {
+            "submitter_id": "experiment_1efbd475f0"
+        }, 
+        "submitter_id": "elisa_assay_2d082a8147", 
+        "type": "elisa_assay", 
+        "unit_preferred": "f8f7029d36", 
+        "unit_reported": "0956833ded", 
+        "value_preferred": 84.12778130414998, 
+        "value_reported": "077cde8e50"
+    }, 
+    {
+        "analyte_preferred": "eebfe997e0", 
+        "analyte_reported": "28601adabb", 
+        "comment": "8c9dfb9418", 
+        "experiments": {
+            "submitter_id": "experiment_015fded8d2"
+        }, 
+        "submitter_id": "elisa_assay_a9577a3c41", 
+        "type": "elisa_assay", 
+        "unit_preferred": "57df128e08", 
+        "unit_reported": "3d15bdf34b", 
+        "value_preferred": 42.26157812178272, 
+        "value_reported": "d5598a7384"
+    }, 
+    {
+        "analyte_preferred": "2814741386", 
+        "analyte_reported": "b514cd6613", 
+        "comment": "1bb49464e1", 
+        "experiments": {
+            "submitter_id": "experiment_d14a38c354"
+        }, 
+        "submitter_id": "elisa_assay_cf6c0295d6", 
+        "type": "elisa_assay", 
+        "unit_preferred": "fbc29a67df", 
+        "unit_reported": "d6eb990057", 
+        "value_preferred": 34.90954067351797, 
+        "value_reported": "092696a069"
+    }, 
+    {
+        "analyte_preferred": "503a826fe1", 
+        "analyte_reported": "b88ef2021d", 
+        "comment": "2962939721", 
+        "experiments": {
+            "submitter_id": "experiment_6e55964547"
+        }, 
+        "submitter_id": "elisa_assay_03192caff7", 
+        "type": "elisa_assay", 
+        "unit_preferred": "1ed5dabc30", 
+        "unit_reported": "b9849c803a", 
+        "value_preferred": 97.96065455190194, 
+        "value_reported": "cf6b6f50e3"
+    }, 
+    {
+        "analyte_preferred": "204c2a1e46", 
+        "analyte_reported": "336da4fee1", 
+        "comment": "990f3fb685", 
+        "experiments": {
+            "submitter_id": "experiment_d14a38c354"
+        }, 
+        "submitter_id": "elisa_assay_5ac659e1f8", 
+        "type": "elisa_assay", 
+        "unit_preferred": "8074864625", 
+        "unit_reported": "bb2400d3d3", 
+        "value_preferred": 39.64864659650365, 
+        "value_reported": "2ea2348c11"
+    }, 
+    {
+        "analyte_preferred": "d43e547aad", 
+        "analyte_reported": "ecd79d3b61", 
+        "comment": "b70033164c", 
+        "experiments": {
+            "submitter_id": "experiment_22c400b62b"
+        }, 
+        "submitter_id": "elisa_assay_5311e5859a", 
+        "type": "elisa_assay", 
+        "unit_preferred": "c8af3afdfe", 
+        "unit_reported": "4855304381", 
+        "value_preferred": 12.034358028619263, 
+        "value_reported": "9a27cba2ba"
+    }, 
+    {
+        "analyte_preferred": "e1da9b8475", 
+        "analyte_reported": "f06aba48d8", 
+        "comment": "fb1869bcdf", 
+        "experiments": {
+            "submitter_id": "experiment_3c9ca91bcd"
+        }, 
+        "submitter_id": "elisa_assay_1d5f1f3b89", 
+        "type": "elisa_assay", 
+        "unit_preferred": "8028bb4bf6", 
+        "unit_reported": "72f5f2629d", 
+        "value_preferred": 72.44894438060754, 
+        "value_reported": "ae41ec7018"
+    }, 
+    {
+        "analyte_preferred": "03de98691d", 
+        "analyte_reported": "5e249c43a0", 
+        "comment": "590fdf1977", 
+        "experiments": {
+            "submitter_id": "experiment_725a56a9b1"
+        }, 
+        "submitter_id": "elisa_assay_6d65cbac9c", 
+        "type": "elisa_assay", 
+        "unit_preferred": "ce73da01fc", 
+        "unit_reported": "0ab9ae9295", 
+        "value_preferred": 59.26450656545295, 
+        "value_reported": "5d6023953e"
+    }, 
+    {
+        "analyte_preferred": "f22924dc64", 
+        "analyte_reported": "af74fdfea9", 
+        "comment": "487e36914f", 
+        "experiments": {
+            "submitter_id": "experiment_286fe979fe"
+        }, 
+        "submitter_id": "elisa_assay_dbb968b05c", 
+        "type": "elisa_assay", 
+        "unit_preferred": "bef322e857", 
+        "unit_reported": "2779ff5d5e", 
+        "value_preferred": 90.56987454105155, 
+        "value_reported": "74199687a4"
+    }, 
+    {
+        "analyte_preferred": "8b40b63e56", 
+        "analyte_reported": "c275a4c339", 
+        "comment": "e73b23044a", 
+        "experiments": {
+            "submitter_id": "experiment_5ab278cde8"
+        }, 
+        "submitter_id": "elisa_assay_665e6e53bd", 
+        "type": "elisa_assay", 
+        "unit_preferred": "9b44c145dd", 
+        "unit_reported": "5f66330548", 
+        "value_preferred": 94.6934305251966, 
+        "value_reported": "9c9dbc48b0"
+    }, 
+    {
+        "analyte_preferred": "61b24590be", 
+        "analyte_reported": "7c9c1aa5e6", 
+        "comment": "ed1ffa02d4", 
+        "experiments": {
+            "submitter_id": "experiment_764497e4b5"
+        }, 
+        "submitter_id": "elisa_assay_935c21c4da", 
+        "type": "elisa_assay", 
+        "unit_preferred": "1257850ab5", 
+        "unit_reported": "b81aff5174", 
+        "value_preferred": 76.43909545858062, 
+        "value_reported": "0f059b510d"
+    }, 
+    {
+        "analyte_preferred": "972268c0ad", 
+        "analyte_reported": "a3567ae80c", 
+        "comment": "12418d55e4", 
+        "experiments": {
+            "submitter_id": "experiment_511490e9e0"
+        }, 
+        "submitter_id": "elisa_assay_a8f7ac0eb1", 
+        "type": "elisa_assay", 
+        "unit_preferred": "64e8ed4f8e", 
+        "unit_reported": "ef3c6cf33a", 
+        "value_preferred": 89.51248380800425, 
+        "value_reported": "f8a897f262"
+    }, 
+    {
+        "analyte_preferred": "7833afec65", 
+        "analyte_reported": "342479d1e8", 
+        "comment": "82568871f1", 
+        "experiments": {
+            "submitter_id": "experiment_6e55964547"
+        }, 
+        "submitter_id": "elisa_assay_ec18f4b794", 
+        "type": "elisa_assay", 
+        "unit_preferred": "87f5ae3c80", 
+        "unit_reported": "69a7c79041", 
+        "value_preferred": 95.17594276486389, 
+        "value_reported": "1cc9562806"
+    }, 
+    {
+        "analyte_preferred": "5cc8771826", 
+        "analyte_reported": "22642b8302", 
+        "comment": "33f978c987", 
+        "experiments": {
+            "submitter_id": "experiment_652073ebc7"
+        }, 
+        "submitter_id": "elisa_assay_a519a029fc", 
+        "type": "elisa_assay", 
+        "unit_preferred": "5709538727", 
+        "unit_reported": "13b0eb7662", 
+        "value_preferred": 46.802099659751505, 
+        "value_reported": "579506d055"
+    }, 
+    {
+        "analyte_preferred": "eb2950894c", 
+        "analyte_reported": "40d2a7a1cb", 
+        "comment": "7f372c5e5f", 
+        "experiments": {
+            "submitter_id": "experiment_cc6111a891"
+        }, 
+        "submitter_id": "elisa_assay_8c27a6a29b", 
+        "type": "elisa_assay", 
+        "unit_preferred": "6335e63cd1", 
+        "unit_reported": "d3d57d32ef", 
+        "value_preferred": 10.925696649441763, 
+        "value_reported": "f1940e7174"
+    }, 
+    {
+        "analyte_preferred": "56afbd0401", 
+        "analyte_reported": "7571667641", 
+        "comment": "c5dbc9e283", 
+        "experiments": {
+            "submitter_id": "experiment_8ae3bf3829"
+        }, 
+        "submitter_id": "elisa_assay_dd81002cfb", 
+        "type": "elisa_assay", 
+        "unit_preferred": "233531b2c9", 
+        "unit_reported": "4a68c1288d", 
+        "value_preferred": 20.86906412675994, 
+        "value_reported": "ee0c2cea28"
+    }, 
+    {
+        "analyte_preferred": "43b78ecb9e", 
+        "analyte_reported": "a56a9ebb47", 
+        "comment": "739e151ebe", 
+        "experiments": {
+            "submitter_id": "experiment_d14a38c354"
+        }, 
+        "submitter_id": "elisa_assay_095bd3406c", 
+        "type": "elisa_assay", 
+        "unit_preferred": "43a30166a6", 
+        "unit_reported": "ba3b28e88e", 
+        "value_preferred": 59.03509693518297, 
+        "value_reported": "0535c10f82"
+    }, 
+    {
+        "analyte_preferred": "4e96ceea1c", 
+        "analyte_reported": "e5cad0f9d7", 
+        "comment": "a5eea28018", 
+        "experiments": {
+            "submitter_id": "experiment_207ddd9c7d"
+        }, 
+        "submitter_id": "elisa_assay_6136d90e20", 
+        "type": "elisa_assay", 
+        "unit_preferred": "aaf1e663dd", 
+        "unit_reported": "c6ccf032af", 
+        "value_preferred": 94.09060416758729, 
+        "value_reported": "36ad553724"
+    }, 
+    {
+        "analyte_preferred": "f89185c512", 
+        "analyte_reported": "d56dccdaf5", 
+        "comment": "abe5b53e9c", 
+        "experiments": {
+            "submitter_id": "experiment_deedad3c8b"
+        }, 
+        "submitter_id": "elisa_assay_36bd8e740d", 
+        "type": "elisa_assay", 
+        "unit_preferred": "576d31c3e7", 
+        "unit_reported": "8059101431", 
+        "value_preferred": 22.451383343748176, 
+        "value_reported": "684cd9002e"
+    }, 
+    {
+        "analyte_preferred": "27f34c5804", 
+        "analyte_reported": "39d0890586", 
+        "comment": "9e3d166f56", 
+        "experiments": {
+            "submitter_id": "experiment_725a56a9b1"
+        }, 
+        "submitter_id": "elisa_assay_34d586be86", 
+        "type": "elisa_assay", 
+        "unit_preferred": "a469429920", 
+        "unit_reported": "21e8d3bbe2", 
+        "value_preferred": 59.335305164005746, 
+        "value_reported": "2accf1006a"
+    }, 
+    {
+        "analyte_preferred": "b0bd37f3ef", 
+        "analyte_reported": "a8ce8da124", 
+        "comment": "346e2b7bbc", 
+        "experiments": {
+            "submitter_id": "experiment_9302fff55e"
+        }, 
+        "submitter_id": "elisa_assay_c585a7eaac", 
+        "type": "elisa_assay", 
+        "unit_preferred": "6f0baaec98", 
+        "unit_reported": "d639c02aec", 
+        "value_preferred": 95.46347185331491, 
+        "value_reported": "6ae400fe2d"
+    }, 
+    {
+        "analyte_preferred": "c7532627c4", 
+        "analyte_reported": "dc903c5c04", 
+        "comment": "21a8eff9d6", 
+        "experiments": {
+            "submitter_id": "experiment_47b39b9bed"
+        }, 
+        "submitter_id": "elisa_assay_8cec50bd0d", 
+        "type": "elisa_assay", 
+        "unit_preferred": "34771dc894", 
+        "unit_reported": "fa5083497b", 
+        "value_preferred": 99.01297486121018, 
+        "value_reported": "15a48755e1"
+    }, 
+    {
+        "analyte_preferred": "3b4b032929", 
+        "analyte_reported": "d449891b23", 
+        "comment": "7e629f7806", 
+        "experiments": {
+            "submitter_id": "experiment_66338672f2"
+        }, 
+        "submitter_id": "elisa_assay_6c2a9c238b", 
+        "type": "elisa_assay", 
+        "unit_preferred": "949442d18e", 
+        "unit_reported": "f349c0ff46", 
+        "value_preferred": 71.38189648581799, 
+        "value_reported": "5a2339bd8f"
+    }, 
+    {
+        "analyte_preferred": "3688493107", 
+        "analyte_reported": "85abbfd3fd", 
+        "comment": "55795be737", 
+        "experiments": {
+            "submitter_id": "experiment_ec1e1eec7f"
+        }, 
+        "submitter_id": "elisa_assay_cfc111108a", 
+        "type": "elisa_assay", 
+        "unit_preferred": "a167e387e6", 
+        "unit_reported": "80c9815e3b", 
+        "value_preferred": 57.15024359798514, 
+        "value_reported": "3e01146272"
+    }, 
+    {
+        "analyte_preferred": "1962cb7afa", 
+        "analyte_reported": "e389cf914b", 
+        "comment": "88608ae2cc", 
+        "experiments": {
+            "submitter_id": "experiment_5ab278cde8"
+        }, 
+        "submitter_id": "elisa_assay_5c480c4213", 
+        "type": "elisa_assay", 
+        "unit_preferred": "f5db65f13a", 
+        "unit_reported": "13a5a67f56", 
+        "value_preferred": 55.80878274459574, 
+        "value_reported": "d6c2c2b51a"
+    }, 
+    {
+        "analyte_preferred": "7ee3758da9", 
+        "analyte_reported": "86f785191a", 
+        "comment": "aeaac5f0a8", 
+        "experiments": {
+            "submitter_id": "experiment_0d3e72cda0"
+        }, 
+        "submitter_id": "elisa_assay_8b0d17f7b7", 
+        "type": "elisa_assay", 
+        "unit_preferred": "9ed4a4e5ac", 
+        "unit_reported": "86b516488e", 
+        "value_preferred": 91.65522375885828, 
+        "value_reported": "176ac5e20e"
+    }, 
+    {
+        "analyte_preferred": "ff5f35f408", 
+        "analyte_reported": "e9a427d767", 
+        "comment": "de1848951b", 
+        "experiments": {
+            "submitter_id": "experiment_2e88d74f87"
+        }, 
+        "submitter_id": "elisa_assay_b862908452", 
+        "type": "elisa_assay", 
+        "unit_preferred": "a3b95a6a6c", 
+        "unit_reported": "28a3863708", 
+        "value_preferred": 3.2135674421820637, 
+        "value_reported": "2299814e2a"
+    }, 
+    {
+        "analyte_preferred": "d4fba82030", 
+        "analyte_reported": "9b5a5f7818", 
+        "comment": "0726185d40", 
+        "experiments": {
+            "submitter_id": "experiment_2e88d74f87"
+        }, 
+        "submitter_id": "elisa_assay_24ac521d6b", 
+        "type": "elisa_assay", 
+        "unit_preferred": "b4c70e9b43", 
+        "unit_reported": "cf14f92b76", 
+        "value_preferred": 16.07622415516531, 
+        "value_reported": "23ca5fddf1"
+    }, 
+    {
+        "analyte_preferred": "58da3ccc49", 
+        "analyte_reported": "e89729ccdd", 
+        "comment": "b1b1343a60", 
+        "experiments": {
+            "submitter_id": "experiment_9302fff55e"
+        }, 
+        "submitter_id": "elisa_assay_2a5c93fba2", 
+        "type": "elisa_assay", 
+        "unit_preferred": "cd7d2c17ea", 
+        "unit_reported": "6a4a23ba72", 
+        "value_preferred": 59.183384278210674, 
+        "value_reported": "bbaf7d964d"
+    }, 
+    {
+        "analyte_preferred": "e79217206c", 
+        "analyte_reported": "b1502956aa", 
+        "comment": "b2f1ac53fc", 
+        "experiments": {
+            "submitter_id": "experiment_1931c0d22b"
+        }, 
+        "submitter_id": "elisa_assay_e1dc57dc58", 
+        "type": "elisa_assay", 
+        "unit_preferred": "0f27f53036", 
+        "unit_reported": "f8c7e64844", 
+        "value_preferred": 11.68015183419383, 
+        "value_reported": "6d6fc05ce1"
+    }, 
+    {
+        "analyte_preferred": "e74b8530b6", 
+        "analyte_reported": "4a1a4e27fd", 
+        "comment": "e8c59c19b1", 
+        "experiments": {
+            "submitter_id": "experiment_764497e4b5"
+        }, 
+        "submitter_id": "elisa_assay_4c0d91af1c", 
+        "type": "elisa_assay", 
+        "unit_preferred": "65deaad9cc", 
+        "unit_reported": "4debdfd1e1", 
+        "value_preferred": 75.51724252628279, 
+        "value_reported": "1f3fa0616d"
+    }, 
+    {
+        "analyte_preferred": "6595ffa9cb", 
+        "analyte_reported": "634f305be8", 
+        "comment": "085e40888c", 
+        "experiments": {
+            "submitter_id": "experiment_a8d0daf8f8"
+        }, 
+        "submitter_id": "elisa_assay_dc0aa0b5cd", 
+        "type": "elisa_assay", 
+        "unit_preferred": "660c419a8a", 
+        "unit_reported": "c534887315", 
+        "value_preferred": 27.91003700737732, 
+        "value_reported": "ad1ae615a7"
+    }, 
+    {
+        "analyte_preferred": "33e462fdb2", 
+        "analyte_reported": "2f3d963cde", 
+        "comment": "9734489a89", 
+        "experiments": {
+            "submitter_id": "experiment_ec1e1eec7f"
+        }, 
+        "submitter_id": "elisa_assay_c817520bde", 
+        "type": "elisa_assay", 
+        "unit_preferred": "5f54dc29b4", 
+        "unit_reported": "a372b7b8a4", 
+        "value_preferred": 2.2378621702619506, 
+        "value_reported": "c3c679bb20"
+    }, 
+    {
+        "analyte_preferred": "22b65a09f1", 
+        "analyte_reported": "3d5b002eb6", 
+        "comment": "8e7dd6f876", 
+        "experiments": {
+            "submitter_id": "experiment_725a56a9b1"
+        }, 
+        "submitter_id": "elisa_assay_e9671d08ab", 
+        "type": "elisa_assay", 
+        "unit_preferred": "6af2a82557", 
+        "unit_reported": "bc16fbf0a6", 
+        "value_preferred": 22.04551603272681, 
+        "value_reported": "3972a98dcd"
+    }, 
+    {
+        "analyte_preferred": "69f76a75b6", 
+        "analyte_reported": "48716268b8", 
+        "comment": "dc0f0f13d0", 
+        "experiments": {
+            "submitter_id": "experiment_bbbbabf843"
+        }, 
+        "submitter_id": "elisa_assay_dae3b636aa", 
+        "type": "elisa_assay", 
+        "unit_preferred": "8ef36312a3", 
+        "unit_reported": "9c044da495", 
+        "value_preferred": 10.959882018385914, 
+        "value_reported": "9a534ee03b"
+    }, 
+    {
+        "analyte_preferred": "138f9d22f6", 
+        "analyte_reported": "21f0894066", 
+        "comment": "0121cfb249", 
+        "experiments": {
+            "submitter_id": "experiment_ec1e1eec7f"
+        }, 
+        "submitter_id": "elisa_assay_31a411b934", 
+        "type": "elisa_assay", 
+        "unit_preferred": "bc8cc606fb", 
+        "unit_reported": "e3a18da477", 
+        "value_preferred": 60.45670688856583, 
+        "value_reported": "52bc1ee171"
+    }, 
+    {
+        "analyte_preferred": "1e518fd557", 
+        "analyte_reported": "90483d0d08", 
+        "comment": "a12d5ee74c", 
+        "experiments": {
+            "submitter_id": "experiment_d14a38c354"
+        }, 
+        "submitter_id": "elisa_assay_238ed87c5d", 
+        "type": "elisa_assay", 
+        "unit_preferred": "0cfd9a3fcc", 
+        "unit_reported": "f5ac75cdd2", 
+        "value_preferred": 55.84015337136624, 
+        "value_reported": "04ed000e31"
+    }, 
+    {
+        "analyte_preferred": "2bb37a4bfd", 
+        "analyte_reported": "44263bf02e", 
+        "comment": "0b079ead40", 
+        "experiments": {
+            "submitter_id": "experiment_2e88d74f87"
+        }, 
+        "submitter_id": "elisa_assay_1eca5858c1", 
+        "type": "elisa_assay", 
+        "unit_preferred": "1af5ec4868", 
+        "unit_reported": "6cac3e5596", 
+        "value_preferred": 27.082675217026985, 
+        "value_reported": "e4b3d8f57c"
+    }, 
+    {
+        "analyte_preferred": "f19c43090e", 
+        "analyte_reported": "2086d0c6a1", 
+        "comment": "407400b192", 
+        "experiments": {
+            "submitter_id": "experiment_6e55964547"
+        }, 
+        "submitter_id": "elisa_assay_de7f7d218c", 
+        "type": "elisa_assay", 
+        "unit_preferred": "e247632b38", 
+        "unit_reported": "419cd8cc7e", 
+        "value_preferred": 12.020091496722618, 
+        "value_reported": "e6fc8b7ec8"
+    }, 
+    {
+        "analyte_preferred": "309aadde83", 
+        "analyte_reported": "9f5c9eeee6", 
+        "comment": "000d152b17", 
+        "experiments": {
+            "submitter_id": "experiment_aeb7601403"
+        }, 
+        "submitter_id": "elisa_assay_8bf822bb6b", 
+        "type": "elisa_assay", 
+        "unit_preferred": "1530afc095", 
+        "unit_reported": "44cb3d40a7", 
+        "value_preferred": 48.49496114396192, 
+        "value_reported": "ad616cf4d0"
+    }, 
+    {
+        "analyte_preferred": "38c8c8a81d", 
+        "analyte_reported": "1a78cb1cdd", 
+        "comment": "4d83414b10", 
+        "experiments": {
+            "submitter_id": "experiment_1931c0d22b"
+        }, 
+        "submitter_id": "elisa_assay_551a88d1ed", 
+        "type": "elisa_assay", 
+        "unit_preferred": "4657ee74b1", 
+        "unit_reported": "a22edcb40a", 
+        "value_preferred": 4.261908231000766, 
+        "value_reported": "61fa0be407"
+    }, 
+    {
+        "analyte_preferred": "f8acb19356", 
+        "analyte_reported": "30e091dfcb", 
+        "comment": "15111a453b", 
+        "experiments": {
+            "submitter_id": "experiment_ec1e1eec7f"
+        }, 
+        "submitter_id": "elisa_assay_5de499e234", 
+        "type": "elisa_assay", 
+        "unit_preferred": "5db90d71c1", 
+        "unit_reported": "6f8387d749", 
+        "value_preferred": 5.621302012957763, 
+        "value_reported": "5a3fde9162"
+    }, 
+    {
+        "analyte_preferred": "8826faf8ff", 
+        "analyte_reported": "dc96b89c5f", 
+        "comment": "26e50aeaa2", 
+        "experiments": {
+            "submitter_id": "experiment_5065e6c22f"
+        }, 
+        "submitter_id": "elisa_assay_6ef751c504", 
+        "type": "elisa_assay", 
+        "unit_preferred": "65ae9aa7aa", 
+        "unit_reported": "674a9354e3", 
+        "value_preferred": 88.09121813991942, 
+        "value_reported": "c9071bbb62"
+    }, 
+    {
+        "analyte_preferred": "fb2656dfca", 
+        "analyte_reported": "6d3725422f", 
+        "comment": "e77c4865f4", 
+        "experiments": {
+            "submitter_id": "experiment_3c9ca91bcd"
+        }, 
+        "submitter_id": "elisa_assay_4a24398c74", 
+        "type": "elisa_assay", 
+        "unit_preferred": "117b46e44f", 
+        "unit_reported": "859b834ec9", 
+        "value_preferred": 67.46848495598532, 
+        "value_reported": "b4c9f933f0"
+    }, 
+    {
+        "analyte_preferred": "468d7a7a80", 
+        "analyte_reported": "1c7ff57d29", 
+        "comment": "f403cfe8cd", 
+        "experiments": {
+            "submitter_id": "experiment_c43297b56b"
+        }, 
+        "submitter_id": "elisa_assay_5b6a9c5d2c", 
+        "type": "elisa_assay", 
+        "unit_preferred": "6fe5b55481", 
+        "unit_reported": "8cbcdc2223", 
+        "value_preferred": 63.074394585489976, 
+        "value_reported": "0c38d0df11"
+    }, 
+    {
+        "analyte_preferred": "aed1da2f4e", 
+        "analyte_reported": "47d8387d54", 
+        "comment": "2c772a8615", 
+        "experiments": {
+            "submitter_id": "experiment_ec1e1eec7f"
+        }, 
+        "submitter_id": "elisa_assay_0ee8d5516d", 
+        "type": "elisa_assay", 
+        "unit_preferred": "13308da26e", 
+        "unit_reported": "0adda4773c", 
+        "value_preferred": 27.42257921113459, 
+        "value_reported": "e1a21f57d9"
+    }, 
+    {
+        "analyte_preferred": "9fd20da0a9", 
+        "analyte_reported": "2fceda738f", 
+        "comment": "737bbf939c", 
+        "experiments": {
+            "submitter_id": "experiment_015fded8d2"
+        }, 
+        "submitter_id": "elisa_assay_12f694be81", 
+        "type": "elisa_assay", 
+        "unit_preferred": "922d491a2f", 
+        "unit_reported": "4677226be6", 
+        "value_preferred": 10.563245485147664, 
+        "value_reported": "a0fe84d896"
+    }, 
+    {
+        "analyte_preferred": "477832c44e", 
+        "analyte_reported": "9aec6a8ea3", 
+        "comment": "2b5177c35c", 
+        "experiments": {
+            "submitter_id": "experiment_286fe979fe"
+        }, 
+        "submitter_id": "elisa_assay_3f1014cc5b", 
+        "type": "elisa_assay", 
+        "unit_preferred": "8230a4b6b6", 
+        "unit_reported": "1e61f34b28", 
+        "value_preferred": 21.788580383926504, 
+        "value_reported": "637bc2e8ce"
+    }, 
+    {
+        "analyte_preferred": "202c959a89", 
+        "analyte_reported": "9bf3b81457", 
+        "comment": "d6d3acf103", 
+        "experiments": {
+            "submitter_id": "experiment_9302fff55e"
+        }, 
+        "submitter_id": "elisa_assay_e1cb200b56", 
+        "type": "elisa_assay", 
+        "unit_preferred": "7a380bc805", 
+        "unit_reported": "9d965bf12a", 
+        "value_preferred": 85.93011976685901, 
+        "value_reported": "3e5ae1fc2b"
+    }, 
+    {
+        "analyte_preferred": "036be3acaf", 
+        "analyte_reported": "4d9f1c3f43", 
+        "comment": "19b6b773db", 
+        "experiments": {
+            "submitter_id": "experiment_5d38ed1a50"
+        }, 
+        "submitter_id": "elisa_assay_9620214119", 
+        "type": "elisa_assay", 
+        "unit_preferred": "b86b3bed6e", 
+        "unit_reported": "7c422ddf7b", 
+        "value_preferred": 21.65429683375748, 
+        "value_reported": "ba17340ee6"
+    }, 
+    {
+        "analyte_preferred": "a7d14954dd", 
+        "analyte_reported": "73ab2df92b", 
+        "comment": "9ef79369f8", 
+        "experiments": {
+            "submitter_id": "experiment_66338672f2"
+        }, 
+        "submitter_id": "elisa_assay_4dd99485db", 
+        "type": "elisa_assay", 
+        "unit_preferred": "b4710726b1", 
+        "unit_reported": "c3d4e1e550", 
+        "value_preferred": 58.53594545340284, 
+        "value_reported": "8d7f84ef32"
+    }, 
+    {
+        "analyte_preferred": "a474ca8818", 
+        "analyte_reported": "ea11e730c7", 
+        "comment": "1f0b8cb172", 
+        "experiments": {
+            "submitter_id": "experiment_3c9ca91bcd"
+        }, 
+        "submitter_id": "elisa_assay_9940033343", 
+        "type": "elisa_assay", 
+        "unit_preferred": "398402f600", 
+        "unit_reported": "1a56bc0fc2", 
+        "value_preferred": 1.026567945058865, 
+        "value_reported": "6b5e6034db"
+    }, 
+    {
+        "analyte_preferred": "8febf2f6fd", 
+        "analyte_reported": "1c3073b882", 
+        "comment": "8c8b709ee8", 
+        "experiments": {
+            "submitter_id": "experiment_207ddd9c7d"
+        }, 
+        "submitter_id": "elisa_assay_ee086662e0", 
+        "type": "elisa_assay", 
+        "unit_preferred": "46573dbd33", 
+        "unit_reported": "da7502a1a1", 
+        "value_preferred": 29.543416077300456, 
+        "value_reported": "07d4af703a"
+    }, 
+    {
+        "analyte_preferred": "f0d94646b9", 
+        "analyte_reported": "e597298d0b", 
+        "comment": "2fb650d7a8", 
+        "experiments": {
+            "submitter_id": "experiment_725a56a9b1"
+        }, 
+        "submitter_id": "elisa_assay_cd77b648bd", 
+        "type": "elisa_assay", 
+        "unit_preferred": "34f9a87529", 
+        "unit_reported": "0d57e21f70", 
+        "value_preferred": 18.039675944060818, 
+        "value_reported": "0e1df6b223"
+    }, 
+    {
+        "analyte_preferred": "aab8d8ae81", 
+        "analyte_reported": "da68cc5e24", 
+        "comment": "a535474ae7", 
+        "experiments": {
+            "submitter_id": "experiment_1399f7a739"
+        }, 
+        "submitter_id": "elisa_assay_658689dba4", 
+        "type": "elisa_assay", 
+        "unit_preferred": "107119bf48", 
+        "unit_reported": "8173b9ef3f", 
+        "value_preferred": 5.426913807211175, 
+        "value_reported": "2045a3904b"
+    }, 
+    {
+        "analyte_preferred": "5289e06ee6", 
+        "analyte_reported": "e0d2694d61", 
+        "comment": "15bd9d9d60", 
+        "experiments": {
+            "submitter_id": "experiment_8ae3bf3829"
+        }, 
+        "submitter_id": "elisa_assay_e86e2d9245", 
+        "type": "elisa_assay", 
+        "unit_preferred": "b28b54ba4a", 
+        "unit_reported": "526f6d0a6f", 
+        "value_preferred": 6.5132919717475595, 
+        "value_reported": "873d2f8d31"
+    }, 
+    {
+        "analyte_preferred": "82f4190c8b", 
+        "analyte_reported": "8a62b6e07b", 
+        "comment": "42d54c35d7", 
+        "experiments": {
+            "submitter_id": "experiment_5065e6c22f"
+        }, 
+        "submitter_id": "elisa_assay_250252287c", 
+        "type": "elisa_assay", 
+        "unit_preferred": "52d4454502", 
+        "unit_reported": "7b6419a1f5", 
+        "value_preferred": 43.94586541577511, 
+        "value_reported": "cec291fda1"
+    }, 
+    {
+        "analyte_preferred": "989770c714", 
+        "analyte_reported": "db6b6b9bff", 
+        "comment": "0dbfee61c3", 
+        "experiments": {
+            "submitter_id": "experiment_207ddd9c7d"
+        }, 
+        "submitter_id": "elisa_assay_c7db0e314f", 
+        "type": "elisa_assay", 
+        "unit_preferred": "c0331ecf01", 
+        "unit_reported": "cda65c840e", 
+        "value_preferred": 75.42078901893171, 
+        "value_reported": "ef71a3f8f3"
+    }, 
+    {
+        "analyte_preferred": "07627e6469", 
+        "analyte_reported": "4f703e8892", 
+        "comment": "eb335a97dc", 
+        "experiments": {
+            "submitter_id": "experiment_015fded8d2"
+        }, 
+        "submitter_id": "elisa_assay_d55033f0ad", 
+        "type": "elisa_assay", 
+        "unit_preferred": "fba5d046b2", 
+        "unit_reported": "2e695c2a4f", 
+        "value_preferred": 74.18435087837003, 
+        "value_reported": "770822f987"
+    }, 
+    {
+        "analyte_preferred": "f9dabb9ad0", 
+        "analyte_reported": "16750dbb42", 
+        "comment": "9c1e3ff82b", 
+        "experiments": {
+            "submitter_id": "experiment_3c9ca91bcd"
+        }, 
+        "submitter_id": "elisa_assay_95e7b18d0f", 
+        "type": "elisa_assay", 
+        "unit_preferred": "6b328053e3", 
+        "unit_reported": "8a810c4256", 
+        "value_preferred": 37.29901428897995, 
+        "value_reported": "5a67faefea"
+    }, 
+    {
+        "analyte_preferred": "36fb7bf085", 
+        "analyte_reported": "d4305b8a1a", 
+        "comment": "ecefa4a393", 
+        "experiments": {
+            "submitter_id": "experiment_8358e443b3"
+        }, 
+        "submitter_id": "elisa_assay_75c29ace4b", 
+        "type": "elisa_assay", 
+        "unit_preferred": "7e2319e8da", 
+        "unit_reported": "00a8430997", 
+        "value_preferred": 5.767959083174978, 
+        "value_reported": "9e52b89e4c"
+    }, 
+    {
+        "analyte_preferred": "f695ce8742", 
+        "analyte_reported": "51223d4e5b", 
+        "comment": "e8594e8be4", 
+        "experiments": {
+            "submitter_id": "experiment_0d3e72cda0"
+        }, 
+        "submitter_id": "elisa_assay_0653f4f0b3", 
+        "type": "elisa_assay", 
+        "unit_preferred": "6edef69375", 
+        "unit_reported": "d75c7b27b1", 
+        "value_preferred": 83.12109183328664, 
+        "value_reported": "a74811aa14"
     }
-  },
-  {
-    "comment": "IM8Dsdpj0EkC",
-    "analyte_preferred": "JGB7tPay4Dkd",
-    "value_reported": "0LXqVVthuDST",
-    "unit_preferred": "ZOnBk1OrpHpL",
-    "unit_reported": "7t3j48c9GuKI",
-    "analyte_reported": "6udqBIY4jspz",
-    "value_preferred": 9.4308,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_002",
-    "experiments": {
-      "submitter_id": "experiment_0017"
-    }
-  },
-  {
-    "comment": "g8Kc7jvBovP4",
-    "analyte_preferred": "dFCnBCuHyKNr",
-    "value_reported": "7FxphqV6UUOU",
-    "unit_preferred": "p3i3ZsbqYDWb",
-    "unit_reported": "MRA1Rts8bOXF",
-    "analyte_reported": "m61Q29lGlt2z",
-    "value_preferred": 4.0928,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_003",
-    "experiments": {
-      "submitter_id": "experiment_001"
-    }
-  },
-  {
-    "comment": "IlReW6sovhaz",
-    "analyte_preferred": "srl5j9be7y7s",
-    "value_reported": "qYgNShwZQLQa",
-    "unit_preferred": "Qkzg4LKYfBiy",
-    "unit_reported": "ydrjxenvbp1c",
-    "analyte_reported": "SvfHvtOnaz4r",
-    "value_preferred": 9.9562,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_004",
-    "experiments": {
-      "submitter_id": "experiment_0023"
-    }
-  },
-  {
-    "comment": "wMIKrIq5ewrp",
-    "analyte_preferred": "XNrUR61SG3jr",
-    "value_reported": "NGhYzBQoPUjd",
-    "unit_preferred": "0rQ861Hls1CB",
-    "unit_reported": "l4ktMhhqtcUM",
-    "analyte_reported": "kzZ3q1EOfXro",
-    "value_preferred": 12.2789,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_005",
-    "experiments": {
-      "submitter_id": "experiment_008"
-    }
-  },
-  {
-    "comment": "UopZp4RD0qmv",
-    "analyte_preferred": "k32FCeZ5UyAo",
-    "value_reported": "lSzg4zrrFFDk",
-    "unit_preferred": "OlpLi5SrSK1F",
-    "unit_reported": "Nv6Qcfmzjltj",
-    "analyte_reported": "yZIWn39GyhYJ",
-    "value_preferred": 8.789,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_006",
-    "experiments": {
-      "submitter_id": "experiment_0011"
-    }
-  },
-  {
-    "comment": "qpZUW4ZVchug",
-    "analyte_preferred": "9gHoWURywPoV",
-    "value_reported": "PXgebQOVu223",
-    "unit_preferred": "Wx8KDAkSBxnA",
-    "unit_reported": "mVyB6oYUthpP",
-    "analyte_reported": "BlM799BthvmA",
-    "value_preferred": 12.4882,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_007",
-    "experiments": {
-      "submitter_id": "experiment_004"
-    }
-  },
-  {
-    "comment": "p2as78p2Rm63",
-    "analyte_preferred": "VtZMNWMBo3yf",
-    "value_reported": "hAPvtnmISGPY",
-    "unit_preferred": "cLFtjk25ec1x",
-    "unit_reported": "6hFlKSUQDH9z",
-    "analyte_reported": "eLfFPtxr7D8E",
-    "value_preferred": 7.9392,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_008",
-    "experiments": {
-      "submitter_id": "experiment_0022"
-    }
-  },
-  {
-    "comment": "hzgXHI9qICoT",
-    "analyte_preferred": "pjL9RjNiVgL5",
-    "value_reported": "nbzU2bkpQpXN",
-    "unit_preferred": "aeVdJvrGqyMe",
-    "unit_reported": "buJZ63Youthk",
-    "analyte_reported": "qbcPBJfm8Qe3",
-    "value_preferred": 9.5499,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_009",
-    "experiments": {
-      "submitter_id": "experiment_0012"
-    }
-  },
-  {
-    "comment": "4OU4P9wqh33N",
-    "analyte_preferred": "emtEDdFDyai6",
-    "value_reported": "BQrOjwsT6BWm",
-    "unit_preferred": "rqvAeL9JwVUs",
-    "unit_reported": "UNG6uPdksbB8",
-    "analyte_reported": "sZUOl7rUBPxk",
-    "value_preferred": 12.3768,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_0010",
-    "experiments": {
-      "submitter_id": "experiment_006"
-    }
-  },
-  {
-    "comment": "BkSiy2EEQdUS",
-    "analyte_preferred": "loruvXrGcWBd",
-    "value_reported": "aDnMx2Ym9lP1",
-    "unit_preferred": "6weU93N9A2nb",
-    "unit_reported": "YqI1rJI32Odk",
-    "analyte_reported": "Km7qIyOJ1vwD",
-    "value_preferred": 8.5098,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_0011",
-    "experiments": {
-      "submitter_id": "experiment_001"
-    }
-  },
-  {
-    "comment": "KMEdLUjEN3rs",
-    "analyte_preferred": "JNhiS0e8RfPc",
-    "value_reported": "IOJcQtqIkeb9",
-    "unit_preferred": "rm6waL4UyYgx",
-    "unit_reported": "zG8V3n0xlqaF",
-    "analyte_reported": "Ghg80VofALfb",
-    "value_preferred": 14.5396,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_0012",
-    "experiments": {
-      "submitter_id": "experiment_007"
-    }
-  },
-  {
-    "comment": "FktWddvri5sj",
-    "analyte_preferred": "bE9I9xFxNqRI",
-    "value_reported": "MLgE3lc65xKO",
-    "unit_preferred": "Y1DwKXnQPlZq",
-    "unit_reported": "Akl1u2m81eVZ",
-    "analyte_reported": "wTbqKX5POdfk",
-    "value_preferred": 10.702,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_0013",
-    "experiments": {
-      "submitter_id": "experiment_0015"
-    }
-  },
-  {
-    "comment": "eOLVNE8CFRDY",
-    "analyte_preferred": "ytKnCPUA7RQl",
-    "value_reported": "pXJpXyaxWX6u",
-    "unit_preferred": "0JNTRzuTmsug",
-    "unit_reported": "DZ40bvi9SMon",
-    "analyte_reported": "LBQilEM3YPn4",
-    "value_preferred": 4.5633,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_0014",
-    "experiments": {
-      "submitter_id": "experiment_008"
-    }
-  },
-  {
-    "comment": "T4xNOIiIBz74",
-    "analyte_preferred": "XwdcLYwtIbgE",
-    "value_reported": "m1SLbdHhG0GP",
-    "unit_preferred": "tOhzmZIRJWSz",
-    "unit_reported": "xbR7PRlzLTg7",
-    "analyte_reported": "CUfnP864TUFi",
-    "value_preferred": 8.8432,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_0015",
-    "experiments": {
-      "submitter_id": "experiment_003"
-    }
-  },
-  {
-    "comment": "q6Xs53QGSjP4",
-    "analyte_preferred": "xexH3fLwActs",
-    "value_reported": "gHtflFldOPjC",
-    "unit_preferred": "RVRgxRV6A0Lx",
-    "unit_reported": "TE4qoiccZTr3",
-    "analyte_reported": "dgC1IzPHhISz",
-    "value_preferred": 8.7428,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_0016",
-    "experiments": {
-      "submitter_id": "experiment_001"
-    }
-  },
-  {
-    "comment": "nJkC4v4MAoxs",
-    "analyte_preferred": "uLEP25orFgFU",
-    "value_reported": "7klUf9ByP6MD",
-    "unit_preferred": "MWOiGEXpd4Ku",
-    "unit_reported": "lsYpdotP3RIR",
-    "analyte_reported": "L8pSQXvEV5nx",
-    "value_preferred": 12.4858,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_0017",
-    "experiments": {
-      "submitter_id": "experiment_0012"
-    }
-  },
-  {
-    "comment": "XZYWc7uBZyDh",
-    "analyte_preferred": "nZRh4Oekhhuw",
-    "value_reported": "P2tdJPWdtTzC",
-    "unit_preferred": "C2CK5YRfc9Ae",
-    "unit_reported": "aJPGzcMypFwd",
-    "analyte_reported": "k1uAXRlglJRf",
-    "value_preferred": 11.5308,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_0018",
-    "experiments": {
-      "submitter_id": "experiment_002"
-    }
-  },
-  {
-    "comment": "qkDVA4Chins9",
-    "analyte_preferred": "brwZ9zHCv4bL",
-    "value_reported": "boWFqTGnUlEe",
-    "unit_preferred": "UN7UPhtBF3W4",
-    "unit_reported": "vFAKo9jVttbN",
-    "analyte_reported": "31opaCpv0nfi",
-    "value_preferred": 8.6983,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_0019",
-    "experiments": {
-      "submitter_id": "experiment_0018"
-    }
-  },
-  {
-    "comment": "oGGPOOHRgTcf",
-    "analyte_preferred": "xO82B3V6gbcU",
-    "value_reported": "xJCefrLwmJpY",
-    "unit_preferred": "kW0N2IXTUPcA",
-    "unit_reported": "VIqL2QvtuH2z",
-    "analyte_reported": "krCfj9kzAU1t",
-    "value_preferred": 9.3968,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_0020",
-    "experiments": {
-      "submitter_id": "experiment_0015"
-    }
-  },
-  {
-    "comment": "QdkNgkTk0HyM",
-    "analyte_preferred": "C6TNjeHaa7aF",
-    "value_reported": "s0TEXSUxKDHo",
-    "unit_preferred": "61klJUuBSqRi",
-    "unit_reported": "CDgbo23ImecJ",
-    "analyte_reported": "tXMaWyuV6xVY",
-    "value_preferred": 12.3114,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_0021",
-    "experiments": {
-      "submitter_id": "experiment_0013"
-    }
-  },
-  {
-    "comment": "YnLfSR6ulyuq",
-    "analyte_preferred": "aKdnJTI3h1Ke",
-    "value_reported": "uqvrHWbVTLIi",
-    "unit_preferred": "teH9r7HkVhcP",
-    "unit_reported": "niWx10gzg4XU",
-    "analyte_reported": "Wf4iOg9MfPId",
-    "value_preferred": 11.4538,
-    "type": "elisa_assay",
-    "submitter_id": "elisa_assay_0022",
-    "experiments": {
-      "submitter_id": "experiment_0015"
-    }
-  }
 ]

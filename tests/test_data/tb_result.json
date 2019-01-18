@@ -1,0 +1,974 @@
+[
+    {
+        "culture": "Unknown result", 
+        "drug": "s", 
+        "microscopy": "daed56363b", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_9a6c748d56"
+        }, 
+        "submitter_id": "tb_result_3a3ff1164d", 
+        "test_type": "le", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "1 to 19", 
+        "drug": "e", 
+        "microscopy": "0472880472", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_529f3edea9"
+        }, 
+        "submitter_id": "tb_result_39df08adf8", 
+        "test_type": "genexpert", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Negative", 
+        "drug": "pas", 
+        "microscopy": "115bdeb0ec", 
+        "response": "not reported", 
+        "samples": {
+            "submitter_id": "sample_4456c0eecd"
+        }, 
+        "submitter_id": "tb_result_8e7aeebf98", 
+        "test_type": "le", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "MOTT", 
+        "drug": "lzd", 
+        "microscopy": "8152de54b8", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_efc9f5827d"
+        }, 
+        "submitter_id": "tb_result_76f9394281", 
+        "test_type": "le", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "More than 200", 
+        "drug": "km", 
+        "microscopy": "a49929b14c", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_dd33c51a67"
+        }, 
+        "submitter_id": "tb_result_974ac530c9", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "1 to 19", 
+        "drug": "cm", 
+        "microscopy": "2b8560aca2", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_529f3edea9"
+        }, 
+        "submitter_id": "tb_result_8d16517c22", 
+        "test_type": "dst", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Positive", 
+        "drug": "cm", 
+        "microscopy": "8b20a39492", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_07c5d0da8f"
+        }, 
+        "submitter_id": "tb_result_208cd5b2c2", 
+        "test_type": "hain", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Unknown result", 
+        "drug": "pas", 
+        "microscopy": "688012dff1", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_837dda9a32"
+        }, 
+        "submitter_id": "tb_result_1d82255fa7", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Negative", 
+        "drug": "ofx", 
+        "microscopy": "fcebec5a8d", 
+        "response": "not reported", 
+        "samples": {
+            "submitter_id": "sample_529f3edea9"
+        }, 
+        "submitter_id": "tb_result_eef92462ee", 
+        "test_type": "hain", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "1 to 19", 
+        "drug": "cm", 
+        "microscopy": "d286a5c4f8", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_f0e3622867"
+        }, 
+        "submitter_id": "tb_result_69476bdaf6", 
+        "test_type": "hain", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Unknown result", 
+        "drug": "pto", 
+        "microscopy": "1f0afa891d", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_ee49d71c1e"
+        }, 
+        "submitter_id": "tb_result_b3612c5da1", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "More than 200", 
+        "drug": "dld", 
+        "microscopy": "92ea1a3add", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_b23598dedc"
+        }, 
+        "submitter_id": "tb_result_2e0c9d0da8", 
+        "test_type": "dst", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Negative", 
+        "drug": "mfx", 
+        "microscopy": "27c0f2e60c", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_e92076a5d9"
+        }, 
+        "submitter_id": "tb_result_d30c791934", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Positive", 
+        "drug": "h", 
+        "microscopy": "8f78e381b7", 
+        "response": "not reported", 
+        "samples": {
+            "submitter_id": "sample_62f88eec93"
+        }, 
+        "submitter_id": "tb_result_6410113cf2", 
+        "test_type": "dst", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Unknown result", 
+        "drug": "dld", 
+        "microscopy": "7ef4d2d529", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_7eea85e163"
+        }, 
+        "submitter_id": "tb_result_605a3d3b82", 
+        "test_type": "dst", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "MOTT", 
+        "drug": "cs", 
+        "microscopy": "75e9ef9745", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_3e95632b34"
+        }, 
+        "submitter_id": "tb_result_5b494bb9f6", 
+        "test_type": "dst", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Study in progress", 
+        "drug": "ipm_cln", 
+        "microscopy": "e451cb9617", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_c5107e8b84"
+        }, 
+        "submitter_id": "tb_result_efbb430657", 
+        "test_type": "dst", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "20 to 100", 
+        "drug": "lfx", 
+        "microscopy": "adc3ec9dbc", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_4540c5a7d5"
+        }, 
+        "submitter_id": "tb_result_7217ed395f", 
+        "test_type": "genexpert", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Positive", 
+        "drug": "fq", 
+        "microscopy": "f1de33439c", 
+        "response": "not reported", 
+        "samples": {
+            "submitter_id": "sample_657ebda6ff"
+        }, 
+        "submitter_id": "tb_result_0d0aebc7d5", 
+        "test_type": "genexpert", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Not done", 
+        "drug": "lzd", 
+        "microscopy": "22f22f283b", 
+        "response": "not reported", 
+        "samples": {
+            "submitter_id": "sample_d513d59282"
+        }, 
+        "submitter_id": "tb_result_a37716cea3", 
+        "test_type": "genexpert", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Positive", 
+        "drug": "amx_clv", 
+        "microscopy": "876555c9a9", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_e92076a5d9"
+        }, 
+        "submitter_id": "tb_result_4d2bc153d6", 
+        "test_type": "le", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Not done", 
+        "drug": "lzd", 
+        "microscopy": "f003d573ed", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_265e850fbd"
+        }, 
+        "submitter_id": "tb_result_65a6a62dbf", 
+        "test_type": "le", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Study in progress", 
+        "drug": "ipm_cln", 
+        "microscopy": "bce33539ea", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_3e95632b34"
+        }, 
+        "submitter_id": "tb_result_fdfff0ce4c", 
+        "test_type": "hain", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "1 to 19", 
+        "drug": "lfx", 
+        "microscopy": "260285e0b9", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_85023af99a"
+        }, 
+        "submitter_id": "tb_result_aaba35ca0f", 
+        "test_type": "hain", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Unknown result", 
+        "drug": "cs", 
+        "microscopy": "13cabc373c", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_ef0569550b"
+        }, 
+        "submitter_id": "tb_result_c842f59b41", 
+        "test_type": "dst", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "More than 200", 
+        "drug": "amx_clv", 
+        "microscopy": "b2aea43250", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_0b702cbe6e"
+        }, 
+        "submitter_id": "tb_result_79621a73b2", 
+        "test_type": "genexpert", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Not done", 
+        "drug": "lzd", 
+        "microscopy": "97387c2342", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_f0e3622867"
+        }, 
+        "submitter_id": "tb_result_d98d02cecc", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "MOTT", 
+        "drug": "clr", 
+        "microscopy": "19f7ecdb8c", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_c0016b2145"
+        }, 
+        "submitter_id": "tb_result_74b684127a", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "MOTT", 
+        "drug": "dld", 
+        "microscopy": "160bbdeb32", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_265e850fbd"
+        }, 
+        "submitter_id": "tb_result_f70fe2468d", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "1 to 19", 
+        "drug": "r", 
+        "microscopy": "ac5e57ff37", 
+        "response": "not reported", 
+        "samples": {
+            "submitter_id": "sample_07c5d0da8f"
+        }, 
+        "submitter_id": "tb_result_61b3b38d72", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "100 to 200", 
+        "drug": "z", 
+        "microscopy": "0d5b6f900d", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_446680304e"
+        }, 
+        "submitter_id": "tb_result_fcb2359545", 
+        "test_type": "hain", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Positive", 
+        "drug": "lfx", 
+        "microscopy": "ebaaec5a99", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_cc99f5fb30"
+        }, 
+        "submitter_id": "tb_result_ffe813ee52", 
+        "test_type": "genexpert", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Not done", 
+        "drug": "cfz", 
+        "microscopy": "19faf61fd1", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_e92076a5d9"
+        }, 
+        "submitter_id": "tb_result_93f1623ec2", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "1 to 19", 
+        "drug": "clr", 
+        "microscopy": "7eb3f991ea", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_529f3edea9"
+        }, 
+        "submitter_id": "tb_result_c1017d6f92", 
+        "test_type": "dst", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Not done", 
+        "drug": "cm", 
+        "microscopy": "7fbdb40742", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_146a07cdfc"
+        }, 
+        "submitter_id": "tb_result_b299f806d9", 
+        "test_type": "le", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Positive", 
+        "drug": "pto", 
+        "microscopy": "0482b51007", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_4a7b8135b3"
+        }, 
+        "submitter_id": "tb_result_f0787d684c", 
+        "test_type": "dst", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "1 to 19", 
+        "drug": "ag_cp", 
+        "microscopy": "0df1b9c7d1", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_e847575009"
+        }, 
+        "submitter_id": "tb_result_57873a7a96", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Nonspecific microflora", 
+        "drug": "cm", 
+        "microscopy": "c3d61c5679", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_62b6f046a5"
+        }, 
+        "submitter_id": "tb_result_209b90de44", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "1 to 19", 
+        "drug": "bdq", 
+        "microscopy": "2074cbdb53", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_c977bc4a2f"
+        }, 
+        "submitter_id": "tb_result_256469fdc7", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Positive", 
+        "drug": "lfx", 
+        "microscopy": "d1e384aeeb", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_529f3edea9"
+        }, 
+        "submitter_id": "tb_result_c726030e6b", 
+        "test_type": "genexpert", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Nonspecific microflora", 
+        "drug": "cs", 
+        "microscopy": "f37b6c870f", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_4456c0eecd"
+        }, 
+        "submitter_id": "tb_result_103be18021", 
+        "test_type": "le", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "More than 200", 
+        "drug": "am", 
+        "microscopy": "40da7d8b2f", 
+        "response": "not reported", 
+        "samples": {
+            "submitter_id": "sample_8fd2174ff8"
+        }, 
+        "submitter_id": "tb_result_50a30f6e9d", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Unknown result", 
+        "drug": "e", 
+        "microscopy": "7c71a84bf4", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_99f43329fe"
+        }, 
+        "submitter_id": "tb_result_cb41c2124a", 
+        "test_type": "le", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Study in progress", 
+        "drug": "z", 
+        "microscopy": "28a65d752d", 
+        "response": "not reported", 
+        "samples": {
+            "submitter_id": "sample_10fd415030"
+        }, 
+        "submitter_id": "tb_result_a47eb478ee", 
+        "test_type": "hain", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "100 to 200", 
+        "drug": "r", 
+        "microscopy": "1a2431fe17", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_ef0569550b"
+        }, 
+        "submitter_id": "tb_result_dabe81d560", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Unknown result", 
+        "drug": "cfz", 
+        "microscopy": "c5cad2f7c0", 
+        "response": "not reported", 
+        "samples": {
+            "submitter_id": "sample_9d613b4fad"
+        }, 
+        "submitter_id": "tb_result_eefb5d2ac6", 
+        "test_type": "hain", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "1 to 19", 
+        "drug": "cm", 
+        "microscopy": "3abdd775d4", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_fe66e30273"
+        }, 
+        "submitter_id": "tb_result_908addbe40", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "1 to 19", 
+        "drug": "lfx", 
+        "microscopy": "7888d14e58", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_bf3bf6742b"
+        }, 
+        "submitter_id": "tb_result_6e55ebf4aa", 
+        "test_type": "dst", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "20 to 100", 
+        "drug": "ofx", 
+        "microscopy": "ec440868b1", 
+        "response": "not reported", 
+        "samples": {
+            "submitter_id": "sample_3308106142"
+        }, 
+        "submitter_id": "tb_result_5509d15649", 
+        "test_type": "le", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Nonspecific microflora", 
+        "drug": "cs", 
+        "microscopy": "d669c7f839", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_837dda9a32"
+        }, 
+        "submitter_id": "tb_result_d88dadf2fd", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "MOTT", 
+        "drug": "clr", 
+        "microscopy": "9ab1daa312", 
+        "response": "not reported", 
+        "samples": {
+            "submitter_id": "sample_f5fcd10148"
+        }, 
+        "submitter_id": "tb_result_cb94f67065", 
+        "test_type": "dst", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Unknown result", 
+        "drug": "lzd", 
+        "microscopy": "4d53a12329", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_3e95632b34"
+        }, 
+        "submitter_id": "tb_result_0054122caf", 
+        "test_type": "genexpert", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "100 to 200", 
+        "drug": "cs", 
+        "microscopy": "71d4e13c11", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_e847575009"
+        }, 
+        "submitter_id": "tb_result_3ccc053b2d", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "100 to 200", 
+        "drug": "r", 
+        "microscopy": "21ff664245", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_30fbcba5b9"
+        }, 
+        "submitter_id": "tb_result_0de964bf65", 
+        "test_type": "le", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Not done", 
+        "drug": "r", 
+        "microscopy": "b2a57c8df6", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_e4e4b55877"
+        }, 
+        "submitter_id": "tb_result_5c89ef510e", 
+        "test_type": "dst", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "MOTT", 
+        "drug": "ipm_cln", 
+        "microscopy": "a34259d600", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_30fbcba5b9"
+        }, 
+        "submitter_id": "tb_result_fdb67801fe", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "More than 200", 
+        "drug": "pto", 
+        "microscopy": "80bcf440aa", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_41d1f1b538"
+        }, 
+        "submitter_id": "tb_result_1c48894f29", 
+        "test_type": "dst", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "100 to 200", 
+        "drug": "ipm_cln", 
+        "microscopy": "68b0674731", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_8acd3ae0f0"
+        }, 
+        "submitter_id": "tb_result_306ee03cc4", 
+        "test_type": "genexpert", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Positive", 
+        "drug": "z", 
+        "microscopy": "598a94fcad", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_5417dab71c"
+        }, 
+        "submitter_id": "tb_result_f16e9df6cc", 
+        "test_type": "genexpert", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Unknown result", 
+        "drug": "dld", 
+        "microscopy": "34bbc9fad9", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_b23598dedc"
+        }, 
+        "submitter_id": "tb_result_87227ab3c3", 
+        "test_type": "le", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Positive", 
+        "drug": "ag_cp", 
+        "microscopy": "927d4cc625", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_657ebda6ff"
+        }, 
+        "submitter_id": "tb_result_87606fa8f9", 
+        "test_type": "genexpert", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Study in progress", 
+        "drug": "r", 
+        "microscopy": "c55e0b07a9", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_e3dd3a9308"
+        }, 
+        "submitter_id": "tb_result_f044cccc7e", 
+        "test_type": "dst", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Positive", 
+        "drug": "fq", 
+        "microscopy": "17aea3fe98", 
+        "response": "not reported", 
+        "samples": {
+            "submitter_id": "sample_146a07cdfc"
+        }, 
+        "submitter_id": "tb_result_97425c505a", 
+        "test_type": "le", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Unknown result", 
+        "drug": "pto", 
+        "microscopy": "e160f84a4e", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_5fdde270bb"
+        }, 
+        "submitter_id": "tb_result_7e16ad7692", 
+        "test_type": "genexpert", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Positive", 
+        "drug": "e", 
+        "microscopy": "223dd30c1b", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_1c8ebece3f"
+        }, 
+        "submitter_id": "tb_result_ee7370b53c", 
+        "test_type": "le", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "100 to 200", 
+        "drug": "bdq", 
+        "microscopy": "b67c440146", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_99872031fc"
+        }, 
+        "submitter_id": "tb_result_4f4abe0f84", 
+        "test_type": "le", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Not done", 
+        "drug": "dld", 
+        "microscopy": "c453365765", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_53a0b5c91e"
+        }, 
+        "submitter_id": "tb_result_3b76315aba", 
+        "test_type": "hain", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "100 to 200", 
+        "drug": "ofx", 
+        "microscopy": "060c15322b", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_25b00a5a20"
+        }, 
+        "submitter_id": "tb_result_a5b3e89c2b", 
+        "test_type": "dst", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Not done", 
+        "drug": "h", 
+        "microscopy": "2f314885c5", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_9d613b4fad"
+        }, 
+        "submitter_id": "tb_result_b3d4505a9e", 
+        "test_type": "genexpert", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "More than 200", 
+        "drug": "mfx", 
+        "microscopy": "411db05e6f", 
+        "response": "not reported", 
+        "samples": {
+            "submitter_id": "sample_9da9a076a8"
+        }, 
+        "submitter_id": "tb_result_21bdfa5a2f", 
+        "test_type": "genexpert", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Negative", 
+        "drug": "z", 
+        "microscopy": "4ece081799", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_4be12baaa7"
+        }, 
+        "submitter_id": "tb_result_7409f6cd2d", 
+        "test_type": "dst", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "MOTT", 
+        "drug": "bdq", 
+        "microscopy": "52870e655e", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_593b1aa38a"
+        }, 
+        "submitter_id": "tb_result_7a53c687c1", 
+        "test_type": "dst", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "20 to 100", 
+        "drug": "mb", 
+        "microscopy": "bcb185ee38", 
+        "response": "R", 
+        "samples": {
+            "submitter_id": "sample_7eea85e163"
+        }, 
+        "submitter_id": "tb_result_0a850b7bbc", 
+        "test_type": "dst", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Nonspecific microflora", 
+        "drug": "pas", 
+        "microscopy": "8aafa06cb1", 
+        "response": "not reported", 
+        "samples": {
+            "submitter_id": "sample_f1fbe2aa7e"
+        }, 
+        "submitter_id": "tb_result_3b443d494f", 
+        "test_type": "hain", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "MOTT", 
+        "drug": "h", 
+        "microscopy": "9f7a31f73a", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_62b6f046a5"
+        }, 
+        "submitter_id": "tb_result_e0bfb47437", 
+        "test_type": "hain", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "1 to 19", 
+        "drug": "clr", 
+        "microscopy": "7662aff644", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_9d613b4fad"
+        }, 
+        "submitter_id": "tb_result_ba3fa90658", 
+        "test_type": "hain", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Positive", 
+        "drug": "cm", 
+        "microscopy": "70fff3498a", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_2fccbd324a"
+        }, 
+        "submitter_id": "tb_result_f72cbb925b", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "More than 200", 
+        "drug": "z", 
+        "microscopy": "29e714ad90", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_c97f3b2ea1"
+        }, 
+        "submitter_id": "tb_result_e8b9210d3b", 
+        "test_type": "hain", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "1 to 19", 
+        "drug": "mb", 
+        "microscopy": "7ecf00c9be", 
+        "response": "S", 
+        "samples": {
+            "submitter_id": "sample_4be12baaa7"
+        }, 
+        "submitter_id": "tb_result_e2211efadb", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "Nonspecific microflora", 
+        "drug": "clr", 
+        "microscopy": "9186463641", 
+        "response": "I", 
+        "samples": {
+            "submitter_id": "sample_6564f04279"
+        }, 
+        "submitter_id": "tb_result_ea9384ffc3", 
+        "test_type": "bactec", 
+        "type": "tb_result"
+    }, 
+    {
+        "culture": "20 to 100", 
+        "drug": "e", 
+        "microscopy": "f633672531", 
+        "response": "not reported", 
+        "samples": {
+            "submitter_id": "sample_06c6d9992a"
+        }, 
+        "submitter_id": "tb_result_fe3e56177d", 
+        "test_type": "genexpert", 
+        "type": "tb_result"
+    }
+]

@@ -1,223 +1,1107 @@
 [
-  {
-    "data_type": "6NQVWiW5cWz8",
-    "data_format": "12rKawK11Wb8",
-    "data_category": "Gynecological Examination",
-    "md5sum": "cb576dcfa3cb4d7b9a6686f006d39b12",
-    "file_size": 3,
-    "file_name": "qoxsLkSfigdF",
-    "type": "visit_file",
-    "submitter_id": "visit_file_001",
-    "laboratory_results": {
-      "submitter_id": "laboratory_result_001"
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_27d251a833"
+        }, 
+        "data_category": "Physical Examination", 
+        "data_format": "4c7768fbc5", 
+        "data_type": "bdae25e4b6", 
+        "file_name": "06751e5bff", 
+        "file_size": 69, 
+        "md5sum": "0d45c37eacfd4aa864cf0b9c0415d882", 
+        "submitter_id": "visit_file_72b0442589", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_674dc0fbc4"
+        }, 
+        "data_category": "Health Questionnaire", 
+        "data_format": "37726d62fd", 
+        "data_type": "ae64188ff8", 
+        "file_name": "902d728fad", 
+        "file_size": 41, 
+        "md5sum": "8df44a6b5947dee17fcb0d5de2d7a0bd", 
+        "submitter_id": "visit_file_89cd11ca91", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_3545c8e725"
+        }, 
+        "data_category": "Socio-Demographic Questionnaire", 
+        "data_format": "3b1e2476c1", 
+        "data_type": "68704b04fb", 
+        "file_name": "16a478f0b1", 
+        "file_size": 49, 
+        "md5sum": "9dcd77c0cde792be82fd6aed69fc41d4", 
+        "submitter_id": "visit_file_be1bbebfa4", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_81e02062e7"
+        }, 
+        "data_category": "Laboratory Results", 
+        "data_format": "0fac377875", 
+        "data_type": "e7455e4816", 
+        "file_name": "8be43033e9", 
+        "file_size": 97, 
+        "md5sum": "9eb94cf73d3d342687d8e289d5e8df47", 
+        "submitter_id": "visit_file_e0b703d7fc", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_01f3aa5ac0"
+        }, 
+        "data_category": "Gynecological Examination", 
+        "data_format": "2807dc28e5", 
+        "data_type": "de6a38b7ca", 
+        "file_name": "0fa647e32b", 
+        "file_size": 72, 
+        "md5sum": "17fadcb6c197c39ae134165fa9e24461", 
+        "submitter_id": "visit_file_6bb38d1bb5", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_7db77a36ef"
+        }, 
+        "data_category": "Mental Health Questionnaire", 
+        "data_format": "294168b6a4", 
+        "data_type": "715156e756", 
+        "file_name": "8ac47975b8", 
+        "file_size": 39, 
+        "md5sum": "ecd87beb032447614f9e45a5b746c3a7", 
+        "submitter_id": "visit_file_8a38b31023", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_e74f11ea34"
+        }, 
+        "data_category": "Socio-Demographic Questionnaire", 
+        "data_format": "4a1dab5b38", 
+        "data_type": "540b7ae107", 
+        "file_name": "0ea72ec98e", 
+        "file_size": 83, 
+        "md5sum": "b2c00e8b260e5a43e1a9fe3cddb2b484", 
+        "submitter_id": "visit_file_51590b4ea0", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_3975abef9f"
+        }, 
+        "data_category": "Socio-Demographic Questionnaire", 
+        "data_format": "ced8e51d5a", 
+        "data_type": "facd8fe367", 
+        "file_name": "7a4c2f0424", 
+        "file_size": 55, 
+        "md5sum": "6aa8393752dd27ce12a3bcbc831f7616", 
+        "submitter_id": "visit_file_d812a95a74", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_0d509bedcd"
+        }, 
+        "data_category": "Laboratory Results", 
+        "data_format": "5ebea0c11f", 
+        "data_type": "72d61a46fe", 
+        "file_name": "1e6c38ba06", 
+        "file_size": 54, 
+        "md5sum": "d81371717beee042dea6769f1343468d", 
+        "submitter_id": "visit_file_c8087efd1a", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_390fd6df90"
+        }, 
+        "data_category": "Gynecological Examination", 
+        "data_format": "28e8d66738", 
+        "data_type": "864ee966fa", 
+        "file_name": "73907578f5", 
+        "file_size": 24, 
+        "md5sum": "1781e169f0c1e1b2e53e890661d1385f", 
+        "submitter_id": "visit_file_a54ebcc637", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a3da392eb2"
+        }, 
+        "data_category": "Behavior Questionnaire", 
+        "data_format": "6491669d47", 
+        "data_type": "f36b1c2421", 
+        "file_name": "5f95f688e9", 
+        "file_size": 57, 
+        "md5sum": "083e0582a2795d70556388cc33c259e4", 
+        "submitter_id": "visit_file_32f3ed0efe", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1e0c77bfc8"
+        }, 
+        "data_category": "Drug Use Questionnaire", 
+        "data_format": "f86672d78d", 
+        "data_type": "b19f58431a", 
+        "file_name": "65dcb53802", 
+        "file_size": 99, 
+        "md5sum": "d20bdcd2f5f14365bdd8c558e67c6501", 
+        "submitter_id": "visit_file_79756eaa22", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b46e7e9524"
+        }, 
+        "data_category": "Laboratory Results", 
+        "data_format": "f7e815e45a", 
+        "data_type": "d4d2773531", 
+        "file_name": "22368b79df", 
+        "file_size": 20, 
+        "md5sum": "94915a60aa8804adbcd5deb50559ae25", 
+        "submitter_id": "visit_file_c747ce21e3", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_dbdaaa754b"
+        }, 
+        "data_category": "Health Questionnaire", 
+        "data_format": "dd617d6270", 
+        "data_type": "ab864fa856", 
+        "file_name": "16e1b88a0e", 
+        "file_size": 25, 
+        "md5sum": "fd046b23fe0ca73810612be074b10310", 
+        "submitter_id": "visit_file_be3b1edc56", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_087f58a19a"
+        }, 
+        "data_category": "Socio-Demographic Questionnaire", 
+        "data_format": "c7a9dcde6e", 
+        "data_type": "e31790d6f9", 
+        "file_name": "d1bfe6045d", 
+        "file_size": 10, 
+        "md5sum": "37e8505242b3d2af347d830ae2a37efb", 
+        "submitter_id": "visit_file_34b0844e93", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d192a273a9"
+        }, 
+        "data_category": "Drug Use Questionnaire", 
+        "data_format": "f40f4eecd3", 
+        "data_type": "0ce0c75b54", 
+        "file_name": "060a22c4d4", 
+        "file_size": 23, 
+        "md5sum": "1734144e6b630c2f00a7848a73bceb9e", 
+        "submitter_id": "visit_file_3da3168d6a", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1f5129d17f"
+        }, 
+        "data_category": "Mental Health Questionnaire", 
+        "data_format": "47a985f065", 
+        "data_type": "6075b95504", 
+        "file_name": "bebf83dc5f", 
+        "file_size": 92, 
+        "md5sum": "9f9190fbfb63d55f26097136ca5c7108", 
+        "submitter_id": "visit_file_8b9d6b5fe1", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_14f4407831"
+        }, 
+        "data_category": "Physical Examination", 
+        "data_format": "fbd01d272c", 
+        "data_type": "ff780b5a8c", 
+        "file_name": "c6210fac33", 
+        "file_size": 4, 
+        "md5sum": "2fafe76f5e7ddb9c2ca8b396a9ec5ef2", 
+        "submitter_id": "visit_file_f08be58e70", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_14f4407831"
+        }, 
+        "data_category": "Drug Use Questionnaire", 
+        "data_format": "f43032afb9", 
+        "data_type": "6c23031ab9", 
+        "file_name": "5639ef7844", 
+        "file_size": 6, 
+        "md5sum": "808d6a45f78a5bbb723fc60068d296bd", 
+        "submitter_id": "visit_file_c7d08b8e3f", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9fc4e81f11"
+        }, 
+        "data_category": "Neurocognitive Test", 
+        "data_format": "edceccf286", 
+        "data_type": "cb4a4c5abc", 
+        "file_name": "97f5e40ab1", 
+        "file_size": 44, 
+        "md5sum": "bf1bb702ce3d274ecb67824d5b744101", 
+        "submitter_id": "visit_file_5731bad1e3", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_3b85557510"
+        }, 
+        "data_category": "Health Questionnaire", 
+        "data_format": "15dbcaf712", 
+        "data_type": "ccc420f6e8", 
+        "file_name": "35a95179cc", 
+        "file_size": 68, 
+        "md5sum": "a9f28dafec3724e05df3c10f87b6e06e", 
+        "submitter_id": "visit_file_5183780e68", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_dbdaaa754b"
+        }, 
+        "data_category": "Drug Use Questionnaire", 
+        "data_format": "79fdba46f6", 
+        "data_type": "a30b77e768", 
+        "file_name": "6789b4eb5e", 
+        "file_size": 55, 
+        "md5sum": "6c4228e575ade3f8b83dda3763c2bbae", 
+        "submitter_id": "visit_file_4da760adf3", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d68fd01d93"
+        }, 
+        "data_category": "Behavior Questionnaire", 
+        "data_format": "61dccaefca", 
+        "data_type": "beef083008", 
+        "file_name": "3f0075863f", 
+        "file_size": 8, 
+        "md5sum": "04a9bbf9e9f4350c8935d703db8e3ec1", 
+        "submitter_id": "visit_file_310f289089", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_043ef69e42"
+        }, 
+        "data_category": "Socio-Demographic Questionnaire", 
+        "data_format": "4da18959b3", 
+        "data_type": "d89bfe4d6a", 
+        "file_name": "66968f9174", 
+        "file_size": 37, 
+        "md5sum": "79efdd202412199be045dbee4bc9293a", 
+        "submitter_id": "visit_file_9118d5975b", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8d1ba44b26"
+        }, 
+        "data_category": "Mental Health Questionnaire", 
+        "data_format": "947d0ca306", 
+        "data_type": "161970757a", 
+        "file_name": "8036490ddc", 
+        "file_size": 59, 
+        "md5sum": "46cafc9adf2a1f73f72c5fbb50b7e7f6", 
+        "submitter_id": "visit_file_3b2f5cfd2f", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a3d0256ed5"
+        }, 
+        "data_category": "Health Questionnaire", 
+        "data_format": "058cef2c67", 
+        "data_type": "55ab8cd2fb", 
+        "file_name": "40686d4780", 
+        "file_size": 4, 
+        "md5sum": "08a321c46579e5c63f2a48f3754f1d28", 
+        "submitter_id": "visit_file_563105ccec", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_27434ba0a2"
+        }, 
+        "data_category": "Neurocognitive Test", 
+        "data_format": "bbfa2f6816", 
+        "data_type": "df378b2245", 
+        "file_name": "1ba439d082", 
+        "file_size": 48, 
+        "md5sum": "ce8d1dd975b2c03aa19f92f401afac0a", 
+        "submitter_id": "visit_file_13427ec8f5", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b94b7f9edf"
+        }, 
+        "data_category": "Neurocognitive Test", 
+        "data_format": "968796bf94", 
+        "data_type": "8b20f1f4ed", 
+        "file_name": "09c6f76345", 
+        "file_size": 66, 
+        "md5sum": "cd61d70c53e24a4e976398af5e58b310", 
+        "submitter_id": "visit_file_f921064422", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_26685588da"
+        }, 
+        "data_category": "Health Questionnaire", 
+        "data_format": "240c7abed8", 
+        "data_type": "9524f4f83b", 
+        "file_name": "7e5887ae5a", 
+        "file_size": 4, 
+        "md5sum": "8ca52436614fa5d7fa545d73f5bcfb16", 
+        "submitter_id": "visit_file_f6666b78d0", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_27d251a833"
+        }, 
+        "data_category": "Socio-Demographic Questionnaire", 
+        "data_format": "61f9031d7c", 
+        "data_type": "310a8466f2", 
+        "file_name": "9d7ca2a7cd", 
+        "file_size": 98, 
+        "md5sum": "c000b92edab7c787787c5d004aed8caa", 
+        "submitter_id": "visit_file_b0490cc6dc", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_f978503490"
+        }, 
+        "data_category": "Laboratory Results", 
+        "data_format": "77065452de", 
+        "data_type": "25982c0899", 
+        "file_name": "d8593845cb", 
+        "file_size": 74, 
+        "md5sum": "2b13f1e4df678971808705b7d148024a", 
+        "submitter_id": "visit_file_bbc9c86401", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_687c809f58"
+        }, 
+        "data_category": "Physical Examination", 
+        "data_format": "89c5bb78bf", 
+        "data_type": "f43ee8a10e", 
+        "file_name": "7001ca1b54", 
+        "file_size": 24, 
+        "md5sum": "e5926306835598114d8d41577fda3223", 
+        "submitter_id": "visit_file_f877f668cb", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_51d91d8e20"
+        }, 
+        "data_category": "Behavior Questionnaire", 
+        "data_format": "5dfcb2208a", 
+        "data_type": "9917a701ee", 
+        "file_name": "a92d50f4f8", 
+        "file_size": 19, 
+        "md5sum": "2776a34ae103cc07ee510e702116b44c", 
+        "submitter_id": "visit_file_067f4cbda5", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a0ee4dbbd4"
+        }, 
+        "data_category": "Physical Examination", 
+        "data_format": "cb342e7c1d", 
+        "data_type": "358088e101", 
+        "file_name": "373ab01abd", 
+        "file_size": 13, 
+        "md5sum": "7b543e91d6b71794a21f20bd4852b31c", 
+        "submitter_id": "visit_file_db1c4d0542", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8a413fa679"
+        }, 
+        "data_category": "Health Questionnaire", 
+        "data_format": "c7c1aae976", 
+        "data_type": "2d0d78a284", 
+        "file_name": "5cead95e3e", 
+        "file_size": 62, 
+        "md5sum": "73294738dc34ffa0f0f37ffa6c28bd4f", 
+        "submitter_id": "visit_file_0ae421375d", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_e74f11ea34"
+        }, 
+        "data_category": "Drug Use Questionnaire", 
+        "data_format": "b1ee4d4e8a", 
+        "data_type": "f8ba24dcc2", 
+        "file_name": "69f699ce84", 
+        "file_size": 56, 
+        "md5sum": "243fdd24093d45b4a2cf1f16ae90aa44", 
+        "submitter_id": "visit_file_663b2f126e", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_dbdaaa754b"
+        }, 
+        "data_category": "Gynecological Examination", 
+        "data_format": "e111659626", 
+        "data_type": "112b32777e", 
+        "file_name": "298e838967", 
+        "file_size": 88, 
+        "md5sum": "ea2e2880e57c8486db55d03bcf8cfc75", 
+        "submitter_id": "visit_file_129a394cfb", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_034fb2331c"
+        }, 
+        "data_category": "Physical Examination", 
+        "data_format": "4ea574ea5c", 
+        "data_type": "0ca118cf4c", 
+        "file_name": "9dd9192398", 
+        "file_size": 81, 
+        "md5sum": "1b9c2476b69897a3f25685f50d2ce33a", 
+        "submitter_id": "visit_file_9eaba588a9", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_cfb673cd63"
+        }, 
+        "data_category": "Physical Examination", 
+        "data_format": "0abf7e0e1e", 
+        "data_type": "45f7cbc9af", 
+        "file_name": "0034368aef", 
+        "file_size": 48, 
+        "md5sum": "1392d0cadabe632bc16e5a57b249beee", 
+        "submitter_id": "visit_file_da7a1e8b62", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_45b9ccf2e1"
+        }, 
+        "data_category": "Laboratory Results", 
+        "data_format": "f1c4bb9d79", 
+        "data_type": "22a96dcc43", 
+        "file_name": "271ed2f6fd", 
+        "file_size": 60, 
+        "md5sum": "77e698f5a7adb21bf1a83c92ef03ee38", 
+        "submitter_id": "visit_file_ecb5906377", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_27d251a833"
+        }, 
+        "data_category": "Laboratory Results", 
+        "data_format": "8495743f88", 
+        "data_type": "c0ffe554a8", 
+        "file_name": "504a4412d9", 
+        "file_size": 4, 
+        "md5sum": "7146193eeba802be6779d6373f2a957c", 
+        "submitter_id": "visit_file_bc02667f8d", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b0bcc4779a"
+        }, 
+        "data_category": "Laboratory Results", 
+        "data_format": "81dcb88d74", 
+        "data_type": "fb90267e36", 
+        "file_name": "9b3ce2204a", 
+        "file_size": 0, 
+        "md5sum": "34ea4696c9db9d4b086059eb98988aab", 
+        "submitter_id": "visit_file_0a67d80d64", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_3975abef9f"
+        }, 
+        "data_category": "Neurocognitive Test", 
+        "data_format": "9f38565834", 
+        "data_type": "5a1642c629", 
+        "file_name": "125b11d3ea", 
+        "file_size": 46, 
+        "md5sum": "e79be30617060440d17a6ffd7bbc05e6", 
+        "submitter_id": "visit_file_dec0b298e2", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_bfeaa8476f"
+        }, 
+        "data_category": "Physical Examination", 
+        "data_format": "77006dfb29", 
+        "data_type": "08e22b548e", 
+        "file_name": "e6af0fdaf7", 
+        "file_size": 37, 
+        "md5sum": "5410c6567f29f5115d577ee3d39ca6d4", 
+        "submitter_id": "visit_file_9cda4971b8", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b94b7f9edf"
+        }, 
+        "data_category": "Physical Examination", 
+        "data_format": "ff16e892cd", 
+        "data_type": "50c1a0de66", 
+        "file_name": "a8f4f187c1", 
+        "file_size": 82, 
+        "md5sum": "3d620383f4b7826b6c98e13135d44c6b", 
+        "submitter_id": "visit_file_f2e01bcdd2", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_14f4407831"
+        }, 
+        "data_category": "Mental Health Questionnaire", 
+        "data_format": "f1ae1740f2", 
+        "data_type": "7c1f68ceaa", 
+        "file_name": "570e2f45dd", 
+        "file_size": 97, 
+        "md5sum": "97bd9aa82cab88c7dd1e72f58ebcc056", 
+        "submitter_id": "visit_file_39e509a1bc", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9fa2a916b0"
+        }, 
+        "data_category": "Behavior Questionnaire", 
+        "data_format": "e9d229774d", 
+        "data_type": "361e10658b", 
+        "file_name": "7fde82287d", 
+        "file_size": 100, 
+        "md5sum": "858c89eb2f1d567f1681915a342db1f3", 
+        "submitter_id": "visit_file_2eba116368", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b94b7f9edf"
+        }, 
+        "data_category": "Drug Use Questionnaire", 
+        "data_format": "34bdd6f53b", 
+        "data_type": "0b6e214684", 
+        "file_name": "3285489cf0", 
+        "file_size": 3, 
+        "md5sum": "16278ac2d414e899b0a7ff1e58b9782e", 
+        "submitter_id": "visit_file_e0898fde56", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_069dc49a92"
+        }, 
+        "data_category": "Socio-Demographic Questionnaire", 
+        "data_format": "9d894f8e94", 
+        "data_type": "f3d597ed97", 
+        "file_name": "36de75a35d", 
+        "file_size": 8, 
+        "md5sum": "03d58186b8362e6c1e0591f79c23ddbb", 
+        "submitter_id": "visit_file_fefabca268", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_da2a97e9f7"
+        }, 
+        "data_category": "Mental Health Questionnaire", 
+        "data_format": "d56d4c5004", 
+        "data_type": "6f8b6cbf70", 
+        "file_name": "ff9a0e751a", 
+        "file_size": 89, 
+        "md5sum": "b3e82a84148e6c4162a66a4e16aa2065", 
+        "submitter_id": "visit_file_2d2507ba12", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a0ee4dbbd4"
+        }, 
+        "data_category": "Socio-Demographic Questionnaire", 
+        "data_format": "47736526c4", 
+        "data_type": "1608a58fdb", 
+        "file_name": "2e4916eeec", 
+        "file_size": 90, 
+        "md5sum": "83f9d7adcb9c96b92ed32fd546212b0c", 
+        "submitter_id": "visit_file_024606f2c3", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a0ee4dbbd4"
+        }, 
+        "data_category": "Neurocognitive Test", 
+        "data_format": "17b5950c7d", 
+        "data_type": "7a253a7478", 
+        "file_name": "2d1328bd47", 
+        "file_size": 34, 
+        "md5sum": "3311f06c5cf5e6b610ff71a81ab92faf", 
+        "submitter_id": "visit_file_f191d14ad5", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_cfb673cd63"
+        }, 
+        "data_category": "Mental Health Questionnaire", 
+        "data_format": "2c2a329720", 
+        "data_type": "f4808c9700", 
+        "file_name": "2aec56ec8a", 
+        "file_size": 95, 
+        "md5sum": "bc67fbe98f398bc291d6b2a1db4a1b6d", 
+        "submitter_id": "visit_file_bbd3417549", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_4333865565"
+        }, 
+        "data_category": "Physical Examination", 
+        "data_format": "bf17d85aae", 
+        "data_type": "0bade60447", 
+        "file_name": "c52dddcfab", 
+        "file_size": 74, 
+        "md5sum": "547816521c7892c3904b7a7fe8b055a1", 
+        "submitter_id": "visit_file_4c1011b385", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_bfeaa8476f"
+        }, 
+        "data_category": "Neurocognitive Test", 
+        "data_format": "9adc982b89", 
+        "data_type": "5e7ad2b76b", 
+        "file_name": "9128bfffa4", 
+        "file_size": 50, 
+        "md5sum": "d5c32072eb95b962169ad12e80470cf0", 
+        "submitter_id": "visit_file_30d588b44e", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_bfeaa8476f"
+        }, 
+        "data_category": "Gynecological Examination", 
+        "data_format": "0bb44dadcc", 
+        "data_type": "609b4a6d4b", 
+        "file_name": "2874db7b49", 
+        "file_size": 27, 
+        "md5sum": "91c9820c16b719780221680264038348", 
+        "submitter_id": "visit_file_cba904399b", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_45b9ccf2e1"
+        }, 
+        "data_category": "Behavior Questionnaire", 
+        "data_format": "4e6ab90cc3", 
+        "data_type": "b56b634579", 
+        "file_name": "929234592e", 
+        "file_size": 23, 
+        "md5sum": "6b31363e7bc9cae0b5692718b6265a0c", 
+        "submitter_id": "visit_file_c541abfe21", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8a3e9dfeab"
+        }, 
+        "data_category": "Mental Health Questionnaire", 
+        "data_format": "9d661069e8", 
+        "data_type": "132eaeeb9d", 
+        "file_name": "cd8c3ce0a6", 
+        "file_size": 26, 
+        "md5sum": "8935961e11ffcde012fc555f78606c51", 
+        "submitter_id": "visit_file_ba84924740", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_27d251a833"
+        }, 
+        "data_category": "Behavior Questionnaire", 
+        "data_format": "3054bcaa58", 
+        "data_type": "382cfd4ba9", 
+        "file_name": "21abf19248", 
+        "file_size": 56, 
+        "md5sum": "6653ca8f85e92de51a7d469d1ff4e135", 
+        "submitter_id": "visit_file_90c1919676", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_da2a97e9f7"
+        }, 
+        "data_category": "Laboratory Results", 
+        "data_format": "06edc447c8", 
+        "data_type": "46c3f227f1", 
+        "file_name": "6eac5d009d", 
+        "file_size": 68, 
+        "md5sum": "87e2fb3578051c7b0900a1a91c899381", 
+        "submitter_id": "visit_file_71ae6c0981", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_069dc49a92"
+        }, 
+        "data_category": "Behavior Questionnaire", 
+        "data_format": "71ec9b13ce", 
+        "data_type": "46721ca443", 
+        "file_name": "edef266b4e", 
+        "file_size": 79, 
+        "md5sum": "74c54ccf9371c1638031ada802264843", 
+        "submitter_id": "visit_file_2569982aae", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_034fb2331c"
+        }, 
+        "data_category": "Health Questionnaire", 
+        "data_format": "808b27f1e1", 
+        "data_type": "6a9b44d3db", 
+        "file_name": "ccf2d8bdc1", 
+        "file_size": 41, 
+        "md5sum": "78167901b4c5d645d59790a26b07e01e", 
+        "submitter_id": "visit_file_11809313d3", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_01f3aa5ac0"
+        }, 
+        "data_category": "Health Questionnaire", 
+        "data_format": "e7fd65f123", 
+        "data_type": "286d4ae004", 
+        "file_name": "c0cbfb43df", 
+        "file_size": 68, 
+        "md5sum": "b284aff2c14100b621b68305a7b0e7b3", 
+        "submitter_id": "visit_file_0044b3e306", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8a413fa679"
+        }, 
+        "data_category": "Mental Health Questionnaire", 
+        "data_format": "07712f7138", 
+        "data_type": "f66da3a756", 
+        "file_name": "e9d0e24c44", 
+        "file_size": 45, 
+        "md5sum": "eb41f2c0204471e700b6c8b298d881e4", 
+        "submitter_id": "visit_file_34073272e3", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d68fd01d93"
+        }, 
+        "data_category": "Drug Use Questionnaire", 
+        "data_format": "cfcef870e1", 
+        "data_type": "15e0836c2d", 
+        "file_name": "7a06d2bd3e", 
+        "file_size": 26, 
+        "md5sum": "3a5ab22b963eab718581e1dbd1ac6aa5", 
+        "submitter_id": "visit_file_fe3c7721cd", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b94b7f9edf"
+        }, 
+        "data_category": "Behavior Questionnaire", 
+        "data_format": "5216df947e", 
+        "data_type": "6de24ef711", 
+        "file_name": "5155a14e6e", 
+        "file_size": 9, 
+        "md5sum": "fe028e366f22994259d97ea3211300cc", 
+        "submitter_id": "visit_file_0bb2ff2ccf", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2f2872593c"
+        }, 
+        "data_category": "Health Questionnaire", 
+        "data_format": "5d113786d9", 
+        "data_type": "476cf924ec", 
+        "file_name": "cde844512e", 
+        "file_size": 9, 
+        "md5sum": "034c4e435b7bfee5f56000390f715d5a", 
+        "submitter_id": "visit_file_fef622cf80", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_203158bd20"
+        }, 
+        "data_category": "Laboratory Results", 
+        "data_format": "98edb76155", 
+        "data_type": "998d8d1b04", 
+        "file_name": "4d2bab63dd", 
+        "file_size": 78, 
+        "md5sum": "00510e61f321ea04af206eb63756aba7", 
+        "submitter_id": "visit_file_01f5230777", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_f978503490"
+        }, 
+        "data_category": "Behavior Questionnaire", 
+        "data_format": "dd9d093968", 
+        "data_type": "92635c4f45", 
+        "file_name": "b4307c7ede", 
+        "file_size": 70, 
+        "md5sum": "a371ebcde769bfdf196aa2cf3e590e1d", 
+        "submitter_id": "visit_file_c25708e5bb", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_203158bd20"
+        }, 
+        "data_category": "Behavior Questionnaire", 
+        "data_format": "d3a48ef9d5", 
+        "data_type": "53bcb0f570", 
+        "file_name": "8b5b72397d", 
+        "file_size": 87, 
+        "md5sum": "033e9adf61a7e1b7be0125fa13d7ebe1", 
+        "submitter_id": "visit_file_b9c457bd3f", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8a3e9dfeab"
+        }, 
+        "data_category": "Mental Health Questionnaire", 
+        "data_format": "8499f0d5f7", 
+        "data_type": "db976ef0d3", 
+        "file_name": "b0ac54566d", 
+        "file_size": 16, 
+        "md5sum": "faf1b1f5a40466bec68f62ae7afc10e2", 
+        "submitter_id": "visit_file_1a569a694b", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_26685588da"
+        }, 
+        "data_category": "Gynecological Examination", 
+        "data_format": "c27f2ddaed", 
+        "data_type": "658c69588b", 
+        "file_name": "447ebca650", 
+        "file_size": 94, 
+        "md5sum": "cfb481ba89f8892864925315e054f6ec", 
+        "submitter_id": "visit_file_6f3a77b03b", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_f708f3beaa"
+        }, 
+        "data_category": "Laboratory Results", 
+        "data_format": "6bdd2353e4", 
+        "data_type": "1b99b1a04a", 
+        "file_name": "86cc20987e", 
+        "file_size": 68, 
+        "md5sum": "b3f338d6ec8e4eec716b1b36e8b4b502", 
+        "submitter_id": "visit_file_51179dc032", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b94b7f9edf"
+        }, 
+        "data_category": "Neurocognitive Test", 
+        "data_format": "4551e9644f", 
+        "data_type": "3aa0228ad0", 
+        "file_name": "8232aefdee", 
+        "file_size": 41, 
+        "md5sum": "7bf1d9de3e0f01ca36d5db46d66ff3f2", 
+        "submitter_id": "visit_file_de8a0d4bb3", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8894501df8"
+        }, 
+        "data_category": "Health Questionnaire", 
+        "data_format": "9efa48270e", 
+        "data_type": "b5f424c960", 
+        "file_name": "f9f9dd4089", 
+        "file_size": 3, 
+        "md5sum": "1ee797a796db418c79808184455f8c64", 
+        "submitter_id": "visit_file_79ca95098e", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_e74f11ea34"
+        }, 
+        "data_category": "Laboratory Results", 
+        "data_format": "c3410fe211", 
+        "data_type": "daf3e3fa77", 
+        "file_name": "d101cc5b79", 
+        "file_size": 87, 
+        "md5sum": "45d21e8eff3b180a20ce52835f3fb340", 
+        "submitter_id": "visit_file_9986b024ed", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_94fa4274cb"
+        }, 
+        "data_category": "Socio-Demographic Questionnaire", 
+        "data_format": "7117b764c4", 
+        "data_type": "95a40b867f", 
+        "file_name": "5f50b88988", 
+        "file_size": 52, 
+        "md5sum": "fb0e8c5598f92cc0a5ff7ebcb1af58d3", 
+        "submitter_id": "visit_file_49b3b03e56", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a545d68608"
+        }, 
+        "data_category": "Drug Use Questionnaire", 
+        "data_format": "83300ca667", 
+        "data_type": "8cfe8d58ea", 
+        "file_name": "7e6be29008", 
+        "file_size": 14, 
+        "md5sum": "01532f4764d1206bd3c9f81ebc35a583", 
+        "submitter_id": "visit_file_454eeef9fc", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_7728dd70cc"
+        }, 
+        "data_category": "Mental Health Questionnaire", 
+        "data_format": "66dd66ad8f", 
+        "data_type": "9a155b5e5c", 
+        "file_name": "9541da0bb0", 
+        "file_size": 2, 
+        "md5sum": "f36e361b3036af6e0de8d938daf74abb", 
+        "submitter_id": "visit_file_5f01edfc04", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_85903f277a"
+        }, 
+        "data_category": "Mental Health Questionnaire", 
+        "data_format": "5f7dab26ca", 
+        "data_type": "569aaca80b", 
+        "file_name": "4b708a5b5d", 
+        "file_size": 77, 
+        "md5sum": "18d184135f77730947ca4b5b379bf5d0", 
+        "submitter_id": "visit_file_924c736026", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_5ae0ab2048"
+        }, 
+        "data_category": "Health Questionnaire", 
+        "data_format": "e41efb24fb", 
+        "data_type": "a020c612f1", 
+        "file_name": "4dd792c5ff", 
+        "file_size": 99, 
+        "md5sum": "e44c0917a2f587d2030bc0091393ff8f", 
+        "submitter_id": "visit_file_74348aad74", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_508dd823c4"
+        }, 
+        "data_category": "Gynecological Examination", 
+        "data_format": "8dbd571a27", 
+        "data_type": "3b348f9141", 
+        "file_name": "07cb9a29b1", 
+        "file_size": 19, 
+        "md5sum": "57155f376132505209ee2d006284bbdd", 
+        "submitter_id": "visit_file_3c8260706f", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_f708f3beaa"
+        }, 
+        "data_category": "Neurocognitive Test", 
+        "data_format": "903d61f460", 
+        "data_type": "8280ce59b1", 
+        "file_name": "a8e7e1826f", 
+        "file_size": 77, 
+        "md5sum": "2232ba72afa06ac5fdcdb60120b92042", 
+        "submitter_id": "visit_file_1a48fdcce1", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a3d0256ed5"
+        }, 
+        "data_category": "Physical Examination", 
+        "data_format": "a44ce63d84", 
+        "data_type": "9e3aee535f", 
+        "file_name": "8dd0531854", 
+        "file_size": 25, 
+        "md5sum": "2a5eefe04895b917c75e5628e161852b", 
+        "submitter_id": "visit_file_2444732345", 
+        "type": "visit_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d192a273a9"
+        }, 
+        "data_category": "Laboratory Results", 
+        "data_format": "98caeaad28", 
+        "data_type": "3a828b4b10", 
+        "file_name": "71555ff130", 
+        "file_size": 43, 
+        "md5sum": "48f317968f0956a87ce7102ceb325006", 
+        "submitter_id": "visit_file_e99a720323", 
+        "type": "visit_file"
     }
-  },
-  {
-    "data_type": "LzVCmSpFRkc0",
-    "data_format": "45NZmhzbQt6G",
-    "data_category": "Laboratory Results",
-    "md5sum": "34e59b1b005961cd838b358dc8137b8b",
-    "file_size": 2,
-    "file_name": "6rcuMuXR4A62",
-    "type": "visit_file",
-    "submitter_id": "visit_file_002",
-    "laboratory_results": {
-      "submitter_id": "laboratory_result_002"
-    }
-  },
-  {
-    "data_type": "itOhoTHA4s4G",
-    "data_format": "Z21sNtgSPZs2",
-    "data_category": "Drug Use Questionnaire",
-    "md5sum": "70afb8ca69906204a9b8de677e87e021",
-    "file_size": 7,
-    "file_name": "uAGlVEyYBXHP",
-    "type": "visit_file",
-    "submitter_id": "visit_file_003",
-    "laboratory_results": {
-      "submitter_id": "laboratory_result_003"
-    }
-  },
-  {
-    "data_type": "6zJwJXVb3ubz",
-    "data_format": "GEnZvN0YmVD7",
-    "data_category": "Health Questionnaire",
-    "md5sum": "e545561c8a8ec303ca6e95ac94a1618d",
-    "file_size": 6,
-    "file_name": "CLMz6dfCNa0Q",
-    "type": "visit_file",
-    "submitter_id": "visit_file_004",
-    "laboratory_results": {
-      "submitter_id": "laboratory_result_004"
-    }
-  },
-  {
-    "data_type": "OCi50xrpWvlo",
-    "data_format": "VDjJth0rVbrN",
-    "data_category": "Socio-Demographic Questionnaire",
-    "md5sum": "9fc103558e5e64b3ae9a91d007cd2cc3",
-    "file_size": 6,
-    "file_name": "WpKUefZQ1xLL",
-    "type": "visit_file",
-    "submitter_id": "visit_file_005",
-    "laboratory_results": {
-      "submitter_id": "laboratory_result_005"
-    }
-  },
-  {
-    "data_type": "RA01ld5n2OvE",
-    "data_format": "S6tralrNfMDj",
-    "data_category": "Neurocognitive Test",
-    "md5sum": "e6a03a9d5a1c592023cd8f7eb6fab472",
-    "file_size": 5,
-    "file_name": "Ipgcz6Ta9IsJ",
-    "type": "visit_file",
-    "submitter_id": "visit_file_006",
-    "laboratory_results": {
-      "submitter_id": "laboratory_result_006"
-    }
-  },
-  {
-    "data_type": "UTlNKaVX9jBo",
-    "data_format": "65EIy4Pf89z9",
-    "data_category": "Gynecological Examination",
-    "md5sum": "59011feb59e9fc218b5559363069a965",
-    "file_size": 2,
-    "file_name": "haU9A4Gy22H5",
-    "type": "visit_file",
-    "submitter_id": "visit_file_007",
-    "laboratory_results": {
-      "submitter_id": "laboratory_result_007"
-    }
-  },
-  {
-    "data_type": "jD1ldp9meRMZ",
-    "data_format": "Xlz4RLTNSNsK",
-    "data_category": "Laboratory Results",
-    "md5sum": "d4d86e8531c493c03d885e159ae3aadb",
-    "file_size": 4,
-    "file_name": "HPRsBEhExSFV",
-    "type": "visit_file",
-    "submitter_id": "visit_file_008",
-    "laboratory_results": {
-      "submitter_id": "laboratory_result_008"
-    }
-  },
-  {
-    "data_type": "pVmBAS3JBUEx",
-    "data_format": "T5caNnxl1Fp2",
-    "data_category": "Gynecological Examination",
-    "md5sum": "ce45eb87773950487f70ffce8cc9e4da",
-    "file_size": 8,
-    "file_name": "U0YQWFDGl079",
-    "type": "visit_file",
-    "submitter_id": "visit_file_009",
-    "laboratory_results": {
-      "submitter_id": "laboratory_result_009"
-    }
-  },
-  {
-    "data_type": "5MdxSluaIbGl",
-    "data_format": "S8xupghG5tls",
-    "data_category": "Health Questionnaire",
-    "md5sum": "f6dcb328e3a2e553c4a5b53db030127d",
-    "file_size": 3,
-    "file_name": "ABulcNIlB1UW",
-    "type": "visit_file",
-    "submitter_id": "visit_file_0010",
-    "laboratory_results": {
-      "submitter_id": "laboratory_result_0010"
-    }
-  },
-  {
-    "data_type": "cqOfUNVKYZyK",
-    "data_format": "e1M4ZWBZQAss",
-    "data_category": "Laboratory Results",
-    "md5sum": "dc465886f0c9ec4a1de13d119cf57ae0",
-    "file_size": 9,
-    "file_name": "LGKBDKR9eJD5",
-    "type": "visit_file",
-    "submitter_id": "visit_file_0011",
-    "laboratory_results": {
-      "submitter_id": "laboratory_result_0011"
-    }
-  },
-  {
-    "data_type": "VANz0mMxD6GG",
-    "data_format": "IIrYNYu095aF",
-    "data_category": "Socio-Demographic Questionnaire",
-    "md5sum": "17b7767d142d7861ab6deff93fa62113",
-    "file_size": 7,
-    "file_name": "o50wPtnNZcrD",
-    "type": "visit_file",
-    "submitter_id": "visit_file_0012",
-    "laboratory_results": {
-      "submitter_id": "laboratory_result_0012"
-    }
-  },
-  {
-    "data_type": "MSniWDJXK0uO",
-    "data_format": "XVgVV2KffS8i",
-    "data_category": "Drug Use Questionnaire",
-    "md5sum": "b8c9dc2ae143ca8cd01c42b7466db3fc",
-    "file_size": 1,
-    "file_name": "GyVMSa9NOyhh",
-    "type": "visit_file",
-    "submitter_id": "visit_file_0013",
-    "laboratory_results": {
-      "submitter_id": "laboratory_result_0013"
-    }
-  },
-  {
-    "data_type": "u8h09pc6QaYW",
-    "data_format": "nqydKe0e5Ko6",
-    "data_category": "Drug Use Questionnaire",
-    "md5sum": "ee32accc4eb0c2e218dde8a9a81d4964",
-    "file_size": 6,
-    "file_name": "e3iSZozCai7o",
-    "type": "visit_file",
-    "submitter_id": "visit_file_0014",
-    "laboratory_results": {
-      "submitter_id": "laboratory_result_0014"
-    }
-  },
-  {
-    "data_type": "Kk6ZiKpHyK8K",
-    "data_format": "R1yEBlTObLWp",
-    "data_category": "Socio-Demographic Questionnaire",
-    "md5sum": "0cdc6d397184bdf6c652b047688e849d",
-    "file_size": 3,
-    "file_name": "5UUsA9awGyQG",
-    "type": "visit_file",
-    "submitter_id": "visit_file_0015",
-    "laboratory_results": {
-      "submitter_id": "laboratory_result_0015"
-    }
-  },
-  {
-    "data_type": "weenjgUVi9f6",
-    "data_format": "n8T10lkQcKKA",
-    "data_category": "Socio-Demographic Questionnaire",
-    "md5sum": "1a80ca88d758b90b00c030f6a63043c9",
-    "file_size": 4,
-    "file_name": "aycmrkmW9Tdi",
-    "type": "visit_file",
-    "submitter_id": "visit_file_0016",
-    "laboratory_results": {
-      "submitter_id": "laboratory_result_0016"
-    }
-  },
-  {
-    "data_type": "2L2Lwb8l1ol5",
-    "data_format": "5MrlwLazenML",
-    "data_category": "Health Questionnaire",
-    "md5sum": "c8421a512acd96ad3f23b53e545ea646",
-    "file_size": 1,
-    "file_name": "tdm9AOsQL5Pa",
-    "type": "visit_file",
-    "submitter_id": "visit_file_0017",
-    "laboratory_results": {
-      "submitter_id": "laboratory_result_0017"
-    }
-  }
 ]

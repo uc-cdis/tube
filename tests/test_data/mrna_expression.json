@@ -1,226 +1,1220 @@
 [
-  {
-    "data_category": "Transcriptome Profiling",
-    "data_type": "mRNA Expression Quantification",
-    "experimental_strategy": "RNA-Seq",
-    "data_format": "TSV",
-    "md5sum": "2c1dfc2bbe0f2c060ba08d1c45572fe6",
-    "file_size": 5,
-    "file_name": "06ELAXuLeRy0",
-    "type": "mrna_expression",
-    "submitter_id": "mrna_expression_001",
-    "mrna_microarrays": {
-      "submitter_id": "mrna_microarray_001"
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_f708f3beaa"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WXS", 
+        "file_name": "ffd6276f08", 
+        "file_size": 44, 
+        "md5sum": "45c70a97474c22e8a0316c8ddac63b68", 
+        "submitter_id": "mrna_expression_a504b01b79", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_e74f11ea34"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WXS", 
+        "file_name": "3323503c36", 
+        "file_size": 46, 
+        "md5sum": "c0a3300ba259d1e8591549a288b69766", 
+        "submitter_id": "mrna_expression_0a8a63fb7a", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_f978503490"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WXS", 
+        "file_name": "66307b5fed", 
+        "file_size": 49, 
+        "md5sum": "7cf5c89f26a135e8794165fde5e20cf6", 
+        "submitter_id": "mrna_expression_5c47f5cb33", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d7919b6b89"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WGS", 
+        "file_name": "28d708339f", 
+        "file_size": 45, 
+        "md5sum": "9de4c9c007759fc97fbad87e6ece3179", 
+        "submitter_id": "mrna_expression_5da6161fc4", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_034fb2331c"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-microarray", 
+        "file_name": "b32313129f", 
+        "file_size": 79, 
+        "md5sum": "04d77bc7b634e4a1da824e65e4d43b2f", 
+        "submitter_id": "mrna_expression_1cbba27d78", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_da2a97e9f7"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "aa0fd5e72b", 
+        "file_size": 13, 
+        "md5sum": "236233852b0c3c851a785553bdf094df", 
+        "submitter_id": "mrna_expression_ba1e452881", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_27434ba0a2"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-microarray", 
+        "file_name": "8d1eea93fa", 
+        "file_size": 31, 
+        "md5sum": "0c78a9a9df41e0669b3670a5dd478cb7", 
+        "submitter_id": "mrna_expression_bc591792fa", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a3da392eb2"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "miRNA-Seq", 
+        "file_name": "c9881e39b1", 
+        "file_size": 8, 
+        "md5sum": "80df521c1fa1abce889302632a5b1cac", 
+        "submitter_id": "mrna_expression_03ca5b0673", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_069dc49a92"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WXS", 
+        "file_name": "fcd061e11c", 
+        "file_size": 55, 
+        "md5sum": "2e0a029dd895270431a28d75e44a719b", 
+        "submitter_id": "mrna_expression_234ec3ec93", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_3b85557510"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-microarray", 
+        "file_name": "8fe7acb256", 
+        "file_size": 83, 
+        "md5sum": "c5ad980a26865a30fe1937fd934de2cb", 
+        "submitter_id": "mrna_expression_6b5bac409a", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_51d91d8e20"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "miRNA-Seq", 
+        "file_name": "281aebf4e8", 
+        "file_size": 97, 
+        "md5sum": "abd2c3cf10006e4b9ab96bef99ca433d", 
+        "submitter_id": "mrna_expression_2c6e44d012", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9fc4e81f11"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "DNA Panel", 
+        "file_name": "d038c7bbb1", 
+        "file_size": 36, 
+        "md5sum": "db9ee1a7b5f463d534f493e99fc0dd46", 
+        "submitter_id": "mrna_expression_0088946368", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_203158bd20"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "66bf96a3c4", 
+        "file_size": 62, 
+        "md5sum": "ab221154da1394d85774f047e46ab0d4", 
+        "submitter_id": "mrna_expression_1531527f5d", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_3975abef9f"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "DNA Panel", 
+        "file_name": "793f5725bf", 
+        "file_size": 93, 
+        "md5sum": "aa468c1eff6b362871a57568d5ec8f76", 
+        "submitter_id": "mrna_expression_27d0fde8a9", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a3da392eb2"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "d198748a7a", 
+        "file_size": 88, 
+        "md5sum": "fd1df07b9010bd7113f0fef15d4bc4ee", 
+        "submitter_id": "mrna_expression_336162c8da", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_7db77a36ef"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "DNA Panel", 
+        "file_name": "4d0cf982c0", 
+        "file_size": 43, 
+        "md5sum": "f800f1a41f4c1084b48687a8083c83e7", 
+        "submitter_id": "mrna_expression_01b8355d6a", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a3da392eb2"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-Seq", 
+        "file_name": "fecc5106e2", 
+        "file_size": 11, 
+        "md5sum": "b3d3d0398227cbee7dd7965c8de5ad4b", 
+        "submitter_id": "mrna_expression_b815eccd9c", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8894501df8"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-microarray", 
+        "file_name": "241076ad53", 
+        "file_size": 91, 
+        "md5sum": "187e0d7dc60e9b90aa99b3047280fc4c", 
+        "submitter_id": "mrna_expression_122bc58bb8", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_376ed10db2"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "DNA Panel", 
+        "file_name": "693d09acbf", 
+        "file_size": 49, 
+        "md5sum": "124f98b05235e3297a5bed0eced41046", 
+        "submitter_id": "mrna_expression_38656e7478", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_cfb673cd63"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "DNA Panel", 
+        "file_name": "fb4d845429", 
+        "file_size": 18, 
+        "md5sum": "7330f9abb643cf932f4aa3737b2e0026", 
+        "submitter_id": "mrna_expression_641802a8ac", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2f865cfb95"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "3b82f19ad2", 
+        "file_size": 42, 
+        "md5sum": "4902eb11740ba4569fc270b9f704c715", 
+        "submitter_id": "mrna_expression_e1f022bb1e", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9e9289954a"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-microarray", 
+        "file_name": "147f1a5816", 
+        "file_size": 78, 
+        "md5sum": "bd3b937c0b08c0dd7f35a291dbc54f6a", 
+        "submitter_id": "mrna_expression_00d7d4837c", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2c4453ff06"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "miRNA-Seq", 
+        "file_name": "6354c12966", 
+        "file_size": 28, 
+        "md5sum": "b9c1b329689063d4751f89ef5d57a8c3", 
+        "submitter_id": "mrna_expression_83e7cf7d7a", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_bfeaa8476f"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WXS", 
+        "file_name": "42a61fb27d", 
+        "file_size": 57, 
+        "md5sum": "51e03ca7210bad0183f709e31ef85543", 
+        "submitter_id": "mrna_expression_f23deef888", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_0d509bedcd"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WXS", 
+        "file_name": "693d012787", 
+        "file_size": 4, 
+        "md5sum": "720a97e049511afbfc1a6459a871e46f", 
+        "submitter_id": "mrna_expression_3a74090bd0", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_087f58a19a"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Validation", 
+        "file_name": "6ee1e93111", 
+        "file_size": 16, 
+        "md5sum": "e1f8f446864f72b43e0640dc9ec88cc9", 
+        "submitter_id": "mrna_expression_8196063095", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_390fd6df90"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WXS", 
+        "file_name": "636460f3b4", 
+        "file_size": 42, 
+        "md5sum": "9f27bed083557b78bc7322d6bc60b128", 
+        "submitter_id": "mrna_expression_aa380c19d6", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2f2872593c"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "7e7388326c", 
+        "file_size": 74, 
+        "md5sum": "3c7dfecd801494e4581554cfc431c2a4", 
+        "submitter_id": "mrna_expression_ed7959522b", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_27d251a833"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Validation", 
+        "file_name": "c30677b11d", 
+        "file_size": 61, 
+        "md5sum": "8e5868379c15017f50abcd6b6427d978", 
+        "submitter_id": "mrna_expression_2e7ef46b77", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_4333865565"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-microarray", 
+        "file_name": "86c234a5fd", 
+        "file_size": 46, 
+        "md5sum": "834ac20aa5bdbf966683a22cb3efdb00", 
+        "submitter_id": "mrna_expression_7ac87b88a0", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_81e02062e7"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Low Pass WGS", 
+        "file_name": "645dfee920", 
+        "file_size": 18, 
+        "md5sum": "695e471984b4fc2f6a91acd46b08b49b", 
+        "submitter_id": "mrna_expression_00515c1b20", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_043ef69e42"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Low Pass WGS", 
+        "file_name": "e920d3d08b", 
+        "file_size": 33, 
+        "md5sum": "e903a098c1147ca6ffc879fb8cd2cfbc", 
+        "submitter_id": "mrna_expression_f0b0b1d8eb", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_80fb876198"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Validation", 
+        "file_name": "1d00403f93", 
+        "file_size": 47, 
+        "md5sum": "b2875ee54922dfbc9f24e071c13b5a60", 
+        "submitter_id": "mrna_expression_e9bdd0b868", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_cc7b6c15b3"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-microarray", 
+        "file_name": "2751c25b03", 
+        "file_size": 85, 
+        "md5sum": "46fd05f94ca53e57d43533398cd00866", 
+        "submitter_id": "mrna_expression_1e406b5c37", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a0ee4dbbd4"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "DNA Panel", 
+        "file_name": "7a45e22c66", 
+        "file_size": 26, 
+        "md5sum": "2e3fe679169166106bb088dabac6fd01", 
+        "submitter_id": "mrna_expression_0515e21397", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a545d68608"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-Seq", 
+        "file_name": "c7962f9fa6", 
+        "file_size": 25, 
+        "md5sum": "3e2ca11ffb0c43d710008b5c72c4ec9e", 
+        "submitter_id": "mrna_expression_5445124b46", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_f708f3beaa"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "187cc71c85", 
+        "file_size": 7, 
+        "md5sum": "8916bb36f3720d286964497ae9ec42d8", 
+        "submitter_id": "mrna_expression_83a8856e0d", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9e9289954a"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WGS", 
+        "file_name": "622a262d36", 
+        "file_size": 80, 
+        "md5sum": "b168bdd4b10ee72c640626e2b486113d", 
+        "submitter_id": "mrna_expression_f6a622f6f1", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d192a273a9"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Low Pass WGS", 
+        "file_name": "4ebc7e7eaa", 
+        "file_size": 80, 
+        "md5sum": "ab6370c26c802ccdfa17e8057e442706", 
+        "submitter_id": "mrna_expression_bd57810825", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_508dd823c4"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "af935e7f3b", 
+        "file_size": 52, 
+        "md5sum": "38f7ba23c2d85f3c012aa79fd7f14942", 
+        "submitter_id": "mrna_expression_9407a91764", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_7739aca976"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "7be1c7a9f5", 
+        "file_size": 86, 
+        "md5sum": "324a77ae8e44c4aaf293e959a57a7ade", 
+        "submitter_id": "mrna_expression_f132fb560f", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_94fa4274cb"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "miRNA-Seq", 
+        "file_name": "7752a08f84", 
+        "file_size": 32, 
+        "md5sum": "f6cca0c5465f72a8006eba6ff1135952", 
+        "submitter_id": "mrna_expression_35a2bedfb4", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_087f58a19a"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-microarray", 
+        "file_name": "750e8336ed", 
+        "file_size": 87, 
+        "md5sum": "25fd930244c7330bcf22c45253e0d80d", 
+        "submitter_id": "mrna_expression_7a19acb505", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9fc4e81f11"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-Seq", 
+        "file_name": "5b5ea7ba8b", 
+        "file_size": 6, 
+        "md5sum": "d611205c66308e9bfbaffabbe42a9ac1", 
+        "submitter_id": "mrna_expression_b08b9b5aa7", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_6ef774c23e"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-microarray", 
+        "file_name": "7d3b2d4224", 
+        "file_size": 51, 
+        "md5sum": "2224ca767a77ca03056f6cef5304ac0b", 
+        "submitter_id": "mrna_expression_83b1316c5a", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9e9289954a"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-microarray", 
+        "file_name": "83c2f134c0", 
+        "file_size": 66, 
+        "md5sum": "03953355279a4a4c188603ee6d75f337", 
+        "submitter_id": "mrna_expression_3105614f11", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_087f58a19a"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-microarray", 
+        "file_name": "827e009b7f", 
+        "file_size": 97, 
+        "md5sum": "ff7a92f43db53d521b717d2becc9bc6a", 
+        "submitter_id": "mrna_expression_0d7643b947", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_bef2e8df82"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WGS", 
+        "file_name": "d716429a5a", 
+        "file_size": 53, 
+        "md5sum": "f1970da476c1caf0574bb31c17497e00", 
+        "submitter_id": "mrna_expression_3b94e165c6", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_687c809f58"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Validation", 
+        "file_name": "7008ea4e45", 
+        "file_size": 75, 
+        "md5sum": "927b73f8048291064709fe9b83ced831", 
+        "submitter_id": "mrna_expression_5511900fee", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_cfb673cd63"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "cb1f802ef3", 
+        "file_size": 48, 
+        "md5sum": "cbde3be6971afa6a7c897ce722e5a0b9", 
+        "submitter_id": "mrna_expression_043f9b2b6d", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1e0c77bfc8"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "miRNA-Seq", 
+        "file_name": "0104bb5675", 
+        "file_size": 77, 
+        "md5sum": "6a1e02b8dc9e5750ead9a5023dd65587", 
+        "submitter_id": "mrna_expression_a99c4a2651", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_81e02062e7"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Validation", 
+        "file_name": "832754574b", 
+        "file_size": 85, 
+        "md5sum": "a7cca145db38a21a7b0760356cc73376", 
+        "submitter_id": "mrna_expression_202cebc2b8", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_376ed10db2"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-microarray", 
+        "file_name": "7a9de6cfaf", 
+        "file_size": 24, 
+        "md5sum": "26f9f887067640e8219d802f4e43d9f9", 
+        "submitter_id": "mrna_expression_1cec7c9b2f", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8d1ba44b26"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WXS", 
+        "file_name": "ce0d0d5a23", 
+        "file_size": 79, 
+        "md5sum": "a9eb3a4a960b95c55f1abf11a3264afb", 
+        "submitter_id": "mrna_expression_a8c164e047", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_94fa4274cb"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-microarray", 
+        "file_name": "80072b79b2", 
+        "file_size": 8, 
+        "md5sum": "ba67081ce45c683b7546b90a685307ee", 
+        "submitter_id": "mrna_expression_8951ad0cb0", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_51d91d8e20"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-microarray", 
+        "file_name": "4667b69930", 
+        "file_size": 10, 
+        "md5sum": "4600605da156850dd86cb323467a6be1", 
+        "submitter_id": "mrna_expression_b8c8df9a62", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_94fa4274cb"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "miRNA-Seq", 
+        "file_name": "0a4a53481b", 
+        "file_size": 15, 
+        "md5sum": "3165c0aafef4e0febff93efffc0ced72", 
+        "submitter_id": "mrna_expression_d94077da6a", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_27434ba0a2"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "miRNA-Seq", 
+        "file_name": "93ae92d95f", 
+        "file_size": 21, 
+        "md5sum": "5ffc5e5ea4d4a3942a3aaa10dc9cd7a2", 
+        "submitter_id": "mrna_expression_41e6c4924c", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_7739aca976"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WXS", 
+        "file_name": "4f2c860499", 
+        "file_size": 61, 
+        "md5sum": "2a747f306b3ac5a02929125517771b57", 
+        "submitter_id": "mrna_expression_2bdbe53b22", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1a28f4fce4"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-Seq", 
+        "file_name": "353da28a5e", 
+        "file_size": 5, 
+        "md5sum": "1caf38bc71489ebc51ed3bc6570453dc", 
+        "submitter_id": "mrna_expression_1e76ad39f7", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_e74f11ea34"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WGS", 
+        "file_name": "0ce9983633", 
+        "file_size": 64, 
+        "md5sum": "92abe2dbd0bd4e1265b4e2c08756edac", 
+        "submitter_id": "mrna_expression_e5d4e11301", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_30a45f8b25"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WGS", 
+        "file_name": "828859f085", 
+        "file_size": 50, 
+        "md5sum": "1cc1cfa5e0c740d60af62a563198815b", 
+        "submitter_id": "mrna_expression_c1af7ed2a5", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1e0c77bfc8"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WXS", 
+        "file_name": "f4708ed34b", 
+        "file_size": 34, 
+        "md5sum": "bb98380fdd38943e7a53fcbbaad62782", 
+        "submitter_id": "mrna_expression_b31c90743e", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d192a273a9"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WGS", 
+        "file_name": "eb9beeb975", 
+        "file_size": 77, 
+        "md5sum": "a616da91314efe6e0890d586f32870bb", 
+        "submitter_id": "mrna_expression_4cf01a1291", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_27d251a833"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-Seq", 
+        "file_name": "0978d761c2", 
+        "file_size": 50, 
+        "md5sum": "101ddb7de25d4fb37233a0f5158aee2e", 
+        "submitter_id": "mrna_expression_2c0471d132", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_26685588da"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WXS", 
+        "file_name": "ddf4e42a65", 
+        "file_size": 64, 
+        "md5sum": "7457d3d339f8617a85b64c88196ff5d5", 
+        "submitter_id": "mrna_expression_f16e45d8d5", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_14f4407831"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WGS", 
+        "file_name": "0586867315", 
+        "file_size": 68, 
+        "md5sum": "d776e24e3ccff88fcd36a3f2bd2c2259", 
+        "submitter_id": "mrna_expression_d3cae46773", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_420fed97f8"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Low Pass WGS", 
+        "file_name": "fe081481db", 
+        "file_size": 81, 
+        "md5sum": "a1cb703dfaa44ba34644dfad38ff7761", 
+        "submitter_id": "mrna_expression_506d6a85d5", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_bef2e8df82"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WGS", 
+        "file_name": "f97b2161a0", 
+        "file_size": 40, 
+        "md5sum": "b398dac0b0c3feea8b4ba457dd939bd5", 
+        "submitter_id": "mrna_expression_ae736e2783", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_5ae0ab2048"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WGS", 
+        "file_name": "1d59c9407a", 
+        "file_size": 76, 
+        "md5sum": "5c7702d9ddd03c2def855e7e3b1dd82e", 
+        "submitter_id": "mrna_expression_0ddbe9424c", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_cc7b6c15b3"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Low Pass WGS", 
+        "file_name": "8822d20f42", 
+        "file_size": 59, 
+        "md5sum": "54763471d75bf5804d917ccf083f4276", 
+        "submitter_id": "mrna_expression_723af5cc17", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8894501df8"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-Seq", 
+        "file_name": "364daca0ce", 
+        "file_size": 0, 
+        "md5sum": "6f4682ac14858848b3ffe1d320bc02b8", 
+        "submitter_id": "mrna_expression_7eea3fef9c", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8a3e9dfeab"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WXS", 
+        "file_name": "edd2f26691", 
+        "file_size": 96, 
+        "md5sum": "4a6923d39016085bbf6f176b482f82b1", 
+        "submitter_id": "mrna_expression_e0b6551120", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_db3c1a52a2"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "b8d612af60", 
+        "file_size": 19, 
+        "md5sum": "0538e190e7e944d82023005cf93f1468", 
+        "submitter_id": "mrna_expression_03d3e63ece", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9fa2a916b0"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Low Pass WGS", 
+        "file_name": "ef3d1c64a3", 
+        "file_size": 27, 
+        "md5sum": "89d3dc2caa65159f750326c4059783a4", 
+        "submitter_id": "mrna_expression_2687443309", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_26685588da"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WGS", 
+        "file_name": "3a519d01ab", 
+        "file_size": 18, 
+        "md5sum": "50054084bbd3fb3c13c2348207704874", 
+        "submitter_id": "mrna_expression_4aa00e2647", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b0bcc4779a"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "c9653a3444", 
+        "file_size": 57, 
+        "md5sum": "51345b8733e72cc533b09974e9f4be57", 
+        "submitter_id": "mrna_expression_0af7b2629f", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_85903f277a"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Total RNA-Seq", 
+        "file_name": "6c9c767d34", 
+        "file_size": 87, 
+        "md5sum": "42dfab53854e36f107b285c1877e992b", 
+        "submitter_id": "mrna_expression_53d04dde37", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_390fd6df90"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "RNA-microarray", 
+        "file_name": "a67c493dc6", 
+        "file_size": 32, 
+        "md5sum": "c3ceb4dd1eda9d77f0cc130fbae8d3de", 
+        "submitter_id": "mrna_expression_2e7ca6f7ed", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2f2872593c"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "DNA Panel", 
+        "file_name": "66cb5ab00b", 
+        "file_size": 64, 
+        "md5sum": "71a757dbb2fd55d70947eba40d3df696", 
+        "submitter_id": "mrna_expression_7466af49f3", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1e0c77bfc8"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WGS", 
+        "file_name": "a2bf50b615", 
+        "file_size": 51, 
+        "md5sum": "23ac9558c381645053e786c867b22bf5", 
+        "submitter_id": "mrna_expression_303e28211d", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9e9289954a"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "miRNA-Seq", 
+        "file_name": "94e3f4a2d2", 
+        "file_size": 72, 
+        "md5sum": "b3c06bebf9bb4fa52c73f4803be2e404", 
+        "submitter_id": "mrna_expression_bc4af7f402", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_bef2e8df82"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WGS", 
+        "file_name": "4f4ccc9a8a", 
+        "file_size": 43, 
+        "md5sum": "5a4cea5cac21276f027d5a144335b7b9", 
+        "submitter_id": "mrna_expression_dff7d06138", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_e1e3de70ac"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "miRNA-Seq", 
+        "file_name": "3089d546a8", 
+        "file_size": 78, 
+        "md5sum": "eeb0316048eeb807c211ecb0a28792f4", 
+        "submitter_id": "mrna_expression_fc2282090a", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9fc4e81f11"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "CSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Validation", 
+        "file_name": "57541829d2", 
+        "file_size": 16, 
+        "md5sum": "f46a272abe595cc825cbcf34af34f384", 
+        "submitter_id": "mrna_expression_c1c52f485f", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_674dc0fbc4"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TSV", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "Validation", 
+        "file_name": "22ddaa43aa", 
+        "file_size": 83, 
+        "md5sum": "b91913c136e64e29277b7bc3131b1ed5", 
+        "submitter_id": "mrna_expression_167b4c26f3", 
+        "type": "mrna_expression"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_203158bd20"
+        }, 
+        "data_category": "Transcriptome Profiling", 
+        "data_format": "TXT", 
+        "data_type": "mRNA Expression Quantification", 
+        "experimental_strategy": "WGS", 
+        "file_name": "b4265db0e9", 
+        "file_size": 56, 
+        "md5sum": "169b459a700083d6c343f0d3cc4df7da", 
+        "submitter_id": "mrna_expression_5fcc444e6a", 
+        "type": "mrna_expression"
     }
-  },
-  {
-    "data_category": "Transcriptome Profiling",
-    "data_type": "mRNA Expression Quantification",
-    "experimental_strategy": "RNA-microarray",
-    "data_format": "TSV",
-    "md5sum": "e45ba9ecc1f0dbab5d160de97fb5cc83",
-    "file_size": 4,
-    "file_name": "nlcPQ57MPgNe",
-    "type": "mrna_expression",
-    "submitter_id": "mrna_expression_002",
-    "mrna_microarrays": {
-      "submitter_id": "mrna_microarray_002"
-    }
-  },
-  {
-    "data_category": "Transcriptome Profiling",
-    "data_type": "mRNA Expression Quantification",
-    "experimental_strategy": "RNA-microarray",
-    "data_format": "TSV",
-    "md5sum": "f46efc9dfdc78b92c11d2fd52d67f48a",
-    "file_size": 3,
-    "file_name": "wDN6cMrhzi34",
-    "type": "mrna_expression",
-    "submitter_id": "mrna_expression_003",
-    "mrna_microarrays": {
-      "submitter_id": "mrna_microarray_003"
-    }
-  },
-  {
-    "data_category": "Transcriptome Profiling",
-    "data_type": "mRNA Expression Quantification",
-    "experimental_strategy": "Validation",
-    "data_format": "CSV",
-    "md5sum": "d5f83a627a9d6f2d3cbe2412881fc835",
-    "file_size": 3,
-    "file_name": "n4XLM42uinqO",
-    "type": "mrna_expression",
-    "submitter_id": "mrna_expression_004",
-    "mrna_microarrays": {
-      "submitter_id": "mrna_microarray_004"
-    }
-  },
-  {
-    "data_category": "Transcriptome Profiling",
-    "data_type": "mRNA Expression Quantification",
-    "experimental_strategy": "WGS",
-    "data_format": "TXT",
-    "md5sum": "eac8a86a6c99229cc9b29020eb0546a9",
-    "file_size": 3,
-    "file_name": "0JaR6MOtDKR1",
-    "type": "mrna_expression",
-    "submitter_id": "mrna_expression_005",
-    "mrna_microarrays": {
-      "submitter_id": "mrna_microarray_005"
-    }
-  },
-  {
-    "data_category": "Transcriptome Profiling",
-    "data_type": "mRNA Expression Quantification",
-    "experimental_strategy": "DNA Panel",
-    "data_format": "TXT",
-    "md5sum": "05cfc52729390bf2b55ddad9c60ee84f",
-    "file_size": 4,
-    "file_name": "Gj8nI7dS2Iyt",
-    "type": "mrna_expression",
-    "submitter_id": "mrna_expression_006",
-    "mrna_microarrays": {
-      "submitter_id": "mrna_microarray_006"
-    }
-  },
-  {
-    "data_category": "Transcriptome Profiling",
-    "data_type": "mRNA Expression Quantification",
-    "experimental_strategy": "WXS",
-    "data_format": "TXT",
-    "md5sum": "0dff45a85cde3c31440ed56091f558c9",
-    "file_size": 6,
-    "file_name": "rjDguQKon9DN",
-    "type": "mrna_expression",
-    "submitter_id": "mrna_expression_007",
-    "mrna_microarrays": {
-      "submitter_id": "mrna_microarray_007"
-    }
-  },
-  {
-    "data_category": "Transcriptome Profiling",
-    "data_type": "mRNA Expression Quantification",
-    "experimental_strategy": "RNA-Seq",
-    "data_format": "TXT",
-    "md5sum": "40da61e6f5423ddf084cd387d47dec2e",
-    "file_size": 1,
-    "file_name": "T9SzeOVz4qpa",
-    "type": "mrna_expression",
-    "submitter_id": "mrna_expression_008",
-    "mrna_microarrays": {
-      "submitter_id": "mrna_microarray_008"
-    }
-  },
-  {
-    "data_category": "Transcriptome Profiling",
-    "data_type": "mRNA Expression Quantification",
-    "experimental_strategy": "DNA Panel",
-    "data_format": "TSV",
-    "md5sum": "00fe0128f9f3cd26490be9967523595e",
-    "file_size": 3,
-    "file_name": "N8iOST0EjStQ",
-    "type": "mrna_expression",
-    "submitter_id": "mrna_expression_009",
-    "mrna_microarrays": {
-      "submitter_id": "mrna_microarray_009"
-    }
-  },
-  {
-    "data_category": "Transcriptome Profiling",
-    "data_type": "mRNA Expression Quantification",
-    "experimental_strategy": "WXS",
-    "data_format": "TXT",
-    "md5sum": "65db78ff6275dad1638defa63ce3a0d7",
-    "file_size": 0,
-    "file_name": "bn1TJUlRzvvY",
-    "type": "mrna_expression",
-    "submitter_id": "mrna_expression_0010",
-    "mrna_microarrays": {
-      "submitter_id": "mrna_microarray_0010"
-    }
-  },
-  {
-    "data_category": "Transcriptome Profiling",
-    "data_type": "mRNA Expression Quantification",
-    "experimental_strategy": "Total RNA-Seq",
-    "data_format": "TSV",
-    "md5sum": "7923fc542889acf8f8917a6997c154f8",
-    "file_size": 0,
-    "file_name": "2YIs7UJS3412",
-    "type": "mrna_expression",
-    "submitter_id": "mrna_expression_0011",
-    "mrna_microarrays": {
-      "submitter_id": "mrna_microarray_0011"
-    }
-  },
-  {
-    "data_category": "Transcriptome Profiling",
-    "data_type": "mRNA Expression Quantification",
-    "experimental_strategy": "Validation",
-    "data_format": "CSV",
-    "md5sum": "443f48aaedc5e932b600e9b96bb3a69d",
-    "file_size": 4,
-    "file_name": "AggKOSNNUFN1",
-    "type": "mrna_expression",
-    "submitter_id": "mrna_expression_0012",
-    "mrna_microarrays": {
-      "submitter_id": "mrna_microarray_0012"
-    }
-  },
-  {
-    "data_category": "Transcriptome Profiling",
-    "data_type": "mRNA Expression Quantification",
-    "experimental_strategy": "DNA Panel",
-    "data_format": "TSV",
-    "md5sum": "692e71dfa4848e15dfcd718db665184c",
-    "file_size": 5,
-    "file_name": "tVyz0B4tW5hy",
-    "type": "mrna_expression",
-    "submitter_id": "mrna_expression_0013",
-    "mrna_microarrays": {
-      "submitter_id": "mrna_microarray_0013"
-    }
-  },
-  {
-    "data_category": "Transcriptome Profiling",
-    "data_type": "mRNA Expression Quantification",
-    "experimental_strategy": "RNA-Seq",
-    "data_format": "CSV",
-    "md5sum": "b552604621a3871efffb84a6366d79e2",
-    "file_size": 5,
-    "file_name": "m2XB5YbOC8Ak",
-    "type": "mrna_expression",
-    "submitter_id": "mrna_expression_0014",
-    "mrna_microarrays": {
-      "submitter_id": "mrna_microarray_0014"
-    }
-  },
-  {
-    "data_category": "Transcriptome Profiling",
-    "data_type": "mRNA Expression Quantification",
-    "experimental_strategy": "Total RNA-Seq",
-    "data_format": "TXT",
-    "md5sum": "5d39e4ec8ed9bde0ae680f63e2b3c5d5",
-    "file_size": 3,
-    "file_name": "VUXTmW8ZhX67",
-    "type": "mrna_expression",
-    "submitter_id": "mrna_expression_0015",
-    "mrna_microarrays": {
-      "submitter_id": "mrna_microarray_0015"
-    }
-  },
-  {
-    "data_category": "Transcriptome Profiling",
-    "data_type": "mRNA Expression Quantification",
-    "experimental_strategy": "DNA Panel",
-    "data_format": "TXT",
-    "md5sum": "8a1e6799307fec539e2098b794f62173",
-    "file_size": 3,
-    "file_name": "lAa42oZnJ3dL",
-    "type": "mrna_expression",
-    "submitter_id": "mrna_expression_0016",
-    "mrna_microarrays": {
-      "submitter_id": "mrna_microarray_0016"
-    }
-  }
 ]

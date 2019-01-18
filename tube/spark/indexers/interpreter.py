@@ -1,7 +1,7 @@
 import yaml
 from tube.utils import make_sure_hdfs_path_exist
-from .aggregator.translator import Translator as AggregatorTranslator
-from .collector.translator import Translator as CollectorTranslator
+from .aggregation.translator import Translator as AggregatorTranslator
+from .injection.translator import Translator as CollectorTranslator
 from .base.translator import Translator as BaseTranslator
 from tube.utils import init_dictionary
 

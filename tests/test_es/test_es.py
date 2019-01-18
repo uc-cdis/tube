@@ -38,7 +38,7 @@ def test_auth_resource_path_exist(init_interpreter, doc_type):
     s = Search(using=es, index=parser.name, doc_type=doc_type)
     response = s.execute()
 
-    auth_resource_path = "/programs/ndh/projects/test"
+    auth_resource_path = "/programs/jnkns/projects/jenkins"
 
     for hit in response:
         assert hit.auth_resource_path == auth_resource_path

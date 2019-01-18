@@ -1,274 +1,1250 @@
 [
-  {
-    "data_category": "BGM Simulation",
-    "data_type": "BGM Simulation",
-    "data_format": "TXT",
-    "md5sum": "aad79de51a4599298ebba9ff2956c8f9",
-    "file_size": 5,
-    "file_name": "ijh8sKaG6tZB",
-    "type": "bgm_simulation",
-    "submitter_id": "bgm_simulation_001",
-    "mutation_panels": {
-      "submitter_id": "mutation_panel_001"
-    },
-    "core_metadata_records": {
-      "submitter_id": "core_metadata_001"
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_4333865565"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "d7bd9afa5c", 
+        "file_size": 77, 
+        "md5sum": "eefbee19e9263275b0c79084200ce8da", 
+        "submitter_id": "bgm_simulation_249e04d73a", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_069dc49a92"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "132e2c6cc4", 
+        "file_size": 73, 
+        "md5sum": "8a59ea6303d20676592854b31a629eed", 
+        "submitter_id": "bgm_simulation_3dd2ec19ef", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b0bcc4779a"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "e62c2b64cb", 
+        "file_size": 91, 
+        "md5sum": "560f185e71e861b3d0b430f6b06de724", 
+        "submitter_id": "bgm_simulation_3a9cb0346e", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_01f3aa5ac0"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "54981aee19", 
+        "file_size": 9, 
+        "md5sum": "4ccdb29a80e58e0a4d9d44988657031d", 
+        "submitter_id": "bgm_simulation_c6f779071b", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a0ee4dbbd4"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "08bfa0dbee", 
+        "file_size": 75, 
+        "md5sum": "392713ab6cb04a4a0f1cd7440c4662d2", 
+        "submitter_id": "bgm_simulation_2e3cf5605e", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2f2872593c"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "9a826cbb87", 
+        "file_size": 17, 
+        "md5sum": "781bc393293674a910b6316e398aafa3", 
+        "submitter_id": "bgm_simulation_3289094fd9", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_3975abef9f"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "f9e5e7dee2", 
+        "file_size": 41, 
+        "md5sum": "48b951f7aa108eb585bd95d696bab6d2", 
+        "submitter_id": "bgm_simulation_2d178d674b", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_674dc0fbc4"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "59ec45239c", 
+        "file_size": 38, 
+        "md5sum": "b184b6feaede726d0e59b6fe61377e51", 
+        "submitter_id": "bgm_simulation_5f4d0cf864", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_3975abef9f"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "4fd6a05d17", 
+        "file_size": 73, 
+        "md5sum": "2506ffca626eb2d74fad01200d6c6da9", 
+        "submitter_id": "bgm_simulation_9e7285f631", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d7919b6b89"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "28c19439b6", 
+        "file_size": 59, 
+        "md5sum": "d293d23618223400d9b5f64ce9a211a1", 
+        "submitter_id": "bgm_simulation_6b29f40999", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9fa2a916b0"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "03f411ca1d", 
+        "file_size": 23, 
+        "md5sum": "e1b2e28bcbe47085f0040629758c52f5", 
+        "submitter_id": "bgm_simulation_78ff13c86f", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a0ee4dbbd4"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "86a5a9b67f", 
+        "file_size": 87, 
+        "md5sum": "38c323e7086a1ee3852f0d355308ac21", 
+        "submitter_id": "bgm_simulation_c155eb6d0f", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_dbdaaa754b"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "409551a67c", 
+        "file_size": 9, 
+        "md5sum": "ee1fb62ede9e420213cb886ba6a9ac1d", 
+        "submitter_id": "bgm_simulation_13069a006d", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2f865cfb95"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "76d132786f", 
+        "file_size": 48, 
+        "md5sum": "5ff7f925ae3754626c9176162fb61b25", 
+        "submitter_id": "bgm_simulation_5cd2aa97ee", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1e641018da"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "e74fe7f6a2", 
+        "file_size": 96, 
+        "md5sum": "0fecacd2ea0986e8ad6c95d791fe70e8", 
+        "submitter_id": "bgm_simulation_bd7f4c8308", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_cc7b6c15b3"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "fc3a6a5f9f", 
+        "file_size": 52, 
+        "md5sum": "5009e374683e48201f596bbbf9bc364b", 
+        "submitter_id": "bgm_simulation_58a28685fd", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_bfeaa8476f"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "5e8ca72d00", 
+        "file_size": 25, 
+        "md5sum": "bcf3267e0e0f7abdda45db4082485b9c", 
+        "submitter_id": "bgm_simulation_26fdae42dc", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_687c809f58"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "4936e24b8f", 
+        "file_size": 73, 
+        "md5sum": "0a88bb99b78f284a67fa75bc1a38c464", 
+        "submitter_id": "bgm_simulation_535b115ba1", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_674dc0fbc4"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "4485a9933e", 
+        "file_size": 63, 
+        "md5sum": "58b65b1f812d86883f5acfa84f56feec", 
+        "submitter_id": "bgm_simulation_60cfb6df21", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_c0a39b36da"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "2d1f26726b", 
+        "file_size": 3, 
+        "md5sum": "9cb60de0c24c4648ba1624ddf9bc5156", 
+        "submitter_id": "bgm_simulation_c186529a60", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2f2872593c"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "730daf0653", 
+        "file_size": 13, 
+        "md5sum": "1621d04b56cbf35ae9c8d90af23efad5", 
+        "submitter_id": "bgm_simulation_da2a6f8645", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a3d0256ed5"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "ffc294285d", 
+        "file_size": 22, 
+        "md5sum": "11dcf854587e53ed6d7956a4c1a3f980", 
+        "submitter_id": "bgm_simulation_b0309395d3", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_3975abef9f"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "faba905ce9", 
+        "file_size": 27, 
+        "md5sum": "08ec2175899dc9503d48c053fc3dc824", 
+        "submitter_id": "bgm_simulation_e9aad66c4b", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_7db77a36ef"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "ad19cc3b0c", 
+        "file_size": 71, 
+        "md5sum": "8636b80d9b93005cfee3a07fc59e2c68", 
+        "submitter_id": "bgm_simulation_90cb26a13c", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_390fd6df90"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "5837505bab", 
+        "file_size": 87, 
+        "md5sum": "20b0661931d14935ab5065974d22339b", 
+        "submitter_id": "bgm_simulation_435be8109b", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_508dd823c4"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "533949a5d1", 
+        "file_size": 8, 
+        "md5sum": "0a40424a79eab5aaad60b79dc32021da", 
+        "submitter_id": "bgm_simulation_cff8a58334", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_687c809f58"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "66ffdb871a", 
+        "file_size": 22, 
+        "md5sum": "110234a7bdc3f5bd0bad1521053b3c84", 
+        "submitter_id": "bgm_simulation_e83c2bd0c4", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1e641018da"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "73e00a23cc", 
+        "file_size": 23, 
+        "md5sum": "b42fde9f6de4c6145480caceb48a8523", 
+        "submitter_id": "bgm_simulation_09726b9f68", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_94fa4274cb"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "313540f54d", 
+        "file_size": 93, 
+        "md5sum": "700de0f903b719338843e46019a92d83", 
+        "submitter_id": "bgm_simulation_82b720d293", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_83a0afebd2"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "bd2437cf21", 
+        "file_size": 9, 
+        "md5sum": "377b9bf3b14d0de19a4e5ceb9f297fb4", 
+        "submitter_id": "bgm_simulation_847f0622cb", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_01f3aa5ac0"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "702133abdc", 
+        "file_size": 74, 
+        "md5sum": "7d12db70bc77aa0384b13de56db2aee6", 
+        "submitter_id": "bgm_simulation_1bd5aab22d", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_7739aca976"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "4e99bd2a98", 
+        "file_size": 63, 
+        "md5sum": "108faab7bd875b16b5f7da106e194af0", 
+        "submitter_id": "bgm_simulation_b91eec95c7", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_087f58a19a"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "62399688ce", 
+        "file_size": 56, 
+        "md5sum": "7acc91232fc0d4a4b25bfb7edbfd2e9e", 
+        "submitter_id": "bgm_simulation_d2e062ee58", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_7739aca976"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "c3ea247411", 
+        "file_size": 76, 
+        "md5sum": "163fb36db4a1b6b0ac2b2158356bbf29", 
+        "submitter_id": "bgm_simulation_7a829455a5", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_069dc49a92"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "9503741a7c", 
+        "file_size": 83, 
+        "md5sum": "1378771e8af4c2e73de9b5bf088c475b", 
+        "submitter_id": "bgm_simulation_fc78d57859", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_27434ba0a2"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "77bfedc9ef", 
+        "file_size": 87, 
+        "md5sum": "7ca2bedb7da12e38c3fa8358e22b4881", 
+        "submitter_id": "bgm_simulation_b410af2a1c", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_390fd6df90"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "b09d076671", 
+        "file_size": 83, 
+        "md5sum": "68e65b07ceeb40e5133c638969ee739e", 
+        "submitter_id": "bgm_simulation_6fbd865a4b", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_cfb673cd63"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "01bb016b54", 
+        "file_size": 97, 
+        "md5sum": "0fb21c50829b5f2016554a82b53aef67", 
+        "submitter_id": "bgm_simulation_4a71c7306a", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b94b7f9edf"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "005a667def", 
+        "file_size": 37, 
+        "md5sum": "063addbc38e5390f569fc5bdaeab151f", 
+        "submitter_id": "bgm_simulation_e542ade990", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_01f3aa5ac0"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "864355125a", 
+        "file_size": 44, 
+        "md5sum": "734a0c2bc6444d9d0e24c98bf101ac1d", 
+        "submitter_id": "bgm_simulation_f8a4bac093", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_7728dd70cc"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "367cd2bbf6", 
+        "file_size": 72, 
+        "md5sum": "450b6d1ad5760f040ff7066ec6b56b1e", 
+        "submitter_id": "bgm_simulation_6eaa302029", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2f865cfb95"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "f339265671", 
+        "file_size": 99, 
+        "md5sum": "1de0fe595a8a26abbc9d50220760adee", 
+        "submitter_id": "bgm_simulation_3746801fb9", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2f2872593c"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "6a6cf37a24", 
+        "file_size": 100, 
+        "md5sum": "0356be2b992d9b5874dde70c1d3d658c", 
+        "submitter_id": "bgm_simulation_9d70203082", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_26685588da"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "ec892c1e14", 
+        "file_size": 41, 
+        "md5sum": "3f3596006c7bad37363d5bbc2ef6eb86", 
+        "submitter_id": "bgm_simulation_97292289c5", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_51d91d8e20"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "e7739747c1", 
+        "file_size": 11, 
+        "md5sum": "a7ebf3513853e5728d1d55f98c3e68b5", 
+        "submitter_id": "bgm_simulation_3fb0de52ba", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_687c809f58"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "b107077568", 
+        "file_size": 45, 
+        "md5sum": "462af40aaa2337666325e90b54c42fa4", 
+        "submitter_id": "bgm_simulation_efc6e314a1", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_cc7b6c15b3"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "1b73d64e27", 
+        "file_size": 17, 
+        "md5sum": "ff086b7412496fff2b6a814f0ef9dc49", 
+        "submitter_id": "bgm_simulation_4b799d752a", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_81e02062e7"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "a382631a5a", 
+        "file_size": 52, 
+        "md5sum": "5bfa3754a59eb76fd6cb8caf1e7abe33", 
+        "submitter_id": "bgm_simulation_2a43e40c7c", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a545d68608"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "6c2cef0a45", 
+        "file_size": 67, 
+        "md5sum": "0e1a417c255adc5a4bcff5a9795b9189", 
+        "submitter_id": "bgm_simulation_79ac9a8df3", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8a3e9dfeab"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "b3782187d2", 
+        "file_size": 37, 
+        "md5sum": "fc1375dd5e85cfc28d9d5c6c6b097e90", 
+        "submitter_id": "bgm_simulation_00385b798c", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_db3c1a52a2"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "0f64018a5a", 
+        "file_size": 18, 
+        "md5sum": "f4b40c64beb6e79847d26594f79df1d7", 
+        "submitter_id": "bgm_simulation_68e99e88ef", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_51d91d8e20"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "b0876255b8", 
+        "file_size": 66, 
+        "md5sum": "4fb5824ec0311822d3c5cdfdd8784044", 
+        "submitter_id": "bgm_simulation_c729ce11c8", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d68fd01d93"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "df3d44c8b0", 
+        "file_size": 61, 
+        "md5sum": "4c194dd28c4b815d3ef097329607dfed", 
+        "submitter_id": "bgm_simulation_0066199410", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_14f4407831"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "e34f830a23", 
+        "file_size": 74, 
+        "md5sum": "c401efeec8dfcc8caa9d639dfcb5de59", 
+        "submitter_id": "bgm_simulation_375a6d8557", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_51d91d8e20"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "e26f689bea", 
+        "file_size": 23, 
+        "md5sum": "d6bf9ca6e235fcfeeae63741428be4b0", 
+        "submitter_id": "bgm_simulation_64c1ee1316", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_c0a39b36da"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "bc40ddcfdd", 
+        "file_size": 90, 
+        "md5sum": "5d43cbfeb3c0196823336004dfcb9510", 
+        "submitter_id": "bgm_simulation_b0821407e5", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_c0a39b36da"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "2e50441eef", 
+        "file_size": 93, 
+        "md5sum": "7d655b6364cf2a6f6e1212ba54ae0098", 
+        "submitter_id": "bgm_simulation_2ab9509972", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_5ae0ab2048"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "6773b939a0", 
+        "file_size": 19, 
+        "md5sum": "529c3761d0759dc7f345b904cb8dd438", 
+        "submitter_id": "bgm_simulation_f08c705e58", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9fa2a916b0"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "0c5ceceac4", 
+        "file_size": 13, 
+        "md5sum": "b545cc2e57a19aa0d877e3ae697b914b", 
+        "submitter_id": "bgm_simulation_eb7f1cbbfd", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_376ed10db2"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "3f795433c6", 
+        "file_size": 54, 
+        "md5sum": "cce20bd879c2ba6df76e789b71b87425", 
+        "submitter_id": "bgm_simulation_c4ffacd3b3", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_457807d927"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "335e02227e", 
+        "file_size": 17, 
+        "md5sum": "811a593d66a68f189cbf65a59430c03b", 
+        "submitter_id": "bgm_simulation_38c837e4e7", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_7739aca976"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "73d9ccde32", 
+        "file_size": 24, 
+        "md5sum": "f86ff0dd7cc6e6965c7375bc3f019ec3", 
+        "submitter_id": "bgm_simulation_e15987bae9", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_85903f277a"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "ae7db608b8", 
+        "file_size": 94, 
+        "md5sum": "5c569e9550cfad8771b74c389863efc3", 
+        "submitter_id": "bgm_simulation_372c187b36", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_508dd823c4"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "609429c8d6", 
+        "file_size": 63, 
+        "md5sum": "605f1e2bda1b432d59c7a3479186a4ba", 
+        "submitter_id": "bgm_simulation_c2d27ff424", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8a413fa679"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "e81dbad747", 
+        "file_size": 73, 
+        "md5sum": "cd96ff1fa77bbbcdd0efb52ebb900d82", 
+        "submitter_id": "bgm_simulation_b807156553", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_5ae0ab2048"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "b9cd1828fb", 
+        "file_size": 70, 
+        "md5sum": "dbc3d3e1d9eda2c4cfe090954eaa7391", 
+        "submitter_id": "bgm_simulation_0e612d183e", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b0bcc4779a"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "3bbd4071a0", 
+        "file_size": 3, 
+        "md5sum": "4d94edac999c20faa9e044b6f1d27816", 
+        "submitter_id": "bgm_simulation_9a02ca4e78", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_7739aca976"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "277930c75d", 
+        "file_size": 13, 
+        "md5sum": "823357a1ee0abbbb5bc4cdda04284bec", 
+        "submitter_id": "bgm_simulation_383cc03c1f", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b94b7f9edf"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "aa7888b196", 
+        "file_size": 66, 
+        "md5sum": "10892527359aad79f6ddbe77ccf81638", 
+        "submitter_id": "bgm_simulation_0e4de514bc", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_45b9ccf2e1"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "32e613b49d", 
+        "file_size": 89, 
+        "md5sum": "3a4e8311e948057ee84694e2101b18a2", 
+        "submitter_id": "bgm_simulation_cb56091024", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_dbdaaa754b"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "3b524c675e", 
+        "file_size": 29, 
+        "md5sum": "7e2a8cda065ae3113ac5f1f1180276bb", 
+        "submitter_id": "bgm_simulation_6a3218cbef", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9e9289954a"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "78f48a32d9", 
+        "file_size": 90, 
+        "md5sum": "4a701c09a552472b73236002473b7fb4", 
+        "submitter_id": "bgm_simulation_9b461adb31", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_bef2e8df82"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "dde066242b", 
+        "file_size": 4, 
+        "md5sum": "4425e02e4e9aaefdd751be5329a117e8", 
+        "submitter_id": "bgm_simulation_c8ec9b3eaa", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_069dc49a92"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "60373e0d57", 
+        "file_size": 91, 
+        "md5sum": "d4707846a37bcd15b8f6521b33126e6e", 
+        "submitter_id": "bgm_simulation_dcf1c45503", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_cfb673cd63"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "5c8cdf9da4", 
+        "file_size": 71, 
+        "md5sum": "76e29e1db156545a70e1115e9c4fcdb6", 
+        "submitter_id": "bgm_simulation_288bd66246", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_83a0afebd2"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "03a1e3b6fd", 
+        "file_size": 37, 
+        "md5sum": "754f160b0e2a01263871f6d201e26262", 
+        "submitter_id": "bgm_simulation_3809cfaec9", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_51d91d8e20"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "8b0b99040c", 
+        "file_size": 28, 
+        "md5sum": "d055462f4f74d1d2d52491808f07ec0a", 
+        "submitter_id": "bgm_simulation_a0d12881db", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_7739aca976"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "d8b79e075f", 
+        "file_size": 23, 
+        "md5sum": "9a3807cf4f1d0066a29c57b271bf9a88", 
+        "submitter_id": "bgm_simulation_ceae6d79ad", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_da2a97e9f7"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "9497f4109a", 
+        "file_size": 0, 
+        "md5sum": "47b0283d74a97ef9d4d0fae125955da5", 
+        "submitter_id": "bgm_simulation_f0aaad3174", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_687c809f58"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "db3708abb4", 
+        "file_size": 17, 
+        "md5sum": "ac0abc0638bb694de4a2705d09efd9eb", 
+        "submitter_id": "bgm_simulation_08ebf6a123", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8d1ba44b26"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "b9a4954143", 
+        "file_size": 50, 
+        "md5sum": "305040247962b63d4a4e5ee38a7a58a6", 
+        "submitter_id": "bgm_simulation_30c3974f56", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_f708f3beaa"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "e74532caa8", 
+        "file_size": 34, 
+        "md5sum": "d6a1696a5b1146b4c5275ad846dfb991", 
+        "submitter_id": "bgm_simulation_044457d461", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_80fb876198"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "42611daece", 
+        "file_size": 63, 
+        "md5sum": "7c35a015fa1150f6441f8a956eaa3f7d", 
+        "submitter_id": "bgm_simulation_05e1a1e69b", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_26685588da"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "aaec47bbbb", 
+        "file_size": 4, 
+        "md5sum": "0b6efa7440b32a09ef65aee2ad0f193c", 
+        "submitter_id": "bgm_simulation_1c08b50054", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_85903f277a"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "23c13f74d1", 
+        "file_size": 8, 
+        "md5sum": "cf9ee281e9752928fcb16a719118d0b5", 
+        "submitter_id": "bgm_simulation_34cdb253e4", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b94b7f9edf"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "eb686faef6", 
+        "file_size": 96, 
+        "md5sum": "509bf6772e3faea3592e2f33e462e196", 
+        "submitter_id": "bgm_simulation_87eb75b2c1", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_cfb673cd63"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "141fbc315e", 
+        "file_size": 56, 
+        "md5sum": "0ab26ccc8c07dd35e67b5832043f9454", 
+        "submitter_id": "bgm_simulation_bf2fd02f48", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_508dd823c4"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "3f6acba9d4", 
+        "file_size": 10, 
+        "md5sum": "184da352a4d04c53dfd7d2b4ac943ea6", 
+        "submitter_id": "bgm_simulation_ecd77398bc", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d68fd01d93"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "30efa7be66", 
+        "file_size": 91, 
+        "md5sum": "e82a70a076f2f3f11c40f8273eeb29cf", 
+        "submitter_id": "bgm_simulation_f91364d86f", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d69262a9ea"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "9ad0bc3f24", 
+        "file_size": 65, 
+        "md5sum": "3330afffdbf62cffa552fa9f2568ab0d", 
+        "submitter_id": "bgm_simulation_547ee26ac9", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d192a273a9"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TXT", 
+        "data_type": "BGM Simulation", 
+        "file_name": "79eb7565c0", 
+        "file_size": 0, 
+        "md5sum": "e3736714821e7eb754e5df1524105db3", 
+        "submitter_id": "bgm_simulation_b9ec3899db", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_cfb673cd63"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "bfdd786b51", 
+        "file_size": 96, 
+        "md5sum": "dccb6b7068b7be7698b72c5404547476", 
+        "submitter_id": "bgm_simulation_a62885a6e4", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_30a45f8b25"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "PNG", 
+        "data_type": "BGM Simulation", 
+        "file_name": "e583e7450d", 
+        "file_size": 71, 
+        "md5sum": "26fd40f1bf4a77967d795db130ae4d23", 
+        "submitter_id": "bgm_simulation_dc3d9163b7", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_7739aca976"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "46afaa5d86", 
+        "file_size": 56, 
+        "md5sum": "fa8e31e8e2dc4719bd6975bf8b328a22", 
+        "submitter_id": "bgm_simulation_d980c4b5d0", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2f865cfb95"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "TSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "9d84c0bb2b", 
+        "file_size": 42, 
+        "md5sum": "c3da72693690f17083f3e5be29ae1e74", 
+        "submitter_id": "bgm_simulation_07c46f130b", 
+        "type": "bgm_simulation"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_034fb2331c"
+        }, 
+        "data_category": "BGM Simulation", 
+        "data_format": "CSV", 
+        "data_type": "BGM Simulation", 
+        "file_name": "319637b2a8", 
+        "file_size": 50, 
+        "md5sum": "b68b162b16ecd3d0ca28243d6845b8b8", 
+        "submitter_id": "bgm_simulation_f67fbaf75c", 
+        "type": "bgm_simulation"
     }
-  },
-  {
-    "data_category": "BGM Simulation",
-    "data_type": "BGM Simulation",
-    "data_format": "CSV",
-    "md5sum": "e0b45d82388a1961a981241a07e74d1c",
-    "file_size": 3,
-    "file_name": "6jM1tuzad5Lf",
-    "type": "bgm_simulation",
-    "submitter_id": "bgm_simulation_002",
-    "mutation_panels": {
-      "submitter_id": "mutation_panel_002"
-    },
-    "core_metadata_records": {
-      "submitter_id": "core_metadata_002"
-    }
-  },
-  {
-    "data_category": "BGM Simulation",
-    "data_type": "BGM Simulation",
-    "data_format": "TXT",
-    "md5sum": "1c7a90b0fd2be61cbc23b664a12b2906",
-    "file_size": 2,
-    "file_name": "rJ3axeduZ3bZ",
-    "type": "bgm_simulation",
-    "submitter_id": "bgm_simulation_003",
-    "mutation_panels": {
-      "submitter_id": "mutation_panel_003"
-    },
-    "core_metadata_records": {
-      "submitter_id": "core_metadata_003"
-    }
-  },
-  {
-    "data_category": "BGM Simulation",
-    "data_type": "BGM Simulation",
-    "data_format": "CSV",
-    "md5sum": "1f8dbf2be5e4e30b747557e28e90b95a",
-    "file_size": 3,
-    "file_name": "9DgutSaWG9L2",
-    "type": "bgm_simulation",
-    "submitter_id": "bgm_simulation_004",
-    "mutation_panels": {
-      "submitter_id": "mutation_panel_004"
-    },
-    "core_metadata_records": {
-      "submitter_id": "core_metadata_004"
-    }
-  },
-  {
-    "data_category": "BGM Simulation",
-    "data_type": "BGM Simulation",
-    "data_format": "TXT",
-    "md5sum": "6e9a6d9de4860ee00bd3fadcc0896b07",
-    "file_size": 1,
-    "file_name": "PKpvMnRWCe2U",
-    "type": "bgm_simulation",
-    "submitter_id": "bgm_simulation_005",
-    "mutation_panels": {
-      "submitter_id": "mutation_panel_005"
-    },
-    "core_metadata_records": {
-      "submitter_id": "core_metadata_005"
-    }
-  },
-  {
-    "data_category": "BGM Simulation",
-    "data_type": "BGM Simulation",
-    "data_format": "TXT",
-    "md5sum": "880a65562dd32558227edc69f18cb7fe",
-    "file_size": 2,
-    "file_name": "uY8HzyyB3aj9",
-    "type": "bgm_simulation",
-    "submitter_id": "bgm_simulation_006",
-    "mutation_panels": {
-      "submitter_id": "mutation_panel_006"
-    },
-    "core_metadata_records": {
-      "submitter_id": "core_metadata_006"
-    }
-  },
-  {
-    "data_category": "BGM Simulation",
-    "data_type": "BGM Simulation",
-    "data_format": "TXT",
-    "md5sum": "7448937c50a0016ff5ffea1ec327a1ca",
-    "file_size": 5,
-    "file_name": "qixiRDQroXNo",
-    "type": "bgm_simulation",
-    "submitter_id": "bgm_simulation_007",
-    "mutation_panels": {
-      "submitter_id": "mutation_panel_007"
-    },
-    "core_metadata_records": {
-      "submitter_id": "core_metadata_007"
-    }
-  },
-  {
-    "data_category": "BGM Simulation",
-    "data_type": "BGM Simulation",
-    "data_format": "PNG",
-    "md5sum": "af0eb3d569af8d5d7152e6b43bd99880",
-    "file_size": 8,
-    "file_name": "jVrnCkmWXAnR",
-    "type": "bgm_simulation",
-    "submitter_id": "bgm_simulation_008",
-    "mutation_panels": {
-      "submitter_id": "mutation_panel_008"
-    },
-    "core_metadata_records": {
-      "submitter_id": "core_metadata_008"
-    }
-  },
-  {
-    "data_category": "BGM Simulation",
-    "data_type": "BGM Simulation",
-    "data_format": "CSV",
-    "md5sum": "104b38ad9b4f2e14403791a58c61d977",
-    "file_size": 1,
-    "file_name": "g94LBcc8dENE",
-    "type": "bgm_simulation",
-    "submitter_id": "bgm_simulation_009",
-    "mutation_panels": {
-      "submitter_id": "mutation_panel_009"
-    },
-    "core_metadata_records": {
-      "submitter_id": "core_metadata_009"
-    }
-  },
-  {
-    "data_category": "BGM Simulation",
-    "data_type": "BGM Simulation",
-    "data_format": "TXT",
-    "md5sum": "d69ff32c51c78e1de534bb3b05bfa591",
-    "file_size": 3,
-    "file_name": "BhBwAm8lDI6m",
-    "type": "bgm_simulation",
-    "submitter_id": "bgm_simulation_0010",
-    "mutation_panels": {
-      "submitter_id": "mutation_panel_0010"
-    },
-    "core_metadata_records": {
-      "submitter_id": "core_metadata_0010"
-    }
-  },
-  {
-    "data_category": "BGM Simulation",
-    "data_type": "BGM Simulation",
-    "data_format": "CSV",
-    "md5sum": "01e003f030344649d909b99d293a38bf",
-    "file_size": 5,
-    "file_name": "v8KOVDNlw9Sp",
-    "type": "bgm_simulation",
-    "submitter_id": "bgm_simulation_0011",
-    "mutation_panels": {
-      "submitter_id": "mutation_panel_0011"
-    },
-    "core_metadata_records": {
-      "submitter_id": "core_metadata_0011"
-    }
-  },
-  {
-    "data_category": "BGM Simulation",
-    "data_type": "BGM Simulation",
-    "data_format": "CSV",
-    "md5sum": "25934f8f4335e082b6f91eee2a9fc012",
-    "file_size": 6,
-    "file_name": "ywQnmcLfGDPk",
-    "type": "bgm_simulation",
-    "submitter_id": "bgm_simulation_0012",
-    "mutation_panels": {
-      "submitter_id": "mutation_panel_0012"
-    },
-    "core_metadata_records": {
-      "submitter_id": "core_metadata_0012"
-    }
-  },
-  {
-    "data_category": "BGM Simulation",
-    "data_type": "BGM Simulation",
-    "data_format": "TXT",
-    "md5sum": "6ee6cdee954503803a94af0729798893",
-    "file_size": 3,
-    "file_name": "P6ZYlh7gDCfp",
-    "type": "bgm_simulation",
-    "submitter_id": "bgm_simulation_0013",
-    "mutation_panels": {
-      "submitter_id": "mutation_panel_0013"
-    },
-    "core_metadata_records": {
-      "submitter_id": "core_metadata_0013"
-    }
-  },
-  {
-    "data_category": "BGM Simulation",
-    "data_type": "BGM Simulation",
-    "data_format": "CSV",
-    "md5sum": "df02949ad456b1f3f17386d2ab3a815f",
-    "file_size": 5,
-    "file_name": "1K7wvYn020HS",
-    "type": "bgm_simulation",
-    "submitter_id": "bgm_simulation_0014",
-    "mutation_panels": {
-      "submitter_id": "mutation_panel_0014"
-    },
-    "core_metadata_records": {
-      "submitter_id": "core_metadata_0014"
-    }
-  },
-  {
-    "data_category": "BGM Simulation",
-    "data_type": "BGM Simulation",
-    "data_format": "CSV",
-    "md5sum": "3553e25388baf0137ef1749c0c49f72b",
-    "file_size": 9,
-    "file_name": "SPvBHbJGK4sO",
-    "type": "bgm_simulation",
-    "submitter_id": "bgm_simulation_0015",
-    "mutation_panels": {
-      "submitter_id": "mutation_panel_0015"
-    },
-    "core_metadata_records": {
-      "submitter_id": "core_metadata_0015"
-    }
-  },
-  {
-    "data_category": "BGM Simulation",
-    "data_type": "BGM Simulation",
-    "data_format": "PNG",
-    "md5sum": "9588d3ccad65696ea09a17087da1e481",
-    "file_size": 6,
-    "file_name": "V1PkAtRz2Bew",
-    "type": "bgm_simulation",
-    "submitter_id": "bgm_simulation_0016",
-    "mutation_panels": {
-      "submitter_id": "mutation_panel_0016"
-    },
-    "core_metadata_records": {
-      "submitter_id": "core_metadata_0016"
-    }
-  },
-  {
-    "data_category": "BGM Simulation",
-    "data_type": "BGM Simulation",
-    "data_format": "PNG",
-    "md5sum": "79d97e2bdfd29974efc7619186ac082d",
-    "file_size": 4,
-    "file_name": "MNCYKATSaxYc",
-    "type": "bgm_simulation",
-    "submitter_id": "bgm_simulation_0017",
-    "mutation_panels": {
-      "submitter_id": "mutation_panel_0017"
-    },
-    "core_metadata_records": {
-      "submitter_id": "core_metadata_0017"
-    }
-  }
 ]

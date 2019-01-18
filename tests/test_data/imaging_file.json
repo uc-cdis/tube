@@ -1,0 +1,1243 @@
+[
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1f5129d17f"
+        }, 
+        "data_category": "55cae7c570", 
+        "data_format": "941d9aa629", 
+        "data_type": "3a3c0a0fdc", 
+        "experimental_strategy": "c878c43269", 
+        "file_name": "83dc9fdefb", 
+        "file_size": 70, 
+        "image_quality": "Average image quality", 
+        "md5sum": "62df219436e9600f74ef7cc04f233a42", 
+        "series_instance_number": 64, 
+        "series_instance_uid": "7823eb9257", 
+        "submitter_id": "imaging_file_e98d44fb78", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2c4453ff06"
+        }, 
+        "data_category": "313603dd33", 
+        "data_format": "e597cd941f", 
+        "data_type": "92ccd229c5", 
+        "experimental_strategy": "34b30cc692", 
+        "file_name": "ea66c07b63", 
+        "file_size": 44, 
+        "image_quality": "Not Reported", 
+        "md5sum": "b6a5af92f49935b839f094ed64436078", 
+        "series_instance_number": 60, 
+        "series_instance_uid": "0e35fc48da", 
+        "submitter_id": "imaging_file_8fc73e8247", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_80fb876198"
+        }, 
+        "data_category": "227d83d098", 
+        "data_format": "817ee727f9", 
+        "data_type": "94742f5898", 
+        "experimental_strategy": "f26d795cff", 
+        "file_name": "10b99dd306", 
+        "file_size": 13, 
+        "image_quality": "Poor image quality", 
+        "md5sum": "b01fd35d62d8f5fc66077ec88a65f5df", 
+        "series_instance_number": 48, 
+        "series_instance_uid": "1507384614", 
+        "submitter_id": "imaging_file_4c0a0b4d62", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_420fed97f8"
+        }, 
+        "data_category": "7b51d46136", 
+        "data_format": "3c1767f5ce", 
+        "data_type": "91ce1d4fec", 
+        "experimental_strategy": "c191e2d263", 
+        "file_name": "26469f5042", 
+        "file_size": 62, 
+        "image_quality": "Average image quality", 
+        "md5sum": "c65d279f9dd60048835ed461a204d49b", 
+        "series_instance_number": 57, 
+        "series_instance_uid": "493235f72a", 
+        "submitter_id": "imaging_file_ea75b09f5b", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1f5129d17f"
+        }, 
+        "data_category": "74a8dc2182", 
+        "data_format": "793f5a56d3", 
+        "data_type": "d621c232b4", 
+        "experimental_strategy": "408b407a0e", 
+        "file_name": "33f4f823a6", 
+        "file_size": 21, 
+        "image_quality": "Not Reported", 
+        "md5sum": "b10babac98581dd4e159c554e9391971", 
+        "series_instance_number": 47, 
+        "series_instance_uid": "973d7a66df", 
+        "submitter_id": "imaging_file_f9fced9a37", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_da2a97e9f7"
+        }, 
+        "data_category": "589c09bc6b", 
+        "data_format": "7ef5640ac9", 
+        "data_type": "230cc2e49d", 
+        "experimental_strategy": "68f2913971", 
+        "file_name": "9836af8ad9", 
+        "file_size": 5, 
+        "image_quality": "Not Reported", 
+        "md5sum": "9dc3630bc720cf2a9828df5542c46770", 
+        "series_instance_number": 76, 
+        "series_instance_uid": "b5c7f3beaf", 
+        "submitter_id": "imaging_file_4742a91c84", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2f2872593c"
+        }, 
+        "data_category": "45f7fb4702", 
+        "data_format": "c38a780774", 
+        "data_type": "c2084e7c50", 
+        "experimental_strategy": "d3edac8504", 
+        "file_name": "c531190bcb", 
+        "file_size": 39, 
+        "image_quality": "Good image quality", 
+        "md5sum": "e73315324e5677bf69354f05c2252f0a", 
+        "series_instance_number": 34, 
+        "series_instance_uid": "195c5d6b80", 
+        "submitter_id": "imaging_file_6a9a8ca4c8", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b46e7e9524"
+        }, 
+        "data_category": "d82ad1f46b", 
+        "data_format": "a10ff9bdfd", 
+        "data_type": "74fde159f7", 
+        "experimental_strategy": "15e9342b7d", 
+        "file_name": "0899d1571e", 
+        "file_size": 49, 
+        "image_quality": "Average image quality", 
+        "md5sum": "f829ce3edbde28533ccbf534f604eb3d", 
+        "series_instance_number": 31, 
+        "series_instance_uid": "d2dd9fb7bd", 
+        "submitter_id": "imaging_file_8c1f499f98", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8894501df8"
+        }, 
+        "data_category": "7a5ea7a503", 
+        "data_format": "0367e29930", 
+        "data_type": "ac1a9475d9", 
+        "experimental_strategy": "68acff0ad2", 
+        "file_name": "9e58d54c96", 
+        "file_size": 45, 
+        "image_quality": "Average image quality", 
+        "md5sum": "3d6bed06b84be75f3757811455c2cad5", 
+        "series_instance_number": 20, 
+        "series_instance_uid": "275f37c5a4", 
+        "submitter_id": "imaging_file_15317c9611", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_390fd6df90"
+        }, 
+        "data_category": "04f899c0cd", 
+        "data_format": "c2687ce806", 
+        "data_type": "d659e9a1fb", 
+        "experimental_strategy": "9628587975", 
+        "file_name": "4b4d2bcf9d", 
+        "file_size": 70, 
+        "image_quality": "Average image quality", 
+        "md5sum": "11f6859e2b1b41ffa8dca5bc765c2b9c", 
+        "series_instance_number": 48, 
+        "series_instance_uid": "3e89b2188c", 
+        "submitter_id": "imaging_file_61c4ad1fcf", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a3d0256ed5"
+        }, 
+        "data_category": "718ee45905", 
+        "data_format": "425fc44e25", 
+        "data_type": "e0f999399c", 
+        "experimental_strategy": "41a618dac0", 
+        "file_name": "1b16fb21f4", 
+        "file_size": 68, 
+        "image_quality": "Not Reported", 
+        "md5sum": "181f0fb132fccf1c569687b56498b8fa", 
+        "series_instance_number": 10, 
+        "series_instance_uid": "69e4fe881a", 
+        "submitter_id": "imaging_file_a12cf9ebb6", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1e641018da"
+        }, 
+        "data_category": "90e7686ecf", 
+        "data_format": "590fdf401a", 
+        "data_type": "279af64d77", 
+        "experimental_strategy": "cc8f7af74b", 
+        "file_name": "8432962ebe", 
+        "file_size": 48, 
+        "image_quality": "Good image quality", 
+        "md5sum": "8be0cae439227cb011024cae794e6da9", 
+        "series_instance_number": 57, 
+        "series_instance_uid": "3bfddd9542", 
+        "submitter_id": "imaging_file_d6753c7ec3", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_087f58a19a"
+        }, 
+        "data_category": "b66ab115c9", 
+        "data_format": "42c9ca795b", 
+        "data_type": "db8ea49fb4", 
+        "experimental_strategy": "fcca8a2336", 
+        "file_name": "858e8f0672", 
+        "file_size": 80, 
+        "image_quality": "Good image quality", 
+        "md5sum": "d9ccca7ab2d6c0c47cafe41a46210e54", 
+        "series_instance_number": 81, 
+        "series_instance_uid": "0d74da0d23", 
+        "submitter_id": "imaging_file_8529f2332f", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_087f58a19a"
+        }, 
+        "data_category": "c08b61fb2c", 
+        "data_format": "6cbba2f947", 
+        "data_type": "f4a60872a7", 
+        "experimental_strategy": "d53c3abd73", 
+        "file_name": "a40fe435d7", 
+        "file_size": 40, 
+        "image_quality": "Good image quality", 
+        "md5sum": "95101825404261d221a0a5c5e8136d7f", 
+        "series_instance_number": 67, 
+        "series_instance_uid": "0c4b478880", 
+        "submitter_id": "imaging_file_d3b77a71e8", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b0bcc4779a"
+        }, 
+        "data_category": "be89738bbd", 
+        "data_format": "e72c2a1bd0", 
+        "data_type": "62271768de", 
+        "experimental_strategy": "95baeded0d", 
+        "file_name": "ba496418c8", 
+        "file_size": 93, 
+        "image_quality": "Poor image quality", 
+        "md5sum": "a260f4505db71bcf53e34ef90c75e52e", 
+        "series_instance_number": 91, 
+        "series_instance_uid": "7136602196", 
+        "submitter_id": "imaging_file_9b38cbd47f", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8a413fa679"
+        }, 
+        "data_category": "6f0c7809c6", 
+        "data_format": "7c288e786d", 
+        "data_type": "85a71d6d2b", 
+        "experimental_strategy": "bac637f519", 
+        "file_name": "f15a8e6a9e", 
+        "file_size": 76, 
+        "image_quality": "Good image quality", 
+        "md5sum": "2006456c97803d1c6a4cfd3e1dda937d", 
+        "series_instance_number": 78, 
+        "series_instance_uid": "06719c5550", 
+        "submitter_id": "imaging_file_5e24342544", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_390fd6df90"
+        }, 
+        "data_category": "9243263f2c", 
+        "data_format": "71f2de0dc2", 
+        "data_type": "ccebf3c2ba", 
+        "experimental_strategy": "0f3cb7789b", 
+        "file_name": "6b450961bd", 
+        "file_size": 51, 
+        "image_quality": "Poor image quality", 
+        "md5sum": "f8b1ebc530dbac253aabc3d91f339a59", 
+        "series_instance_number": 24, 
+        "series_instance_uid": "7068b23d27", 
+        "submitter_id": "imaging_file_2923e20586", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d192a273a9"
+        }, 
+        "data_category": "d95df77443", 
+        "data_format": "18041b42cf", 
+        "data_type": "08ebd8cfcb", 
+        "experimental_strategy": "16507ea55b", 
+        "file_name": "ec8b106f6f", 
+        "file_size": 24, 
+        "image_quality": "Not Reported", 
+        "md5sum": "e072495f6ec66fc1661f45119aab4965", 
+        "series_instance_number": 15, 
+        "series_instance_uid": "8948c14f61", 
+        "submitter_id": "imaging_file_b184fe18ea", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_45b9ccf2e1"
+        }, 
+        "data_category": "61ba2bea5e", 
+        "data_format": "cb24c47c43", 
+        "data_type": "dc8b06824b", 
+        "experimental_strategy": "aa5e5409be", 
+        "file_name": "20b58c4cdb", 
+        "file_size": 10, 
+        "image_quality": "Poor image quality", 
+        "md5sum": "ef59f1eccf8b40dd8cd5f59d83b5f686", 
+        "series_instance_number": 33, 
+        "series_instance_uid": "661929ec5f", 
+        "submitter_id": "imaging_file_824a70b05f", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_376ed10db2"
+        }, 
+        "data_category": "b0fe809b46", 
+        "data_format": "6b1637872f", 
+        "data_type": "4f76a1bc8f", 
+        "experimental_strategy": "3acd0e375e", 
+        "file_name": "7b29576ed8", 
+        "file_size": 81, 
+        "image_quality": "Poor image quality", 
+        "md5sum": "44bb3e46476b969966c94a09622f76a0", 
+        "series_instance_number": 35, 
+        "series_instance_uid": "cef5ef43cb", 
+        "submitter_id": "imaging_file_fd72cae126", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d69262a9ea"
+        }, 
+        "data_category": "b38b9021f8", 
+        "data_format": "673c405333", 
+        "data_type": "a8bbdeef1f", 
+        "experimental_strategy": "bbc71cbd13", 
+        "file_name": "145374b6dd", 
+        "file_size": 92, 
+        "image_quality": "Poor image quality", 
+        "md5sum": "ddc7dce6cda4a2d4b1f137e9f4903fba", 
+        "series_instance_number": 97, 
+        "series_instance_uid": "08bd591974", 
+        "submitter_id": "imaging_file_3e6d7bddd7", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9fc4e81f11"
+        }, 
+        "data_category": "68a6668d5e", 
+        "data_format": "31d8cc1e79", 
+        "data_type": "6a3a561390", 
+        "experimental_strategy": "c570ce0401", 
+        "file_name": "732565c9f3", 
+        "file_size": 81, 
+        "image_quality": "Average image quality", 
+        "md5sum": "b6c41a6d02e167650842c9adcd51c308", 
+        "series_instance_number": 3, 
+        "series_instance_uid": "320010f501", 
+        "submitter_id": "imaging_file_107fc0364f", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1e641018da"
+        }, 
+        "data_category": "4f6b520f5f", 
+        "data_format": "9d557f6470", 
+        "data_type": "77672dc2c0", 
+        "experimental_strategy": "c7e4238ea2", 
+        "file_name": "e629a0f674", 
+        "file_size": 26, 
+        "image_quality": "Good image quality", 
+        "md5sum": "bc55c4833cb4ae3503911db9065baf18", 
+        "series_instance_number": 38, 
+        "series_instance_uid": "4125d8ae33", 
+        "submitter_id": "imaging_file_1dab45fbf2", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_27d251a833"
+        }, 
+        "data_category": "b3d0070ac6", 
+        "data_format": "2b6d094721", 
+        "data_type": "0ffed74b3c", 
+        "experimental_strategy": "daf4b394f9", 
+        "file_name": "edf4fa26d8", 
+        "file_size": 51, 
+        "image_quality": "Good image quality", 
+        "md5sum": "1797676ca702f838ebd72f141c0ebf3d", 
+        "series_instance_number": 0, 
+        "series_instance_uid": "89bde017a0", 
+        "submitter_id": "imaging_file_146c62c40f", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_85903f277a"
+        }, 
+        "data_category": "2cf2e6edf4", 
+        "data_format": "9666f57fe2", 
+        "data_type": "598e0abd87", 
+        "experimental_strategy": "e822658a93", 
+        "file_name": "5a70af99f0", 
+        "file_size": 42, 
+        "image_quality": "Not Reported", 
+        "md5sum": "d0be5d5fbe92ed7881e5359f5cd005e9", 
+        "series_instance_number": 12, 
+        "series_instance_uid": "125058b86b", 
+        "submitter_id": "imaging_file_594f101406", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8d1ba44b26"
+        }, 
+        "data_category": "b6eb37b59d", 
+        "data_format": "1fda67eb0a", 
+        "data_type": "9c6d43df97", 
+        "experimental_strategy": "1a63330ec9", 
+        "file_name": "1f6c43a48f", 
+        "file_size": 76, 
+        "image_quality": "Not Reported", 
+        "md5sum": "10915d1b25230d05988dc8d182eee1ff", 
+        "series_instance_number": 67, 
+        "series_instance_uid": "93480ada07", 
+        "submitter_id": "imaging_file_b52bf9019b", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_27d251a833"
+        }, 
+        "data_category": "d98c562400", 
+        "data_format": "ce145a9788", 
+        "data_type": "c45bd20c07", 
+        "experimental_strategy": "96c1b3d072", 
+        "file_name": "1b992875d5", 
+        "file_size": 92, 
+        "image_quality": "Poor image quality", 
+        "md5sum": "fc1c97546be3e4be7facae8f26fe46cb", 
+        "series_instance_number": 14, 
+        "series_instance_uid": "6bb0a7f2c6", 
+        "submitter_id": "imaging_file_e7fabc8fc1", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_51d91d8e20"
+        }, 
+        "data_category": "7dec13a4eb", 
+        "data_format": "e930880aa5", 
+        "data_type": "b9f26b3636", 
+        "experimental_strategy": "c19d70a441", 
+        "file_name": "2ea4728ccd", 
+        "file_size": 98, 
+        "image_quality": "Good image quality", 
+        "md5sum": "ef42e0d298bdd8421258d8ea99cdf24c", 
+        "series_instance_number": 4, 
+        "series_instance_uid": "f5951f5488", 
+        "submitter_id": "imaging_file_9be0a5738b", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d68fd01d93"
+        }, 
+        "data_category": "d8a669d94e", 
+        "data_format": "1e52f06110", 
+        "data_type": "9842950146", 
+        "experimental_strategy": "3395ba0075", 
+        "file_name": "924e5b24ab", 
+        "file_size": 44, 
+        "image_quality": "Not Reported", 
+        "md5sum": "25b3079adad3433809e25e2dde777a9c", 
+        "series_instance_number": 33, 
+        "series_instance_uid": "5d4f1211ea", 
+        "submitter_id": "imaging_file_59a00cbff9", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2c4453ff06"
+        }, 
+        "data_category": "b2761c3394", 
+        "data_format": "fac034de06", 
+        "data_type": "5dd922eaed", 
+        "experimental_strategy": "da71d3444a", 
+        "file_name": "600ad04c01", 
+        "file_size": 49, 
+        "image_quality": "Not Reported", 
+        "md5sum": "a8659eaa38985f6f748e1ed4ee9958bd", 
+        "series_instance_number": 29, 
+        "series_instance_uid": "a8c81523fb", 
+        "submitter_id": "imaging_file_7c00987eed", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_da2a97e9f7"
+        }, 
+        "data_category": "4b614001d3", 
+        "data_format": "3b5f3bfaf8", 
+        "data_type": "73df760823", 
+        "experimental_strategy": "252e1ffd37", 
+        "file_name": "00033923ed", 
+        "file_size": 48, 
+        "image_quality": "Average image quality", 
+        "md5sum": "8d0edd5a69af70e6ee955bfb4d733259", 
+        "series_instance_number": 30, 
+        "series_instance_uid": "ef28e10d93", 
+        "submitter_id": "imaging_file_237a73e3d2", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_85903f277a"
+        }, 
+        "data_category": "4c2b8dc572", 
+        "data_format": "dfc7e554a8", 
+        "data_type": "c02b093698", 
+        "experimental_strategy": "93cf2fe261", 
+        "file_name": "5d54304185", 
+        "file_size": 89, 
+        "image_quality": "Poor image quality", 
+        "md5sum": "60081a36d383494234bd82e3bcdc0356", 
+        "series_instance_number": 74, 
+        "series_instance_uid": "eb8218f5a2", 
+        "submitter_id": "imaging_file_222033818c", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_81e02062e7"
+        }, 
+        "data_category": "f760a85275", 
+        "data_format": "2f8a1cbd25", 
+        "data_type": "d1cf768999", 
+        "experimental_strategy": "8df52e9566", 
+        "file_name": "6a613ac793", 
+        "file_size": 1, 
+        "image_quality": "Good image quality", 
+        "md5sum": "c2fc1acf625cd260727fc65f2d8db5b7", 
+        "series_instance_number": 98, 
+        "series_instance_uid": "9e87fe0b17", 
+        "submitter_id": "imaging_file_756ecc143b", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a545d68608"
+        }, 
+        "data_category": "651c68f51e", 
+        "data_format": "c2e9e8953a", 
+        "data_type": "e23e5c7a14", 
+        "experimental_strategy": "bc91f94321", 
+        "file_name": "301ad8a82b", 
+        "file_size": 60, 
+        "image_quality": "Poor image quality", 
+        "md5sum": "a9da98024f414c02bd90d2c8e0e1b3c1", 
+        "series_instance_number": 39, 
+        "series_instance_uid": "88d46c86d5", 
+        "submitter_id": "imaging_file_754189f661", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_069dc49a92"
+        }, 
+        "data_category": "0382dce273", 
+        "data_format": "38c7fac6f3", 
+        "data_type": "7f04a53b58", 
+        "experimental_strategy": "df7c4fa0ce", 
+        "file_name": "be6e6b4a7b", 
+        "file_size": 90, 
+        "image_quality": "Not Reported", 
+        "md5sum": "a66ed60462216c34c306433e3918e9bf", 
+        "series_instance_number": 66, 
+        "series_instance_uid": "20a0909a1a", 
+        "submitter_id": "imaging_file_c2e831eccf", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_3545c8e725"
+        }, 
+        "data_category": "3e6ebfbc83", 
+        "data_format": "ab1da2a1a2", 
+        "data_type": "2c568895b8", 
+        "experimental_strategy": "a330299d53", 
+        "file_name": "5bd852e077", 
+        "file_size": 0, 
+        "image_quality": "Not Reported", 
+        "md5sum": "568014025e65131ca16788ea8abdc70f", 
+        "series_instance_number": 3, 
+        "series_instance_uid": "10a2f814e3", 
+        "submitter_id": "imaging_file_f116d618dc", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_65cf0dc203"
+        }, 
+        "data_category": "19e597c99a", 
+        "data_format": "26d6921850", 
+        "data_type": "795318b9c1", 
+        "experimental_strategy": "a3ef8b3691", 
+        "file_name": "cc2ed32aed", 
+        "file_size": 19, 
+        "image_quality": "Poor image quality", 
+        "md5sum": "fbd4cfc85f54c08b07e11800005a50fa", 
+        "series_instance_number": 17, 
+        "series_instance_uid": "bf7d6a9c5d", 
+        "submitter_id": "imaging_file_c5710156e4", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_4333865565"
+        }, 
+        "data_category": "52fdba0ad4", 
+        "data_format": "0da8da850e", 
+        "data_type": "1ea21ad11e", 
+        "experimental_strategy": "ce15a06c39", 
+        "file_name": "b7004a6c6c", 
+        "file_size": 96, 
+        "image_quality": "Average image quality", 
+        "md5sum": "e75680fb172f515418ed157a337c220c", 
+        "series_instance_number": 91, 
+        "series_instance_uid": "87ee62d5ea", 
+        "submitter_id": "imaging_file_f34aa93645", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_6ef774c23e"
+        }, 
+        "data_category": "d0ebe3a3b0", 
+        "data_format": "9e9b1e4103", 
+        "data_type": "5bbb5744fc", 
+        "experimental_strategy": "9faa081d58", 
+        "file_name": "70da8add14", 
+        "file_size": 8, 
+        "image_quality": "Average image quality", 
+        "md5sum": "0a7e4a808fad5c43642674d31d25cea7", 
+        "series_instance_number": 77, 
+        "series_instance_uid": "77839aa04f", 
+        "submitter_id": "imaging_file_18f35ca16b", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_043ef69e42"
+        }, 
+        "data_category": "869a498a3b", 
+        "data_format": "ffa1a92cf4", 
+        "data_type": "56098b9822", 
+        "experimental_strategy": "19ac844d79", 
+        "file_name": "c5cd1a53f2", 
+        "file_size": 96, 
+        "image_quality": "Poor image quality", 
+        "md5sum": "6e5e81a1e5debf15e89ea49b340de78e", 
+        "series_instance_number": 20, 
+        "series_instance_uid": "c40180d05c", 
+        "submitter_id": "imaging_file_7ea72ba8a0", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_203158bd20"
+        }, 
+        "data_category": "a4420ce470", 
+        "data_format": "74c4511dc3", 
+        "data_type": "b3d46d2661", 
+        "experimental_strategy": "734ff77e3f", 
+        "file_name": "4107ffdf5b", 
+        "file_size": 57, 
+        "image_quality": "Good image quality", 
+        "md5sum": "d3225c80579f6dbdd71a7dc3a571ff8d", 
+        "series_instance_number": 4, 
+        "series_instance_uid": "da11452215", 
+        "submitter_id": "imaging_file_f935096b0f", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a3da392eb2"
+        }, 
+        "data_category": "2a3d498c8e", 
+        "data_format": "3d333c36d8", 
+        "data_type": "11c86a1319", 
+        "experimental_strategy": "665d2b82a2", 
+        "file_name": "075666ddbf", 
+        "file_size": 16, 
+        "image_quality": "Not Reported", 
+        "md5sum": "968d59b7225ed3d7d5fcadc3607c27f8", 
+        "series_instance_number": 13, 
+        "series_instance_uid": "42bfb46667", 
+        "submitter_id": "imaging_file_e56f80dd68", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_bfeaa8476f"
+        }, 
+        "data_category": "a63cba2fdb", 
+        "data_format": "756286e0c5", 
+        "data_type": "c9042cdaed", 
+        "experimental_strategy": "528378cdc9", 
+        "file_name": "792b366e20", 
+        "file_size": 73, 
+        "image_quality": "Average image quality", 
+        "md5sum": "8c35f2083884d8ed836213b650c09378", 
+        "series_instance_number": 87, 
+        "series_instance_uid": "a1797b7b58", 
+        "submitter_id": "imaging_file_2fabdebc46", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_27434ba0a2"
+        }, 
+        "data_category": "27e7243215", 
+        "data_format": "679c962676", 
+        "data_type": "03bdca96f1", 
+        "experimental_strategy": "255b24ba29", 
+        "file_name": "aa932d5a77", 
+        "file_size": 67, 
+        "image_quality": "Good image quality", 
+        "md5sum": "c272cfb14afca1c7498f68fb4d10a60a", 
+        "series_instance_number": 88, 
+        "series_instance_uid": "8b095e5a95", 
+        "submitter_id": "imaging_file_62d4eda2bc", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_bfeaa8476f"
+        }, 
+        "data_category": "223f6c9129", 
+        "data_format": "6a8bd8ef7b", 
+        "data_type": "b3b11129ca", 
+        "experimental_strategy": "56adc15d15", 
+        "file_name": "f1a24398c4", 
+        "file_size": 86, 
+        "image_quality": "Poor image quality", 
+        "md5sum": "ee6f0afc18078ba231d163dcab4c960b", 
+        "series_instance_number": 35, 
+        "series_instance_uid": "3cd437ebe6", 
+        "submitter_id": "imaging_file_c879534850", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d69262a9ea"
+        }, 
+        "data_category": "2495384784", 
+        "data_format": "f6874a03fd", 
+        "data_type": "070f4ccf0a", 
+        "experimental_strategy": "4ba24ef60d", 
+        "file_name": "24d91ead30", 
+        "file_size": 56, 
+        "image_quality": "Average image quality", 
+        "md5sum": "afe1c9fecea23ed3414b32a40e83c60a", 
+        "series_instance_number": 1, 
+        "series_instance_uid": "a2c33fa920", 
+        "submitter_id": "imaging_file_5f0f51ae0a", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_0d509bedcd"
+        }, 
+        "data_category": "609b482ae1", 
+        "data_format": "5ce6cf433f", 
+        "data_type": "cb39823752", 
+        "experimental_strategy": "b3dee6af23", 
+        "file_name": "a50873f001", 
+        "file_size": 38, 
+        "image_quality": "Good image quality", 
+        "md5sum": "f13309452811db9239fcfa6620421b26", 
+        "series_instance_number": 52, 
+        "series_instance_uid": "821fa37867", 
+        "submitter_id": "imaging_file_664b4911ed", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_27d251a833"
+        }, 
+        "data_category": "2db90f2041", 
+        "data_format": "bd754b6a35", 
+        "data_type": "324e85d764", 
+        "experimental_strategy": "f462aed146", 
+        "file_name": "01641b6ef9", 
+        "file_size": 61, 
+        "image_quality": "Not Reported", 
+        "md5sum": "19e9b7c6c64a9016f60e22cba7be96ba", 
+        "series_instance_number": 75, 
+        "series_instance_uid": "ad17b84b35", 
+        "submitter_id": "imaging_file_b52c18c82a", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9e9289954a"
+        }, 
+        "data_category": "a4c8dd9382", 
+        "data_format": "2c53b72e6b", 
+        "data_type": "84fdefb654", 
+        "experimental_strategy": "8cc549c05c", 
+        "file_name": "ce2c8e6284", 
+        "file_size": 99, 
+        "image_quality": "Good image quality", 
+        "md5sum": "ad55f9fa8e93a50f28437062a3410c06", 
+        "series_instance_number": 22, 
+        "series_instance_uid": "a786b1763a", 
+        "submitter_id": "imaging_file_fc817e9301", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_3b85557510"
+        }, 
+        "data_category": "47280844d4", 
+        "data_format": "77da87d783", 
+        "data_type": "cbd161b8f5", 
+        "experimental_strategy": "af953b214b", 
+        "file_name": "113d2ca971", 
+        "file_size": 57, 
+        "image_quality": "Good image quality", 
+        "md5sum": "55a957cdbc399d5dcd5a0e33ad866b08", 
+        "series_instance_number": 23, 
+        "series_instance_uid": "d71b057fa5", 
+        "submitter_id": "imaging_file_d04bcb90c4", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2c4453ff06"
+        }, 
+        "data_category": "3c1c787a75", 
+        "data_format": "cef79b1560", 
+        "data_type": "9641f419b4", 
+        "experimental_strategy": "81322bec84", 
+        "file_name": "e281925553", 
+        "file_size": 41, 
+        "image_quality": "Not Reported", 
+        "md5sum": "7b365bd5e5890b2366a6249ec7013a38", 
+        "series_instance_number": 53, 
+        "series_instance_uid": "a3b4c75d8a", 
+        "submitter_id": "imaging_file_73b0dc2eee", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d192a273a9"
+        }, 
+        "data_category": "8901c72fde", 
+        "data_format": "884b1115a5", 
+        "data_type": "bcdad90976", 
+        "experimental_strategy": "7544060f99", 
+        "file_name": "9e00c8a7fa", 
+        "file_size": 1, 
+        "image_quality": "Good image quality", 
+        "md5sum": "efdede3998a31dd21c287bf4eead327c", 
+        "series_instance_number": 91, 
+        "series_instance_uid": "6ab62635f5", 
+        "submitter_id": "imaging_file_a486d4e228", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_f708f3beaa"
+        }, 
+        "data_category": "80f0ca26e6", 
+        "data_format": "e69b2e9122", 
+        "data_type": "006eb2d16d", 
+        "experimental_strategy": "091323a1d9", 
+        "file_name": "ef2c8e6333", 
+        "file_size": 57, 
+        "image_quality": "Not Reported", 
+        "md5sum": "0df9e97fbaf7718ca2bf08d06c9ab39d", 
+        "series_instance_number": 85, 
+        "series_instance_uid": "64d1f2f231", 
+        "submitter_id": "imaging_file_e7f3ee3952", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_bef2e8df82"
+        }, 
+        "data_category": "f64c792ace", 
+        "data_format": "9bb607a3ea", 
+        "data_type": "127ac95f5e", 
+        "experimental_strategy": "08c978441a", 
+        "file_name": "b4aadae1f7", 
+        "file_size": 61, 
+        "image_quality": "Good image quality", 
+        "md5sum": "ca26b521d9cf3b7f754414de4ca98094", 
+        "series_instance_number": 75, 
+        "series_instance_uid": "07fa0795b8", 
+        "submitter_id": "imaging_file_263ad0de42", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_e74f11ea34"
+        }, 
+        "data_category": "0a125b1a7a", 
+        "data_format": "0400c25dd9", 
+        "data_type": "b4bbf06f25", 
+        "experimental_strategy": "ee13d8af3b", 
+        "file_name": "631d925c81", 
+        "file_size": 95, 
+        "image_quality": "Average image quality", 
+        "md5sum": "d80f8273369eb8d3bdcec6434f495b6d", 
+        "series_instance_number": 58, 
+        "series_instance_uid": "b69549bbda", 
+        "submitter_id": "imaging_file_b08a6a1d4d", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_6ef774c23e"
+        }, 
+        "data_category": "564b5431d9", 
+        "data_format": "66e3a955c2", 
+        "data_type": "c942bc1e13", 
+        "experimental_strategy": "afa818cf0b", 
+        "file_name": "3f9f2f9b46", 
+        "file_size": 81, 
+        "image_quality": "Good image quality", 
+        "md5sum": "4c18f280519591365029fc938f345b7b", 
+        "series_instance_number": 85, 
+        "series_instance_uid": "12624e7744", 
+        "submitter_id": "imaging_file_7689bbb9c1", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_508dd823c4"
+        }, 
+        "data_category": "47f6c23e18", 
+        "data_format": "4da78f7291", 
+        "data_type": "1f0d3e6121", 
+        "experimental_strategy": "51793be087", 
+        "file_name": "5c7d51f8ae", 
+        "file_size": 73, 
+        "image_quality": "Good image quality", 
+        "md5sum": "6994148baba6cf123ee698e99401d63e", 
+        "series_instance_number": 57, 
+        "series_instance_uid": "43856a652d", 
+        "submitter_id": "imaging_file_ba68b407f4", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_7728dd70cc"
+        }, 
+        "data_category": "1d89da7197", 
+        "data_format": "535644e1b1", 
+        "data_type": "7cf45f56c3", 
+        "experimental_strategy": "8081022854", 
+        "file_name": "2385f351bd", 
+        "file_size": 49, 
+        "image_quality": "Good image quality", 
+        "md5sum": "71c5469efebb63b795387d8538835589", 
+        "series_instance_number": 52, 
+        "series_instance_uid": "55fac217b1", 
+        "submitter_id": "imaging_file_f293273334", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_c4a745aedb"
+        }, 
+        "data_category": "86d099ab5e", 
+        "data_format": "b26742cb91", 
+        "data_type": "8fe18eda2e", 
+        "experimental_strategy": "72432611c1", 
+        "file_name": "5df4b4d949", 
+        "file_size": 45, 
+        "image_quality": "Not Reported", 
+        "md5sum": "80f22e2fcf4dcf9a5844b7b20d810816", 
+        "series_instance_number": 35, 
+        "series_instance_uid": "454fb889b9", 
+        "submitter_id": "imaging_file_b0f54e9f6c", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1e0c77bfc8"
+        }, 
+        "data_category": "0402410850", 
+        "data_format": "ee0db19db8", 
+        "data_type": "fde5faddf2", 
+        "experimental_strategy": "7be74ba43c", 
+        "file_name": "10d940cd9d", 
+        "file_size": 43, 
+        "image_quality": "Poor image quality", 
+        "md5sum": "d4de1f7039bed2f923ea4b1118468b2f", 
+        "series_instance_number": 21, 
+        "series_instance_uid": "8a101b3418", 
+        "submitter_id": "imaging_file_be448d3651", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_7db77a36ef"
+        }, 
+        "data_category": "e4ac05159a", 
+        "data_format": "0a6cff9cf5", 
+        "data_type": "205f5c3020", 
+        "experimental_strategy": "4b6e178962", 
+        "file_name": "3ef0768f1c", 
+        "file_size": 88, 
+        "image_quality": "Good image quality", 
+        "md5sum": "106d1eeae72400739d70ef963befa862", 
+        "series_instance_number": 73, 
+        "series_instance_uid": "f3c69529cd", 
+        "submitter_id": "imaging_file_be7ca63fdb", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_57071bd3bf"
+        }, 
+        "data_category": "e0f8cdfcb6", 
+        "data_format": "0a877ee0d4", 
+        "data_type": "691378cef3", 
+        "experimental_strategy": "f9360a1529", 
+        "file_name": "53b40cd714", 
+        "file_size": 81, 
+        "image_quality": "Average image quality", 
+        "md5sum": "32a3879a6a467101be385759ff482d90", 
+        "series_instance_number": 100, 
+        "series_instance_uid": "f36079c673", 
+        "submitter_id": "imaging_file_d948f7e2ec", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_cc7b6c15b3"
+        }, 
+        "data_category": "ed7b26888d", 
+        "data_format": "aeed413c2a", 
+        "data_type": "4367dde42e", 
+        "experimental_strategy": "3499763038", 
+        "file_name": "898bd1b5af", 
+        "file_size": 53, 
+        "image_quality": "Not Reported", 
+        "md5sum": "34e4879b8cc345763be5e059538244a3", 
+        "series_instance_number": 73, 
+        "series_instance_uid": "c8581c20b1", 
+        "submitter_id": "imaging_file_dcdbcf5353", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9fc4e81f11"
+        }, 
+        "data_category": "cee9f4265c", 
+        "data_format": "c3026c913a", 
+        "data_type": "b300161102", 
+        "experimental_strategy": "e2c329e5aa", 
+        "file_name": "3fdf0ef718", 
+        "file_size": 9, 
+        "image_quality": "Good image quality", 
+        "md5sum": "ead72624fea2b175b4df289d76027333", 
+        "series_instance_number": 15, 
+        "series_instance_uid": "97a4f53574", 
+        "submitter_id": "imaging_file_a546da1768", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_14f4407831"
+        }, 
+        "data_category": "2f0db4ade9", 
+        "data_format": "ab0a6a5f07", 
+        "data_type": "4e3f6da822", 
+        "experimental_strategy": "b932835c4c", 
+        "file_name": "5f60fb217f", 
+        "file_size": 9, 
+        "image_quality": "Good image quality", 
+        "md5sum": "70944f3801405af182c133db663079d7", 
+        "series_instance_number": 92, 
+        "series_instance_uid": "63cd9f5257", 
+        "submitter_id": "imaging_file_df77984fc8", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_3b85557510"
+        }, 
+        "data_category": "9cc0a0d731", 
+        "data_format": "c2fd3ffd6a", 
+        "data_type": "4d99bd43f8", 
+        "experimental_strategy": "cc2d0e735c", 
+        "file_name": "80d8e6bf26", 
+        "file_size": 97, 
+        "image_quality": "Average image quality", 
+        "md5sum": "920caf9ae8ed1f406f64fc7c01c01136", 
+        "series_instance_number": 37, 
+        "series_instance_uid": "8f259e78ae", 
+        "submitter_id": "imaging_file_7fd1c4c5a5", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1e641018da"
+        }, 
+        "data_category": "c55a4cebb8", 
+        "data_format": "d409539509", 
+        "data_type": "cb9ea2964c", 
+        "experimental_strategy": "1126f19315", 
+        "file_name": "1a14984723", 
+        "file_size": 69, 
+        "image_quality": "Not Reported", 
+        "md5sum": "df82235160b7fd34b2f5e4f49d31b136", 
+        "series_instance_number": 12, 
+        "series_instance_uid": "91988df9f4", 
+        "submitter_id": "imaging_file_3906f4dc0d", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a0ee4dbbd4"
+        }, 
+        "data_category": "69c00cdf90", 
+        "data_format": "1f25b0e68b", 
+        "data_type": "92eb7b5cc0", 
+        "experimental_strategy": "f179b5a2a5", 
+        "file_name": "6e4aafd414", 
+        "file_size": 95, 
+        "image_quality": "Poor image quality", 
+        "md5sum": "5338c85fd887cb8c8da1141f50e7bfa0", 
+        "series_instance_number": 26, 
+        "series_instance_uid": "38e694e026", 
+        "submitter_id": "imaging_file_8c4a2084c3", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a3da392eb2"
+        }, 
+        "data_category": "0c72ce7819", 
+        "data_format": "382a357840", 
+        "data_type": "b355ae5e45", 
+        "experimental_strategy": "6fc44c9bd4", 
+        "file_name": "27dc10ba25", 
+        "file_size": 30, 
+        "image_quality": "Poor image quality", 
+        "md5sum": "c75edb91a123f71a92bfca27ccd69fd9", 
+        "series_instance_number": 96, 
+        "series_instance_uid": "3eb54d96e2", 
+        "submitter_id": "imaging_file_55e0f890e0", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1e0c77bfc8"
+        }, 
+        "data_category": "38aa462118", 
+        "data_format": "14cac6c054", 
+        "data_type": "85e934b560", 
+        "experimental_strategy": "cd0842c868", 
+        "file_name": "9a1ae3cecd", 
+        "file_size": 1, 
+        "image_quality": "Good image quality", 
+        "md5sum": "c02e7bea5ef62f3886e70a06112ca015", 
+        "series_instance_number": 91, 
+        "series_instance_uid": "27db6bb43f", 
+        "submitter_id": "imaging_file_85f51b0fcc", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9e9289954a"
+        }, 
+        "data_category": "875e86127a", 
+        "data_format": "048eb00e67", 
+        "data_type": "406bf3cc38", 
+        "experimental_strategy": "7e76c8eae0", 
+        "file_name": "7cfaa0c6b5", 
+        "file_size": 39, 
+        "image_quality": "Average image quality", 
+        "md5sum": "395ad1cf5c11d422c00d9c4d8f98d9b8", 
+        "series_instance_number": 74, 
+        "series_instance_uid": "13ef9d79fe", 
+        "submitter_id": "imaging_file_369880fada", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_57071bd3bf"
+        }, 
+        "data_category": "c661917b5b", 
+        "data_format": "32ac61fe1d", 
+        "data_type": "3715d74b62", 
+        "experimental_strategy": "f8fa2f95e4", 
+        "file_name": "a77dcd68f2", 
+        "file_size": 46, 
+        "image_quality": "Average image quality", 
+        "md5sum": "cf27734c5b1158753d89742e14f46670", 
+        "series_instance_number": 16, 
+        "series_instance_uid": "2317ceca0b", 
+        "submitter_id": "imaging_file_8ad83b3093", 
+        "type": "imaging_file"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_da2a97e9f7"
+        }, 
+        "data_category": "10f30c5e2a", 
+        "data_format": "a90b1695dc", 
+        "data_type": "21c9409b0a", 
+        "experimental_strategy": "0e5c05ef3a", 
+        "file_name": "4ca4b687c1", 
+        "file_size": 98, 
+        "image_quality": "Good image quality", 
+        "md5sum": "4f4c93f4d6f913d8e105752054de9c62", 
+        "series_instance_number": 12, 
+        "series_instance_uid": "87d301deab", 
+        "submitter_id": "imaging_file_67bb3aae48", 
+        "type": "imaging_file"
+    }
+]

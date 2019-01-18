@@ -1,0 +1,326 @@
+[
+    {
+        "ct_count": 79, 
+        "subjects": {
+            "submitter_id": "subject_e79e962a72"
+        }, 
+        "submitter_id": "imaging_study_58830adb69", 
+        "type": "imaging_study", 
+        "x_ray_count": 80
+    }, 
+    {
+        "ct_count": 49, 
+        "subjects": {
+            "submitter_id": "subject_3acb46b021"
+        }, 
+        "submitter_id": "imaging_study_41dc5ce499", 
+        "type": "imaging_study", 
+        "x_ray_count": 25
+    }, 
+    {
+        "ct_count": 13, 
+        "subjects": {
+            "submitter_id": "subject_4badb8c874"
+        }, 
+        "submitter_id": "imaging_study_2aa510714c", 
+        "type": "imaging_study", 
+        "x_ray_count": 15
+    }, 
+    {
+        "ct_count": 78, 
+        "subjects": {
+            "submitter_id": "subject_13681c6d88"
+        }, 
+        "submitter_id": "imaging_study_5935ba9222", 
+        "type": "imaging_study", 
+        "x_ray_count": 7
+    }, 
+    {
+        "ct_count": 86, 
+        "subjects": {
+            "submitter_id": "subject_13681c6d88"
+        }, 
+        "submitter_id": "imaging_study_f653cffbbb", 
+        "type": "imaging_study", 
+        "x_ray_count": 5
+    }, 
+    {
+        "ct_count": 7, 
+        "subjects": {
+            "submitter_id": "subject_bf3c8fb892"
+        }, 
+        "submitter_id": "imaging_study_e24dba3af9", 
+        "type": "imaging_study", 
+        "x_ray_count": 10
+    }, 
+    {
+        "ct_count": 83, 
+        "subjects": {
+            "submitter_id": "subject_c0e52d1a73"
+        }, 
+        "submitter_id": "imaging_study_d811a2b036", 
+        "type": "imaging_study", 
+        "x_ray_count": 1
+    }, 
+    {
+        "ct_count": 28, 
+        "subjects": {
+            "submitter_id": "subject_7aaabc2f05"
+        }, 
+        "submitter_id": "imaging_study_e417387159", 
+        "type": "imaging_study", 
+        "x_ray_count": 62
+    }, 
+    {
+        "ct_count": 76, 
+        "subjects": {
+            "submitter_id": "subject_3327fab75f"
+        }, 
+        "submitter_id": "imaging_study_892ac69305", 
+        "type": "imaging_study", 
+        "x_ray_count": 44
+    }, 
+    {
+        "ct_count": 67, 
+        "subjects": {
+            "submitter_id": "subject_b97103f685"
+        }, 
+        "submitter_id": "imaging_study_7256c4c7c9", 
+        "type": "imaging_study", 
+        "x_ray_count": 22
+    }, 
+    {
+        "ct_count": 26, 
+        "subjects": {
+            "submitter_id": "subject_a383391f3d"
+        }, 
+        "submitter_id": "imaging_study_e805c3e4ab", 
+        "type": "imaging_study", 
+        "x_ray_count": 42
+    }, 
+    {
+        "ct_count": 92, 
+        "subjects": {
+            "submitter_id": "subject_83da697cc1"
+        }, 
+        "submitter_id": "imaging_study_72a9a67517", 
+        "type": "imaging_study", 
+        "x_ray_count": 29
+    }, 
+    {
+        "ct_count": 37, 
+        "subjects": {
+            "submitter_id": "subject_f6e1215155"
+        }, 
+        "submitter_id": "imaging_study_1ba31defcf", 
+        "type": "imaging_study", 
+        "x_ray_count": 8
+    }, 
+    {
+        "ct_count": 36, 
+        "subjects": {
+            "submitter_id": "subject_7eddff0179"
+        }, 
+        "submitter_id": "imaging_study_f8bfaae15a", 
+        "type": "imaging_study", 
+        "x_ray_count": 47
+    }, 
+    {
+        "ct_count": 10, 
+        "subjects": {
+            "submitter_id": "subject_3327fab75f"
+        }, 
+        "submitter_id": "imaging_study_f15b9d6d69", 
+        "type": "imaging_study", 
+        "x_ray_count": 3
+    }, 
+    {
+        "ct_count": 50, 
+        "subjects": {
+            "submitter_id": "subject_70e75bf21f"
+        }, 
+        "submitter_id": "imaging_study_89fe9e9bf3", 
+        "type": "imaging_study", 
+        "x_ray_count": 85
+    }, 
+    {
+        "ct_count": 64, 
+        "subjects": {
+            "submitter_id": "subject_015c5ec387"
+        }, 
+        "submitter_id": "imaging_study_b0caa17c65", 
+        "type": "imaging_study", 
+        "x_ray_count": 95
+    }, 
+    {
+        "ct_count": 4, 
+        "subjects": {
+            "submitter_id": "subject_036869ebdc"
+        }, 
+        "submitter_id": "imaging_study_7816ee2d71", 
+        "type": "imaging_study", 
+        "x_ray_count": 17
+    }, 
+    {
+        "ct_count": 10, 
+        "subjects": {
+            "submitter_id": "subject_c0e52d1a73"
+        }, 
+        "submitter_id": "imaging_study_6780fdf27d", 
+        "type": "imaging_study", 
+        "x_ray_count": 92
+    }, 
+    {
+        "ct_count": 68, 
+        "subjects": {
+            "submitter_id": "subject_f42445cb2c"
+        }, 
+        "submitter_id": "imaging_study_9067fb7902", 
+        "type": "imaging_study", 
+        "x_ray_count": 38
+    }, 
+    {
+        "ct_count": 77, 
+        "subjects": {
+            "submitter_id": "subject_5c1738e8ea"
+        }, 
+        "submitter_id": "imaging_study_c483d73278", 
+        "type": "imaging_study", 
+        "x_ray_count": 78
+    }, 
+    {
+        "ct_count": 32, 
+        "subjects": {
+            "submitter_id": "subject_601943af83"
+        }, 
+        "submitter_id": "imaging_study_9fab0696be", 
+        "type": "imaging_study", 
+        "x_ray_count": 8
+    }, 
+    {
+        "ct_count": 75, 
+        "subjects": {
+            "submitter_id": "subject_8792cd8649"
+        }, 
+        "submitter_id": "imaging_study_9fc5435b96", 
+        "type": "imaging_study", 
+        "x_ray_count": 76
+    }, 
+    {
+        "ct_count": 46, 
+        "subjects": {
+            "submitter_id": "subject_399301bc26"
+        }, 
+        "submitter_id": "imaging_study_97b91bde57", 
+        "type": "imaging_study", 
+        "x_ray_count": 68
+    }, 
+    {
+        "ct_count": 84, 
+        "subjects": {
+            "submitter_id": "subject_4ac16b404a"
+        }, 
+        "submitter_id": "imaging_study_29debb4d0c", 
+        "type": "imaging_study", 
+        "x_ray_count": 84
+    }, 
+    {
+        "ct_count": 22, 
+        "subjects": {
+            "submitter_id": "subject_70e75bf21f"
+        }, 
+        "submitter_id": "imaging_study_85861d5e30", 
+        "type": "imaging_study", 
+        "x_ray_count": 67
+    }, 
+    {
+        "ct_count": 10, 
+        "subjects": {
+            "submitter_id": "subject_6460949536"
+        }, 
+        "submitter_id": "imaging_study_f6a262fdcf", 
+        "type": "imaging_study", 
+        "x_ray_count": 84
+    }, 
+    {
+        "ct_count": 25, 
+        "subjects": {
+            "submitter_id": "subject_de74551675"
+        }, 
+        "submitter_id": "imaging_study_71b171b687", 
+        "type": "imaging_study", 
+        "x_ray_count": 97
+    }, 
+    {
+        "ct_count": 62, 
+        "subjects": {
+            "submitter_id": "subject_0cacca0e1d"
+        }, 
+        "submitter_id": "imaging_study_53d19f7e95", 
+        "type": "imaging_study", 
+        "x_ray_count": 17
+    }, 
+    {
+        "ct_count": 36, 
+        "subjects": {
+            "submitter_id": "subject_7363f76fd8"
+        }, 
+        "submitter_id": "imaging_study_5a8ef0942d", 
+        "type": "imaging_study", 
+        "x_ray_count": 83
+    }, 
+    {
+        "ct_count": 63, 
+        "subjects": {
+            "submitter_id": "subject_ff6bef4a99"
+        }, 
+        "submitter_id": "imaging_study_6d65efd346", 
+        "type": "imaging_study", 
+        "x_ray_count": 63
+    }, 
+    {
+        "ct_count": 30, 
+        "subjects": {
+            "submitter_id": "subject_ef2e3e3e73"
+        }, 
+        "submitter_id": "imaging_study_81a56c2169", 
+        "type": "imaging_study", 
+        "x_ray_count": 7
+    }, 
+    {
+        "ct_count": 35, 
+        "subjects": {
+            "submitter_id": "subject_8792cd8649"
+        }, 
+        "submitter_id": "imaging_study_b90bd5646f", 
+        "type": "imaging_study", 
+        "x_ray_count": 43
+    }, 
+    {
+        "ct_count": 57, 
+        "subjects": {
+            "submitter_id": "subject_a383391f3d"
+        }, 
+        "submitter_id": "imaging_study_25d77760f0", 
+        "type": "imaging_study", 
+        "x_ray_count": 40
+    }, 
+    {
+        "ct_count": 63, 
+        "subjects": {
+            "submitter_id": "subject_ef2e3e3e73"
+        }, 
+        "submitter_id": "imaging_study_aec4ca628c", 
+        "type": "imaging_study", 
+        "x_ray_count": 58
+    }, 
+    {
+        "ct_count": 37, 
+        "subjects": {
+            "submitter_id": "subject_c0e52d1a73"
+        }, 
+        "submitter_id": "imaging_study_57d193a1e5", 
+        "type": "imaging_study", 
+        "x_ray_count": 65
+    }
+]

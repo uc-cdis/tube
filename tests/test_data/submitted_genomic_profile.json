@@ -1,0 +1,1094 @@
+[
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_26685588da"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "XML", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "WGS", 
+        "file_name": "ab2955026f", 
+        "file_size": 37, 
+        "md5sum": "2dad45e9fa45b29a7eb5b32a2fc0eecc", 
+        "submitter_id": "submitted_genomic_profile_d725451201", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_27434ba0a2"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "XML", 
+        "data_type": "GENIE Report", 
+        "experimental_strategy": "WGS", 
+        "file_name": "9c9fe8cfb5", 
+        "file_size": 78, 
+        "md5sum": "491d305c0b3b3e6639ad7272a18c6267", 
+        "submitter_id": "submitted_genomic_profile_7db2528ac7", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b94b7f9edf"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "VCF", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "d048425875", 
+        "file_size": 15, 
+        "md5sum": "12d0f460e3469d0aa4e9ab1adc1a1540", 
+        "submitter_id": "submitted_genomic_profile_bfc5bbd57e", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_f978503490"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "TSV", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "WGS", 
+        "file_name": "ef82d1a783", 
+        "file_size": 76, 
+        "md5sum": "7dc41d1b09870b1d47e4876018d4947d", 
+        "submitter_id": "submitted_genomic_profile_a87a14d165", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8a3e9dfeab"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "MAF", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "WGS", 
+        "file_name": "56b34980d2", 
+        "file_size": 72, 
+        "md5sum": "c3f5d460da2758a2e4e1794c6d776f96", 
+        "submitter_id": "submitted_genomic_profile_9632bdd790", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2c4453ff06"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "XML", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "9094b8f193", 
+        "file_size": 95, 
+        "md5sum": "6605f0599382daca9007583eb9676cfa", 
+        "submitter_id": "submitted_genomic_profile_ac93e6390b", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b94b7f9edf"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "MAF", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "4d8c0891b7", 
+        "file_size": 83, 
+        "md5sum": "cad291f0cbe49f64ecb6ec1db76649ac", 
+        "submitter_id": "submitted_genomic_profile_90c437ade1", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9fa2a916b0"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "MAF", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "WGS", 
+        "file_name": "539314f23c", 
+        "file_size": 56, 
+        "md5sum": "d27b0f4e551c9b4498b8f54eb4b7ef72", 
+        "submitter_id": "submitted_genomic_profile_80101d013d", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_d68fd01d93"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "TSV", 
+        "data_type": "Raw CGI Variant", 
+        "experimental_strategy": "WGS", 
+        "file_name": "6fefc06317", 
+        "file_size": 16, 
+        "md5sum": "2bc60cd0808bbf4f6a5f752d7b2dc01e", 
+        "submitter_id": "submitted_genomic_profile_8658f57174", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_087f58a19a"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "MAF", 
+        "data_type": "Raw CGI Variant", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "d0ee67d5b3", 
+        "file_size": 32, 
+        "md5sum": "633b17cfc0dcc45e2a941b6e92f7954b", 
+        "submitter_id": "submitted_genomic_profile_f4fbafe0a0", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_dbdaaa754b"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "VCF", 
+        "data_type": "Raw CGI Variant", 
+        "experimental_strategy": "WGS", 
+        "file_name": "cf1c052b2f", 
+        "file_size": 61, 
+        "md5sum": "5106b1febc69bf3b15650c2796831f19", 
+        "submitter_id": "submitted_genomic_profile_5c3538bfdd", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_508dd823c4"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "XML", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "WGS", 
+        "file_name": "c2ccb84819", 
+        "file_size": 67, 
+        "md5sum": "a72a949f6bf94645c040b716f58391a6", 
+        "submitter_id": "submitted_genomic_profile_7176b385e3", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_376ed10db2"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "TSV", 
+        "data_type": "GENIE Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "2d403c069d", 
+        "file_size": 91, 
+        "md5sum": "d0f50b099ac77d683a8f2efc2f379760", 
+        "submitter_id": "submitted_genomic_profile_e7ab2aa253", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_01f3aa5ac0"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "MAF", 
+        "data_type": "GENIE Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "a9319c5e33", 
+        "file_size": 28, 
+        "md5sum": "be7bb637a46118389fda74edb82fdb9b", 
+        "submitter_id": "submitted_genomic_profile_81862678a6", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_069dc49a92"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "TSV", 
+        "data_type": "GENIE Report", 
+        "experimental_strategy": "WGS", 
+        "file_name": "8145745134", 
+        "file_size": 49, 
+        "md5sum": "8d1c460f777236cdebc2e72158d1ccb7", 
+        "submitter_id": "submitted_genomic_profile_54c6b27842", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_cc7b6c15b3"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "MAF", 
+        "data_type": "GENIE Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "344ed0d22a", 
+        "file_size": 89, 
+        "md5sum": "98c23c9aa1aa3116b8782929b4f22a1a", 
+        "submitter_id": "submitted_genomic_profile_6ac6ff60fb", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_94fa4274cb"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "VCF", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "fdd3519653", 
+        "file_size": 74, 
+        "md5sum": "96435277c7c0b899cf1d4077d9c85197", 
+        "submitter_id": "submitted_genomic_profile_382896a9a0", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_c4a745aedb"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "VCF", 
+        "data_type": "GENIE Report", 
+        "experimental_strategy": "WGS", 
+        "file_name": "d0c9bb8fd4", 
+        "file_size": 29, 
+        "md5sum": "5c6e785124b37c8f8ff1f63771b92211", 
+        "submitter_id": "submitted_genomic_profile_7d3d1f2eea", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_14f4407831"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "XML", 
+        "data_type": "Raw CGI Variant", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "9915275f34", 
+        "file_size": 43, 
+        "md5sum": "39163d6c6eccfaf111869be439e24a65", 
+        "submitter_id": "submitted_genomic_profile_184f009513", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_94fa4274cb"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "TSV", 
+        "data_type": "GENIE Report", 
+        "experimental_strategy": "WGS", 
+        "file_name": "40a8267360", 
+        "file_size": 12, 
+        "md5sum": "fba65ff564b379244acc3ac6d9019872", 
+        "submitter_id": "submitted_genomic_profile_4cc7665ce6", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_674dc0fbc4"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "MAF", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "8d8cbff715", 
+        "file_size": 90, 
+        "md5sum": "90674741b0aa2eb508b21c7b7f6af03c", 
+        "submitter_id": "submitted_genomic_profile_1ce605c096", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1a28f4fce4"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "XML", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "74ff5fb651", 
+        "file_size": 71, 
+        "md5sum": "d5f70089d997a6004780299b88848f29", 
+        "submitter_id": "submitted_genomic_profile_df7fcda568", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_e74f11ea34"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "VCF", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "4756127349", 
+        "file_size": 73, 
+        "md5sum": "7e0b82fb28f2536da363b92740bb0885", 
+        "submitter_id": "submitted_genomic_profile_6d683a09dc", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_457807d927"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "MAF", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "WGS", 
+        "file_name": "e890429dab", 
+        "file_size": 80, 
+        "md5sum": "02bea2d5ae61d7ae481b0b0c65d32cae", 
+        "submitter_id": "submitted_genomic_profile_823b308f63", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_687c809f58"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "TSV", 
+        "data_type": "GENIE Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "3edbfb2b34", 
+        "file_size": 2, 
+        "md5sum": "a979043ac37b96830fe15449dce67414", 
+        "submitter_id": "submitted_genomic_profile_fb70c1dff3", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_db3c1a52a2"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "MAF", 
+        "data_type": "GENIE Report", 
+        "experimental_strategy": "WGS", 
+        "file_name": "8b9e11ba53", 
+        "file_size": 92, 
+        "md5sum": "371c490149a02bac54d3f164fd3a2ef1", 
+        "submitter_id": "submitted_genomic_profile_95fa897d32", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_83a0afebd2"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "XML", 
+        "data_type": "Raw CGI Variant", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "9a51e1b979", 
+        "file_size": 44, 
+        "md5sum": "8be01df453a3afe23b5f380d2189b550", 
+        "submitter_id": "submitted_genomic_profile_c6cb196165", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1e641018da"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "XML", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "WGS", 
+        "file_name": "62d16b7221", 
+        "file_size": 35, 
+        "md5sum": "b6fb869be54db93711182e9f4fa31d4a", 
+        "submitter_id": "submitted_genomic_profile_9f4ecb22ac", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_80fb876198"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "XML", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "9e73c36b70", 
+        "file_size": 39, 
+        "md5sum": "ebce3bbd2abbded3f26fb658af2e0503", 
+        "submitter_id": "submitted_genomic_profile_54b363b862", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b94b7f9edf"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "MAF", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "e062df9e7d", 
+        "file_size": 84, 
+        "md5sum": "24be4993eb8c206f0f72bb53a26e2410", 
+        "submitter_id": "submitted_genomic_profile_3d949746c2", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_dbdaaa754b"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "TSV", 
+        "data_type": "Raw CGI Variant", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "94d24e55cd", 
+        "file_size": 54, 
+        "md5sum": "88d1e38af423a3f822a42f1e796cb573", 
+        "submitter_id": "submitted_genomic_profile_97f023137d", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_4333865565"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "MAF", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "765cee15e1", 
+        "file_size": 39, 
+        "md5sum": "42780712172c4c519c8c17a34dd56028", 
+        "submitter_id": "submitted_genomic_profile_d10ec7fc2b", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_034fb2331c"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "MAF", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "WGS", 
+        "file_name": "0942015981", 
+        "file_size": 74, 
+        "md5sum": "c87536ae5288a12ed706ab8632878d98", 
+        "submitter_id": "submitted_genomic_profile_f60ea84b7a", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1a28f4fce4"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "TSV", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "0bc46c876b", 
+        "file_size": 87, 
+        "md5sum": "c82c633dbb698a0cb85d32f17422a471", 
+        "submitter_id": "submitted_genomic_profile_489e5efc6a", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2c4453ff06"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "XML", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "WGS", 
+        "file_name": "9c118607d7", 
+        "file_size": 71, 
+        "md5sum": "35e29b54f62695c99fd6d6dd24dead42", 
+        "submitter_id": "submitted_genomic_profile_47ab390182", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_26685588da"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "MAF", 
+        "data_type": "Raw CGI Variant", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "1cdba5b51e", 
+        "file_size": 28, 
+        "md5sum": "5c5e05832ba9de88fb791538e196189d", 
+        "submitter_id": "submitted_genomic_profile_b48da1985f", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a3da392eb2"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "XML", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "019e26e807", 
+        "file_size": 26, 
+        "md5sum": "ab68e7bfa2bb9cada9f63a73b5a51e46", 
+        "submitter_id": "submitted_genomic_profile_d989e4199d", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1f5129d17f"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "MAF", 
+        "data_type": "GENIE Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "95474c0ed8", 
+        "file_size": 75, 
+        "md5sum": "8d263f25c0faecdbcbf1587588fa0172", 
+        "submitter_id": "submitted_genomic_profile_2039f6ce5d", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_01f3aa5ac0"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "XML", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "WGS", 
+        "file_name": "9624ca160e", 
+        "file_size": 5, 
+        "md5sum": "2157b41ab98b97eda7ed0fabb74abec7", 
+        "submitter_id": "submitted_genomic_profile_0403c756c9", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a545d68608"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "MAF", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "fe9de73d31", 
+        "file_size": 84, 
+        "md5sum": "e07a382c5bee86538eb7416e2b9dd0ea", 
+        "submitter_id": "submitted_genomic_profile_241f7072a8", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2f865cfb95"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "XML", 
+        "data_type": "GENIE Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "4047663d81", 
+        "file_size": 71, 
+        "md5sum": "d8e5c9aa5f35ae9348379e81e7fbfa25", 
+        "submitter_id": "submitted_genomic_profile_026e86c75c", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_034fb2331c"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "TSV", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "d513637eb9", 
+        "file_size": 72, 
+        "md5sum": "f73a43a722686937d365013c5f79c4dc", 
+        "submitter_id": "submitted_genomic_profile_f2fa6fd77b", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b0bcc4779a"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "MAF", 
+        "data_type": "GENIE Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "60cb7d7392", 
+        "file_size": 34, 
+        "md5sum": "7a565b568609a665fffbbfeb5dee1c10", 
+        "submitter_id": "submitted_genomic_profile_bafbf45413", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_a3da392eb2"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "XML", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "8fefbf1b97", 
+        "file_size": 35, 
+        "md5sum": "1914c57a8abb1a29554d899be41e540c", 
+        "submitter_id": "submitted_genomic_profile_93d6d88427", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b0bcc4779a"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "TSV", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "WGS", 
+        "file_name": "b0f0237620", 
+        "file_size": 44, 
+        "md5sum": "1e066a16ffc5047f1b1ed8fa773218bb", 
+        "submitter_id": "submitted_genomic_profile_46f43afbbb", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_4333865565"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "XML", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "WGS", 
+        "file_name": "5c8f33ec8f", 
+        "file_size": 17, 
+        "md5sum": "13f9198dd485c58808afb5c69327b118", 
+        "submitter_id": "submitted_genomic_profile_2c389f6acb", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_db3c1a52a2"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "MAF", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "WGS", 
+        "file_name": "1a418c6c0f", 
+        "file_size": 100, 
+        "md5sum": "791006ca4b8d034852e394e2d02f0b91", 
+        "submitter_id": "submitted_genomic_profile_b7ffcaf56e", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_bfeaa8476f"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "XML", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "WGS", 
+        "file_name": "b12689f7ea", 
+        "file_size": 20, 
+        "md5sum": "8a81925a2f8337d440ca9a3c9e036b16", 
+        "submitter_id": "submitted_genomic_profile_a3bc2ce6cd", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_420fed97f8"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "XML", 
+        "data_type": "Raw CGI Variant", 
+        "experimental_strategy": "WGS", 
+        "file_name": "5614747b5a", 
+        "file_size": 33, 
+        "md5sum": "a0acb89675d2f1292892b61db91c0f21", 
+        "submitter_id": "submitted_genomic_profile_ac332a25a9", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_83a0afebd2"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "MAF", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "57873a5658", 
+        "file_size": 72, 
+        "md5sum": "5fef6e9337f07b0df88aacd046d1ffeb", 
+        "submitter_id": "submitted_genomic_profile_cd35b35879", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_390fd6df90"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "MAF", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "6bc822f679", 
+        "file_size": 88, 
+        "md5sum": "56e6b654ea26c03bc4e8fe028ad7bdc9", 
+        "submitter_id": "submitted_genomic_profile_36a2a86e12", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8a413fa679"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "TSV", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "d3aaa19b07", 
+        "file_size": 98, 
+        "md5sum": "a6bb2014b0bea1345d59df38f32593b0", 
+        "submitter_id": "submitted_genomic_profile_f6e83229fc", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8894501df8"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "MAF", 
+        "data_type": "GENIE Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "6f0841ba52", 
+        "file_size": 70, 
+        "md5sum": "70f11f17d00ec175f41c02d3ddcd5f78", 
+        "submitter_id": "submitted_genomic_profile_31981bd26e", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_087f58a19a"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "MAF", 
+        "data_type": "Raw CGI Variant", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "edab764510", 
+        "file_size": 19, 
+        "md5sum": "a67fa5a1aa2ca4ebef8210a80ba051f3", 
+        "submitter_id": "submitted_genomic_profile_c75bb9db57", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_2f2872593c"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "VCF", 
+        "data_type": "GENIE Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "036787ebbe", 
+        "file_size": 17, 
+        "md5sum": "1f2a4fde84e38824f83dd337d6908770", 
+        "submitter_id": "submitted_genomic_profile_4c23cb6602", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_9e9289954a"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "TSV", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "6007e94336", 
+        "file_size": 64, 
+        "md5sum": "5345a9c700f0e09bb4f56659baabc1e2", 
+        "submitter_id": "submitted_genomic_profile_f1f13659ea", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_7728dd70cc"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "TSV", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "WGS", 
+        "file_name": "9ffd98ab44", 
+        "file_size": 82, 
+        "md5sum": "939aa4f094b7d3ea42007b4b00c02c6f", 
+        "submitter_id": "submitted_genomic_profile_afbe6d34c7", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_94fa4274cb"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "VCF", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "WGS", 
+        "file_name": "c21691462d", 
+        "file_size": 48, 
+        "md5sum": "83d4c4b8d6a7a3d149f28e0619c5e476", 
+        "submitter_id": "submitted_genomic_profile_a498779adc", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_80fb876198"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "VCF", 
+        "data_type": "Raw CGI Variant", 
+        "experimental_strategy": "WGS", 
+        "file_name": "2be98ef648", 
+        "file_size": 94, 
+        "md5sum": "7758f871c5893c7d5cdeb5809e638974", 
+        "submitter_id": "submitted_genomic_profile_6260178fe5", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_dbdaaa754b"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "TSV", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "46aadfb821", 
+        "file_size": 56, 
+        "md5sum": "f966e5112a999ac8a5b850dd83a4f1ed", 
+        "submitter_id": "submitted_genomic_profile_e73a4c3fcb", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_376ed10db2"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "VCF", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "WGS", 
+        "file_name": "dda75f839d", 
+        "file_size": 94, 
+        "md5sum": "0eed2171155e63713e12bed0ce2201a2", 
+        "submitter_id": "submitted_genomic_profile_8594edb893", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1e0c77bfc8"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "VCF", 
+        "data_type": "GENIE Report", 
+        "experimental_strategy": "WGS", 
+        "file_name": "098b7b39ed", 
+        "file_size": 92, 
+        "md5sum": "0177157e0e2191bd0c3bd9fcdd29cfd8", 
+        "submitter_id": "submitted_genomic_profile_7338a20652", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_674dc0fbc4"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "VCF", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "WGS", 
+        "file_name": "39e3be29ce", 
+        "file_size": 17, 
+        "md5sum": "d76464ed3d3fdf557cb9eeec4bc2bc6f", 
+        "submitter_id": "submitted_genomic_profile_9928f17ecc", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_674dc0fbc4"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "VCF", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "42405c4716", 
+        "file_size": 97, 
+        "md5sum": "5d8b204499e3f879ba4144e1912b4a3c", 
+        "submitter_id": "submitted_genomic_profile_29a0b8ba15", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_b20b632a1b"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "TSV", 
+        "data_type": "Raw CGI Variant", 
+        "experimental_strategy": "WGS", 
+        "file_name": "86a261ff4d", 
+        "file_size": 61, 
+        "md5sum": "1f0d1ea917f2417f6efa34f91112b178", 
+        "submitter_id": "submitted_genomic_profile_caeceb8dd5", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_8a413fa679"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "XML", 
+        "data_type": "Raw CGI Variant", 
+        "experimental_strategy": "WGS", 
+        "file_name": "9eb25d67a5", 
+        "file_size": 73, 
+        "md5sum": "efad7d9bb708bcd7b122ddd49ec28471", 
+        "submitter_id": "submitted_genomic_profile_7f29f05282", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_376ed10db2"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "MAF", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "addb5eb343", 
+        "file_size": 46, 
+        "md5sum": "1eef7cd7f5aae6247fc00d93d10c5710", 
+        "submitter_id": "submitted_genomic_profile_40078560c4", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_30a45f8b25"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "TSV", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "WGS", 
+        "file_name": "dad46cf521", 
+        "file_size": 96, 
+        "md5sum": "48ee7e3cabdb5638765e65fc8477b1f6", 
+        "submitter_id": "submitted_genomic_profile_a9098b3e38", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_f978503490"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "VCF", 
+        "data_type": "Raw CGI Variant", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "0b49f6c28c", 
+        "file_size": 63, 
+        "md5sum": "80b33e1194729e0209d91d6684431bbe", 
+        "submitter_id": "submitted_genomic_profile_0a012d623f", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1f5129d17f"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "XML", 
+        "data_type": "GENIE Report", 
+        "experimental_strategy": "WGS", 
+        "file_name": "ab81e1db85", 
+        "file_size": 55, 
+        "md5sum": "622ba508e8ad6a0629bfb18aecc0e25e", 
+        "submitter_id": "submitted_genomic_profile_f7838affa0", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_7728dd70cc"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "VCF", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "WGS", 
+        "file_name": "417b512c83", 
+        "file_size": 78, 
+        "md5sum": "cad01bdef4776fd5339ff6a8b4ac0d1c", 
+        "submitter_id": "submitted_genomic_profile_11a9089599", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_3545c8e725"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "VCF", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "adc20e48b2", 
+        "file_size": 53, 
+        "md5sum": "1aaac48d54e37ded9c1358f005615d7a", 
+        "submitter_id": "submitted_genomic_profile_aaace4ca50", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_f978503490"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "MAF", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "611a585c89", 
+        "file_size": 1, 
+        "md5sum": "f47544159a50957b9ca127e36badb3d4", 
+        "submitter_id": "submitted_genomic_profile_f63b9780fe", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_30a45f8b25"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "MAF", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "cce9aa5d32", 
+        "file_size": 32, 
+        "md5sum": "ffc9d0e0743a465ce227dca9a911b02e", 
+        "submitter_id": "submitted_genomic_profile_ace2c1319b", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_687c809f58"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "XML", 
+        "data_type": "Raw CGI Variant", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "b09c06aa03", 
+        "file_size": 8, 
+        "md5sum": "9a6ff88ad8f3990e0d8b62e74cf814ee", 
+        "submitter_id": "submitted_genomic_profile_419f022607", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_57071bd3bf"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "TSV", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "WGS", 
+        "file_name": "a7a2791970", 
+        "file_size": 82, 
+        "md5sum": "9ce806faeda7e2569849f855ebfd504b", 
+        "submitter_id": "submitted_genomic_profile_ae519d68c3", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_83a0afebd2"
+        }, 
+        "data_category": "Genomic Profiling", 
+        "data_format": "VCF", 
+        "data_type": "FoundationOne Report", 
+        "experimental_strategy": "Targeted Sequencing", 
+        "file_name": "6e0eae8069", 
+        "file_size": 38, 
+        "md5sum": "6be0cc44042f42e16cac13dcf4eee33a", 
+        "submitter_id": "submitted_genomic_profile_e50a0be779", 
+        "type": "submitted_genomic_profile"
+    }, 
+    {
+        "core_metadata_collections": {
+            "submitter_id": "core_metadata_collection_1a28f4fce4"
+        }, 
+        "data_category": "Combined Nucleotide Variation", 
+        "data_format": "MAF", 
+        "data_type": "Variant Calling", 
+        "experimental_strategy": "WGS", 
+        "file_name": "c011790556", 
+        "file_size": 11, 
+        "md5sum": "68d19a76686e7a0863d16d8544397b16", 
+        "submitter_id": "submitted_genomic_profile_aa51406bad", 
+        "type": "submitted_genomic_profile"
+    }
+]
