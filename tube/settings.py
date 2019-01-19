@@ -15,11 +15,12 @@ LIST_TABLES_FILES = 'tables.txt'
 #
 conf_data = load_json('creds.json', 'tube')
 DB_HOST = conf_data.get('db_host', 'localhost')
+DB_PORT = conf_data.get('db_port', '5432')
 DB_DATABASE = conf_data.get('db_database', 'gdcdb')
 DB_USERNAME = conf_data.get('db_username', 'peregrine')
 DB_PASSWORD = conf_data.get('db_password', 'unknown')
-JDBC = 'jdbc:postgresql://{}/{}'.format(DB_HOST, DB_DATABASE)
-PYDBC = 'postgresql://{}:{}@{}:5432/{}'.format(DB_USERNAME, DB_PASSWORD, DB_HOST, DB_DATABASE)
+JDBC = 'jdbc:postgresql://{}:{}/{}'.format(DB_HOST, DB_PORT, DB_DATABASE)
+PYDBC = 'postgresql://{}:{}@{}:{}/{}'.format(DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE)
 DICTIONARY_URL = os.getenv('DICTIONARY_URL', 'https://s3.amazonaws.com/dictionary-artifacts/datadictionary/develop/schema.json')
 ES_URL = os.getenv("ES_URL", "esproxy-service")
 

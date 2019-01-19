@@ -1,0 +1,282 @@
+[
+    {
+        "image_body_site": "Right lung", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_2aa510714c"
+        }, 
+        "series_uid": "0f5d1b0788", 
+        "submitter_id": "imaging_exam_67d33284a3", 
+        "type": "imaging_exam", 
+        "uid": "417e22d216"
+    }, 
+    {
+        "image_body_site": "Both lungs", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_5a8ef0942d"
+        }, 
+        "series_uid": "4a8e43f549", 
+        "submitter_id": "imaging_exam_eb17580b59", 
+        "type": "imaging_exam", 
+        "uid": "06b59fd49c"
+    }, 
+    {
+        "image_body_site": "Right lung", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_41dc5ce499"
+        }, 
+        "series_uid": "d7c367edc7", 
+        "submitter_id": "imaging_exam_17b2511a9d", 
+        "type": "imaging_exam", 
+        "uid": "9963a21576"
+    }, 
+    {
+        "image_body_site": "Right lung", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_e417387159"
+        }, 
+        "series_uid": "b7c9af0c42", 
+        "submitter_id": "imaging_exam_f206d6c1de", 
+        "type": "imaging_exam", 
+        "uid": "4837781490"
+    }, 
+    {
+        "image_body_site": "Right lung", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_d811a2b036"
+        }, 
+        "series_uid": "97f3c25fc5", 
+        "submitter_id": "imaging_exam_bc1c40d6d3", 
+        "type": "imaging_exam", 
+        "uid": "ca846ffd58"
+    }, 
+    {
+        "image_body_site": "Left lung", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_aec4ca628c"
+        }, 
+        "series_uid": "35a2fb71cc", 
+        "submitter_id": "imaging_exam_b59b153152", 
+        "type": "imaging_exam", 
+        "uid": "68a9294df6"
+    }, 
+    {
+        "image_body_site": "Both lungs", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_9fab0696be"
+        }, 
+        "series_uid": "8304b63ed1", 
+        "submitter_id": "imaging_exam_a3c39d82bd", 
+        "type": "imaging_exam", 
+        "uid": "8d43d1b238"
+    }, 
+    {
+        "image_body_site": "Both lungs", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_b90bd5646f"
+        }, 
+        "series_uid": "6fbf4d4d4a", 
+        "submitter_id": "imaging_exam_4f1df92e43", 
+        "type": "imaging_exam", 
+        "uid": "bb25ac5d15"
+    }, 
+    {
+        "image_body_site": "Both lungs", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_5935ba9222"
+        }, 
+        "series_uid": "8792740989", 
+        "submitter_id": "imaging_exam_5f29efe6d5", 
+        "type": "imaging_exam", 
+        "uid": "6a588f301c"
+    }, 
+    {
+        "image_body_site": "Both lungs", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_d811a2b036"
+        }, 
+        "series_uid": "954f9225b8", 
+        "submitter_id": "imaging_exam_b9874b9f39", 
+        "type": "imaging_exam", 
+        "uid": "6068b7f6c8"
+    }, 
+    {
+        "image_body_site": "Right lung", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_7816ee2d71"
+        }, 
+        "series_uid": "074103a8c6", 
+        "submitter_id": "imaging_exam_5ed40cad2a", 
+        "type": "imaging_exam", 
+        "uid": "f3d0e9441c"
+    }, 
+    {
+        "image_body_site": "Right lung", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_53d19f7e95"
+        }, 
+        "series_uid": "956ccf057d", 
+        "submitter_id": "imaging_exam_33e6236065", 
+        "type": "imaging_exam", 
+        "uid": "918c38d46c"
+    }, 
+    {
+        "image_body_site": "Right lung", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_892ac69305"
+        }, 
+        "series_uid": "733b71b52f", 
+        "submitter_id": "imaging_exam_6d6f3d4838", 
+        "type": "imaging_exam", 
+        "uid": "8f1ed3b65b"
+    }, 
+    {
+        "image_body_site": "Both lungs", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_f653cffbbb"
+        }, 
+        "series_uid": "8689183907", 
+        "submitter_id": "imaging_exam_32f9799c8b", 
+        "type": "imaging_exam", 
+        "uid": "710629aaca"
+    }, 
+    {
+        "image_body_site": "Both lungs", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_57d193a1e5"
+        }, 
+        "series_uid": "accbf738fe", 
+        "submitter_id": "imaging_exam_97a815a867", 
+        "type": "imaging_exam", 
+        "uid": "10869fb185"
+    }, 
+    {
+        "image_body_site": "Right lung", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_6d65efd346"
+        }, 
+        "series_uid": "26fa07f14b", 
+        "submitter_id": "imaging_exam_e10b0d3c61", 
+        "type": "imaging_exam", 
+        "uid": "0fef3bff44"
+    }, 
+    {
+        "image_body_site": "Right lung", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_71b171b687"
+        }, 
+        "series_uid": "77047f04d0", 
+        "submitter_id": "imaging_exam_2c126b9eeb", 
+        "type": "imaging_exam", 
+        "uid": "5c891900c7"
+    }, 
+    {
+        "image_body_site": "Right lung", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_81a56c2169"
+        }, 
+        "series_uid": "b7a4b26acc", 
+        "submitter_id": "imaging_exam_341a7e9b8e", 
+        "type": "imaging_exam", 
+        "uid": "a54e2d5832"
+    }, 
+    {
+        "image_body_site": "Left lung", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_5935ba9222"
+        }, 
+        "series_uid": "6d99d3aef5", 
+        "submitter_id": "imaging_exam_536b4bd4f7", 
+        "type": "imaging_exam", 
+        "uid": "b334a4ef5d"
+    }, 
+    {
+        "image_body_site": "Left lung", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_892ac69305"
+        }, 
+        "series_uid": "a82f5af4d3", 
+        "submitter_id": "imaging_exam_f59e405f97", 
+        "type": "imaging_exam", 
+        "uid": "b57859b341"
+    }, 
+    {
+        "image_body_site": "Left lung", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_1ba31defcf"
+        }, 
+        "series_uid": "221a44d877", 
+        "submitter_id": "imaging_exam_4098e467f8", 
+        "type": "imaging_exam", 
+        "uid": "2b28e71b47"
+    }, 
+    {
+        "image_body_site": "Left lung", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_97b91bde57"
+        }, 
+        "series_uid": "8f94c5b5df", 
+        "submitter_id": "imaging_exam_9fef0b1a35", 
+        "type": "imaging_exam", 
+        "uid": "11dc812771"
+    }, 
+    {
+        "image_body_site": "Left lung", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_53d19f7e95"
+        }, 
+        "series_uid": "252ab9c4fb", 
+        "submitter_id": "imaging_exam_cb7faf1229", 
+        "type": "imaging_exam", 
+        "uid": "9ae59eadd1"
+    }, 
+    {
+        "image_body_site": "Right lung", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_7256c4c7c9"
+        }, 
+        "series_uid": "ed3ccc22e7", 
+        "submitter_id": "imaging_exam_b7100b88bb", 
+        "type": "imaging_exam", 
+        "uid": "5dc087b63d"
+    }, 
+    {
+        "image_body_site": "Both lungs", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_9fc5435b96"
+        }, 
+        "series_uid": "f6e2a4f90b", 
+        "submitter_id": "imaging_exam_5c37f72df9", 
+        "type": "imaging_exam", 
+        "uid": "ec5bf46980"
+    }, 
+    {
+        "image_body_site": "Right lung", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_6d65efd346"
+        }, 
+        "series_uid": "f8953e9bf5", 
+        "submitter_id": "imaging_exam_50e8e67ab3", 
+        "type": "imaging_exam", 
+        "uid": "a855f96592"
+    }, 
+    {
+        "image_body_site": "Both lungs", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_aec4ca628c"
+        }, 
+        "series_uid": "644cde22db", 
+        "submitter_id": "imaging_exam_6d5ce262d8", 
+        "type": "imaging_exam", 
+        "uid": "63f94bb4b5"
+    }, 
+    {
+        "image_body_site": "Right lung", 
+        "imaging_studies": {
+            "submitter_id": "imaging_study_5a8ef0942d"
+        }, 
+        "series_uid": "4603f238ee", 
+        "submitter_id": "imaging_exam_009ac77b52", 
+        "type": "imaging_exam", 
+        "uid": "748f813b5c"
+    }
+]

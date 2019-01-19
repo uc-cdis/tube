@@ -1,322 +1,1275 @@
 [
-  {
-    "last_macs_visit_haart_free": 8,
-    "treatment_type": "aSvnSsSuPEJg",
-    "year_of_last_haart_free": 10.0801,
-    "first_macs_visit_haart": 11.2178,
-    "therapeutic_agents": "2wvrccGwvaua",
-    "regimen_or_line_of_therapy": "A82dXIMrim2R",
-    "year_of_treatment": 9.294,
-    "treatment_outcome": "Partial Response",
-    "treatment_intent_type": "oMGWQqQ09jSs",
-    "type": "treatment",
-    "submitter_id": "treatment_001",
-    "diagnoses": {
-      "submitter_id": "diagnosis_0016"
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_d796b400f6"
+        }, 
+        "first_macs_visit_haart": 86.36428068966443, 
+        "last_macs_visit_haart_free": 33, 
+        "regimen_count": 68, 
+        "regimen_or_line_of_therapy": "c406717bf9", 
+        "submitter_id": "treatment_d8e0db3508", 
+        "therapeutic_agents": "481865d491", 
+        "treatment_intent_type": "039dcb9d8b", 
+        "treatment_outcome": "Completed", 
+        "treatment_span": 70, 
+        "treatment_status": "ba0332af77", 
+        "treatment_type": "dd3a92c2d8", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 44.57588241786791, 
+        "year_of_treatment": 60.06106074269901
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_3df84e8034"
+        }, 
+        "first_macs_visit_haart": 81.84115636464257, 
+        "last_macs_visit_haart_free": 60, 
+        "regimen_count": 64, 
+        "regimen_or_line_of_therapy": "561a6a8156", 
+        "submitter_id": "treatment_8d9e812dfd", 
+        "therapeutic_agents": "e8356fcee6", 
+        "treatment_intent_type": "5dc5ba20a9", 
+        "treatment_outcome": "Partial Response", 
+        "treatment_span": 60, 
+        "treatment_status": "57a9ad55f9", 
+        "treatment_type": "6d7b70c452", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 90.7534529808802, 
+        "year_of_treatment": 36.07244161488203
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_03c7d3cc81"
+        }, 
+        "first_macs_visit_haart": 23.924493214356957, 
+        "last_macs_visit_haart_free": 57, 
+        "regimen_count": 78, 
+        "regimen_or_line_of_therapy": "b609e44446", 
+        "submitter_id": "treatment_1491593b7f", 
+        "therapeutic_agents": "fd3edbfa94", 
+        "treatment_intent_type": "3094bd75dd", 
+        "treatment_outcome": "Default", 
+        "treatment_span": 85, 
+        "treatment_status": "b9af23fe3e", 
+        "treatment_type": "241e5023ed", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 5.522120507625239, 
+        "year_of_treatment": 24.010094168314332
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_ab895da3de"
+        }, 
+        "first_macs_visit_haart": 0.7719372508254274, 
+        "last_macs_visit_haart_free": 62, 
+        "regimen_count": 1, 
+        "regimen_or_line_of_therapy": "14f3e4f006", 
+        "submitter_id": "treatment_463bbae02a", 
+        "therapeutic_agents": "697ab67776", 
+        "treatment_intent_type": "711a6e672e", 
+        "treatment_outcome": "Cured", 
+        "treatment_span": 93, 
+        "treatment_status": "73e1332d3b", 
+        "treatment_type": "99fd8d921b", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 67.16867765750553, 
+        "year_of_treatment": 91.8422798431244
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_580915a20e"
+        }, 
+        "first_macs_visit_haart": 4.1904452542338655, 
+        "last_macs_visit_haart_free": 23, 
+        "regimen_count": 44, 
+        "regimen_or_line_of_therapy": "a15feb5d0e", 
+        "submitter_id": "treatment_67e19a4944", 
+        "therapeutic_agents": "03b9940e54", 
+        "treatment_intent_type": "cedd32d00e", 
+        "treatment_outcome": "Treatment Ongoing", 
+        "treatment_span": 77, 
+        "treatment_status": "e26d12a24e", 
+        "treatment_type": "bed46c57e7", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 49.824038204177626, 
+        "year_of_treatment": 74.94753425734147
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_52bea64e07"
+        }, 
+        "first_macs_visit_haart": 4.670623293144915, 
+        "last_macs_visit_haart_free": 99, 
+        "regimen_count": 88, 
+        "regimen_or_line_of_therapy": "e0b0b1e989", 
+        "submitter_id": "treatment_6eda4f2e28", 
+        "therapeutic_agents": "bd027b98b5", 
+        "treatment_intent_type": "e273e002e8", 
+        "treatment_outcome": "Completed", 
+        "treatment_span": 73, 
+        "treatment_status": "7cffd3bed0", 
+        "treatment_type": "3bf47f6ce1", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 73.0952111294571, 
+        "year_of_treatment": 75.47416028985245
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_6ec752d5b7"
+        }, 
+        "first_macs_visit_haart": 68.93574208924117, 
+        "last_macs_visit_haart_free": 25, 
+        "regimen_count": 92, 
+        "regimen_or_line_of_therapy": "ab9266c719", 
+        "submitter_id": "treatment_0ec538b0b1", 
+        "therapeutic_agents": "b2da0d37c0", 
+        "treatment_intent_type": "5a3e4a3e30", 
+        "treatment_outcome": "Partial Response", 
+        "treatment_span": 79, 
+        "treatment_status": "73143eb127", 
+        "treatment_type": "82e815872a", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 41.55259298501745, 
+        "year_of_treatment": 43.37922884834244
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_ab895da3de"
+        }, 
+        "first_macs_visit_haart": 46.78810303895327, 
+        "last_macs_visit_haart_free": 98, 
+        "regimen_count": 18, 
+        "regimen_or_line_of_therapy": "afd0f5794e", 
+        "submitter_id": "treatment_1e18c12c75", 
+        "therapeutic_agents": "a15bf08b3b", 
+        "treatment_intent_type": "8e893f0a80", 
+        "treatment_outcome": "Died", 
+        "treatment_span": 13, 
+        "treatment_status": "89f356d3ff", 
+        "treatment_type": "1f48784356", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 18.482461628773926, 
+        "year_of_treatment": 6.1641886144459646
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_dc3dbb9968"
+        }, 
+        "first_macs_visit_haart": 6.91444904340337, 
+        "last_macs_visit_haart_free": 3, 
+        "regimen_count": 97, 
+        "regimen_or_line_of_therapy": "5aa09204b8", 
+        "submitter_id": "treatment_2e29852065", 
+        "therapeutic_agents": "66269001d6", 
+        "treatment_intent_type": "e3f1d1ebac", 
+        "treatment_outcome": "Unknown", 
+        "treatment_span": 95, 
+        "treatment_status": "876db31c2f", 
+        "treatment_type": "2ff30adc04", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 45.44134149064713, 
+        "year_of_treatment": 98.84388280401795
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_a2b531ba91"
+        }, 
+        "first_macs_visit_haart": 65.4892097011846, 
+        "last_macs_visit_haart_free": 7, 
+        "regimen_count": 0, 
+        "regimen_or_line_of_therapy": "a465a50071", 
+        "submitter_id": "treatment_7cf4879489", 
+        "therapeutic_agents": "3f86d960e5", 
+        "treatment_intent_type": "68a48d256c", 
+        "treatment_outcome": "Treatment Ongoing", 
+        "treatment_span": 94, 
+        "treatment_status": "aea67796cf", 
+        "treatment_type": "903a3b7bb9", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 42.999309031218544, 
+        "year_of_treatment": 21.36135622227142
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_5dce2a3160"
+        }, 
+        "first_macs_visit_haart": 77.74018745426812, 
+        "last_macs_visit_haart_free": 8, 
+        "regimen_count": 83, 
+        "regimen_or_line_of_therapy": "590981df06", 
+        "submitter_id": "treatment_92da7c55c8", 
+        "therapeutic_agents": "f21994566d", 
+        "treatment_intent_type": "7c18c38b42", 
+        "treatment_outcome": "Unknown", 
+        "treatment_span": 93, 
+        "treatment_status": "671371dca5", 
+        "treatment_type": "5cde3eb0c6", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 61.38308367256128, 
+        "year_of_treatment": 14.207352242173776
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_ddb4432116"
+        }, 
+        "first_macs_visit_haart": 92.13087329192673, 
+        "last_macs_visit_haart_free": 37, 
+        "regimen_count": 50, 
+        "regimen_or_line_of_therapy": "8e03c88bed", 
+        "submitter_id": "treatment_f29fd73d7e", 
+        "therapeutic_agents": "68db611989", 
+        "treatment_intent_type": "bcce9b7d0b", 
+        "treatment_outcome": "Completed", 
+        "treatment_span": 57, 
+        "treatment_status": "e5fa7aa70b", 
+        "treatment_type": "95e4796b85", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 93.32124270508064, 
+        "year_of_treatment": 90.70456131982797
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_f459916fe3"
+        }, 
+        "first_macs_visit_haart": 2.0756793487386127, 
+        "last_macs_visit_haart_free": 85, 
+        "regimen_count": 65, 
+        "regimen_or_line_of_therapy": "98725b6336", 
+        "submitter_id": "treatment_2e4792c22b", 
+        "therapeutic_agents": "17b85d1554", 
+        "treatment_intent_type": "0d20757e55", 
+        "treatment_outcome": "Failed", 
+        "treatment_span": 11, 
+        "treatment_status": "a301ba9c9f", 
+        "treatment_type": "6fbe8b8ffb", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 66.48778513495039, 
+        "year_of_treatment": 89.38600181178325
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_0db3333d27"
+        }, 
+        "first_macs_visit_haart": 27.759644250815473, 
+        "last_macs_visit_haart_free": 1, 
+        "regimen_count": 1, 
+        "regimen_or_line_of_therapy": "cf74809abe", 
+        "submitter_id": "treatment_6c048b858f", 
+        "therapeutic_agents": "f020c8952c", 
+        "treatment_intent_type": "ab3e751bb6", 
+        "treatment_outcome": "Failed", 
+        "treatment_span": 94, 
+        "treatment_status": "4eb98b1c30", 
+        "treatment_type": "c740b0a644", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 29.56691430611955, 
+        "year_of_treatment": 3.2062892674749044
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_ab895da3de"
+        }, 
+        "first_macs_visit_haart": 26.874055764658166, 
+        "last_macs_visit_haart_free": 73, 
+        "regimen_count": 79, 
+        "regimen_or_line_of_therapy": "b99c1b3828", 
+        "submitter_id": "treatment_78312aff8e", 
+        "therapeutic_agents": "8fb13f4ba2", 
+        "treatment_intent_type": "d884fd5ec9", 
+        "treatment_outcome": "Died", 
+        "treatment_span": 72, 
+        "treatment_status": "e1278e0d25", 
+        "treatment_type": "c557dd37a2", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 0.015711318853650624, 
+        "year_of_treatment": 97.84978095424025
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_dc3dbb9968"
+        }, 
+        "first_macs_visit_haart": 62.72242053478211, 
+        "last_macs_visit_haart_free": 8, 
+        "regimen_count": 40, 
+        "regimen_or_line_of_therapy": "4b2bba9f72", 
+        "submitter_id": "treatment_61a94c060e", 
+        "therapeutic_agents": "41e39bc968", 
+        "treatment_intent_type": "ec14cfebef", 
+        "treatment_outcome": "Cured", 
+        "treatment_span": 20, 
+        "treatment_status": "6562dcfe6a", 
+        "treatment_type": "e04216c57d", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 46.10996027074056, 
+        "year_of_treatment": 88.26174735906814
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_6ec752d5b7"
+        }, 
+        "first_macs_visit_haart": 22.901941641607536, 
+        "last_macs_visit_haart_free": 20, 
+        "regimen_count": 17, 
+        "regimen_or_line_of_therapy": "8664c378f3", 
+        "submitter_id": "treatment_a8ae82e3f1", 
+        "therapeutic_agents": "fe8a177570", 
+        "treatment_intent_type": "bd6547f0be", 
+        "treatment_outcome": "Partial Response", 
+        "treatment_span": 55, 
+        "treatment_status": "7d920fbcb0", 
+        "treatment_type": "0363e42c01", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 79.24548622751604, 
+        "year_of_treatment": 53.96103533932533
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_6ec752d5b7"
+        }, 
+        "first_macs_visit_haart": 40.15451224087161, 
+        "last_macs_visit_haart_free": 50, 
+        "regimen_count": 26, 
+        "regimen_or_line_of_therapy": "9ed8655da5", 
+        "submitter_id": "treatment_45bbee5d9c", 
+        "therapeutic_agents": "100037dbb4", 
+        "treatment_intent_type": "cedb815aae", 
+        "treatment_outcome": "Treatment Ongoing", 
+        "treatment_span": 53, 
+        "treatment_status": "eab99353a5", 
+        "treatment_type": "af31ec8471", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 86.57929943792465, 
+        "year_of_treatment": 34.33964837290249
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_9a5034118c"
+        }, 
+        "first_macs_visit_haart": 6.462508228500008, 
+        "last_macs_visit_haart_free": 35, 
+        "regimen_count": 63, 
+        "regimen_or_line_of_therapy": "5a2b4be9c0", 
+        "submitter_id": "treatment_11cb7aaf20", 
+        "therapeutic_agents": "2fec0e52a9", 
+        "treatment_intent_type": "8a2f2f2817", 
+        "treatment_outcome": "Complete Response", 
+        "treatment_span": 32, 
+        "treatment_status": "c7ec70f55b", 
+        "treatment_type": "97bd438a05", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 44.30390704906275, 
+        "year_of_treatment": 63.22661788537477
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_3df84e8034"
+        }, 
+        "first_macs_visit_haart": 85.90640205757944, 
+        "last_macs_visit_haart_free": 16, 
+        "regimen_count": 40, 
+        "regimen_or_line_of_therapy": "3a80105f61", 
+        "submitter_id": "treatment_5fee9ab8af", 
+        "therapeutic_agents": "cb6861d785", 
+        "treatment_intent_type": "f973b339e0", 
+        "treatment_outcome": "Unknown", 
+        "treatment_span": 56, 
+        "treatment_status": "6ec023b9e2", 
+        "treatment_type": "eb2fbf65a6", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 40.60441329241703, 
+        "year_of_treatment": 44.421880380998566
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_63988b723f"
+        }, 
+        "first_macs_visit_haart": 1.3064475857125557, 
+        "last_macs_visit_haart_free": 39, 
+        "regimen_count": 21, 
+        "regimen_or_line_of_therapy": "2099125a2e", 
+        "submitter_id": "treatment_a9039ca108", 
+        "therapeutic_agents": "1efc89c4df", 
+        "treatment_intent_type": "de692ce919", 
+        "treatment_outcome": "Complete Response", 
+        "treatment_span": 50, 
+        "treatment_status": "ef31ab02c4", 
+        "treatment_type": "6e062932e9", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 83.25723841006693, 
+        "year_of_treatment": 94.0060266690111
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_03c7d3cc81"
+        }, 
+        "first_macs_visit_haart": 32.954724244620024, 
+        "last_macs_visit_haart_free": 97, 
+        "regimen_count": 21, 
+        "regimen_or_line_of_therapy": "4cb649025b", 
+        "submitter_id": "treatment_d721a71c19", 
+        "therapeutic_agents": "49f362e0db", 
+        "treatment_intent_type": "67563c9988", 
+        "treatment_outcome": "Partial Response", 
+        "treatment_span": 73, 
+        "treatment_status": "3a151a8277", 
+        "treatment_type": "cd31470370", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 91.41911805737136, 
+        "year_of_treatment": 26.316996499043555
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_f459916fe3"
+        }, 
+        "first_macs_visit_haart": 11.484766719219298, 
+        "last_macs_visit_haart_free": 42, 
+        "regimen_count": 63, 
+        "regimen_or_line_of_therapy": "8451226d41", 
+        "submitter_id": "treatment_de1a2442a3", 
+        "therapeutic_agents": "ef4fe2656a", 
+        "treatment_intent_type": "877048b256", 
+        "treatment_outcome": "Failed", 
+        "treatment_span": 53, 
+        "treatment_status": "9df02e2bf7", 
+        "treatment_type": "b1d0c440be", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 59.072287852506534, 
+        "year_of_treatment": 56.73186277301541
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_580915a20e"
+        }, 
+        "first_macs_visit_haart": 87.56840167911221, 
+        "last_macs_visit_haart_free": 88, 
+        "regimen_count": 58, 
+        "regimen_or_line_of_therapy": "74a4765603", 
+        "submitter_id": "treatment_d2a63580c2", 
+        "therapeutic_agents": "a12cd59d29", 
+        "treatment_intent_type": "70b4f42808", 
+        "treatment_outcome": "Default", 
+        "treatment_span": 27, 
+        "treatment_status": "f29b498252", 
+        "treatment_type": "78d1298f8f", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 87.50639923314968, 
+        "year_of_treatment": 19.134713166443127
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_229fbebcdc"
+        }, 
+        "first_macs_visit_haart": 11.939891132466796, 
+        "last_macs_visit_haart_free": 65, 
+        "regimen_count": 92, 
+        "regimen_or_line_of_therapy": "61b9f7b424", 
+        "submitter_id": "treatment_82796f09fb", 
+        "therapeutic_agents": "722f798af2", 
+        "treatment_intent_type": "e689fe8e73", 
+        "treatment_outcome": "Default", 
+        "treatment_span": 24, 
+        "treatment_status": "0ddc66684e", 
+        "treatment_type": "b54cbaaf65", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 35.90539149258013, 
+        "year_of_treatment": 1.025703696211988
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_d796b400f6"
+        }, 
+        "first_macs_visit_haart": 26.49693378975583, 
+        "last_macs_visit_haart_free": 21, 
+        "regimen_count": 61, 
+        "regimen_or_line_of_therapy": "1ea10c5699", 
+        "submitter_id": "treatment_b2f45b23a2", 
+        "therapeutic_agents": "d68e0ea2ba", 
+        "treatment_intent_type": "98a7d4d7e7", 
+        "treatment_outcome": "Failed", 
+        "treatment_span": 81, 
+        "treatment_status": "c5e767b0ec", 
+        "treatment_type": "fcac566925", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 82.8312233991334, 
+        "year_of_treatment": 30.423198728681065
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_9a5034118c"
+        }, 
+        "first_macs_visit_haart": 28.490644533070686, 
+        "last_macs_visit_haart_free": 75, 
+        "regimen_count": 84, 
+        "regimen_or_line_of_therapy": "f30365fc39", 
+        "submitter_id": "treatment_5ab793512d", 
+        "therapeutic_agents": "18d3e09cbb", 
+        "treatment_intent_type": "4d7cc4624a", 
+        "treatment_outcome": "Completed", 
+        "treatment_span": 24, 
+        "treatment_status": "4570193402", 
+        "treatment_type": "7b68f7d769", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 40.8228503880938, 
+        "year_of_treatment": 71.6373880556847
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_d796b400f6"
+        }, 
+        "first_macs_visit_haart": 50.87092134637936, 
+        "last_macs_visit_haart_free": 23, 
+        "regimen_count": 39, 
+        "regimen_or_line_of_therapy": "1108194d28", 
+        "submitter_id": "treatment_c7889cba0a", 
+        "therapeutic_agents": "b575e84a3d", 
+        "treatment_intent_type": "a43e6f6307", 
+        "treatment_outcome": "Cured", 
+        "treatment_span": 3, 
+        "treatment_status": "cb8723c97d", 
+        "treatment_type": "220328eaea", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 24.67298698394026, 
+        "year_of_treatment": 7.041619313355385
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_03c7d3cc81"
+        }, 
+        "first_macs_visit_haart": 69.1796765911028, 
+        "last_macs_visit_haart_free": 69, 
+        "regimen_count": 44, 
+        "regimen_or_line_of_therapy": "5e173327ca", 
+        "submitter_id": "treatment_67092d9aa4", 
+        "therapeutic_agents": "d5448b7553", 
+        "treatment_intent_type": "12438e223f", 
+        "treatment_outcome": "Died", 
+        "treatment_span": 43, 
+        "treatment_status": "d46f87aec2", 
+        "treatment_type": "c5e3f007ec", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 95.65137656351503, 
+        "year_of_treatment": 60.562658438097216
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_9379b339bb"
+        }, 
+        "first_macs_visit_haart": 37.9702909573019, 
+        "last_macs_visit_haart_free": 58, 
+        "regimen_count": 96, 
+        "regimen_or_line_of_therapy": "e7ec4b765e", 
+        "submitter_id": "treatment_ab783be2cd", 
+        "therapeutic_agents": "28880d7be4", 
+        "treatment_intent_type": "4d92ec843a", 
+        "treatment_outcome": "Died", 
+        "treatment_span": 62, 
+        "treatment_status": "2ac8273a8a", 
+        "treatment_type": "ac219f065c", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 97.41594513307628, 
+        "year_of_treatment": 87.32261747792944
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_52bea64e07"
+        }, 
+        "first_macs_visit_haart": 5.5566587071505635, 
+        "last_macs_visit_haart_free": 76, 
+        "regimen_count": 47, 
+        "regimen_or_line_of_therapy": "bb9eca2569", 
+        "submitter_id": "treatment_b746497a39", 
+        "therapeutic_agents": "9a575c373d", 
+        "treatment_intent_type": "b8f4bf520a", 
+        "treatment_outcome": "Default", 
+        "treatment_span": 58, 
+        "treatment_status": "ac21075d2b", 
+        "treatment_type": "1143705eb1", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 43.45074006331914, 
+        "year_of_treatment": 33.87403223062797
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_6203cc7c13"
+        }, 
+        "first_macs_visit_haart": 89.01785104120519, 
+        "last_macs_visit_haart_free": 52, 
+        "regimen_count": 49, 
+        "regimen_or_line_of_therapy": "0e943af3de", 
+        "submitter_id": "treatment_c248e36391", 
+        "therapeutic_agents": "ca9cade41e", 
+        "treatment_intent_type": "1a887387c1", 
+        "treatment_outcome": "Unknown", 
+        "treatment_span": 32, 
+        "treatment_status": "1d6ef67ab9", 
+        "treatment_type": "7b3a8b6733", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 64.03769750259369, 
+        "year_of_treatment": 91.57523052739424
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_f459916fe3"
+        }, 
+        "first_macs_visit_haart": 63.80696295917409, 
+        "last_macs_visit_haart_free": 31, 
+        "regimen_count": 43, 
+        "regimen_or_line_of_therapy": "04407cbd3a", 
+        "submitter_id": "treatment_5b213ca2e1", 
+        "therapeutic_agents": "72c419fd1a", 
+        "treatment_intent_type": "49e3c323d2", 
+        "treatment_outcome": "Died", 
+        "treatment_span": 87, 
+        "treatment_status": "fd462d60f9", 
+        "treatment_type": "96d65b22fc", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 51.24169357399669, 
+        "year_of_treatment": 97.9392209300765
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_5dce2a3160"
+        }, 
+        "first_macs_visit_haart": 76.52288931463124, 
+        "last_macs_visit_haart_free": 86, 
+        "regimen_count": 5, 
+        "regimen_or_line_of_therapy": "46144f621d", 
+        "submitter_id": "treatment_89de8eebf6", 
+        "therapeutic_agents": "4d14c2c7b8", 
+        "treatment_intent_type": "982eb1e995", 
+        "treatment_outcome": "Complete Response", 
+        "treatment_span": 42, 
+        "treatment_status": "b00f8449a8", 
+        "treatment_type": "ff56e39063", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 20.55831054081957, 
+        "year_of_treatment": 37.102541603543436
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_156c86d6cb"
+        }, 
+        "first_macs_visit_haart": 73.02364202437698, 
+        "last_macs_visit_haart_free": 96, 
+        "regimen_count": 32, 
+        "regimen_or_line_of_therapy": "75c43e7975", 
+        "submitter_id": "treatment_614b565de0", 
+        "therapeutic_agents": "cf6399309c", 
+        "treatment_intent_type": "41cd9155d4", 
+        "treatment_outcome": "Default", 
+        "treatment_span": 1, 
+        "treatment_status": "f0969056ad", 
+        "treatment_type": "4399a6c9fa", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 73.3561921660215, 
+        "year_of_treatment": 90.58374281548367
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_6203cc7c13"
+        }, 
+        "first_macs_visit_haart": 91.4044187781368, 
+        "last_macs_visit_haart_free": 98, 
+        "regimen_count": 37, 
+        "regimen_or_line_of_therapy": "6f9ff7c299", 
+        "submitter_id": "treatment_8ee4a32a54", 
+        "therapeutic_agents": "e67588e9e7", 
+        "treatment_intent_type": "6982361a36", 
+        "treatment_outcome": "Unknown", 
+        "treatment_span": 28, 
+        "treatment_status": "06a68dfe38", 
+        "treatment_type": "41503e1902", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 90.28490795471053, 
+        "year_of_treatment": 68.32465328081672
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_d796b400f6"
+        }, 
+        "first_macs_visit_haart": 25.68396905560545, 
+        "last_macs_visit_haart_free": 57, 
+        "regimen_count": 34, 
+        "regimen_or_line_of_therapy": "f0719ba9d5", 
+        "submitter_id": "treatment_652e3b82b4", 
+        "therapeutic_agents": "db9ae3291d", 
+        "treatment_intent_type": "b890235267", 
+        "treatment_outcome": "Failed", 
+        "treatment_span": 93, 
+        "treatment_status": "646ca7ebf6", 
+        "treatment_type": "0bd38a4068", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 34.911213987185974, 
+        "year_of_treatment": 23.744553218583032
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_f25d08a076"
+        }, 
+        "first_macs_visit_haart": 98.20290419833809, 
+        "last_macs_visit_haart_free": 82, 
+        "regimen_count": 53, 
+        "regimen_or_line_of_therapy": "5e457aa3ef", 
+        "submitter_id": "treatment_3d8a521f4e", 
+        "therapeutic_agents": "840349ca7b", 
+        "treatment_intent_type": "c954df28c2", 
+        "treatment_outcome": "Default", 
+        "treatment_span": 12, 
+        "treatment_status": "a50a0ffc99", 
+        "treatment_type": "b4e6d73a02", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 37.56192741816302, 
+        "year_of_treatment": 81.29140475709758
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_a2b531ba91"
+        }, 
+        "first_macs_visit_haart": 60.20241471455366, 
+        "last_macs_visit_haart_free": 36, 
+        "regimen_count": 49, 
+        "regimen_or_line_of_therapy": "d56491a032", 
+        "submitter_id": "treatment_a2d9d38928", 
+        "therapeutic_agents": "e74e807df8", 
+        "treatment_intent_type": "0cf6e2663a", 
+        "treatment_outcome": "Partial Response", 
+        "treatment_span": 71, 
+        "treatment_status": "7683016f39", 
+        "treatment_type": "012b751377", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 35.85637766593578, 
+        "year_of_treatment": 36.93804446003319
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_f459916fe3"
+        }, 
+        "first_macs_visit_haart": 64.08569997734182, 
+        "last_macs_visit_haart_free": 58, 
+        "regimen_count": 24, 
+        "regimen_or_line_of_therapy": "96bf99fb2c", 
+        "submitter_id": "treatment_3b566dd871", 
+        "therapeutic_agents": "6ceb25f7ec", 
+        "treatment_intent_type": "2fa6508572", 
+        "treatment_outcome": "Complete Response", 
+        "treatment_span": 92, 
+        "treatment_status": "bf5d8aeb84", 
+        "treatment_type": "eec334e069", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 74.64077131058588, 
+        "year_of_treatment": 38.41604702196179
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_a2b531ba91"
+        }, 
+        "first_macs_visit_haart": 36.93616244899651, 
+        "last_macs_visit_haart_free": 92, 
+        "regimen_count": 40, 
+        "regimen_or_line_of_therapy": "a6a9fb8ea6", 
+        "submitter_id": "treatment_f68b4a7f1d", 
+        "therapeutic_agents": "b9294f334a", 
+        "treatment_intent_type": "6b473d4d22", 
+        "treatment_outcome": "Unknown", 
+        "treatment_span": 14, 
+        "treatment_status": "ec1cd332b9", 
+        "treatment_type": "e3cd062673", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 75.19209374860174, 
+        "year_of_treatment": 95.80526706235507
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_0db3333d27"
+        }, 
+        "first_macs_visit_haart": 26.36171413706424, 
+        "last_macs_visit_haart_free": 15, 
+        "regimen_count": 21, 
+        "regimen_or_line_of_therapy": "d28355f1d8", 
+        "submitter_id": "treatment_ab07305101", 
+        "therapeutic_agents": "74b80c283d", 
+        "treatment_intent_type": "a2ec2e70d3", 
+        "treatment_outcome": "Treatment Ongoing", 
+        "treatment_span": 63, 
+        "treatment_status": "98136351f9", 
+        "treatment_type": "2ff19ee4fa", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 66.45329627043527, 
+        "year_of_treatment": 61.79717631578154
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_ddb4432116"
+        }, 
+        "first_macs_visit_haart": 76.90037368240263, 
+        "last_macs_visit_haart_free": 12, 
+        "regimen_count": 98, 
+        "regimen_or_line_of_therapy": "fdd9adfb2c", 
+        "submitter_id": "treatment_bb9e11caa5", 
+        "therapeutic_agents": "dd0167c8e4", 
+        "treatment_intent_type": "529ba28711", 
+        "treatment_outcome": "Treatment Ongoing", 
+        "treatment_span": 64, 
+        "treatment_status": "95f8d0ad2e", 
+        "treatment_type": "c41756220b", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 82.59981317076642, 
+        "year_of_treatment": 72.81613641771422
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_ab895da3de"
+        }, 
+        "first_macs_visit_haart": 51.29410938183404, 
+        "last_macs_visit_haart_free": 75, 
+        "regimen_count": 62, 
+        "regimen_or_line_of_therapy": "7ef4b1a7c7", 
+        "submitter_id": "treatment_4633d2b16e", 
+        "therapeutic_agents": "0eb4f70b7b", 
+        "treatment_intent_type": "6de9fe25cb", 
+        "treatment_outcome": "Default", 
+        "treatment_span": 96, 
+        "treatment_status": "12766f3d98", 
+        "treatment_type": "a7c80aa90c", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 60.07095353232334, 
+        "year_of_treatment": 63.019082531134316
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_23f3f07173"
+        }, 
+        "first_macs_visit_haart": 38.17775460763286, 
+        "last_macs_visit_haart_free": 7, 
+        "regimen_count": 18, 
+        "regimen_or_line_of_therapy": "b76bc6c1bf", 
+        "submitter_id": "treatment_3204399031", 
+        "therapeutic_agents": "f65c4bd195", 
+        "treatment_intent_type": "393f059d47", 
+        "treatment_outcome": "Partial Response", 
+        "treatment_span": 43, 
+        "treatment_status": "32ca23c9c4", 
+        "treatment_type": "8ca0046214", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 51.37193876739647, 
+        "year_of_treatment": 77.02607040686492
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_5dce2a3160"
+        }, 
+        "first_macs_visit_haart": 55.820967524590785, 
+        "last_macs_visit_haart_free": 25, 
+        "regimen_count": 27, 
+        "regimen_or_line_of_therapy": "c436211ee3", 
+        "submitter_id": "treatment_8bf615bf22", 
+        "therapeutic_agents": "a445c7e8e6", 
+        "treatment_intent_type": "194e285e81", 
+        "treatment_outcome": "Unknown", 
+        "treatment_span": 8, 
+        "treatment_status": "c6d0cc5464", 
+        "treatment_type": "d34c01e94b", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 76.00302218157292, 
+        "year_of_treatment": 56.489429729349524
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_9379b339bb"
+        }, 
+        "first_macs_visit_haart": 56.482686524702785, 
+        "last_macs_visit_haart_free": 83, 
+        "regimen_count": 63, 
+        "regimen_or_line_of_therapy": "6ef9f63e3c", 
+        "submitter_id": "treatment_d4e29d6717", 
+        "therapeutic_agents": "6dd4832430", 
+        "treatment_intent_type": "10edcf7f03", 
+        "treatment_outcome": "Failed", 
+        "treatment_span": 10, 
+        "treatment_status": "996a335018", 
+        "treatment_type": "af19c445ff", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 42.64993866308823, 
+        "year_of_treatment": 4.344706033906598
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_ddb4432116"
+        }, 
+        "first_macs_visit_haart": 63.74466807455917, 
+        "last_macs_visit_haart_free": 21, 
+        "regimen_count": 89, 
+        "regimen_or_line_of_therapy": "1c30422ad4", 
+        "submitter_id": "treatment_a8d3257cac", 
+        "therapeutic_agents": "be527cf87f", 
+        "treatment_intent_type": "55380b1f4c", 
+        "treatment_outcome": "Complete Response", 
+        "treatment_span": 96, 
+        "treatment_status": "39ffd29106", 
+        "treatment_type": "f40fcd5bf5", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 50.40004377211302, 
+        "year_of_treatment": 53.654166015902874
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_9379b339bb"
+        }, 
+        "first_macs_visit_haart": 35.60688202428748, 
+        "last_macs_visit_haart_free": 17, 
+        "regimen_count": 44, 
+        "regimen_or_line_of_therapy": "bb78f79376", 
+        "submitter_id": "treatment_3cea7726a0", 
+        "therapeutic_agents": "77f2e1684e", 
+        "treatment_intent_type": "4447310a45", 
+        "treatment_outcome": "Failed", 
+        "treatment_span": 42, 
+        "treatment_status": "1a9e73a2db", 
+        "treatment_type": "6362abaebd", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 46.105925477847634, 
+        "year_of_treatment": 78.30930351637996
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_59b16a61c0"
+        }, 
+        "first_macs_visit_haart": 8.164191986632419, 
+        "last_macs_visit_haart_free": 34, 
+        "regimen_count": 23, 
+        "regimen_or_line_of_therapy": "8cbf86fc47", 
+        "submitter_id": "treatment_5272cddb30", 
+        "therapeutic_agents": "36c6359fdc", 
+        "treatment_intent_type": "e1272b6f9c", 
+        "treatment_outcome": "Treatment Ongoing", 
+        "treatment_span": 66, 
+        "treatment_status": "66e1a4fbfd", 
+        "treatment_type": "6347db8e03", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 22.411175921563466, 
+        "year_of_treatment": 11.435975116670882
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_4d918ed827"
+        }, 
+        "first_macs_visit_haart": 69.42772454263265, 
+        "last_macs_visit_haart_free": 98, 
+        "regimen_count": 87, 
+        "regimen_or_line_of_therapy": "e984956cf3", 
+        "submitter_id": "treatment_c4260a719a", 
+        "therapeutic_agents": "c4d8d52ea2", 
+        "treatment_intent_type": "a23aa1dfa4", 
+        "treatment_outcome": "Unknown", 
+        "treatment_span": 84, 
+        "treatment_status": "016a04a838", 
+        "treatment_type": "baba810cbb", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 33.17416680837866, 
+        "year_of_treatment": 80.31799717465002
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_9379b339bb"
+        }, 
+        "first_macs_visit_haart": 33.47677098876362, 
+        "last_macs_visit_haart_free": 35, 
+        "regimen_count": 6, 
+        "regimen_or_line_of_therapy": "a8f24a3e1a", 
+        "submitter_id": "treatment_c5a36a332d", 
+        "therapeutic_agents": "4f7b170047", 
+        "treatment_intent_type": "292d8e1051", 
+        "treatment_outcome": "Failed", 
+        "treatment_span": 81, 
+        "treatment_status": "3d94d60eb1", 
+        "treatment_type": "790871d00f", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 38.3903663107836, 
+        "year_of_treatment": 56.78662430986683
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_03c7d3cc81"
+        }, 
+        "first_macs_visit_haart": 25.388117505695252, 
+        "last_macs_visit_haart_free": 69, 
+        "regimen_count": 47, 
+        "regimen_or_line_of_therapy": "27993ec46f", 
+        "submitter_id": "treatment_fa8ac49c8a", 
+        "therapeutic_agents": "ec677006a7", 
+        "treatment_intent_type": "109bde76a6", 
+        "treatment_outcome": "Cured", 
+        "treatment_span": 95, 
+        "treatment_status": "5764b1d648", 
+        "treatment_type": "e15f9a8721", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 88.24117391385403, 
+        "year_of_treatment": 47.62889724282719
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_156c86d6cb"
+        }, 
+        "first_macs_visit_haart": 9.53524161380821, 
+        "last_macs_visit_haart_free": 38, 
+        "regimen_count": 20, 
+        "regimen_or_line_of_therapy": "9717481e2d", 
+        "submitter_id": "treatment_ec67b9d7ca", 
+        "therapeutic_agents": "79687e0c10", 
+        "treatment_intent_type": "58a6cc427d", 
+        "treatment_outcome": "Default", 
+        "treatment_span": 84, 
+        "treatment_status": "f25e627f6e", 
+        "treatment_type": "833265a070", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 29.4628281379649, 
+        "year_of_treatment": 90.36861962226149
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_156c86d6cb"
+        }, 
+        "first_macs_visit_haart": 52.922080201844366, 
+        "last_macs_visit_haart_free": 82, 
+        "regimen_count": 51, 
+        "regimen_or_line_of_therapy": "b892c9026d", 
+        "submitter_id": "treatment_a7e8c6146b", 
+        "therapeutic_agents": "9f99c0efe1", 
+        "treatment_intent_type": "05ca787816", 
+        "treatment_outcome": "Completed", 
+        "treatment_span": 83, 
+        "treatment_status": "4947177dcb", 
+        "treatment_type": "e714085bb6", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 59.81764185549344, 
+        "year_of_treatment": 7.859016641092465
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_9a5034118c"
+        }, 
+        "first_macs_visit_haart": 36.695781807569446, 
+        "last_macs_visit_haart_free": 79, 
+        "regimen_count": 0, 
+        "regimen_or_line_of_therapy": "5a9fe370c3", 
+        "submitter_id": "treatment_cf145eccaf", 
+        "therapeutic_agents": "9ac0da9314", 
+        "treatment_intent_type": "68f8c4decb", 
+        "treatment_outcome": "Failed", 
+        "treatment_span": 3, 
+        "treatment_status": "67c64357b6", 
+        "treatment_type": "31c4e5fcf2", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 63.23595080239103, 
+        "year_of_treatment": 99.1091894613929
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_f459916fe3"
+        }, 
+        "first_macs_visit_haart": 23.50712644009635, 
+        "last_macs_visit_haart_free": 36, 
+        "regimen_count": 94, 
+        "regimen_or_line_of_therapy": "9f8e5c9e47", 
+        "submitter_id": "treatment_253030f1d1", 
+        "therapeutic_agents": "67042156a6", 
+        "treatment_intent_type": "711480fa4a", 
+        "treatment_outcome": "Default", 
+        "treatment_span": 64, 
+        "treatment_status": "fc45cbdc99", 
+        "treatment_type": "ef648dcfd8", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 19.070383169755335, 
+        "year_of_treatment": 38.76324460256343
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_0db3333d27"
+        }, 
+        "first_macs_visit_haart": 48.596461864299165, 
+        "last_macs_visit_haart_free": 6, 
+        "regimen_count": 94, 
+        "regimen_or_line_of_therapy": "db2bac0819", 
+        "submitter_id": "treatment_d47a7f619d", 
+        "therapeutic_agents": "b68c016846", 
+        "treatment_intent_type": "03c8690913", 
+        "treatment_outcome": "Treatment Stopped Due to Toxicity", 
+        "treatment_span": 39, 
+        "treatment_status": "53c9140ee4", 
+        "treatment_type": "6aeb1b564a", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 53.1183160180212, 
+        "year_of_treatment": 43.640579073006755
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_d796b400f6"
+        }, 
+        "first_macs_visit_haart": 39.6244384939195, 
+        "last_macs_visit_haart_free": 31, 
+        "regimen_count": 40, 
+        "regimen_or_line_of_therapy": "74923e1cdc", 
+        "submitter_id": "treatment_0a3d15afa4", 
+        "therapeutic_agents": "9199329b3f", 
+        "treatment_intent_type": "b1f9d25b3e", 
+        "treatment_outcome": "Treatment Ongoing", 
+        "treatment_span": 72, 
+        "treatment_status": "be70202f6b", 
+        "treatment_type": "679c20d613", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 87.46353038762979, 
+        "year_of_treatment": 61.23810295360113
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_279a6359fa"
+        }, 
+        "first_macs_visit_haart": 88.56920889467324, 
+        "last_macs_visit_haart_free": 39, 
+        "regimen_count": 88, 
+        "regimen_or_line_of_therapy": "8088814542", 
+        "submitter_id": "treatment_7747a83cde", 
+        "therapeutic_agents": "e3f13edc0d", 
+        "treatment_intent_type": "7ffff36111", 
+        "treatment_outcome": "Completed", 
+        "treatment_span": 16, 
+        "treatment_status": "b0a2038fae", 
+        "treatment_type": "deabee6543", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 19.697959668979294, 
+        "year_of_treatment": 10.59027642067971
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_ab895da3de"
+        }, 
+        "first_macs_visit_haart": 28.427827726406505, 
+        "last_macs_visit_haart_free": 62, 
+        "regimen_count": 56, 
+        "regimen_or_line_of_therapy": "508f10d85c", 
+        "submitter_id": "treatment_a03280d8d9", 
+        "therapeutic_agents": "6f7c3ff0e5", 
+        "treatment_intent_type": "1ad7dea676", 
+        "treatment_outcome": "Complete Response", 
+        "treatment_span": 62, 
+        "treatment_status": "9231169ff0", 
+        "treatment_type": "3311f7f534", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 43.84910166365618, 
+        "year_of_treatment": 65.23905096031906
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_3df84e8034"
+        }, 
+        "first_macs_visit_haart": 11.051477529462804, 
+        "last_macs_visit_haart_free": 41, 
+        "regimen_count": 81, 
+        "regimen_or_line_of_therapy": "974883fb31", 
+        "submitter_id": "treatment_ee97542e5a", 
+        "therapeutic_agents": "46490b9c90", 
+        "treatment_intent_type": "7e883a873c", 
+        "treatment_outcome": "Died", 
+        "treatment_span": 41, 
+        "treatment_status": "66bab94724", 
+        "treatment_type": "4fd07dacb6", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 31.06758902874659, 
+        "year_of_treatment": 27.958160106303264
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_49f4ede287"
+        }, 
+        "first_macs_visit_haart": 46.68217645038087, 
+        "last_macs_visit_haart_free": 90, 
+        "regimen_count": 11, 
+        "regimen_or_line_of_therapy": "6471d473e3", 
+        "submitter_id": "treatment_867f4ea5df", 
+        "therapeutic_agents": "1a9ac31b90", 
+        "treatment_intent_type": "181d41694f", 
+        "treatment_outcome": "Complete Response", 
+        "treatment_span": 93, 
+        "treatment_status": "a909cc4648", 
+        "treatment_type": "d93ef52623", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 3.5406953230533778, 
+        "year_of_treatment": 9.882412826357756
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_9a5034118c"
+        }, 
+        "first_macs_visit_haart": 47.93170708724711, 
+        "last_macs_visit_haart_free": 61, 
+        "regimen_count": 98, 
+        "regimen_or_line_of_therapy": "0f82ab8fda", 
+        "submitter_id": "treatment_7a50eb2df9", 
+        "therapeutic_agents": "0fd0b82cc7", 
+        "treatment_intent_type": "d3d153df74", 
+        "treatment_outcome": "Default", 
+        "treatment_span": 3, 
+        "treatment_status": "f5c2f25006", 
+        "treatment_type": "8f7af21c0a", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 0.4381562138075723, 
+        "year_of_treatment": 87.61940990994604
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_23f3f07173"
+        }, 
+        "first_macs_visit_haart": 82.82977557013635, 
+        "last_macs_visit_haart_free": 44, 
+        "regimen_count": 90, 
+        "regimen_or_line_of_therapy": "74fb6da715", 
+        "submitter_id": "treatment_e54f645ec1", 
+        "therapeutic_agents": "c9096a1ff6", 
+        "treatment_intent_type": "02ca071117", 
+        "treatment_outcome": "Treatment Stopped Due to Toxicity", 
+        "treatment_span": 45, 
+        "treatment_status": "b560ad596f", 
+        "treatment_type": "56a0677ffd", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 11.734546251170997, 
+        "year_of_treatment": 75.07298676762613
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_279a6359fa"
+        }, 
+        "first_macs_visit_haart": 54.67792739774351, 
+        "last_macs_visit_haart_free": 13, 
+        "regimen_count": 89, 
+        "regimen_or_line_of_therapy": "47088511fa", 
+        "submitter_id": "treatment_98c45a0f92", 
+        "therapeutic_agents": "b3e6ceea16", 
+        "treatment_intent_type": "58a1dc92f9", 
+        "treatment_outcome": "Default", 
+        "treatment_span": 95, 
+        "treatment_status": "b472d81e0e", 
+        "treatment_type": "5bacee63d9", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 43.61855929940015, 
+        "year_of_treatment": 85.48055058680848
+    }, 
+    {
+        "diagnoses": {
+            "submitter_id": "diagnosis_279a6359fa"
+        }, 
+        "first_macs_visit_haart": 25.199450047263817, 
+        "last_macs_visit_haart_free": 81, 
+        "regimen_count": 16, 
+        "regimen_or_line_of_therapy": "4a11095828", 
+        "submitter_id": "treatment_12edc606b1", 
+        "therapeutic_agents": "1ceaa13f11", 
+        "treatment_intent_type": "bf5dd65977", 
+        "treatment_outcome": "Partial Response", 
+        "treatment_span": 47, 
+        "treatment_status": "f447c99cd5", 
+        "treatment_type": "ec7bf8cb1e", 
+        "type": "treatment", 
+        "year_of_last_haart_free": 35.60934138781231, 
+        "year_of_treatment": 4.660037157086682
     }
-  },
-  {
-    "last_macs_visit_haart_free": 3,
-    "treatment_type": "QbWJePk4VB7K",
-    "year_of_last_haart_free": 8.8535,
-    "first_macs_visit_haart": 12.8807,
-    "therapeutic_agents": "n03BMn8CKuye",
-    "regimen_or_line_of_therapy": "K0ETENhhu9rs",
-    "year_of_treatment": 7.1522,
-    "treatment_outcome": "Complete Response",
-    "treatment_intent_type": "5RY2cHpqNLwy",
-    "type": "treatment",
-    "submitter_id": "treatment_002",
-    "diagnoses": {
-      "submitter_id": "diagnosis_0013"
-    }
-  },
-  {
-    "last_macs_visit_haart_free": 2,
-    "treatment_type": "yD5cKq9LgbO2",
-    "year_of_last_haart_free": 6.3697,
-    "first_macs_visit_haart": 13.1785,
-    "therapeutic_agents": "jyS6rv8uQkDC",
-    "regimen_or_line_of_therapy": "OMSJJbrqraM5",
-    "year_of_treatment": 15.8229,
-    "treatment_outcome": "Treatment Stopped Due to Toxicity",
-    "treatment_intent_type": "NqXbsI0DBvHT",
-    "type": "treatment",
-    "submitter_id": "treatment_003",
-    "diagnoses": {
-      "submitter_id": "diagnosis_0010"
-    }
-  },
-  {
-    "last_macs_visit_haart_free": 2,
-    "treatment_type": "moechJlvA9l6",
-    "year_of_last_haart_free": 12.4236,
-    "first_macs_visit_haart": 6.2199,
-    "therapeutic_agents": "5ShoG8RR1G3k",
-    "regimen_or_line_of_therapy": "FPlfFqIei0W7",
-    "year_of_treatment": 12.4971,
-    "treatment_outcome": "Treatment Stopped Due to Toxicity",
-    "treatment_intent_type": "NTrcejVgPBGk",
-    "type": "treatment",
-    "submitter_id": "treatment_004",
-    "diagnoses": {
-      "submitter_id": "diagnosis_006"
-    }
-  },
-  {
-    "last_macs_visit_haart_free": 10,
-    "treatment_type": "PqVRKfZEWBQU",
-    "year_of_last_haart_free": 6.941,
-    "first_macs_visit_haart": 9.384,
-    "therapeutic_agents": "j7rIbetvXdKe",
-    "regimen_or_line_of_therapy": "C0hiPT6L3Uxa",
-    "year_of_treatment": 10.308,
-    "treatment_outcome": "Complete Response",
-    "treatment_intent_type": "pPQPOZ303fcY",
-    "type": "treatment",
-    "submitter_id": "treatment_005",
-    "diagnoses": {
-      "submitter_id": "diagnosis_0014"
-    }
-  },
-  {
-    "last_macs_visit_haart_free": 4,
-    "treatment_type": "OP27tuIHlxO2",
-    "year_of_last_haart_free": 7.4586,
-    "first_macs_visit_haart": 11.4646,
-    "therapeutic_agents": "oSELKRmV8zsM",
-    "regimen_or_line_of_therapy": "CquNcRSmJlCZ",
-    "year_of_treatment": 10.9399,
-    "treatment_outcome": "Treatment Stopped Due to Toxicity",
-    "treatment_intent_type": "qLqKfFfFIx16",
-    "type": "treatment",
-    "submitter_id": "treatment_006",
-    "diagnoses": {
-      "submitter_id": "diagnosis_0020"
-    }
-  },
-  {
-    "last_macs_visit_haart_free": 2,
-    "treatment_type": "pR7GJ17vbqdR",
-    "year_of_last_haart_free": 12.7312,
-    "first_macs_visit_haart": 12.6629,
-    "therapeutic_agents": "Qq2IcXuT1yaX",
-    "regimen_or_line_of_therapy": "rvcbq8XnTEan",
-    "year_of_treatment": 7.41,
-    "treatment_outcome": "Unknown",
-    "treatment_intent_type": "Jg9WdcU8ISoo",
-    "type": "treatment",
-    "submitter_id": "treatment_007",
-    "diagnoses": {
-      "submitter_id": "diagnosis_006"
-    }
-  },
-  {
-    "last_macs_visit_haart_free": 7,
-    "treatment_type": "kEfAHlljuznR",
-    "year_of_last_haart_free": 9.9998,
-    "first_macs_visit_haart": 13.2859,
-    "therapeutic_agents": "aoDi7q75wiqv",
-    "regimen_or_line_of_therapy": "Ew4TofRkzrAQ",
-    "year_of_treatment": 8.2832,
-    "treatment_outcome": "Partial Response",
-    "treatment_intent_type": "yqjRDBUKR03C",
-    "type": "treatment",
-    "submitter_id": "treatment_008",
-    "diagnoses": {
-      "submitter_id": "diagnosis_009"
-    }
-  },
-  {
-    "last_macs_visit_haart_free": 3,
-    "treatment_type": "5kVDNdt6ritc",
-    "year_of_last_haart_free": 14.8343,
-    "first_macs_visit_haart": 7.5066,
-    "therapeutic_agents": "EUNPvgZFJ9Ma",
-    "regimen_or_line_of_therapy": "VnDcg53EOV9J",
-    "year_of_treatment": 9.0781,
-    "treatment_outcome": "Partial Response",
-    "treatment_intent_type": "tBtcNK0MltSl",
-    "type": "treatment",
-    "submitter_id": "treatment_009",
-    "diagnoses": {
-      "submitter_id": "diagnosis_0014"
-    }
-  },
-  {
-    "last_macs_visit_haart_free": 6,
-    "treatment_type": "uks2ilM24vZu",
-    "year_of_last_haart_free": 7.3337,
-    "first_macs_visit_haart": 16.1483,
-    "therapeutic_agents": "B8ZhUR6iin6D",
-    "regimen_or_line_of_therapy": "tlsz1D7sEOQg",
-    "year_of_treatment": 14.0102,
-    "treatment_outcome": "Unknown",
-    "treatment_intent_type": "FMFsa3oz5y95",
-    "type": "treatment",
-    "submitter_id": "treatment_0010",
-    "diagnoses": {
-      "submitter_id": "diagnosis_0017"
-    }
-  },
-  {
-    "last_macs_visit_haart_free": 3,
-    "treatment_type": "54J2Wtgk4fzf",
-    "year_of_last_haart_free": 8.9963,
-    "first_macs_visit_haart": 11.9914,
-    "therapeutic_agents": "L5Ypb86TwUNK",
-    "regimen_or_line_of_therapy": "K3gK2RfvyKkP",
-    "year_of_treatment": 8.6329,
-    "treatment_outcome": "Partial Response",
-    "treatment_intent_type": "z0rGoTesZh1p",
-    "type": "treatment",
-    "submitter_id": "treatment_0011",
-    "diagnoses": {
-      "submitter_id": "diagnosis_0014"
-    }
-  },
-  {
-    "last_macs_visit_haart_free": 3,
-    "treatment_type": "ZsQBQYPQLyIr",
-    "year_of_last_haart_free": 12.6578,
-    "first_macs_visit_haart": 9.7557,
-    "therapeutic_agents": "Om9y2IjjMVTP",
-    "regimen_or_line_of_therapy": "TsAKIYETHh3r",
-    "year_of_treatment": 5.2855,
-    "treatment_outcome": "Treatment Ongoing",
-    "treatment_intent_type": "MbEOCJDs8LDQ",
-    "type": "treatment",
-    "submitter_id": "treatment_0012",
-    "diagnoses": {
-      "submitter_id": "diagnosis_006"
-    }
-  },
-  {
-    "last_macs_visit_haart_free": 3,
-    "treatment_type": "RiRSVgiOMxrz",
-    "year_of_last_haart_free": 7.0385,
-    "first_macs_visit_haart": 9.4713,
-    "therapeutic_agents": "tNZhr85clSKC",
-    "regimen_or_line_of_therapy": "ThQ0QfOs4S2J",
-    "year_of_treatment": 12.6925,
-    "treatment_outcome": "Treatment Stopped Due to Toxicity",
-    "treatment_intent_type": "yT9o4WlukEuj",
-    "type": "treatment",
-    "submitter_id": "treatment_0013",
-    "diagnoses": {
-      "submitter_id": "diagnosis_0015"
-    }
-  },
-  {
-    "last_macs_visit_haart_free": 8,
-    "treatment_type": "UCACgi9BKK6D",
-    "year_of_last_haart_free": 13.7582,
-    "first_macs_visit_haart": 8.035,
-    "therapeutic_agents": "zb0wsuZdfFyc",
-    "regimen_or_line_of_therapy": "ojyW3ndGiWzb",
-    "year_of_treatment": 14.6878,
-    "treatment_outcome": "Partial Response",
-    "treatment_intent_type": "Vh1Em1GIdnF2",
-    "type": "treatment",
-    "submitter_id": "treatment_0014",
-    "diagnoses": {
-      "submitter_id": "diagnosis_005"
-    }
-  },
-  {
-    "last_macs_visit_haart_free": 4,
-    "treatment_type": "Wvm4NiUbVlNu",
-    "year_of_last_haart_free": 11.2183,
-    "first_macs_visit_haart": 13.6366,
-    "therapeutic_agents": "gFIHpn7bzL4V",
-    "regimen_or_line_of_therapy": "5EPet77QkjUJ",
-    "year_of_treatment": 12.5731,
-    "treatment_outcome": "Complete Response",
-    "treatment_intent_type": "wHFNAIshEwOy",
-    "type": "treatment",
-    "submitter_id": "treatment_0015",
-    "diagnoses": {
-      "submitter_id": "diagnosis_0010"
-    }
-  },
-  {
-    "last_macs_visit_haart_free": 1,
-    "treatment_type": "FN5ucBnPTLYB",
-    "year_of_last_haart_free": 6.6791,
-    "first_macs_visit_haart": 12.2236,
-    "therapeutic_agents": "gEHJyibevrzj",
-    "regimen_or_line_of_therapy": "068ocaYnLLu2",
-    "year_of_treatment": 10.3937,
-    "treatment_outcome": "Complete Response",
-    "treatment_intent_type": "Uot8TIirDMPQ",
-    "type": "treatment",
-    "submitter_id": "treatment_0016",
-    "diagnoses": {
-      "submitter_id": "diagnosis_0018"
-    }
-  },
-  {
-    "last_macs_visit_haart_free": 1,
-    "treatment_type": "uizU5b9iXiHb",
-    "year_of_last_haart_free": 7.0528,
-    "first_macs_visit_haart": 11.6604,
-    "therapeutic_agents": "PZzuTE5FAs2E",
-    "regimen_or_line_of_therapy": "oBbP953ZsHpt",
-    "year_of_treatment": 9.154,
-    "treatment_outcome": "Complete Response",
-    "treatment_intent_type": "sA49ahC9ebVv",
-    "type": "treatment",
-    "submitter_id": "treatment_0017",
-    "diagnoses": {
-      "submitter_id": "diagnosis_002"
-    }
-  },
-  {
-    "last_macs_visit_haart_free": 1,
-    "treatment_type": "I8VBjHoYDRCw",
-    "year_of_last_haart_free": 10.8143,
-    "first_macs_visit_haart": 10.4141,
-    "therapeutic_agents": "OWoFGi7UPMA9",
-    "regimen_or_line_of_therapy": "p30JGoRWnGrX",
-    "year_of_treatment": 8.5484,
-    "treatment_outcome": "Unknown",
-    "treatment_intent_type": "emlz2URcQNdL",
-    "type": "treatment",
-    "submitter_id": "treatment_0018",
-    "diagnoses": {
-      "submitter_id": "diagnosis_001"
-    }
-  },
-  {
-    "last_macs_visit_haart_free": 1,
-    "treatment_type": "idnooYW40mui",
-    "year_of_last_haart_free": 4.7254,
-    "first_macs_visit_haart": 5.8362,
-    "therapeutic_agents": "R88UUHc87roP",
-    "regimen_or_line_of_therapy": "hxKlCA9opxAE",
-    "year_of_treatment": 7.7277,
-    "treatment_outcome": "Unknown",
-    "treatment_intent_type": "OFzvMoKCWMlD",
-    "type": "treatment",
-    "submitter_id": "treatment_0019",
-    "diagnoses": {
-      "submitter_id": "diagnosis_0011"
-    }
-  },
-  {
-    "last_macs_visit_haart_free": 6,
-    "treatment_type": "xYBmnOveHR1L",
-    "year_of_last_haart_free": 8.1796,
-    "first_macs_visit_haart": 12.6766,
-    "therapeutic_agents": "ffebQFO7hdpz",
-    "regimen_or_line_of_therapy": "AanxgRb4UaMW",
-    "year_of_treatment": 12.3319,
-    "treatment_outcome": "Complete Response",
-    "treatment_intent_type": "Z5UgCvRseAwH",
-    "type": "treatment",
-    "submitter_id": "treatment_0020",
-    "diagnoses": {
-      "submitter_id": "diagnosis_008"
-    }
-  }
 ]

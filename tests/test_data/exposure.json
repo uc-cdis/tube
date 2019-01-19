@@ -1,278 +1,554 @@
 [
-  {
-    "highest_education": "12th grade (high school graduate or a GED)",
-    "dominand_hand": "Right",
-    "employment_status": "Disability",
-    "rodent_weight": 5.8046,
-    "insurance_coverage": false,
-    "type": "exposure",
-    "submitter_id": "exposure_001",
-    "subjects": {
-      "submitter_id": "subject_0018"
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Student", 
+        "highest_education": "four years of college and got a degree", 
+        "insurance_coverage": true, 
+        "rodent_weight": 90.94833880285393, 
+        "subjects": {
+            "submitter_id": "subject_ff16e1838c"
+        }, 
+        "submitter_id": "exposure_7d1052c49d", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Student", 
+        "highest_education": "some graduate school", 
+        "insurance_coverage": false, 
+        "rodent_weight": 58.25720272521917, 
+        "subjects": {
+            "submitter_id": "subject_c0d1344b90"
+        }, 
+        "submitter_id": "exposure_008616b8b3", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Retired", 
+        "highest_education": "8th grade (or less)", 
+        "insurance_coverage": false, 
+        "rodent_weight": 55.72661992377477, 
+        "subjects": {
+            "submitter_id": "subject_b97103f685"
+        }, 
+        "submitter_id": "exposure_ea7f4ca73a", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Right", 
+        "employment_status": "Working part-time", 
+        "highest_education": "8th grade (or less)", 
+        "insurance_coverage": false, 
+        "rodent_weight": 35.68950838177491, 
+        "subjects": {
+            "submitter_id": "subject_c45e41e33f"
+        }, 
+        "submitter_id": "exposure_8c016978ca", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Retired", 
+        "highest_education": "12th grade (high school graduate or a GED)", 
+        "insurance_coverage": false, 
+        "rodent_weight": 51.37685445636567, 
+        "subjects": {
+            "submitter_id": "subject_b97103f685"
+        }, 
+        "submitter_id": "exposure_917ee1873c", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Working part-time", 
+        "highest_education": "at least one year of college but not degree", 
+        "insurance_coverage": false, 
+        "rodent_weight": 89.53116796449237, 
+        "subjects": {
+            "submitter_id": "subject_bb8d35682c"
+        }, 
+        "submitter_id": "exposure_9f3628a6ae", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Disability", 
+        "highest_education": "12th grade (high school graduate or a GED)", 
+        "insurance_coverage": true, 
+        "rodent_weight": 67.29120603635704, 
+        "subjects": {
+            "submitter_id": "subject_bf3c8fb892"
+        }, 
+        "submitter_id": "exposure_6169634980", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Working full-time", 
+        "highest_education": "four years of college and got a degree", 
+        "insurance_coverage": true, 
+        "rodent_weight": 86.22411038518824, 
+        "subjects": {
+            "submitter_id": "subject_a383391f3d"
+        }, 
+        "submitter_id": "exposure_3c84758cfe", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Right", 
+        "employment_status": "Student", 
+        "highest_education": "at least one year of college but not degree", 
+        "insurance_coverage": true, 
+        "rodent_weight": 49.09973994207425, 
+        "subjects": {
+            "submitter_id": "subject_bb8d35682c"
+        }, 
+        "submitter_id": "exposure_8e903dbce6", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Working part-time", 
+        "highest_education": "12th grade (high school graduate or a GED)", 
+        "insurance_coverage": true, 
+        "rodent_weight": 48.08743780505663, 
+        "subjects": {
+            "submitter_id": "subject_c0e52d1a73"
+        }, 
+        "submitter_id": "exposure_d0bbb34640", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Right", 
+        "employment_status": "Unemployed but seeking work", 
+        "highest_education": "some graduate school", 
+        "insurance_coverage": true, 
+        "rodent_weight": 93.00324366938113, 
+        "subjects": {
+            "submitter_id": "subject_a54dbc0ede"
+        }, 
+        "submitter_id": "exposure_2789355b89", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Retired", 
+        "highest_education": "some graduate school", 
+        "insurance_coverage": false, 
+        "rodent_weight": 78.78870320114495, 
+        "subjects": {
+            "submitter_id": "subject_3b65076830"
+        }, 
+        "submitter_id": "exposure_ca0cd324fd", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Right", 
+        "employment_status": "Unemployed not seeking work", 
+        "highest_education": "12th grade (high school graduate or a GED)", 
+        "insurance_coverage": true, 
+        "rodent_weight": 60.23609074159465, 
+        "subjects": {
+            "submitter_id": "subject_8b28e86e5b"
+        }, 
+        "submitter_id": "exposure_3fa220f7a5", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Disability", 
+        "highest_education": "at least one year of college but not degree", 
+        "insurance_coverage": true, 
+        "rodent_weight": 21.40856605141941, 
+        "subjects": {
+            "submitter_id": "subject_5818f3aef6"
+        }, 
+        "submitter_id": "exposure_d6e80d80ea", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Right", 
+        "employment_status": "Unemployed not seeking work", 
+        "highest_education": "a graduate program and got a post-graduate degree", 
+        "insurance_coverage": false, 
+        "rodent_weight": 99.89074889226956, 
+        "subjects": {
+            "submitter_id": "subject_0870542665"
+        }, 
+        "submitter_id": "exposure_0d03d45bbf", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Unemployed not seeking work", 
+        "highest_education": "12th grade (high school graduate or a GED)", 
+        "insurance_coverage": false, 
+        "rodent_weight": 4.82243086563412, 
+        "subjects": {
+            "submitter_id": "subject_3b65076830"
+        }, 
+        "submitter_id": "exposure_e75f4de368", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Retired", 
+        "highest_education": "a graduate program and got a post-graduate degree", 
+        "insurance_coverage": false, 
+        "rodent_weight": 93.4787092623769, 
+        "subjects": {
+            "submitter_id": "subject_c0e52d1a73"
+        }, 
+        "submitter_id": "exposure_f420f58c23", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Right", 
+        "employment_status": "Student", 
+        "highest_education": "9th 10th or 11th grade", 
+        "insurance_coverage": true, 
+        "rodent_weight": 86.13182631567378, 
+        "subjects": {
+            "submitter_id": "subject_e79e962a72"
+        }, 
+        "submitter_id": "exposure_ace440e7b1", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Retired", 
+        "highest_education": "12th grade (high school graduate or a GED)", 
+        "insurance_coverage": true, 
+        "rodent_weight": 84.29537694922902, 
+        "subjects": {
+            "submitter_id": "subject_b97103f685"
+        }, 
+        "submitter_id": "exposure_5254e5907e", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Unemployed not seeking work", 
+        "highest_education": "9th 10th or 11th grade", 
+        "insurance_coverage": false, 
+        "rodent_weight": 55.47299186247698, 
+        "subjects": {
+            "submitter_id": "subject_0cacca0e1d"
+        }, 
+        "submitter_id": "exposure_7d1ca3b8f7", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Right", 
+        "employment_status": "Student", 
+        "highest_education": "four years of college and got a degree", 
+        "insurance_coverage": true, 
+        "rodent_weight": 61.85053012572703, 
+        "subjects": {
+            "submitter_id": "subject_59852b2218"
+        }, 
+        "submitter_id": "exposure_33ada3dd60", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Unemployed not seeking work", 
+        "highest_education": "a graduate program and got a post-graduate degree", 
+        "insurance_coverage": false, 
+        "rodent_weight": 65.2954653190895, 
+        "subjects": {
+            "submitter_id": "subject_f6e1215155"
+        }, 
+        "submitter_id": "exposure_e8313e780d", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Unemployed not seeking work", 
+        "highest_education": "at least one year of college but not degree", 
+        "insurance_coverage": false, 
+        "rodent_weight": 58.76079209032107, 
+        "subjects": {
+            "submitter_id": "subject_a2f4052924"
+        }, 
+        "submitter_id": "exposure_3c2e153137", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Student", 
+        "highest_education": "12th grade (high school graduate or a GED)", 
+        "insurance_coverage": true, 
+        "rodent_weight": 50.63079009123869, 
+        "subjects": {
+            "submitter_id": "subject_c0d1344b90"
+        }, 
+        "submitter_id": "exposure_b53d0a23a5", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Right", 
+        "employment_status": "Unemployed but seeking work", 
+        "highest_education": "9th 10th or 11th grade", 
+        "insurance_coverage": true, 
+        "rodent_weight": 51.30936882812166, 
+        "subjects": {
+            "submitter_id": "subject_13681c6d88"
+        }, 
+        "submitter_id": "exposure_3e65ad2710", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Retired", 
+        "highest_education": "at least one year of college but not degree", 
+        "insurance_coverage": true, 
+        "rodent_weight": 49.15089587475314, 
+        "subjects": {
+            "submitter_id": "subject_ef2e3e3e73"
+        }, 
+        "submitter_id": "exposure_da7df453ee", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Working full-time", 
+        "highest_education": "a graduate program and got a post-graduate degree", 
+        "insurance_coverage": true, 
+        "rodent_weight": 34.96447099420057, 
+        "subjects": {
+            "submitter_id": "subject_0870542665"
+        }, 
+        "submitter_id": "exposure_7143911ef4", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Right", 
+        "employment_status": "Working full-time", 
+        "highest_education": "12th grade (high school graduate or a GED)", 
+        "insurance_coverage": false, 
+        "rodent_weight": 55.07674433801096, 
+        "subjects": {
+            "submitter_id": "subject_1bdcc07656"
+        }, 
+        "submitter_id": "exposure_787aa53997", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Unemployed but seeking work", 
+        "highest_education": "12th grade (high school graduate or a GED)", 
+        "insurance_coverage": true, 
+        "rodent_weight": 51.38459378200967, 
+        "subjects": {
+            "submitter_id": "subject_a69f892d49"
+        }, 
+        "submitter_id": "exposure_a419d1eecd", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Working full-time", 
+        "highest_education": "12th grade (high school graduate or a GED)", 
+        "insurance_coverage": true, 
+        "rodent_weight": 81.66499979699951, 
+        "subjects": {
+            "submitter_id": "subject_c45c7af2fd"
+        }, 
+        "submitter_id": "exposure_6a03af50ed", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Right", 
+        "employment_status": "Working full-time", 
+        "highest_education": "9th 10th or 11th grade", 
+        "insurance_coverage": false, 
+        "rodent_weight": 19.665926788041432, 
+        "subjects": {
+            "submitter_id": "subject_5fa248ee7a"
+        }, 
+        "submitter_id": "exposure_02da0823b6", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Right", 
+        "employment_status": "Student", 
+        "highest_education": "8th grade (or less)", 
+        "insurance_coverage": true, 
+        "rodent_weight": 67.21826219390944, 
+        "subjects": {
+            "submitter_id": "subject_4bdd9c155d"
+        }, 
+        "submitter_id": "exposure_76d4934307", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Unemployed but seeking work", 
+        "highest_education": "a graduate program and got a post-graduate degree", 
+        "insurance_coverage": false, 
+        "rodent_weight": 80.25095642331452, 
+        "subjects": {
+            "submitter_id": "subject_adabd694d3"
+        }, 
+        "submitter_id": "exposure_f4b45e7e61", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Unemployed not seeking work", 
+        "highest_education": "four years of college and got a degree", 
+        "insurance_coverage": true, 
+        "rodent_weight": 35.04657468787406, 
+        "subjects": {
+            "submitter_id": "subject_7ede054691"
+        }, 
+        "submitter_id": "exposure_4240521f0c", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Right", 
+        "employment_status": "Student", 
+        "highest_education": "some graduate school", 
+        "insurance_coverage": false, 
+        "rodent_weight": 54.231761370820585, 
+        "subjects": {
+            "submitter_id": "subject_bf3c8fb892"
+        }, 
+        "submitter_id": "exposure_ca2a29f16e", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Unemployed but seeking work", 
+        "highest_education": "some graduate school", 
+        "insurance_coverage": false, 
+        "rodent_weight": 33.15731316100848, 
+        "subjects": {
+            "submitter_id": "subject_a54dbc0ede"
+        }, 
+        "submitter_id": "exposure_b64bfa475a", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Unemployed not seeking work", 
+        "highest_education": "12th grade (high school graduate or a GED)", 
+        "insurance_coverage": false, 
+        "rodent_weight": 45.28366544774123, 
+        "subjects": {
+            "submitter_id": "subject_7eddff0179"
+        }, 
+        "submitter_id": "exposure_4cab14c8c7", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Right", 
+        "employment_status": "Working part-time", 
+        "highest_education": "12th grade (high school graduate or a GED)", 
+        "insurance_coverage": false, 
+        "rodent_weight": 69.50393902099017, 
+        "subjects": {
+            "submitter_id": "subject_4a5a8ca10e"
+        }, 
+        "submitter_id": "exposure_d4cd8a85ed", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Right", 
+        "employment_status": "Unemployed but seeking work", 
+        "highest_education": "a graduate program and got a post-graduate degree", 
+        "insurance_coverage": true, 
+        "rodent_weight": 22.857342233212986, 
+        "subjects": {
+            "submitter_id": "subject_c0d1344b90"
+        }, 
+        "submitter_id": "exposure_45a73c19cb", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Working part-time", 
+        "highest_education": "at least one year of college but not degree", 
+        "insurance_coverage": true, 
+        "rodent_weight": 67.32720023483412, 
+        "subjects": {
+            "submitter_id": "subject_a69f892d49"
+        }, 
+        "submitter_id": "exposure_a2eb6a6f3f", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Right", 
+        "employment_status": "Unemployed but seeking work", 
+        "highest_education": "four years of college and got a degree", 
+        "insurance_coverage": false, 
+        "rodent_weight": 40.491913011575164, 
+        "subjects": {
+            "submitter_id": "subject_c0e52d1a73"
+        }, 
+        "submitter_id": "exposure_61c1cf630d", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Right", 
+        "employment_status": "Student", 
+        "highest_education": "four years of college and got a degree", 
+        "insurance_coverage": false, 
+        "rodent_weight": 9.503062789942096, 
+        "subjects": {
+            "submitter_id": "subject_24d39e82e8"
+        }, 
+        "submitter_id": "exposure_c8c817b562", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Right", 
+        "employment_status": "Unemployed not seeking work", 
+        "highest_education": "at least one year of college but not degree", 
+        "insurance_coverage": false, 
+        "rodent_weight": 93.01223713201094, 
+        "subjects": {
+            "submitter_id": "subject_13681c6d88"
+        }, 
+        "submitter_id": "exposure_691e477564", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Working full-time", 
+        "highest_education": "12th grade (high school graduate or a GED)", 
+        "insurance_coverage": false, 
+        "rodent_weight": 37.93525429070876, 
+        "subjects": {
+            "submitter_id": "subject_3b65076830"
+        }, 
+        "submitter_id": "exposure_876f101651", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Left", 
+        "employment_status": "Working full-time", 
+        "highest_education": "8th grade (or less)", 
+        "insurance_coverage": false, 
+        "rodent_weight": 92.75891640528658, 
+        "subjects": {
+            "submitter_id": "subject_5c1738e8ea"
+        }, 
+        "submitter_id": "exposure_7cd039e945", 
+        "type": "exposure"
+    }, 
+    {
+        "dominant_hand": "Right", 
+        "employment_status": "Unemployed but seeking work", 
+        "highest_education": "9th 10th or 11th grade", 
+        "insurance_coverage": false, 
+        "rodent_weight": 34.46822586075511, 
+        "subjects": {
+            "submitter_id": "subject_8671c2a876"
+        }, 
+        "submitter_id": "exposure_b8085ff9f9", 
+        "type": "exposure"
     }
-  },
-  {
-    "highest_education": "a graduate program and got a post-graduate degree",
-    "dominand_hand": "Right",
-    "employment_status": "Working part-time",
-    "rodent_weight": 6.7645,
-    "insurance_coverage": false,
-    "type": "exposure",
-    "submitter_id": "exposure_002",
-    "subjects": {
-      "submitter_id": "subject_0010"
-    }
-  },
-  {
-    "highest_education": "12th grade (high school graduate or a GED)",
-    "dominand_hand": "Left",
-    "employment_status": "Unemployed not seeking work",
-    "rodent_weight": 10.5515,
-    "insurance_coverage": false,
-    "type": "exposure",
-    "submitter_id": "exposure_003",
-    "subjects": {
-      "submitter_id": "subject_0010"
-    }
-  },
-  {
-    "highest_education": "12th grade (high school graduate or a GED)",
-    "dominand_hand": "Right",
-    "employment_status": "Retired",
-    "rodent_weight": 8.703,
-    "insurance_coverage": true,
-    "type": "exposure",
-    "submitter_id": "exposure_004",
-    "subjects": {
-      "submitter_id": "subject_0012"
-    }
-  },
-  {
-    "highest_education": "9th 10th or 11th grade",
-    "dominand_hand": "Right",
-    "employment_status": "Working part-time",
-    "rodent_weight": 12.9378,
-    "insurance_coverage": true,
-    "type": "exposure",
-    "submitter_id": "exposure_005",
-    "subjects": {
-      "submitter_id": "subject_005"
-    }
-  },
-  {
-    "highest_education": "at least one year of college but not degree",
-    "dominand_hand": "Right",
-    "employment_status": "Disability",
-    "rodent_weight": 14.1046,
-    "insurance_coverage": false,
-    "type": "exposure",
-    "submitter_id": "exposure_006",
-    "subjects": {
-      "submitter_id": "subject_006"
-    }
-  },
-  {
-    "highest_education": "9th 10th or 11th grade",
-    "dominand_hand": "Right",
-    "employment_status": "Disability",
-    "rodent_weight": 11.2031,
-    "insurance_coverage": true,
-    "type": "exposure",
-    "submitter_id": "exposure_007",
-    "subjects": {
-      "submitter_id": "subject_0015"
-    }
-  },
-  {
-    "highest_education": "12th grade (high school graduate or a GED)",
-    "dominand_hand": "Right",
-    "employment_status": "Unemployed not seeking work",
-    "rodent_weight": 11.1512,
-    "insurance_coverage": true,
-    "type": "exposure",
-    "submitter_id": "exposure_008",
-    "subjects": {
-      "submitter_id": "subject_008"
-    }
-  },
-  {
-    "highest_education": "some graduate school",
-    "dominand_hand": "Right",
-    "employment_status": "Student",
-    "rodent_weight": 14.1857,
-    "insurance_coverage": false,
-    "type": "exposure",
-    "submitter_id": "exposure_009",
-    "subjects": {
-      "submitter_id": "subject_002"
-    }
-  },
-  {
-    "highest_education": "9th 10th or 11th grade",
-    "dominand_hand": "Right",
-    "employment_status": "Student",
-    "rodent_weight": 9.7784,
-    "insurance_coverage": true,
-    "type": "exposure",
-    "submitter_id": "exposure_0010",
-    "subjects": {
-      "submitter_id": "subject_0015"
-    }
-  },
-  {
-    "highest_education": "12th grade (high school graduate or a GED)",
-    "dominand_hand": "Left",
-    "employment_status": "Disability",
-    "rodent_weight": 13.2562,
-    "insurance_coverage": false,
-    "type": "exposure",
-    "submitter_id": "exposure_0011",
-    "subjects": {
-      "submitter_id": "subject_0011"
-    }
-  },
-  {
-    "highest_education": "8th grade (or less)",
-    "dominand_hand": "Right",
-    "employment_status": "Working part-time",
-    "rodent_weight": 12.1607,
-    "insurance_coverage": true,
-    "type": "exposure",
-    "submitter_id": "exposure_0012",
-    "subjects": {
-      "submitter_id": "subject_0018"
-    }
-  },
-  {
-    "highest_education": "at least one year of college but not degree",
-    "dominand_hand": "Left",
-    "employment_status": "Student",
-    "rodent_weight": 8.0671,
-    "insurance_coverage": false,
-    "type": "exposure",
-    "submitter_id": "exposure_0013",
-    "subjects": {
-      "submitter_id": "subject_002"
-    }
-  },
-  {
-    "highest_education": "12th grade (high school graduate or a GED)",
-    "dominand_hand": "Left",
-    "employment_status": "Working part-time",
-    "rodent_weight": 9.5898,
-    "insurance_coverage": true,
-    "type": "exposure",
-    "submitter_id": "exposure_0014",
-    "subjects": {
-      "submitter_id": "subject_0010"
-    }
-  },
-  {
-    "highest_education": "9th 10th or 11th grade",
-    "dominand_hand": "Right",
-    "employment_status": "Disability",
-    "rodent_weight": 13.0388,
-    "insurance_coverage": false,
-    "type": "exposure",
-    "submitter_id": "exposure_0015",
-    "subjects": {
-      "submitter_id": "subject_005"
-    }
-  },
-  {
-    "highest_education": "9th 10th or 11th grade",
-    "dominand_hand": "Left",
-    "employment_status": "Working full-time",
-    "rodent_weight": 7.865,
-    "insurance_coverage": false,
-    "type": "exposure",
-    "submitter_id": "exposure_0016",
-    "subjects": {
-      "submitter_id": "subject_002"
-    }
-  },
-  {
-    "highest_education": "12th grade (high school graduate or a GED)",
-    "dominand_hand": "Right",
-    "employment_status": "Unemployed not seeking work",
-    "rodent_weight": 6.6026,
-    "insurance_coverage": true,
-    "type": "exposure",
-    "submitter_id": "exposure_0017",
-    "subjects": {
-      "submitter_id": "subject_007"
-    }
-  },
-  {
-    "highest_education": "8th grade (or less)",
-    "dominand_hand": "Left",
-    "employment_status": "Disability",
-    "rodent_weight": 13.3576,
-    "insurance_coverage": true,
-    "type": "exposure",
-    "submitter_id": "exposure_0018",
-    "subjects": {
-      "submitter_id": "subject_0013"
-    }
-  },
-  {
-    "highest_education": "8th grade (or less)",
-    "dominand_hand": "Right",
-    "employment_status": "Working part-time",
-    "rodent_weight": 5.042,
-    "insurance_coverage": true,
-    "type": "exposure",
-    "submitter_id": "exposure_0019",
-    "subjects": {
-      "submitter_id": "subject_001"
-    }
-  },
-  {
-    "highest_education": "9th 10th or 11th grade",
-    "dominand_hand": "Right",
-    "employment_status": "Disability",
-    "rodent_weight": 11.5887,
-    "insurance_coverage": true,
-    "type": "exposure",
-    "submitter_id": "exposure_0020",
-    "subjects": {
-      "submitter_id": "subject_004"
-    }
-  },
-  {
-    "highest_education": "9th 10th or 11th grade",
-    "dominand_hand": "Left",
-    "employment_status": "Unemployed but seeking work",
-    "rodent_weight": 10.3594,
-    "insurance_coverage": true,
-    "type": "exposure",
-    "submitter_id": "exposure_0021",
-    "subjects": {
-      "submitter_id": "subject_002"
-    }
-  },
-  {
-    "highest_education": "four years of college and got a degree",
-    "dominand_hand": "Right",
-    "employment_status": "Retired",
-    "rodent_weight": 8.0572,
-    "insurance_coverage": false,
-    "type": "exposure",
-    "submitter_id": "exposure_0022",
-    "subjects": {
-      "submitter_id": "subject_0012"
-    }
-  },
-  {
-    "highest_education": "9th 10th or 11th grade",
-    "dominand_hand": "Right",
-    "employment_status": "Student",
-    "rodent_weight": 4.7018,
-    "insurance_coverage": false,
-    "type": "exposure",
-    "submitter_id": "exposure_0023",
-    "subjects": {
-      "submitter_id": "subject_0014"
-    }
-  }
 ]

@@ -11,12 +11,16 @@ class PropFactory(object):
         return res
 
     @staticmethod
+    def create_prop_from_json(p):
+        value_mappings = p['value_mappings'] if 'value_mappings' in p else []
+        src = p['src'] if 'src' in p else p['name']
+        return Prop(p['name'], src, PropFactory.create_value_mappings(value_mappings))
+
+    @staticmethod
     def create_props_from_json(props_in_json):
         res = []
         for p in props_in_json:
-            value_mappings = p['value_mappings'] if 'value_mappings' in p else []
-            src = p['src'] if 'src' in p else p['name']
-            res.append(Prop(p['name'], src, PropFactory.create_value_mappings(value_mappings)))
+            res.append(PropFactory.create_prop_from_json(p))
         return res
 
     @staticmethod

@@ -1,0 +1,1052 @@
+[
+    {
+        "gene_name": "6756e310f7", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "a7b3cc4b66", 
+        "snp": "6c2a22a2a1", 
+        "snp_result": 55, 
+        "subjects": {
+            "submitter_id": "subject_8671c2a876"
+        }, 
+        "submitter_id": "summary_mutation_panel_32c879531c", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "f4bfe1cc0c", 
+        "genexpert": false, 
+        "hain": false, 
+        "high_confidence": true, 
+        "ncbi_sra": "ad36dc22c6", 
+        "snp": "469c401281", 
+        "snp_result": 84, 
+        "subjects": {
+            "submitter_id": "subject_bf3c8fb892"
+        }, 
+        "submitter_id": "summary_mutation_panel_eb6583ad35", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "74418cb63f", 
+        "genexpert": false, 
+        "hain": false, 
+        "high_confidence": false, 
+        "ncbi_sra": "57cef121f7", 
+        "snp": "133edb37a5", 
+        "snp_result": 23, 
+        "subjects": {
+            "submitter_id": "subject_83da697cc1"
+        }, 
+        "submitter_id": "summary_mutation_panel_f9c4f74a59", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "74475bb044", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "cd1b21b367", 
+        "snp": "8973d956e5", 
+        "snp_result": 21, 
+        "subjects": {
+            "submitter_id": "subject_5818f3aef6"
+        }, 
+        "submitter_id": "summary_mutation_panel_8bee6142f4", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "876a361432", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": true, 
+        "ncbi_sra": "2d36dd255a", 
+        "snp": "82cdd16f2e", 
+        "snp_result": 82, 
+        "subjects": {
+            "submitter_id": "subject_3b65076830"
+        }, 
+        "submitter_id": "summary_mutation_panel_2a29217b98", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "89147935bf", 
+        "genexpert": false, 
+        "hain": false, 
+        "high_confidence": false, 
+        "ncbi_sra": "dbd3adcaac", 
+        "snp": "39ea7501c6", 
+        "snp_result": 17, 
+        "subjects": {
+            "submitter_id": "subject_036869ebdc"
+        }, 
+        "submitter_id": "summary_mutation_panel_c7273e6a18", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "a5dd29ba6a", 
+        "genexpert": false, 
+        "hain": false, 
+        "high_confidence": true, 
+        "ncbi_sra": "b06b7d0f32", 
+        "snp": "325a9fee5a", 
+        "snp_result": 95, 
+        "subjects": {
+            "submitter_id": "subject_e348bf617c"
+        }, 
+        "submitter_id": "summary_mutation_panel_3002278955", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "b3aef7f181", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "b4e0a8e24e", 
+        "snp": "2cc4fd3f39", 
+        "snp_result": 84, 
+        "subjects": {
+            "submitter_id": "subject_f42445cb2c"
+        }, 
+        "submitter_id": "summary_mutation_panel_91b9012d70", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "2c35cb9ce9", 
+        "genexpert": false, 
+        "hain": false, 
+        "high_confidence": false, 
+        "ncbi_sra": "e2c8d762e7", 
+        "snp": "e963b6fc87", 
+        "snp_result": 69, 
+        "subjects": {
+            "submitter_id": "subject_f8665143d6"
+        }, 
+        "submitter_id": "summary_mutation_panel_65856662b2", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "4e62e9f2d1", 
+        "genexpert": false, 
+        "hain": false, 
+        "high_confidence": false, 
+        "ncbi_sra": "56b1695fb7", 
+        "snp": "16dae896cc", 
+        "snp_result": 76, 
+        "subjects": {
+            "submitter_id": "subject_8b28e86e5b"
+        }, 
+        "submitter_id": "summary_mutation_panel_a173705ff5", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "eb4e966685", 
+        "genexpert": false, 
+        "hain": false, 
+        "high_confidence": false, 
+        "ncbi_sra": "ede53240d1", 
+        "snp": "d95fbf398b", 
+        "snp_result": 73, 
+        "subjects": {
+            "submitter_id": "subject_036869ebdc"
+        }, 
+        "submitter_id": "summary_mutation_panel_56d4ea58d0", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "cd83b9d106", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "d2cc520977", 
+        "snp": "b280cb959b", 
+        "snp_result": 70, 
+        "subjects": {
+            "submitter_id": "subject_d2ddf6c8a6"
+        }, 
+        "submitter_id": "summary_mutation_panel_81c2983d06", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "87bfd711c3", 
+        "genexpert": true, 
+        "hain": false, 
+        "high_confidence": true, 
+        "ncbi_sra": "1db51c4fbc", 
+        "snp": "6b25b5880f", 
+        "snp_result": 77, 
+        "subjects": {
+            "submitter_id": "subject_30b8c1f0dd"
+        }, 
+        "submitter_id": "summary_mutation_panel_c7a421a5b3", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "7bb3957ccb", 
+        "genexpert": true, 
+        "hain": false, 
+        "high_confidence": true, 
+        "ncbi_sra": "a8f81cd2cb", 
+        "snp": "bbc2ea0466", 
+        "snp_result": 20, 
+        "subjects": {
+            "submitter_id": "subject_c45c7af2fd"
+        }, 
+        "submitter_id": "summary_mutation_panel_a5bb68a90e", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "5635d431c4", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": true, 
+        "ncbi_sra": "9498edef2e", 
+        "snp": "0a21481ef1", 
+        "snp_result": 96, 
+        "subjects": {
+            "submitter_id": "subject_1bdcc07656"
+        }, 
+        "submitter_id": "summary_mutation_panel_f76408ecb6", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "f52b9a1ac7", 
+        "genexpert": false, 
+        "hain": false, 
+        "high_confidence": false, 
+        "ncbi_sra": "d740d68b01", 
+        "snp": "a0e4444f64", 
+        "snp_result": 38, 
+        "subjects": {
+            "submitter_id": "subject_7ede054691"
+        }, 
+        "submitter_id": "summary_mutation_panel_ed0335c147", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "6070e4abd1", 
+        "genexpert": true, 
+        "hain": false, 
+        "high_confidence": true, 
+        "ncbi_sra": "a499b73605", 
+        "snp": "ad3e5c0d72", 
+        "snp_result": 63, 
+        "subjects": {
+            "submitter_id": "subject_5818f3aef6"
+        }, 
+        "submitter_id": "summary_mutation_panel_324b621049", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "63d7928193", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": true, 
+        "ncbi_sra": "6b9cbb0b37", 
+        "snp": "1603a47c88", 
+        "snp_result": 47, 
+        "subjects": {
+            "submitter_id": "subject_24d39e82e8"
+        }, 
+        "submitter_id": "summary_mutation_panel_91774a5bf3", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "c2ab8b81e9", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": true, 
+        "ncbi_sra": "113911f9de", 
+        "snp": "bd63091968", 
+        "snp_result": 53, 
+        "subjects": {
+            "submitter_id": "subject_98dee5ab9f"
+        }, 
+        "submitter_id": "summary_mutation_panel_4ca27ca46f", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "b87a6c40b9", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": true, 
+        "ncbi_sra": "d19d97de68", 
+        "snp": "32987e6386", 
+        "snp_result": 56, 
+        "subjects": {
+            "submitter_id": "subject_3b65076830"
+        }, 
+        "submitter_id": "summary_mutation_panel_620141e9a6", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "9a69e713e1", 
+        "genexpert": false, 
+        "hain": false, 
+        "high_confidence": true, 
+        "ncbi_sra": "44d9d48682", 
+        "snp": "4a937531bc", 
+        "snp_result": 33, 
+        "subjects": {
+            "submitter_id": "subject_f42445cb2c"
+        }, 
+        "submitter_id": "summary_mutation_panel_707c0ed413", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "3f3324c571", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": true, 
+        "ncbi_sra": "9f1c614276", 
+        "snp": "92e7af26dd", 
+        "snp_result": 73, 
+        "subjects": {
+            "submitter_id": "subject_7aaabc2f05"
+        }, 
+        "submitter_id": "summary_mutation_panel_ba9b71b9ee", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "30c35f8ee8", 
+        "genexpert": false, 
+        "hain": false, 
+        "high_confidence": true, 
+        "ncbi_sra": "12487751f8", 
+        "snp": "b47bc0fb86", 
+        "snp_result": 60, 
+        "subjects": {
+            "submitter_id": "subject_13681c6d88"
+        }, 
+        "submitter_id": "summary_mutation_panel_8b80e953f6", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "961fe58467", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": true, 
+        "ncbi_sra": "e6aebf7571", 
+        "snp": "30545b7d92", 
+        "snp_result": 95, 
+        "subjects": {
+            "submitter_id": "subject_70e75bf21f"
+        }, 
+        "submitter_id": "summary_mutation_panel_7e3e7b28bd", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "56b9c86287", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "14adaedc53", 
+        "snp": "08e0812bbd", 
+        "snp_result": 43, 
+        "subjects": {
+            "submitter_id": "subject_a54dbc0ede"
+        }, 
+        "submitter_id": "summary_mutation_panel_0e35e63fe3", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "fb23bba18a", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "95df35809f", 
+        "snp": "62e095ad9a", 
+        "snp_result": 71, 
+        "subjects": {
+            "submitter_id": "subject_4ac16b404a"
+        }, 
+        "submitter_id": "summary_mutation_panel_8c342bbe0c", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "79e5db1b10", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "d783b95859", 
+        "snp": "2ad21920ee", 
+        "snp_result": 96, 
+        "subjects": {
+            "submitter_id": "subject_b97103f685"
+        }, 
+        "submitter_id": "summary_mutation_panel_de31dc4534", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "1cc7a7850d", 
+        "genexpert": false, 
+        "hain": false, 
+        "high_confidence": true, 
+        "ncbi_sra": "cc1e231968", 
+        "snp": "8d06688071", 
+        "snp_result": 96, 
+        "subjects": {
+            "submitter_id": "subject_3327fab75f"
+        }, 
+        "submitter_id": "summary_mutation_panel_887ad7b32a", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "9ebb8836ad", 
+        "genexpert": true, 
+        "hain": false, 
+        "high_confidence": false, 
+        "ncbi_sra": "5b58d7a0cc", 
+        "snp": "44854d5b83", 
+        "snp_result": 30, 
+        "subjects": {
+            "submitter_id": "subject_a73bdaad77"
+        }, 
+        "submitter_id": "summary_mutation_panel_4a81007197", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "11037e10a0", 
+        "genexpert": true, 
+        "hain": false, 
+        "high_confidence": false, 
+        "ncbi_sra": "2e4db8d03e", 
+        "snp": "1f86189d6a", 
+        "snp_result": 58, 
+        "subjects": {
+            "submitter_id": "subject_c0e52d1a73"
+        }, 
+        "submitter_id": "summary_mutation_panel_02b76918fd", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "85af2da43e", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": true, 
+        "ncbi_sra": "65a4e2c0be", 
+        "snp": "0de85266b8", 
+        "snp_result": 73, 
+        "subjects": {
+            "submitter_id": "subject_4ac16b404a"
+        }, 
+        "submitter_id": "summary_mutation_panel_e2c3c75525", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "cae2a6a94c", 
+        "genexpert": true, 
+        "hain": false, 
+        "high_confidence": true, 
+        "ncbi_sra": "9f111bc93a", 
+        "snp": "64428634af", 
+        "snp_result": 55, 
+        "subjects": {
+            "submitter_id": "subject_6460949536"
+        }, 
+        "submitter_id": "summary_mutation_panel_99f064dba9", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "3e2bee12cc", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": true, 
+        "ncbi_sra": "e782e6a1a2", 
+        "snp": "cdf75d12e6", 
+        "snp_result": 83, 
+        "subjects": {
+            "submitter_id": "subject_30b8c1f0dd"
+        }, 
+        "submitter_id": "summary_mutation_panel_f76b8ae38e", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "56c971baeb", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": true, 
+        "ncbi_sra": "010f313a28", 
+        "snp": "e13a463586", 
+        "snp_result": 99, 
+        "subjects": {
+            "submitter_id": "subject_13681c6d88"
+        }, 
+        "submitter_id": "summary_mutation_panel_77099fa607", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "3876e3e0b8", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "f35723aa3b", 
+        "snp": "46c2adf4c7", 
+        "snp_result": 59, 
+        "subjects": {
+            "submitter_id": "subject_8671c2a876"
+        }, 
+        "submitter_id": "summary_mutation_panel_ddd33246fe", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "36f2a76327", 
+        "genexpert": true, 
+        "hain": false, 
+        "high_confidence": true, 
+        "ncbi_sra": "39c7b9043c", 
+        "snp": "b93ac9d8e5", 
+        "snp_result": 72, 
+        "subjects": {
+            "submitter_id": "subject_13681c6d88"
+        }, 
+        "submitter_id": "summary_mutation_panel_8dc00b4169", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "0a329efe54", 
+        "genexpert": true, 
+        "hain": false, 
+        "high_confidence": true, 
+        "ncbi_sra": "643291115d", 
+        "snp": "8c5c216453", 
+        "snp_result": 92, 
+        "subjects": {
+            "submitter_id": "subject_8b28e86e5b"
+        }, 
+        "submitter_id": "summary_mutation_panel_661006a755", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "a80039b990", 
+        "genexpert": true, 
+        "hain": false, 
+        "high_confidence": false, 
+        "ncbi_sra": "3e4f6e2b96", 
+        "snp": "4e265f55bf", 
+        "snp_result": 12, 
+        "subjects": {
+            "submitter_id": "subject_e79e962a72"
+        }, 
+        "submitter_id": "summary_mutation_panel_700a28faad", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "611d3892ac", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "b1a82a9200", 
+        "snp": "c86945e90f", 
+        "snp_result": 77, 
+        "subjects": {
+            "submitter_id": "subject_6460949536"
+        }, 
+        "submitter_id": "summary_mutation_panel_24dde9c922", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "23a09da406", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": true, 
+        "ncbi_sra": "431403b4bb", 
+        "snp": "a01a3be157", 
+        "snp_result": 0, 
+        "subjects": {
+            "submitter_id": "subject_c0e52d1a73"
+        }, 
+        "submitter_id": "summary_mutation_panel_0b84fdb8c1", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "6e386b1b14", 
+        "genexpert": true, 
+        "hain": false, 
+        "high_confidence": true, 
+        "ncbi_sra": "da28aac1b7", 
+        "snp": "e3b418f437", 
+        "snp_result": 70, 
+        "subjects": {
+            "submitter_id": "subject_70e75bf21f"
+        }, 
+        "submitter_id": "summary_mutation_panel_dfbfa363b1", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "9bd46de30c", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "f391f8a441", 
+        "snp": "b86a3338e8", 
+        "snp_result": 10, 
+        "subjects": {
+            "submitter_id": "subject_5c1738e8ea"
+        }, 
+        "submitter_id": "summary_mutation_panel_96b351af34", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "3c88d52eb9", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "e9ee2fcf10", 
+        "snp": "871de8d0e9", 
+        "snp_result": 60, 
+        "subjects": {
+            "submitter_id": "subject_f8665143d6"
+        }, 
+        "submitter_id": "summary_mutation_panel_3f80d226b8", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "81a4fdc4ba", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "4bc983cf50", 
+        "snp": "0f8cc54169", 
+        "snp_result": 100, 
+        "subjects": {
+            "submitter_id": "subject_0870542665"
+        }, 
+        "submitter_id": "summary_mutation_panel_2668f073bc", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "631afba92d", 
+        "genexpert": false, 
+        "hain": false, 
+        "high_confidence": false, 
+        "ncbi_sra": "6989d5c662", 
+        "snp": "dc7d273d79", 
+        "snp_result": 64, 
+        "subjects": {
+            "submitter_id": "subject_bb8d35682c"
+        }, 
+        "submitter_id": "summary_mutation_panel_e3d23bd829", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "397879b906", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "b27faffc19", 
+        "snp": "35cc61fe42", 
+        "snp_result": 42, 
+        "subjects": {
+            "submitter_id": "subject_7363f76fd8"
+        }, 
+        "submitter_id": "summary_mutation_panel_97750d96a1", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "73e71e8b5b", 
+        "genexpert": false, 
+        "hain": false, 
+        "high_confidence": true, 
+        "ncbi_sra": "6d1b57e462", 
+        "snp": "9d04fa760c", 
+        "snp_result": 5, 
+        "subjects": {
+            "submitter_id": "subject_7aaabc2f05"
+        }, 
+        "submitter_id": "summary_mutation_panel_f9910cd7f1", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "a84b84ff3b", 
+        "genexpert": true, 
+        "hain": false, 
+        "high_confidence": false, 
+        "ncbi_sra": "fc1f716261", 
+        "snp": "6eacf92c1d", 
+        "snp_result": 37, 
+        "subjects": {
+            "submitter_id": "subject_4a5a8ca10e"
+        }, 
+        "submitter_id": "summary_mutation_panel_8a08dc1939", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "1f2cd906d4", 
+        "genexpert": true, 
+        "hain": false, 
+        "high_confidence": false, 
+        "ncbi_sra": "c4fd6987fe", 
+        "snp": "b3bf94e454", 
+        "snp_result": 91, 
+        "subjects": {
+            "submitter_id": "subject_c0d1344b90"
+        }, 
+        "submitter_id": "summary_mutation_panel_d41e0cf996", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "402f803149", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": true, 
+        "ncbi_sra": "6721c29a9c", 
+        "snp": "cdc53c45c8", 
+        "snp_result": 11, 
+        "subjects": {
+            "submitter_id": "subject_7ede054691"
+        }, 
+        "submitter_id": "summary_mutation_panel_c3f4a78297", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "6f4123fb02", 
+        "genexpert": false, 
+        "hain": false, 
+        "high_confidence": false, 
+        "ncbi_sra": "7c23582055", 
+        "snp": "991eddfbeb", 
+        "snp_result": 60, 
+        "subjects": {
+            "submitter_id": "subject_7ede054691"
+        }, 
+        "submitter_id": "summary_mutation_panel_00bb4fa2f1", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "9c1f224d7e", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "d9eec9becc", 
+        "snp": "8c3a9a6e04", 
+        "snp_result": 45, 
+        "subjects": {
+            "submitter_id": "subject_adabd694d3"
+        }, 
+        "submitter_id": "summary_mutation_panel_ab06cbe26c", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "153eab75f2", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "845301f954", 
+        "snp": "36293695b1", 
+        "snp_result": 58, 
+        "subjects": {
+            "submitter_id": "subject_a54dbc0ede"
+        }, 
+        "submitter_id": "summary_mutation_panel_25036cc0d8", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "b3ba18f2bc", 
+        "genexpert": true, 
+        "hain": false, 
+        "high_confidence": true, 
+        "ncbi_sra": "e97d1e9dd8", 
+        "snp": "ef0825bc57", 
+        "snp_result": 91, 
+        "subjects": {
+            "submitter_id": "subject_5427c8dfaf"
+        }, 
+        "submitter_id": "summary_mutation_panel_ba1a3776af", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "87ebb54825", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "b04b28c70c", 
+        "snp": "ae4a34b3bb", 
+        "snp_result": 21, 
+        "subjects": {
+            "submitter_id": "subject_601943af83"
+        }, 
+        "submitter_id": "summary_mutation_panel_1baf8c879c", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "48660b5f92", 
+        "genexpert": true, 
+        "hain": false, 
+        "high_confidence": true, 
+        "ncbi_sra": "7fef90adb2", 
+        "snp": "3939d57ea5", 
+        "snp_result": 100, 
+        "subjects": {
+            "submitter_id": "subject_a2f4052924"
+        }, 
+        "submitter_id": "summary_mutation_panel_52cf66f729", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "35cc796bf9", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "7759080be6", 
+        "snp": "53773ee9dc", 
+        "snp_result": 17, 
+        "subjects": {
+            "submitter_id": "subject_7eddff0179"
+        }, 
+        "submitter_id": "summary_mutation_panel_96e2b83020", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "baf32b498d", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": true, 
+        "ncbi_sra": "4a86836771", 
+        "snp": "53d91ccc7e", 
+        "snp_result": 5, 
+        "subjects": {
+            "submitter_id": "subject_1bdcc07656"
+        }, 
+        "submitter_id": "summary_mutation_panel_109e53cda8", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "0dc6b508e0", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": true, 
+        "ncbi_sra": "ff22e90d7d", 
+        "snp": "c1133aac5a", 
+        "snp_result": 19, 
+        "subjects": {
+            "submitter_id": "subject_adabd694d3"
+        }, 
+        "submitter_id": "summary_mutation_panel_dbb7986a2d", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "c581ebb902", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "3b03f6322c", 
+        "snp": "025900767c", 
+        "snp_result": 21, 
+        "subjects": {
+            "submitter_id": "subject_6460949536"
+        }, 
+        "submitter_id": "summary_mutation_panel_d518c1d86d", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "75da0445ad", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": true, 
+        "ncbi_sra": "cd04946ca4", 
+        "snp": "ed80a94861", 
+        "snp_result": 43, 
+        "subjects": {
+            "submitter_id": "subject_a383391f3d"
+        }, 
+        "submitter_id": "summary_mutation_panel_645f53669f", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "f606e08dc5", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "edaf6e873c", 
+        "snp": "2ef27e761c", 
+        "snp_result": 62, 
+        "subjects": {
+            "submitter_id": "subject_4a5a8ca10e"
+        }, 
+        "submitter_id": "summary_mutation_panel_60cd4e4901", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "87ce0142a4", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": true, 
+        "ncbi_sra": "3f2fd8ca08", 
+        "snp": "d9594bb841", 
+        "snp_result": 82, 
+        "subjects": {
+            "submitter_id": "subject_13681c6d88"
+        }, 
+        "submitter_id": "summary_mutation_panel_bec5762501", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "46c67e591e", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "47d5a88c01", 
+        "snp": "59930eeef1", 
+        "snp_result": 20, 
+        "subjects": {
+            "submitter_id": "subject_5fa248ee7a"
+        }, 
+        "submitter_id": "summary_mutation_panel_6e55dba5d0", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "fe41accf13", 
+        "genexpert": true, 
+        "hain": false, 
+        "high_confidence": true, 
+        "ncbi_sra": "1e03075d51", 
+        "snp": "f40f103941", 
+        "snp_result": 35, 
+        "subjects": {
+            "submitter_id": "subject_1bdcc07656"
+        }, 
+        "submitter_id": "summary_mutation_panel_298a97895a", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "b15c50c9dd", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "f9190fa81e", 
+        "snp": "7458c6cb6b", 
+        "snp_result": 27, 
+        "subjects": {
+            "submitter_id": "subject_ef2e3e3e73"
+        }, 
+        "submitter_id": "summary_mutation_panel_7dae627349", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "f13abcabd3", 
+        "genexpert": false, 
+        "hain": false, 
+        "high_confidence": false, 
+        "ncbi_sra": "06bc467da4", 
+        "snp": "9b57d2213e", 
+        "snp_result": 15, 
+        "subjects": {
+            "submitter_id": "subject_a2f4052924"
+        }, 
+        "submitter_id": "summary_mutation_panel_1295b7cb88", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "57fd91787f", 
+        "genexpert": true, 
+        "hain": false, 
+        "high_confidence": false, 
+        "ncbi_sra": "6c26b5e22f", 
+        "snp": "89c22e0afc", 
+        "snp_result": 28, 
+        "subjects": {
+            "submitter_id": "subject_4badb8c874"
+        }, 
+        "submitter_id": "summary_mutation_panel_824fda61e2", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "8d61ef163d", 
+        "genexpert": false, 
+        "hain": false, 
+        "high_confidence": false, 
+        "ncbi_sra": "ce735c9439", 
+        "snp": "64b160342a", 
+        "snp_result": 75, 
+        "subjects": {
+            "submitter_id": "subject_0cacca0e1d"
+        }, 
+        "submitter_id": "summary_mutation_panel_dcb3068e1e", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "f5dc1d0e0a", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": true, 
+        "ncbi_sra": "b9d838868b", 
+        "snp": "5c900a6c39", 
+        "snp_result": 24, 
+        "subjects": {
+            "submitter_id": "subject_e348bf617c"
+        }, 
+        "submitter_id": "summary_mutation_panel_4326599168", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "f95fd3d50f", 
+        "genexpert": false, 
+        "hain": false, 
+        "high_confidence": true, 
+        "ncbi_sra": "6ac84ae7f1", 
+        "snp": "bd10618446", 
+        "snp_result": 79, 
+        "subjects": {
+            "submitter_id": "subject_5fa248ee7a"
+        }, 
+        "submitter_id": "summary_mutation_panel_1a236a68b2", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "b10cf90352", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": true, 
+        "ncbi_sra": "25aa326fa8", 
+        "snp": "5b20eaf0ea", 
+        "snp_result": 92, 
+        "subjects": {
+            "submitter_id": "subject_3acb46b021"
+        }, 
+        "submitter_id": "summary_mutation_panel_a2c56d9ec7", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "397cc328dc", 
+        "genexpert": true, 
+        "hain": true, 
+        "high_confidence": false, 
+        "ncbi_sra": "ed0c9690c6", 
+        "snp": "c177c2e5b7", 
+        "snp_result": 46, 
+        "subjects": {
+            "submitter_id": "subject_de74551675"
+        }, 
+        "submitter_id": "summary_mutation_panel_2ba4234cb2", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "284ac4559c", 
+        "genexpert": false, 
+        "hain": true, 
+        "high_confidence": true, 
+        "ncbi_sra": "19c9ff0ae0", 
+        "snp": "63e945c895", 
+        "snp_result": 87, 
+        "subjects": {
+            "submitter_id": "subject_98dee5ab9f"
+        }, 
+        "submitter_id": "summary_mutation_panel_f6d62a87b6", 
+        "type": "summary_mutation_panel"
+    }, 
+    {
+        "gene_name": "6eeb9d73e4", 
+        "genexpert": false, 
+        "hain": false, 
+        "high_confidence": true, 
+        "ncbi_sra": "fc1ea6a0df", 
+        "snp": "d20a5bf1c8", 
+        "snp_result": 66, 
+        "subjects": {
+            "submitter_id": "subject_c45e41e33f"
+        }, 
+        "submitter_id": "summary_mutation_panel_0da0ef0ed1", 
+        "type": "summary_mutation_panel"
+    }
+]

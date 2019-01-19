@@ -21,7 +21,6 @@ def items_in_file(filename):
 def get_test_files():
     test_files = os.listdir(test_data_folder)
     # remove two "metadata" files
-    test_files.remove("NodeDescriptions.json")
     test_files.remove("DataImportOrder.txt")
     # filter out dot-files
     test_files = filter(lambda x: x[0] != ".", test_files)

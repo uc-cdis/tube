@@ -1,12 +1,11 @@
 import json
 import re
 
-from elasticsearch import Elasticsearch, client, helpers
+from elasticsearch import Elasticsearch, helpers
 
 from tube.utils import generate_mapping
 from tube.spark.plugins import post_process_plugins, add_auth_resource_path_mapping
 from tube.spark.spark_base import SparkBase
-from enum import IntEnum
 
 
 def json_export(x):

@@ -1,362 +1,442 @@
 [
-  {
-    "virus_subtype": "xZC4M7iAACHO",
-    "mutation_status": true,
-    "virus_volume": 8.2316,
-    "strain": "alFGeYjDDcUJ",
-    "moi": 8.6181,
-    "infection_buffer": "3JlkJOQiNtWR",
-    "virus_titer_in_stock": 6,
-    "post_infection_TPCK": 11.4004,
-    "post_infection_BSA_percentage": 10.5539,
-    "post_infection_medium": "R8ven6hm7Haf",
-    "virus_type": "j7f8NGxbZGB8",
-    "mutation": "gH76TemcNU6o",
-    "infection_dose": 9.7668,
-    "type": "virus_infection",
-    "submitter_id": "virus_infection_001",
-    "subjects": {
-      "submitter_id": "subject_001"
+    {
+        "infection_buffer": "7f3d8fbfa5", 
+        "infection_dose": 16.71583865099028, 
+        "moi": 0.04221591236731603, 
+        "mutation": "087f0b29f4", 
+        "mutation_status": false, 
+        "post_infection_BSA_percentage": 90.72259662636519, 
+        "post_infection_TPCK": 98.54403828413096, 
+        "post_infection_medium": "468cf0eabc", 
+        "strain": "268a777619", 
+        "subjects": {
+            "submitter_id": "subject_b97103f685"
+        }, 
+        "submitter_id": "virus_infection_4e090a341e", 
+        "type": "virus_infection", 
+        "virus_subtype": "e2842892c4", 
+        "virus_titer_in_stock": 97, 
+        "virus_type": "97bf505f31", 
+        "virus_volume": 67.50648518712877
+    }, 
+    {
+        "infection_buffer": "3d0e03b60e", 
+        "infection_dose": 15.002531968871224, 
+        "moi": 51.827034337230614, 
+        "mutation": "ef51d73b19", 
+        "mutation_status": true, 
+        "post_infection_BSA_percentage": 12.70172261358794, 
+        "post_infection_TPCK": 98.66769632238575, 
+        "post_infection_medium": "58b8559e38", 
+        "strain": "611eab1a33", 
+        "subjects": {
+            "submitter_id": "subject_adabd694d3"
+        }, 
+        "submitter_id": "virus_infection_4d25ca9acc", 
+        "type": "virus_infection", 
+        "virus_subtype": "16abad8936", 
+        "virus_titer_in_stock": 4, 
+        "virus_type": "cf60c4bf16", 
+        "virus_volume": 25.09671187095569
+    }, 
+    {
+        "infection_buffer": "fafe5e396d", 
+        "infection_dose": 56.324451416423116, 
+        "moi": 30.786818008358065, 
+        "mutation": "99dbfa4ac6", 
+        "mutation_status": true, 
+        "post_infection_BSA_percentage": 63.62802683632811, 
+        "post_infection_TPCK": 82.60296264153253, 
+        "post_infection_medium": "507d06fb80", 
+        "strain": "abfee86d60", 
+        "subjects": {
+            "submitter_id": "subject_bb8d35682c"
+        }, 
+        "submitter_id": "virus_infection_97f5bc1955", 
+        "type": "virus_infection", 
+        "virus_subtype": "c1fea48edf", 
+        "virus_titer_in_stock": 17, 
+        "virus_type": "3ca211656f", 
+        "virus_volume": 40.22436868037804
+    }, 
+    {
+        "infection_buffer": "22aee36030", 
+        "infection_dose": 48.32137735319987, 
+        "moi": 26.040449692510737, 
+        "mutation": "c475b0441f", 
+        "mutation_status": true, 
+        "post_infection_BSA_percentage": 62.59856125370096, 
+        "post_infection_TPCK": 39.51395250067683, 
+        "post_infection_medium": "199c66957b", 
+        "strain": "198b76d072", 
+        "subjects": {
+            "submitter_id": "subject_224379a40b"
+        }, 
+        "submitter_id": "virus_infection_5957cdc4e9", 
+        "type": "virus_infection", 
+        "virus_subtype": "1768a5e803", 
+        "virus_titer_in_stock": 1, 
+        "virus_type": "187e6e4dbc", 
+        "virus_volume": 23.344157985835047
+    }, 
+    {
+        "infection_buffer": "7224bf361b", 
+        "infection_dose": 96.6250060198767, 
+        "moi": 82.57153192264235, 
+        "mutation": "e6b6cc377f", 
+        "mutation_status": false, 
+        "post_infection_BSA_percentage": 66.66152909117974, 
+        "post_infection_TPCK": 74.30588790120677, 
+        "post_infection_medium": "247de88d06", 
+        "strain": "762794137f", 
+        "subjects": {
+            "submitter_id": "subject_e79e962a72"
+        }, 
+        "submitter_id": "virus_infection_b6c6272465", 
+        "type": "virus_infection", 
+        "virus_subtype": "e76456cdf8", 
+        "virus_titer_in_stock": 15, 
+        "virus_type": "f7dcb8c672", 
+        "virus_volume": 49.28231335761328
+    }, 
+    {
+        "infection_buffer": "eaca0ff81a", 
+        "infection_dose": 26.19738486617492, 
+        "moi": 29.297521962007387, 
+        "mutation": "29ddd740ee", 
+        "mutation_status": false, 
+        "post_infection_BSA_percentage": 46.88932170123926, 
+        "post_infection_TPCK": 11.380925833977384, 
+        "post_infection_medium": "cf7199686b", 
+        "strain": "f4091deb53", 
+        "subjects": {
+            "submitter_id": "subject_f42445cb2c"
+        }, 
+        "submitter_id": "virus_infection_5e5d885bc1", 
+        "type": "virus_infection", 
+        "virus_subtype": "7ed9c65570", 
+        "virus_titer_in_stock": 75, 
+        "virus_type": "b9a27aa552", 
+        "virus_volume": 63.62675162323795
+    }, 
+    {
+        "infection_buffer": "8720a27518", 
+        "infection_dose": 26.663638050161175, 
+        "moi": 94.31315621355817, 
+        "mutation": "69f5e945a5", 
+        "mutation_status": false, 
+        "post_infection_BSA_percentage": 53.54504022644237, 
+        "post_infection_TPCK": 19.610957541517525, 
+        "post_infection_medium": "9e654b66bc", 
+        "strain": "df597de6ed", 
+        "subjects": {
+            "submitter_id": "subject_3b65076830"
+        }, 
+        "submitter_id": "virus_infection_0042fd2473", 
+        "type": "virus_infection", 
+        "virus_subtype": "bea9789bb4", 
+        "virus_titer_in_stock": 62, 
+        "virus_type": "e4eb90d3c7", 
+        "virus_volume": 10.194164261265936
+    }, 
+    {
+        "infection_buffer": "a3f981b1c0", 
+        "infection_dose": 46.584721909356716, 
+        "moi": 15.249248815910644, 
+        "mutation": "98a0cd6f07", 
+        "mutation_status": true, 
+        "post_infection_BSA_percentage": 65.47250808657301, 
+        "post_infection_TPCK": 16.124765378706364, 
+        "post_infection_medium": "18cddffc63", 
+        "strain": "63bc6a6d2a", 
+        "subjects": {
+            "submitter_id": "subject_98dee5ab9f"
+        }, 
+        "submitter_id": "virus_infection_2dce151685", 
+        "type": "virus_infection", 
+        "virus_subtype": "93ee69b7c6", 
+        "virus_titer_in_stock": 89, 
+        "virus_type": "b5df7fa676", 
+        "virus_volume": 60.82642121538381
+    }, 
+    {
+        "infection_buffer": "091e24c323", 
+        "infection_dose": 43.76407315187885, 
+        "moi": 0.8561972745837032, 
+        "mutation": "4c70ac33e1", 
+        "mutation_status": true, 
+        "post_infection_BSA_percentage": 24.889300017740734, 
+        "post_infection_TPCK": 64.68697152099911, 
+        "post_infection_medium": "ad9e12b70f", 
+        "strain": "133483c006", 
+        "subjects": {
+            "submitter_id": "subject_c45c7af2fd"
+        }, 
+        "submitter_id": "virus_infection_9d26c37e29", 
+        "type": "virus_infection", 
+        "virus_subtype": "d03b27013e", 
+        "virus_titer_in_stock": 5, 
+        "virus_type": "cc91e9cd7d", 
+        "virus_volume": 16.09958481144932
+    }, 
+    {
+        "infection_buffer": "25e1bbfeb2", 
+        "infection_dose": 23.56551874090527, 
+        "moi": 52.95663140730075, 
+        "mutation": "bca3b421f9", 
+        "mutation_status": true, 
+        "post_infection_BSA_percentage": 72.20434897525257, 
+        "post_infection_TPCK": 55.235776163586614, 
+        "post_infection_medium": "caf74c7c5e", 
+        "strain": "6ea0fa4cd1", 
+        "subjects": {
+            "submitter_id": "subject_c0d1344b90"
+        }, 
+        "submitter_id": "virus_infection_ebf4b3cd3e", 
+        "type": "virus_infection", 
+        "virus_subtype": "db6c35a58d", 
+        "virus_titer_in_stock": 6, 
+        "virus_type": "6064a0ba46", 
+        "virus_volume": 23.339541851113854
+    }, 
+    {
+        "infection_buffer": "2670a1e951", 
+        "infection_dose": 68.92577833379153, 
+        "moi": 53.484816394371215, 
+        "mutation": "78f5f8eca3", 
+        "mutation_status": false, 
+        "post_infection_BSA_percentage": 61.983412245328296, 
+        "post_infection_TPCK": 79.8707281986212, 
+        "post_infection_medium": "7d5fd549ed", 
+        "strain": "ffe4be06ee", 
+        "subjects": {
+            "submitter_id": "subject_0cacca0e1d"
+        }, 
+        "submitter_id": "virus_infection_e30b870f79", 
+        "type": "virus_infection", 
+        "virus_subtype": "b3d667e34a", 
+        "virus_titer_in_stock": 81, 
+        "virus_type": "fc58500728", 
+        "virus_volume": 41.67530032989133
+    }, 
+    {
+        "infection_buffer": "bef8e820b1", 
+        "infection_dose": 26.440264222927112, 
+        "moi": 68.53379117926409, 
+        "mutation": "2d6f3bf872", 
+        "mutation_status": false, 
+        "post_infection_BSA_percentage": 93.82506191185257, 
+        "post_infection_TPCK": 15.604218394298696, 
+        "post_infection_medium": "b3091c7156", 
+        "strain": "a133a0ac7e", 
+        "subjects": {
+            "submitter_id": "subject_6460949536"
+        }, 
+        "submitter_id": "virus_infection_cb3ddea066", 
+        "type": "virus_infection", 
+        "virus_subtype": "fe59d6ef72", 
+        "virus_titer_in_stock": 34, 
+        "virus_type": "494805194e", 
+        "virus_volume": 40.85156885746635
+    }, 
+    {
+        "infection_buffer": "b89c16e7b2", 
+        "infection_dose": 38.349000276112776, 
+        "moi": 52.03244316075216, 
+        "mutation": "0acaf46dae", 
+        "mutation_status": false, 
+        "post_infection_BSA_percentage": 58.0859397027567, 
+        "post_infection_TPCK": 6.983814198678184, 
+        "post_infection_medium": "ec2a9b4d53", 
+        "strain": "9442332fb0", 
+        "subjects": {
+            "submitter_id": "subject_7aaabc2f05"
+        }, 
+        "submitter_id": "virus_infection_09d9cc8dfc", 
+        "type": "virus_infection", 
+        "virus_subtype": "6b3c0d2c3b", 
+        "virus_titer_in_stock": 23, 
+        "virus_type": "ced8749da8", 
+        "virus_volume": 18.042218049942292
+    }, 
+    {
+        "infection_buffer": "43bfee703d", 
+        "infection_dose": 19.266402414132898, 
+        "moi": 91.0310358574998, 
+        "mutation": "6c2fe78732", 
+        "mutation_status": true, 
+        "post_infection_BSA_percentage": 1.869283210987216, 
+        "post_infection_TPCK": 98.48345439301107, 
+        "post_infection_medium": "d5e251eff8", 
+        "strain": "50e0d38053", 
+        "subjects": {
+            "submitter_id": "subject_2370bef481"
+        }, 
+        "submitter_id": "virus_infection_1dddece8d5", 
+        "type": "virus_infection", 
+        "virus_subtype": "6a788d1a7e", 
+        "virus_titer_in_stock": 66, 
+        "virus_type": "8daa7bd6bd", 
+        "virus_volume": 87.84095475886944
+    }, 
+    {
+        "infection_buffer": "33b832e112", 
+        "infection_dose": 61.237169790754024, 
+        "moi": 69.27655757697705, 
+        "mutation": "a58eb1cf7e", 
+        "mutation_status": true, 
+        "post_infection_BSA_percentage": 73.36248112094293, 
+        "post_infection_TPCK": 92.93336376712656, 
+        "post_infection_medium": "1fa7881561", 
+        "strain": "d17345c41c", 
+        "subjects": {
+            "submitter_id": "subject_5fa248ee7a"
+        }, 
+        "submitter_id": "virus_infection_96dba18f8c", 
+        "type": "virus_infection", 
+        "virus_subtype": "25fac6162e", 
+        "virus_titer_in_stock": 35, 
+        "virus_type": "6039c2ddab", 
+        "virus_volume": 24.350427913798267
+    }, 
+    {
+        "infection_buffer": "31baf561a5", 
+        "infection_dose": 86.86785375744036, 
+        "moi": 87.66225840430842, 
+        "mutation": "e57afb3fde", 
+        "mutation_status": false, 
+        "post_infection_BSA_percentage": 5.824710161382452, 
+        "post_infection_TPCK": 97.69249863130104, 
+        "post_infection_medium": "178d4e7e49", 
+        "strain": "59668e6fbe", 
+        "subjects": {
+            "submitter_id": "subject_4ac16b404a"
+        }, 
+        "submitter_id": "virus_infection_e357796bba", 
+        "type": "virus_infection", 
+        "virus_subtype": "c5364fb6ab", 
+        "virus_titer_in_stock": 74, 
+        "virus_type": "8d5e24f34b", 
+        "virus_volume": 42.20669618012588
+    }, 
+    {
+        "infection_buffer": "27e17d1eed", 
+        "infection_dose": 13.823909115175425, 
+        "moi": 60.30240278112288, 
+        "mutation": "96f2cafbf2", 
+        "mutation_status": false, 
+        "post_infection_BSA_percentage": 70.51131481306135, 
+        "post_infection_TPCK": 23.371794670563617, 
+        "post_infection_medium": "a712614757", 
+        "strain": "a1b977497f", 
+        "subjects": {
+            "submitter_id": "subject_601943af83"
+        }, 
+        "submitter_id": "virus_infection_1b27147c97", 
+        "type": "virus_infection", 
+        "virus_subtype": "5de1c1b1c7", 
+        "virus_titer_in_stock": 7, 
+        "virus_type": "8b91b0a384", 
+        "virus_volume": 27.799716383742123
+    }, 
+    {
+        "infection_buffer": "be28967b2c", 
+        "infection_dose": 16.72908871828507, 
+        "moi": 85.44344267474148, 
+        "mutation": "e18fd2e636", 
+        "mutation_status": false, 
+        "post_infection_BSA_percentage": 81.45536227641882, 
+        "post_infection_TPCK": 85.97586160011778, 
+        "post_infection_medium": "b07dbe65e5", 
+        "strain": "976376b7bb", 
+        "subjects": {
+            "submitter_id": "subject_45749e3dd5"
+        }, 
+        "submitter_id": "virus_infection_4eececd5b5", 
+        "type": "virus_infection", 
+        "virus_subtype": "c17f5429cc", 
+        "virus_titer_in_stock": 9, 
+        "virus_type": "b76e50b68d", 
+        "virus_volume": 80.2623811728711
+    }, 
+    {
+        "infection_buffer": "d319868464", 
+        "infection_dose": 40.822011712753614, 
+        "moi": 44.21080605164644, 
+        "mutation": "555af163b1", 
+        "mutation_status": false, 
+        "post_infection_BSA_percentage": 6.129232024237585, 
+        "post_infection_TPCK": 78.16240681921715, 
+        "post_infection_medium": "18d79ff426", 
+        "strain": "2be775e973", 
+        "subjects": {
+            "submitter_id": "subject_70e75bf21f"
+        }, 
+        "submitter_id": "virus_infection_b56c6f1694", 
+        "type": "virus_infection", 
+        "virus_subtype": "bac0a0060e", 
+        "virus_titer_in_stock": 63, 
+        "virus_type": "1c0b7edbf9", 
+        "virus_volume": 54.59076792145622
+    }, 
+    {
+        "infection_buffer": "5e3bb2c864", 
+        "infection_dose": 54.6822070416104, 
+        "moi": 67.25263037310907, 
+        "mutation": "7177f75a25", 
+        "mutation_status": true, 
+        "post_infection_BSA_percentage": 0.7706111487043255, 
+        "post_infection_TPCK": 76.74097142713947, 
+        "post_infection_medium": "c4f6c09e90", 
+        "strain": "73a231145e", 
+        "subjects": {
+            "submitter_id": "subject_a73bdaad77"
+        }, 
+        "submitter_id": "virus_infection_53864bed7e", 
+        "type": "virus_infection", 
+        "virus_subtype": "97804d9730", 
+        "virus_titer_in_stock": 54, 
+        "virus_type": "3f3f30c3f6", 
+        "virus_volume": 72.6054785792773
+    }, 
+    {
+        "infection_buffer": "d65413ee8b", 
+        "infection_dose": 35.70408016777682, 
+        "moi": 14.138115331968603, 
+        "mutation": "2c2be10c05", 
+        "mutation_status": true, 
+        "post_infection_BSA_percentage": 41.632737919624816, 
+        "post_infection_TPCK": 75.38450456182531, 
+        "post_infection_medium": "4da730dfaf", 
+        "strain": "ec6b6e5118", 
+        "subjects": {
+            "submitter_id": "subject_5818f3aef6"
+        }, 
+        "submitter_id": "virus_infection_abc61dd46e", 
+        "type": "virus_infection", 
+        "virus_subtype": "169f168eed", 
+        "virus_titer_in_stock": 62, 
+        "virus_type": "5b12a14d2c", 
+        "virus_volume": 78.63585674872434
+    }, 
+    {
+        "infection_buffer": "c1b07b98e6", 
+        "infection_dose": 79.53635039279673, 
+        "moi": 67.92260882920253, 
+        "mutation": "045960b628", 
+        "mutation_status": false, 
+        "post_infection_BSA_percentage": 86.62985874511155, 
+        "post_infection_TPCK": 13.080565429051127, 
+        "post_infection_medium": "eeb4584306", 
+        "strain": "d896339ad1", 
+        "subjects": {
+            "submitter_id": "subject_1bdcc07656"
+        }, 
+        "submitter_id": "virus_infection_c56c7516b6", 
+        "type": "virus_infection", 
+        "virus_subtype": "e66e1eb948", 
+        "virus_titer_in_stock": 14, 
+        "virus_type": "fe694800cd", 
+        "virus_volume": 24.137008958326422
     }
-  },
-  {
-    "virus_subtype": "vCzJBXqvqbuC",
-    "mutation_status": false,
-    "virus_volume": 5.5523,
-    "strain": "gXXWcYWeEBuf",
-    "moi": 8.8459,
-    "infection_buffer": "BIxNLk2BaCOj",
-    "virus_titer_in_stock": 4,
-    "post_infection_TPCK": 8.3731,
-    "post_infection_BSA_percentage": 9.0941,
-    "post_infection_medium": "ZlgXUsq9N5Ef",
-    "virus_type": "nGzLMrjS78mz",
-    "mutation": "MzVYNsvjqGgE",
-    "infection_dose": 16.0737,
-    "type": "virus_infection",
-    "submitter_id": "virus_infection_002",
-    "subjects": {
-      "submitter_id": "subject_002"
-    }
-  },
-  {
-    "virus_subtype": "TNSyRmCnsiW4",
-    "mutation_status": false,
-    "virus_volume": 13.8287,
-    "strain": "saRmy0l9c40Z",
-    "moi": 3.3212,
-    "infection_buffer": "yp3ja3lNGj1R",
-    "virus_titer_in_stock": 4,
-    "post_infection_TPCK": 7.4112,
-    "post_infection_BSA_percentage": 13.8703,
-    "post_infection_medium": "XyTChzUdL4yt",
-    "virus_type": "MhQI3BulDw3I",
-    "mutation": "4TEQkKms0KVR",
-    "infection_dose": 10.8894,
-    "type": "virus_infection",
-    "submitter_id": "virus_infection_003",
-    "subjects": {
-      "submitter_id": "subject_003"
-    }
-  },
-  {
-    "virus_subtype": "5KezSEnV64py",
-    "mutation_status": false,
-    "virus_volume": 12.3223,
-    "strain": "GRhp9NUfxWih",
-    "moi": 9.7388,
-    "infection_buffer": "2oKN44utqc3W",
-    "virus_titer_in_stock": 5,
-    "post_infection_TPCK": 15.1434,
-    "post_infection_BSA_percentage": 12.8561,
-    "post_infection_medium": "WtdtyaUE015M",
-    "virus_type": "HZYAd4YhTzJR",
-    "mutation": "YDPkeHS0uswr",
-    "infection_dose": 6.745,
-    "type": "virus_infection",
-    "submitter_id": "virus_infection_004",
-    "subjects": {
-      "submitter_id": "subject_004"
-    }
-  },
-  {
-    "virus_subtype": "hnnryRii0wIl",
-    "mutation_status": true,
-    "virus_volume": 7.5364,
-    "strain": "HJYq8SsPDcvX",
-    "moi": 5.2523,
-    "infection_buffer": "ls0avvYuquBq",
-    "virus_titer_in_stock": 3,
-    "post_infection_TPCK": 9.0701,
-    "post_infection_BSA_percentage": 11.2849,
-    "post_infection_medium": "Ca4EztaKHJ33",
-    "virus_type": "ZKqHWGf7c3QJ",
-    "mutation": "UKe85T8o98wQ",
-    "infection_dose": 14.353,
-    "type": "virus_infection",
-    "submitter_id": "virus_infection_005",
-    "subjects": {
-      "submitter_id": "subject_005"
-    }
-  },
-  {
-    "virus_subtype": "e8yiGd9lGY8h",
-    "mutation_status": false,
-    "virus_volume": 9.8413,
-    "strain": "ugSUSUV5wMBn",
-    "moi": 7.3015,
-    "infection_buffer": "aFReoUAeD0Ra",
-    "virus_titer_in_stock": 6,
-    "post_infection_TPCK": 14.9249,
-    "post_infection_BSA_percentage": 6.0631,
-    "post_infection_medium": "oaT4duA0tHQg",
-    "virus_type": "1K9HuyweT4Iv",
-    "mutation": "LkciVXUmZKGV",
-    "infection_dose": 10.6046,
-    "type": "virus_infection",
-    "submitter_id": "virus_infection_006",
-    "subjects": {
-      "submitter_id": "subject_006"
-    }
-  },
-  {
-    "virus_subtype": "MdmsRRl9RXbp",
-    "mutation_status": false,
-    "virus_volume": 13.5067,
-    "strain": "sReAL4cJ0yPP",
-    "moi": 16.8662,
-    "infection_buffer": "tDE7I7V595CB",
-    "virus_titer_in_stock": 3,
-    "post_infection_TPCK": 11.1495,
-    "post_infection_BSA_percentage": 8.7579,
-    "post_infection_medium": "MjtsSpKs3iYZ",
-    "virus_type": "pwD8ZCg982DQ",
-    "mutation": "C5ezlOmVnKhJ",
-    "infection_dose": 7.9783,
-    "type": "virus_infection",
-    "submitter_id": "virus_infection_007",
-    "subjects": {
-      "submitter_id": "subject_007"
-    }
-  },
-  {
-    "virus_subtype": "czaUIrZp856P",
-    "mutation_status": false,
-    "virus_volume": 8.5095,
-    "strain": "hw8Tc7VQr4aY",
-    "moi": 7.7616,
-    "infection_buffer": "mXlO9JPaqU9T",
-    "virus_titer_in_stock": 4,
-    "post_infection_TPCK": 14.3428,
-    "post_infection_BSA_percentage": 9.5132,
-    "post_infection_medium": "mjylpFrwSbZL",
-    "virus_type": "eRKEUmj3Itvq",
-    "mutation": "ZhlUxrTx7GjV",
-    "infection_dose": 13.293,
-    "type": "virus_infection",
-    "submitter_id": "virus_infection_008",
-    "subjects": {
-      "submitter_id": "subject_008"
-    }
-  },
-  {
-    "virus_subtype": "wezsuygFFzq6",
-    "mutation_status": false,
-    "virus_volume": 15.4649,
-    "strain": "OGHIxExdrgeO",
-    "moi": 11.0774,
-    "infection_buffer": "UcROxypb7LPv",
-    "virus_titer_in_stock": 2,
-    "post_infection_TPCK": 7.2186,
-    "post_infection_BSA_percentage": 4.6456,
-    "post_infection_medium": "HtYVHycAccpY",
-    "virus_type": "xO1UxJXA9t1W",
-    "mutation": "F74wc6pXPxcY",
-    "infection_dose": 9.7168,
-    "type": "virus_infection",
-    "submitter_id": "virus_infection_009",
-    "subjects": {
-      "submitter_id": "subject_009"
-    }
-  },
-  {
-    "virus_subtype": "G5OIkELF60z7",
-    "mutation_status": false,
-    "virus_volume": 6.4034,
-    "strain": "4wiBJRGSw6mQ",
-    "moi": 9.0822,
-    "infection_buffer": "eGP01BXSJzgp",
-    "virus_titer_in_stock": 3,
-    "post_infection_TPCK": 12.2094,
-    "post_infection_BSA_percentage": 2.2542,
-    "post_infection_medium": "kIUpuRNd54Zo",
-    "virus_type": "6DhenYP8FtTR",
-    "mutation": "jwYNAQjIaZLb",
-    "infection_dose": 8.8919,
-    "type": "virus_infection",
-    "submitter_id": "virus_infection_0010",
-    "subjects": {
-      "submitter_id": "subject_0010"
-    }
-  },
-  {
-    "virus_subtype": "CUiPLus9dU23",
-    "mutation_status": false,
-    "virus_volume": 11.3062,
-    "strain": "lLzrXuEPrMzt",
-    "moi": 8.7936,
-    "infection_buffer": "quMdgohIyTBU",
-    "virus_titer_in_stock": 5,
-    "post_infection_TPCK": 8.5623,
-    "post_infection_BSA_percentage": 7.1337,
-    "post_infection_medium": "pPJMJdsLPGOE",
-    "virus_type": "vLj901UK9t3J",
-    "mutation": "o2JDpUGAGNaw",
-    "infection_dose": 9.7544,
-    "type": "virus_infection",
-    "submitter_id": "virus_infection_0011",
-    "subjects": {
-      "submitter_id": "subject_0011"
-    }
-  },
-  {
-    "virus_subtype": "4HjL99Pv78JT",
-    "mutation_status": false,
-    "virus_volume": 9.8351,
-    "strain": "MsUKHgnexP3B",
-    "moi": 12.8348,
-    "infection_buffer": "Ln1oMmG2CnqU",
-    "virus_titer_in_stock": 4,
-    "post_infection_TPCK": 8.6956,
-    "post_infection_BSA_percentage": 10.4252,
-    "post_infection_medium": "LwuBEVvm9lLD",
-    "virus_type": "fnGYfiX8JTnP",
-    "mutation": "xnpit7VbNxGH",
-    "infection_dose": 8.3891,
-    "type": "virus_infection",
-    "submitter_id": "virus_infection_0012",
-    "subjects": {
-      "submitter_id": "subject_0012"
-    }
-  },
-  {
-    "virus_subtype": "TyuTiPDXA65C",
-    "mutation_status": false,
-    "virus_volume": 13.2136,
-    "strain": "83OSlfn67Jed",
-    "moi": 9.9647,
-    "infection_buffer": "IIP0vTzbaIYd",
-    "virus_titer_in_stock": 3,
-    "post_infection_TPCK": 8.9521,
-    "post_infection_BSA_percentage": 12.228,
-    "post_infection_medium": "oH6PuuH6rl3P",
-    "virus_type": "JD4Oz6nygNOm",
-    "mutation": "8EclJ3zBxThR",
-    "infection_dose": 8.2068,
-    "type": "virus_infection",
-    "submitter_id": "virus_infection_0013",
-    "subjects": {
-      "submitter_id": "subject_0013"
-    }
-  },
-  {
-    "virus_subtype": "XZMkmIvbKTQD",
-    "mutation_status": true,
-    "virus_volume": 11.1084,
-    "strain": "BcOeagKVyz4p",
-    "moi": 10.1158,
-    "infection_buffer": "U875JHGeW6oc",
-    "virus_titer_in_stock": 4,
-    "post_infection_TPCK": 14.9555,
-    "post_infection_BSA_percentage": 11.9838,
-    "post_infection_medium": "APaDIJT3TmKm",
-    "virus_type": "tb2CAPxHZtno",
-    "mutation": "yyOcfSEH3Zx0",
-    "infection_dose": 13.5249,
-    "type": "virus_infection",
-    "submitter_id": "virus_infection_0014",
-    "subjects": {
-      "submitter_id": "subject_0014"
-    }
-  },
-  {
-    "virus_subtype": "j1GFUxXViheT",
-    "mutation_status": true,
-    "virus_volume": 12.6933,
-    "strain": "81IbOwjd7yAt",
-    "moi": 7.0415,
-    "infection_buffer": "ZxSngYIaTUCn",
-    "virus_titer_in_stock": 4,
-    "post_infection_TPCK": 11.4755,
-    "post_infection_BSA_percentage": 8.5621,
-    "post_infection_medium": "x1ANLaydfyNl",
-    "virus_type": "BsXmCHspuqPT",
-    "mutation": "q0WwcKCpVzad",
-    "infection_dose": 9.6192,
-    "type": "virus_infection",
-    "submitter_id": "virus_infection_0015",
-    "subjects": {
-      "submitter_id": "subject_0015"
-    }
-  },
-  {
-    "virus_subtype": "o2mm59CnAMKA",
-    "mutation_status": false,
-    "virus_volume": 6.3109,
-    "strain": "T3xGudpCKVcv",
-    "moi": 7.3349,
-    "infection_buffer": "5fmTbNbz4cWR",
-    "virus_titer_in_stock": 5,
-    "post_infection_TPCK": 12.0605,
-    "post_infection_BSA_percentage": 7.1936,
-    "post_infection_medium": "MeORkF4Reo27",
-    "virus_type": "mjYbcfkXdMJn",
-    "mutation": "8C1dlz4jUY4i",
-    "infection_dose": 9.3182,
-    "type": "virus_infection",
-    "submitter_id": "virus_infection_0016",
-    "subjects": {
-      "submitter_id": "subject_0016"
-    }
-  },
-  {
-    "virus_subtype": "KOMbooG9hfYH",
-    "mutation_status": false,
-    "virus_volume": 11.2669,
-    "strain": "vyqoMcs6HmU0",
-    "moi": 7.5742,
-    "infection_buffer": "ksrhCZIhUCH6",
-    "virus_titer_in_stock": 2,
-    "post_infection_TPCK": 12.1529,
-    "post_infection_BSA_percentage": 9.5983,
-    "post_infection_medium": "wcedCCm7X8pv",
-    "virus_type": "78Jj3F5P5t7G",
-    "mutation": "ifE3qrxU5kDG",
-    "infection_dose": 8.5486,
-    "type": "virus_infection",
-    "submitter_id": "virus_infection_0017",
-    "subjects": {
-      "submitter_id": "subject_0017"
-    }
-  },
-  {
-    "virus_subtype": "DgPbDLzRN5hl",
-    "mutation_status": true,
-    "virus_volume": 12.2895,
-    "strain": "pK61LmTtfWP5",
-    "moi": 8.869,
-    "infection_buffer": "6zaV5c4rrJ6M",
-    "virus_titer_in_stock": 7,
-    "post_infection_TPCK": 10.7214,
-    "post_infection_BSA_percentage": 6.3045,
-    "post_infection_medium": "MdCqNnjc8eOP",
-    "virus_type": "xBJ17GrS4Z9z",
-    "mutation": "U421aY2et8m3",
-    "infection_dose": 12.3531,
-    "type": "virus_infection",
-    "submitter_id": "virus_infection_0018",
-    "subjects": {
-      "submitter_id": "subject_0018"
-    }
-  }
 ]

@@ -1,382 +1,1244 @@
 [
-  {
-    "study_release_version": "g214pnng8Wui",
-    "data_description": "araesREZFXSB",
-    "study_design": "X47aqzMP26HY",
-    "study_organization": "Dj9wp6CGzLA8",
-    "study_description": "oU9N7a0lqqLj",
-    "study_doi": "QAhE04n8Sdj5",
-    "age_unit": "Not Specified",
-    "study_completeness": "2",
-    "study_release_date": "rPj8W5Jck32R",
-    "is_clinical_trial": false,
-    "study_setup": "JJeWW3fkxoYv",
-    "study_objective": "b4CmONDJFqV5",
-    "type": "study",
-    "submitter_id": "study_001",
-    "projects": {
-      "code": "test"
+    {
+        "data_description": "9bd2b39229", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "2", 
+        "study_description": "4b938c0ff5", 
+        "study_design": "b99d01dda1", 
+        "study_doi": "b4e4513d5f", 
+        "study_objective": "e3fe7e8f67", 
+        "study_organization": "85302a1ba1", 
+        "study_release_date": "f5e5f902ba", 
+        "study_release_version": "3172704bac", 
+        "study_setup": "4ad0fcac3e", 
+        "submitter_id": "study_c7fb29df89", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "c145458c8d", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "2", 
+        "study_description": "870ebc3dfb", 
+        "study_design": "0de4e47a0f", 
+        "study_doi": "61477b912c", 
+        "study_objective": "2dc73f8023", 
+        "study_organization": "933c11785f", 
+        "study_release_date": "5541c4d5ef", 
+        "study_release_version": "31b3f31fb7", 
+        "study_setup": "72d8dcb3d4", 
+        "submitter_id": "study_017eb6718b", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "c650a3f9bb", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "2", 
+        "study_description": "1f4eb5fda2", 
+        "study_design": "34576eee73", 
+        "study_doi": "ec8922b467", 
+        "study_objective": "ac47cb9627", 
+        "study_organization": "3fd06df976", 
+        "study_release_date": "e07b67bf2d", 
+        "study_release_version": "c5c5178e14", 
+        "study_setup": "2bd5e45530", 
+        "submitter_id": "study_d44abf3cbf", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "93e7749dde", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "a8de5a7daf", 
+        "study_design": "e925121d59", 
+        "study_doi": "f6f59f69f7", 
+        "study_objective": "456e83b78a", 
+        "study_organization": "3a81e2e47d", 
+        "study_release_date": "132ec3f6bd", 
+        "study_release_version": "20ff107807", 
+        "study_setup": "b9a33038f6", 
+        "submitter_id": "study_7d750dc5fc", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "55fde37d65", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "2f0adef64b", 
+        "study_design": "7c36948f00", 
+        "study_doi": "2d1118c397", 
+        "study_objective": "f6b10fc612", 
+        "study_organization": "2ad194b402", 
+        "study_release_date": "1194e6a6aa", 
+        "study_release_version": "779f933d00", 
+        "study_setup": "73d9b2aa50", 
+        "submitter_id": "study_ffacb85998", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "e8b1e01839", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "e972dc945e", 
+        "study_design": "15ed3b1691", 
+        "study_doi": "d3f6ad21e2", 
+        "study_objective": "f81739089c", 
+        "study_organization": "bcb659d1b6", 
+        "study_release_date": "a44603620b", 
+        "study_release_version": "e7ef952701", 
+        "study_setup": "f44b91feb8", 
+        "submitter_id": "study_67c522c127", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "b6e7562f1b", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "a167c00cb0", 
+        "study_design": "be006c40ad", 
+        "study_doi": "f4a9bee96b", 
+        "study_objective": "d05867afdc", 
+        "study_organization": "4758ed3a71", 
+        "study_release_date": "d145329474", 
+        "study_release_version": "9a8e49228d", 
+        "study_setup": "60c18bd066", 
+        "submitter_id": "study_631d14a5ee", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "f2e38adff9", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "0d1b989f6c", 
+        "study_design": "f811f49141", 
+        "study_doi": "65d2593d17", 
+        "study_objective": "81b63909eb", 
+        "study_organization": "ded981dae8", 
+        "study_release_date": "af0f64b3f1", 
+        "study_release_version": "8b228af8ec", 
+        "study_setup": "06c1ab1a9f", 
+        "submitter_id": "study_587a3c6eff", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "9b2e1f6207", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "2", 
+        "study_description": "3b45888b2b", 
+        "study_design": "0d3760a977", 
+        "study_doi": "6b47ac819e", 
+        "study_objective": "1b96cede3d", 
+        "study_organization": "2f9142886d", 
+        "study_release_date": "4516af3c7f", 
+        "study_release_version": "d0109d1f22", 
+        "study_setup": "cebac476ac", 
+        "submitter_id": "study_d0575ef861", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "f82cf94212", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "0958d0bd91", 
+        "study_design": "ae3ee12ebe", 
+        "study_doi": "be47178a84", 
+        "study_objective": "ef63531f5d", 
+        "study_organization": "683294e05e", 
+        "study_release_date": "6f2c046268", 
+        "study_release_version": "d09dd6d10d", 
+        "study_setup": "ed4f687206", 
+        "submitter_id": "study_5510b6a651", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "bddb2dd29c", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "2", 
+        "study_description": "912cedca61", 
+        "study_design": "8a8f37d243", 
+        "study_doi": "2272f1ee26", 
+        "study_objective": "7e687aed54", 
+        "study_organization": "775001351b", 
+        "study_release_date": "4da8a16a7f", 
+        "study_release_version": "b612497aba", 
+        "study_setup": "57c306d5fb", 
+        "submitter_id": "study_17849729c7", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "8c8c10e42d", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "c27dcb9028", 
+        "study_design": "34a25ae927", 
+        "study_doi": "31b9140050", 
+        "study_objective": "932c8576a8", 
+        "study_organization": "951869f714", 
+        "study_release_date": "b24f75a94c", 
+        "study_release_version": "c822fdead6", 
+        "study_setup": "be99a50e49", 
+        "submitter_id": "study_c9379547c5", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "0cde586c37", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "92622b998e", 
+        "study_design": "428e9cf73f", 
+        "study_doi": "58b51cda1b", 
+        "study_objective": "5275f6801d", 
+        "study_organization": "c18a7620a3", 
+        "study_release_date": "cfac09d7c4", 
+        "study_release_version": "bb72741017", 
+        "study_setup": "e260515e60", 
+        "submitter_id": "study_f2d25ccf3f", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "9fc15da558", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "60c8c18b55", 
+        "study_design": "99db55ca8c", 
+        "study_doi": "a8d323a1ea", 
+        "study_objective": "3d7046c58d", 
+        "study_organization": "6fc47c153a", 
+        "study_release_date": "bffcfc116d", 
+        "study_release_version": "c5f531027d", 
+        "study_setup": "1523ec7858", 
+        "submitter_id": "study_430ec5fc17", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "f752194667", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "ea885a8800", 
+        "study_design": "b160613999", 
+        "study_doi": "31ded2c15c", 
+        "study_objective": "da43c92e8a", 
+        "study_organization": "95552bf3bc", 
+        "study_release_date": "18f67f1d01", 
+        "study_release_version": "2e381ce061", 
+        "study_setup": "5b10ae3e95", 
+        "submitter_id": "study_cfdbbc450d", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "11b1cf7d67", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "79bb772970", 
+        "study_design": "33199110c3", 
+        "study_doi": "ba24f13a6c", 
+        "study_objective": "175bb80e78", 
+        "study_organization": "4b67a4ca8c", 
+        "study_release_date": "5088d7e96c", 
+        "study_release_version": "005f578804", 
+        "study_setup": "5ca8b8a8ef", 
+        "submitter_id": "study_dec814955a", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "a32505576d", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "294b623708", 
+        "study_design": "5174091f2f", 
+        "study_doi": "948d499cb0", 
+        "study_objective": "72ce2e11dc", 
+        "study_organization": "2e8480216d", 
+        "study_release_date": "bab243c7f8", 
+        "study_release_version": "28a8831056", 
+        "study_setup": "c9975922dc", 
+        "submitter_id": "study_05e99633c6", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "3d45c7935b", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "bc249b128c", 
+        "study_design": "eb53c4f0f4", 
+        "study_doi": "5be33a9b60", 
+        "study_objective": "574e4fb67c", 
+        "study_organization": "80707087da", 
+        "study_release_date": "7708a56bc4", 
+        "study_release_version": "638084b466", 
+        "study_setup": "17faf141e7", 
+        "submitter_id": "study_9fc61e79af", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "3cdcc8d013", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "a7921d92ed", 
+        "study_design": "358e5dc102", 
+        "study_doi": "31f8a59528", 
+        "study_objective": "2f005ec100", 
+        "study_organization": "4ff93e21c6", 
+        "study_release_date": "d4df8613a6", 
+        "study_release_version": "47f1842638", 
+        "study_setup": "ce74348eef", 
+        "submitter_id": "study_2d9388fb36", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "f59706df43", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "2", 
+        "study_description": "c229a423e2", 
+        "study_design": "f31fec7620", 
+        "study_doi": "4177f4b70c", 
+        "study_objective": "dfb6df98a0", 
+        "study_organization": "909489ea5f", 
+        "study_release_date": "3ba8ac0568", 
+        "study_release_version": "0ecbea1f0f", 
+        "study_setup": "f1bd03b673", 
+        "submitter_id": "study_0f8f4c2673", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "dde4cb4114", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "5292796c5e", 
+        "study_design": "da7e8f10d2", 
+        "study_doi": "b6eb4f9d78", 
+        "study_objective": "8aff52060a", 
+        "study_organization": "3e8a273342", 
+        "study_release_date": "3dbcf2acbe", 
+        "study_release_version": "e60b0abd5a", 
+        "study_setup": "5267162db5", 
+        "submitter_id": "study_6953c82151", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "5d56a056c6", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "2", 
+        "study_description": "2c695ed4c3", 
+        "study_design": "02fabd64d6", 
+        "study_doi": "1122218097", 
+        "study_objective": "e0281aac7a", 
+        "study_organization": "22976871f8", 
+        "study_release_date": "dd9eee02a5", 
+        "study_release_version": "a6234330c4", 
+        "study_setup": "1e845099b7", 
+        "submitter_id": "study_d71d5ca2f4", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "d83799d29a", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "2", 
+        "study_description": "95ddcc2680", 
+        "study_design": "60ba7f860b", 
+        "study_doi": "e973ab4678", 
+        "study_objective": "320548a566", 
+        "study_organization": "e024169c3f", 
+        "study_release_date": "46bc01409b", 
+        "study_release_version": "bd58c2bdb8", 
+        "study_setup": "67c6beb8cd", 
+        "submitter_id": "study_278d356f9d", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "aa99edbc45", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "2", 
+        "study_description": "8745c06894", 
+        "study_design": "1f717d0c05", 
+        "study_doi": "a782fb4469", 
+        "study_objective": "729eb06d15", 
+        "study_organization": "523fa1d61d", 
+        "study_release_date": "329b3f8e6e", 
+        "study_release_version": "f44d3a6f87", 
+        "study_setup": "20f39f39d2", 
+        "submitter_id": "study_f16b9ea5fe", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "04ccc5dac3", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "81ceee2a39", 
+        "study_design": "f8fbc9a0d4", 
+        "study_doi": "a5665261a9", 
+        "study_objective": "d4ee983173", 
+        "study_organization": "fbbbc14af6", 
+        "study_release_date": "ee9a3dce72", 
+        "study_release_version": "0d089bc290", 
+        "study_setup": "143820b544", 
+        "submitter_id": "study_223991a7b2", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "25ea422cf9", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "b3194c9999", 
+        "study_design": "821460a3a2", 
+        "study_doi": "dd396c0fcb", 
+        "study_objective": "bd3f7fecde", 
+        "study_organization": "d8aad68f64", 
+        "study_release_date": "b4439b7d8d", 
+        "study_release_version": "28e8445d03", 
+        "study_setup": "e9473ae7d8", 
+        "submitter_id": "study_17c5a284b3", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "a193551557", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "1b2d4e92a2", 
+        "study_design": "e58f8ceaf6", 
+        "study_doi": "77f879fec8", 
+        "study_objective": "9f4c6c0a70", 
+        "study_organization": "607458d766", 
+        "study_release_date": "864084c8ae", 
+        "study_release_version": "5a12320019", 
+        "study_setup": "a416104c42", 
+        "submitter_id": "study_02db28f19c", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "b8cb4932f2", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "dd2b4e45ec", 
+        "study_design": "faa32c3099", 
+        "study_doi": "5434485680", 
+        "study_objective": "528d4eba5c", 
+        "study_organization": "2dbd165c12", 
+        "study_release_date": "09712c9439", 
+        "study_release_version": "d62341d059", 
+        "study_setup": "e360c10065", 
+        "submitter_id": "study_f8aecca0a6", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "f251692532", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "c8146748cf", 
+        "study_design": "d7482eb6f6", 
+        "study_doi": "7bad3f607e", 
+        "study_objective": "9aec4643be", 
+        "study_organization": "9d1c04701c", 
+        "study_release_date": "753b170433", 
+        "study_release_version": "2f9b5932a8", 
+        "study_setup": "0d9ccce16b", 
+        "submitter_id": "study_3dced909c7", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "c31318cf89", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "8c2f0334ca", 
+        "study_design": "2552b67f43", 
+        "study_doi": "7d877a63d2", 
+        "study_objective": "7fada0cbe0", 
+        "study_organization": "5a05b6e000", 
+        "study_release_date": "d0e3bfef33", 
+        "study_release_version": "662f8cc3a3", 
+        "study_setup": "150ca0a8b3", 
+        "submitter_id": "study_6556b5a615", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "c426f0e581", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "fab391bedf", 
+        "study_design": "70899c5388", 
+        "study_doi": "2db4963fe0", 
+        "study_objective": "b6ac3cebcd", 
+        "study_organization": "27d7c34ec6", 
+        "study_release_date": "1f647a470e", 
+        "study_release_version": "855164e516", 
+        "study_setup": "e8614f44d5", 
+        "submitter_id": "study_6be1e81736", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "3354ccfe56", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "df863887d6", 
+        "study_design": "d838b9414b", 
+        "study_doi": "faccfd869a", 
+        "study_objective": "44781d5735", 
+        "study_organization": "83ed7c6ecb", 
+        "study_release_date": "3d13b287f1", 
+        "study_release_version": "ea12a9ddb4", 
+        "study_setup": "b5fd683ff4", 
+        "submitter_id": "study_5d34354346", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "eaa10565ef", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "ee354902cd", 
+        "study_design": "769ea0536c", 
+        "study_doi": "fe05065179", 
+        "study_objective": "aa474fb0dc", 
+        "study_organization": "2d7ba94b2f", 
+        "study_release_date": "83e39e7eca", 
+        "study_release_version": "7719ac0967", 
+        "study_setup": "c3d3a0f720", 
+        "submitter_id": "study_0caa7a2f80", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "88618ac3b2", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "f549f03aba", 
+        "study_design": "4042d02034", 
+        "study_doi": "3342bde1f0", 
+        "study_objective": "a5920bb353", 
+        "study_organization": "4aa77aab0e", 
+        "study_release_date": "83c825da10", 
+        "study_release_version": "399cc5440d", 
+        "study_setup": "8bed623a69", 
+        "submitter_id": "study_a9ff32eb49", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "c8b26ee249", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "70ce734f15", 
+        "study_design": "a32af501ea", 
+        "study_doi": "72407c03f4", 
+        "study_objective": "df4a353a56", 
+        "study_organization": "22a4dc3563", 
+        "study_release_date": "74f9ef699d", 
+        "study_release_version": "414c01b65f", 
+        "study_setup": "5f0b3b8b3c", 
+        "submitter_id": "study_c6f3ed73ba", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "9b5f1e788d", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "2", 
+        "study_description": "fba4d40428", 
+        "study_design": "83460cabf6", 
+        "study_doi": "ba50963a35", 
+        "study_objective": "043bf0788b", 
+        "study_organization": "f00155ea37", 
+        "study_release_date": "ad14f01aef", 
+        "study_release_version": "1260c6b730", 
+        "study_setup": "47fb3b4b36", 
+        "submitter_id": "study_35bece6c2f", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "9fc2c42cce", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "5be253dc88", 
+        "study_design": "961614b74f", 
+        "study_doi": "dc9fb245ef", 
+        "study_objective": "391ff71492", 
+        "study_organization": "0d71b61025", 
+        "study_release_date": "8f3723233b", 
+        "study_release_version": "629d7e3223", 
+        "study_setup": "18a2326af7", 
+        "submitter_id": "study_b5af25cee1", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "987171c6a7", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "2247a3c64e", 
+        "study_design": "9fc01affeb", 
+        "study_doi": "13dc24ba0c", 
+        "study_objective": "060e412bf4", 
+        "study_organization": "e8b07f9e5f", 
+        "study_release_date": "1b06f8be98", 
+        "study_release_version": "4b8fc036df", 
+        "study_setup": "4756616d41", 
+        "submitter_id": "study_25a20d9b39", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "01fe9a72df", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "1f0f183210", 
+        "study_design": "47204e999b", 
+        "study_doi": "c2450e1629", 
+        "study_objective": "14db127f0b", 
+        "study_organization": "d51d9855c8", 
+        "study_release_date": "aeea4fd52b", 
+        "study_release_version": "90d73d92df", 
+        "study_setup": "8d3a110615", 
+        "submitter_id": "study_6356aeae6d", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "04641d7809", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "799471ef86", 
+        "study_design": "fff05a94d1", 
+        "study_doi": "848080e978", 
+        "study_objective": "67c2844814", 
+        "study_organization": "405a7f59e8", 
+        "study_release_date": "4c860ccaf9", 
+        "study_release_version": "48980ead16", 
+        "study_setup": "3648a276be", 
+        "submitter_id": "study_65238315a7", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "a0bae4ea36", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "08d905a390", 
+        "study_design": "2e80e2f64d", 
+        "study_doi": "7b6dc2b036", 
+        "study_objective": "a4a86ac0a3", 
+        "study_organization": "cc51cdb4af", 
+        "study_release_date": "ca1a7c17ee", 
+        "study_release_version": "12cb09f051", 
+        "study_setup": "b4fcf25528", 
+        "submitter_id": "study_14db385e1b", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "5e536b8129", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "61208776a3", 
+        "study_design": "0ebdbef759", 
+        "study_doi": "794d432cb7", 
+        "study_objective": "2d0aacf5be", 
+        "study_organization": "fea7f53373", 
+        "study_release_date": "23ed085640", 
+        "study_release_version": "000ba6f852", 
+        "study_setup": "7e9ad98571", 
+        "submitter_id": "study_e6f98d0dc4", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "71f0b0b6eb", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "d3bda3245f", 
+        "study_design": "9d7883ffeb", 
+        "study_doi": "4f17fa4f07", 
+        "study_objective": "4ea2b45984", 
+        "study_organization": "5096b17838", 
+        "study_release_date": "cedaba55ef", 
+        "study_release_version": "c6239d5a3b", 
+        "study_setup": "fc23a8de12", 
+        "submitter_id": "study_4ee12b09ff", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "4861338805", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "2", 
+        "study_description": "82d1323053", 
+        "study_design": "ed4c841a35", 
+        "study_doi": "8bf7f7edb5", 
+        "study_objective": "92bb6762e4", 
+        "study_organization": "d5a6ab0941", 
+        "study_release_date": "6e79e8a68a", 
+        "study_release_version": "58023dbbb9", 
+        "study_setup": "6d52900410", 
+        "submitter_id": "study_06af10b4de", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "d6a08dc3da", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "dbb3bd7665", 
+        "study_design": "b0a36d2a35", 
+        "study_doi": "87f0568677", 
+        "study_objective": "24313955b9", 
+        "study_organization": "c826df2594", 
+        "study_release_date": "411b9ec47f", 
+        "study_release_version": "c02af68b6f", 
+        "study_setup": "0a576ba5e9", 
+        "submitter_id": "study_12e65a478c", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "b1f1889979", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "8ebfac71c6", 
+        "study_design": "7152576cbb", 
+        "study_doi": "fddb8f9077", 
+        "study_objective": "a3111f8b2e", 
+        "study_organization": "b4f5c5ca94", 
+        "study_release_date": "31629870f9", 
+        "study_release_version": "1d96a6f779", 
+        "study_setup": "894fe03c84", 
+        "submitter_id": "study_a9890229da", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "bc9a9dfd15", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "ec5b4c892c", 
+        "study_design": "b4fce37aa2", 
+        "study_doi": "cf346002d9", 
+        "study_objective": "6bd4eee4f0", 
+        "study_organization": "ce58ad8006", 
+        "study_release_date": "5c3e40d73c", 
+        "study_release_version": "023874764d", 
+        "study_setup": "74d88df070", 
+        "submitter_id": "study_038655f5ec", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "759dd8cef0", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "f1a97f2c3f", 
+        "study_design": "c538f2b4c4", 
+        "study_doi": "664dc0d26d", 
+        "study_objective": "9dcb1cc98b", 
+        "study_organization": "68d95453a2", 
+        "study_release_date": "19c62bf145", 
+        "study_release_version": "537aa9ffba", 
+        "study_setup": "5cfa2973ed", 
+        "submitter_id": "study_0242b427b3", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "63b0f3431f", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "707dd6cbff", 
+        "study_design": "8d04c77460", 
+        "study_doi": "5efcc8e9a9", 
+        "study_objective": "b854820f20", 
+        "study_organization": "7a5203b98a", 
+        "study_release_date": "3196772d23", 
+        "study_release_version": "357abf97ae", 
+        "study_setup": "7c3ce57db4", 
+        "submitter_id": "study_5923a26c3d", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "5a60676d89", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "ad9a19ed11", 
+        "study_design": "0b6d79b29d", 
+        "study_doi": "5384255182", 
+        "study_objective": "c4e46107e2", 
+        "study_organization": "1ae97c11b4", 
+        "study_release_date": "2da9119804", 
+        "study_release_version": "c03db99a6a", 
+        "study_setup": "82e677c2d8", 
+        "submitter_id": "study_81ca6f8b22", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "21ac8aa763", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "16c16ca156", 
+        "study_design": "1fa9b95aaf", 
+        "study_doi": "3104b8c77d", 
+        "study_objective": "f21cc286d8", 
+        "study_organization": "e94756d288", 
+        "study_release_date": "b9ce90a94f", 
+        "study_release_version": "5a03ff1588", 
+        "study_setup": "b3e79c71d8", 
+        "submitter_id": "study_f014f04dc5", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "f2cd08f9ad", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "2", 
+        "study_description": "f60488c746", 
+        "study_design": "15394ec846", 
+        "study_doi": "12d4fbf6ac", 
+        "study_objective": "51e868e748", 
+        "study_organization": "9eae9d7dba", 
+        "study_release_date": "b1700e7971", 
+        "study_release_version": "ad71249d49", 
+        "study_setup": "b1c0a18a98", 
+        "submitter_id": "study_b5db7edf9f", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "c22b3a1b1e", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "60e109f4ce", 
+        "study_design": "c49a9c8911", 
+        "study_doi": "c2d737a376", 
+        "study_objective": "08d34d0afb", 
+        "study_organization": "162b6f0f42", 
+        "study_release_date": "c704107026", 
+        "study_release_version": "a2e56a6d6b", 
+        "study_setup": "dc4c639862", 
+        "submitter_id": "study_babc499be3", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "17bac5f2dd", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "308562f996", 
+        "study_design": "a39ae8e181", 
+        "study_doi": "6fc115c984", 
+        "study_objective": "a99b541ec7", 
+        "study_organization": "137cd5e7d0", 
+        "study_release_date": "55e4afdfda", 
+        "study_release_version": "93a8c828fb", 
+        "study_setup": "a8920de6af", 
+        "submitter_id": "study_d87f192087", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "25f68ada27", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "efbcca3e00", 
+        "study_design": "70a4515f74", 
+        "study_doi": "b0b5fea6f9", 
+        "study_objective": "19325e1d26", 
+        "study_organization": "a70dd5ab9e", 
+        "study_release_date": "c4de864499", 
+        "study_release_version": "ae44a46b2a", 
+        "study_setup": "8d94cf58e8", 
+        "submitter_id": "study_500409ed84", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "f9c7b3b262", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "2", 
+        "study_description": "061b971853", 
+        "study_design": "7a2824f9e1", 
+        "study_doi": "bb70a38aaf", 
+        "study_objective": "35bfa06b88", 
+        "study_organization": "37fb1f46c7", 
+        "study_release_date": "002fc9f72a", 
+        "study_release_version": "012295a8b8", 
+        "study_setup": "0629099918", 
+        "submitter_id": "study_5e01704109", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "73905b8d7c", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "12a5207495", 
+        "study_design": "37a3d4d48c", 
+        "study_doi": "7361130376", 
+        "study_objective": "eb69ea35e3", 
+        "study_organization": "33bc6ed11c", 
+        "study_release_date": "86492cbf25", 
+        "study_release_version": "ee1a5c8f78", 
+        "study_setup": "4cfab5c665", 
+        "submitter_id": "study_65784368b8", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "eaada17b81", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "2", 
+        "study_description": "408415e28c", 
+        "study_design": "a15e43f949", 
+        "study_doi": "bfd523db0b", 
+        "study_objective": "5248aa68fb", 
+        "study_organization": "77e12771c1", 
+        "study_release_date": "5dbc9b9ebd", 
+        "study_release_version": "9121480062", 
+        "study_setup": "1dde807e90", 
+        "submitter_id": "study_6ff1840842", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "1f24def87f", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "2", 
+        "study_description": "c29c84dd90", 
+        "study_design": "3650f65d1d", 
+        "study_doi": "566cb3f968", 
+        "study_objective": "7e045247c6", 
+        "study_organization": "ac9b0b57e6", 
+        "study_release_date": "6cb1f3ff21", 
+        "study_release_version": "cf6cd34881", 
+        "study_setup": "77e1a9cb9e", 
+        "submitter_id": "study_883c77f935", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "e5c6eb6228", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "992f50c9dc", 
+        "study_design": "1a38c4a765", 
+        "study_doi": "7247d01952", 
+        "study_objective": "bc204d6dfe", 
+        "study_organization": "cb01ce9397", 
+        "study_release_date": "5c8e38ede4", 
+        "study_release_version": "ba8054a61a", 
+        "study_setup": "48ac9a4a70", 
+        "submitter_id": "study_e885fa64e3", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "bf4551bfd0", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "2", 
+        "study_description": "5dcbf4c044", 
+        "study_design": "4270720cb9", 
+        "study_doi": "180ea43633", 
+        "study_objective": "1307d13d07", 
+        "study_organization": "e3949d96bb", 
+        "study_release_date": "80cd5623c7", 
+        "study_release_version": "9eee9ea619", 
+        "study_setup": "b75f0d025c", 
+        "submitter_id": "study_f69d40d50f", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "267735e52f", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "811c5b591e", 
+        "study_design": "9df5a0fc6f", 
+        "study_doi": "ab32f13697", 
+        "study_objective": "bc065285b5", 
+        "study_organization": "39e87b8a21", 
+        "study_release_date": "78e50a83d7", 
+        "study_release_version": "f2dfc869d4", 
+        "study_setup": "737b775f1d", 
+        "submitter_id": "study_496fa733e8", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "a4c82df2fe", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "f79b6c9449", 
+        "study_design": "39ce20a3c4", 
+        "study_doi": "81ce4d1e56", 
+        "study_objective": "72775b4dcf", 
+        "study_organization": "f6c38f33dd", 
+        "study_release_date": "75f868ca5a", 
+        "study_release_version": "623b01ac2f", 
+        "study_setup": "59cfde088a", 
+        "submitter_id": "study_5f49670d05", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "d4c1d524e1", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "1", 
+        "study_description": "c755280e7f", 
+        "study_design": "0c3d5d8947", 
+        "study_doi": "6ce1188b0c", 
+        "study_objective": "fb826271cb", 
+        "study_organization": "d5db4b9651", 
+        "study_release_date": "395f98ed1f", 
+        "study_release_version": "bec04ac964", 
+        "study_setup": "dbc2e6dac0", 
+        "submitter_id": "study_c3d9ae9d9b", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "b168f07f76", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "2", 
+        "study_description": "9c758862f4", 
+        "study_design": "8eba4bfaae", 
+        "study_doi": "f987dff205", 
+        "study_objective": "83819d7910", 
+        "study_organization": "693da18564", 
+        "study_release_date": "69d23d5105", 
+        "study_release_version": "3611af36aa", 
+        "study_setup": "1de7180e15", 
+        "submitter_id": "study_55d6a29919", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "ce840ac7de", 
+        "is_clinical_trial": true, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "2", 
+        "study_description": "d70d9b7567", 
+        "study_design": "be6dec9bda", 
+        "study_doi": "2b273513a7", 
+        "study_objective": "9058c7ea37", 
+        "study_organization": "210053612e", 
+        "study_release_date": "1743c79655", 
+        "study_release_version": "a745549ab3", 
+        "study_setup": "c7fd0ffdb1", 
+        "submitter_id": "study_010bcfe58f", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "184ebfa246", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "91112bee01", 
+        "study_design": "5904f9f4fc", 
+        "study_doi": "98949f3d18", 
+        "study_objective": "5e830f4496", 
+        "study_organization": "d639f54eb0", 
+        "study_release_date": "a4ee897ec6", 
+        "study_release_version": "388ec8b500", 
+        "study_setup": "dff2b9c6d9", 
+        "submitter_id": "study_f9ad57a0fb", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "d119f34d0a", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "2", 
+        "study_description": "24aea521a1", 
+        "study_design": "a663fcca59", 
+        "study_doi": "93e7693ee2", 
+        "study_objective": "37dca50359", 
+        "study_organization": "7f9450fb16", 
+        "study_release_date": "ed7bdb8ee6", 
+        "study_release_version": "1ca836916f", 
+        "study_setup": "c29ce404cf", 
+        "submitter_id": "study_91acd4e402", 
+        "type": "study"
+    }, 
+    {
+        "data_description": "508a3b827e", 
+        "is_clinical_trial": false, 
+        "projects": {
+            "code": "jenkins"
+        }, 
+        "study_completeness": "0", 
+        "study_description": "8d8a048b67", 
+        "study_design": "c989c2ac9c", 
+        "study_doi": "0ce43d27dc", 
+        "study_objective": "0421c34ce7", 
+        "study_organization": "fbfc069742", 
+        "study_release_date": "a33314da0d", 
+        "study_release_version": "b381f5db2c", 
+        "study_setup": "0525da74da", 
+        "submitter_id": "study_4572279d80", 
+        "type": "study"
     }
-  },
-  {
-    "study_release_version": "OFU5Roxki5U3",
-    "data_description": "yGAsikXe6cRg",
-    "study_design": "oXKEXGVPx8w5",
-    "study_organization": "KVIm0wGdaxmA",
-    "study_description": "2GwfWgtZmAza",
-    "study_doi": "ibB3jIaXn72z",
-    "age_unit": "Months",
-    "study_completeness": "1",
-    "study_release_date": "xVG9GKLZtOG6",
-    "is_clinical_trial": true,
-    "study_setup": "RMHySePkWjUV",
-    "study_objective": "gNku5aJ07INi",
-    "type": "study",
-    "submitter_id": "study_002",
-    "projects": {
-      "code": "test"
-    }
-  },
-  {
-    "study_release_version": "2mslgcNsJnpn",
-    "data_description": "2fm7DjVhVvMu",
-    "study_design": "3p0uhOOpqwYZ",
-    "study_organization": "E2kj9i3UlPui",
-    "study_description": "l8n61LnRTG7I",
-    "study_doi": "u7CRLxUJuHy9",
-    "age_unit": "d.p.c.",
-    "study_completeness": "1",
-    "study_release_date": "3ErL7bNYPl3D",
-    "is_clinical_trial": false,
-    "study_setup": "oYiOcIR5NBJw",
-    "study_objective": "cflKUaqbOUcC",
-    "type": "study",
-    "submitter_id": "study_003",
-    "projects": {
-      "code": "test"
-    }
-  },
-  {
-    "study_release_version": "XAUvdvIDO8P4",
-    "data_description": "kT8eXNaPYVUI",
-    "study_design": "a0OSBMYNhRC0",
-    "study_organization": "OuzA1uIGRyTE",
-    "study_description": "NByw0NKJ4soG",
-    "study_doi": "jEazhrUs1c2x",
-    "age_unit": "Minutes",
-    "study_completeness": "2",
-    "study_release_date": "c30WwxVaGakZ",
-    "is_clinical_trial": false,
-    "study_setup": "vWkpf93zOzCD",
-    "study_objective": "X0vGCSZA7pYu",
-    "type": "study",
-    "submitter_id": "study_004",
-    "projects": {
-      "code": "test"
-    }
-  },
-  {
-    "study_release_version": "PlXWJVn95GCZ",
-    "data_description": "lssGRoRbq5up",
-    "study_design": "6ENduMqOGysv",
-    "study_organization": "l95NVOQVXpJY",
-    "study_description": "3MhpNXuJrVaC",
-    "study_doi": "uAGllPCgSsgo",
-    "age_unit": "Months",
-    "study_completeness": "0",
-    "study_release_date": "6lFORScV9pp9",
-    "is_clinical_trial": true,
-    "study_setup": "lvTcfBcoqIL5",
-    "study_objective": "n1Mb8dpLk7M5",
-    "type": "study",
-    "submitter_id": "study_005",
-    "projects": {
-      "code": "test"
-    }
-  },
-  {
-    "study_release_version": "9FKiGhyElx8K",
-    "data_description": "oJ3Pz9TT6gnZ",
-    "study_design": "PJcAafZIY9uk",
-    "study_organization": "ze7s1XXyCgwk",
-    "study_description": "i6HbSFUvxsyW",
-    "study_doi": "upoP2LMIcFvj",
-    "age_unit": "Minutes",
-    "study_completeness": "1",
-    "study_release_date": "7K5CLKb4BALJ",
-    "is_clinical_trial": false,
-    "study_setup": "VqkNE2XzcgpJ",
-    "study_objective": "9xliSsZgG7Hk",
-    "type": "study",
-    "submitter_id": "study_006",
-    "projects": {
-      "code": "test"
-    }
-  },
-  {
-    "study_release_version": "Nqyqzm7ZKKWg",
-    "data_description": "kq0pU45ITTLG",
-    "study_design": "ZM4M738OlM5B",
-    "study_organization": "SkmVxhTKS3u1",
-    "study_description": "y6IHt4D2V004",
-    "study_doi": "ZmtifoII4qal",
-    "age_unit": "Seconds",
-    "study_completeness": "2",
-    "study_release_date": "G9uxPCT0amf7",
-    "is_clinical_trial": false,
-    "study_setup": "Cqv2hKgS0fCu",
-    "study_objective": "8GGCH3inXx5y",
-    "type": "study",
-    "submitter_id": "study_007",
-    "projects": {
-      "code": "test"
-    }
-  },
-  {
-    "study_release_version": "LrRVDEjdRZgl",
-    "data_description": "222X6CS20zkZ",
-    "study_design": "sHP2nPBRq8iq",
-    "study_organization": "a49okp0dq3Rs",
-    "study_description": "NUpYTTXivMQG",
-    "study_doi": "PNlkhu9Rdj7u",
-    "age_unit": "Seconds",
-    "study_completeness": "0",
-    "study_release_date": "5gH1Eagq6OCq",
-    "is_clinical_trial": false,
-    "study_setup": "UnD75gBdZCtj",
-    "study_objective": "uOuX6sMZ4upN",
-    "type": "study",
-    "submitter_id": "study_008",
-    "projects": {
-      "code": "test"
-    }
-  },
-  {
-    "study_release_version": "t3hoEK1j6N8p",
-    "data_description": "SN2i8rxPmfTm",
-    "study_design": "sh4th9lh9I6F",
-    "study_organization": "jAdVUHIAug6R",
-    "study_description": "BQkcsiKzIgcx",
-    "study_doi": "U08ifSjoHnhA",
-    "age_unit": "Days",
-    "study_completeness": "0",
-    "study_release_date": "uHq9wMv10cj8",
-    "is_clinical_trial": false,
-    "study_setup": "BlzEunJgH6Rl",
-    "study_objective": "CpDsqutoCBpB",
-    "type": "study",
-    "submitter_id": "study_009",
-    "projects": {
-      "code": "test"
-    }
-  },
-  {
-    "study_release_version": "HEfm9tKOHodB",
-    "data_description": "3ScFtVVQa4SM",
-    "study_design": "OtZQhyCUI3Hb",
-    "study_organization": "oXSECwNMFlec",
-    "study_description": "VLZCiWLUajEK",
-    "study_doi": "ynvdeWDrFBJd",
-    "age_unit": "Days",
-    "study_completeness": "0",
-    "study_release_date": "CZghiVcOvcRQ",
-    "is_clinical_trial": true,
-    "study_setup": "C2fq7a0mOWqg",
-    "study_objective": "43X5BdeS3ahw",
-    "type": "study",
-    "submitter_id": "study_0010",
-    "projects": {
-      "code": "test"
-    }
-  },
-  {
-    "study_release_version": "6I5wiIZvlJ3R",
-    "data_description": "Q4cS93sHcAJK",
-    "study_design": "EaispfbBgh5J",
-    "study_organization": "KZWtshBeI4kF",
-    "study_description": "8AdIzkY378JH",
-    "study_doi": "DU29UpmWZrSo",
-    "age_unit": "Months",
-    "study_completeness": "1",
-    "study_release_date": "cMqfnXvxnHd1",
-    "is_clinical_trial": true,
-    "study_setup": "Ldyh2K6Uq8h8",
-    "study_objective": "Dm6O8LZ0dBVP",
-    "type": "study",
-    "submitter_id": "study_0011",
-    "projects": {
-      "code": "test"
-    }
-  },
-  {
-    "study_release_version": "fjyWsHvhuPru",
-    "data_description": "nnLnN0Hb2A7N",
-    "study_design": "MRSWTLIAmxj9",
-    "study_organization": "Zw3phNYkY8t7",
-    "study_description": "qoXO9r7e0tUK",
-    "study_doi": "2zEHPjMibOii",
-    "age_unit": "Hours",
-    "study_completeness": "2",
-    "study_release_date": "Aghzm3iyq4RC",
-    "is_clinical_trial": true,
-    "study_setup": "0uIUg0ZIctco",
-    "study_objective": "6UUAYFQNViOI",
-    "type": "study",
-    "submitter_id": "study_0012",
-    "projects": {
-      "code": "test"
-    }
-  },
-  {
-    "study_release_version": "lJur4TbroNcX",
-    "data_description": "CZrlnE0u5E37",
-    "study_design": "znp6izLVRZ7q",
-    "study_organization": "b8BJ8GNkOj9K",
-    "study_description": "OnHTzXMdQJck",
-    "study_doi": "uljwyKBJhfMZ",
-    "age_unit": "Days",
-    "study_completeness": "2",
-    "study_release_date": "7pDtDW2RsMBb",
-    "is_clinical_trial": false,
-    "study_setup": "NakWaKypHkcO",
-    "study_objective": "qWGFJjrRMfx5",
-    "type": "study",
-    "submitter_id": "study_0013",
-    "projects": {
-      "code": "test"
-    }
-  },
-  {
-    "study_release_version": "ehoJQd5ETkcL",
-    "data_description": "VZslhGveZGsw",
-    "study_design": "PdMHWpOiUc15",
-    "study_organization": "q2SaAAdt1Ngi",
-    "study_description": "2h5X5BheRbVh",
-    "study_doi": "F6dMhEaf3yE6",
-    "age_unit": "d.p.c.",
-    "study_completeness": "1",
-    "study_release_date": "6rUasfFia4I0",
-    "is_clinical_trial": true,
-    "study_setup": "FdmB0Td1XMVw",
-    "study_objective": "AYiHOm96ykSp",
-    "type": "study",
-    "submitter_id": "study_0014",
-    "projects": {
-      "code": "test"
-    }
-  },
-  {
-    "study_release_version": "8fUJ29yIv9Qc",
-    "data_description": "S7iFQJB7k7lV",
-    "study_design": "Lq8eGbsN1Hxw",
-    "study_organization": "5SK8sfTi0rso",
-    "study_description": "XCfS0zBuyyxW",
-    "study_doi": "xZZTCJHxHdIw",
-    "age_unit": "d.p.c.",
-    "study_completeness": "1",
-    "study_release_date": "7H9KyZEb9Ul6",
-    "is_clinical_trial": true,
-    "study_setup": "E23lR3pqHSKN",
-    "study_objective": "fgqpn5RQFLx9",
-    "type": "study",
-    "submitter_id": "study_0015",
-    "projects": {
-      "code": "test"
-    }
-  },
-  {
-    "study_release_version": "FMAK9cUecCtI",
-    "data_description": "S4WcL1dZLInM",
-    "study_design": "jwMoecoy3jrp",
-    "study_organization": "dVx1viqqR7kX",
-    "study_description": "a7GxKjTTpJ4P",
-    "study_doi": "BVlsXuUVefd7",
-    "age_unit": "Years",
-    "study_completeness": "1",
-    "study_release_date": "hjwYkRFNDGw4",
-    "is_clinical_trial": false,
-    "study_setup": "INt3rTC8y8JG",
-    "study_objective": "OcTIejQKMxoU",
-    "type": "study",
-    "submitter_id": "study_0016",
-    "projects": {
-      "code": "test"
-    }
-  },
-  {
-    "study_release_version": "T6jrJ9MBrwSD",
-    "data_description": "D0ddc6uyIetg",
-    "study_design": "jLMC1az5dCYz",
-    "study_organization": "m2rGb2bRQzzt",
-    "study_description": "CPwwzpVlzQwg",
-    "study_doi": "vrCipMvj5d0C",
-    "age_unit": "Seconds",
-    "study_completeness": "2",
-    "study_release_date": "dHQhtK9qYm1V",
-    "is_clinical_trial": false,
-    "study_setup": "7EeEijtobueJ",
-    "study_objective": "QJJn4Ly2Lqvf",
-    "type": "study",
-    "submitter_id": "study_0017",
-    "projects": {
-      "code": "test"
-    }
-  },
-  {
-    "study_release_version": "umGhalJDvM9k",
-    "data_description": "qC8n3uxzWtx0",
-    "study_design": "DjDp0ObgsfCh",
-    "study_organization": "6n8IbyDMYr2C",
-    "study_description": "aSsyXm9eGhFv",
-    "study_doi": "3kWuW5aCVO5a",
-    "age_unit": "Weeks",
-    "study_completeness": "1",
-    "study_release_date": "IgiIelnmUPIj",
-    "is_clinical_trial": true,
-    "study_setup": "wYmF68jg3dEk",
-    "study_objective": "IamkZWooJWAI",
-    "type": "study",
-    "submitter_id": "study_0018",
-    "projects": {
-      "code": "test"
-    }
-  },
-  {
-    "study_release_version": "7EYZQFkzOLo0",
-    "data_description": "lvhNfnkG88KZ",
-    "study_design": "RBzD3It3ykY5",
-    "study_organization": "kcnMuDDJMX2n",
-    "study_description": "RxI49tQPWo9A",
-    "study_doi": "3NlQdH5eIeXC",
-    "age_unit": "Days",
-    "study_completeness": "0",
-    "study_release_date": "fE5HTl9mYmhg",
-    "is_clinical_trial": false,
-    "study_setup": "vdOSllT6DSza",
-    "study_objective": "QgSOrxpibwey",
-    "type": "study",
-    "submitter_id": "study_0019",
-    "projects": {
-      "code": "test"
-    }
-  },
-  {
-    "study_release_version": "KGsBEVA7bXow",
-    "data_description": "DTITrU2d1pNw",
-    "study_design": "Ef25ha4X8BKr",
-    "study_organization": "MAxpjNfj7TkW",
-    "study_description": "GLS6F5DSR6Yu",
-    "study_doi": "w1AZ70y6PIKd",
-    "age_unit": "Minutes",
-    "study_completeness": "2",
-    "study_release_date": "mTvRu4LS723L",
-    "is_clinical_trial": false,
-    "study_setup": "IIDsGuCpSV3I",
-    "study_objective": "TDJJTwOQrveF",
-    "type": "study",
-    "submitter_id": "study_0020",
-    "projects": {
-      "code": "test"
-    }
-  }
 ]

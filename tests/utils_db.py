@@ -45,11 +45,11 @@ class SQLQuery:
         self.join_clauses = {}
 
     def __getitem__(self, item):
-        tables, fn, name, submitter_id = item
+        tables, fn, name, src, submitter_id = item
         tables = self.order_tables(tables)
 
-        if (tuple(tables), fn) in self.join_clauses:
-            sql_join = self.join_clauses[(tuple(tables), fn)]
+        if (tuple(tables), fn, name) in self.join_clauses:
+            sql_join = self.join_clauses[(tuple(tables), fn, name)]
         else:
             query = "FROM {joins}"
             joins = self.generate_join_clauses(tables)
@@ -57,21 +57,26 @@ class SQLQuery:
 
             self.join_clauses[(tuple(tables), fn, name)] = sql_join
 
-        if name in self.select_clauses:
-            sql_select = self.select_clauses[name]
+        key = '{}_{}_{}_{}_{}'.format(fn, tables[0], name, src, tables[-1])
+        if key in self.select_clauses:
+            sql_select, group = self.select_clauses[key]
         else:
             query = "SELECT {gather}"
-            gather = self.generate_gather_clause(fn, tables[0], name)
+            gather, group = self.generate_gather_clause(fn, tables[0], name, src, tables[-1])
             sql_select = SQL(query).format(gather=gather)
 
-            self.select_clauses[name] = sql_select
+            self.select_clauses[key] = (sql_select, group)
 
         submitter_json = '{{"submitter_id": "{}"}}'.format(submitter_id)
-        sql_where = SQL("WHERE {last_node}.{_props} @> {submitter};").format(last_node=Identifier(tables[-1]),
+        sql_where = SQL("WHERE {last_node}.{_props} @> {submitter}").format(last_node=Identifier(tables[-1]),
                                                                              _props=Identifier("_props"),
                                                                              submitter=Literal(submitter_json))
 
-        sql = SQL(" ").join([sql_select, sql_join, sql_where])
+        if group:
+            sql = SQL(" ").join([sql_select, sql_join, sql_where, group, SQL(";")])
+        else:
+            sql = SQL(" ").join([sql_select, sql_join, sql_where, SQL(";")])
+
         val = execute_sql_query(sql)
 
         return val
@@ -109,23 +114,44 @@ class SQLQuery:
         return joins
 
     @staticmethod
-    def generate_gather_clause(aggregator, table=None, prop=None):
+    def generate_gather_clause(aggregator, table=None, prop=None, src=None, root=None):
         """
 
         :param aggregator:
         :param table:
         :param prop:
+        :param src:
+        :param root:
         :return:
         """
+        group = None
         if aggregator == "_get":
             select = SQL("{table}.{column} -> {field}").format(table=Identifier(table),
                                                                column=Identifier("_props"),
                                                                field=Literal(prop))
         elif aggregator == "count":
             select = SQL("COUNT(*)")
+        elif aggregator == "set":
+            select = SQL("array_agg(DISTINCT {table}.{column}->{field}), {root}.{node_id}").format(
+                table=Identifier(table),
+                column=Identifier("_props"),
+                field=Literal(src),
+                root=Identifier(root),
+                node_id=Identifier("node_id")
+            )
+            group = SQL("GROUP BY {root}.{node_id} ORDER BY {root}.{node_id}").format(
+                root=Identifier(root),
+                node_id=Identifier("node_id")
+            )
+        elif aggregator == "sum":
+            select = SQL("SUM(coalesce(({table}.{props}->>{field})::int, 0))").format(
+                table=Identifier(table),
+                props=Identifier("_props"),
+                field=Literal(src)
+            )
         else:
             select = SQL("*")
-        return select
+        return select, group
 
     @staticmethod
     def order_tables(tables):

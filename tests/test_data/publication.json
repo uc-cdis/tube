@@ -1,236 +1,990 @@
 [
-  {
-    "doi": 2,
-    "title": "0nlMYy6VaRlV",
-    "journal": "BHNE6pka7SEe",
-    "authors": "BFZJfESTkVdg",
-    "pmid": 5,
-    "issue": "IZkJQd2YzW98",
-    "type": "publication",
-    "submitter_id": "publication_001",
-    "studies": {
-      "submitter_id": "study_005"
+    {
+        "authors": "f51d24175f", 
+        "doi": 54, 
+        "issue": "3fb01638c0", 
+        "journal": "ca70f82faf", 
+        "pmid": 8, 
+        "studies": {
+            "submitter_id": "study_02db28f19c"
+        }, 
+        "submitter_id": "publication_7bd408c85f", 
+        "title": "acec38915e", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "ec4254fabb", 
+        "doi": 0, 
+        "issue": "ec72f99be8", 
+        "journal": "1facc35429", 
+        "pmid": 95, 
+        "studies": {
+            "submitter_id": "study_0caa7a2f80"
+        }, 
+        "submitter_id": "publication_f18a825a4e", 
+        "title": "82715766ba", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "48b7c9db44", 
+        "doi": 4, 
+        "issue": "1f830db6d5", 
+        "journal": "531f458f56", 
+        "pmid": 56, 
+        "studies": {
+            "submitter_id": "study_500409ed84"
+        }, 
+        "submitter_id": "publication_21dd4c42c6", 
+        "title": "271a69fca3", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "88701aa13d", 
+        "doi": 99, 
+        "issue": "aac35e10ee", 
+        "journal": "2755807284", 
+        "pmid": 27, 
+        "studies": {
+            "submitter_id": "study_587a3c6eff"
+        }, 
+        "submitter_id": "publication_7b024847f8", 
+        "title": "8aa65e2cd8", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "b4f4f5db39", 
+        "doi": 22, 
+        "issue": "5f09557137", 
+        "journal": "7f3503d96e", 
+        "pmid": 5, 
+        "studies": {
+            "submitter_id": "study_4ee12b09ff"
+        }, 
+        "submitter_id": "publication_a2b32474ff", 
+        "title": "0375e13c4d", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "7d68105643", 
+        "doi": 12, 
+        "issue": "55940b646e", 
+        "journal": "8a08991f48", 
+        "pmid": 76, 
+        "studies": {
+            "submitter_id": "study_67c522c127"
+        }, 
+        "submitter_id": "publication_fe0efae722", 
+        "title": "9a378a82e0", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "dd5f77b535", 
+        "doi": 83, 
+        "issue": "8b056297d4", 
+        "journal": "476b5dafe5", 
+        "pmid": 91, 
+        "studies": {
+            "submitter_id": "study_496fa733e8"
+        }, 
+        "submitter_id": "publication_d370be6e91", 
+        "title": "7e78ea4cb9", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "50509c90be", 
+        "doi": 3, 
+        "issue": "7a075c6179", 
+        "journal": "3dfb7fdf03", 
+        "pmid": 42, 
+        "studies": {
+            "submitter_id": "study_f2d25ccf3f"
+        }, 
+        "submitter_id": "publication_f1e19298ed", 
+        "title": "28615c1c63", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "daf0797f0e", 
+        "doi": 22, 
+        "issue": "8f1b4bd35d", 
+        "journal": "62a8f2a148", 
+        "pmid": 25, 
+        "studies": {
+            "submitter_id": "study_7d750dc5fc"
+        }, 
+        "submitter_id": "publication_f8805b1891", 
+        "title": "7797851f4b", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "6fcaeba86e", 
+        "doi": 48, 
+        "issue": "09a0463119", 
+        "journal": "6033284a75", 
+        "pmid": 79, 
+        "studies": {
+            "submitter_id": "study_17849729c7"
+        }, 
+        "submitter_id": "publication_6b4b0e7adc", 
+        "title": "4ecb849237", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "5e5d1a550b", 
+        "doi": 82, 
+        "issue": "4d187e0991", 
+        "journal": "f07740ce08", 
+        "pmid": 5, 
+        "studies": {
+            "submitter_id": "study_f16b9ea5fe"
+        }, 
+        "submitter_id": "publication_25ac3111f4", 
+        "title": "076805302a", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "8b3a7cc23f", 
+        "doi": 7, 
+        "issue": "923859f438", 
+        "journal": "b1a9694ce6", 
+        "pmid": 22, 
+        "studies": {
+            "submitter_id": "study_0242b427b3"
+        }, 
+        "submitter_id": "publication_799b6ae0a9", 
+        "title": "8c9c7908ad", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "6e40315483", 
+        "doi": 50, 
+        "issue": "78dc608d3f", 
+        "journal": "709e981aca", 
+        "pmid": 81, 
+        "studies": {
+            "submitter_id": "study_7d750dc5fc"
+        }, 
+        "submitter_id": "publication_6694bc72a1", 
+        "title": "59ff3eacac", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "133030b6dd", 
+        "doi": 66, 
+        "issue": "830dd9709c", 
+        "journal": "919466d63c", 
+        "pmid": 97, 
+        "studies": {
+            "submitter_id": "study_d44abf3cbf"
+        }, 
+        "submitter_id": "publication_c0c82ea661", 
+        "title": "9d6d471839", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "01b7982bbc", 
+        "doi": 95, 
+        "issue": "ba9741cb1b", 
+        "journal": "f391958f18", 
+        "pmid": 40, 
+        "studies": {
+            "submitter_id": "study_d71d5ca2f4"
+        }, 
+        "submitter_id": "publication_66587f8b29", 
+        "title": "a340d10499", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "ab6dec85b3", 
+        "doi": 46, 
+        "issue": "5582f5f61e", 
+        "journal": "fa90e38ff5", 
+        "pmid": 29, 
+        "studies": {
+            "submitter_id": "study_25a20d9b39"
+        }, 
+        "submitter_id": "publication_56360766a8", 
+        "title": "bcdcfc22e5", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "8481ba7528", 
+        "doi": 18, 
+        "issue": "784dc194d6", 
+        "journal": "1bb0a2dfbb", 
+        "pmid": 42, 
+        "studies": {
+            "submitter_id": "study_223991a7b2"
+        }, 
+        "submitter_id": "publication_2ceec0092e", 
+        "title": "3ffc674f88", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "3e296b45d5", 
+        "doi": 6, 
+        "issue": "1135fc25f3", 
+        "journal": "06c71ecf80", 
+        "pmid": 45, 
+        "studies": {
+            "submitter_id": "study_4ee12b09ff"
+        }, 
+        "submitter_id": "publication_377b32a75c", 
+        "title": "4ba9de1c37", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "fca873191d", 
+        "doi": 1, 
+        "issue": "8b4ee12403", 
+        "journal": "5c8f786cf3", 
+        "pmid": 51, 
+        "studies": {
+            "submitter_id": "study_f16b9ea5fe"
+        }, 
+        "submitter_id": "publication_2da4022d3d", 
+        "title": "fdbe2c1639", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "92d67028e7", 
+        "doi": 72, 
+        "issue": "932535110f", 
+        "journal": "f5abdab3ca", 
+        "pmid": 60, 
+        "studies": {
+            "submitter_id": "study_17c5a284b3"
+        }, 
+        "submitter_id": "publication_4444cea2f7", 
+        "title": "eceb94c85a", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "f639ef3f56", 
+        "doi": 23, 
+        "issue": "6c7fc1d94e", 
+        "journal": "dd49ac1c38", 
+        "pmid": 42, 
+        "studies": {
+            "submitter_id": "study_f014f04dc5"
+        }, 
+        "submitter_id": "publication_1db37d9c75", 
+        "title": "e5983a293b", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "3df517ac21", 
+        "doi": 9, 
+        "issue": "8fda775c1d", 
+        "journal": "a97d2a5f2f", 
+        "pmid": 86, 
+        "studies": {
+            "submitter_id": "study_02db28f19c"
+        }, 
+        "submitter_id": "publication_348ca5f886", 
+        "title": "f92d2208e9", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "0bcb33e231", 
+        "doi": 79, 
+        "issue": "54e93f610c", 
+        "journal": "19ee5ca49e", 
+        "pmid": 23, 
+        "studies": {
+            "submitter_id": "study_b5af25cee1"
+        }, 
+        "submitter_id": "publication_1ca480f80a", 
+        "title": "44e5af3617", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "4543c53e76", 
+        "doi": 51, 
+        "issue": "e7cbaf2029", 
+        "journal": "ecfc774ddb", 
+        "pmid": 99, 
+        "studies": {
+            "submitter_id": "study_06af10b4de"
+        }, 
+        "submitter_id": "publication_be57548cba", 
+        "title": "75bc6dd96f", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "b810ed3cc8", 
+        "doi": 47, 
+        "issue": "5ac466a2db", 
+        "journal": "19162aa0a9", 
+        "pmid": 47, 
+        "studies": {
+            "submitter_id": "study_b5af25cee1"
+        }, 
+        "submitter_id": "publication_af2d2d7ccb", 
+        "title": "f5ee5ae1ba", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "6249039b24", 
+        "doi": 24, 
+        "issue": "d5683bdf0f", 
+        "journal": "cc092fd351", 
+        "pmid": 62, 
+        "studies": {
+            "submitter_id": "study_631d14a5ee"
+        }, 
+        "submitter_id": "publication_35997c2f2b", 
+        "title": "2e271ed0e9", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "43122c7028", 
+        "doi": 87, 
+        "issue": "f80a98b339", 
+        "journal": "ca21071f83", 
+        "pmid": 35, 
+        "studies": {
+            "submitter_id": "study_e6f98d0dc4"
+        }, 
+        "submitter_id": "publication_17de51dcd2", 
+        "title": "c008ad5259", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "af4b6a6b0c", 
+        "doi": 35, 
+        "issue": "8bc26952f6", 
+        "journal": "dd8cb58388", 
+        "pmid": 69, 
+        "studies": {
+            "submitter_id": "study_d71d5ca2f4"
+        }, 
+        "submitter_id": "publication_c9080e25ea", 
+        "title": "aded462850", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "518767b0f7", 
+        "doi": 53, 
+        "issue": "0b7df0addd", 
+        "journal": "4c542282d8", 
+        "pmid": 0, 
+        "studies": {
+            "submitter_id": "study_5923a26c3d"
+        }, 
+        "submitter_id": "publication_e6b2ac7c2c", 
+        "title": "b0b3441b8b", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "1e4945a55e", 
+        "doi": 32, 
+        "issue": "7adf258fe6", 
+        "journal": "58e0dc1079", 
+        "pmid": 25, 
+        "studies": {
+            "submitter_id": "study_67c522c127"
+        }, 
+        "submitter_id": "publication_87c70b3cbc", 
+        "title": "d863cdeb41", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "62fc2f01f8", 
+        "doi": 18, 
+        "issue": "0d997f1884", 
+        "journal": "489adfb749", 
+        "pmid": 63, 
+        "studies": {
+            "submitter_id": "study_c3d9ae9d9b"
+        }, 
+        "submitter_id": "publication_7335ac75d1", 
+        "title": "073d34821d", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "7953833f88", 
+        "doi": 15, 
+        "issue": "403a13151c", 
+        "journal": "1978c5661a", 
+        "pmid": 9, 
+        "studies": {
+            "submitter_id": "study_587a3c6eff"
+        }, 
+        "submitter_id": "publication_9a03dc2028", 
+        "title": "bac1730048", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "b4149cd6e4", 
+        "doi": 86, 
+        "issue": "b9bbcc5daa", 
+        "journal": "9e7f76e67e", 
+        "pmid": 65, 
+        "studies": {
+            "submitter_id": "study_05e99633c6"
+        }, 
+        "submitter_id": "publication_79895ce339", 
+        "title": "f9ac1a0474", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "0f3e8401d5", 
+        "doi": 78, 
+        "issue": "6318ff60dc", 
+        "journal": "7593194d92", 
+        "pmid": 33, 
+        "studies": {
+            "submitter_id": "study_91acd4e402"
+        }, 
+        "submitter_id": "publication_da68191088", 
+        "title": "98a919e53c", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "1e0cc75e9b", 
+        "doi": 14, 
+        "issue": "60f3bf145e", 
+        "journal": "8b3c755a38", 
+        "pmid": 30, 
+        "studies": {
+            "submitter_id": "study_65238315a7"
+        }, 
+        "submitter_id": "publication_3e58a1fdcb", 
+        "title": "89a113af8d", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "1302750534", 
+        "doi": 65, 
+        "issue": "ed9c9324fe", 
+        "journal": "4505a01f7a", 
+        "pmid": 54, 
+        "studies": {
+            "submitter_id": "study_883c77f935"
+        }, 
+        "submitter_id": "publication_d2f7562d54", 
+        "title": "d32f36bc41", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "6e6858a628", 
+        "doi": 87, 
+        "issue": "dd04f79bdd", 
+        "journal": "8a8babce92", 
+        "pmid": 88, 
+        "studies": {
+            "submitter_id": "study_d0575ef861"
+        }, 
+        "submitter_id": "publication_cb146be629", 
+        "title": "399249177f", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "62116c2440", 
+        "doi": 51, 
+        "issue": "2483120673", 
+        "journal": "8a9386d5bb", 
+        "pmid": 4, 
+        "studies": {
+            "submitter_id": "study_4ee12b09ff"
+        }, 
+        "submitter_id": "publication_d3e18b38b3", 
+        "title": "966dd90714", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "36aa4f09ba", 
+        "doi": 23, 
+        "issue": "885dde8a97", 
+        "journal": "12ca992081", 
+        "pmid": 42, 
+        "studies": {
+            "submitter_id": "study_06af10b4de"
+        }, 
+        "submitter_id": "publication_989c150034", 
+        "title": "60a07a6f25", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "5f3a19c476", 
+        "doi": 30, 
+        "issue": "f10761fcb2", 
+        "journal": "6e14a26426", 
+        "pmid": 65, 
+        "studies": {
+            "submitter_id": "study_6556b5a615"
+        }, 
+        "submitter_id": "publication_8f55c9c1f5", 
+        "title": "4fdb8fbab2", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "1371d3976c", 
+        "doi": 88, 
+        "issue": "5692e3e098", 
+        "journal": "cc94d73bb3", 
+        "pmid": 60, 
+        "studies": {
+            "submitter_id": "study_a9890229da"
+        }, 
+        "submitter_id": "publication_771cc8b476", 
+        "title": "bd670a91fa", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "b4b1ee293c", 
+        "doi": 67, 
+        "issue": "0ad2f2a221", 
+        "journal": "cddf5fc2b0", 
+        "pmid": 71, 
+        "studies": {
+            "submitter_id": "study_cfdbbc450d"
+        }, 
+        "submitter_id": "publication_da00d115ff", 
+        "title": "39fdabe6d7", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "b89e0173d8", 
+        "doi": 40, 
+        "issue": "d4017ae58d", 
+        "journal": "f85929a0c2", 
+        "pmid": 75, 
+        "studies": {
+            "submitter_id": "study_b5af25cee1"
+        }, 
+        "submitter_id": "publication_a19192329a", 
+        "title": "0005145a34", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "5c6dfe2c5d", 
+        "doi": 49, 
+        "issue": "28637189ca", 
+        "journal": "1be88ffe00", 
+        "pmid": 12, 
+        "studies": {
+            "submitter_id": "study_f2d25ccf3f"
+        }, 
+        "submitter_id": "publication_682c2553a9", 
+        "title": "fc14f2da77", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "70a4d6ab3c", 
+        "doi": 59, 
+        "issue": "bb7fc3fc29", 
+        "journal": "713576f46d", 
+        "pmid": 9, 
+        "studies": {
+            "submitter_id": "study_cfdbbc450d"
+        }, 
+        "submitter_id": "publication_86d3c4b9a1", 
+        "title": "592e72c392", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "96fa1d095c", 
+        "doi": 16, 
+        "issue": "aa45dedce5", 
+        "journal": "3c0f6aa722", 
+        "pmid": 89, 
+        "studies": {
+            "submitter_id": "study_7d750dc5fc"
+        }, 
+        "submitter_id": "publication_7c0b1c473c", 
+        "title": "ac0ec04266", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "9ab4a31d61", 
+        "doi": 14, 
+        "issue": "7270b45a14", 
+        "journal": "e0f6b97e6e", 
+        "pmid": 79, 
+        "studies": {
+            "submitter_id": "study_b5db7edf9f"
+        }, 
+        "submitter_id": "publication_50fba3a8bc", 
+        "title": "31baf89e97", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "cf8500547a", 
+        "doi": 65, 
+        "issue": "9a7d57cac1", 
+        "journal": "22c3aec3eb", 
+        "pmid": 46, 
+        "studies": {
+            "submitter_id": "study_010bcfe58f"
+        }, 
+        "submitter_id": "publication_51e4de0c7f", 
+        "title": "b7648d4dfa", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "4b763a0634", 
+        "doi": 70, 
+        "issue": "82940b2bcc", 
+        "journal": "37afcc78fe", 
+        "pmid": 68, 
+        "studies": {
+            "submitter_id": "study_f69d40d50f"
+        }, 
+        "submitter_id": "publication_a97b7e0fd0", 
+        "title": "bd98d6ee2e", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "b1481dd8e2", 
+        "doi": 44, 
+        "issue": "5daf066eb1", 
+        "journal": "343247cc92", 
+        "pmid": 66, 
+        "studies": {
+            "submitter_id": "study_4ee12b09ff"
+        }, 
+        "submitter_id": "publication_38e8fcc913", 
+        "title": "a85deab31e", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "6757dfc3c5", 
+        "doi": 98, 
+        "issue": "d348eedba7", 
+        "journal": "e4953abb3f", 
+        "pmid": 36, 
+        "studies": {
+            "submitter_id": "study_b5db7edf9f"
+        }, 
+        "submitter_id": "publication_8192dcdebe", 
+        "title": "694826a07a", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "7d90f5b5fc", 
+        "doi": 63, 
+        "issue": "6523b0beee", 
+        "journal": "e91875dee5", 
+        "pmid": 39, 
+        "studies": {
+            "submitter_id": "study_c6f3ed73ba"
+        }, 
+        "submitter_id": "publication_0c7ab57241", 
+        "title": "3b0bc628c8", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "0582e6d12b", 
+        "doi": 4, 
+        "issue": "5c6bb13188", 
+        "journal": "947bec3771", 
+        "pmid": 15, 
+        "studies": {
+            "submitter_id": "study_6556b5a615"
+        }, 
+        "submitter_id": "publication_72cce5d9b8", 
+        "title": "79c5876120", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "7a9977d319", 
+        "doi": 68, 
+        "issue": "ca8e3153ba", 
+        "journal": "6421ac9b23", 
+        "pmid": 94, 
+        "studies": {
+            "submitter_id": "study_17c5a284b3"
+        }, 
+        "submitter_id": "publication_4a7bc4288d", 
+        "title": "d3ffd6f933", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "10be0b7d9e", 
+        "doi": 59, 
+        "issue": "2c7d19e94f", 
+        "journal": "5ce8e4b68e", 
+        "pmid": 43, 
+        "studies": {
+            "submitter_id": "study_f8aecca0a6"
+        }, 
+        "submitter_id": "publication_2102edff89", 
+        "title": "cdddbcf9f4", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "d5eb4de47e", 
+        "doi": 55, 
+        "issue": "8aefb5ce92", 
+        "journal": "b2de8e10b5", 
+        "pmid": 50, 
+        "studies": {
+            "submitter_id": "study_81ca6f8b22"
+        }, 
+        "submitter_id": "publication_803c5801b7", 
+        "title": "d7e619061d", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "d1bffba4ae", 
+        "doi": 3, 
+        "issue": "c86b8a0028", 
+        "journal": "54185b6893", 
+        "pmid": 24, 
+        "studies": {
+            "submitter_id": "study_496fa733e8"
+        }, 
+        "submitter_id": "publication_7c18193639", 
+        "title": "e1722c419a", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "2910dc635d", 
+        "doi": 79, 
+        "issue": "4a2a4f5e08", 
+        "journal": "42e36c1270", 
+        "pmid": 11, 
+        "studies": {
+            "submitter_id": "study_65784368b8"
+        }, 
+        "submitter_id": "publication_02e0c10505", 
+        "title": "ac3fdce3b9", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "cc11df8387", 
+        "doi": 99, 
+        "issue": "f3bcedcf12", 
+        "journal": "e570f45142", 
+        "pmid": 76, 
+        "studies": {
+            "submitter_id": "study_b5db7edf9f"
+        }, 
+        "submitter_id": "publication_675f7c0ac3", 
+        "title": "4cb5825d9c", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "3ae7dc022c", 
+        "doi": 55, 
+        "issue": "307ce32dd1", 
+        "journal": "2d304c9802", 
+        "pmid": 64, 
+        "studies": {
+            "submitter_id": "study_cfdbbc450d"
+        }, 
+        "submitter_id": "publication_bdb7b37013", 
+        "title": "f33f41375f", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "dbbdbec07a", 
+        "doi": 98, 
+        "issue": "c4cb4e1652", 
+        "journal": "7a1518d8ba", 
+        "pmid": 6, 
+        "studies": {
+            "submitter_id": "study_c9379547c5"
+        }, 
+        "submitter_id": "publication_a63f555060", 
+        "title": "7084999e10", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "f7881d8f34", 
+        "doi": 6, 
+        "issue": "ccf5e2447f", 
+        "journal": "5018a1d5c1", 
+        "pmid": 48, 
+        "studies": {
+            "submitter_id": "study_a9ff32eb49"
+        }, 
+        "submitter_id": "publication_ed6ea03912", 
+        "title": "816b577d0c", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "fa7793b0eb", 
+        "doi": 23, 
+        "issue": "3a6c716d5e", 
+        "journal": "cf4e3ba1da", 
+        "pmid": 38, 
+        "studies": {
+            "submitter_id": "study_67c522c127"
+        }, 
+        "submitter_id": "publication_dbd60ffba7", 
+        "title": "a65c4f6063", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "3c654c9eff", 
+        "doi": 25, 
+        "issue": "f2816163e2", 
+        "journal": "1cff25f4be", 
+        "pmid": 31, 
+        "studies": {
+            "submitter_id": "study_35bece6c2f"
+        }, 
+        "submitter_id": "publication_e0c5e01162", 
+        "title": "d52312cd4b", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "19b1634d97", 
+        "doi": 44, 
+        "issue": "cea69068fb", 
+        "journal": "adea997b03", 
+        "pmid": 72, 
+        "studies": {
+            "submitter_id": "study_dec814955a"
+        }, 
+        "submitter_id": "publication_721e64c519", 
+        "title": "2f519c5fb5", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "ce189be124", 
+        "doi": 19, 
+        "issue": "fc66245cfa", 
+        "journal": "39882225d1", 
+        "pmid": 68, 
+        "studies": {
+            "submitter_id": "study_81ca6f8b22"
+        }, 
+        "submitter_id": "publication_edfdb83fbd", 
+        "title": "d9f006bd87", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "b3701a99b7", 
+        "doi": 66, 
+        "issue": "2fe97ee2ba", 
+        "journal": "d62e0f544d", 
+        "pmid": 63, 
+        "studies": {
+            "submitter_id": "study_cfdbbc450d"
+        }, 
+        "submitter_id": "publication_9be578b297", 
+        "title": "55154fe2bf", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "c6a30d34b5", 
+        "doi": 83, 
+        "issue": "f5474e3281", 
+        "journal": "adee678763", 
+        "pmid": 33, 
+        "studies": {
+            "submitter_id": "study_65238315a7"
+        }, 
+        "submitter_id": "publication_5cd84e034f", 
+        "title": "88214ae6bc", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "8b9705dc35", 
+        "doi": 13, 
+        "issue": "c20141613b", 
+        "journal": "ff0012dd6d", 
+        "pmid": 61, 
+        "studies": {
+            "submitter_id": "study_02db28f19c"
+        }, 
+        "submitter_id": "publication_74a73f8ed9", 
+        "title": "a092314263", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "e783b8a969", 
+        "doi": 61, 
+        "issue": "6a0658e906", 
+        "journal": "b61194dfba", 
+        "pmid": 10, 
+        "studies": {
+            "submitter_id": "study_010bcfe58f"
+        }, 
+        "submitter_id": "publication_4a968b5216", 
+        "title": "37494e966e", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "2c37dde280", 
+        "doi": 82, 
+        "issue": "f51c36efab", 
+        "journal": "c6999d4650", 
+        "pmid": 85, 
+        "studies": {
+            "submitter_id": "study_f69d40d50f"
+        }, 
+        "submitter_id": "publication_1d9664ac81", 
+        "title": "7e949ad9ca", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "a1d86a993a", 
+        "doi": 66, 
+        "issue": "23272ef718", 
+        "journal": "df37d37d6d", 
+        "pmid": 8, 
+        "studies": {
+            "submitter_id": "study_4ee12b09ff"
+        }, 
+        "submitter_id": "publication_4827c09700", 
+        "title": "9eb4746881", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "cd5769a249", 
+        "doi": 44, 
+        "issue": "b6d4af472f", 
+        "journal": "3bb410db04", 
+        "pmid": 62, 
+        "studies": {
+            "submitter_id": "study_6556b5a615"
+        }, 
+        "submitter_id": "publication_ad5bea9ae0", 
+        "title": "7fa6dec8f9", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "804a50c9cb", 
+        "doi": 89, 
+        "issue": "b04c3c0554", 
+        "journal": "e9dbc14e8f", 
+        "pmid": 46, 
+        "studies": {
+            "submitter_id": "study_ffacb85998"
+        }, 
+        "submitter_id": "publication_11673cae23", 
+        "title": "739c540a20", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "d917cb2831", 
+        "doi": 34, 
+        "issue": "ac5250cb20", 
+        "journal": "832356167b", 
+        "pmid": 83, 
+        "studies": {
+            "submitter_id": "study_d0575ef861"
+        }, 
+        "submitter_id": "publication_24549e551c", 
+        "title": "b343eac121", 
+        "type": "publication"
+    }, 
+    {
+        "authors": "ec70145a82", 
+        "doi": 77, 
+        "issue": "5a14b38fc0", 
+        "journal": "0b12b0fa13", 
+        "pmid": 26, 
+        "studies": {
+            "submitter_id": "study_5e01704109"
+        }, 
+        "submitter_id": "publication_65a4d32312", 
+        "title": "7ad7baf9d7", 
+        "type": "publication"
     }
-  },
-  {
-    "doi": 4,
-    "title": "JbeZfyYiOWcg",
-    "journal": "p4q5GlgsdgCr",
-    "authors": "xQLFoLRVaVSV",
-    "pmid": 3,
-    "issue": "sxbeqC2cuUTk",
-    "type": "publication",
-    "submitter_id": "publication_002",
-    "studies": {
-      "submitter_id": "study_0019"
-    }
-  },
-  {
-    "doi": 6,
-    "title": "msf5SjDNzeJd",
-    "journal": "IvWXT3dj747Q",
-    "authors": "BVtcgfLg0jQL",
-    "pmid": 7,
-    "issue": "skfwNDBtQRDi",
-    "type": "publication",
-    "submitter_id": "publication_003",
-    "studies": {
-      "submitter_id": "study_0018"
-    }
-  },
-  {
-    "doi": 3,
-    "title": "D2Abcnwhv1hH",
-    "journal": "nmnxT69IfwlM",
-    "authors": "7EvihvCPncov",
-    "pmid": 2,
-    "issue": "yTP64fLilk0Z",
-    "type": "publication",
-    "submitter_id": "publication_004",
-    "studies": {
-      "submitter_id": "study_0019"
-    }
-  },
-  {
-    "doi": 9,
-    "title": "aTSTHnJhc2tI",
-    "journal": "5lkRMZVfSuPd",
-    "authors": "tfg3jTgW50gA",
-    "pmid": 3,
-    "issue": "hzkCYNf6vOs1",
-    "type": "publication",
-    "submitter_id": "publication_005",
-    "studies": {
-      "submitter_id": "study_0016"
-    }
-  },
-  {
-    "doi": 2,
-    "title": "VzHDuX6AeujH",
-    "journal": "0HZNZCGRKee7",
-    "authors": "r3ZAONgNaf48",
-    "pmid": 6,
-    "issue": "PVkMBr4CwAwm",
-    "type": "publication",
-    "submitter_id": "publication_006",
-    "studies": {
-      "submitter_id": "study_0010"
-    }
-  },
-  {
-    "doi": 5,
-    "title": "OLXQNUJnSafa",
-    "journal": "vk8O6lZajN92",
-    "authors": "q8sSRetdbjtK",
-    "pmid": 7,
-    "issue": "MJWh1s5Wc7Pu",
-    "type": "publication",
-    "submitter_id": "publication_007",
-    "studies": {
-      "submitter_id": "study_0019"
-    }
-  },
-  {
-    "doi": 4,
-    "title": "TMrgsBBJ0GBQ",
-    "journal": "QIsWlQwUTcVX",
-    "authors": "oMXpxeuEkgi1",
-    "pmid": 4,
-    "issue": "lgWHQ18RmU9O",
-    "type": "publication",
-    "submitter_id": "publication_008",
-    "studies": {
-      "submitter_id": "study_003"
-    }
-  },
-  {
-    "doi": 2,
-    "title": "xWRDUf1oWKub",
-    "journal": "t0ehOZucr0xB",
-    "authors": "QWfOrOgoOnJj",
-    "pmid": 3,
-    "issue": "gL3QyI60SPw7",
-    "type": "publication",
-    "submitter_id": "publication_009",
-    "studies": {
-      "submitter_id": "study_007"
-    }
-  },
-  {
-    "doi": 4,
-    "title": "Oen3KXPMLMV5",
-    "journal": "aEzgz43sm8j8",
-    "authors": "xKmA2isW1uYn",
-    "pmid": 6,
-    "issue": "WBuX3s9EwmCn",
-    "type": "publication",
-    "submitter_id": "publication_0010",
-    "studies": {
-      "submitter_id": "study_0018"
-    }
-  },
-  {
-    "doi": 3,
-    "title": "h0k99yl8CNvE",
-    "journal": "qdNTLpLHpU5X",
-    "authors": "UUSgQmyJ0zEZ",
-    "pmid": 4,
-    "issue": "tvT1tuvCAF2E",
-    "type": "publication",
-    "submitter_id": "publication_0011",
-    "studies": {
-      "submitter_id": "study_001"
-    }
-  },
-  {
-    "doi": 4,
-    "title": "jcQ3gWkeCT1k",
-    "journal": "vhZ5Yh2fiPxK",
-    "authors": "3c8w0HNrHZOl",
-    "pmid": 5,
-    "issue": "TM29ClTJLswY",
-    "type": "publication",
-    "submitter_id": "publication_0012",
-    "studies": {
-      "submitter_id": "study_0018"
-    }
-  },
-  {
-    "doi": 7,
-    "title": "CJZSVc9xEFDT",
-    "journal": "GX1hgr4mBsmU",
-    "authors": "FcZExtn290cr",
-    "pmid": 4,
-    "issue": "1cfek9Rg2O30",
-    "type": "publication",
-    "submitter_id": "publication_0013",
-    "studies": {
-      "submitter_id": "study_0014"
-    }
-  },
-  {
-    "doi": 3,
-    "title": "ajGJsN4ZWcuE",
-    "journal": "60yRUlDY5GEH",
-    "authors": "xi9LMsEv2b4y",
-    "pmid": 7,
-    "issue": "0VjlqAftZifO",
-    "type": "publication",
-    "submitter_id": "publication_0014",
-    "studies": {
-      "submitter_id": "study_0012"
-    }
-  },
-  {
-    "doi": 1,
-    "title": "wMCnwHcbSeoj",
-    "journal": "0MHWHjHS25XJ",
-    "authors": "hXqrZ9c2m1Lr",
-    "pmid": 6,
-    "issue": "nE2Lwh8qzFlZ",
-    "type": "publication",
-    "submitter_id": "publication_0015",
-    "studies": {
-      "submitter_id": "study_0012"
-    }
-  },
-  {
-    "doi": 3,
-    "title": "krDlsyItY6Qw",
-    "journal": "LIreXePVxoPy",
-    "authors": "t3MxejlTaYgm",
-    "pmid": 2,
-    "issue": "qIPj8PiEnp0T",
-    "type": "publication",
-    "submitter_id": "publication_0016",
-    "studies": {
-      "submitter_id": "study_0011"
-    }
-  },
-  {
-    "doi": 2,
-    "title": "pqDHROPopQrC",
-    "journal": "1ePPJYOxIJg1",
-    "authors": "T5FeyRfiYMw1",
-    "pmid": 1,
-    "issue": "zo3GfYCZhW9t",
-    "type": "publication",
-    "submitter_id": "publication_0017",
-    "studies": {
-      "submitter_id": "study_006"
-    }
-  },
-  {
-    "doi": 2,
-    "title": "ZMQ5kvszTKNq",
-    "journal": "eMWmMr6hPvyZ",
-    "authors": "seRaYKrHsRWQ",
-    "pmid": 1,
-    "issue": "Jb8XIeJ1bDXP",
-    "type": "publication",
-    "submitter_id": "publication_0018",
-    "studies": {
-      "submitter_id": "study_003"
-    }
-  }
 ]
