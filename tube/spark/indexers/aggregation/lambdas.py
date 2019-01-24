@@ -28,16 +28,20 @@ def get_single_frame_zero_by_func(func_name, output_name):
     return (func_name, output_name, '')
 
 
-def get_single_frame_value(func_name, value):
-    if func_name == 'set':
-        return [value] if type(value) is not list else value
-    if func_name == 'count' or func_name == 'sum':
-        return value
-    return ''
-
-
 def get_frame_zero(reducers):
     return tuple([get_single_frame_zero_by_func(rd.fn, rd.prop.name) for rd in reducers if not rd.done])
+
+
+def get_single_frame_value(func_name, value):
+    if func_name == 'set':
+        if value is None:
+            return []
+        return [value] if type(value) is not list else value
+    if func_name == 'count':
+        return 1 if value is None else value
+    if func_name == 'sum':
+        return 0 if value is None else value
+    return ''
 
 
 def get_normal_frame(reducers):
