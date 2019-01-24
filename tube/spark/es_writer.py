@@ -154,24 +154,24 @@ class ESWriter(SparkBase):
         :return:
         """
         try:
-            self.reset_status()
+            # self.reset_status()
             for plugin in post_process_plugins:
                 df = df.map(lambda x: plugin(x))
 
-            types = add_auth_resource_path_mapping(types)
-            mapping = generate_mapping(doc_type, types)
-            current_index = self.create_index(mapping, index)
-
-            df = df.map(lambda x: json_export(x))
-            es_config = self.es_config
-            es_config['es.resource'] = current_index + '/{}'.format(doc_type)
-            df.saveAsNewAPIHadoopFile(path='-',
-                                      outputFormatClass='org.elasticsearch.hadoop.mr.EsOutputFormat',
-                                      keyClass='org.apache.hadoop.io.NullWritable',
-                                      valueClass='org.elasticsearch.hadoop.mr.LinkedMapWritable',
-                                      conf=es_config)
-            self.es.indices.put_alias(index=current_index, name=index)
-            self.clean_up(index)
-            self.reset_status()
+            # types = add_auth_resource_path_mapping(types)
+            # mapping = generate_mapping(doc_type, types)
+            # current_index = self.create_index(mapping, index)
+            #
+            # df = df.map(lambda x: json_export(x))
+            # es_config = self.es_config
+            # es_config['es.resource'] = current_index + '/{}'.format(doc_type)
+            # df.saveAsNewAPIHadoopFile(path='-',
+            #                           outputFormatClass='org.elasticsearch.hadoop.mr.EsOutputFormat',
+            #                           keyClass='org.apache.hadoop.io.NullWritable',
+            #                           valueClass='org.elasticsearch.hadoop.mr.LinkedMapWritable',
+            #                           conf=es_config)
+            # self.es.indices.put_alias(index=current_index, name=index)
+            # self.clean_up(index)
+            # self.reset_status()
         except Exception as e:
             print(e)
