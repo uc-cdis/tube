@@ -44,7 +44,6 @@ class Translator(BaseTranslator):
         for rd in child.reducers:
             props.append(rd.prop.src)
 
-        print(child.tbl_name)
         child_df = self.translate_table(child.tbl_name, props=[rd.prop for rd in child.reducers
                                                                if not rd.done and rd.prop.src is not None])\
             .mapValues(get_normal_frame(child.reducers))
@@ -52,9 +51,7 @@ class Translator(BaseTranslator):
         frame_zero = get_frame_zero(child.reducers)
         temp_df = swapped_df.leftOuterJoin(child_df).map(lambda x: (x[1][0], x[1][1]))\
             .mapValues(lambda x: x if x is not None else frame_zero)
-        print temp_df.collect()
         temp_df = temp_df.aggregateByKey(frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer)
-        print temp_df.collect()
         return df.leftOuterJoin(temp_df).mapValues(lambda x: x[0] + x[1])
 
     def aggregate_nested_properties(self):
@@ -66,8 +63,6 @@ class Translator(BaseTranslator):
             A dataframe including all the aggregated fields
         """
         aggregated_dfs = {}
-        print "list all aggregated nodes"
-        print self.parser.aggregated_nodes
         for n in self.parser.aggregated_nodes:
             df = None
             key_df = self.translate_table(n.tbl_name, get_zero_frame=True)
