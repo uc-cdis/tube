@@ -5,6 +5,7 @@ from tube.spark.indexers.aggregation.lambdas import intermediate_frame, merge_ag
     seq_aggregate_with_reducer, get_frame_zero, get_normal_frame, get_single_frame_zero_by_func
 from ..base.lambdas import sort_by_field
 from .parser import Parser
+from memory_profiler import profile
 
 
 class Translator(BaseTranslator):
@@ -50,10 +51,11 @@ class Translator(BaseTranslator):
 
         frame_zero = get_frame_zero(child.reducers)
         temp_df = swapped_df.leftOuterJoin(child_df).map(lambda x: (x[1][0], x[1][1]))\
-            .mapValues(lambda x: x if x is not None else frame_zero)
-        temp_df = temp_df.aggregateByKey(frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer)
+            .mapValues(lambda x: x if x is not None else frame_zero)\
+            .aggregateByKey(frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer)
         return df.leftOuterJoin(temp_df).mapValues(lambda x: x[0] + x[1])
 
+    @profile
     def aggregate_nested_properties(self):
         """
         Create aggregated nodes from the deepest level of the aggregation tree.
@@ -106,9 +108,13 @@ class Translator(BaseTranslator):
             root_df = root_df.leftOuterJoin(child_by_root).mapValues(lambda x: merge_and_fill_empty_props(x, n.props))
         return root_df
 
+    @profile
     def translate(self):
         root_tbl = get_node_table_name(self.parser.model, self.parser.root)
         root_df = self.translate_table(root_tbl, props=self.parser.props)
+        print root_df.toDebugString()
         root_df = self.get_direct_children(root_df)
+        print root_df.toDebugString()
         root_df = root_df.join(self.aggregate_nested_properties()).mapValues(lambda x: merge_dictionary(x[0], x[1]))
+        print root_df.toDebugString()
         self.writer.write_df(root_df, self.parser.name, self.parser.doc_type, self.parser.types)

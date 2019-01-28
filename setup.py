@@ -14,7 +14,8 @@ setup(
         "six==1.11.0",
         "Werkzeug==0.12.2",
         "psutil==2.1.3",
-        "pyyaml"
+        "pyyaml",
+        "memory_profiler"
     ],
     packages=find_packages(),
 )
