@@ -1,7 +1,7 @@
 from itertools import chain
 
 from tests.value.value import Value
-from tube.utils import get_edge_table, get_node_table_name
+from tube.utils.dd import get_edge_table, get_node_table_name
 
 
 class AggregatorValue(Value):

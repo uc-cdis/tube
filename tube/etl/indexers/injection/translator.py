@@ -1,5 +1,5 @@
-from tube.spark.indexers.base.lambdas import merge_and_fill_empty_props
-from tube.spark.indexers.base.translator import Translator as BaseTranslator
+from tube.etl.indexers.base.lambdas import merge_and_fill_empty_props
+from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from .nodes.collecting_node import LeafNode
 from .parser import Parser
 

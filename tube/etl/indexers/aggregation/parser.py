@@ -1,5 +1,5 @@
-from tube.utils import get_attribute_from_path, get_edge_table, get_child_table, get_multiplicity,\
-    get_node_table_name, get_properties_types, object_to_string, select_widest_types
+from tube.utils.dd import get_attribute_from_path, get_edge_table, get_child_table, get_multiplicity,\
+    get_node_table_name, get_properties_types, object_to_string
 from .nodes.aggregated_node import AggregatedNode, Reducer
 from .nodes.direct_node import DirectNode
 from ..base.parser import Parser as BaseParser
@@ -200,6 +200,6 @@ class Parser(BaseParser):
                 props = [self.get_prop(p_in_json) for p_in_json in v]
                 types.update({p.name: get_properties_types(model, root)[p.src] for p in props})
 
-        types = select_widest_types(types)
+        types = self.select_widest_types(types)
 
         return types

@@ -1,6 +1,6 @@
-from tube.utils import object_to_string
-from tube.spark.indexers.base.node import BaseNode
-from tube.spark.indexers.base.prop import PropFactory
+from tube.utils.dd import object_to_string
+from tube.etl.indexers.base.node import BaseNode
+from tube.etl.indexers.base.prop import PropFactory
 
 
 class RootNode(BaseNode):

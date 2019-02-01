@@ -10,7 +10,7 @@ from tests.utils_es import get_names
 from tests.value.aggregator_value import AggregatorValue
 from tests.value.es_value import ESValue
 from tests.value.value import value_diff
-from tube.spark.indexers.interpreter import Interpreter
+from tube.etl.indexers.interpreter import Interpreter
 
 
 @pytest.fixture

@@ -1,16 +1,7 @@
 import json
 import re
 
-from elasticsearch import Elasticsearch, helpers
-
-from tube.utils import generate_mapping
-from tube.spark.plugins import post_process_plugins, add_auth_resource_path_mapping
-from tube.spark.spark_base import SparkBase
-
-
-def json_export(x):
-    x[1]['node_id'] = x[0]
-    return (x[0], json.dumps(x[1]))
+from elasticsearch import helpers
 
 
 def get_index_name(index, version):
@@ -32,31 +23,22 @@ def get_backup_version(index_name):
     return 0
 
 
-class ESWriter(SparkBase):
-    def __init__(self, sc, config):
-        super(ESWriter, self).__init__(sc, config)
-        self.es_config = self.config.ES
-        self.reset_status()
-        self.es = self.get_es()
+class Versioning(object):
+    def __init__(self, es):
+        self.es = es
+        # Reset status, putting here to declare all properties.
+        self.old_index_to_forget = None
+        self.target_version = None
+        self.backup_index = None
 
     def reset_status(self):
         """
         Reset all the running status used to write the data frame
         :return:
         """
-        self.conflict_index = None
         self.old_index_to_forget = None
         self.target_version = None
         self.backup_index = None
-
-    def get_es(self):
-        """
-        Create ElasticSearch instance
-        :return:
-        """
-        es_hosts = self.es_config['es.nodes']
-        es_port = self.es_config['es.port']
-        return Elasticsearch([{'host': es_hosts, 'port': es_port}])
 
     def get_backup_info(self, index):
         """
@@ -102,16 +84,6 @@ class ESWriter(SparkBase):
             self.es.indices.delete_alias(index=self.old_index_to_forget, name=index)
         if self.backup_index is not None:
             self.es.indices.delete_alias(index=self.backup_index, name=index)
-        if self.conflict_index is not None:
-            self.es.indices.delete_alias(index=self.conflict_index, name=index)
-
-    def create_new_index(self, index, version, mapping):
-        versioned_index_name = get_index_name(index, version)
-        if self.es.indices.exists(index=versioned_index_name):
-            self.conflict_index = versioned_index_name
-            self.backup_index = self.do_backup_index(index, self.conflict_index)
-        self.es.indices.create(index=versioned_index_name, body=mapping)
-        return versioned_index_name
 
     def get_index_version(self, index):
         """
@@ -131,7 +103,7 @@ class ESWriter(SparkBase):
             return int(res.group(1)) + 1
         return 0
 
-    def create_index(self, mapping, index):
+    def backup_old_index(self, index):
         """
         Create an empty versioned index.
         :param mapping: mapping for index
@@ -142,36 +114,16 @@ class ESWriter(SparkBase):
         if self.target_version == -1:
             self.backup_index = self.do_backup_index(index, index)
             self.target_version = 0
-        return self.create_new_index(index, self.target_version, mapping)
 
-    def write_df(self, df, index, doc_type, types):
-        """
-        Function to write the data frame to ElasticSearch
-        :param df: data frame to be written
-        :param index: name of the index
-        :param doc_type: document type's name
-        :param types:
-        :return:
-        """
-        try:
-            # self.reset_status()
-            for plugin in post_process_plugins:
-                df = df.map(lambda x: plugin(x))
+        versioned_index_name = get_index_name(index, self.target_version)
+        if self.es.indices.exists(index=versioned_index_name):
+            self.backup_index = self.do_backup_index(index, versioned_index_name)
+        return versioned_index_name
 
-            # types = add_auth_resource_path_mapping(types)
-            # mapping = generate_mapping(doc_type, types)
-            # current_index = self.create_index(mapping, index)
-            #
-            # df = df.map(lambda x: json_export(x))
-            # es_config = self.es_config
-            # es_config['es.resource'] = current_index + '/{}'.format(doc_type)
-            # df.saveAsNewAPIHadoopFile(path='-',
-            #                           outputFormatClass='org.elasticsearch.hadoop.mr.EsOutputFormat',
-            #                           keyClass='org.apache.hadoop.io.NullWritable',
-            #                           valueClass='org.elasticsearch.hadoop.mr.LinkedMapWritable',
-            #                           conf=es_config)
-            # self.es.indices.put_alias(index=current_index, name=index)
-            # self.clean_up(index)
-            # self.reset_status()
-        except Exception as e:
-            print(e)
+    def create_new_index(self, mapping, versioned_index_name):
+        self.es.indices.create(index=versioned_index_name, body=mapping)
+        return versioned_index_name
+
+    def putting_new_version_tag(self, index_to_write, index_name):
+        self.es.indices.put_alias(index=index_to_write, name=index_name)
+        self.clean_up(index_name)
