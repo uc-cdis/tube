@@ -1,5 +1,6 @@
 import ast
 import json
+import collections
 
 
 def extract_metadata(str_value):
@@ -41,7 +42,7 @@ def swap_key_value(df):
 
 
 def get_props(names, values):
-    return lambda x: {names[src]: values[src][v] if src in values and v in values[src] else v
+    return lambda x: {names[src]: values[src][v] if isinstance(v, collections.Hashable) and src in values and v in values[src] else v
                       for (src, v) in x.items() if src in names.keys()}
 
 
