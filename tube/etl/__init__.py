@@ -17,11 +17,6 @@ def make_spark_context(config):
         conf = conf.setMaster(config.SPARK_MASTER)
 
     sc = SparkContext(conf=conf, pyFiles=[])
-    print sc.__dict__
-    print sc._conf.__dict__
-    print sc._javaAccumulator.__dict__
-    print sc._jsc.__dict__
-    print sc._accumulatorServer.__dict__
 
     # Configure logging
     log4j = sc._jvm.org.apache.log4j
