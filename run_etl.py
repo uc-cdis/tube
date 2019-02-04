@@ -29,7 +29,7 @@ def run_transform():
     sc.stop()
 
 
-def main():
+def config_by_args():
     '''
     Define the spark context and parse agruments into config
     '''
@@ -50,6 +50,11 @@ def main():
 
     args = parser.parse_args()
     config.RUNNING_MODE = args.config
+    return args
+
+
+def main():
+    args = config_by_args()
 
     es_hosts = config.ES['es.nodes']
     es_port = config.ES['es.port']
