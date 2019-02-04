@@ -1,42 +1,7 @@
-from contextlib import contextmanager
-
-from psycopg2.extras import DictCursor
-from psycopg2.pool import ThreadedConnectionPool
 from psycopg2.sql import SQL, Identifier, Literal
 
-import tube.settings as config
 from tests.utils import pairwise
-
-pools = {"test_db": ThreadedConnectionPool(1, 20, dsn=config.PYDBC, connect_timeout=30)}
-
-
-@contextmanager
-def get_db_connection(db):
-    pool = pools[db]
-    try:
-        connection = pool.getconn()
-        yield connection
-    finally:
-        pool.putconn(connection)
-
-
-@contextmanager
-def get_db_cursor(db, commit=False):
-    with get_db_connection(db) as connection:
-        cursor = connection.cursor(cursor_factory=DictCursor)
-        try:
-            yield cursor
-            if commit:
-                connection.commit()
-        finally:
-            cursor.close()
-
-
-def execute_sql_query(sql):
-    with get_db_cursor("test_db") as cur:
-        cur.execute(sql)
-        val = cur.fetchall()
-        return val[0][0] if val else None
+from tube.utils.db import execute_sql_query_return_first_field
 
 
 class SQLQuery:
@@ -69,16 +34,13 @@ class SQLQuery:
 
         submitter_json = '{{"submitter_id": "{}"}}'.format(submitter_id)
         sql_where = SQL("WHERE {last_node}.{_props} @> {submitter}").format(last_node=Identifier(tables[-1]),
-                                                                             _props=Identifier("_props"),
-                                                                             submitter=Literal(submitter_json))
-
+                                                                            _props=Identifier("_props"),
+                                                                            submitter=Literal(submitter_json))
         if group:
             sql = SQL(" ").join([sql_select, sql_join, sql_where, group, SQL(";")])
         else:
             sql = SQL(" ").join([sql_select, sql_join, sql_where, SQL(";")])
-
-        val = execute_sql_query(sql)
-
+        val = execute_sql_query_return_first_field(sql)
         return val
 
     @staticmethod

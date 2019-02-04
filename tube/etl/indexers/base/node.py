@@ -1,4 +1,4 @@
-from tube.utils import object_to_string
+from tube.utils.dd import object_to_string
 
 
 class BaseNode(object):

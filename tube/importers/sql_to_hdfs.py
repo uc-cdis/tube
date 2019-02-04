@@ -1,6 +1,7 @@
 import subprocess
 import psycopg2
-from tube.utils import list_to_file, get_sql_to_hdfs_config, make_sure_hdfs_path_exist
+from tube.utils.spark import make_sure_hdfs_path_exist
+from tube.utils.general import list_to_file, get_sql_to_hdfs_config
 
 
 class SqlToHDFS(object):
@@ -29,7 +30,8 @@ class SqlToHDFS(object):
             '--warehouse-dir', output_dir,
             '--outdir', 'temp',
             '--enclosed-by', '"',
-            '--exclude-tables', 'transaction_documents,transaction_logs,transaction_snapshots,_voided_edges,_voided_nodes',
+            '--exclude-tables',
+            'transaction_documents,transaction_logs,transaction_snapshots,_voided_edges,_voided_nodes',
             '--map-column-java', '_props=String,acl=String,_sysan=String'
         ]
         sp = subprocess.Popen(execs, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)

@@ -1,5 +1,5 @@
-from tube.utils import object_to_string
-from tube.spark.indexers.base.prop import PropFactory
+from tube.utils.dd import object_to_string
+from tube.etl.indexers.base.prop import PropFactory
 
 
 class DirectNode(object):

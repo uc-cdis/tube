@@ -6,9 +6,6 @@ def make_spark_context(config):
     '''
     Makes a spark and sqlContext
     '''
-    os.environ['PYSPARK_SUBMIT_ARGS'] = \
-        '--jars {}/dist/elasticsearch-spark-20_2.11-{}.jar pyspark-shell' \
-            .format(config.ES_HADOOP_HOME_BIN, config.ES_HADOOP_VERSION)
     conf = SparkConf() \
         .set('spark.executor.memory', '2g') \
         .set('spark.driver.memory', '2g') \
@@ -20,6 +17,11 @@ def make_spark_context(config):
         conf = conf.setMaster(config.SPARK_MASTER)
 
     sc = SparkContext(conf=conf, pyFiles=[])
+    print sc.__dict__
+    print sc._conf.__dict__
+    print sc._javaAccumulator.__dict__
+    print sc._jsc.__dict__
+    print sc._accumulatorServer.__dict__
 
     # Configure logging
     log4j = sc._jvm.org.apache.log4j

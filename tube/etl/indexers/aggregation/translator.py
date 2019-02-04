@@ -1,10 +1,10 @@
-from tube.spark.indexers.base.lambdas import merge_and_fill_empty_props, merge_dictionary, swap_key_value
-from tube.spark.indexers.base.translator import Translator as BaseTranslator
-from tube.utils import get_node_table_name
-from tube.spark.indexers.aggregation.lambdas import intermediate_frame, merge_aggregate_with_reducer, \
+from tube.etl.indexers.base.lambdas import merge_and_fill_empty_props, merge_dictionary, swap_key_value
+from tube.etl.indexers.base.translator import Translator as BaseTranslator
+from tube.etl.indexers.aggregation.lambdas import intermediate_frame, merge_aggregate_with_reducer, \
     seq_aggregate_with_reducer, get_frame_zero, get_normal_frame, get_single_frame_zero_by_func
-from ..base.lambdas import sort_by_field
+from tube.utils.dd import get_node_table_name
 from .parser import Parser
+from ..base.lambdas import sort_by_field
 
 
 class Translator(BaseTranslator):

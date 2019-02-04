@@ -55,8 +55,7 @@ before_script:
   - docker-compose up -d spark elasticsearch
   - sleep 60
   - docker-compose logs
-  - docker-compose run tube bash -c "python run_config.py; python run_import.py"
-  - docker-compose run tube bash -c "python run_config.py; python run_spark.py"
+  - docker-compose run tube bash -c "python run_config.py; python run_etl.py"
   - cd -
   - export XDG_DATA_HOME="$HOME/.local/share"
   - export ES_URL="localhost"

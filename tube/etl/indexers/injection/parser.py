@@ -1,6 +1,6 @@
-from tube.utils import get_edge_table, get_node_table_name, get_node_label, get_parent_name, get_parent_label, \
-    get_properties_types, object_to_string, select_widest_types, select_widest_type
-from tube.spark.indexers.injection.nodes.collecting_node import CollectingNode, RootNode, LeafNode
+from tube.utils.dd import get_edge_table, get_node_table_name, get_node_label, get_parent_name, get_parent_label, \
+    get_properties_types, object_to_string
+from tube.etl.indexers.injection.nodes.collecting_node import CollectingNode, RootNode, LeafNode
 from ..base.parser import Parser as BaseParser
 from ..base.prop import Prop, PropFactory
 
@@ -52,7 +52,7 @@ class Parser(BaseParser):
                 for j in self.mapping['props']:
                     types[j['name']] = a[j['name']]
 
-        types = select_widest_types(types)
+        types = self.select_widest_types(types)
         return types
 
     def get_collecting_nodes(self):
@@ -97,7 +97,7 @@ class Parser(BaseParser):
             src = f['src'] if 'src' in f else f['name']
             p = Prop(f['name'], src, [])
             if p.src != 'id':
-                f_type = select_widest_type(get_properties_types(self.model, root_name)[p.src])
+                f_type = self.select_widest_type(get_properties_types(self.model, root_name)[p.src])
             else:
                 f_type = str
             self.final_fields.append(p)

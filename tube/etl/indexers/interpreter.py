@@ -1,9 +1,8 @@
 import yaml
-from tube.utils import make_sure_hdfs_path_exist
 from .aggregation.translator import Translator as AggregatorTranslator
 from .injection.translator import Translator as CollectorTranslator
 from .base.translator import Translator as BaseTranslator
-from tube.utils import init_dictionary
+from tube.utils.dd import init_dictionary
 
 
 class Interpreter(object):
@@ -14,10 +13,7 @@ class Interpreter(object):
         self.sc = sc
         self.writer = writer
         self.dictionary, self.model = init_dictionary(config.DICTIONARY_URL)
-        if sc is not None:
-            self.hdfs_path = make_sure_hdfs_path_exist(config.HDFS_DIR, sc)
-        else:
-            self.hdfs_path = config.HDFS_DIR
+        self.hdfs_path = config.HDFS_DIR
         self.translators = self.create_translators(config.MAPPING_FILE)
 
     def create_translators(self, mapping_path):
@@ -34,6 +30,6 @@ class Interpreter(object):
             translators[translator.parser.doc_type] = translator
         return translators
 
-    def run_etl(self):
+    def run_transform(self):
         for translator in self.translators.values():
             translator.translate()
