@@ -67,9 +67,9 @@ class Versioning(object):
         self.es.indices.create(index=backup_index)
         helpers.reindex(self.es, source_index=index_to_backup,
                         target_index=backup_index)
+        self.es.indices.put_alias(index=backup_index, name=index_alias_name)
         self.es.indices.delete(index_to_backup)
         self.es.indices.put_alias(index=backup_index, name=backup_alias)
-        self.es.indices.put_alias(index=backup_index, name=index_alias_name)
         if backup_version > 0:
             self.es.indices.delete_alias(index=old_backup, name=backup_alias)
         return backup_index
@@ -89,7 +89,9 @@ class Versioning(object):
         """
         Get the next version of index that number will be added as a suffix into index name
         :param index: original name/alias of index
-        :return:
+        :return: -1: if the alias does not exist while the index with that name exists
+                 0: if the alias does not exists,
+                 n: (n > 0) if there exists the alias and n is the new increased version.
         """
         alias_existed = self.es.indices.exists_alias(name=index)
         if not alias_existed:
