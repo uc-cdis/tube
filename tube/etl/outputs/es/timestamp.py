@@ -45,6 +45,7 @@ def get_latest_time_indices_built(es, index_names):
             return None
         new_timestamp = get_timestamp_from_index(es, versioned_index)
         if timestamp is None or timestamp != new_timestamp:
+            timestamp = new_timestamp
             count = 1
         else:
             count += 1

@@ -65,6 +65,8 @@ def main():
             run_import()
         if args.step == "transform" or args.step == "all":
             run_transform()
+    else:
+        print "Nothing's new"
 
 
 if __name__ == '__main__':
