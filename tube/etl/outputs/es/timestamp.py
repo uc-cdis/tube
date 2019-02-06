@@ -29,18 +29,39 @@ def get_latest_utc_transaction_time():
     return to_utc_time(execute_sql_query_return_first_item(query)[2])
 
 
-def check_to_run_etl(es, index_name):
-    if not es.indices.exists_alias(name=index_name):
+def check_exists_all_indices(es, index_names):
+    for index_name in index_names:
+        if not es.indices.exists_alias(name=index_name):
+            return False
+    return True
+
+
+def get_latest_time_indices_built(es, index_names):
+    timestamp = None
+    count = 0
+    for index_name in index_names:
+        versioned_index = es.indices.get_alias(name=index_name).keys()[0]
+        if not es.indices.exists_alias(index=versioned_index, name="time_*"):
+            return None
+        new_timestamp = get_timestamp_from_index(es, versioned_index)
+        if timestamp is None or timestamp != new_timestamp:
+            timestamp = new_timestamp
+            count = 1
+        else:
+            count += 1
+    if count == len(index_names):
+        return timestamp
+    return None
+
+
+def check_to_run_etl(es, index_names):
+    if not check_exists_all_indices(es, index_names):
         return True
 
-    versioned_index = es.indices.get_alias(name=index_name).keys()[0]
-    if not es.indices.exists_alias(index=versioned_index, name="time_*"):
-        return True
-    time_from_es = get_timestamp_from_index(es, versioned_index)
-
+    time_from_es = get_latest_time_indices_built(es, index_names)
     latest_transaction_time = get_latest_utc_transaction_time()
 
-    if time_from_es < latest_transaction_time:
+    if time_from_es is None or time_from_es < latest_transaction_time:
         return True
     return False
 

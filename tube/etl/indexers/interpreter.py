@@ -3,33 +3,32 @@ from .aggregation.translator import Translator as AggregatorTranslator
 from .injection.translator import Translator as CollectorTranslator
 from .base.translator import Translator as BaseTranslator
 from tube.utils.dd import init_dictionary
+from tube.etl.outputs.es.writer import Writer
 
 
-class Interpreter(object):
-    """
-    The main entry point into the index export process for the mutation indices
-    """
-    def __init__(self, sc, writer, config):
-        self.sc = sc
-        self.writer = writer
-        self.dictionary, self.model = init_dictionary(config.DICTIONARY_URL)
-        self.hdfs_path = config.HDFS_DIR
-        self.translators = self.create_translators(config.MAPPING_FILE)
+def create_translators(sc, config):
+    dictionary, model = init_dictionary(config.DICTIONARY_URL)
+    mappings = yaml.load(open(config.MAPPING_FILE))
+    writer = Writer(sc, config)
 
-    def create_translators(self, mapping_path):
-        stream = open(mapping_path)
-        mappings = yaml.load(stream)
-        translators = {}
-        for m in mappings['mappings']:
-            if m['type'] == 'aggregator':
-                translator = AggregatorTranslator(self.sc, self.hdfs_path, self.writer, m, self.model, self.dictionary)
-            elif m['type'] == 'collector':
-                translator = CollectorTranslator(self.sc, self.hdfs_path, self.writer, m, self.model)
-            else:
-                translator = BaseTranslator(self.sc, self.hdfs_path, self.writer)
-            translators[translator.parser.doc_type] = translator
-        return translators
+    translators = {}
+    for m in mappings['mappings']:
+        if m['type'] == 'aggregator':
+            translator = AggregatorTranslator(sc, config.HDFS_DIR, writer, m, model, dictionary)
+        elif m['type'] == 'collector':
+            translator = CollectorTranslator(sc, config.HDFS_DIR, writer, m, model)
+        else:
+            translator = BaseTranslator(sc, config.HDFS_DIR, writer)
+        translators[translator.parser.doc_type] = translator
+    return translators
 
-    def run_transform(self):
-        for translator in self.translators.values():
-            translator.translate()
+
+def run_transform(translators):
+    for translator in translators.values():
+        translator.translate()
+
+
+def get_index_names(config):
+    stream = open(config.MAPPING_FILE)
+    mappings = yaml.load(stream)
+    return [m['name'] for m in mappings['mappings']]
