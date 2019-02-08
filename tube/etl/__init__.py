@@ -1,4 +1,3 @@
-import os
 from pyspark import SparkConf, SparkContext
 
 

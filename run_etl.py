@@ -1,10 +1,9 @@
 import argparse
 import tube.settings as config
+import tube.etl.indexers.interpreter as interpreter
 from tube.importers.sql_to_hdfs import SqlToHDFS
 from tube.formatters import BaseFormatter
-from tube.etl import make_spark_context as etl_make_spark_context
-import tube.etl.indexers.interpreter as interpreter
-from tube.etl.outputs.es.writer import Writer
+from tube.utils.spark import make_spark_context
 from tube.etl.outputs.es.timestamp import check_to_run_etl
 from elasticsearch import Elasticsearch
 
@@ -22,7 +21,7 @@ def run_import():
 
 
 def run_transform():
-    sc = etl_make_spark_context(config)
+    sc = make_spark_context(config)
     translators = interpreter.create_translators(sc, config)
     interpreter.run_transform(translators)
     sc.stop()
