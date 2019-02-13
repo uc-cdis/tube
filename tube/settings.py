@@ -57,3 +57,4 @@ APP_NAME = 'Gen3 ETL'
 os.environ['PYSPARK_SUBMIT_ARGS'] = \
     '--jars {}/dist/elasticsearch-spark-20_2.11-{}.jar pyspark-shell' \
         .format(ES_HADOOP_HOME_BIN, ES_HADOOP_VERSION)
+os.environ['HADOOP_CLIENT_OPTS'] = os.getenv('HADOOP_CLIENT_OPTS', '')
