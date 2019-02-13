@@ -6,7 +6,6 @@ import os
 logger = get_logger(__name__)
 
 LIST_TABLES_FILES = 'tables.txt'
-#LINK_TO_ES_HADOOP_JAR = '/Users/thanhnd/Workspace/es/elasticsearch-hadoop-6.3.0/dist/elasticsearch-spark-20_2.11-6.3.0.jar'
 
 #
 # Load db credentials from a creds.json file.
@@ -51,8 +50,11 @@ HADOOP_HOST = os.getenv("HADOOP_HOST", "spark-service")
 
 MAPPING_FILE = find_paths("etlMapping.yaml", 'tube')[0]
 SPARK_MASTER = os.getenv('SPARK_MASTER', 'local[1]')  # 'spark-service'
+SPARK_EXECUTOR_MEMORY = os.getenv("SPARK_EXECUTOR_MEMORY", "2g")
+SPARK_DRIVER_MEMORY = os.getenv("SPARK_DRIVER_MEMORY", "512m")
 APP_NAME = 'Gen3 ETL'
 
 os.environ['PYSPARK_SUBMIT_ARGS'] = \
     '--jars {}/dist/elasticsearch-spark-20_2.11-{}.jar pyspark-shell' \
         .format(ES_HADOOP_HOME_BIN, ES_HADOOP_VERSION)
+os.environ['HADOOP_CLIENT_OPTS'] = os.getenv('HADOOP_CLIENT_OPTS', '')
