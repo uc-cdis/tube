@@ -2,6 +2,7 @@ from tube.etl.indexers.base.lambdas import merge_and_fill_empty_props
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from .nodes.collecting_node import LeafNode
 from .parser import Parser
+from memory_profiler import profile
 
 
 class Translator(BaseTranslator):
@@ -9,6 +10,7 @@ class Translator(BaseTranslator):
         super(Translator, self).__init__(sc, hdfs_path, writer)
         self.parser = Parser(mapping, model)
 
+    @profile
     def collect_child(self, child, edge_df, collected_dfs):
         if edge_df.isEmpty():
             return
@@ -32,6 +34,7 @@ class Translator(BaseTranslator):
             child.no_parent_to_map -= 1
             collected_dfs[child.name] = child_df
 
+    @profile
     def merge_roots_to_children(self):
         collected_dfs = {}
         for root in self.parser.roots:
@@ -45,6 +48,7 @@ class Translator(BaseTranslator):
                 self.collect_child(child, edge_df, collected_dfs)
         return collected_dfs
 
+    @profile
     def merge_collectors(self, collected_dfs):
         for collector in self.parser.collectors:
             if collector.no_parent_to_map == 0:
@@ -65,6 +69,7 @@ class Translator(BaseTranslator):
                         .map(lambda x: (x[1][1], x[1][0]))
                     self.collect_child(leaf, edge_df, collected_dfs)
 
+    @profile
     def translate(self):
         collected_dfs = self.merge_roots_to_children()
         self.merge_collectors(collected_dfs)
@@ -73,3 +78,6 @@ class Translator(BaseTranslator):
             self.writer.write_df(collected_dfs['final'], self.parser.name, self.parser.doc_type, self.parser.types)
         else:
             self.writer.write_df(self.sc.parallelize([]), self.parser.name, self.parser.doc_type, self.parser.types)
+        for df in collected_dfs.values():
+            del df
+        del collected_dfs

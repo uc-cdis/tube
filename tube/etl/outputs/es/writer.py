@@ -99,14 +99,14 @@ class Writer(SparkBase):
             for plugin in post_process_plugins:
                 df = df.map(lambda x: plugin(x))
 
-            types = add_auth_resource_path_mapping(types)
-            mapping = self.generate_mapping(doc_type, types)
+            # types = add_auth_resource_path_mapping(types)
+            # mapping = self.generate_mapping(doc_type, types)
 
-            self.reset_status()
-            index_to_write = self.versioning.create_new_index(mapping, self.versioning.backup_old_index(index))
-            self.write_to_new_index(df, index_to_write, doc_type)
-            self.versioning.putting_new_version_tag(index_to_write, index)
-            putting_timestamp(self.es, index_to_write)
-            self.reset_status()
+            # self.reset_status()
+            # index_to_write = self.versioning.create_new_index(mapping, self.versioning.backup_old_index(index))
+            # self.write_to_new_index(df, index_to_write, doc_type)
+            # self.versioning.putting_new_version_tag(index_to_write, index)
+            # putting_timestamp(self.es, index_to_write)
+            # self.reset_status()
         except Exception as e:
             print(e)

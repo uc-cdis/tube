@@ -5,6 +5,7 @@ from tube.etl.indexers.aggregation.lambdas import intermediate_frame, merge_aggr
 from tube.utils.dd import get_node_table_name
 from .parser import Parser
 from ..base.lambdas import sort_by_field
+from memory_profiler import profile
 
 
 class Translator(BaseTranslator):
@@ -20,6 +21,7 @@ class Translator(BaseTranslator):
                                       seq_aggregate_with_reducer,
                                       merge_aggregate_with_reducer)
 
+    @profile
     def aggregate_with_count_on_edge_tbl(self, df, edge_df, child):
         count_reducer = None
         for reducer in child.reducers:
@@ -39,6 +41,7 @@ class Translator(BaseTranslator):
         # combine value lists new counted dataframe to existing one
         return count_df if df is None else df.leftOuterJoin(count_df).mapValues(lambda x: x[0] + x[1])
 
+    @profile
     def aggregate_with_child_tbl(self, df, swapped_df, child):
         props = []
         for rd in child.reducers:
@@ -54,6 +57,7 @@ class Translator(BaseTranslator):
         temp_df = temp_df.aggregateByKey(frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer)
         return df.leftOuterJoin(temp_df).mapValues(lambda x: x[0] + x[1])
 
+    @profile
     def aggregate_nested_properties(self):
         """
         Create aggregated nodes from the deepest level of the aggregation tree.
@@ -82,11 +86,13 @@ class Translator(BaseTranslator):
                                                                                      swap_key_value(edge_df))) \
                         .mapValues(lambda x: x[0] + x[1])
                     n.no_children_to_map -= 1
+                    del edge_df
                 else:
                     df = key_df
             aggregated_dfs[n.__key__()] = df
         return aggregated_dfs[self.parser.root].mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
 
+    @profile
     def get_direct_children(self, root_df):
         """
         Get data of all directed nodes and attach to root node
@@ -106,6 +112,7 @@ class Translator(BaseTranslator):
             root_df = root_df.leftOuterJoin(child_by_root).mapValues(lambda x: merge_and_fill_empty_props(x, n.props))
         return root_df
 
+    @profile
     def translate(self):
         root_tbl = get_node_table_name(self.parser.model, self.parser.root)
         root_df = self.translate_table(root_tbl, props=self.parser.props)
