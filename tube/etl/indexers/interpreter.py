@@ -16,7 +16,7 @@ def create_translators(sc, config):
         if m['type'] == 'aggregator':
             translator = AggregatorTranslator(sc, config.HDFS_DIR, writer, m, model, dictionary)
         elif m['type'] == 'collector':
-            translator = CollectorTranslator(sc, config.HDFS_DIR, writer, m, model)
+            translator = CollectorTranslator(sc, config.HDFS_DIR, writer, m, model, dictionary)
         else:
             translator = BaseTranslator(sc, config.HDFS_DIR, writer)
         translators[translator.parser.doc_type] = translator
@@ -24,8 +24,22 @@ def create_translators(sc, config):
 
 
 def run_transform(translators):
+    need_to_join = {}
+    translator_to_translators = {}
+
     for translator in translators.values():
-        translator.translate()
+        df = translator.translate()
+        translator.save_to_hadoop(df)
+        if len(translator.parser.joining_indices) == 0:
+            translator.write(df)
+        else:
+            need_to_join[translator.parser.doc_type] = translator
+            translator_to_translators[translator.parser.doc_type] = \
+                [j.joining_index for j in translator.parser.joining_indices]
+
+    for v in need_to_join.values():
+        df = v.translate_joining_props(translators)
+        v.write(df)
 
 
 def get_index_names(config):

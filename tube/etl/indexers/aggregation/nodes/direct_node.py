@@ -7,10 +7,7 @@ class DirectNode(object):
         self.tbl_name = name
         self.edge = edge
         self.props = PropFactory.create_props_from_json(props_in_json)
-        if sorted_by is not None:
-            self.sorted_by = PropFactory.add_sorting_field_to_props(self.props, sorted_by)
-        else:
-            self.sorted_by = None
+        self.sorted_by = sorted_by
         self.desc_order = desc_order
         self.props_from_child = props_from_child
 

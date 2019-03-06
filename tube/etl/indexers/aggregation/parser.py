@@ -2,6 +2,7 @@ from tube.utils.dd import get_attribute_from_path, get_edge_table, get_child_tab
     get_node_table_name, get_properties_types, object_to_string
 from .nodes.aggregated_node import AggregatedNode, Reducer
 from .nodes.direct_node import DirectNode
+from .nodes.joining_node import JoiningNode
 from ..base.parser import Parser as BaseParser
 from ..base.prop import PropFactory
 
@@ -43,6 +44,8 @@ class Parser(BaseParser):
         self.aggregated_nodes = []
         if 'aggregated_props' in self.mapping:
             self.aggregated_nodes = self.get_aggregation_nodes()
+        if 'joining_props' in self.mapping:
+            self.joining_indices = self.get_joining_node()
         self.types = self.get_types()
 
     def get_root_props(self):
@@ -60,6 +63,12 @@ class Parser(BaseParser):
             p.non_leaf_children_count = Parser.non_leaves_count(p.children, leaves)
         aggregated_nodes.sort()
         return aggregated_nodes
+
+    def get_joining_node(self):
+        joining_nodes = []
+        for idx in self.mapping['joining_props']:
+            joining_nodes.append(JoiningNode(idx))
+        return joining_nodes
 
     """
     Construct the parsing tree that have the path to the parent node.
@@ -181,25 +190,35 @@ class Parser(BaseParser):
             if k == 'aggregated_props':
                 sub_type = {}
                 for i in v:
-                    if i['fn'] == 'count':
+                    if i['fn'] in ['count', 'sum']:
                         sub_type[i['name']] = (float, )
-                    elif i['fn'] == 'set':
+                    elif i['fn'] in ['set', 'list']:
                         sub_type[i['name']] = (str, )
+                types.update(sub_type)
+            if k == 'joining_props':
+                sub_type = {}
+                for i in v:
+                    vi = i.get('props', [])
+                    for p in vi:
+                        if p['fn'] in ['count', 'sum']:
+                            sub_type[p['name']] = (float, )
+                        elif p['fn'] in ['set', 'list']:
+                            sub_type[p['name']] = (str, )
                 types.update(sub_type)
             if k == 'flatten_props':
                 for i in v:
                     a = get_properties_types(model, get_attribute_from_path(model, root, i['path']))
                     for j in i['props']:
-                        p = self.get_prop(j)
+                        p = PropFactory.get_prop_by_json(j)
                         if p.src in a:
                             types[p.name] = a[p.src]
                         else:
                             types[p.name] = (str,)
 
             if k == 'props':
-                props = [self.get_prop(p_in_json) for p_in_json in v]
+                props = [PropFactory.get_prop_by_json(p_in_json) for p_in_json in v]
                 types.update({p.name: get_properties_types(model, root)[p.src] for p in props})
 
         types = self.select_widest_types(types)
-
+        types['{}_id'.format(self.doc_type)] = str
         return types

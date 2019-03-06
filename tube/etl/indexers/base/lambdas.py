@@ -50,6 +50,26 @@ def get_props_empty_values(props):
     return {k.name: None for k in props}
 
 
+def get_number(num):
+    if num is None:
+        return None
+    try:
+        return int(num)
+    except ValueError as e:
+        return num
+
+
+def use_property_as_key(x0, x1, prop_name, new_prop_name):
+    key = x1.pop(prop_name, None)
+    x1[new_prop_name] = x0
+    x0 = key
+    return (x0, x1)
+
+
+def swap_property_as_key(df, prop_name, new_prop_name):
+    return df.map(lambda x: use_property_as_key(x[0], x[1], prop_name, new_prop_name))
+
+
 def merge_and_fill_empty_props(item, props):
     if item[1] is None and item[0] is None:
         return {}

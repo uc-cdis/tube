@@ -1,4 +1,4 @@
-from ..base.prop import Prop
+from ..base.prop import PropFactory
 
 
 class Parser(object):
@@ -11,13 +11,10 @@ class Parser(object):
         self.name = mapping['name']
         self.root = mapping['root']
         self.doc_type = mapping['doc_type']
+        self.joining_indices = []
 
     def get_types(self):
         pass
-
-    def get_prop(self, p):
-        src = p['src'] if 'src' in p else p['name']
-        return Prop(p['name'], src, [])
 
     def select_widest_types(self, types):
         for k, v in types.items():

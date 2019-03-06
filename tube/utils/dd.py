@@ -47,6 +47,12 @@ def get_child_table(models, node_name, edge_name):
     return models.Node.get_subclass_named(edge.target_class.__dst_class__).__tablename__, False
 
 
+def get_all_children_of_node(models, class_name):
+    name = models.Node.get_subclass_named(class_name).__name__
+    edges_in = models.Edge._get_edges_with_dst(name)
+    return edges_in
+
+
 def get_parent_name(models, node_name, edge_name):
     node = models.Node.get_subclass(node_name)
     edge = getattr(node, edge_name)
@@ -103,5 +109,10 @@ def get_multiplicity(dictionary, parent, child):
         else:
             if link['target_type'] == parent:
                 return link['multiplicity']
-
     return
+
+
+def get_node_category(dictionary, node):
+    schema = dictionary.schema
+    dd_node = schema[node]
+    return dd_node.get('category', None)

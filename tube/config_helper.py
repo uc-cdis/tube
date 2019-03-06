@@ -6,7 +6,7 @@ import os
 # on linux XDG_DATA_HOME defaults to $HOME/.local/share,
 # but may need to add to .bashrc on Mac
 #
-XDG_DATA_HOME = os.getenv('XDG_DATA_HOME', '/usr/share/')
+XDG_DATA_HOME = os.getenv('XDG_DATA_HOME', '/usr/share')
 
 
 def default_search_folders(app_name):

@@ -9,6 +9,18 @@ def union_sets(x, y):
         return list(set(x) | set(y))
 
 
+def extend_list(x, y):
+    if x is None and y is None:
+        return []
+    elif x is None and y is not None:
+        return y
+    elif x is not None and y is None:
+        return x
+    else:
+        x.extend(y)
+        return x
+
+
 def get_aggregation_func_by_name(func_name, is_merging=False):
     if func_name == 'count':
         if is_merging:
@@ -18,10 +30,12 @@ def get_aggregation_func_by_name(func_name, is_merging=False):
         return lambda x, y: x + y
     if func_name == 'set':
         return lambda x, y: union_sets(x, y)
+    if func_name == 'list':
+        return lambda x, y: extend_list(x, y)
 
 
 def get_single_frame_zero_by_func(func_name, output_name):
-    if func_name == 'set':
+    if func_name in ['set', 'list']:
         return (func_name, output_name, [])
     if func_name == 'count' or func_name == 'sum':
         return (func_name, output_name, 0)
@@ -29,11 +43,11 @@ def get_single_frame_zero_by_func(func_name, output_name):
 
 
 def get_frame_zero(reducers):
-    return tuple([get_single_frame_zero_by_func(rd.fn, rd.prop.name) for rd in reducers if not rd.done])
+    return tuple([get_single_frame_zero_by_func(rd.fn, rd.prop.id) for rd in reducers if not rd.done])
 
 
 def get_single_frame_value(func_name, value):
-    if func_name == 'set':
+    if func_name in ['set', 'list']:
         if value is None:
             return []
         return [value] if type(value) is not list else value
@@ -51,7 +65,7 @@ def get_normal_frame(reducers):
     :param reducers:
     :return:
     """
-    return lambda x: tuple([(rd.fn, rd.prop.name, get_single_frame_value(rd.fn, x.get(rd.prop.name)))
+    return lambda x: tuple([(rd.fn, rd.prop.id, get_single_frame_value(rd.fn, x.get(rd.prop.id)))
                             for rd in reducers if not rd.done])
 
 
@@ -75,6 +89,6 @@ def merge_aggregate_with_reducer(x, y):
     return tuple(res)
 
 
-def intermediate_frame(output_name):
+def intermediate_frame(prop):
     # Generalize later base on the input
-    return lambda x: (('sum', output_name, x),)
+    return lambda x: (('sum', prop.id, x),)
