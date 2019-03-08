@@ -9,8 +9,8 @@ from tube.etl.outputs.es.versioning import Versioning
 from tube.etl.outputs.es.timestamp import putting_timestamp
 
 
-def json_export(x):
-    x[1]['node_id'] = x[0]
+def json_export(x, doc_type):
+    x[1]['{}_id'.format(doc_type)] = x[0]
     return (x[0], json.dumps(x[1]))
 
 
@@ -77,7 +77,7 @@ class Writer(SparkBase):
         return Elasticsearch([{'host': es_hosts, 'port': es_port}])
 
     def write_to_new_index(self, df, index, doc_type):
-        df = df.map(lambda x: json_export(x))
+        df = df.map(lambda x: json_export(x, doc_type))
         es_config = self.es_config
         es_config['es.resource'] = index + '/{}'.format(doc_type)
         df.saveAsNewAPIHadoopFile(path='-',

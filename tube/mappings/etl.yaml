@@ -75,10 +75,21 @@ mappings:
         src: ct_count
         path: imaging_studies
         fn: sum
+    joining_props:
+      - index: file
+        join_on: subject_id
+        props:
+          - name: data_format
+            src: data_format
+            fn: list
+          - name: data_type
+            src: data_type
+            fn: list
   - name: file
     doc_type: file
     type: collector
     root: None
+    category: data_file
     props:
       - name: object_id
       - name: md5sum
@@ -91,28 +102,3 @@ mappings:
           - name: subject_id
             src: id
           - name: project_id
-    target_nodes:
-      - name: mutation_panel
-        path: subjects
-      - name: bgm_simulation
-        path: mutation_panels.subjects
-      - name: mrna_microarray
-        path: aliquots.samples.subjects
-      - name: mirna_microarray
-        path: aliquots.samples.subjects
-      - name: lipid_mass_spectrometry
-        path: aliquots.samples.subjects
-      - name: protein_mass_spectrometry
-        path: aliquots.samples.subjects
-      - name: metabolite_mass_spectrometry
-        path: aliquots.samples.subjects
-      - name: submitted_copy_number
-        path: aliquots.samples.subjects
-      - name: submitted_methylation
-        path: aliquots.samples.subjects
-      - name: submitted_aligned_reads
-        path: read_groups.aliquots.samples.subjects
-      - name: submitted_unaligned_reads
-        path: read_groups.aliquots.samples.subjects
-      - name: submitted_somatic_mutation
-        path: read_groups.aliquots.samples.subjects
