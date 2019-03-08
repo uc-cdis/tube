@@ -33,7 +33,7 @@ class Translator(BaseTranslator):
             if child.name not in collected_collecting_dfs:
                 collected_collecting_dfs[child.name] = edge_df
             else:
-                collected_collecting_dfs[child.name].union(edge_df)
+                collected_collecting_dfs[child.name].union(edge_df).reduceByKey(lambda (x, y): x)
 
     def merge_roots_to_children(self):
         collected_leaf_dfs = {}
