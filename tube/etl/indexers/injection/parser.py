@@ -70,7 +70,7 @@ class Parser(BaseParser):
         while (i < len(processing_queue)):
             current_node = processing_queue[i]
             current_label = get_node_label(self.model, current_node.class_name)
-            if get_node_category(self.dictionary, current_label) == self.mapping['category']:
+            if get_node_category(self.dictionary, current_label) == self.mapping.get('category', 'data_file'):
                 return current_label
             children = get_all_children_of_node(self.model, current_node.class_name)
             for child in children:
@@ -190,7 +190,6 @@ class Parser(BaseParser):
                 collectors[p.src] = CollectingNode(p.src, edge_up_tbl)
             child = collectors[p.src]
             if len(segments) > 1:
-                # looping_list = zip(segments[0:len(segments)-1], segments[1:len(segments)])
                 for fst in segments[0:len(segments)-1]:
                     child = self.add_collecting_node(child, collectors, fst)
             self.add_root_node(child, roots, segments[-1])
@@ -207,7 +206,7 @@ class Parser(BaseParser):
         while (i < len(processing_queue)):
             current_node = processing_queue[i]
             current_label = get_node_label(self.model, current_node.class_name)
-            if get_node_category(self.dictionary, current_label) == self.mapping['category']:
+            if get_node_category(self.dictionary, current_label) == self.mapping.get('category', 'data_file'):
                 path = Path(len(flat_paths), current_node.upper_path, current_label)
                 flat_paths.add(path)
             children = get_all_children_of_node(self.model, current_node.class_name)
