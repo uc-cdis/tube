@@ -43,7 +43,7 @@ class Translator(object):
         self.writer.write_df(df, self.parser.name,
                              self.parser.doc_type, self.parser.types)
 
-    def get_props_from_data_row(self, df, props):
+    def get_props_from_data_row(self, df, props, to_tuple=False):
         if df.isEmpty():
             return df.mapValues(get_props_empty_values(props))
         names = {p.src: p.id for p in props}

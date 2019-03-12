@@ -22,18 +22,18 @@ class Translator(BaseTranslator):
             # child_df = collected_dfs[child.name] if child.name in collected_dfs else \
             child_df = self.translate_table(child.tbl_name, props=self.parser.props)
             child_df = child_df.join(edge_df).mapValues(
-                lambda x: merge_and_fill_empty_props(x, root_props))
-            child.done = True
+                lambda x: merge_and_fill_empty_props(x, root_props, to_tuple=True))
             collected_leaf_dfs['final'] = child_df if 'final' not in collected_leaf_dfs \
-                else collected_leaf_dfs['final'].union(child_df).reduceByKey(lambda (x, y): x)
+                else collected_leaf_dfs['final'].union(child_df).distinct()
             if child.name in collected_leaf_dfs:
                 collected_leaf_dfs[child.name].unpersist()
+            child.done = True
         else:
             child.no_parent_to_map -= 1
             if child.name not in collected_collecting_dfs:
                 collected_collecting_dfs[child.name] = edge_df
             else:
-                collected_collecting_dfs[child.name].union(edge_df).reduceByKey(lambda (x, y): x)
+                collected_collecting_dfs[child.name].union(edge_df).distinct()
 
     def merge_roots_to_children(self):
         collected_leaf_dfs = {}
@@ -72,8 +72,6 @@ class Translator(BaseTranslator):
             df = collected_collecting_dfs.get(leaf.name, None)
             if df is None:
                 continue
-            # edge_df = df.join(self.translate_edge(leaf.edge_up_tbl))\
-            #     .map(lambda x: (x[1][1], x[1][0]))
             self.collect_child(leaf, df, collected_collecting_dfs, collected_leaf_dfs)
 
     def translate(self):
@@ -83,7 +81,9 @@ class Translator(BaseTranslator):
         for (k, df) in collected_collecting_dfs.items():
             if k != 'final':
                 df.unpersist()
+
         if 'final' in collected_leaf_dfs:
+            collected_leaf_dfs['final'] = collected_leaf_dfs['final'].mapValues(lambda x: {x_i[0]: x_i[1] for x_i in x})
             return collected_leaf_dfs['final']
         else:
             return self.sc.parallelize([])

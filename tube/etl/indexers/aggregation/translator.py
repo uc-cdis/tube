@@ -126,7 +126,7 @@ class Translator(BaseTranslator):
         joining_df.unpersist()
         temp_df = temp_df.mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
 
-        df = df.leftOuterJoin(temp_df).mapValues(lambda x: merge_dictionary(x[0], x[1]))
+        df = df.leftOuterJoin(temp_df).mapValues(lambda x: merge_and_fill_empty_props(x, props))
         temp_df.unpersist()
         return df
 
@@ -141,3 +141,6 @@ class Translator(BaseTranslator):
         for j in self.parser.joining_indices:
             df = self.join_to_an_index(df, translators[j.joining_index], j)
         return df
+
+    def translate_spcial(self):
+        viral_loads = self.translate_table('node_summary_lab_result', props=['viral_load'])
