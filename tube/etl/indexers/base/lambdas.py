@@ -47,7 +47,7 @@ def get_props(names, values):
 
 
 def get_props_empty_values(props):
-    return {k.name: None for k in props}
+    return {k.name: [] if k.fn in ['set', 'list'] else None for k in props}
 
 
 def get_number(num):
