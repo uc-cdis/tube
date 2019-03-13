@@ -33,7 +33,7 @@ class Translator(BaseTranslator):
             if child.name not in collected_collecting_dfs:
                 collected_collecting_dfs[child.name] = edge_df
             else:
-                collected_collecting_dfs[child.name].union(edge_df).distinct()
+                collected_collecting_dfs[child.name] = collected_collecting_dfs[child.name].union(edge_df).distinct()
 
     def merge_roots_to_children(self):
         collected_leaf_dfs = {}
@@ -46,7 +46,7 @@ class Translator(BaseTranslator):
                 edge_tbl, _ = child.parents[root_name]
                 edge_df = df.join(self.translate_edge(edge_tbl))\
                     .map(lambda x: (x[1][1], ({'{}_id'.format(root_name): x[0]},) + (x[1][0],)))\
-                    .mapValues(lambda x: merge_and_fill_empty_props(x, props))
+                    .mapValues(lambda x: merge_and_fill_empty_props(x, props, to_tuple=True))
                 self.collect_child(child, edge_df, collected_collecting_dfs, collected_leaf_dfs)
         return collected_collecting_dfs, collected_leaf_dfs
 
