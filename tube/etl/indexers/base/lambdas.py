@@ -31,10 +31,10 @@ def flatten_files_to_lists(pair):
     return [line for line in text.splitlines()]
 
 
-def merge_dictionary(d1, d2):
+def merge_dictionary(d1, d2, to_tuple=False):
     d0 = d1.copy()
     d0.update(d2)
-    return d0
+    return d0 if not to_tuple else tuple([(k, v) for (k, v) in d0.items()])
 
 
 def swap_key_value(df):
@@ -47,7 +47,7 @@ def get_props(names, values):
 
 
 def get_props_empty_values(props):
-    return {k.name: None for k in props}
+    return {k.name: [] if k.fn in ['set', 'list'] else None for k in props}
 
 
 def get_number(num):
@@ -70,14 +70,14 @@ def swap_property_as_key(df, prop_name, new_prop_name):
     return df.map(lambda x: use_property_as_key(x[0], x[1], prop_name, new_prop_name))
 
 
-def merge_and_fill_empty_props(item, props):
+def merge_and_fill_empty_props(item, props, to_tuple=False):
     if item[1] is None and item[0] is None:
-        return {}
+        return {} if not to_tuple else tuple([])
     if item[0] is None:
-        return item[1]
+        return item[1] if not to_tuple else tuple([(k, v) for (k, v) in item[1].items()])
     if item[1] is None:
-        return merge_dictionary(item[0], get_props_empty_values(props))
-    return merge_dictionary(item[0], item[1])
+        return merge_dictionary(item[0], get_props_empty_values(props), to_tuple)
+    return merge_dictionary(item[0], item[1], to_tuple)
 
 
 def sort_by_field(x, field, reversed):

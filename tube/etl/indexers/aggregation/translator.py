@@ -6,6 +6,7 @@ from tube.utils.dd import get_node_table_name
 from .parser import Parser
 from ..base.lambdas import sort_by_field, swap_property_as_key
 from tube.etl.indexers.base.prop import PropFactory
+from copy import copy
 
 
 class Translator(BaseTranslator):
@@ -114,11 +115,19 @@ class Translator(BaseTranslator):
             child_by_root.unpersist()
         return root_df
 
+    def get_joining_props(self, joining_index):
+        props = []
+        for r in joining_index.reducers:
+            prop = copy(PropFactory.get_prop_by_name(r.prop.src))
+            prop.fn = r.fn
+            props.append(prop)
+        return props
+
     def join_to_an_index(self, df, translator, joining_index):
         joining_df = swap_property_as_key(translator.load_from_hadoop(), joining_index.joining_field,
                                           '{}_id'.format(translator.parser.doc_type))
 
-        props = [PropFactory.get_prop_by_name(r.prop.src) for r in joining_index.reducers]
+        props = self.get_joining_props(joining_index)
         joining_df = self.get_props_from_df(joining_df, props)
         joining_df = joining_df.mapValues(get_normal_frame(joining_index.reducers))
         frame_zero = get_frame_zero(joining_index.reducers)
@@ -126,7 +135,7 @@ class Translator(BaseTranslator):
         joining_df.unpersist()
         temp_df = temp_df.mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
 
-        df = df.leftOuterJoin(temp_df).mapValues(lambda x: merge_dictionary(x[0], x[1]))
+        df = df.leftOuterJoin(temp_df).mapValues(lambda x: merge_and_fill_empty_props(x, props))
         temp_df.unpersist()
         return df
 
@@ -141,3 +150,6 @@ class Translator(BaseTranslator):
         for j in self.parser.joining_indices:
             df = self.join_to_an_index(df, translators[j.joining_index], j)
         return df
+
+    def translate_spcial(self):
+        viral_loads = self.translate_table('node_summary_lab_result', props=['viral_load'])
