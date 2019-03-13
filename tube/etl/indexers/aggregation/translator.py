@@ -6,6 +6,7 @@ from tube.utils.dd import get_node_table_name
 from .parser import Parser
 from ..base.lambdas import sort_by_field, swap_property_as_key
 from tube.etl.indexers.base.prop import PropFactory
+from copy import copy
 
 
 class Translator(BaseTranslator):
@@ -114,11 +115,19 @@ class Translator(BaseTranslator):
             child_by_root.unpersist()
         return root_df
 
+    def get_joining_props(self, joining_index):
+        props = []
+        for r in joining_index.reducers:
+            prop = copy(PropFactory.get_prop_by_name(r.prop.src))
+            prop.fn = r.fn
+            props.append(prop)
+        return props
+
     def join_to_an_index(self, df, translator, joining_index):
         joining_df = swap_property_as_key(translator.load_from_hadoop(), joining_index.joining_field,
                                           '{}_id'.format(translator.parser.doc_type))
 
-        props = [PropFactory.get_prop_by_name(r.prop.src) for r in joining_index.reducers]
+        props = self.get_joining_props(joining_index)
         joining_df = self.get_props_from_df(joining_df, props)
         joining_df = joining_df.mapValues(get_normal_frame(joining_index.reducers))
         frame_zero = get_frame_zero(joining_index.reducers)
