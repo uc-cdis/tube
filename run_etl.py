@@ -45,6 +45,9 @@ def config_by_args():
                         type=str,
                         choices=['import', 'transform', 'all'],
                         default='all')
+    parser.add_argument('-f', '--force',
+                        help='Force ETL run when there is no new data',
+                        action="store_true")
 
     args = parser.parse_args()
     config.RUNNING_MODE = args.config
@@ -59,7 +62,7 @@ def main():
     es = Elasticsearch([{'host': es_hosts, 'port': es_port}])
     index_names = interpreter.get_index_names(config)
 
-    if check_to_run_etl(es, index_names):
+    if args.force or check_to_run_etl(es, index_names):
         if args.step == "import" or args.step == "all":
             run_import()
         if args.step == "transform" or args.step == "all":
