@@ -1,7 +1,11 @@
-from tube.etl.indexers.base.lambdas import merge_and_fill_empty_props
+from copy import copy
+from tube.etl.indexers.base.lambdas import merge_and_fill_empty_props, merge_dictionary
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from .nodes.collecting_node import LeafNode
 from .parser import Parser
+from .lambdas import get_props_to_tuple, remove_props_to_tuple, get_frame_zero, \
+    seq_aggregate_with_prop, merge_aggregate_with_prop, get_normal_frame
+from tube.etl.indexers.base.prop import PropFactory
 
 
 class Translator(BaseTranslator):
@@ -11,7 +15,7 @@ class Translator(BaseTranslator):
         root_props = []
         for root in self.parser.roots:
             root_props.extend(root.props)
-        self.root_props = root_props
+        self.root_props = list(set(root_props))
 
     def collect_child(self, child, edge_df, collected_collecting_dfs, collected_leaf_dfs, root_props=None):
         if edge_df is None or edge_df.isEmpty():
@@ -88,5 +92,27 @@ class Translator(BaseTranslator):
         else:
             return self.sc.parallelize([])
 
-    def translate_joining_props(self, translators):
-        pass
+    def get_aggregating_props(self):
+        props = []
+        for p in self.root_props:
+            prop = copy(PropFactory.get_prop_by_name(p.name))
+            if p.fn is not None:
+                prop.fn = p.fn
+                props.append(prop)
+        return props
+
+    def translate_final(self):
+        df = self.load_from_hadoop()
+        aggregating_props = self.get_aggregating_props()
+        if len(aggregating_props) == 0:
+            return df
+
+        prop_df = df.mapValues(lambda x: get_props_to_tuple(x, aggregating_props))
+        df = df.mapValues(lambda x: remove_props_to_tuple(x, aggregating_props)).distinct()
+
+        df = df.mapValues(lambda x: {x0: x1 for (x0, x1) in x})
+        frame_zero = get_frame_zero(aggregating_props)
+        prop_df = prop_df.aggregateByKey(frame_zero, seq_aggregate_with_prop, merge_aggregate_with_prop)
+        prop_df = prop_df.mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
+
+        return df.join(prop_df).mapValues(lambda x: merge_dictionary(x[0], x[1]))

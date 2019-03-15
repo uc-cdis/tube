@@ -43,7 +43,7 @@ def make_sure_hdfs_path_exist(path, sc=None):
     return path
 
 
-def save_rds(sc, df, path):
+def save_rds(df, path, sc):
     fs, opath, sc = get_hdfs_file_handler(sc)
     fs.delete(opath(path), True)
     df.saveAsPickleFile(path)

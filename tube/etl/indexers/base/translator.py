@@ -14,6 +14,7 @@ class Translator(object):
         self.writer = writer
         self.hdfs_path = hdfs_path
         self.parser = None
+        self.current_step = 0
 
     def translate_table(self, table_name, get_zero_frame=None, props=None):
         df = self.sc.wholeTextFiles(os.path.join(self.hdfs_path, table_name)).flatMap(flatten_files_to_lists)
@@ -59,12 +60,18 @@ class Translator(object):
     def restore_prop_name(self, df, props):
         return df.mapValues(lambda x: {props[k].name if type(get_number(k)) is int else k: v for (k, v) in x.items()})
 
+    def get_path_from_step(self, step):
+        return os.path.join(self.hdfs_path, 'output', '{}_{}'.format(self.parser.doc_type, str(step)))
+
     def save_to_hadoop(self, df):
-        save_rds(self.sc, df, os.path.join(self.hdfs_path, 'output', self.parser.doc_type))
+        save_rds(df, self.get_path_from_step(self.current_step), self.sc)
         df.unpersist()
 
     def load_from_hadoop(self):
-        return self.sc.pickleFile(os.path.join(self.hdfs_path, 'output', self.parser.doc_type))
+        return self.sc.pickleFile(self.get_path_from_step(self.current_step - 1))
 
     def translate_joining_props(self, translators):
         pass
+
+    def translate_final(self):
+        return self.load_from_hadoop()
