@@ -67,6 +67,9 @@ class Prop(object):
         self.value_mappings = [] if value_mappings is None else value_mappings
         self.fn = fn
 
+    def __hash__(self):
+        return self.id
+
     def __str__(self):
         return object_to_string(self)
 

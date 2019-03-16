@@ -84,3 +84,59 @@ def sort_by_field(x, field, reversed):
     if not reversed:
         return sorted(x, key=lambda k: k[field])
     return sorted(x, key=lambda k: k[field], reverse=reversed)
+
+
+def union_sets(x, y):
+    if x is None and y is None:
+        return []
+    elif x is None and y is not None:
+        return y
+    elif x is not None and y is None:
+        return x
+    else:
+        return list(set(x) | set(y))
+
+
+def extend_list(x, y):
+    if x is None and y is None:
+        return []
+    elif x is None and y is not None:
+        return y
+    elif x is not None and y is None:
+        return x
+    else:
+        x.extend(y)
+        return x
+
+
+def get_aggregation_func_by_name(func_name, is_merging=False):
+    if func_name == 'count':
+        if is_merging:
+            return lambda x, y: x + y
+        return lambda x, y: x + 1
+    if func_name == 'sum':
+        return lambda x, y: x + y
+    if func_name == 'set':
+        return lambda x, y: union_sets(x, y)
+    if func_name == 'list':
+        return lambda x, y: extend_list(x, y)
+
+
+def get_single_frame_zero_by_func(func_name, output_name):
+    if func_name in ['set', 'list']:
+        return (func_name, output_name, [])
+    if func_name == 'count' or func_name == 'sum':
+        return (func_name, output_name, 0)
+    return (func_name, output_name, '')
+
+
+def get_single_frame_value(func_name, value):
+    if func_name in ['set', 'list']:
+        if value is None:
+            return []
+        return [value] if type(value) is not list else value
+    if func_name == 'count':
+        return 1 if value is None else value
+    if func_name == 'sum':
+        return 0 if value is None else value
+    return ''

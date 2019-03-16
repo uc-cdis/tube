@@ -42,10 +42,6 @@ class Translator(BaseTranslator):
         return count_df if df is None else df.leftOuterJoin(count_df).mapValues(lambda x: x[0] + x[1])
 
     def aggregate_with_child_tbl(self, df, swapped_df, child):
-        props = []
-        for rd in child.reducers:
-            props.append(rd.prop.src)
-
         child_df = self.translate_table(child.tbl_name, props=[rd.prop for rd in child.reducers
                                                                if not rd.done and rd.prop.src is not None])\
             .mapValues(get_normal_frame(child.reducers))

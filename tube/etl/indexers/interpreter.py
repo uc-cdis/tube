@@ -30,16 +30,20 @@ def run_transform(translators):
     for translator in translators.values():
         df = translator.translate()
         translator.save_to_hadoop(df)
-        if len(translator.parser.joining_indices) == 0:
-            translator.write(df)
-        else:
+        translator.current_step = 1
+        if len(translator.parser.joining_indices) > 0:
             need_to_join[translator.parser.doc_type] = translator
             translator_to_translators[translator.parser.doc_type] = \
                 [j.joining_index for j in translator.parser.joining_indices]
 
     for v in need_to_join.values():
         df = v.translate_joining_props(translators)
-        v.write(df)
+        v.save_to_hadoop(df)
+        v.current_step += 1
+
+    for t in translators.values():
+        df = t.translate_final()
+        t.write(df)
 
 
 def get_index_names(config):

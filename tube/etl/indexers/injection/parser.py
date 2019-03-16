@@ -48,11 +48,11 @@ class Parser(BaseParser):
         super(Parser, self).__init__(mapping, model)
         self.dictionary = dictionary
         self.props = PropFactory.create_props_from_json(self.mapping['props'])
-        self.final_fields = [p for p in self.props]
-        self.final_types = self.get_props_types()
         self.leaves = set([])
         self.collectors = []
         self.roots = set([])
+        self.all_props = [p for p in self.props]
+        self.final_types = self.get_props_types()
         self.get_collecting_nodes()
         self.types = self.get_types()
 
@@ -141,7 +141,7 @@ class Parser(BaseParser):
                 f_type = self.select_widest_type(get_properties_types(self.model, root_name)[p.src])
             else:
                 f_type = str
-            self.final_fields.append(p)
+            self.all_props.append(p)
             self.final_types[p.name] = f_type
 
     def add_root_node(self, child, roots, segment):
