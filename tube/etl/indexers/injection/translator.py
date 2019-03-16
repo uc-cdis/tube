@@ -44,12 +44,12 @@ class Translator(BaseTranslator):
         collected_collecting_dfs = {}
         for root in self.parser.roots:
             df = self.translate_table(root.tbl_name, props=root.props)
-            root_name = root.name
+            root_id = PropFactory.get_prop_by_name('{}_id'.format(root.name)).id
             props = root.props
             for child in root.children:
-                edge_tbl, _ = child.parents[root_name]
+                edge_tbl, _ = child.parents[root.name]
                 edge_df = df.join(self.translate_edge(edge_tbl))\
-                    .map(lambda x: (x[1][1], ({'{}_id'.format(root_name): x[0]},) + (x[1][0],)))\
+                    .map(lambda x: (x[1][1], ({root_id: x[0]},) + (x[1][0],)))\
                     .mapValues(lambda x: merge_and_fill_empty_props(x, props, to_tuple=True))
                 self.collect_child(child, edge_df, collected_collecting_dfs, collected_leaf_dfs)
         return collected_collecting_dfs, collected_leaf_dfs
