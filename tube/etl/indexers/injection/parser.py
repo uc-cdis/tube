@@ -57,7 +57,7 @@ class Parser(BaseParser):
         self.types = self.get_types()
 
     def get_first_node_label_with_category(self):
-        if len(self.mapping['injecting_props'].items()) > 0:
+        if len(self.mapping['injecting_props'].items()) == 0:
             return None
 
         processing_queue = []
@@ -98,7 +98,13 @@ class Parser(BaseParser):
     def get_collecting_nodes(self):
         for k, v in self.mapping['injecting_props'].items():
             flat_paths = self.create_collecting_paths(k)
-        self.leaves, self.collectors, self.roots = self.construct_reversed_collection_tree(flat_paths)
+
+        selected_category = self.mapping.get('category', 'data_file')
+        leaves_name = [k for (k, v) in self.dictionary.schema.items()
+                       if v.get('category', None) == selected_category]
+
+        self.leaves = [LeafNode(name, get_node_table_name(self.model, name)) for name in leaves_name]
+        self.collectors, self.roots = self.construct_reversed_collection_tree(flat_paths)
         self.update_level()
         self.collectors.sort()
 
@@ -179,13 +185,13 @@ class Parser(BaseParser):
         return leaves[name]
 
     def construct_reversed_collection_tree(self, flat_paths):
-        leaves = {}
+        # leaves = {}
         collectors = {}
         roots = {}
         for p in flat_paths:
             segments = list(p.path)
             _, edge_up_tbl = get_edge_table(self.model, p.src, segments[0])
-            self.add_leaf_node(p.src, leaves)
+            # self.add_leaf_node(p.src, leaves)
             if p.src not in collectors:
                 collectors[p.src] = CollectingNode(p.src, edge_up_tbl)
             child = collectors[p.src]
@@ -193,7 +199,7 @@ class Parser(BaseParser):
                 for fst in segments[0:len(segments)-1]:
                     child = self.add_collecting_node(child, collectors, fst)
             self.add_root_node(child, roots, segments[-1])
-        return leaves.values(), collectors.values(), roots.values()
+        return collectors.values(), roots.values()
 
     def create_collecting_paths(self, label):
         name = self.model.Node.get_subclass(label).__name__

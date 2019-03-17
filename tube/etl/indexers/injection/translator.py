@@ -17,27 +17,29 @@ class Translator(BaseTranslator):
             root_props.extend(root.props)
         self.root_props = list(set(root_props))
 
-    def collect_child(self, child, edge_df, collected_collecting_dfs, collected_leaf_dfs, root_props=None):
-        if edge_df is None or edge_df.isEmpty():
-            child.no_parent_to_map -= 1
-            return
+    def collect_leaf(self, child, edge_df, collected_leaf_dfs, root_props=None):
         root_props = self.root_props if root_props is None else root_props
         if type(child) is LeafNode:
-            # child_df = collected_dfs[child.name] if child.name in collected_dfs else \
             child_df = self.translate_table(child.tbl_name, props=self.parser.props)
-            child_df = child_df.join(edge_df).mapValues(
+            if child_df.isEmpty():
+                return
+            child_df = child_df.leftOuterJoin(edge_df).mapValues(
                 lambda x: merge_and_fill_empty_props(x, root_props, to_tuple=True))
             collected_leaf_dfs['final'] = child_df if 'final' not in collected_leaf_dfs \
                 else collected_leaf_dfs['final'].union(child_df).distinct()
             if child.name in collected_leaf_dfs:
                 collected_leaf_dfs[child.name].unpersist()
             child.done = True
-        else:
+
+    def collect_collecting_child(self, child, edge_df, collected_collecting_dfs):
+        if edge_df is None or edge_df.isEmpty():
             child.no_parent_to_map -= 1
-            if child.name not in collected_collecting_dfs:
-                collected_collecting_dfs[child.name] = edge_df
-            else:
-                collected_collecting_dfs[child.name] = collected_collecting_dfs[child.name].union(edge_df).distinct()
+            return
+        child.no_parent_to_map -= 1
+        if child.name not in collected_collecting_dfs:
+            collected_collecting_dfs[child.name] = edge_df
+        else:
+            collected_collecting_dfs[child.name] = collected_collecting_dfs[child.name].union(edge_df).distinct()
 
     def merge_roots_to_children(self):
         collected_leaf_dfs = {}
@@ -51,7 +53,7 @@ class Translator(BaseTranslator):
                 edge_df = df.join(self.translate_edge(edge_tbl))\
                     .map(lambda x: (x[1][1], ({root_id: x[0]},) + (x[1][0],)))\
                     .mapValues(lambda x: merge_and_fill_empty_props(x, props, to_tuple=True))
-                self.collect_child(child, edge_df, collected_collecting_dfs, collected_leaf_dfs)
+                self.collect_collecting_child(child, edge_df, collected_collecting_dfs)
         return collected_collecting_dfs, collected_leaf_dfs
 
     def merge_collectors(self, collected_collecting_dfs, collected_leaf_dfs):
@@ -67,16 +69,14 @@ class Translator(BaseTranslator):
                             edge_tbl, _ = child.parents[collector.name]
                             edge_df = df.join(self.translate_edge(edge_tbl)) \
                                 .map(lambda x: (x[1][1], x[1][0]))
-                        self.collect_child(child, edge_df, collected_collecting_dfs, collected_leaf_dfs)
+                        self.collect_collecting_child(child, edge_df, collected_collecting_dfs)
                     collector.done = True
                     done_once = True
 
     def get_leaves(self, collected_collecting_dfs, collected_leaf_dfs):
         for leaf in self.parser.leaves:
-            df = collected_collecting_dfs.get(leaf.name, None)
-            if df is None:
-                continue
-            self.collect_child(leaf, df, collected_collecting_dfs, collected_leaf_dfs)
+            df = collected_collecting_dfs.get(leaf.name, self.sc.parallelize([('__BLANK_ID__', '__BLANK_VALUE__')]))
+            self.collect_leaf(leaf, df, collected_leaf_dfs)
 
     def translate(self):
         collected_collecting_dfs, collected_leaf_dfs = self.merge_roots_to_children()
