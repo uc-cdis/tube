@@ -6,8 +6,8 @@ from ..base.prop import PropFactory
 
 
 class Path(object):
-    def __init__(self, prop_name, path_name, src):
-        self.name = prop_name
+    def __init__(self, roots, path_name, src):
+        self.roots = roots
         self.src = src
         self.path = Path.create_path(path_name)
 
@@ -95,16 +95,39 @@ class Parser(BaseParser):
         types['{}_id'.format(self.doc_type)] = str
         return types
 
-    def get_collecting_nodes(self):
-        for k, v in self.mapping['injecting_props'].items():
-            flat_paths = self.create_collecting_paths(k)
+    # def create_program_project_root(self):
 
-        selected_category = self.mapping.get('category', 'data_file')
+    def get_orphan_paths(self, selected_category, leaves):
         leaves_name = [k for (k, v) in self.dictionary.schema.items()
                        if v.get('category', None) == selected_category]
+        orphan_leaves = set([])
+        for name in leaves_name:
+            self.leaves.add(LeafNode(name, get_node_table_name(self.model, name)))
+            if name not in leaves:
+                orphan_leaves.add(name)
 
-        self.leaves = [LeafNode(name, get_node_table_name(self.model, name)) for name in leaves_name]
+        if len(orphan_leaves) > 0:
+            return self.get_shortest_path_from_root(['program', 'project'], orphan_leaves)
+        return set([])
+
+    def get_collecting_nodes(self):
+        def selected_category_comparer(dictionary, x):
+            return get_node_category(dictionary, x) == selected_category
+
+        selected_category = self.mapping.get('category', 'data_file')
+        flat_paths = set([])
+        for k, v in self.mapping['injecting_props'].items():
+            flat_paths |= self.create_collecting_paths_from_root(k, lambda x: selected_category_comparer(self.dictionary, x))
+        leaves = [p.src for p in flat_paths]
+
         self.collectors, self.roots = self.construct_reversed_collection_tree(flat_paths)
+
+        flat_paths = self.get_orphan_paths(selected_category, leaves)
+        # self.roots.append(auth_root)
+        orphan_collectors, auth_root = self.construct_auth_path_tree(flat_paths)
+        self.collectors.extend(orphan_collectors)
+        self.roots.append(auth_root)
+
         self.update_level()
         self.collectors.sort()
 
@@ -158,8 +181,7 @@ class Parser(BaseParser):
             else RootNode(root_name, root_tbl_name,
                           self.mapping['injecting_props'][root_name]['props']
                           )
-        if type(child) is CollectingNode:
-            child.add_parent(top_node, edge_up_tbl)
+        child.add_parent(top_node.name, edge_up_tbl)
         top_node.add_child(child)
         if root_name not in roots:
             self.update_final_fields(root_name)
@@ -172,26 +194,16 @@ class Parser(BaseParser):
         collecting_node = collectors[parent_name] if parent_name in collectors \
             else CollectingNode(parent_name)
         collecting_node.add_child(child)
-        child.add_parent(collecting_node, edge_up_tbl)
+        child.add_parent(collecting_node.name, edge_up_tbl)
         collectors[parent_name] = collecting_node
         return collecting_node
 
-    def add_leaf_node(self, name, leaves):
-        leaf_tbl_name = get_node_table_name(self.model, name)
-
-        if name not in leaves:
-            leaf_node = LeafNode(name, leaf_tbl_name)
-            leaves[name] = leaf_node
-        return leaves[name]
-
     def construct_reversed_collection_tree(self, flat_paths):
-        # leaves = {}
         collectors = {}
         roots = {}
         for p in flat_paths:
             segments = list(p.path)
             _, edge_up_tbl = get_edge_table(self.model, p.src, segments[0])
-            # self.add_leaf_node(p.src, leaves)
             if p.src not in collectors:
                 collectors[p.src] = CollectingNode(p.src, edge_up_tbl)
             child = collectors[p.src]
@@ -201,20 +213,70 @@ class Parser(BaseParser):
             self.add_root_node(child, roots, segments[-1])
         return collectors.values(), roots.values()
 
-    def create_collecting_paths(self, label):
+    def create_auth_path_root(self):
+        program_table_name = get_node_table_name(self.model, 'program')
+        project_table_name = get_node_table_name(self.model, 'project')
+        _, edge_up_tbl = get_edge_table(self.model, 'project', 'programs')
+        root_program = RootNode('auth_path_root', program_table_name, [{'name': 'program_name', 'src': 'name'}])
+        root_project = RootNode('project', project_table_name, [{'name': 'project_code', 'src': 'code'}], edge_up_tbl)
+        root_program.root_child = root_project
+
+        return root_program
+
+    def construct_auth_path_tree(self, flat_paths):
+        collectors = {}
+        root = self.create_auth_path_root()
+        for p in flat_paths:
+            segments = list(p.path)
+            _, edge_up_tbl = get_edge_table(self.model, p.src, segments[0])
+            if p.src not in collectors:
+                collectors[p.src] = CollectingNode(p.src, edge_up_tbl)
+            child = collectors[p.src]
+            if len(segments) > 1:
+                for node in segments[0:len(segments)-2]:
+                    child = self.add_collecting_node(child, collectors, node)
+            root.add_child(child)
+            child.add_parent('auth_path_root', edge_up_tbl)
+
+        return collectors.values(), root
+
+    def initialize_queue(self, label):
         name = self.model.Node.get_subclass(label).__name__
         processing_queue = []
-        flat_paths = set()
         children = get_all_children_of_node(self.model, name)
         for child in children:
             processing_queue.append(NodePath(child.__src_class__, child.__src_dst_assoc__))
+        return processing_queue
+
+    def create_collecting_paths_from_root(self, label, selector):
+        flat_paths = set()
+        processing_queue = self.initialize_queue(label)
         i = 0
         while (i < len(processing_queue)):
             current_node = processing_queue[i]
             current_label = get_node_label(self.model, current_node.class_name)
-            if get_node_category(self.dictionary, current_label) == self.mapping.get('category', 'data_file'):
-                path = Path(len(flat_paths), current_node.upper_path, current_label)
+            if selector(current_label):
+                path = Path([label], current_node.upper_path, current_label)
                 flat_paths.add(path)
+            children = get_all_children_of_node(self.model, current_node.class_name)
+            for child in children:
+                processing_queue.append(
+                    NodePath(child.__src_class__, '.'.join([child.__src_dst_assoc__, current_node.upper_path])))
+            i += 1
+        return flat_paths
+
+    def get_shortest_path_from_root(self, roots, nodes):
+        cloned_nodes = nodes.copy()
+        flat_paths = set()
+        processing_queue = self.initialize_queue(roots[0])
+        i = 0
+        while len(cloned_nodes) > 0 and i < len(processing_queue):
+            current_node = processing_queue[i]
+            current_label = get_node_label(self.model, current_node.class_name)
+            if current_label in cloned_nodes:
+                path = Path(roots, current_node.upper_path, current_label)
+                flat_paths.add(path)
+                cloned_nodes.remove(current_label)
             children = get_all_children_of_node(self.model, current_node.class_name)
             for child in children:
                 processing_queue.append(
