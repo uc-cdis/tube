@@ -120,7 +120,8 @@ class Translator(BaseTranslator):
         return props
 
     def join_to_an_index(self, df, translator, joining_index):
-        joining_df = swap_property_as_key(translator.load_from_hadoop(), joining_index.joining_field,
+        joining_df = swap_property_as_key(translator.load_from_hadoop(),
+                                          PropFactory.get_prop_by_name(joining_index.joining_field).id,
                                           '{}_id'.format(translator.parser.doc_type))
 
         props = self.get_joining_props(joining_index)
