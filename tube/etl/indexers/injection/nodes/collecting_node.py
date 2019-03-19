@@ -4,11 +4,13 @@ from tube.etl.indexers.base.prop import PropFactory
 
 
 class RootNode(BaseNode):
-    def __init__(self, name, tbl_name, props):
+    def __init__(self, name, tbl_name, props, edge_to_parent=None):
         super(RootNode, self).__init__()
         self.name = name
+        self.edge_to_parent = edge_to_parent
         self.tbl_name = tbl_name
         self.props = PropFactory.create_props_from_json(props)
+        self.root_child = None
 
     def __repr__(self):
         return self.name
@@ -43,8 +45,8 @@ class CollectingNode(BaseNode):
             self.level == other.level and self.non_leaf_children_count < other.non_leaf_children_count
         )
 
-    def add_parent(self, parent, edge_up_tbl):
-        self.parents[parent.name] = (edge_up_tbl, parent)
+    def add_parent(self, parent_name, edge_up_tbl):
+        self.parents[parent_name] = edge_up_tbl
         self.no_parent_to_map = len(self.parents)
 
 

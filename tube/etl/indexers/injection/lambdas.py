@@ -48,3 +48,7 @@ def get_props_to_tuple(x, props):
     for p in props:
         get_props.append(tuple([p.fn, p.id, get_single_frame_value(p.fn, x.get(p.id))]))
     return tuple(get_props)
+
+
+def construct_project_id(x, props, output):
+    return {output: '-'.join([x.pop(p.id, '') for p in props])}
