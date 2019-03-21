@@ -1,8 +1,10 @@
+import re
 from tube.utils.dd import get_attribute_from_path, get_edge_table, get_child_table, get_multiplicity,\
     get_node_table_name, get_properties_types, object_to_string
 from .nodes.aggregated_node import AggregatedNode, Reducer
 from .nodes.direct_node import DirectNode
 from .nodes.joining_node import JoiningNode
+from .nodes.special_node import SpecialNode, SpecialRoot
 from ..base.parser import Parser as BaseParser
 from ..base.prop import PropFactory
 
@@ -44,8 +46,8 @@ class Parser(BaseParser):
         self.aggregated_nodes = []
         if 'aggregated_props' in self.mapping:
             self.aggregated_nodes = self.get_aggregation_nodes()
-        if 'joining_props' in self.mapping:
-            self.joining_indices = self.get_joining_node()
+        self.joining_indices = self.get_joining_node() if 'joining_props' in self.mapping else []
+        self.special_nodes = self.get_special_node() if 'special_props' in self.mapping else []
         self.types = self.get_types()
 
     def get_root_props(self):
@@ -63,6 +65,33 @@ class Parser(BaseParser):
             p.non_leaf_children_count = Parser.non_leaves_count(p.children, leaves)
         aggregated_nodes.sort()
         return aggregated_nodes
+
+    def json_to_special_node(self, path):
+        words = path.split('.')
+        nodes = [tuple(filter(None, re.split('[\[\]]', w))) for w in words]
+        first = None
+        prev = None
+        prev_label = self.root
+        for (n, p) in nodes:
+            child_name, edge_tbl = get_edge_table(self.model, prev_label, n)
+            child_tbl = get_node_table_name(self.model, child_name)
+            cur = SpecialNode(child_name, child_tbl, edge_tbl, p.split(','))
+            if prev is not None:
+                prev.child = cur
+            else:
+                first = cur
+            prev_label = child_name
+            prev = cur
+        return first
+
+    def get_special_node(self):
+        lst_nodes = []
+        for s in self.mapping.get('special_props'):
+            if 'path' in s:
+                PropFactory.adding_prop(s.get('name'), '', [], '')
+                lst_nodes.append(SpecialRoot(s.get('name'),
+                                             self.json_to_special_node(s.get('path')), s.get('fn', '').split(',')))
+        return lst_nodes
 
     def get_joining_node(self):
         joining_nodes = []

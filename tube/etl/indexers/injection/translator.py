@@ -50,7 +50,8 @@ class Translator(BaseTranslator):
             child_props = child.props
             df = df.join(self.translate_edge(edge_tbl)) \
                 .map(lambda x: (x[1][1], x[1][0]))
-            df = df.join(self.translate_table(child.tbl_name, props=child_props)) \
+            tbl_name = child.tbl_name
+            df = df.join(self.translate_table(tbl_name, props=child_props)) \
                 .mapValues(lambda x: merge_and_fill_empty_props(x, child_props))
             props.extend(child_props)
             child = child.root_child

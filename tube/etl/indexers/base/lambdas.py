@@ -1,6 +1,7 @@
 import ast
 import json
 import collections
+import sys
 
 
 def extract_metadata(str_value):
@@ -33,7 +34,8 @@ def flatten_files_to_lists(pair):
 
 def merge_dictionary(d1, d2, to_tuple=False):
     d0 = d1.copy()
-    d0.update(d2)
+    if d2 is not None and len(d2.items()) > 0:
+        d0.update(d2)
     return d0 if not to_tuple else tuple([(k, v) for (k, v) in d0.items()])
 
 
@@ -57,6 +59,12 @@ def get_number(num):
         return int(num)
     except ValueError as e:
         return num
+
+
+def make_key_from_property(x1, prop_name):
+    key = x1.pop(prop_name, None)
+    x0 = key
+    return (x0, x1)
 
 
 def use_property_as_key(x0, x1, prop_name, new_prop_name):
@@ -120,6 +128,10 @@ def get_aggregation_func_by_name(func_name, is_merging=False):
         return lambda x, y: union_sets(x, y)
     if func_name == 'list':
         return lambda x, y: extend_list(x, y)
+    if func_name == 'min':
+        return lambda x, y: min([i for i in [x, y] if i is not None])
+    if func_name == 'max':
+        return lambda x, y: max([i for i in [x, y] if i is not None])
 
 
 def get_single_frame_zero_by_func(func_name, output_name):
@@ -127,6 +139,10 @@ def get_single_frame_zero_by_func(func_name, output_name):
         return (func_name, output_name, [])
     if func_name == 'count' or func_name == 'sum':
         return (func_name, output_name, 0)
+    if func_name == 'min':
+        return (func_name, output_name, sys.maxint)
+    if func_name == 'max':
+        return (func_name, output_name, -sys.maxint-1)
     return (func_name, output_name, '')
 
 
@@ -139,4 +155,4 @@ def get_single_frame_value(func_name, value):
         return 1 if value is None else value
     if func_name == 'sum':
         return 0 if value is None else value
-    return ''
+    return value
