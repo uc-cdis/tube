@@ -54,6 +54,10 @@ class Parser(BaseParser):
         return PropFactory.create_props_from_json(self.mapping['props'])
 
     def get_aggregation_nodes(self):
+        """
+        Get aggregation nodes of aggregation tree which will produce aggregated_props
+        :return:
+        """
         flat_paths = self.create_paths()
         for p in flat_paths:
             print(str(p))
@@ -67,6 +71,11 @@ class Parser(BaseParser):
         return aggregated_nodes
 
     def json_to_special_node(self, path):
+        """
+        Create node in the path of special aggregation
+        :param path: path define the node and the prop to be aggregated
+        :return:
+        """
         words = path.split('.')
         nodes = [tuple(filter(None, re.split('[\[\]]', w))) for w in words]
         first = None
@@ -85,15 +94,22 @@ class Parser(BaseParser):
         return first
 
     def get_special_node(self):
+        """
+        Parse definition of special aggregation and create aggregated node for that
+        :return:
+        """
         lst_nodes = []
         for s in self.mapping.get('special_props'):
             if 'path' in s:
-                PropFactory.adding_prop(s.get('name'), '', [], '')
                 lst_nodes.append(SpecialRoot(s.get('name'),
                                              self.json_to_special_node(s.get('path')), s.get('fn', '').split(',')))
         return lst_nodes
 
     def get_joining_node(self):
+        """
+        Parse definition of joining between two indices
+        :return:
+        """
         joining_nodes = []
         for idx in self.mapping['joining_props']:
             joining_nodes.append(JoiningNode(idx))
@@ -209,6 +225,10 @@ class Parser(BaseParser):
         return nodes
 
     def get_types(self):
+        """
+        Get the ES types for all properties created by the index
+        :return:
+        """
         mapping = self.mapping
         model = self.model
         root = self.root

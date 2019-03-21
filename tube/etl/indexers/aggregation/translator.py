@@ -16,6 +16,12 @@ class Translator(BaseTranslator):
         self.parser = Parser(mapping, model, dictionary)
 
     def aggregate_intermediate_data_frame(self, child_df, edge_df):
+        """
+        Perform aggregation in the intermediate steps (attached to a AggregationNode - child node)
+        :param child_df: rdd of the child table which will be aggregated
+        :param edge_df: rdd of the edge connected from the parent to child node.
+        :return:
+        """
         frame_zero = tuple([get_single_frame_zero_by_func(i[0], i[1]) for i in child_df.first()[1]])
         temp_df = edge_df.leftOuterJoin(child_df).map(lambda x: (x[1][0], x[1][1])) \
             .mapValues(lambda x: x if x is not None else frame_zero)
@@ -24,6 +30,13 @@ class Translator(BaseTranslator):
                                       merge_aggregate_with_reducer)
 
     def aggregate_with_count_on_edge_tbl(self, df, edge_df, child):
+        """
+        Do the aggregation which only based on the edge table (count, sum, ...)
+        :param df:
+        :param edge_df:
+        :param child:
+        :return:
+        """
         count_reducer = None
         for reducer in child.reducers:
             if reducer.prop.src is None and reducer.fn == 'count':
@@ -113,6 +126,11 @@ class Translator(BaseTranslator):
         return root_df
 
     def get_joining_props(self, joining_index):
+        """
+        Get joining props added by an additional join between indices/documents
+        :param joining_index: Joining index created from parser
+        :return:
+        """
         props = []
         for r in joining_index.reducers:
             prop = copy(PropFactory.get_prop_by_name(r.prop.src))
@@ -121,6 +139,15 @@ class Translator(BaseTranslator):
         return props
 
     def join_to_an_index(self, df, translator, joining_index):
+        """
+        Perform the join between indices. It will:
+         - load rdd to be join from HDFS
+         - Joining with df
+        :param df: rdd of translator that does the join
+        :param translator: translator has rdd to be join this translator
+        :param joining_index: joining_index define in yaml file.
+        :return:
+        """
         joining_df = swap_property_as_key(translator.load_from_hadoop(),
                                           PropFactory.get_prop_by_name(joining_index.joining_field).id,
                                           PropFactory.get_prop_by_name('{}_id'.format(translator.parser.doc_type)).id)
@@ -145,18 +172,29 @@ class Translator(BaseTranslator):
         return root_df.join(self.aggregate_nested_properties()).mapValues(lambda x: merge_dictionary(x[0], x[1]))
 
     def translate_joining_props(self, translators):
+        """
+        Perform the join between the index/document created by this translator with
+        the indices/documents created by translators in the paramter
+        :param translators: translators containing indices that need to be joined
+        :return:
+        """
         df = self.load_from_hadoop()
         for j in self.parser.joining_indices:
             df = self.join_to_an_index(df, translators[j.joining_index], j)
         return df
 
     def translate_special(self, root_df):
+        """
+        If etlMapping have special_props entry that defines a special function, run this translation
+        :param root_df: The special function also have the same root with hosted document (case or subject)
+        :return: Return the origin rdd with result from special function included inside
+        """
         root_tbl = get_node_table_name(self.parser.model, self.parser.root)
         root_id = PropFactory.get_prop_by_name('{}_id'.format(self.parser.doc_type)).id
         for f in self.parser.special_nodes:
             if f.fn[0] == 'sliding':
                 df = self.translate_table(root_tbl, props=[])
-                n = f.root
+                n = f.head
                 first = True
                 while n is not None:
                     edge_tbl = n.edge_up_tbl

@@ -2,10 +2,14 @@ from tube.etl.indexers.base.prop import PropFactory
 
 
 class SpecialRoot():
-    def __init__(self, name, root, fn):
-        self.name = name
-        self.root = root
-        self.fn = fn
+    """
+    Special root is the abstract node give the access to the aggregation path of a special_prop in etlMapping
+    """
+    def __init__(self, name, head, fn):
+        self.name = name  # name of the prop create by this special function
+        self.head = head  # first SpecialNode in the chain of nodes (like a link-list) related to the special function
+        self.fn = fn  # name of the function perform in this special aggregation node
+        PropFactory.adding_prop(name, '', [], '')
 
     def __key__(self):
         return self.name
@@ -18,6 +22,9 @@ class SpecialRoot():
 
 
 class SpecialNode():
+    """
+    Special Node is a node in a chain of aggregation path that will be follow by the special aggregation
+    """
     def __init__(self, name, tbl, edge_up_tbl, props):
         self.name = name
         self.tbl = tbl
