@@ -1,3 +1,4 @@
+import collections
 from tube.etl.indexers.base.lambdas import merge_and_fill_empty_props, merge_dictionary, swap_key_value
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from tube.etl.indexers.aggregation.lambdas import intermediate_frame, merge_aggregate_with_reducer, \
@@ -202,6 +203,7 @@ class Translator(BaseTranslator):
                     if first:
                         df = df.map(lambda x: (x[1][1], ({root_id: x[0]},) + (x[1][0],)))\
                             .mapValues(lambda x: merge_dictionary(x[0], x[1]))
+                        first = False
                     else:
                         df = df.map(lambda x: (x[1][1], x[1][0]))
                     cur_props = n.props
@@ -213,7 +215,7 @@ class Translator(BaseTranslator):
                 df = df.map(lambda x: make_key_from_property(x[1], root_id))
                 (n, fn1, fn2) = tuple(f.fn[1:])
                 fid = PropFactory.get_prop_by_name(f.name).id
-                df = df.mapValues(lambda x: tuple([v for (k, v) in x.items()]))
+                df = df.mapValues(lambda x: tuple([v for (k, v) in collections.OrderedDict(sorted(x.items())).items()]))
                 df = sliding(df, int(n.strip()), fn1.strip(), fn2.strip())\
                     .mapValues(lambda x: {fid: x})
                 root_df = root_df.leftOuterJoin(df).mapValues(lambda x: merge_dictionary(x[0], x[1]))
