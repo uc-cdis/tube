@@ -1,8 +1,10 @@
+import re
 from tube.utils.dd import get_attribute_from_path, get_edge_table, get_child_table, get_multiplicity,\
     get_node_table_name, get_properties_types, object_to_string
 from .nodes.aggregated_node import AggregatedNode, Reducer
 from .nodes.direct_node import DirectNode
 from .nodes.joining_node import JoiningNode
+from .nodes.special_node import SpecialNode, SpecialRoot
 from ..base.parser import Parser as BaseParser
 from ..base.prop import PropFactory
 
@@ -44,14 +46,18 @@ class Parser(BaseParser):
         self.aggregated_nodes = []
         if 'aggregated_props' in self.mapping:
             self.aggregated_nodes = self.get_aggregation_nodes()
-        if 'joining_props' in self.mapping:
-            self.joining_indices = self.get_joining_node()
+        self.joining_indices = self.get_joining_node() if 'joining_props' in self.mapping else []
+        self.special_nodes = self.get_special_node() if 'special_props' in self.mapping else []
         self.types = self.get_types()
 
     def get_root_props(self):
         return PropFactory.create_props_from_json(self.mapping['props'])
 
     def get_aggregation_nodes(self):
+        """
+        Get aggregation nodes of aggregation tree which will produce aggregated_props
+        :return:
+        """
         flat_paths = self.create_paths()
         for p in flat_paths:
             print(str(p))
@@ -64,7 +70,46 @@ class Parser(BaseParser):
         aggregated_nodes.sort()
         return aggregated_nodes
 
+    def json_to_special_node(self, path):
+        """
+        Create node in the path of special aggregation
+        :param path: path define the node and the prop to be aggregated
+        :return:
+        """
+        words = path.split('.')
+        nodes = [tuple(filter(None, re.split('[\[\]]', w))) for w in words]
+        first = None
+        prev = None
+        prev_label = self.root
+        for (n, p) in nodes:
+            child_name, edge_tbl = get_edge_table(self.model, prev_label, n)
+            child_tbl = get_node_table_name(self.model, child_name)
+            cur = SpecialNode(child_name, child_tbl, edge_tbl, p.split(','))
+            if prev is not None:
+                prev.child = cur
+            else:
+                first = cur
+            prev_label = child_name
+            prev = cur
+        return first
+
+    def get_special_node(self):
+        """
+        Parse definition of special aggregation and create aggregated node for that
+        :return:
+        """
+        lst_nodes = []
+        for s in self.mapping.get('special_props'):
+            if 'path' in s:
+                lst_nodes.append(SpecialRoot(s.get('name'),
+                                             self.json_to_special_node(s.get('path')), s.get('fn', '').split(',')))
+        return lst_nodes
+
     def get_joining_node(self):
+        """
+        Parse definition of joining between two indices
+        :return:
+        """
         joining_nodes = []
         for idx in self.mapping['joining_props']:
             joining_nodes.append(JoiningNode(idx))
@@ -180,6 +225,10 @@ class Parser(BaseParser):
         return nodes
 
     def get_types(self):
+        """
+        Get the ES types for all properties created by the index
+        :return:
+        """
         mapping = self.mapping
         model = self.model
         root = self.root

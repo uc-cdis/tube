@@ -1,5 +1,6 @@
 from tube.etl.indexers.base.lambdas import get_aggregation_func_by_name, get_single_frame_zero_by_func, \
                             get_single_frame_value
+import __builtin__
 
 
 def get_frame_zero(reducers):
@@ -40,3 +41,15 @@ def merge_aggregate_with_reducer(x, y):
 def intermediate_frame(prop):
     # Generalize later base on the input
     return lambda x: (('sum', prop.id, x),)
+
+
+def sliding(rdd, n, fn1, fn2):
+    def gen_window(xi, n):
+        k, v = xi
+        x = tuple(v)
+        return [((k, x[0] - offset), (x[0], x[1])) for offset in xrange(n)]
+
+    return rdd.flatMap(lambda xi: gen_window(xi, n)) \
+        .groupByKey().mapValues(lambda vals: [x for (i, x) in sorted(vals)])\
+        .sortByKey().filter(lambda x: len(x[1]) == n).mapValues(lambda x: getattr(__builtin__, fn1)(x))\
+        .map(lambda x: (x[0][0], x[1])).groupByKey().mapValues(lambda vals: getattr(__builtin__, fn2)(vals))
