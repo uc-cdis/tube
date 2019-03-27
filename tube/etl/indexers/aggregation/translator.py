@@ -111,7 +111,7 @@ class Translator(BaseTranslator):
         for n in self.parser.flatten_props:
             # if n is a child of root node, we don't need to swap order of the pair ids
             edge_df = self.translate_edge(n.edge, not n.props_from_child)
-            sorting_prop = PropFactory.adding_prop(n.sorted_by, n.sorted_by, [])
+            sorting_prop = PropFactory.adding_prop(self.parser.doc_type, n.sorted_by, n.sorted_by, [])
             props = n.props
             props.append(sorting_prop)
             child_df = self.translate_table(n.tbl_name, props=props)
@@ -133,8 +133,8 @@ class Translator(BaseTranslator):
         :return:
         """
         props = []
-        for r in joining_index.reducers:
-            prop = copy(PropFactory.get_prop_by_name(r.prop.src))
+        for r in joining_index.getting_fields:
+            prop = copy(PropFactory.get_prop_by_name(self.parser.doc_type, r.prop.src))
             prop.fn = r.fn
             props.append(prop)
         return props
@@ -150,13 +150,13 @@ class Translator(BaseTranslator):
         :return:
         """
         joining_df = swap_property_as_key(translator.load_from_hadoop(),
-                                          PropFactory.get_prop_by_name(joining_index.joining_field).id,
-                                          PropFactory.get_prop_by_name('{}_id'.format(translator.parser.doc_type)).id)
+                                          translator.parser.get_prop_by_name(joining_index.joining_field).id,
+                                          translator.parser.get_key_prop().id)
 
         props = self.get_joining_props(joining_index)
         joining_df = self.get_props_from_df(joining_df, props)
-        joining_df = joining_df.mapValues(get_normal_frame(joining_index.reducers))
-        frame_zero = get_frame_zero(joining_index.reducers)
+        joining_df = joining_df.mapValues(get_normal_frame(joining_index.getting_fields))
+        frame_zero = get_frame_zero(joining_index.getting_fields)
         temp_df = joining_df.aggregateByKey(frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer)
         joining_df.unpersist()
         temp_df = temp_df.mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
@@ -191,7 +191,7 @@ class Translator(BaseTranslator):
         :return: Return the origin rdd with result from special function included inside
         """
         root_tbl = get_node_table_name(self.parser.model, self.parser.root)
-        root_id = PropFactory.get_prop_by_name('{}_id'.format(self.parser.doc_type)).id
+        root_id = self.parser.get_key_prop().id
         for f in self.parser.special_nodes:
             if f.fn[0] == 'sliding':
                 df = self.translate_table(root_tbl, props=[])
@@ -214,7 +214,7 @@ class Translator(BaseTranslator):
                     n = n.child
                 df = df.map(lambda x: make_key_from_property(x[1], root_id))
                 (n, fn1, fn2) = tuple(f.fn[1:])
-                fid = PropFactory.get_prop_by_name(f.name).id
+                fid = PropFactory.get_prop_by_name(self.parser.doc_type, f.name).id
                 df = df.mapValues(lambda x: tuple([v for (k, v) in collections.OrderedDict(sorted(x.items())).items()]))
                 df = sliding(df, int(n.strip()), fn1.strip(), fn2.strip())\
                     .mapValues(lambda x: {fid: x})
