@@ -46,12 +46,12 @@ class Parser(BaseParser):
         self.aggregated_nodes = []
         if 'aggregated_props' in self.mapping:
             self.aggregated_nodes = self.get_aggregation_nodes()
-        self.joining_indices = self.get_joining_node() if 'joining_props' in self.mapping else []
+        self.joining_nodes = self.get_joining_nodes() if 'joining_props' in self.mapping else []
         self.special_nodes = self.get_special_node() if 'special_props' in self.mapping else []
         self.types = self.get_types()
 
     def get_root_props(self):
-        return PropFactory.create_props_from_json(self.mapping['props'])
+        return PropFactory.create_props_from_json(self.doc_type, self.mapping['props'])
 
     def get_aggregation_nodes(self):
         """
@@ -84,7 +84,7 @@ class Parser(BaseParser):
         for (n, p) in nodes:
             child_name, edge_tbl = get_edge_table(self.model, prev_label, n)
             child_tbl = get_node_table_name(self.model, child_name)
-            cur = SpecialNode(child_name, child_tbl, edge_tbl, p.split(','))
+            cur = SpecialNode(self.doc_type, child_name, child_tbl, edge_tbl, p.split(','))
             if prev is not None:
                 prev.child = cur
             else:
@@ -101,18 +101,18 @@ class Parser(BaseParser):
         lst_nodes = []
         for s in self.mapping.get('special_props'):
             if 'path' in s:
-                lst_nodes.append(SpecialRoot(s.get('name'),
+                lst_nodes.append(SpecialRoot(self.doc_type, s.get('name'),
                                              self.json_to_special_node(s.get('path')), s.get('fn', '').split(',')))
         return lst_nodes
 
-    def get_joining_node(self):
+    def get_joining_nodes(self):
         """
         Parse definition of joining between two indices
         :return:
         """
         joining_nodes = []
         for idx in self.mapping['joining_props']:
-            joining_nodes.append(JoiningNode(idx))
+            joining_nodes.append(JoiningNode(self.doc_type, idx))
         return joining_nodes
 
     """
@@ -147,7 +147,7 @@ class Parser(BaseParser):
                 n_child.parent = n_current
                 if i == len(path.path) - 1:
                     for (output, prop, fn) in path.reducers:
-                        n_child.reducers.append(Reducer(prop, fn, output))
+                        n_child.reducers.append(Reducer(self.doc_type, prop, fn, output))
 
                 n_current.add_child(n_child)
                 if (child_name, edge_tbl) not in reversed_index:
@@ -221,7 +221,7 @@ class Parser(BaseParser):
                                 "for parent '{}'\n"
                                 "has multiplicity '{}' that cannot be used on in 'flatten_props'"
                                 "\n".format(child['props'], child['path'], child_node, multiplicity))
-            nodes.append(DirectNode(child_name, edge, child['props'], sorted_by, desc_order, is_child))
+            nodes.append(DirectNode(self.doc_type, child_name, edge, child['props'], sorted_by, desc_order, is_child))
         return nodes
 
     def get_types(self):
@@ -258,14 +258,14 @@ class Parser(BaseParser):
                 for i in v:
                     a = get_properties_types(model, get_attribute_from_path(model, root, i['path']))
                     for j in i['props']:
-                        p = PropFactory.get_prop_by_json(j)
+                        p = PropFactory.get_prop_by_json(self.doc_type, j)
                         if p.src in a:
                             types[p.name] = a[p.src]
                         else:
                             types[p.name] = (str,)
 
             if k == 'props':
-                props = [PropFactory.get_prop_by_json(p_in_json) for p_in_json in v]
+                props = [PropFactory.get_prop_by_json(self.doc_type, p_in_json) for p_in_json in v]
                 types.update({p.name: get_properties_types(model, root)[p.src] for p in props})
 
         types = self.select_widest_types(types)

@@ -44,8 +44,10 @@ def swap_key_value(df):
 
 
 def get_props(names, values):
-    return lambda x: {names[src]: values[src][v] if isinstance(v, collections.Hashable) and src in values and v in values[src] else v
-                      for (src, v) in x.items() if src in names.keys()}
+    return lambda x: {
+        names[src]: values[src][v] if isinstance(v, collections.Hashable) and src in values and v in values[src] else v
+        for (src, v) in x.items() if src in names.keys()
+    }
 
 
 def get_props_empty_values(props):

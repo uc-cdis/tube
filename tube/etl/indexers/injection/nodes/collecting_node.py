@@ -4,12 +4,12 @@ from tube.etl.indexers.base.prop import PropFactory
 
 
 class RootNode(BaseNode):
-    def __init__(self, name, tbl_name, props, edge_to_parent=None):
+    def __init__(self, doc_name, name, tbl_name, props, edge_to_parent=None):
         super(RootNode, self).__init__()
         self.name = name
         self.edge_to_parent = edge_to_parent
         self.tbl_name = tbl_name
-        self.props = PropFactory.create_props_from_json(props)
+        self.props = PropFactory.create_props_from_json(doc_name, props)
         self.root_child = None
 
     def __repr__(self):

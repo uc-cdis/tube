@@ -11,7 +11,8 @@ class Parser(object):
         self.name = mapping['name']
         self.root = mapping['root']
         self.doc_type = mapping['doc_type']
-        self.joining_indices = []
+        self.joining_nodes = []
+        PropFactory.adding_prop(self.doc_type, '{}_id'.format(self.doc_type), '', [])
 
     def get_types(self):
         pass
@@ -32,3 +33,9 @@ class Parser(object):
             return int
         else:
             return str
+
+    def get_key_prop(self):
+        return PropFactory.get_prop_by_name(self.doc_type, '{}_id'.format(self.doc_type))
+
+    def get_prop_by_name(self, name):
+        return PropFactory.get_prop_by_name(self.doc_type, name)

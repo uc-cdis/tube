@@ -47,7 +47,7 @@ class Parser(BaseParser):
     def __init__(self, mapping, model, dictionary):
         super(Parser, self).__init__(mapping, model)
         self.dictionary = dictionary
-        self.props = PropFactory.create_props_from_json(self.mapping['props'])
+        self.props = PropFactory.create_props_from_json(self.doc_type, self.mapping['props'])
         self.leaves = set([])
         self.collectors = []
         self.roots = set([])
@@ -165,7 +165,7 @@ class Parser(BaseParser):
     def update_final_fields(self, root_name):
         for f in self.mapping['injecting_props'][root_name]['props']:
             src = f['src'] if 'src' in f else f['name']
-            p = PropFactory.adding_prop(f['name'], src, [])
+            p = PropFactory.adding_prop(self.doc_type, f['name'], src, [])
             if p.src != 'id':
                 f_type = self.select_widest_type(get_properties_types(self.model, root_name)[p.src])
             else:
@@ -178,9 +178,8 @@ class Parser(BaseParser):
         _, edge_up_tbl = get_edge_table(self.model, child.name, segment)
         root_tbl_name = get_node_table_name(self.model, get_parent_label(self.model, child.name, segment))
         top_node = roots[root_name] if root_name in roots \
-            else RootNode(root_name, root_tbl_name,
-                          self.mapping['injecting_props'][root_name]['props']
-                          )
+            else RootNode(self.doc_type, root_name, root_tbl_name,
+                          self.mapping['injecting_props'][root_name]['props'])
         child.add_parent(top_node.name, edge_up_tbl)
         top_node.add_child(child)
         if root_name not in roots:
@@ -217,8 +216,10 @@ class Parser(BaseParser):
         program_table_name = get_node_table_name(self.model, 'program')
         project_table_name = get_node_table_name(self.model, 'project')
         _, edge_up_tbl = get_edge_table(self.model, 'project', 'programs')
-        root_program = RootNode('auth_path_root', program_table_name, [{'name': 'program_name', 'src': 'name'}])
-        root_project = RootNode('project', project_table_name, [{'name': 'project_code', 'src': 'code'}], edge_up_tbl)
+        root_program = RootNode(self.doc_type, 'auth_path_root',
+                                program_table_name, [{'name': 'program_name', 'src': 'name'}])
+        root_project = RootNode(self.doc_type, 'project',
+                                project_table_name, [{'name': 'project_code', 'src': 'code'}], edge_up_tbl)
         root_program.root_child = root_project
 
         return root_program
