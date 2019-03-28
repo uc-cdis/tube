@@ -43,7 +43,7 @@ class PropFactory(object):
 
     @staticmethod
     def get_prop_by_name(doc_name, name):
-        return PropFactory.prop_by_names[(doc_name, name)]
+        return PropFactory.prop_by_names.get((doc_name, name))
 
     @staticmethod
     def get_prop_by_json(doc_name, p):

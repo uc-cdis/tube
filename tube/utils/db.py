@@ -7,12 +7,17 @@ import tube.settings as config
 
 
 connection_name = "db"
-pools = {connection_name: ThreadedConnectionPool(1, 20, dsn=config.PYDBC, connect_timeout=30)}
+pools = {}
+
+
+def create_default_db_connection():
+    pools[connection_name] = ThreadedConnectionPool(1, 20, dsn=config.PYDBC, connect_timeout=30)
+    return pools[connection_name]
 
 
 @contextmanager
 def get_db_connection(db):
-    pool = pools[db]
+    pool = pools.get(db, create_default_db_connection())
     try:
         connection = pool.getconn()
         yield connection

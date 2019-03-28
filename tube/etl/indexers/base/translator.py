@@ -53,7 +53,7 @@ class Translator(object):
 
     def get_props_from_df(self, df, props):
         if df.isEmpty():
-            return df.mapValues(get_props_empty_values(props))
+            return df.mapValues(get_props_empty_values([p.get('dst') for p in props]))
         prop_ids = [(p.get('src').id, p.get('dst').id) for p in props]
         return df.mapValues(lambda x: {dst: x.get(src, '') for (src, dst) in prop_ids})
 

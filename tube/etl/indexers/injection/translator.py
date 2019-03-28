@@ -64,7 +64,7 @@ class Translator(BaseTranslator):
         for root in self.parser.roots:
             if root.root_child is None:
                 df = self.translate_table(root.tbl_name, props=root.props)
-                root_id = self.parser.get_key_prop().id
+                root_id = self.parser.get_prop_by_name('{}_id'.format(root.name)).id
             else:
                 df = self.merge_auth_root(root)
             props = root.props

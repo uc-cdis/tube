@@ -8,7 +8,6 @@ from .parser import Parser
 from ..base.lambdas import sort_by_field, swap_property_as_key, make_key_from_property
 from tube.etl.indexers.base.prop import PropFactory
 from .lambdas import sliding
-from copy import copy
 
 
 class Translator(BaseTranslator):
@@ -171,6 +170,7 @@ class Translator(BaseTranslator):
         root_tbl = get_node_table_name(self.parser.model, self.parser.root)
         root_df = self.translate_table(root_tbl, props=self.parser.props)
         root_df = self.translate_special(root_df)
+        root_df = self.translate_parent(root_df)
         root_df = self.get_direct_children(root_df)
         return root_df.join(self.aggregate_nested_properties()).mapValues(lambda x: merge_dictionary(x[0], x[1]))
 
@@ -186,12 +186,49 @@ class Translator(BaseTranslator):
             df = self.join_to_an_index(df, translators[j.joining_index], j)
         return df
 
+    def translate_parent(self, root_df):
+        if len(self.parser.parent_nodes) == 0:
+            return root_df
+        root_tbl = get_node_table_name(self.parser.model, self.parser.root)
+        root_id = self.parser.get_key_prop().id
+        for f in self.parser.parent_nodes:
+            df = self.translate_table(root_tbl, props=[])
+            n = f.head
+            first = True
+            while n is not None:
+                edge_tbl = n.edge_up_tbl
+                df = df.join(self.translate_edge(edge_tbl, reversed=False))
+                if first:
+                    df = df.map(lambda x: (x[1][1], ({root_id: x[0]},) + (x[1][0],))) \
+                        .mapValues(lambda x: merge_dictionary(x[0], x[1]))
+                    first = False
+                else:
+                    df = df.map(lambda x: (x[1][1], x[1][0]))
+                cur_props = n.props
+                tbl = n.tbl
+                n_df = self.translate_table(tbl, props=cur_props)
+
+                n_prop = self.parser.get_prop_by_name('{}_id'.format(n.name))
+                if n_prop is not None:
+                    n_id = n_prop.id
+                    n_df = n_df.map(lambda x: (x[0], ({n_id: x[0]},) + (x[1],))) \
+                        .mapValues(lambda x: merge_dictionary(x[0], x[1]))
+
+                df = n_df.join(df) \
+                    .mapValues(lambda x: merge_and_fill_empty_props(x, cur_props))
+                n = n.child
+            df = df.map(lambda x: make_key_from_property(x[1], root_id))
+            root_df = root_df.leftOuterJoin(df).mapValues(lambda x: merge_dictionary(x[0], x[1]))
+        return root_df
+
     def translate_special(self, root_df):
         """
         If etlMapping have special_props entry that defines a special function, run this translation
         :param root_df: The special function also have the same root with hosted document (case or subject)
         :return: Return the origin rdd with result from special function included inside
         """
+        if len(self.parser.special_nodes) == 0:
+            return root_df
         root_tbl = get_node_table_name(self.parser.model, self.parser.root)
         root_id = self.parser.get_key_prop().id
         for f in self.parser.special_nodes:

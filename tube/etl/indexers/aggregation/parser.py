@@ -4,7 +4,8 @@ from tube.utils.dd import get_attribute_from_path, get_edge_table, get_child_tab
 from .nodes.aggregated_node import AggregatedNode, Reducer
 from .nodes.direct_node import DirectNode
 from .nodes.joining_node import JoiningNode
-from .nodes.special_node import SpecialNode, SpecialRoot
+from .nodes.special_node import SpecialNode, SpecialChain
+from .nodes.parent_node import ParentChain, ParentNode
 from ..base.parser import Parser as BaseParser
 from ..base.prop import PropFactory
 
@@ -41,16 +42,43 @@ class Parser(BaseParser):
     def __init__(self, mapping, model, dictionary):
         super(Parser, self).__init__(mapping, model)
         self.dictionary = dictionary
-        self.props = self.get_root_props()
+        self.props = self.get_host_props()
         self.flatten_props = self.get_direct_children() if 'flatten_props' in mapping else []
         self.aggregated_nodes = []
         if 'aggregated_props' in self.mapping:
             self.aggregated_nodes = self.get_aggregation_nodes()
         self.joining_nodes = self.get_joining_nodes() if 'joining_props' in self.mapping else []
         self.special_nodes = self.get_special_node() if 'special_props' in self.mapping else []
+        self.parent_nodes = self.get_parent_props()
         self.types = self.get_types()
 
-    def get_root_props(self):
+    def json_to_parent_node(self, path):
+        words = path.split('.')
+        nodes = [tuple(filter(None, re.split('[\[\]]', w))) for w in words]
+        first = None
+        prev = None
+        prev_label = self.root
+        for (n, p) in nodes:
+            parent_name, edge_tbl = get_edge_table(self.model, prev_label, n)
+            parent_tbl = get_node_table_name(self.model, parent_name)
+            cur = ParentNode(self.doc_type, parent_name, parent_tbl, edge_tbl, p.split(','))
+            if prev is not None:
+                prev.child = cur
+            else:
+                first = cur
+            prev_label = parent_name
+            prev = cur
+        return first
+
+    def get_parent_props(self):
+        list_nodes = []
+        json_parents = self.mapping.get('parent_props', [])
+        for r in json_parents:
+            if 'path' in r:
+                list_nodes.append(ParentChain(self.json_to_parent_node(r.get('path')), r.get('fn')))
+        return list_nodes
+
+    def get_host_props(self):
         return PropFactory.create_props_from_json(self.doc_type, self.mapping['props'])
 
     def get_aggregation_nodes(self):
@@ -101,8 +129,8 @@ class Parser(BaseParser):
         lst_nodes = []
         for s in self.mapping.get('special_props'):
             if 'path' in s:
-                lst_nodes.append(SpecialRoot(self.doc_type, s.get('name'),
-                                             self.json_to_special_node(s.get('path')), s.get('fn', '').split(',')))
+                lst_nodes.append(SpecialChain(self.doc_type, s.get('name'),
+                                              self.json_to_special_node(s.get('path')), s.get('fn', '').split(',')))
         return lst_nodes
 
     def get_joining_nodes(self):
