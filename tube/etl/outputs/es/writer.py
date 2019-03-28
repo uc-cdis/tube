@@ -11,6 +11,7 @@ from tube.etl.outputs.es.timestamp import putting_timestamp
 
 def json_export(x, doc_type):
     x[1]['{}_id'.format(doc_type)] = x[0]
+    x[1]['node_id'] = x[0]  # redundant field for backward compatibility with arranger
     return (x[0], json.dumps(x[1]))
 
 
