@@ -1,5 +1,5 @@
 import re
-from tube.utils.dd import get_attribute_from_path, get_edge_table, get_child_table, get_multiplicity,\
+from tube.utils.dd import get_attribute_from_path, get_edge_table, get_child_table, get_multiplicity, \
     get_node_table_name, get_properties_types, object_to_string
 from .nodes.aggregated_node import AggregatedNode, Reducer
 from .nodes.direct_node import DirectNode
@@ -39,6 +39,7 @@ class Parser(BaseParser):
     """
     The main entry point into the index export process for the mutation indices
     """
+
     def __init__(self, mapping, model, dictionary):
         super(Parser, self).__init__(mapping, model)
         self.dictionary = dictionary
@@ -47,7 +48,8 @@ class Parser(BaseParser):
         self.aggregated_nodes = []
         if 'aggregated_props' in self.mapping:
             self.aggregated_nodes = self.get_aggregation_nodes()
-        self.joining_nodes = self.get_joining_nodes() if 'joining_props' in self.mapping else []
+        self.joining_nodes = self.get_joining_nodes() if 'joining_props' in self.mapping or 'joining' in self.mapping \
+            else []
         self.special_nodes = self.get_special_node() if 'special_props' in self.mapping else []
         self.parent_nodes = self.get_parent_props()
         self.types = self.get_types()
@@ -61,7 +63,9 @@ class Parser(BaseParser):
         for (n, p) in nodes:
             parent_name, edge_tbl = get_edge_table(self.model, prev_label, n)
             parent_tbl = get_node_table_name(self.model, parent_name)
-            cur = ParentNode(self.doc_type, parent_name, parent_tbl, edge_tbl, p.split(','))
+            json_props = [{'name': p[0], 'src': p[1]} for p in self.get_src_name(p.split(','))]
+            props = self.create_props_from_json(self.doc_type, json_props, parent_name)
+            cur = ParentNode(parent_name, parent_tbl, edge_tbl, props)
             if prev is not None:
                 prev.child = cur
             else:
@@ -79,7 +83,7 @@ class Parser(BaseParser):
         return list_nodes
 
     def get_host_props(self):
-        return PropFactory.create_props_from_json(self.doc_type, self.mapping['props'])
+        return self.create_props_from_json(self.doc_type, self.mapping['props'], self.root)
 
     def get_aggregation_nodes(self):
         """
@@ -109,10 +113,12 @@ class Parser(BaseParser):
         first = None
         prev = None
         prev_label = self.root
-        for (n, p) in nodes:
+        for (n, str_p) in nodes:
             child_name, edge_tbl = get_edge_table(self.model, prev_label, n)
             child_tbl = get_node_table_name(self.model, child_name)
-            cur = SpecialNode(self.doc_type, child_name, child_tbl, edge_tbl, p.split(','))
+            json_props = [{'name': p, 'src': p} for p in str_p.split(',')]
+            props = self.create_props_from_json(self.doc_type, json_props, child_name)
+            cur = SpecialNode(child_name, child_tbl, edge_tbl, props)
             if prev is not None:
                 prev.child = cur
             else:
@@ -130,7 +136,8 @@ class Parser(BaseParser):
         for s in self.mapping.get('special_props'):
             if 'path' in s:
                 lst_nodes.append(SpecialChain(self.doc_type, s.get('name'),
-                                              self.json_to_special_node(s.get('path')), s.get('fn', '').split(',')))
+                                              self.json_to_special_node(s.get('path')),
+                                              s.get('fn', '').split(',')))
         return lst_nodes
 
     def get_joining_nodes(self):
@@ -140,7 +147,9 @@ class Parser(BaseParser):
         """
         joining_nodes = []
         for idx in self.mapping['joining_props']:
-            joining_nodes.append(JoiningNode(self.doc_type, idx))
+            json_props = [{'name': j.get('name'), 'src': j.get('src'), 'fn': j.get('fn')} for j in idx['props']]
+            props = self.create_props_from_json(self.doc_type, json_props, None)
+            joining_nodes.append(JoiningNode(props, idx))
         return joining_nodes
 
     """
@@ -151,6 +160,7 @@ class Parser(BaseParser):
         - flat_paths: set of aggregation paths in the output document.
 
     """
+
     def construct_aggregation_tree(self, flat_paths):
         reversed_index = {}
         list_nodes = []
@@ -175,7 +185,9 @@ class Parser(BaseParser):
                 n_child.parent = n_current
                 if i == len(path.path) - 1:
                     for (output, prop, fn) in path.reducers:
-                        n_child.reducers.append(Reducer(self.doc_type, prop, fn, output))
+                        json_prop = {'name': output, 'src': prop, 'fn': fn}
+                        prop = self.create_prop_from_json(self.doc_type, json_prop, None)
+                        n_child.reducers.append(Reducer(prop, fn))
 
                 n_current.add_child(n_child)
                 if (child_name, edge_tbl) not in reversed_index:
@@ -238,64 +250,17 @@ class Parser(BaseParser):
         bypass = self.mapping.get(
             'settings', {}).get('bypass_multiplicity_check')
         for child in children:
-            child_node, edge = get_edge_table(self.model, self.root, child['path'])
+            child_label, edge = get_edge_table(self.model, self.root, child['path'])
             child_name, is_child = get_child_table(self.model, self.root, child['path'])
-            multiplicity = get_multiplicity(self.dictionary, self.root, child_node) if is_child else \
-                get_multiplicity(self.dictionary, child_node, self.root)
+            multiplicity = get_multiplicity(self.dictionary, self.root, child_label) if is_child else \
+                get_multiplicity(self.dictionary, child_label, self.root)
             sorted_by, desc_order = self.parse_sorting(child)
             if not bypass and sorted_by is None and multiplicity != 'one_to_one' and multiplicity != 'one_to_many':
                 raise Exception("something bad has just happened\n"
                                 "the properties '{}' for '{}'\n"
                                 "for parent '{}'\n"
                                 "has multiplicity '{}' that cannot be used on in 'flatten_props'"
-                                "\n".format(child['props'], child['path'], child_node, multiplicity))
-            nodes.append(DirectNode(self.doc_type, child_name, edge, child['props'], sorted_by, desc_order, is_child))
+                                "\n".format(child['props'], child['path'], child_label, multiplicity))
+            props = self.create_props_from_json(self.doc_type, child['props'], child_label)
+            nodes.append(DirectNode(child_name, edge, props, sorted_by, desc_order, is_child))
         return nodes
-
-    def get_types(self):
-        """
-        Get the ES types for all properties created by the index
-        :return:
-        """
-        mapping = self.mapping
-        model = self.model
-        root = self.root
-
-        types = {}
-
-        for k, v in mapping.items():
-            if k == 'aggregated_props':
-                sub_type = {}
-                for i in v:
-                    if i['fn'] in ['count', 'sum']:
-                        sub_type[i['name']] = (float, )
-                    elif i['fn'] in ['set', 'list']:
-                        sub_type[i['name']] = (str, )
-                types.update(sub_type)
-            if k == 'joining_props':
-                sub_type = {}
-                for i in v:
-                    vi = i.get('props', [])
-                    for p in vi:
-                        if p['fn'] in ['count', 'sum']:
-                            sub_type[p['name']] = (float, )
-                        elif p['fn'] in ['set', 'list']:
-                            sub_type[p['name']] = (str, )
-                types.update(sub_type)
-            if k == 'flatten_props':
-                for i in v:
-                    a = get_properties_types(model, get_attribute_from_path(model, root, i['path']))
-                    for j in i['props']:
-                        p = PropFactory.get_prop_by_json(self.doc_type, j)
-                        if p.src in a:
-                            types[p.name] = a[p.src]
-                        else:
-                            types[p.name] = (str,)
-
-            if k == 'props':
-                props = [PropFactory.get_prop_by_json(self.doc_type, p_in_json) for p_in_json in v]
-                types.update({p.name: get_properties_types(model, root)[p.src] for p in props})
-
-        types = self.select_widest_types(types)
-        types['{}_id'.format(self.doc_type)] = str
-        return types

@@ -9,7 +9,7 @@ class SpecialChain():
         self.name = name  # name of the prop create by this special function
         self.head = head  # first SpecialNode in the chain of nodes (like a link-list) related to the special function
         self.fn = fn  # name of the function perform in this special aggregation node
-        PropFactory.adding_prop(doc_name, name, '', [], '')
+        PropFactory.adding_prop(doc_name, name, '', [], '', (float, ))
 
     def __key__(self):
         return self.name
@@ -25,9 +25,9 @@ class SpecialNode():
     """
     Special Node is a node in a chain of aggregation path that will be follow by the special aggregation
     """
-    def __init__(self, doc_name, name, tbl, edge_up_tbl, props):
+    def __init__(self, name, tbl, edge_up_tbl, props):
         self.name = name
         self.tbl = tbl
         self.edge_up_tbl = edge_up_tbl
-        self.props = PropFactory.create_props_from_json(doc_name, [{'name': p, 'src': p} for p in props])
+        self.props = props
         self.child = None

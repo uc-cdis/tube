@@ -22,12 +22,15 @@ class PropFactory(object):
         return res
 
     @staticmethod
-    def adding_prop(doc_name, name, src, value_mappings, fn=None):
-        prop = PropFactory.prop_by_names.get((doc_name, name))
+    def adding_prop(doc_name, name, src, value_mappings, fn=None, prop_type=None):
+        if doc_name not in PropFactory.prop_by_names:
+            PropFactory.prop_by_names[doc_name] = {}
+        prop = PropFactory.get_prop_by_name(doc_name, name)
         if prop is None:
-            prop = Prop(PropFactory.get_length(), name, src, PropFactory.create_value_mappings(value_mappings), fn)
+            prop = Prop(PropFactory.get_length(), name, src,
+                        PropFactory.create_value_mappings(value_mappings), fn, prop_type)
             PropFactory.list_props.append(prop)
-            PropFactory.prop_by_names[(doc_name, name)] = prop
+            PropFactory.prop_by_names.get(doc_name)[name] = prop
         return prop
 
     @staticmethod
@@ -43,7 +46,14 @@ class PropFactory(object):
 
     @staticmethod
     def get_prop_by_name(doc_name, name):
-        return PropFactory.prop_by_names.get((doc_name, name))
+        sub_dict_props = PropFactory.get_prop_by_doc_name(doc_name)
+        if sub_dict_props is None:
+            return None
+        return sub_dict_props.get(name)
+
+    @staticmethod
+    def get_prop_by_doc_name(doc_name):
+        return PropFactory.prop_by_names.get(doc_name)
 
     @staticmethod
     def get_prop_by_json(doc_name, p):
@@ -64,12 +74,13 @@ class ValueMapping(object):
 
 
 class Prop(object):
-    def __init__(self, id, name, src, value_mappings, fn=None):
+    def __init__(self, id, name, src, value_mappings, fn=None, prop_type=None):
         self.id = id
         self.name = name
         self.src = src
         self.value_mappings = [] if value_mappings is None else value_mappings
         self.fn = fn
+        self.type = prop_type
 
     def __hash__(self):
         return self.id
@@ -79,3 +90,6 @@ class Prop(object):
 
     def __repr__(self):
         return self.__str__()
+
+    def update_type(self, prop_type):
+        self.type = prop_type

@@ -118,7 +118,7 @@ class Translator(BaseTranslator):
             if n.sorted_by is not None:
                 child_by_root = child_by_root.groupByKey()
                 child_by_root = child_by_root.mapValues(lambda it: sort_by_field(it, sorting_prop.id, n.desc_order)[0])
-                child_by_root = child_by_root.mapValues(lambda x: {(k, v) for (k, v) in x.items()
+                child_by_root = child_by_root.mapValues(lambda x: {k: v for (k, v) in x.items()
                                                                    if k != sorting_prop.id})
             root_df = root_df.leftOuterJoin(child_by_root).mapValues(lambda x: merge_and_fill_empty_props(x, n.props))
             child_df.unpersist()
@@ -135,7 +135,6 @@ class Translator(BaseTranslator):
         for r in joining_index.getting_fields:
             src_prop = translator.parser.get_prop_by_name(r.prop.src)
             dst_prop = self.parser.get_prop_by_name(r.prop.name)
-            # prop.fn = r.fn
             props.append({'src': src_prop, 'dst': dst_prop})
         return props
 
@@ -253,7 +252,7 @@ class Translator(BaseTranslator):
                     n = n.child
                 df = df.map(lambda x: make_key_from_property(x[1], root_id))
                 (n, fn1, fn2) = tuple(f.fn[1:])
-                fid = PropFactory.get_prop_by_name(self.parser.doc_type, f.name).id
+                fid = self.parser.get_prop_by_name(f.name).id
                 df = df.mapValues(lambda x: tuple([v for (k, v) in collections.OrderedDict(sorted(x.items())).items()]))
                 df = sliding(df, int(n.strip()), fn1.strip(), fn2.strip())\
                     .mapValues(lambda x: {fid: x})

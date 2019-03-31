@@ -34,7 +34,7 @@ def flatten_files_to_lists(pair):
 
 def merge_dictionary(d1, d2, to_tuple=False):
     d0 = d1.copy()
-    if d2 is not None and len(d2.items()) > 0:
+    if d2 is not None and len(d2) > 0:
         d0.update(d2)
     return d0 if not to_tuple else tuple([(k, v) for (k, v) in d0.items()])
 
