@@ -37,8 +37,8 @@ class AggregatedNode(BaseNode):
 
 
 class Reducer(object):
-    def __init__(self, prop, fn, output):
-        self.prop = PropFactory.create_prop_from_json({"name": output, "src": prop})
+    def __init__(self, prop, fn):
+        self.prop = prop
         self.fn = fn
         self.done = False
 

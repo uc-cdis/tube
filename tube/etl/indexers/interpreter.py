@@ -31,10 +31,10 @@ def run_transform(translators):
         df = translator.translate()
         translator.save_to_hadoop(df)
         translator.current_step = 1
-        if len(translator.parser.joining_indices) > 0:
+        if len(translator.parser.joining_nodes) > 0:
             need_to_join[translator.parser.doc_type] = translator
             translator_to_translators[translator.parser.doc_type] = \
-                [j.joining_index for j in translator.parser.joining_indices]
+                [j.joining_index for j in translator.parser.joining_nodes]
 
     for v in need_to_join.values():
         df = v.translate_joining_props(translators)

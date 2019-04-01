@@ -37,7 +37,7 @@ def merge_aggregate_with_prop(x, y):
     return tuple(res)
 
 
-def remove_props_to_tuple(x, props):
+def remove_props_from_tuple(x, props):
     for p in props:
         x.pop(p.id, None)
     return tuple([(k, v) for (k, v) in x.items()])

@@ -3,7 +3,7 @@ from tube.etl.indexers.base.lambdas import merge_and_fill_empty_props, merge_dic
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from .nodes.collecting_node import LeafNode
 from .parser import Parser
-from .lambdas import get_props_to_tuple, remove_props_to_tuple, get_frame_zero, \
+from .lambdas import get_props_to_tuple, remove_props_from_tuple, get_frame_zero, \
     seq_aggregate_with_prop, merge_aggregate_with_prop, construct_project_id
 from tube.etl.indexers.base.prop import PropFactory
 
@@ -55,7 +55,7 @@ class Translator(BaseTranslator):
                 .mapValues(lambda x: merge_and_fill_empty_props(x, child_props))
             props.extend(child_props)
             child = child.root_child
-        root_id = PropFactory.get_prop_by_name('project_id').id
+        root_id = self.parser.get_prop_by_name('project_id').id
         return df.mapValues(lambda x: construct_project_id(x, props, root_id))
 
     def merge_roots_to_children(self):
@@ -64,7 +64,7 @@ class Translator(BaseTranslator):
         for root in self.parser.roots:
             if root.root_child is None:
                 df = self.translate_table(root.tbl_name, props=root.props)
-                root_id = PropFactory.get_prop_by_name('{}_id'.format(root.name)).id
+                root_id = self.parser.get_prop_by_name('{}_id'.format(root.name)).id
             else:
                 df = self.merge_auth_root(root)
             props = root.props
@@ -119,24 +119,30 @@ class Translator(BaseTranslator):
     def get_aggregating_props(self):
         props = []
         for p in self.root_props:
-            prop = copy(PropFactory.get_prop_by_name(p.name))
+            prop = copy(self.parser.get_prop_by_name(p.name))
             if p.fn is not None:
                 prop.fn = p.fn
                 props.append(prop)
         return props
 
     def translate_final(self):
+        '''
+        Because one file can belong to multiple root nodes (case, subject).
+        In the final step of file document, we must construct the list of root instance's id
+        :return:
+        '''
         df = self.load_from_hadoop()
         aggregating_props = self.get_aggregating_props()
         if len(aggregating_props) == 0:
             return df
 
-        prop_df = df.mapValues(lambda x: get_props_to_tuple(x, aggregating_props))
-        df = df.mapValues(lambda x: remove_props_to_tuple(x, aggregating_props)).distinct()
-
-        df = df.mapValues(lambda x: {x0: x1 for (x0, x1) in x})
         frame_zero = get_frame_zero(aggregating_props)
-        prop_df = prop_df.aggregateByKey(frame_zero, seq_aggregate_with_prop, merge_aggregate_with_prop)
-        prop_df = prop_df.mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
+
+        prop_df = df.mapValues(lambda x: get_props_to_tuple(x, aggregating_props))\
+            .aggregateByKey(frame_zero, seq_aggregate_with_prop, merge_aggregate_with_prop)\
+            .mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
+
+        df = df.mapValues(lambda x: remove_props_from_tuple(x, aggregating_props)).distinct()\
+            .mapValues(lambda x: {x0: x1 for (x0, x1) in x})
 
         return df.join(prop_df).mapValues(lambda x: merge_dictionary(x[0], x[1]))

@@ -9,7 +9,7 @@ class RootNode(BaseNode):
         self.name = name
         self.edge_to_parent = edge_to_parent
         self.tbl_name = tbl_name
-        self.props = PropFactory.create_props_from_json(props)
+        self.props = props
         self.root_child = None
 
     def __repr__(self):

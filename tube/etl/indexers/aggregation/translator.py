@@ -1,3 +1,4 @@
+import collections
 from tube.etl.indexers.base.lambdas import merge_and_fill_empty_props, merge_dictionary, swap_key_value
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from tube.etl.indexers.aggregation.lambdas import intermediate_frame, merge_aggregate_with_reducer, \
@@ -7,7 +8,6 @@ from .parser import Parser
 from ..base.lambdas import sort_by_field, swap_property_as_key, make_key_from_property
 from tube.etl.indexers.base.prop import PropFactory
 from .lambdas import sliding
-from copy import copy
 
 
 class Translator(BaseTranslator):
@@ -110,7 +110,7 @@ class Translator(BaseTranslator):
         for n in self.parser.flatten_props:
             # if n is a child of root node, we don't need to swap order of the pair ids
             edge_df = self.translate_edge(n.edge, not n.props_from_child)
-            sorting_prop = PropFactory.adding_prop(n.sorted_by, n.sorted_by, [])
+            sorting_prop = PropFactory.adding_prop(self.parser.doc_type, n.sorted_by, n.sorted_by, [])
             props = n.props
             props.append(sorting_prop)
             child_df = self.translate_table(n.tbl_name, props=props)
@@ -118,56 +118,58 @@ class Translator(BaseTranslator):
             if n.sorted_by is not None:
                 child_by_root = child_by_root.groupByKey()
                 child_by_root = child_by_root.mapValues(lambda it: sort_by_field(it, sorting_prop.id, n.desc_order)[0])
-                child_by_root = child_by_root.mapValues(lambda x: {(k, v) for (k, v) in x.items()
+                child_by_root = child_by_root.mapValues(lambda x: {k: v for (k, v) in x.items()
                                                                    if k != sorting_prop.id})
             root_df = root_df.leftOuterJoin(child_by_root).mapValues(lambda x: merge_and_fill_empty_props(x, n.props))
             child_df.unpersist()
             child_by_root.unpersist()
         return root_df
 
-    def get_joining_props(self, joining_index):
+    def get_joining_props(self, translator, joining_index):
         """
         Get joining props added by an additional join between indices/documents
         :param joining_index: Joining index created from parser
         :return:
         """
         props = []
-        for r in joining_index.reducers:
-            prop = copy(PropFactory.get_prop_by_name(r.prop.src))
-            prop.fn = r.fn
-            props.append(prop)
+        for r in joining_index.getting_fields:
+            src_prop = translator.parser.get_prop_by_name(r.prop.src)
+            dst_prop = self.parser.get_prop_by_name(r.prop.name)
+            props.append({'src': src_prop, 'dst': dst_prop})
         return props
 
-    def join_to_an_index(self, df, translator, joining_index):
+    def join_to_an_index(self, df, translator, joining_node):
         """
         Perform the join between indices. It will:
          - load rdd to be join from HDFS
          - Joining with df
         :param df: rdd of translator that does the join
         :param translator: translator has rdd to be join this translator
-        :param joining_index: joining_index define in yaml file.
+        :param joining_node: joining_node define in yaml file.
         :return:
         """
         joining_df = swap_property_as_key(translator.load_from_hadoop(),
-                                          PropFactory.get_prop_by_name(joining_index.joining_field).id,
-                                          PropFactory.get_prop_by_name('{}_id'.format(translator.parser.doc_type)).id)
+                                          translator.parser.get_prop_by_name(joining_node.joining_field).id,
+                                          translator.parser.get_key_prop().id)
 
-        props = self.get_joining_props(joining_index)
-        joining_df = self.get_props_from_df(joining_df, props)
-        joining_df = joining_df.mapValues(get_normal_frame(joining_index.reducers))
-        frame_zero = get_frame_zero(joining_index.reducers)
-        temp_df = joining_df.aggregateByKey(frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer)
+        frame_zero = get_frame_zero(joining_node.getting_fields)
+
+        dual_props = self.get_joining_props(translator, joining_node)
+        joining_df = self.get_props_from_df(joining_df, dual_props)\
+            .mapValues(get_normal_frame(joining_node.getting_fields))\
+            .aggregateByKey(frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer)\
+            .mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
+
+        df = df.leftOuterJoin(joining_df)\
+            .mapValues(lambda x: merge_and_fill_empty_props(x, [p.get('dst') for p in dual_props]))
         joining_df.unpersist()
-        temp_df = temp_df.mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
-
-        df = df.leftOuterJoin(temp_df).mapValues(lambda x: merge_and_fill_empty_props(x, props))
-        temp_df.unpersist()
         return df
 
     def translate(self):
         root_tbl = get_node_table_name(self.parser.model, self.parser.root)
         root_df = self.translate_table(root_tbl, props=self.parser.props)
         root_df = self.translate_special(root_df)
+        root_df = self.translate_parent(root_df)
         root_df = self.get_direct_children(root_df)
         return root_df.join(self.aggregate_nested_properties()).mapValues(lambda x: merge_dictionary(x[0], x[1]))
 
@@ -179,9 +181,44 @@ class Translator(BaseTranslator):
         :return:
         """
         df = self.load_from_hadoop()
-        for j in self.parser.joining_indices:
+        for j in self.parser.joining_nodes:
             df = self.join_to_an_index(df, translators[j.joining_index], j)
         return df
+
+    def translate_parent(self, root_df):
+        if len(self.parser.parent_nodes) == 0:
+            return root_df
+        root_tbl = get_node_table_name(self.parser.model, self.parser.root)
+        root_id = self.parser.get_key_prop().id
+        for f in self.parser.parent_nodes:
+            df = self.translate_table(root_tbl, props=[])
+            n = f.head
+            first = True
+            while n is not None:
+                edge_tbl = n.edge_up_tbl
+                df = df.join(self.translate_edge(edge_tbl, reversed=False))
+                if first:
+                    df = df.map(lambda x: (x[1][1], ({root_id: x[0]},) + (x[1][0],))) \
+                        .mapValues(lambda x: merge_dictionary(x[0], x[1]))
+                    first = False
+                else:
+                    df = df.map(lambda x: (x[1][1], x[1][0]))
+                cur_props = n.props
+                tbl = n.tbl
+                n_df = self.translate_table(tbl, props=cur_props)
+
+                n_prop = self.parser.get_prop_by_name('{}_id'.format(n.name))
+                if n_prop is not None:
+                    n_id = n_prop.id
+                    n_df = n_df.map(lambda x: (x[0], ({n_id: x[0]},) + (x[1],))) \
+                        .mapValues(lambda x: merge_dictionary(x[0], x[1]))
+
+                df = n_df.join(df) \
+                    .mapValues(lambda x: merge_and_fill_empty_props(x, cur_props))
+                n = n.child
+            df = df.map(lambda x: make_key_from_property(x[1], root_id))
+            root_df = root_df.leftOuterJoin(df).mapValues(lambda x: merge_dictionary(x[0], x[1]))
+        return root_df
 
     def translate_special(self, root_df):
         """
@@ -189,8 +226,10 @@ class Translator(BaseTranslator):
         :param root_df: The special function also have the same root with hosted document (case or subject)
         :return: Return the origin rdd with result from special function included inside
         """
+        if len(self.parser.special_nodes) == 0:
+            return root_df
         root_tbl = get_node_table_name(self.parser.model, self.parser.root)
-        root_id = PropFactory.get_prop_by_name('{}_id'.format(self.parser.doc_type)).id
+        root_id = self.parser.get_key_prop().id
         for f in self.parser.special_nodes:
             if f.fn[0] == 'sliding':
                 df = self.translate_table(root_tbl, props=[])
@@ -202,6 +241,7 @@ class Translator(BaseTranslator):
                     if first:
                         df = df.map(lambda x: (x[1][1], ({root_id: x[0]},) + (x[1][0],)))\
                             .mapValues(lambda x: merge_dictionary(x[0], x[1]))
+                        first = False
                     else:
                         df = df.map(lambda x: (x[1][1], x[1][0]))
                     cur_props = n.props
@@ -212,8 +252,8 @@ class Translator(BaseTranslator):
                     n = n.child
                 df = df.map(lambda x: make_key_from_property(x[1], root_id))
                 (n, fn1, fn2) = tuple(f.fn[1:])
-                fid = PropFactory.get_prop_by_name(f.name).id
-                df = df.mapValues(lambda x: tuple([v for (k, v) in x.items()]))
+                fid = self.parser.get_prop_by_name(f.name).id
+                df = df.mapValues(lambda x: tuple([v for (k, v) in collections.OrderedDict(sorted(x.items())).items()]))
                 df = sliding(df, int(n.strip()), fn1.strip(), fn2.strip())\
                     .mapValues(lambda x: {fid: x})
                 root_df = root_df.leftOuterJoin(df).mapValues(lambda x: merge_dictionary(x[0], x[1]))
