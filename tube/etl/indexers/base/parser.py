@@ -46,10 +46,11 @@ class Parser(object):
 
     def get_prop_type(self, fn, src, node_label=None):
         if fn is not None:
-            if fn in ['count', 'sum']:
+            if fn in ['count', 'sum', 'min', 'max']:
                 return (float, )
             elif fn in ['set', 'list']:
                 return (str, )
+            return (str, )
         else:
             if node_label is None:
                 raise Exception('An index property must have either path or fn property')

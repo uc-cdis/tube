@@ -131,9 +131,11 @@ def get_aggregation_func_by_name(func_name, is_merging=False):
     if func_name == 'list':
         return lambda x, y: extend_list(x, y)
     if func_name == 'min':
-        return lambda x, y: min([i for i in [x, y] if i is not None])
+        return lambda x, y: None if x is None and y is None \
+            else min([i for i in [x, y] if i is not None])
     if func_name == 'max':
-        return lambda x, y: max([i for i in [x, y] if i is not None])
+        return lambda x, y: None if x is None and y is None \
+            else max([i for i in [x, y] if i is not None])
 
 
 def get_single_frame_zero_by_func(func_name, output_name):
@@ -141,10 +143,8 @@ def get_single_frame_zero_by_func(func_name, output_name):
         return (func_name, output_name, [])
     if func_name == 'count' or func_name == 'sum':
         return (func_name, output_name, 0)
-    if func_name == 'min':
-        return (func_name, output_name, sys.maxint)
-    if func_name == 'max':
-        return (func_name, output_name, -sys.maxint-1)
+    if func_name in ['min', 'max']:
+        return (func_name, output_name, None)
     return (func_name, output_name, '')
 
 
