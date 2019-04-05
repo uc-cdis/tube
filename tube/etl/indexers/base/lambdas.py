@@ -143,10 +143,8 @@ def get_single_frame_zero_by_func(func_name, output_name):
         return (func_name, output_name, [])
     if func_name == 'count' or func_name == 'sum':
         return (func_name, output_name, 0)
-    if func_name == 'min':
-        return (func_name, output_name, sys.maxint)
-    if func_name == 'max':
-        return (func_name, output_name, -sys.maxint-1)
+    if func_name in ['min', 'max']:
+        return (func_name, output_name, None)
     return (func_name, output_name, '')
 
 
