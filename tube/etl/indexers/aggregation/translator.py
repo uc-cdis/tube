@@ -125,7 +125,7 @@ class Translator(BaseTranslator):
             child_by_root.unpersist()
         return root_df
 
-    def get_joining_props(self, translator, joining_index):
+    def get_joining_props(self, translator, joining_index, with_agg_func):
         """
         Get joining props added by an additional join between indices/documents
         :param joining_index: Joining index created from parser
@@ -133,10 +133,30 @@ class Translator(BaseTranslator):
         """
         props = []
         for r in joining_index.getting_fields:
+            if with_agg_func ^ (r.fn is None) is False:
+                continue
             src_prop = translator.parser.get_prop_by_name(r.prop.src)
             dst_prop = self.parser.get_prop_by_name(r.prop.name)
             props.append({'src': src_prop, 'dst': dst_prop})
         return props
+
+    def join_and_aggregate(self, df, joining_df, dual_props, joining_node):
+        frame_zero = get_frame_zero(joining_node.getting_fields)
+        joining_df = self.get_props_from_df(joining_df, dual_props)\
+            .mapValues(get_normal_frame(joining_node.getting_fields))\
+            .aggregateByKey(frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer)\
+            .mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
+        df = df.leftOuterJoin(joining_df)\
+            .mapValues(lambda x: merge_and_fill_empty_props(x, [p.get('dst') for p in dual_props]))
+        joining_df.unpersist()
+        return df
+
+    def join_no_aggregate(self, df, joining_df, dual_props):
+        joining_df = self.get_props_from_df(joining_df, dual_props)
+        df = df.leftOuterJoin(joining_df)\
+            .mapValues(lambda x: merge_and_fill_empty_props(x, [p.get('dst') for p in dual_props]))
+        joining_df.unpersist()
+        return df
 
     def join_to_an_index(self, df, translator, joining_node):
         """
@@ -152,18 +172,14 @@ class Translator(BaseTranslator):
                                           translator.parser.get_prop_by_name(joining_node.joining_field).id,
                                           translator.parser.get_key_prop().id)
 
-        frame_zero = get_frame_zero(joining_node.getting_fields)
-
-        dual_props = self.get_joining_props(translator, joining_node)
-        joining_df = self.get_props_from_df(joining_df, dual_props)\
-            .mapValues(get_normal_frame(joining_node.getting_fields))\
-            .aggregateByKey(frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer)\
-            .mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
-
-        df = df.leftOuterJoin(joining_df)\
-            .mapValues(lambda x: merge_and_fill_empty_props(x, [p.get('dst') for p in dual_props]))
-        joining_df.unpersist()
-        return df
+        dual_props = self.get_joining_props(translator, joining_node, with_agg_func=True)
+        if len(dual_props) > 0:
+            return self.join_and_aggregate(df, joining_df, dual_props, joining_node)
+        else:
+            dual_props = self.get_joining_props(translator, joining_node, with_agg_func=False)
+            if len(dual_props) > 0:
+                return self.join_no_aggregate(df, joining_df, dual_props)
+            return df
 
     def translate(self):
         root_tbl = get_node_table_name(self.parser.model, self.parser.root)
