@@ -1,8 +1,7 @@
 from tube.utils.dd import get_edge_table, get_node_table_name, get_node_label, get_parent_name, get_parent_label, \
-    get_properties_types, object_to_string, get_all_children_of_node, get_node_category
+    object_to_string, get_all_children_of_node, get_node_category
 from tube.etl.indexers.injection.nodes.collecting_node import CollectingNode, RootNode, LeafNode
 from ..base.parser import Parser as BaseParser
-from ..base.prop import PropFactory
 
 
 class Path(object):
@@ -48,12 +47,11 @@ class Parser(BaseParser):
         super(Parser, self).__init__(mapping, model)
         self.dictionary = dictionary
         self.props = self.create_props_from_json(self.doc_type, self.mapping['props'],
-                                                 self.get_first_node_label_with_category())
+                                                 node_label=self.get_first_node_label_with_category())
         self.leaves = set([])
         self.collectors = []
         self.roots = set([])
         self.get_collecting_nodes()
-        self.types = self.get_types()
 
     def get_first_node_label_with_category(self):
         if len(self.mapping['injecting_props'].items()) == 0:
@@ -138,7 +136,7 @@ class Parser(BaseParser):
             else RootNode(root_name, root_tbl_name,
                           self.create_props_from_json(self.doc_type,
                                                       self.mapping['injecting_props'][root_name]['props'],
-                                                      root_name))
+                                                      node_label=root_name))
         child.add_parent(top_node.name, edge_up_tbl)
         top_node.add_child(child)
 
@@ -176,11 +174,11 @@ class Parser(BaseParser):
         root_program = RootNode('auth_path_root', program_table_name,
                                 self.create_props_from_json(self.doc_type,
                                                             [{'name': 'program_name', 'src': 'name'}],
-                                                            'program'))
+                                                            node_label='program'))
         root_project = RootNode('project', project_table_name,
                                 self.create_props_from_json(self.doc_type,
                                                             [{'name': 'project_code', 'src': 'code'}],
-                                                            'program'), edge_up_tbl)
+                                                            node_label='project'), edge_up_tbl)
         root_program.root_child = root_project
 
         return root_program

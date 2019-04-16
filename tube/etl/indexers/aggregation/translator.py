@@ -110,12 +110,12 @@ class Translator(BaseTranslator):
         for n in self.parser.flatten_props:
             # if n is a child of root node, we don't need to swap order of the pair ids
             edge_df = self.translate_edge(n.edge, not n.props_from_child)
-            sorting_prop = PropFactory.adding_prop(self.parser.doc_type, n.sorted_by, n.sorted_by, [])
             props = n.props
-            props.append(sorting_prop)
             child_df = self.translate_table(n.tbl_name, props=props)
             child_by_root = edge_df.join(child_df).map(lambda x: tuple([x[1][0], x[1][1]]))
             if n.sorted_by is not None:
+                sorting_prop = PropFactory.adding_prop(self.parser.doc_type, n.sorted_by, n.sorted_by, [])
+                props.append(sorting_prop)
                 child_by_root = child_by_root.groupByKey()
                 child_by_root = child_by_root.mapValues(lambda it: sort_by_field(it, sorting_prop.id, n.desc_order)[0])
                 child_by_root = child_by_root.mapValues(lambda x: {k: v for (k, v) in x.items()
@@ -133,7 +133,7 @@ class Translator(BaseTranslator):
         """
         props = []
         for r in joining_index.getting_fields:
-            if with_agg_func ^ (r.fn is None) is False:
+            if not (with_agg_func ^ (r.fn is None)):
                 continue
             src_prop = translator.parser.get_prop_by_name(r.prop.src)
             dst_prop = self.parser.get_prop_by_name(r.prop.name)
@@ -168,18 +168,35 @@ class Translator(BaseTranslator):
         :param joining_node: joining_node define in yaml file.
         :return:
         """
-        joining_df = swap_property_as_key(translator.load_from_hadoop(),
-                                          translator.parser.get_prop_by_name(joining_node.joining_field).id,
-                                          translator.parser.get_key_prop().id)
+        joining_df = translator.load_from_hadoop()
 
+        # For joining two indices, we need to swap the property field and key of one of the index.
+        # based on join_on value in the etlMapping, we know what field is used as joining field.
+        # We swap the index that have name of key field different than the name of joining field
+        joining_df_key_id = translator.parser.get_key_prop().id
+        field_id_in_joining_df = translator.parser.get_prop_by_name(joining_node.joining_field).id
+        field_id_in_df = self.parser.get_prop_by_name(joining_node.joining_field).id
+        df_key_id = self.parser.get_key_prop().id
+
+        swap_df = False
+        if joining_df_key_id != field_id_in_joining_df:
+            joining_df = swap_property_as_key(joining_df, field_id_in_joining_df, joining_df_key_id)
+        else:
+            df = swap_property_as_key(df, field_id_in_df, df_key_id)
+            swap_df = True
+
+        # Join can be done with or without an aggregation function like max, min, sum, ...
+        # these two type of join requires different map-reduce steos
         dual_props = self.get_joining_props(translator, joining_node, with_agg_func=True)
         if len(dual_props) > 0:
-            return self.join_and_aggregate(df, joining_df, dual_props, joining_node)
+            df = self.join_and_aggregate(df, joining_df, dual_props, joining_node)
         else:
             dual_props = self.get_joining_props(translator, joining_node, with_agg_func=False)
             if len(dual_props) > 0:
-                return self.join_no_aggregate(df, joining_df, dual_props)
-            return df
+                df = self.join_no_aggregate(df, joining_df, dual_props)
+        if swap_df:
+            df = swap_property_as_key(df, df_key_id, field_id_in_df)
+        return df
 
     def translate(self):
         root_tbl = get_node_table_name(self.parser.model, self.parser.root)
