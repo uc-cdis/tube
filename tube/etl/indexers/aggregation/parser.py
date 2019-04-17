@@ -52,7 +52,6 @@ class Parser(BaseParser):
             else []
         self.special_nodes = self.get_special_node() if 'special_props' in self.mapping else []
         self.parent_nodes = self.get_parent_props()
-        self.types = self.get_types()
 
     def json_to_parent_node(self, path):
         words = path.split('.')
@@ -64,7 +63,7 @@ class Parser(BaseParser):
             parent_name, edge_tbl = get_edge_table(self.model, prev_label, n)
             parent_tbl = get_node_table_name(self.model, parent_name)
             json_props = [{'name': p[0], 'src': p[1]} for p in self.get_src_name(p.split(','))]
-            props = self.create_props_from_json(self.doc_type, json_props, parent_name)
+            props = self.create_props_from_json(self.doc_type, json_props, node_label=parent_name)
             cur = ParentNode(parent_name, parent_tbl, edge_tbl, props)
             if prev is not None:
                 prev.child = cur
@@ -83,7 +82,7 @@ class Parser(BaseParser):
         return list_nodes
 
     def get_host_props(self):
-        return self.create_props_from_json(self.doc_type, self.mapping['props'], self.root)
+        return self.create_props_from_json(self.doc_type, self.mapping['props'], node_label=self.root)
 
     def get_aggregation_nodes(self):
         """
@@ -117,7 +116,7 @@ class Parser(BaseParser):
             child_name, edge_tbl = get_edge_table(self.model, prev_label, n)
             child_tbl = get_node_table_name(self.model, child_name)
             json_props = [{'name': p, 'src': p} for p in str_p.split(',')]
-            props = self.create_props_from_json(self.doc_type, json_props, child_name)
+            props = self.create_props_from_json(self.doc_type, json_props, node_label=child_name)
             cur = SpecialNode(child_name, child_tbl, edge_tbl, props)
             if prev is not None:
                 prev.child = cur
@@ -146,9 +145,11 @@ class Parser(BaseParser):
         :return:
         """
         joining_nodes = []
-        for idx in self.mapping['joining_props']:
-            json_props = [{'name': j.get('name'), 'src': j.get('src'), 'fn': j.get('fn')} for j in idx['props']]
-            props = self.create_props_from_json(self.doc_type, json_props, None)
+        joining_props = self.mapping.get('joining_props', self.mapping.get('joining'))
+        for idx in joining_props:
+            json_props = [{'name': j.get('name'), 'src': j.get('src'),
+                           'fn': j.get('fn')} for j in idx['props']]
+            props = self.create_props_from_json(self.doc_type, json_props, index=idx.get('index'))
             joining_nodes.append(JoiningNode(props, idx))
         return joining_nodes
 
@@ -261,6 +262,6 @@ class Parser(BaseParser):
                                 "for parent '{}'\n"
                                 "has multiplicity '{}' that cannot be used on in 'flatten_props'"
                                 "\n".format(child['props'], child['path'], child_label, multiplicity))
-            props = self.create_props_from_json(self.doc_type, child['props'], child_label)
+            props = self.create_props_from_json(self.doc_type, child['props'], node_label=child_label)
             nodes.append(DirectNode(child_name, edge, props, sorted_by, desc_order, is_child))
         return nodes

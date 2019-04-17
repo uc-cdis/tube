@@ -110,9 +110,10 @@ class Translator(BaseTranslator):
         for n in self.parser.flatten_props:
             # if n is a child of root node, we don't need to swap order of the pair ids
             edge_df = self.translate_edge(n.edge, not n.props_from_child)
-            sorting_prop = PropFactory.adding_prop(self.parser.doc_type, n.sorted_by, n.sorted_by, [])
             props = n.props
-            props.append(sorting_prop)
+            if n.sorted_by is not None:
+                sorting_prop = PropFactory.adding_prop(self.parser.doc_type, n.sorted_by, n.sorted_by, [])
+                props.append(sorting_prop)
             child_df = self.translate_table(n.tbl_name, props=props)
             child_by_root = edge_df.join(child_df).map(lambda x: tuple([x[1][0], x[1][1]]))
             if n.sorted_by is not None:
@@ -131,12 +132,34 @@ class Translator(BaseTranslator):
         :param joining_index: Joining index created from parser
         :return:
         """
-        props = []
+        props_with_fn = []
+        props_without_fn = []
         for r in joining_index.getting_fields:
             src_prop = translator.parser.get_prop_by_name(r.prop.src)
             dst_prop = self.parser.get_prop_by_name(r.prop.name)
-            props.append({'src': src_prop, 'dst': dst_prop})
-        return props
+            if r.fn is None:
+                props_without_fn.append({'src': src_prop, 'dst': dst_prop})
+            else:
+                props_with_fn.append({'src': src_prop, 'dst': dst_prop})
+        return props_with_fn, props_without_fn
+
+    def join_and_aggregate(self, df, joining_df, dual_props, joining_node):
+        frame_zero = get_frame_zero(joining_node.getting_fields)
+        joining_df = self.get_props_from_df(joining_df, dual_props)\
+            .mapValues(get_normal_frame(joining_node.getting_fields))\
+            .aggregateByKey(frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer)\
+            .mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
+        df = df.leftOuterJoin(joining_df)\
+            .mapValues(lambda x: merge_and_fill_empty_props(x, [p.get('dst') for p in dual_props]))
+        joining_df.unpersist()
+        return df
+
+    def join_no_aggregate(self, df, joining_df, dual_props):
+        joining_df = self.get_props_from_df(joining_df, dual_props)
+        df = df.leftOuterJoin(joining_df)\
+            .mapValues(lambda x: merge_and_fill_empty_props(x, [p.get('dst') for p in dual_props]))
+        joining_df.unpersist()
+        return df
 
     def join_to_an_index(self, df, translator, joining_node):
         """
@@ -148,21 +171,33 @@ class Translator(BaseTranslator):
         :param joining_node: joining_node define in yaml file.
         :return:
         """
-        joining_df = swap_property_as_key(translator.load_from_hadoop(),
-                                          translator.parser.get_prop_by_name(joining_node.joining_field).id,
-                                          translator.parser.get_key_prop().id)
+        joining_df = translator.load_from_hadoop()
 
-        frame_zero = get_frame_zero(joining_node.getting_fields)
+        # For joining two indices, we need to swap the property field and key of one of the index.
+        # based on join_on value in the etlMapping, we know what field is used as joining field.
+        # We swap the index that have name of key field different than the name of joining field
+        joining_df_key_id = translator.parser.get_key_prop().id
+        field_id_in_joining_df = translator.parser.get_prop_by_name(joining_node.joining_field).id
+        field_id_in_df = self.parser.get_prop_by_name(joining_node.joining_field).id
+        df_key_id = self.parser.get_key_prop().id
 
-        dual_props = self.get_joining_props(translator, joining_node)
-        joining_df = self.get_props_from_df(joining_df, dual_props)\
-            .mapValues(get_normal_frame(joining_node.getting_fields))\
-            .aggregateByKey(frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer)\
-            .mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
+        swap_df = False
+        if joining_df_key_id != field_id_in_joining_df:
+            joining_df = swap_property_as_key(joining_df, field_id_in_joining_df, joining_df_key_id)
+        else:
+            df = swap_property_as_key(df, field_id_in_df, df_key_id)
+            swap_df = True
 
-        df = df.leftOuterJoin(joining_df)\
-            .mapValues(lambda x: merge_and_fill_empty_props(x, [p.get('dst') for p in dual_props]))
-        joining_df.unpersist()
+        # Join can be done with or without an aggregation function like max, min, sum, ...
+        # these two type of join requires different map-reduce steos
+        props_with_fn, props_without_fn = self.get_joining_props(translator, joining_node)
+        if len(props_with_fn) > 0:
+            df = self.join_and_aggregate(df, joining_df, props_with_fn, joining_node)
+        if len(props_without_fn) > 0:
+            df = self.join_no_aggregate(df, joining_df, props_without_fn)
+
+        if swap_df:
+            df = swap_property_as_key(df, df_key_id, field_id_in_df)
         return df
 
     def translate(self):

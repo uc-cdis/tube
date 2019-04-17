@@ -16,6 +16,10 @@ class Translator(object):
         self.parser = None
         self.current_step = 0
 
+    def update_types(self):
+        self.parser.update_prop_types()
+        self.parser.get_es_types()
+
     def translate_table(self, table_name, get_zero_frame=None, props=None):
         df = self.sc.wholeTextFiles(os.path.join(self.hdfs_path, table_name)).flatMap(flatten_files_to_lists)
         df = df.map(extract_metadata)

@@ -6,7 +6,7 @@ class DirectNode(object):
     def __init__(self, name, edge, props, sorted_by=None, desc_order=False, props_from_child=True):
         self.tbl_name = name
         self.edge = edge
-        self.props = props  # PropFactory.create_props_from_json(doc_name, props_in_json)
+        self.props = props
         self.sorted_by = sorted_by
         self.desc_order = desc_order
         self.props_from_child = props_from_child

@@ -9,7 +9,7 @@ class SpecialChain():
         self.name = name  # name of the prop create by this special function
         self.head = head  # first SpecialNode in the chain of nodes (like a link-list) related to the special function
         self.fn = fn  # name of the function perform in this special aggregation node
-        PropFactory.adding_prop(doc_name, name, '', [], '', (float, ))
+        PropFactory.adding_prop(doc_name, name, '', [], src_node=None, src_index=None, fn='', prop_type=(float, ))
 
     def __key__(self):
         return self.name

@@ -22,23 +22,16 @@ class PropFactory(object):
         return res
 
     @staticmethod
-    def adding_prop(doc_name, name, src, value_mappings, fn=None, prop_type=None):
+    def adding_prop(doc_name, name, src, value_mappings, src_node=None, src_index=None, fn=None, prop_type=None):
         if doc_name not in PropFactory.prop_by_names:
             PropFactory.prop_by_names[doc_name] = {}
         prop = PropFactory.get_prop_by_name(doc_name, name)
         if prop is None:
-            prop = Prop(PropFactory.get_length(), name, src,
-                        PropFactory.create_value_mappings(value_mappings), fn, prop_type)
+            prop = Prop(PropFactory.get_length(), name, src, PropFactory.create_value_mappings(value_mappings),
+                        src_node, src_index, fn, prop_type)
             PropFactory.list_props.append(prop)
             PropFactory.prop_by_names.get(doc_name)[name] = prop
         return prop
-
-    @staticmethod
-    def create_prop_from_json(doc_name, p):
-        value_mappings = p.get('value_mappings', [])
-        src = p['src'] if 'src' in p else p['name']
-        fn = p.get('fn')
-        return PropFactory.adding_prop(doc_name, p['name'], src, value_mappings, fn)
 
     @staticmethod
     def get_prop_by_id(id):
@@ -59,13 +52,6 @@ class PropFactory(object):
     def get_prop_by_json(doc_name, p):
         return PropFactory.get_prop_by_name(doc_name, p['name'])
 
-    @staticmethod
-    def create_props_from_json(doc_name, props_in_json):
-        res = []
-        for p in props_in_json:
-            res.append(PropFactory.create_prop_from_json(doc_name, p))
-        return res
-
 
 class ValueMapping(object):
     def __init__(self, original, final):
@@ -74,10 +60,12 @@ class ValueMapping(object):
 
 
 class Prop(object):
-    def __init__(self, id, name, src, value_mappings, fn=None, prop_type=None):
+    def __init__(self, id, name, src, value_mappings, src_node, src_index=None, fn=None, prop_type=None):
         self.id = id
         self.name = name
         self.src = src
+        self.src_node = src_node
+        self.src_index = src_index
         self.value_mappings = [] if value_mappings is None else value_mappings
         self.fn = fn
         self.type = prop_type
