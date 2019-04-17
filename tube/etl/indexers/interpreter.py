@@ -20,7 +20,7 @@ def create_translators(sc, config):
         else:
             translator = BaseTranslator(sc, config.HDFS_DIR, writer)
         translators[translator.parser.doc_type] = translator
-    for translator in translators:
+    for translator in translators.values():
         translator.update_types()
     return translators
 

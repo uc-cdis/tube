@@ -111,11 +111,12 @@ class Translator(BaseTranslator):
             # if n is a child of root node, we don't need to swap order of the pair ids
             edge_df = self.translate_edge(n.edge, not n.props_from_child)
             props = n.props
-            child_df = self.translate_table(n.tbl_name, props=props)
-            child_by_root = edge_df.join(child_df).map(lambda x: tuple([x[1][0], x[1][1]]))
             if n.sorted_by is not None:
                 sorting_prop = PropFactory.adding_prop(self.parser.doc_type, n.sorted_by, n.sorted_by, [])
                 props.append(sorting_prop)
+            child_df = self.translate_table(n.tbl_name, props=props)
+            child_by_root = edge_df.join(child_df).map(lambda x: tuple([x[1][0], x[1][1]]))
+            if n.sorted_by is not None:
                 child_by_root = child_by_root.groupByKey()
                 child_by_root = child_by_root.mapValues(lambda it: sort_by_field(it, sorting_prop.id, n.desc_order)[0])
                 child_by_root = child_by_root.mapValues(lambda x: {k: v for (k, v) in x.items()
@@ -125,20 +126,22 @@ class Translator(BaseTranslator):
             child_by_root.unpersist()
         return root_df
 
-    def get_joining_props(self, translator, joining_index, with_agg_func):
+    def get_joining_props(self, translator, joining_index):
         """
         Get joining props added by an additional join between indices/documents
         :param joining_index: Joining index created from parser
         :return:
         """
-        props = []
+        props_with_fn = []
+        props_without_fn = []
         for r in joining_index.getting_fields:
-            if not (with_agg_func ^ (r.fn is None)):
-                continue
             src_prop = translator.parser.get_prop_by_name(r.prop.src)
             dst_prop = self.parser.get_prop_by_name(r.prop.name)
-            props.append({'src': src_prop, 'dst': dst_prop})
-        return props
+            if r.fn is None:
+                props_without_fn.append({'src': src_prop, 'dst': dst_prop})
+            else:
+                props_with_fn.append({'src': src_prop, 'dst': dst_prop})
+        return props_with_fn, props_without_fn
 
     def join_and_aggregate(self, df, joining_df, dual_props, joining_node):
         frame_zero = get_frame_zero(joining_node.getting_fields)
@@ -187,13 +190,12 @@ class Translator(BaseTranslator):
 
         # Join can be done with or without an aggregation function like max, min, sum, ...
         # these two type of join requires different map-reduce steos
-        dual_props = self.get_joining_props(translator, joining_node, with_agg_func=True)
-        if len(dual_props) > 0:
-            df = self.join_and_aggregate(df, joining_df, dual_props, joining_node)
-        else:
-            dual_props = self.get_joining_props(translator, joining_node, with_agg_func=False)
-            if len(dual_props) > 0:
-                df = self.join_no_aggregate(df, joining_df, dual_props)
+        props_with_fn, props_without_fn = self.get_joining_props(translator, joining_node)
+        if len(props_with_fn) > 0:
+            df = self.join_and_aggregate(df, joining_df, props_with_fn, joining_node)
+        if len(props_without_fn) > 0:
+            df = self.join_no_aggregate(df, joining_df, props_without_fn)
+
         if swap_df:
             df = swap_property_as_key(df, df_key_id, field_id_in_df)
         return df
