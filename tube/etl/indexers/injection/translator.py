@@ -70,14 +70,14 @@ class Translator(BaseTranslator):
             props = root.props
             for child in root.children:
                 edge_tbl = child.parents[root.name]
-                df = df.join(self.translate_edge(edge_tbl))
+                tmp_df = df.join(self.translate_edge(edge_tbl))
                 if root.root_child is None:
-                    df = df.map(lambda x: (x[1][1], ({root_id: x[0]},) + (x[1][0],)))\
+                    tmp_df = tmp_df.map(lambda x: (x[1][1], ({root_id: x[0]},) + (x[1][0],)))\
                         .mapValues(lambda x: merge_and_fill_empty_props(x, props, to_tuple=True))
                 else:
-                    df = df.map(lambda x: (x[1][1], x[1][0])) \
+                    tmp_df = tmp_df.map(lambda x: (x[1][1], x[1][0])) \
                         .mapValues(lambda x: tuple([(k, v) for (k, v) in x.items()]))
-                self.collect_collecting_child(child, df, collected_collecting_dfs)
+                self.collect_collecting_child(child, tmp_df, collected_collecting_dfs)
         return collected_collecting_dfs, collected_leaf_dfs
 
     def merge_collectors(self, collected_collecting_dfs):
