@@ -8,7 +8,7 @@ from tube.etl.outputs.es.writer import Writer
 
 def create_translators(sc, config):
     dictionary, model = init_dictionary(config.DICTIONARY_URL)
-    mappings = yaml.load(open(config.MAPPING_FILE))
+    mappings = yaml.load(open(config.MAPPING_FILE), Loader=yaml.SafeLoader)
     writer = Writer(sc, config)
 
     translators = {}
@@ -50,5 +50,5 @@ def run_transform(translators):
 
 def get_index_names(config):
     stream = open(config.MAPPING_FILE)
-    mappings = yaml.load(stream)
+    mappings = yaml.load(stream, Loader=yaml.SafeLoader)
     return [m['name'] for m in mappings['mappings']]

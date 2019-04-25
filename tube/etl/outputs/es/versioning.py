@@ -27,7 +27,8 @@ class Versioning(object):
     def __init__(self, es):
         self.es = es
         # Reset status, putting here to declare all properties.
-        self.old_index_to_forget = None
+        self.old_indices_to_forget = None
+        self.last_index = None
         self.target_version = None
         self.backup_index = None
 
@@ -36,7 +37,8 @@ class Versioning(object):
         Reset all the running status used to write the data frame
         :return:
         """
-        self.old_index_to_forget = None
+        self.old_indices_to_forget = None
+        self.last_index = None
         self.target_version = None
         self.backup_index = None
 
@@ -80,8 +82,9 @@ class Versioning(object):
         :param index: the name/alias of the index to be cleaned
         :return:
         """
-        if self.old_index_to_forget is not None:
-            self.es.indices.delete_alias(index=self.old_index_to_forget, name=index)
+        if self.old_indices_to_forget is not None:
+            for old_index_to_forget in self.old_indices_to_forget:
+                self.es.indices.delete_alias(index=old_index_to_forget, name=index)
         if self.backup_index is not None:
             self.es.indices.delete_alias(index=self.backup_index, name=index)
 
@@ -99,8 +102,9 @@ class Versioning(object):
                 return -1
             return 0
 
-        self.old_index_to_forget = self.es.indices.get_alias(name=index).keys()[0]
-        res = re.match('.*?([0-9]+)$', self.old_index_to_forget)
+        self.old_indices_to_forget = self.es.indices.get_alias(name=index).keys()
+        self.last_index = sorted(self.old_indices_to_forget)[-1]
+        res = re.match('.*?([0-9]+)$', self.last_index)
         if res is not None:
             return int(res.group(1)) + 1
         return 0
