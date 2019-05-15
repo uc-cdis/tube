@@ -6,7 +6,8 @@ from elasticsearch import Elasticsearch
 from tube.etl.plugins import post_process_plugins, add_auth_resource_path_mapping
 from tube.etl.spark_base import SparkBase
 from tube.etl.outputs.es.versioning import Versioning
-from tube.etl.outputs.es.timestamp import putting_timestamp
+from tube.etl.outputs.es.timestamp import putting_timestamp, get_latest_utc_transaction_time, \
+    timestamp_from_transaction_time
 
 
 def json_export(x, doc_type):
@@ -58,7 +59,7 @@ class Writer(SparkBase):
             int: 'integer'
         }
 
-        properties = {k: {'type': es_type[v]} for k, v in field_types.items()}
+        properties = {k: {'type': es_type[v[0]]} for k, v in field_types.items()}
 
         # explicitly mapping 'node_id'
         properties['node_id'] = {'type': 'keyword'}
@@ -86,6 +87,39 @@ class Writer(SparkBase):
                                   keyClass='org.apache.hadoop.io.NullWritable',
                                   valueClass='org.elasticsearch.hadoop.mr.LinkedMapWritable',
                                   conf=es_config)
+
+    def create_guppy_array_config(self, etl_index_name, types):
+        """
+        Create index with Guppy configuration for array fields
+        :param etl_index_name:
+        :param types:
+        """
+        index = 'array-config'
+
+        mapping = {
+            'mappings': {
+                '_doc': {'properties':
+                    {
+                        'timestamp': {'type': 'date'},
+                        'array': {'type': 'keyword'}
+                    }
+                }
+            }
+        }
+
+        latest_transaction_time = get_latest_utc_transaction_time()
+
+        doc = {
+            'timestamp': latest_transaction_time,
+            'array': ['{}.{}'.format(etl_index_name, k) for k, v in types.iteritems() if v[1]]
+        }
+
+        self.reset_status()
+        index_to_write = self.versioning.create_new_index(mapping, self.versioning.backup_old_index(index))
+        self.es.index(index_to_write, '_doc', body=doc)
+        self.versioning.putting_new_version_tag(index_to_write, index)
+        putting_timestamp(self.es, index_to_write)
+        self.reset_status()
 
     def write_df(self, df, index, doc_type, types):
         """
