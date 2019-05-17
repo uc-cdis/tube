@@ -112,7 +112,6 @@ class Versioning(object):
     def backup_old_index(self, index):
         """
         Create an empty versioned index.
-        :param mapping: mapping for index
         :param index: the name/alias of index
         :return:
         """
