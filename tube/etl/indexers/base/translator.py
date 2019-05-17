@@ -45,9 +45,7 @@ class Translator(object):
 
     def write(self, df):
         df = self.restore_prop_name(df, PropFactory.list_props)
-        # fix this, found a better way to distinguish between 'file' and 'etl'
-        if self.parser.name == 'etl':
-            self.writer.create_guppy_array_config(self.parser.name, self.parser.types)
+        self.writer.create_guppy_array_config(self.parser.name, self.parser.types)
         self.writer.write_df(df, self.parser.name, self.parser.doc_type, self.parser.types)
 
     def get_props_from_data_row(self, df, props, to_tuple=False):

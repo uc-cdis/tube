@@ -94,7 +94,8 @@ class Writer(SparkBase):
         :param etl_index_name:
         :param types:
         """
-        index = 'array-config'
+        index = '{}-array-config'.format(etl_index_name)
+        alias = 'array-config'
 
         mapping = {
             'mappings': {
@@ -116,8 +117,9 @@ class Writer(SparkBase):
 
         self.reset_status()
         index_to_write = self.versioning.create_new_index(mapping, self.versioning.backup_old_index(index))
-        self.es.index(index_to_write, '_doc', body=doc)
+        self.es.index(index_to_write, '_doc', id=etl_index_name, body=doc)
         self.versioning.putting_new_version_tag(index_to_write, index)
+        self.versioning.putting_new_version_tag(index_to_write, alias)
         putting_timestamp(self.es, index_to_write)
         self.reset_status()
 
