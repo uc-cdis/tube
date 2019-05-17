@@ -32,9 +32,14 @@ class Parser(object):
                 p.update_type(prop.type)
 
     def get_es_types(self):
-        self.types = {p.name: (self.select_widest_type(p.type), 1 if p.fn in ['set', 'list'] else 0)
-                      for p in PropFactory.get_prop_by_doc_name(self.doc_type).values()
-                      if p.type is not None}
+        self.types = {}
+
+        for p in PropFactory.get_prop_by_doc_name(self.doc_type).values():
+            if p.type is not None:
+                is_array_type = p.type[0] == list
+                has_array_agg_fn = p.fn in ['set', 'list']
+                array_type_condition = is_array_type or has_array_agg_fn
+                self.types[p.name] = (self.select_widest_type(p.type), 1 if array_type_condition else 0)
 
     def select_widest_type(self, types):
         if str in types:
