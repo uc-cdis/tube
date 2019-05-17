@@ -95,7 +95,7 @@ class Writer(SparkBase):
         :param types:
         """
         index = '{}-array-config'.format(etl_index_name)
-        alias = 'array-config'
+        alias = '{}_array-config'.format(etl_index_name.split('_')[0])
 
         mapping = {
             'mappings': {
@@ -112,7 +112,7 @@ class Writer(SparkBase):
 
         doc = {
             'timestamp': latest_transaction_time,
-            'array': ['{}.{}'.format(etl_index_name, k) for k, v in types.iteritems() if v[1]]
+            'array': ['{}'.format(k) for k, v in types.iteritems() if v[1]]
         }
 
         self.reset_status()
