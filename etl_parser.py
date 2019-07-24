@@ -23,11 +23,12 @@ class Parser(object):
             root_dict.update({data['mappings'][i].get("doc_type", ""): ""})
             root_props = data['mappings'][i].get("props", "")
             root_dict[list(root_dict)[i]] = [d['name'] for d in root_props]
-            for i in range(len(one_data['flatten_props'])):
-                flatten_dict.update({one_data['flatten_props'][i].get("path", ""): ""})
-                root_props = one_data['flatten_props'][i].get("props", "")
-                flatten_dict[list(flatten_dict)[i]] = [d['name'] for d in root_props]
-            return flatten_dict
+            one_data = data['mappings'][0]
+        for i in range(len(one_data['flatten_props'])):
+            flatten_dict.update({one_data['flatten_props'][i].get("path", ""): ""})
+            root_props = one_data['flatten_props'][i].get("props", "")
+            flatten_dict[list(flatten_dict)[i]] = root_props
+        return flatten_dict
         return root_dict
             
 p1 = Parser()
