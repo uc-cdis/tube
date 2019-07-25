@@ -17,17 +17,17 @@ In the data transformation stage, a series of rules or functions are applied to 
 There are two loading stage, one is loading data from traditional database to the place that can be easily processed by the **transformer**, another one is loading from **transformer** to the target data source.
 
 ### Gen3 ETL
-Gen3 ETL is designed to translate data from a graph data model stored in Postgresql database to flatten indices in ElasticSearch (ES) which supports the efficient way to query data from the front-end. 
+Gen3 ETL is designed to translate data from a graph data model stored in Postgresql database to flatten indices in ElasticSearch (ES) which supports the efficient way to query data from the front-end.
 #### Transformer
 Interestingly, choosing transformer is the most important thing in ETL, because transformer requires a specific format of input and output data.
 Specifically to our use-case, Spark becomes one of the most advanced data processing technology, because its distributed architecture allows:
  1. processing data in parallel simply inside the horizontally scalable memory.
- 2. iteratively processing data in multiple steps without reloading from data storage (disk). 
+ 2. iteratively processing data in multiple steps without reloading from data storage (disk).
  3. streaming and integrating incremental data to an existing data source.
 
-Hence, we choose Spark as a data transformer for a fast and scalable data processing. 
+Hence, we choose Spark as a data transformer for a fast and scalable data processing.
 
-As discussed previously, there are multiple ways to extract data from database and load to Spark. One is directly generate and execute in parallel multiple SQL queries and load it to Spark's memory, another one is dumping the whole dataset to intermediate data storage like HDFS and then load text data stored in HDFS into Spark in parallel.  
+As discussed previously, there are multiple ways to extract data from database and load to Spark. One is directly generate and execute in parallel multiple SQL queries and load it to Spark's memory, another one is dumping the whole dataset to intermediate data storage like HDFS and then load text data stored in HDFS into Spark in parallel.
 
 Learning all the options that one of our collabators OICR tried (posted [here](https://softeng.oicr.on.ca/grant_guo/2017/08/14/spark/) ). We decided to go with similar strategy - dump postgres to HDFS and load HDFS to rdd/SPARK.
 We decided to use [SQOOP](https://github.com/apache/sqoop) to dump the postgres database to HDFS. In order to dump postgresql database, SQOOP calls [CopyManager](https://jdbc.postgresql.org/documentation/publicapi/org/postgresql/copy/CopyManager.html).
@@ -56,7 +56,7 @@ mappings:
       - name: submitter_id
       - name: project_id
     flatten_props:
-      # list of properties together with paths to the nodes 
+      # list of properties together with paths to the nodes
       # have 1-to-1 relationship with the root node
       - path: demographics
         props:
@@ -66,7 +66,7 @@ mappings:
             src: gender
             # name of field in the original database
             value_mappings:
-            # mapping rule from value in SQL database 
+            # mapping rule from value in SQL database
             # to the value in ES
               - female: F
               - male: M
