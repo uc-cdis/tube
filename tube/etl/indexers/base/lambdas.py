@@ -10,10 +10,10 @@ def extract_metadata(str_value):
     :param str_value:
     :return:
     '''
-    str_value = str_value.replace("'", "##")
+    str_value = str_value.replace("'", "###")
     str_value = str_value.replace('\\""', "##")
     strs = ast.literal_eval(str_value.replace('""', "'"))
-    props = json.loads(strs[3].replace("'", '"').replace("##", "'"), strict=False)
+    props = json.loads(strs[3].replace("'", '"').replace("###", "'").replace('##', '"'), strict=False)
     return tuple([strs[4], props])
 
 
