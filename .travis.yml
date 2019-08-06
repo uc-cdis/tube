@@ -60,7 +60,7 @@ before_script:
   - export XDG_DATA_HOME="$HOME/.local/share"
   - export ES_URL="localhost"
   - export ES_INDEX_NAME="etl"
-  - export DICTIONARY_URL="https://s3.amazonaws.com/dictionary-artifacts/ndhdictionary/master/schema.json"
+  - export DICTIONARY_URL="https://s3.amazonaws.com/dictionary-artifacts/ndhdictionary/3.3.8/schema.json"
   - mkdir -p $XDG_DATA_HOME/gen3/tube
   - cp tests/gen3/tube/{creds.json,etlMapping.yaml} $XDG_DATA_HOME/gen3/tube/
 

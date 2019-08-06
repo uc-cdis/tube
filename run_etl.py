@@ -12,19 +12,25 @@ def run_import():
     '''
     Define the spark context and parse agruments into config
     '''
-    sql_to_hdfs = SqlToHDFS(config, BaseFormatter())
-    stream = sql_to_hdfs.generate_import_all_tables()
-    if stream is None:
-        return
-    for line in stream:
-        print(line.rstrip())
+    try:
+        sql_to_hdfs = SqlToHDFS(config, BaseFormatter())
+        stream = sql_to_hdfs.generate_import_all_tables()
+        if stream is None:
+            return
+        for line in stream:
+            print(line.rstrip())
+    except Exception as ex:
+        print ex.message
 
 
 def run_transform():
-    sc = make_spark_context(config)
-    translators = interpreter.create_translators(sc, config)
-    interpreter.run_transform(translators)
-    sc.stop()
+    try:
+        sc = make_spark_context(config)
+        translators = interpreter.create_translators(sc, config)
+        interpreter.run_transform(translators)
+        sc.stop()
+    except Exception as ex:
+        print ex.message
 
 
 def config_by_args():
