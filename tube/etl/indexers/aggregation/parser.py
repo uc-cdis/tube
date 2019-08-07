@@ -264,7 +264,7 @@ class Parser(BaseParser):
                                 "\n".format(child['props'], child['path'], child_label, multiplicity))
 
             if child['props'] == '_all':
-                all_props = get_properties_types(self.model, node_label=child_label)
+                all_props = get_properties_types(self.model, child_label)
                 all_props_list = [k for k in all_props.keys()]
                 for n in all_props_list:
                     props = self.create_props_from_json(self.doc_type, n, node_label=child_label)
