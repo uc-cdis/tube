@@ -6,6 +6,7 @@ from tube.formatters import BaseFormatter
 from tube.utils.spark import make_spark_context
 from tube.etl.outputs.es.timestamp import check_to_run_etl
 from elasticsearch import Elasticsearch
+import traceback
 
 
 def run_import():
@@ -21,6 +22,7 @@ def run_import():
             print(line.rstrip())
     except Exception as ex:
         print ex.message
+        traceback.format_exc()
 
 
 def run_transform():
@@ -31,6 +33,7 @@ def run_transform():
         sc.stop()
     except Exception as ex:
         print ex.message
+        traceback.format_exc()
 
 
 def config_by_args():
