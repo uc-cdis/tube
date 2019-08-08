@@ -7,6 +7,7 @@ from tube.formatters import BaseFormatter
 from tube.utils.spark import make_spark_context
 from tube.etl.outputs.es.timestamp import check_to_run_etl
 from elasticsearch import Elasticsearch
+import traceback
 
 
 def run_import():
