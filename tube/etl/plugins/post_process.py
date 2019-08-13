@@ -7,27 +7,32 @@ def _get_resource_path_from_yaml(project):
     """
     Get resource path from user yaml file
     """
-
     if not USERYAML_FILE:
-        return ''
+        print("Can not find user.yaml file")
+        return ""
+    
     with open(USERYAML_FILE, 'r') as stream:
         try:
             data = yaml.safe_load(stream)
         except yaml.YAMLError as e:
-            print("Can not read {}. Detail {}", USERYAML_FILE, e)
-            return ''
+            print("Can not read {}. Detail {}".format(USERYAML_FILE, e))
+            return ""
+    
+    if project in data.get("user_project_to_resource", {}):
+        return data["user_project_to_resource"][project]
+
     try:
-        for _, v in data['users'].iteritems():
-            projects = v['projects']
+        for _, user in data["users"].iteritems():
+            projects = user["projects"]
             if not isinstance(projects, list):
                 projects = [projects]
             for pr in projects:
-                if pr['auth_id'] == project:
-                    return pr['resource']
+                if pr["auth_id"] == project:
+                    return pr["resource"]
     except KeyError as e:
-        return ''
+        return ""
     
-    return ''
+    return ""
 
 
 def add_auth_resource_path(df):
