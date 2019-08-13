@@ -1,6 +1,6 @@
 import yaml
 
-from settings import USERYAML_FILE
+from tube.settings import USERYAML_FILE
 
 
 def _get_resource_path_from_yaml(project):
@@ -21,17 +21,14 @@ def _get_resource_path_from_yaml(project):
     if project in data.get("user_project_to_resource", {}):
         return data["user_project_to_resource"][project]
 
-    try:
-        for _, user in data["users"].iteritems():
-            projects = user["projects"]
-            if not isinstance(projects, list):
-                projects = [projects]
-            for pr in projects:
-                if pr["auth_id"] == project:
+    for _, user in data.get("users", {}).iteritems():
+        projects = user.get("projects", [])
+        if not isinstance(projects, list):
+            projects = [projects]
+        for pr in projects:
+            if pr.get("auth_id") == project:
+                if "resource" in pr:
                     return pr["resource"]
-    except KeyError as e:
-        return ""
-    
     return ""
 
 
@@ -41,8 +38,7 @@ def add_auth_resource_path(df):
         project_id = df[1]['project_id']
         if project_id is not None:
             program_name, project_code = project_id.split('-', 1)
-            resource_path = _get_resource_path_from_yaml(project_code)
-            df[1]['auth_resource_path'] = resource_path
+            df[1]['auth_resource_path'] = _get_resource_path_from_yaml(project_code)
         else:
             df[1]['auth_resource_path'] = ''
 
