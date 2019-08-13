@@ -39,6 +39,7 @@ before_script:
   - ./wait_for_quay.sh -r ${REPOSITORY} -b ${BRANCH//\//_} -d 30
   - git clone https://github.com/uc-cdis/compose-etl.git --branch master --single-branch
   - cp -f tests/gen3/tube/etlMapping.yaml compose-etl/configs/etlMapping.yaml
+  - cp -f tests/gen3/tube/user.yaml compose-etl/configs/user.yaml
   - cd compose-etl
   - export HOST_IP_ADDRESS="$(ip -f inet -o addr show docker0 | cut -d\  -f 7 | cut -d/ -f 1)"
   - |
@@ -62,7 +63,7 @@ before_script:
   - export ES_INDEX_NAME="etl"
   - export DICTIONARY_URL="https://s3.amazonaws.com/dictionary-artifacts/ndhdictionary/3.3.8/schema.json"
   - mkdir -p $XDG_DATA_HOME/gen3/tube
-  - cp tests/gen3/tube/{creds.json,etlMapping.yaml} $XDG_DATA_HOME/gen3/tube/
+  - cp tests/gen3/tube/{creds.json,etlMapping.yaml,user.yaml} $XDG_DATA_HOME/gen3/tube/
 
 script:
   - python -m pytest -v tests
