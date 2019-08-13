@@ -49,6 +49,10 @@ HADOOP_HOST = os.getenv("HADOOP_HOST", "spark-service")
 # Searches same folders as load_json above
 
 MAPPING_FILE = find_paths("etlMapping.yaml", 'tube')[0]
+try:
+    USERYAML_FILE = find_paths("user.yaml", 'tube')[0]
+except IndexError:
+    USERYAML_FILE = None
 SPARK_MASTER = os.getenv('SPARK_MASTER', 'local[1]')  # 'spark-service'
 SPARK_EXECUTOR_MEMORY = os.getenv("SPARK_EXECUTOR_MEMORY", "2g")
 SPARK_DRIVER_MEMORY = os.getenv("SPARK_DRIVER_MEMORY", "512m")
