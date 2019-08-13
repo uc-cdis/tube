@@ -20,7 +20,8 @@ def run_import():
         for line in stream:
             print(line.rstrip())
     except Exception as ex:
-        print ex.message
+        print 'Error when running import to hadoop'
+        raise ex
 
 
 def run_transform():
@@ -30,7 +31,8 @@ def run_transform():
         interpreter.run_transform(translators)
         sc.stop()
     except Exception as ex:
-        print ex.message
+        print 'Error when running transformation'
+        raise ex
 
 
 def config_by_args():

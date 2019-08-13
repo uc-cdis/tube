@@ -54,9 +54,8 @@ class Parser(BaseParser):
         self.get_collecting_nodes()
 
     def get_first_node_label_with_category(self):
-        if len(self.mapping['injecting_props'].items()) == 0:
-            return None
-
+        # if len(self.mapping['injecting_props'].items()) == 0:
+        #     return None
         selected_category = self.mapping.get('category', 'data_file')
         leaves_name = [k for (k, v) in self.dictionary.schema.items()
                        if v.get('category', None) == selected_category]
@@ -83,8 +82,11 @@ class Parser(BaseParser):
 
         selected_category = self.mapping.get('category', 'data_file')
         flat_paths = set([])
-        for k, v in self.mapping['injecting_props'].items():
-            flat_paths |= self.create_collecting_paths_from_root(k, lambda x: selected_category_comparer(self.dictionary, x))
+        if 'injecting_props' in self.mapping:
+            for k, v in self.mapping['injecting_props'].items():
+                flat_paths |= self.create_collecting_paths_from_root(k, lambda x: selected_category_comparer(
+                                                                         self.dictionary, x)
+                                                                     )
         leaves = [p.src for p in flat_paths]
 
         self.collectors, self.roots = self.construct_reversed_collection_tree(flat_paths)
