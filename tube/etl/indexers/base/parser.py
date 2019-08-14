@@ -72,7 +72,7 @@ class Parser(object):
             return None
         else:
             if node_label is None:
-                raise Exception('An index property must have at least one of [path, fn, index] is set property')
+                raise Exception('An index property must have at least one of [path, fn, index] is set')
             if src == 'id':
                 return (str, )
             a = get_properties_types(self.model, node_label)
