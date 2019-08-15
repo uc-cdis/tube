@@ -1,6 +1,7 @@
 import argparse
 import tube.settings as config
 import tube.etl.indexers.interpreter as interpreter
+import traceback
 from tube.importers.sql_to_hdfs import SqlToHDFS
 from tube.formatters import BaseFormatter
 from tube.utils.spark import make_spark_context
@@ -20,8 +21,8 @@ def run_import():
         for line in stream:
             print(line.rstrip())
     except Exception as ex:
-        print 'Error when running import to hadoop'
-        raise ex
+        print 'ERROR when running import to hadoop'
+        print traceback.format_exc()
 
 
 def run_transform():
@@ -31,8 +32,8 @@ def run_transform():
         interpreter.run_transform(translators)
         sc.stop()
     except Exception as ex:
-        print 'Error when running transformation'
-        raise ex
+        print 'ERROR when running transformation'
+        print traceback.format_exc()
 
 
 def config_by_args():

@@ -50,7 +50,7 @@ class Parser(BaseParser):
                                                  node_label=self.get_first_node_label_with_category())
         self.leaves = set([])
         self.collectors = []
-        self.roots = set([])
+        self.roots = []
         self.get_collecting_nodes()
 
     def get_first_node_label_with_category(self):
@@ -89,7 +89,8 @@ class Parser(BaseParser):
                                                                      )
         leaves = [p.src for p in flat_paths]
 
-        self.collectors, self.roots = self.construct_reversed_collection_tree(flat_paths)
+        if 'injecting_props' in self.mapping:
+            self.collectors, self.roots = self.construct_reversed_collection_tree(flat_paths)
 
         flat_paths = self.get_orphan_paths(selected_category, leaves)
         orphan_collectors, auth_root = self.construct_auth_path_tree(flat_paths)
