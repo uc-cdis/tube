@@ -1,6 +1,5 @@
-import re
 from tube.utils.dd import get_attribute_from_path, get_edge_table, get_child_table, get_multiplicity, \
-    get_node_table_name, get_properties_types, object_to_string
+    get_node_table_name, get_properties_types, object_to_string, get_node_label, get_all_children_of_node
 from .nodes.aggregated_node import AggregatedNode, Reducer
 from .nodes.direct_node import DirectNode
 from .nodes.joining_node import JoiningNode
@@ -34,6 +33,16 @@ class Path(object):
     def __eq__(self, other):
         return self.__key__() == other.__key__()
 
+class NodesPath(object):
+    def __init__(self, class_name, upper_path):
+        self.class_name = class_name
+        self.upper_path = upper_path
+
+    def __str__(self):
+        return object_to_string(self)
+
+    def __repr__(self):
+        return self.__str__()
 
 class Parser(BaseParser):
     """
@@ -223,13 +232,53 @@ class Parser(BaseParser):
         :return:
         """
         flat_paths = {}
+        label = self.mapping['root']
         aggregated_nodes = self.mapping['aggregated_props']
         for n in aggregated_nodes:
-            if n['path'] in flat_paths:
-                flat_paths[n['path']].reducers.append((n['name'], n.get('src'), n['fn']))
+            if '_ANY' in n['path']:
+                split_node = n['path'].split('.')
+                d_node = split_node[-1]
+                f_paths = self.create_aggregations_all_paths_from_root(label, d_node, n['name'], n.get('src'), n['fn'])
+                for key, value in f_paths.items():
+                    flat_paths[key] = Path(key, n['name'], n.get('src'), n['fn'])
+                    flat_paths[key].reducers.append((n['name'], n.get('src'), n['fn']))
             else:
                 flat_paths[n['path']] = Path(n['path'], n['name'], n.get('src'), n['fn'])
+                flat_paths[n['path']].reducers.append((n['name'], n.get('src'), n['fn']))
         return set(flat_paths.values())
+
+    def initializing_queue(self, label):
+        name = self.model.Node.get_subclass(label).__name__
+        processing_queue = []
+        children = get_all_children_of_node(self.model, name)
+        for child in children:
+            processing_queue.append(NodesPath(child.__src_class__, child.__src_dst_assoc__))
+        return processing_queue
+
+    def create_aggregations_all_paths_from_root(self, label, selector, n_name, n_src, n_fn):
+        flat_paths = {}
+        processing_queue = self.initializing_queue(label)
+        i = 0
+        while (i < len(processing_queue)):
+            current_node = processing_queue[i]
+            current_label = get_node_label(self.model, current_node.class_name)
+
+            if current_label in selector:
+                path = Path(current_node.upper_path, n_name, n_src, n_fn)
+                l_paths = list(path.path)
+                l_paths.remove("subjects")
+                l_paths.insert(0, selector)
+                l_paths.reverse()
+                t_paths = tuple(l_paths)
+                upper_paths = '.'.join(t_paths)
+                flat_paths.update({upper_paths: t_paths})
+
+            children = get_all_children_of_node(self.model, current_node.class_name)
+            for child in children:
+                processing_queue.append(
+                    NodesPath(child.__src_class__, '.'.join([child.__src_dst_assoc__, current_node.upper_path])))
+            i += 1
+        return flat_paths
 
     def parse_sorting(self, child):
         sorts = child['sorted_by'] if 'sorted_by' in child else None
@@ -263,12 +312,17 @@ class Parser(BaseParser):
                                 "has multiplicity '{}' that cannot be used on in 'flatten_props'"
                                 "\n".format(child['props'], child['path'], child_label, multiplicity))
 
-            if child['props'] == '_all':
+            if child['props'] == '_ALL':
                 all_props = get_properties_types(self.model, child_label)
                 all_props_list = [k for k in all_props.keys()]
+                child_all_json = []
+                child_name_props_dict = {}
                 for n in all_props_list:
-                    props = self.create_props_from_json(self.doc_type, n, node_label=child_label)
-                    nodes.append(DirectNode(child_name, edge, props, sorted_by, desc_order, is_child))
+                    child_name_props_dict.update({'name': n})
+                    child_all_json.append(dict(child_name_props_dict))
+
+                props = self.create_props_from_json(self.doc_type, child_all_json, node_label=child_label)
+                nodes.append(DirectNode(child_name, edge, props, sorted_by, desc_order, is_child))
 
             else:
                 props = self.create_props_from_json(self.doc_type, child['props'], node_label=child_label)
