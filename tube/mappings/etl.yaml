@@ -1,5 +1,5 @@
 mappings:
-  - name: etl
+  - name: etl_nish
     doc_type: subject
     type: aggregator
     root: subject
@@ -9,8 +9,7 @@ mappings:
       - name: study_center
     flatten_props:
       - path: virus_infections
-        props:
-          - name: virus_type
+        props: _ALL
       - path: demographics
         props:
           - name: gender
@@ -30,7 +29,7 @@ mappings:
         path: follow_ups
         fn: count
       - name: _summary_drug_uses_count
-        path: follow_ups.summary_drug_uses
+        path: _ANY.summary_drug_uses
         fn: count
       - name: _summary_lab_results_on_follow_up_count
         path: follow_ups.summary_lab_results
@@ -39,7 +38,7 @@ mappings:
         path: samples
         fn: count
       - name: _aliquots_count
-        path: samples.aliquots
+        path: _ANY.aliquots
         fn: count
       - name: _summary_lab_results_on_sample_count
         path: samples.summary_lab_results
@@ -85,11 +84,11 @@ mappings:
           - name: data_type
             src: data_type
             fn: list
-  - name: file
+  - name: file_nish
     doc_type: file
     type: collector
     root: None
-    category: data_file
+    category: nish_file
     props:
       - name: object_id
       - name: md5sum
@@ -101,4 +100,5 @@ mappings:
         props:
           - name: subject_id
             src: id
+            fn: set
           - name: project_id
