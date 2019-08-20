@@ -18,8 +18,8 @@ def _get_resource_path_from_yaml(project):
             print("Can not read {}. Detail {}".format(USERYAML_FILE, e))
             return ""
     
-    if project in data.get("user_project_to_resource", {}):
-        return data["user_project_to_resource"][project]
+    if "rbac" in data and project in data["rbac"].get("user_project_to_resource", {}):
+        return data["rbac"]["user_project_to_resource"][project]
 
     for _, user in data.get("users", {}).iteritems():
         projects = user.get("projects", [])
@@ -29,6 +29,7 @@ def _get_resource_path_from_yaml(project):
             if pr.get("auth_id") == project:
                 if "resource" in pr:
                     return pr["resource"]
+    print("Can not get resource path from user.yaml. Please check the file format")
     return ""
 
 
