@@ -1,5 +1,7 @@
+from tube.etl.indexers.base import validator
 from ..base.prop import PropFactory
 from tube.utils.dd import get_properties_types
+from tube.etl.indexers.base import validator
 
 
 class Parser(object):
@@ -13,6 +15,9 @@ class Parser(object):
         self.root = mapping['root']
         self.doc_type = mapping['doc_type']
         self.joining_nodes = []
+        if not validator.validate(self.mapping, self.model):
+            raise Exception('Something wrong in the mapping file -' + mapping)
+
         PropFactory.adding_prop(self.doc_type, '{}_id'.format(self.doc_type), '', [],
                                 src_node=None, src_index=None, fn=None, prop_type=(str,))
         self.types = []
