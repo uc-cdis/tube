@@ -198,6 +198,9 @@ class Parser(BaseParser):
             if len(segments) > 1:
                 for node in segments[0:len(segments)-2]:
                     child = self.add_collecting_node(child, collectors, node)
+                edge_up_tbl = get_edge_table(self.model, child.name, segments[-2])
+            elif len(segments) == 1:
+                _, edge_up_tbl = get_edge_table(self.model, child.name, segments[-1])
             root.add_child(child)
             child.add_parent('auth_path_root', edge_up_tbl)
 
