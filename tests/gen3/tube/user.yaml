@@ -2,12 +2,12 @@ cloud_providers: {}
 groups: {}
 #
 # Define information used for role-based access control.
-# The information in the `rbac` section is sent to arborist to populate its
+# The information in the `authz` section is sent to arborist to populate its
 # access control model.
 # see https://github.com/uc-cdis/fence/blob/88327870a5c35b13154a11408548cecb60a4945c/ua.yaml#L25
 #
 
-rbac:
+authz:
     policies:
         - id: 'data_upload'
           description: 'upload raw data files to S3'

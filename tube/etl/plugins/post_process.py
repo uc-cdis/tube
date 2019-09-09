@@ -18,7 +18,10 @@ def _get_resource_path_from_yaml(project):
             print("Can not read {}. Detail {}".format(USERYAML_FILE, e))
             return ""
 
-    if "rbac" in data and project in data["rbac"].get("user_project_to_resource", {}):
+    if "authz" in data and project in data["authz"].get("user_project_to_resource", {}):
+        return data["authz"]["user_project_to_resource"][project]
+    # deprecate "rbac" field in useryaml
+    elif "rbac" in data and project in data["rbac"].get("user_project_to_resource", {}):
         return data["rbac"]["user_project_to_resource"][project]
 
     for _, user in data.get("users", {}).iteritems():
