@@ -1,6 +1,7 @@
+import os
 from cdislogging import get_logger
 from tube.config_helper import *
-import os
+from utils.general import get_resource_paths_from_yaml
 
 
 logger = get_logger(__name__)
@@ -53,6 +54,8 @@ try:
     USERYAML_FILE = find_paths("user.yaml", 'tube')[0]
 except IndexError:
     USERYAML_FILE = None
+PROJECT_TO_RESOURCE_PATH = get_resource_paths_from_yaml(USERYAML_FILE)
+
 SPARK_MASTER = os.getenv('SPARK_MASTER', 'local[1]')  # 'spark-service'
 SPARK_EXECUTOR_MEMORY = os.getenv("SPARK_EXECUTOR_MEMORY", "2g")
 SPARK_DRIVER_MEMORY = os.getenv("SPARK_DRIVER_MEMORY", "512m")
