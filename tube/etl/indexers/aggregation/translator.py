@@ -211,7 +211,7 @@ class Translator(BaseTranslator):
     def translate_joining_props(self, translators):
         """
         Perform the join between the index/document created by this translator with
-        the indices/documents created by translators in the paramter
+        the indices/documents created by translators in the parameter
         :param translators: translators containing indices that need to be joined
         :return:
         """
