@@ -206,6 +206,8 @@ class Translator(BaseTranslator):
         root_df = self.translate_special(root_df)
         root_df = self.translate_parent(root_df)
         root_df = self.get_direct_children(root_df)
+        if len(self.parser.aggregated_nodes) == 0:
+            return root_df
         return root_df.join(self.aggregate_nested_properties()).mapValues(lambda x: merge_dictionary(x[0], x[1]))
 
     def translate_joining_props(self, translators):
