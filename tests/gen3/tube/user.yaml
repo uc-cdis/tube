@@ -68,19 +68,14 @@ users:
     projects:
     - auth_id: jnkns
       privilege: ['create', 'read', 'update', 'delete', 'upload', 'read-storage']
-      resource: /programs/jnkns
     - auth_id: jenkins
       privilege: ['create', 'read', 'update', 'delete', 'upload', 'read-storage']
-      resource: /programs/jnkns/projects/jenkins
     - auth_id: DEV
       privilege: ['create', 'read', 'update', 'delete', 'upload', 'read-storage']
-      resource: /programs/DEV
     - auth_id: test
       privilege: ['create', 'read', 'update', 'delete', 'upload', 'read-storage']
-      resource: /programs/DEV/projects/test
     - auth_id: QA
       privilege: ['create', 'read', 'update', 'delete', 'upload', 'read-storage']
-      resource: /programs/QA
 
   # The integration test suite assumes this user exists - you can
   # delete it if you dont want to run the test suite:
@@ -90,16 +85,11 @@ users:
     projects:
     - auth_id: jnkns
       privilege: ['create', 'read', 'update', 'delete', 'upload', 'read-storage']
-      resource: /programs/jnkns
     - auth_id: jenkins
       privilege: ['create', 'read', 'update', 'delete', 'upload', 'read-storage']
-      resource: /programs/jnkns/projects/jenkins
     - auth_id: DEV
       privilege: ['create', 'read', 'update', 'delete', 'upload', 'read-storage']
-      resource: /programs/DEV
     - auth_id: test
       privilege: ['create', 'read', 'update', 'delete', 'upload', 'read-storage']
-      resource: /programs/DEV/projects/test
     - auth_id: QA
       privilege: ['create', 'read', 'update', 'delete', 'upload', 'read-storage']
-      resource: /programs/QA

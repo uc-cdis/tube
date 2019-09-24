@@ -67,8 +67,12 @@ def get_resource_path_from_json(results, json_data):
             program_name = program.get('name')
             if program_name is None:
                 return
-            projects = program.get('subresources')
-            for project in projects:
-                project_name = project.get('name')
-                results[project_name] = '/programs/{0}/projects/{1}'.\
-                    format(program_name, project_name)
+            program_resources = program.get('subresources')
+            for res in program_resources:
+                if res.get('name') is None or res.get('name') != 'projects':
+                    continue
+                projects = res.get('subresources')
+                for project in projects:
+                    project_name = project.get('name')
+                    results[project_name] = '/programs/{0}/projects/{1}'.\
+                        format(program_name, project_name)
