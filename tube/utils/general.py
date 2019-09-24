@@ -43,8 +43,6 @@ def get_resource_paths_from_yaml(useryaml_file):
     
     # if user_project_to_resource is in user yaml
     json_data = data.get("authz", data.get("rbac"))
-    import pdb
-    pdb.set_trace()
     if json_data:
         get_resource_path_from_json(results, json_data)
     return results
