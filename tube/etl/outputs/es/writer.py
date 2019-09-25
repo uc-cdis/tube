@@ -115,13 +115,16 @@ class Writer(SparkBase):
             'array': ['{}'.format(k) for k, v in types.iteritems() if v[1]]
         }
 
-        self.reset_status()
-        index_to_write = self.versioning.create_new_index(mapping, self.versioning.backup_old_index(index))
-        self.es.index(index_to_write, '_doc', id=etl_index_name, body=doc)
-        self.versioning.putting_new_version_tag(index_to_write, index)
-        self.versioning.putting_new_version_tag(index_to_write, alias)
-        putting_timestamp(self.es, index_to_write)
-        self.reset_status()
+        try:
+            self.reset_status()
+            index_to_write = self.versioning.create_new_index(mapping, self.versioning.backup_old_index(index))
+            self.es.index(index_to_write, '_doc', id=etl_index_name, body=doc)
+            self.versioning.putting_new_version_tag(index_to_write, index)
+            self.versioning.putting_new_version_tag(index_to_write, alias)
+            putting_timestamp(self.es, index_to_write)
+            self.reset_status()
+        except Exception as e:
+            print(e)
 
     def write_df(self, df, index, doc_type, types):
         """

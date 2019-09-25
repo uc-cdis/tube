@@ -45,8 +45,8 @@ class Translator(object):
 
     def write(self, df):
         df = self.restore_prop_name(df, PropFactory.list_props)
-        self.writer.create_guppy_array_config(self.parser.name, self.parser.types)
         self.writer.write_df(df, self.parser.name, self.parser.doc_type, self.parser.types)
+        self.writer.create_guppy_array_config(self.parser.name, self.parser.types)
 
     def get_props_from_data_row(self, df, props, to_tuple=False):
         if df.isEmpty():
