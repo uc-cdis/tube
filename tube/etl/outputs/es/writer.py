@@ -1,13 +1,11 @@
 import json
-import re
 
 from elasticsearch import Elasticsearch
 
+from tube.etl.outputs.es.timestamp import putting_timestamp, get_latest_utc_transaction_time
+from tube.etl.outputs.es.versioning import Versioning
 from tube.etl.plugins import post_process_plugins, add_auth_resource_path_mapping
 from tube.etl.spark_base import SparkBase
-from tube.etl.outputs.es.versioning import Versioning
-from tube.etl.outputs.es.timestamp import putting_timestamp, get_latest_utc_transaction_time, \
-    timestamp_from_transaction_time
 
 
 def json_export(x, doc_type):
