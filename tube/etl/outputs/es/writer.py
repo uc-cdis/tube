@@ -16,25 +16,6 @@ def json_export(x, doc_type):
     return (x[0], json.dumps(x[1]))
 
 
-def get_index_name(index, version):
-    return '{}_{}'.format(index, version)
-
-
-def get_backup_index_name(index, version):
-    return '{}_{}'.format(version, index)
-
-
-def get_backup_alias(index):
-    return '{}_backup'.format(index)
-
-
-def get_backup_version(index_name):
-    res = re.match('^[0-9]+', index_name)
-    if res is not None:
-        return int(res.group()) + 1
-    return 0
-
-
 class Writer(SparkBase):
     def __init__(self, sc, config):
         super(Writer, self).__init__(sc, config)
