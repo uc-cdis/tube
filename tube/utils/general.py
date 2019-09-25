@@ -49,30 +49,7 @@ def get_resource_paths_from_yaml(useryaml_file):
 
 
 def get_resource_path_from_json(results, json_data):
-    for project in json_data.get('user_project_to_resource', {}):
-        results[project] = json_data['user_project_to_resource'][project]
-    resources = json_data.get('resources')
-    if resources is None:
-        return
-    for it in resources:
-        it_name = it.get('name')
-        if it.get('name') is None:
-            return
-        if it_name != 'programs':
-            continue
-        programs = it.get('subresources')
-        if programs is None:
-            return
-        for program in programs:
-            program_name = program.get('name')
-            if program_name is None:
-                return
-            program_resources = program.get('subresources')
-            for res in program_resources:
-                if res.get('name') is None or res.get('name') != 'projects':
-                    continue
-                projects = res.get('subresources')
-                for project in projects:
-                    project_name = project.get('name')
-                    results[project_name] = '/programs/{0}/projects/{1}'.\
-                        format(program_name, project_name)
+    user_project_to_resource = json_data.get('user_project_to_resource', {})
+    for project in user_project_to_resource:
+        results[project] = user_project_to_resource[project]
+    return results

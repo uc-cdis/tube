@@ -1,38 +1,17 @@
 import json
-import re
 
 from elasticsearch import Elasticsearch
 
+from tube.etl.outputs.es.timestamp import putting_timestamp, get_latest_utc_transaction_time
+from tube.etl.outputs.es.versioning import Versioning
 from tube.etl.plugins import post_process_plugins, add_auth_resource_path_mapping
 from tube.etl.spark_base import SparkBase
-from tube.etl.outputs.es.versioning import Versioning
-from tube.etl.outputs.es.timestamp import putting_timestamp, get_latest_utc_transaction_time, \
-    timestamp_from_transaction_time
 
 
 def json_export(x, doc_type):
     x[1]['{}_id'.format(doc_type)] = x[0]
     x[1]['node_id'] = x[0]  # redundant field for backward compatibility with arranger
     return (x[0], json.dumps(x[1]))
-
-
-def get_index_name(index, version):
-    return '{}_{}'.format(index, version)
-
-
-def get_backup_index_name(index, version):
-    return '{}_{}'.format(version, index)
-
-
-def get_backup_alias(index):
-    return '{}_backup'.format(index)
-
-
-def get_backup_version(index_name):
-    res = re.match('^[0-9]+', index_name)
-    if res is not None:
-        return int(res.group()) + 1
-    return 0
 
 
 class Writer(SparkBase):
@@ -115,13 +94,16 @@ class Writer(SparkBase):
             'array': ['{}'.format(k) for k, v in types.iteritems() if v[1]]
         }
 
-        self.reset_status()
-        index_to_write = self.versioning.create_new_index(mapping, self.versioning.backup_old_index(index))
-        self.es.index(index_to_write, '_doc', id=etl_index_name, body=doc)
-        self.versioning.putting_new_version_tag(index_to_write, index)
-        self.versioning.putting_new_version_tag(index_to_write, alias)
-        putting_timestamp(self.es, index_to_write)
-        self.reset_status()
+        try:
+            self.reset_status()
+            index_to_write = self.versioning.create_new_index(mapping, self.versioning.backup_old_index(index))
+            self.es.index(index_to_write, '_doc', id=etl_index_name, body=doc)
+            self.versioning.putting_new_version_tag(index_to_write, index)
+            self.versioning.putting_new_version_tag(index_to_write, alias)
+            putting_timestamp(self.es, index_to_write)
+            self.reset_status()
+        except Exception as e:
+            print(e)
 
     def write_df(self, df, index, doc_type, types):
         """
