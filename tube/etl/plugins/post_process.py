@@ -8,10 +8,10 @@ def add_auth_resource_path(df):
     if 'project_id' in df[1]:
         project_id = df[1]['project_id']
         if project_id is not None:
-            program_name, project_code = project_id.split('-', 1)
-            resource_path = PROJECT_TO_RESOURCE_PATH.get(project_code)
-            if not resource_path:
-                df[1]['auth_resource_path'] = "/programs/{}/projects/{}".format(program_name, project_code)
+            s = project_id.split('-', 1)
+            resource_path = PROJECT_TO_RESOURCE_PATH.get(s[1])
+            if resource_path is None:
+                df[1]['auth_resource_path'] = "/programs/{}/projects/{}".format(s[0], s[1])
             else:
                 df[1]['auth_resource_path'] = resource_path
         else:
