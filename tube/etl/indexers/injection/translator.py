@@ -125,7 +125,9 @@ class Translator(BaseTranslator):
             prop = copy(self.parser.get_prop_by_name(p.name))
             if p.fn is not None:
                 prop.fn = p.fn
-                props.append(prop)
+            else:
+                prop.fn = 'set'
+            props.append(prop)
         return props
 
     def translate_final(self):
