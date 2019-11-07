@@ -12,3 +12,20 @@ In the data transformation stage, a series of rules or functions are applied to 
 
 ### Load
 There are two loading stage, one is loading data from traditional database to the place that can be easily processed by the **transformer**, another one is loading from **transformer** to the target data source.
+
+
+## Data Transformation
+Choosing framework to do data transformation (a.k.a data pipeline) is the most important thing in ETL, because every data pipeline requires a specific format of input and output data.
+In specific to our use-case, [Apache Spark](https://spark.apache.org/) is one of the most advanced data processing technology, because its distributed architecture allows:
+ 1. processing data in parallel simply inside the horizontally scalable memory.
+ 2. iteratively processing data in multiple steps without reloading from data storage (disk). 
+ 3. streaming and integrating incremental data to an existing data source.
+
+Hence, we choose Spark as a data transformer for a fast and scalable data processing. 
+
+As discussed previously, there are multiple ways to extract data from database and load to Spark. One is directly generate and execute in parallel multiple SQL queries and load it to Spark's memory, another one is dumping the whole dataset to intermediate data storage like HDFS and then load text data stored in HDFS into Spark in parallel.  
+
+Learning all the options that one of our collabators OICR tried (posted [here](https://softeng.oicr.on.ca/grant_guo/2017/08/14/spark/) ). We decided to go with similar strategy - dump postgres to HDFS and load HDFS to rdd/SPARK.
+We decided to use [SQOOP](https://github.com/apache/sqoop) to dump the postgres database to HDFS. In order to dump postgresql database, SQOOP calls [CopyManager](https://jdbc.postgresql.org/documentation/publicapi/org/postgresql/copy/CopyManager.html).
+
+Finally, we decided to use python instead of scala because cdis dev teams are much more comfortable with python programming. And since all the computation will be done in spark, we won't do any manipulation on the python level, the performance won't be a huge difference.
