@@ -74,6 +74,9 @@ RUN mkdir -p $ACCUMULO_HOME $HIVE_HOME $HBASE_HOME $HCAT_HOME $ZOOKEEPER_HOME
 
 ENV PATH=${SQOOP_HOME}/bin:${HADOOP_HOME}/sbin:$HADOOP_HOME/bin:${JAVA_HOME}/bin:${PATH}
 
+COPY requirements.txt /tube/
+RUN pip install --no-cache-dir -r /tube/requirements.txt
+
 COPY . /tube
 WORKDIR /tube
 
@@ -82,5 +85,4 @@ WORKDIR /tube
 #RUN chmod +x /tini
 #ENTRYPOINT ["/tini", "--"]
 
-RUN pip install --no-cache-dir -r requirements.txt
 RUN python setup.py develop
