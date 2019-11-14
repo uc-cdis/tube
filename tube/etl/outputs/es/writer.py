@@ -38,7 +38,19 @@ class Writer(SparkBase):
             int: 'integer'
         }
 
-        properties = {k: {'type': es_type[v[0]]} for k, v in field_types.items()}
+        properties = {
+            k: {
+                'type': es_type[v[0]]
+            } if v[0] is not str else {
+                'type': es_type[v[0]],
+                'fields': {
+                    'analyzed': {
+                        'type': 'text'
+                    }
+                }
+            }
+            for k, v in field_types.items()
+        }
 
         # explicitly mapping 'node_id'
         properties['node_id'] = {'type': 'keyword'}
