@@ -7,12 +7,12 @@ from .nodes.joining_node import JoiningNode
 from .nodes.special_node import SpecialNode, SpecialChain
 from .nodes.parent_node import ParentChain, ParentNode
 from ..base.parser import Parser as BaseParser
-from ..base.prop import PropFactory
+from copy import deepcopy
 
 
 class Path(object):
-    def __init__(self, path_name, output_name, prop_name, fn):
-        self.reducers = [(output_name, prop_name, fn)]
+    def __init__(self, path_name, reducer_as_json):
+        self.reducers = [reducer_as_json]
         self.path = Path.create_path(path_name)
 
     @classmethod
@@ -185,10 +185,9 @@ class Parser(BaseParser):
                     else AggregatedNode(child_name, get_node_table_name(self.model, child_name), edge_tbl, level + 1)
                 n_child.parent = n_current
                 if i == len(path.path) - 1:
-                    for (output, prop, fn) in path.reducers:
-                        json_prop = {'name': output, 'src': prop, 'fn': fn}
-                        prop = self.create_prop_from_json(self.doc_type, json_prop, None)
-                        n_child.reducers.append(Reducer(prop, fn))
+                    for reducer in path.reducers:
+                        prop = self.create_prop_from_json(self.doc_type, reducer, None)
+                        n_child.reducers.append(Reducer(prop, reducer['fn']))
 
                 n_current.add_child(n_child)
                 if (child_name, edge_tbl) not in reversed_index:
@@ -225,10 +224,17 @@ class Parser(BaseParser):
         flat_paths = {}
         aggregated_nodes = self.mapping['aggregated_props']
         for n in aggregated_nodes:
-            if n['path'] in flat_paths:
-                flat_paths[n['path']].reducers.append((n['name'], n.get('src'), n['fn']))
+            copied_n = deepcopy(n)
+            if 'src' not in copied_n:
+                copied_n['src'] = None
+            path = copied_n.pop('path', None)
+            if path in flat_paths:
+                flat_paths[path].reducers.append(copied_n)
             else:
-                flat_paths[n['path']] = Path(n['path'], n['name'], n.get('src'), n['fn'])
+                flat_paths[path] = Path(path, copied_n)
+        print flat_paths.values()
+        for p in flat_paths:
+            print str(p)
         return set(flat_paths.values())
 
     def parse_sorting(self, child):
