@@ -21,16 +21,20 @@ class Translator(object):
         self.parser.get_es_types()
 
     def translate_table(self, table_name, get_zero_frame=None, props=None):
-        df = self.sc.wholeTextFiles(os.path.join(self.hdfs_path, table_name)).flatMap(flatten_files_to_lists)
-        df = df.map(extract_metadata)
+        try:
+            df = self.sc.wholeTextFiles(os.path.join(self.hdfs_path, table_name)).flatMap(flatten_files_to_lists)
+            df = df.map(extract_metadata)
 
-        if get_zero_frame:
-            if df.isEmpty():
-                df = self.sc.parallelize([('__BLANK_ID__', '__BLANK_VALUE__')])  # to create the frame for empty node
-            return df.mapValues(lambda x: [])
-        if props is not None:
-            return self.get_props_from_data_row(df, props)
-        return df
+            if get_zero_frame:
+                if df.isEmpty():
+                    df = self.sc.parallelize([('__BLANK_ID__', '__BLANK_VALUE__')])  # to create the frame for empty node
+                return df.mapValues(lambda x: [])
+            if props is not None:
+                return self.get_props_from_data_row(df, props)
+            return df
+        except Exception as ex:
+            print "HAPPEN WITH NODE: {}".format(table_name)
+            print ex
 
     def translate_edge(self, table_name, reversed=True):
         """

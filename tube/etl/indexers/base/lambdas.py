@@ -10,10 +10,13 @@ def extract_metadata(str_value):
     :param str_value:
     :return:
     '''
-    str_value = str_value.replace("'", "###")
-    str_value = str_value.replace('\\""', "##")
+    str_value = str_value.replace("'", "###MAGICx3###")
+    str_value = str_value.replace('\\""', "##MAGICx2##")
     strs = ast.literal_eval(str_value.replace('""', "'"))
-    props = json.loads(strs[3].replace("'", '"').replace("###", "'").replace('##', '"'), strict=False)
+    try:
+      props = json.loads(strs[3].replace("'", '"').replace("###MAGICx3###", "'").replace('##MAGICx2##', '"'), strict=False)
+    except Exception as ex:
+      raise Exception("ERROR IN SPARK: {}".format(str_value))
     return tuple([strs[4], props])
 
 
