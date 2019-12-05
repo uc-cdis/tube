@@ -3,29 +3,33 @@ from .aggregation.translator import Translator as AggregatorTranslator
 from .injection.translator import Translator as CollectorTranslator
 from .base.translator import Translator as BaseTranslator
 from tube.utils.dd import init_dictionary
-from tube.etl.outputs.es.writer import Writer
+from tube.etl.outputs.es.writer import Writer as ESWriter
+from tube.etl.outputs.archive.writer import Writer as ArchiveWriter
 
 
 def create_translators(sc, config):
     dictionary, model = init_dictionary(config.DICTIONARY_URL)
     mappings = yaml.load(open(config.MAPPING_FILE), Loader=yaml.SafeLoader)
-    writer = Writer(sc, config)
+    writer = ESWriter(sc, config)
+    archive_writer = ArchiveWriter(sc, config)
 
     translators = {}
     for m in mappings['mappings']:
         if m['type'] == 'aggregator':
-            translator = AggregatorTranslator(sc, config.HDFS_DIR, writer, m, model, dictionary)
+            translator = AggregatorTranslator(sc, config.HDFS_DIR, writer, archive_writer, m, model, dictionary)
         elif m['type'] == 'collector':
-            translator = CollectorTranslator(sc, config.HDFS_DIR, writer, m, model, dictionary)
+            translator = CollectorTranslator(sc, config.HDFS_DIR, writer, archive_writer, m, model, dictionary)
         else:
             translator = BaseTranslator(sc, config.HDFS_DIR, writer)
         translators[translator.parser.doc_type] = translator
+
+
     for translator in translators.values():
         translator.update_types()
     return translators
 
 
-def run_transform(translators):
+def run_transform(translators, make_archive):
     need_to_join = {}
     translator_to_translators = {}
 
@@ -45,7 +49,7 @@ def run_transform(translators):
 
     for t in translators.values():
         df = t.translate_final()
-        t.write(df)
+        t.write(df, make_archive)
 
 
 def get_index_names(config):

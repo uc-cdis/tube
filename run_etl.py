@@ -25,11 +25,11 @@ def run_import():
         print traceback.format_exc()
 
 
-def run_transform():
+def run_transform(make_archive):
     try:
         sc = make_spark_context(config)
         translators = interpreter.create_translators(sc, config)
-        interpreter.run_transform(translators)
+        interpreter.run_transform(translators, make_archive)
         sc.stop()
     except Exception as ex:
         print 'ERROR when running transformation'
@@ -57,6 +57,9 @@ def config_by_args():
     parser.add_argument('-f', '--force',
                         help='Force ETL run when there is no new data',
                         action="store_true")
+    parser.add_argument('-a', '--archive',
+                        help='Produce zip archive of all tbl TSVs per subject',
+                        action="store_true")
 
     args = parser.parse_args()
     config.RUNNING_MODE = args.config
@@ -75,7 +78,7 @@ def main():
         if args.step == "import" or args.step == "all":
             run_import()
         if args.step == "transform" or args.step == "all":
-            run_transform()
+            run_transform(args.archive)
     else:
         print "Nothing's new"
 

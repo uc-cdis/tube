@@ -9,9 +9,10 @@ class Translator(object):
     """
     The main entry point into the index export process for the mutation indices
     """
-    def __init__(self, sc, hdfs_path, writer):
+    def __init__(self, sc, hdfs_path, writer, archive_writer):
         self.sc = sc
         self.writer = writer
+        self.archive_writer = archive_writer
         self.hdfs_path = hdfs_path
         self.parser = None
         self.current_step = 0
@@ -47,10 +48,12 @@ class Translator(object):
             return df.map(extract_link_reverse)
         return df.map(extract_link)
 
-    def write(self, df):
+    def write(self, df, make_archive):
         df = self.restore_prop_name(df, PropFactory.list_props)
         self.writer.write_df(df, self.parser.name, self.parser.doc_type, self.parser.types)
         self.writer.create_guppy_array_config(self.parser.name, self.parser.types)
+        if make_archive:
+            self.archive_writer.write_archive(df)
 
     def get_props_from_data_row(self, df, props, to_tuple=False):
         if df.isEmpty():

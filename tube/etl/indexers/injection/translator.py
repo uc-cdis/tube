@@ -9,8 +9,8 @@ from tube.etl.indexers.base.prop import PropFactory
 
 
 class Translator(BaseTranslator):
-    def __init__(self, sc, hdfs_path, writer, mapping, model, dictionary):
-        super(Translator, self).__init__(sc, hdfs_path, writer)
+    def __init__(self, sc, hdfs_path, writer, archive_writer, mapping, model, dictionary):
+        super(Translator, self).__init__(sc, hdfs_path, writer, archive_writer)
         self.parser = Parser(mapping, model, dictionary)
         root_props = []
         for root in self.parser.roots:
