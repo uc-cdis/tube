@@ -72,7 +72,6 @@ conf_indexd = load_json('indexd_creds.json', 'tube')
 INDEXD_BASICAUTH_USERNAME = conf_indexd.get('indexd_basicauth_username')
 INDEXD_BASICAUTH_PASSWORD = conf_indexd.get('indexd_basicauth_password')
 INDEXD = 'http://your.indexd.here'
-INDEXD_REC_AUTHZ_FIELD = ["/programs/tube/projects/archive"]
 
 conf_aws = load_json('aws_creds.json', 'tube')
 AWS_ACCESS_KEY_ID = conf_aws.get('aws_access_key_id')

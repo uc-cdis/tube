@@ -39,6 +39,8 @@ def archive_export(x):
         rgn=config.S3_ARCHIVE_BUCKET_REGION_NAME,
         pth=s3_filepath,
     )
+    auth_resource_path = json.loads(x[1])['auth_resource_path']
+    authz = auth_resource_path if type(auth_resource_path)==list else [auth_resource_path]
     data = {
         "urls": [s3url],
         "form": "object",
@@ -47,7 +49,7 @@ def archive_export(x):
         },
         "size": len(x[1]), # In python 3, change to len(x[1].encode("utf8"))
         "file_name": "{}.zip".format(x[0]), # TODO should file_name be the entire file path or just the x.zip?
-        "authz": config.INDEXD_REC_AUTHZ_FIELD if type(config.INDEXD_REC_AUTHZ_FIELD)==list else [config.INDEXD_REC_AUTHZ_FIELD],
+        "authz": authz,
     }
     resp = requests.post(
         '{}/index/'.format(config.INDEXD),
