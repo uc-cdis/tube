@@ -65,3 +65,19 @@ os.environ['PYSPARK_SUBMIT_ARGS'] = \
     '--jars {}/dist/elasticsearch-spark-20_2.11-{}.jar pyspark-shell' \
         .format(ES_HADOOP_HOME_BIN, ES_HADOOP_VERSION)
 os.environ['HADOOP_CLIENT_OPTS'] = os.getenv('HADOOP_CLIENT_OPTS', '')
+
+# Following configuration used for archive step only
+
+conf_indexd = load_json('indexd_creds.json', 'tube')
+INDEXD_BASICAUTH_USERNAME = conf_indexd.get('indexd_basicauth_username')
+INDEXD_BASICAUTH_PASSWORD = conf_indexd.get('indexd_basicauth_password')
+INDEXD = 'http://your.indexd.here'
+INDEXD_REC_AUTHZ_FIELD = ["/programs/tube/projects/archive"]
+
+conf_aws = load_json('aws_creds.json', 'tube')
+AWS_ACCESS_KEY_ID = conf_aws.get('aws_access_key_id')
+AWS_SECRET_ACCESS_KEY = conf_aws.get('aws_secret_access_key')
+S3_ARCHIVE_BUCKET_NAME = conf_aws.get('s3_archive_bucket_name')
+S3_ARCHIVE_BUCKET_REGION_NAME = conf_aws.get('s3_archive_bucket_region_name')
+S3_ARCHIVE_DIR = conf_aws.get('s3_archive_dir', '/archive')
+LOCAL_ARCHIVE_DIR = 'archive'
