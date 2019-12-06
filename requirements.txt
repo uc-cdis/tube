@@ -1,3 +1,4 @@
+boto3==1.10.31
 cryptography>=2.1.2
 hdfs==2.1.0
 oauthlib==2.0.6
