@@ -33,8 +33,8 @@ class Translator(object):
                 return self.get_props_from_data_row(df, props)
             return df
         except Exception as ex:
-            print "HAPPEN WITH NODE: {}".format(table_name)
-            print ex
+            print("HAPPEN WITH NODE: {}".format(table_name))
+            print(ex)
 
     def translate_edge(self, table_name, reversed=True):
         """
