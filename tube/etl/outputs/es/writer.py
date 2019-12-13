@@ -103,7 +103,7 @@ class Writer(SparkBase):
 
         doc = {
             'timestamp': latest_transaction_time,
-            'array': ['{}'.format(k) for k, v in types.iteritems() if v[1]]
+            'array': ['{}'.format(k) for k, v in types.items() if v[1]]
         }
 
         try:
