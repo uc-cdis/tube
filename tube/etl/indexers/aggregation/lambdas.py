@@ -1,6 +1,6 @@
 from tube.etl.indexers.base.lambdas import get_aggregation_func_by_name, get_single_frame_zero_by_func, \
                             get_single_frame_value
-import __builtin__
+import builtins
 
 
 def get_frame_zero(reducers):
@@ -51,5 +51,5 @@ def sliding(rdd, n, fn1, fn2):
 
     return rdd.flatMap(lambda xi: gen_window(xi, n)) \
         .groupByKey().mapValues(lambda vals: [x for (i, x) in sorted(vals)])\
-        .sortByKey().filter(lambda x: len(x[1]) == n).mapValues(lambda x: getattr(__builtin__, fn1)(x))\
-        .map(lambda x: (x[0][0], x[1])).groupByKey().mapValues(lambda vals: getattr(__builtin__, fn2)(vals))
+        .sortByKey().filter(lambda x: len(x[1]) == n).mapValues(lambda x: getattr(builtins, fn1)(x))\
+        .map(lambda x: (x[0][0], x[1])).groupByKey().mapValues(lambda vals: getattr(builtins, fn2)(vals))
