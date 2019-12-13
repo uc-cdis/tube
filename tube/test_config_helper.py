@@ -1,4 +1,4 @@
-import config_helper
+from . import config_helper
 import os
 import time
 

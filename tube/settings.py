@@ -1,7 +1,7 @@
 import os
 from cdislogging import get_logger
 from tube.config_helper import *
-from utils.general import get_resource_paths_from_yaml
+from .utils.general import get_resource_paths_from_yaml
 
 
 logger = get_logger(__name__)
