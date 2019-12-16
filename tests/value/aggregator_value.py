@@ -59,20 +59,20 @@ class AggregatorValue(Value):
 
         for k, v in mapping.items():
             if k == "aggregated_props":
-                filtered = filter(lambda i: name == i["name"], v)
+                filtered = [i for i in v if name == i["name"]]
                 if filtered:
                     return filtered[0], None
 
             if k == "flatten_props":
-                filtered = filter(lambda i: name in [j['name'] for j in i["props"]], v)
-                value_mappings = filter(lambda x: name == x.name, chain(*(x.props for x in p.flatten_props)))
+                filtered = [i for i in v if name in [j['name'] for j in i["props"]]]
+                value_mappings = [x for x in chain(*(x.props for x in p.flatten_props)) if name == x.name]
                 if filtered:
                     filtered[0]["fn"] = "_get"
                     return filtered[0], value_mappings[0]
 
             if k == "props":
-                filtered = filter(lambda i: name == i['name'], v)
-                value_mappings = filter(lambda x: name == x.name, p.props)
+                filtered = [i for i in v if name == i['name']]
+                value_mappings = [x for x in p.props if name == x.name]
                 if filtered:
                     return {"path": "", "fn": "_get"}, value_mappings[0]
         return None
