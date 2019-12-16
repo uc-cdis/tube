@@ -47,7 +47,7 @@ def sliding(rdd, n, fn1, fn2):
     def gen_window(xi, n):
         k, v = xi
         x = tuple(v)
-        return [((k, x[0] - offset), (x[0], x[1])) for offset in xrange(n)]
+        return [((k, x[0] - offset), (x[0], x[1])) for offset in range(n)]
 
     return rdd.flatMap(lambda xi: gen_window(xi, n)) \
         .groupByKey().mapValues(lambda vals: [x for (i, x) in sorted(vals)])\
