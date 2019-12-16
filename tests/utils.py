@@ -24,7 +24,7 @@ def get_test_files():
     test_files.remove("DataImportOrder.txt")
     # filter out dot-files
     test_files = [x for x in test_files if x[0] != "."]
-    test_files = map(lambda x: os.path.splitext(x)[0], test_files)
+    test_files = [os.path.splitext(x)[0] for x in test_files]
 
     return test_files
 

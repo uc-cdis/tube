@@ -28,7 +28,7 @@ def test_items_equal_db(filename, total, entries):
         cur.execute("SELECT _props FROM %s;", (table,))
 
         prop_json = cur.fetchall()
-        prop_json = map(lambda item: item["_props"], prop_json)
+        prop_json = [item["_props"] for item in prop_json]
         prop_json = sorted(prop_json, key=itemgetter("submitter_id"))
 
         for x, y in zip(entries, prop_json):

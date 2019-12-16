@@ -13,7 +13,7 @@ class SqlToHDFS(object):
         conn = psycopg2.connect(self.config.PYDBC)
         cursor = conn.cursor()
         cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'")
-        tables = list(map(lambda i: i[0], cursor.fetchall()))
+        tables = list([i[0] for i in cursor.fetchall()])
         list_to_file(tables, self.config.LIST_TABLES_FILES)
         cursor.close()
         conn.close()
