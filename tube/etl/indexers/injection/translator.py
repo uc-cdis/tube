@@ -79,7 +79,7 @@ class Translator(BaseTranslator):
                         .mapValues(lambda x: merge_and_fill_empty_props(x, props, to_tuple=True))
                 else:
                     tmp_df = tmp_df.map(lambda x: (x[1][1], x[1][0])) \
-                        .mapValues(lambda x: tuple([(k, v) for (k, v) in x.items()]))
+                        .mapValues(lambda x: tuple([(k, v) for (k, v) in list(x.items())]))
                 self.collect_collecting_child(child, tmp_df, collected_collecting_dfs)
         return collected_collecting_dfs, collected_leaf_dfs
 
@@ -109,7 +109,7 @@ class Translator(BaseTranslator):
         collected_collecting_dfs, collected_leaf_dfs = self.merge_roots_to_children()
         self.merge_collectors(collected_collecting_dfs)
         self.get_leaves(collected_collecting_dfs, collected_leaf_dfs)
-        for (k, df) in collected_collecting_dfs.items():
+        for (k, df) in list(collected_collecting_dfs.items()):
             if k != 'final':
                 df.unpersist()
 

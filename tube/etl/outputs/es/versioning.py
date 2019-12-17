@@ -52,7 +52,7 @@ class Versioning(object):
         index_name = None
         backup_version = 0
         if self.es.indices.exists_alias(name=backup_alias):
-            index_name = self.es.indices.get_alias(name=backup_alias).keys()[0]
+            index_name = list(self.es.indices.get_alias(name=backup_alias).keys())[0]
             backup_version = get_backup_version(index_name)
         backup_index = get_backup_index_name(index, backup_version)
         return backup_alias, backup_version, backup_index, index_name
@@ -102,7 +102,7 @@ class Versioning(object):
                 return -1
             return 0
 
-        self.old_indices_to_forget = self.es.indices.get_alias(name=index).keys()
+        self.old_indices_to_forget = list(self.es.indices.get_alias(name=index).keys())
         self.last_index = sorted(self.old_indices_to_forget)[-1]
         res = re.match('.*?([0-9]+)$', self.last_index)
         if res is not None:

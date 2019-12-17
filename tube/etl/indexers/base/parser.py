@@ -25,7 +25,7 @@ class Parser(object):
         During the first iteration the parser doesn't have all types in all the indices.
         Then, an additional update should be perform at the end.
         """
-        props = PropFactory.get_prop_by_doc_name(self.doc_type).values()
+        props = list(PropFactory.get_prop_by_doc_name(self.doc_type).values())
         for p in props:
             if p.type is None:
                 prop = PropFactory.get_prop_by_name(p.src_index, p.src)
@@ -36,7 +36,7 @@ class Parser(object):
     def get_es_types(self):
         self.types = {}
 
-        for p in PropFactory.get_prop_by_doc_name(self.doc_type).values():
+        for p in list(PropFactory.get_prop_by_doc_name(self.doc_type).values()):
             if p.type is not None:
                 is_array_type = p.type[0] == list
                 has_array_agg_fn = p.fn in ['set', 'list']

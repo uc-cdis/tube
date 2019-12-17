@@ -12,7 +12,7 @@ class AggregatorValue(Value):
         self.submitter_id = submitter_id
         self.doc_type = doc_type
         self.names = names
-        self.val = self.values()
+        self.val = list(self.values())
 
     def __getattr__(self, item):
         return self.val[item] if item in self.val else None
@@ -57,7 +57,7 @@ class AggregatorValue(Value):
     def get_path_by_name(self, p, name):
         mapping = p.mapping
 
-        for k, v in mapping.items():
+        for k, v in list(mapping.items()):
             if k == "aggregated_props":
                 filtered = [i for i in v if name == i["name"]]
                 if filtered:

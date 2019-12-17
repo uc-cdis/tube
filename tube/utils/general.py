@@ -33,7 +33,7 @@ def get_resource_paths_from_yaml(useryaml_file):
             return {}
     
     results = {}
-    for _, user in data.get("users", {}).items():
+    for _, user in list(data.get("users", {}).items()):
         projects = user.get("projects", [])
         if not isinstance(projects, list):
             projects = [projects]

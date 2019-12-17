@@ -57,14 +57,14 @@ class Parser(BaseParser):
         # if len(self.mapping['injecting_props'].items()) == 0:
         #     return None
         selected_category = self.mapping.get('category', 'data_file')
-        leaves_name = [k for (k, v) in self.dictionary.schema.items()
+        leaves_name = [k for (k, v) in list(self.dictionary.schema.items())
                        if v.get('category', None) == selected_category]
         if len(leaves_name) > 0:
             return leaves_name[0]
         return None
 
     def get_orphan_paths(self, selected_category, leaves):
-        leaves_name = [k for (k, v) in self.dictionary.schema.items()
+        leaves_name = [k for (k, v) in list(self.dictionary.schema.items())
                        if v.get('category', None) == selected_category]
         orphan_leaves = set([])
         for name in leaves_name:
@@ -83,7 +83,7 @@ class Parser(BaseParser):
         selected_category = self.mapping.get('category', 'data_file')
         flat_paths = set([])
         if 'injecting_props' in self.mapping:
-            for k, v in self.mapping['injecting_props'].items():
+            for k, v in list(self.mapping['injecting_props'].items()):
                 flat_paths |= self.create_collecting_paths_from_root(k, lambda x: selected_category_comparer(
                                                                          self.dictionary, x)
                                                                      )
@@ -168,7 +168,7 @@ class Parser(BaseParser):
                 for fst in segments[0:len(segments)-1]:
                     child = self.add_collecting_node(child, collectors, fst)
             self.add_root_node(child, roots, segments[-1])
-        return collectors.values(), roots.values()
+        return list(collectors.values()), list(roots.values())
 
     def create_auth_path_root(self):
         program_table_name = get_node_table_name(self.model, 'program')
@@ -204,7 +204,7 @@ class Parser(BaseParser):
             root.add_child(child)
             child.add_parent('auth_path_root', edge_up_tbl)
 
-        return collectors.values(), root
+        return list(collectors.values()), root
 
     def initialize_queue(self, label):
         name = self.model.Node.get_subclass(label).__name__

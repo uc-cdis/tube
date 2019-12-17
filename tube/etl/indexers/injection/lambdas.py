@@ -40,7 +40,7 @@ def merge_aggregate_with_prop(x, y):
 def remove_props_from_tuple(x, props):
     for p in props:
         x.pop(p.id, None)
-    return tuple([(k, v) for (k, v) in x.items()])
+    return tuple([(k, v) for (k, v) in list(x.items())])
 
 
 def get_props_to_tuple(x, props):

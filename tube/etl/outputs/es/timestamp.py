@@ -40,7 +40,7 @@ def get_latest_time_indices_built(es, index_names):
     timestamp = None
     count = 0
     for index_name in index_names:
-        versioned_index = es.indices.get_alias(name=index_name).keys()[0]
+        versioned_index = list(es.indices.get_alias(name=index_name).keys())[0]
         if not es.indices.exists_alias(index=versioned_index, name="time_*"):
             return None
         new_timestamp = get_timestamp_from_index(es, versioned_index)
@@ -72,7 +72,7 @@ def timestamp_from_transaction_time(dt):
 
 def get_timestamp_from_index(es, versioned_index):
     res = es.indices.get_alias(index=versioned_index, name="time_*")
-    iso_str = res[versioned_index]['aliases'].keys()[0].replace('plus', '+')[5:]
+    iso_str = list(res[versioned_index]['aliases'].keys())[0].replace('plus', '+')[5:]
     return datetime.strptime(iso_str, "%Y-%m-%dT%H:%M:%S.%f")
 
 

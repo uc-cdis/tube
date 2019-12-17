@@ -40,7 +40,7 @@ def merge_dictionary(d1, d2, to_tuple=False):
     d0 = d1.copy()
     if d2 is not None and len(d2) > 0:
         d0.update(d2)
-    return d0 if not to_tuple else tuple([(k, v) for (k, v) in d0.items()])
+    return d0 if not to_tuple else tuple([(k, v) for (k, v) in list(d0.items())])
 
 
 def swap_key_value(df):
@@ -50,7 +50,7 @@ def swap_key_value(df):
 def get_props(names, values):
     return lambda x: {
         names[src]: values[src][v] if isinstance(v, collections.Hashable) and src in values and v in values[src] else v
-        for (src, v) in x.items() if src in names.keys()
+        for (src, v) in list(x.items()) if src in list(names.keys())
     }
 
 
@@ -88,7 +88,7 @@ def merge_and_fill_empty_props(item, props, to_tuple=False):
     if item[1] is None and item[0] is None:
         return {} if not to_tuple else tuple([])
     if item[0] is None:
-        return item[1] if not to_tuple else tuple([(k, v) for (k, v) in item[1].items()])
+        return item[1] if not to_tuple else tuple([(k, v) for (k, v) in list(item[1].items())])
     if item[1] is None:
         return merge_dictionary(item[0], get_props_empty_values(props), to_tuple)
     return merge_dictionary(item[0], item[1], to_tuple)

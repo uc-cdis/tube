@@ -49,7 +49,7 @@ class Writer(SparkBase):
                     }
                 }
             }
-            for k, v in field_types.items()
+            for k, v in list(field_types.items())
         }
 
         # explicitly mapping 'node_id'
@@ -103,7 +103,7 @@ class Writer(SparkBase):
 
         doc = {
             'timestamp': latest_transaction_time,
-            'array': ['{}'.format(k) for k, v in types.items() if v[1]]
+            'array': ['{}'.format(k) for k, v in list(types.items()) if v[1]]
         }
 
         try:

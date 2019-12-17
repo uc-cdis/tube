@@ -237,7 +237,7 @@ class Parser(BaseParser):
                 flat_paths[path].reducers.append(copied_n)
             else:
                 flat_paths[path] = Path(path, copied_n)
-        print(flat_paths.values())
+        print(list(flat_paths.values()))
         for p in flat_paths:
             print(str(p))
         return set(flat_paths.values())

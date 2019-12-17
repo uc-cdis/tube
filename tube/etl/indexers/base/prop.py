@@ -14,7 +14,7 @@ class PropFactory(object):
         res = []
         if type(value_mappings_in_json) is list:
             for item in value_mappings_in_json:
-                k = item.keys()[0]
+                k = list(item.keys())[0]
                 res.append(ValueMapping(k, item[k]))
         elif type(value_mappings_in_json) is dict:
             for k, v in value_mappings_in_json:
