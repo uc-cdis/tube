@@ -12,7 +12,7 @@ class AggregatorValue(Value):
         self.submitter_id = submitter_id
         self.doc_type = doc_type
         self.names = names
-        self.val = list(self.values())
+        self.val = self.values()
 
     def __getattr__(self, item):
         return self.val[item] if item in self.val else None
