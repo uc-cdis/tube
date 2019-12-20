@@ -3,7 +3,7 @@ import os
 import time
 
 # WORKSPACE == Jenkins workspace
-TEST_ROOT=os.getenv('WORKSPACE',os.getenv('XDG_RUNTIME_DIR', '/tmp')) + '/test_config_helper/' + str(int(time.time()))
+TEST_ROOT=os.getenv('WORKSPACE', os.getenv('XDG_RUNTIME_DIR', '/tmp')) + '/test_config_helper/' + str(int(time.time()))
 APP_NAME='test_config_helper'
 TEST_JSON = '''
 {
@@ -37,5 +37,5 @@ def test_find_paths():
 def test_load_json():
     setup()
     data = config_helper.load_json(TEST_FILENAME, APP_NAME)
-    for key in ['a','b','c']:
+    for key in ['a', 'b', 'c']:
         assert data[key] == key.upper()
