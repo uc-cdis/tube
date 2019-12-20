@@ -123,10 +123,22 @@ class Parser(BaseParser):
             new_assigned = set([])
             for collector in just_assigned:
                 for child in collector.children:
-                    if len(child.children) == 0 or child in assigned_levels:
+                    # TODO: PXP-5067 investigate int-string comparison in node lvls
+                    # (Why were we assigning edge tbl names to leaf node lvls?)
+
+                    # For now, commenting this out...
+                    #if len(child.children) == 0 or child in assigned_levels:
+                    #    continue
+                    #child.level = level
+                    #new_assigned.add(child)
+
+                    # ...and proposing this fix:
+                    if child in assigned_levels:
                         continue
                     child.level = level
-                    new_assigned.add(child)
+                    if len(child.children) != 0:
+                        new_assigned.add(child)
+
             just_assigned = new_assigned
             assigned_levels = assigned_levels.union(new_assigned)
             level += 1
