@@ -26,7 +26,7 @@ def value_diff(left, right):
         left_val = left.__getattr__(name)
         right_val = right.__getattr__(name)
 
-        if isinstance(right_val, list):
+        if isinstance(left_val, list) and isinstance(right_val, list):
             items_not_equal = sorted(left_val) != sorted(right_val)
         else:
             items_not_equal = left_val != right_val
