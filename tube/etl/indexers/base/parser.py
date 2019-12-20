@@ -48,8 +48,6 @@ class Parser(object):
             return str
         elif float in types:
             return float
-        elif long in types:
-            return long
         elif int in types:
             return int
         else:

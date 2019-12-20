@@ -34,7 +34,6 @@ class Writer(SparkBase):
         es_type = {
             str: 'keyword',
             float: 'float',
-            long: 'long',
             int: 'integer'
         }
 
