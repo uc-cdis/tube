@@ -19,7 +19,7 @@ class Translator(BaseTranslator):
 
     def collect_leaf(self, child, edge_df, collected_leaf_dfs, root_props=None):
         root_props = self.root_props if root_props is None else root_props
-        if type(child) is LeafNode:
+        if isinstance(child, LeafNode):
             child_df = self.translate_table(child.tbl_name, props=self.parser.props)
             if child_df.isEmpty():
                 return

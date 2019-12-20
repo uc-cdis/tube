@@ -12,11 +12,11 @@ class PropFactory(object):
     @staticmethod
     def create_value_mappings(value_mappings_in_json):
         res = []
-        if type(value_mappings_in_json) is list:
+        if isinstance(value_mappings_in_json, list):
             for item in value_mappings_in_json:
                 k = list(item.keys())[0]
                 res.append(ValueMapping(k, item[k]))
-        elif type(value_mappings_in_json) is dict:
+        elif isinstance(value_mappings_in_json, dict):
             for k, v in value_mappings_in_json:
                 res.append(ValueMapping(k, v))
         return res

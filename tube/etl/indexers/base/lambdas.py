@@ -156,7 +156,7 @@ def get_single_frame_value(func_name, value):
     if func_name in ['set', 'list']:
         if value is None:
             return []
-        return [value] if type(value) is not list else value
+        return [value] if not isinstance(value, list) else value
     if func_name == 'count':
         return 1 if value is None else value
     if func_name == 'sum':

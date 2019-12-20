@@ -8,7 +8,7 @@ def add_auth_resource_path(df):
     if 'project_id' in df[1]:
         project_id = df[1]['project_id']
         if project_id is not None:
-            if type(project_id) == list:
+            if isinstance(project_id, list):
                 df[1]['auth_resource_path'] = [create_single_auth_resource_path(p) for p in project_id]
             else:
                 df[1]['auth_resource_path'] = create_single_auth_resource_path(project_id)
