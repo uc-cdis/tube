@@ -1,5 +1,5 @@
 # To check running container: docker exec -it tube /bin/bash
-FROM python:3.8-buster
+FROM python:3.7-buster
 
 ENV DEBIAN_FRONTEND=noninteractive \
     SQOOP_VERSION="1.4.7" \
