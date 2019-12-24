@@ -66,10 +66,10 @@ class SqlToHDFS(object):
                 output, self.config.PARALLEL_JOBS
             )
 
-        line = sp.stdout.readline()
+        line = sp.stdout.readline().decode()
         while line != '':
             yield self.formatter.format_line(line)
-            line = sp.stdout.readline()
+            line = sp.stdout.readline().decode()
 
     def generate_import_all_tables_gradually(self):
         config = get_sql_to_hdfs_config(self.config.__dict__)
