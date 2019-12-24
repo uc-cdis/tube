@@ -1,5 +1,5 @@
 # To check running container: docker exec -it tube /bin/bash
-FROM python:3.7-buster
+FROM python:3.7-stretch
 
 ENV DEBIAN_FRONTEND=noninteractive \
     SQOOP_VERSION="1.4.7" \
@@ -12,14 +12,14 @@ ENV SQOOP_INSTALLATION_URL="http://archive.apache.org/dist/sqoop/${SQOOP_VERSION
     SQOOP_HOME="/sqoop" \
     HADOOP_HOME="/hadoop" \
     ES_HADOOP_HOME="/es-hadoop" \
-    JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/"
+    JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/"
 
 RUN mkdir -p /usr/share/man/man1
 RUN mkdir -p /usr/share/man/man7
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
-    openjdk-11-jdk-headless \
+    openjdk-8-jdk-headless \
     # dependency for pyscopg2 - which is dependency for sqlalchemy postgres engine
     libpq-dev \
     postgresql-client \
