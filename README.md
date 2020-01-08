@@ -18,7 +18,7 @@ Refer to [Overview](docs/OVERVIEW.md) for more informaiton about general ETL pro
 We need a way to specify how we want to materialize data from `source-of-truth` database to an indexing data source.
 
 Given a schema with multiple one-to-many or many-to-many relationships as in the figures, literally, there are several ways of joining data from different table together.
-1. Storing complete complete table inside another table so that we can freely do whatever we want later.
+1. Storing complete children (relationally) tables inside the parent (relationally) table so that we can freely do whatever we want later.
 2. Pre-computing all necessary fields of an index
 3. Add extra/redundant key from parent node to children nodes to reduce the times of joining nodes.
 
