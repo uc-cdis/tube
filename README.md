@@ -4,8 +4,6 @@
 
 Providing a quick response for every data query is challenging, since we need to balance the drawback of the data storage space and the performance of the query. Given a database schema represented in the figure, query the whole data from all data tables requires multiple joins to connect data to each other.
 
-<img atl="drawing" src="docs/dictionary.png" width="150">
-
 ![Data schema](docs/dictionary.png "Schema")
 
 SQL databases provide us an optimal and standard way to store data. However, we must pay the cost to process or retrieve data for that optimization on the saving space. Given a database with schema as in the figure above, in order to gather all information related to `Subject` in descendant table, we need perform sixteen joins (one per link). With big data, it is an expensive task.
@@ -24,7 +22,7 @@ Given a schema with multiple one-to-many or many-to-many relationships as in the
 2. Pre-computing all necessary fields of an index
 3. Add extra/redundant key from parent node to children nodes to reduce the times of joining nodes.
 
-We choose the later two approach to implement in `Tube`. They are implemented as two mapping syntax.
+We choose the later two approaches to implement in `Tube`. They are implemented as two mapping syntax.
  1. `aggregation` allows to pre-compute and integrate data from multiple nodes in original dataset to an individual one in the target dataset.
  2. `injection` allows to embed some fields in high level node to lower level nodes to reduce the time doing joining.
 
