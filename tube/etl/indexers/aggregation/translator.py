@@ -244,12 +244,6 @@ class Translator(BaseTranslator):
                 tbl = n.tbl
                 n_df = self.translate_table(tbl, props=cur_props)
 
-                n_prop = self.parser.get_prop_by_name('{}_id'.format(n.name))
-                if n_prop is not None:
-                    n_id = n_prop.id
-                    n_df = n_df.map(lambda x: (x[0], ({n_id: x[0]},) + (x[1],))) \
-                        .mapValues(lambda x: merge_dictionary(x[0], x[1]))
-
                 df = n_df.join(df) \
                     .mapValues(lambda x: merge_and_fill_empty_props(x, cur_props))
                 n = n.child

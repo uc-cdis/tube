@@ -59,11 +59,16 @@ class Parser(BaseParser):
         first = None
         prev = None
         prev_label = self.root
-        for (n, p) in nodes:
+        for nd in nodes:
+            n = nd[0]
+            p = nd[1] if len(nd) > 1 else None
             parent_name, edge_tbl = get_edge_table(self.model, prev_label, n)
             parent_tbl = get_node_table_name(self.model, parent_name)
-            json_props = [{'name': p[0], 'src': p[1]} for p in self.get_src_name(p.split(','))]
-            props = self.create_props_from_json(self.doc_type, json_props, node_label=parent_name)
+            if p is not None:
+                json_props = [{'name': p[0], 'src': p[1]} for p in self.get_src_name(p.split(','))]
+                props = self.create_props_from_json(self.doc_type, json_props, node_label=parent_name)
+            else:
+                props = []
             cur = ParentNode(parent_name, parent_tbl, edge_tbl, props)
             if prev is not None:
                 prev.child = cur
