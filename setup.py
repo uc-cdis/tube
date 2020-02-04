@@ -5,9 +5,9 @@ setup(
     version='0.0.1',
     install_requires=[
         "cryptography>=2.1.2",
-        "dictionaryutils~=3.0.0",
+        "dictionaryutils~=3.0.2",
         "hdfs==2.1.0",
-        "gen3datamodel~=3.0.0",
+        "gen3datamodel~=3.0.2",
         "psqlgraph~=3.0.0",
         "psycopg2~=2.8.4",
         "pyspark~=2.4.4",

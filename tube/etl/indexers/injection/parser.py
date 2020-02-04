@@ -84,9 +84,9 @@ class Parser(BaseParser):
         flat_paths = set([])
         if 'injecting_props' in self.mapping:
             for k, v in list(self.mapping['injecting_props'].items()):
-                flat_paths |= self.create_collecting_paths_from_root(k, lambda x: selected_category_comparer(
-                                                                         self.dictionary, x)
-                                                                     )
+                flat_paths |= self.create_collecting_paths_from_root(
+                    k, lambda x: selected_category_comparer(self.dictionary, x)
+                )
         leaves = [p.src for p in flat_paths]
 
         if 'injecting_props' in self.mapping:
@@ -110,9 +110,11 @@ class Parser(BaseParser):
         just_assigned = set([])
         for root in self.roots:
             for child in root.children:
-                if len(child.children) == 0 or child in just_assigned:
+                if child in just_assigned:
                     continue
                 child.level = level
+                if len(child.children) == 0:
+                    continue
                 just_assigned.add(child)
         assigned_levels = assigned_levels.union(just_assigned)
 
@@ -123,22 +125,12 @@ class Parser(BaseParser):
             new_assigned = set([])
             for collector in just_assigned:
                 for child in collector.children:
-                    # TODO: PXP-5067 investigate int-string comparison in node lvls
-                    # (Why were we assigning edge tbl names to leaf node lvls?)
-
-                    # For now, commenting this out...
-                    #if len(child.children) == 0 or child in assigned_levels:
-                    #    continue
-                    #child.level = level
-                    #new_assigned.add(child)
-
-                    # ...and proposing this fix:
                     if child in assigned_levels:
                         continue
                     child.level = level
-                    if len(child.children) != 0:
-                        new_assigned.add(child)
-
+                    if len(child.children) == 0:
+                        continue
+                    new_assigned.add(child)
             just_assigned = new_assigned
             assigned_levels = assigned_levels.union(new_assigned)
             level += 1
@@ -174,7 +166,7 @@ class Parser(BaseParser):
             segments = list(p.path)
             _, edge_up_tbl = get_edge_table(self.model, p.src, segments[0])
             if p.src not in collectors:
-                collectors[p.src] = CollectingNode(p.src, edge_up_tbl)
+                collectors[p.src] = CollectingNode(p.src)
             child = collectors[p.src]
             if len(segments) > 1:
                 for fst in segments[0:len(segments)-1]:
@@ -195,7 +187,6 @@ class Parser(BaseParser):
                                                             [{'name': 'project_code', 'src': 'code'}],
                                                             node_label='project'), edge_up_tbl)
         root_program.root_child = root_project
-
         return root_program
 
     def construct_auth_path_tree(self, flat_paths):
@@ -205,7 +196,7 @@ class Parser(BaseParser):
             segments = list(p.path)
             _, edge_up_tbl = get_edge_table(self.model, p.src, segments[0])
             if p.src not in collectors:
-                collectors[p.src] = CollectingNode(p.src, edge_up_tbl)
+                collectors[p.src] = CollectingNode(p.src)
             child = collectors[p.src]
             if len(segments) > 1:
                 for node in segments[0:len(segments)-2]:
@@ -215,7 +206,6 @@ class Parser(BaseParser):
                 _, edge_up_tbl = get_edge_table(self.model, child.name, segments[-1])
             root.add_child(child)
             child.add_parent('auth_path_root', edge_up_tbl)
-
         return list(collectors.values()), root
 
     def initialize_queue(self, label):
