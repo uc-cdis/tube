@@ -33,8 +33,8 @@ class Translator(object):
                 return self.get_props_from_data_row(df, props)
             return df
         except Exception as ex:
-            print "HAPPEN WITH NODE: {}".format(table_name)
-            print ex
+            print("HAPPEN WITH NODE: {}".format(table_name))
+            print(ex)
 
     def translate_edge(self, table_name, reversed=True):
         """
@@ -66,7 +66,7 @@ class Translator(object):
         return df.mapValues(lambda x: {dst: x.get(src) for (src, dst) in prop_ids})
 
     def restore_prop_name(self, df, props):
-        return df.mapValues(lambda x: {props[k].name if type(get_number(k)) is int else k: v for (k, v) in x.items()})
+        return df.mapValues(lambda x: {props[k].name if isinstance(get_number(k), int) else k: v for (k, v) in list(x.items())})
 
     def get_path_from_step(self, step):
         return os.path.join(self.hdfs_path, 'output', '{}_{}'.format(self.parser.doc_type, str(step)))

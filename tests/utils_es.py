@@ -20,7 +20,7 @@ def get_names(p):
     mapping = p.mapping
     names = []
 
-    for k, v in mapping.items():
+    for k, v in list(mapping.items()):
         if k == "aggregated_props":
             names.extend([{'name': i["name"]} for i in v])
 

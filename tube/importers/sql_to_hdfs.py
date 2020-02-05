@@ -13,7 +13,7 @@ class SqlToHDFS(object):
         conn = psycopg2.connect(self.config.PYDBC)
         cursor = conn.cursor()
         cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'")
-        tables = list(map(lambda i: i[0], cursor.fetchall()))
+        tables = list([i[0] for i in cursor.fetchall()])
         list_to_file(tables, self.config.LIST_TABLES_FILES)
         cursor.close()
         conn.close()
@@ -66,10 +66,10 @@ class SqlToHDFS(object):
                 output, self.config.PARALLEL_JOBS
             )
 
-        line = sp.stdout.readline()
+        line = sp.stdout.readline().decode()
         while line != '':
             yield self.formatter.format_line(line)
-            line = sp.stdout.readline()
+            line = sp.stdout.readline().decode()
 
     def generate_import_all_tables_gradually(self):
         config = get_sql_to_hdfs_config(self.config.__dict__)

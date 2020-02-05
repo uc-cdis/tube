@@ -23,8 +23,8 @@ def get_test_files():
     # remove two "metadata" files
     test_files.remove("DataImportOrder.txt")
     # filter out dot-files
-    test_files = filter(lambda x: x[0] != ".", test_files)
-    test_files = map(lambda x: os.path.splitext(x)[0], test_files)
+    test_files = [x for x in test_files if x[0] != "."]
+    test_files = [os.path.splitext(x)[0] for x in test_files]
 
     return test_files
 
@@ -36,4 +36,4 @@ def pairwise(iterable):
     """s -> (s0,s1), (s1,s2), (s2, s3), ..."""
     a, b = itertools.tee(iterable)
     next(b, None)
-    return itertools.izip(a, b)
+    return list(zip(a, b))

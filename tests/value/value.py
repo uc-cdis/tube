@@ -26,12 +26,13 @@ def value_diff(left, right):
         left_val = left.__getattr__(name)
         right_val = right.__getattr__(name)
 
-        if isinstance(right_val, list):
-            items_equal = sorted(left_val) != sorted(right_val)
+        if isinstance(right_val, list) and left_val is not None:
+            # This should check that left_val is an AttrList, probably
+            items_not_equal = sorted(left_val) != sorted(right_val)
         else:
-            items_equal = left_val != right_val
+            items_not_equal = left_val != right_val
 
-        if items_equal and left_val is not None and right_val is not None:
+        if items_not_equal and left_val is not None and right_val is not None:
             equal = False
             diff = "{attr}: {left_val} != {right_val}".format(attr=name,
                                                               left_val=left_val,

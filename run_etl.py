@@ -21,8 +21,8 @@ def run_import():
         for line in stream:
             print(line.rstrip())
     except Exception as ex:
-        print 'ERROR when running import to hadoop'
-        print traceback.format_exc()
+        print('ERROR when running import to hadoop')
+        print(traceback.format_exc())
 
 
 def run_transform():
@@ -32,8 +32,8 @@ def run_transform():
         interpreter.run_transform(translators)
         sc.stop()
     except Exception as ex:
-        print 'ERROR when running transformation'
-        print traceback.format_exc()
+        print('ERROR when running transformation')
+        print(traceback.format_exc())
 
 
 def config_by_args():
@@ -77,7 +77,7 @@ def main():
         if args.step == "transform" or args.step == "all":
             run_transform()
     else:
-        print "Nothing's new"
+        print("Nothing's new")
 
 
 if __name__ == '__main__':

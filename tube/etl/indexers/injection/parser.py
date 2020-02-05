@@ -57,14 +57,14 @@ class Parser(BaseParser):
         # if len(self.mapping['injecting_props'].items()) == 0:
         #     return None
         selected_category = self.mapping.get('category', 'data_file')
-        leaves_name = [k for (k, v) in self.dictionary.schema.items()
+        leaves_name = [k for (k, v) in list(self.dictionary.schema.items())
                        if v.get('category', None) == selected_category]
         if len(leaves_name) > 0:
             return leaves_name[0]
         return None
 
     def get_orphan_paths(self, selected_category, leaves):
-        leaves_name = [k for (k, v) in self.dictionary.schema.items()
+        leaves_name = [k for (k, v) in list(self.dictionary.schema.items())
                        if v.get('category', None) == selected_category]
         orphan_leaves = set([])
         for name in leaves_name:
@@ -83,10 +83,10 @@ class Parser(BaseParser):
         selected_category = self.mapping.get('category', 'data_file')
         flat_paths = set([])
         if 'injecting_props' in self.mapping:
-            for k, v in self.mapping['injecting_props'].items():
-                flat_paths |= self.create_collecting_paths_from_root(k, lambda x: selected_category_comparer(
-                                                                         self.dictionary, x)
-                                                                     )
+            for k, v in list(self.mapping['injecting_props'].items()):
+                flat_paths |= self.create_collecting_paths_from_root(
+                    k, lambda x: selected_category_comparer(self.dictionary, x)
+                )
         leaves = [p.src for p in flat_paths]
 
         if 'injecting_props' in self.mapping:
@@ -110,9 +110,11 @@ class Parser(BaseParser):
         just_assigned = set([])
         for root in self.roots:
             for child in root.children:
-                if len(child.children) == 0 or child in just_assigned:
+                if child in just_assigned:
                     continue
                 child.level = level
+                if len(child.children) == 0:
+                    continue
                 just_assigned.add(child)
         assigned_levels = assigned_levels.union(just_assigned)
 
@@ -123,9 +125,11 @@ class Parser(BaseParser):
             new_assigned = set([])
             for collector in just_assigned:
                 for child in collector.children:
-                    if len(child.children) == 0 or child in assigned_levels:
+                    if child in assigned_levels:
                         continue
                     child.level = level
+                    if len(child.children) == 0:
+                        continue
                     new_assigned.add(child)
             just_assigned = new_assigned
             assigned_levels = assigned_levels.union(new_assigned)
@@ -162,13 +166,13 @@ class Parser(BaseParser):
             segments = list(p.path)
             _, edge_up_tbl = get_edge_table(self.model, p.src, segments[0])
             if p.src not in collectors:
-                collectors[p.src] = CollectingNode(p.src, edge_up_tbl)
+                collectors[p.src] = CollectingNode(p.src)
             child = collectors[p.src]
             if len(segments) > 1:
                 for fst in segments[0:len(segments)-1]:
                     child = self.add_collecting_node(child, collectors, fst)
             self.add_root_node(child, roots, segments[-1])
-        return collectors.values(), roots.values()
+        return list(collectors.values()), list(roots.values())
 
     def create_auth_path_root(self):
         program_table_name = get_node_table_name(self.model, 'program')
@@ -183,7 +187,6 @@ class Parser(BaseParser):
                                                             [{'name': 'project_code', 'src': 'code'}],
                                                             node_label='project'), edge_up_tbl)
         root_program.root_child = root_project
-
         return root_program
 
     def construct_auth_path_tree(self, flat_paths):
@@ -193,7 +196,7 @@ class Parser(BaseParser):
             segments = list(p.path)
             _, edge_up_tbl = get_edge_table(self.model, p.src, segments[0])
             if p.src not in collectors:
-                collectors[p.src] = CollectingNode(p.src, edge_up_tbl)
+                collectors[p.src] = CollectingNode(p.src)
             child = collectors[p.src]
             if len(segments) > 1:
                 for node in segments[0:len(segments)-2]:
@@ -203,8 +206,7 @@ class Parser(BaseParser):
                 _, edge_up_tbl = get_edge_table(self.model, child.name, segments[-1])
             root.add_child(child)
             child.add_parent('auth_path_root', edge_up_tbl)
-
-        return collectors.values(), root
+        return list(collectors.values()), root
 
     def initialize_queue(self, label):
         name = self.model.Node.get_subclass(label).__name__

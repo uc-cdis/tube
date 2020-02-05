@@ -20,7 +20,7 @@ def create_translators(sc, config):
         else:
             translator = BaseTranslator(sc, config.HDFS_DIR, writer)
         translators[translator.parser.doc_type] = translator
-    for translator in translators.values():
+    for translator in list(translators.values()):
         translator.update_types()
     return translators
 
@@ -29,7 +29,7 @@ def run_transform(translators):
     need_to_join = {}
     translator_to_translators = {}
 
-    for translator in translators.values():
+    for translator in list(translators.values()):
         df = translator.translate()
         translator.save_to_hadoop(df)
         translator.current_step = 1
@@ -38,12 +38,12 @@ def run_transform(translators):
             translator_to_translators[translator.parser.doc_type] = \
                 [j.joining_index for j in translator.parser.joining_nodes]
 
-    for v in need_to_join.values():
+    for v in list(need_to_join.values()):
         df = v.translate_joining_props(translators)
         v.save_to_hadoop(df)
         v.current_step += 1
 
-    for t in translators.values():
+    for t in list(translators.values()):
         df = t.translate_final()
         t.write(df)
 

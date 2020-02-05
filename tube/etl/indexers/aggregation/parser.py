@@ -55,7 +55,7 @@ class Parser(BaseParser):
 
     def json_to_parent_node(self, path):
         words = path.split('.')
-        nodes = [tuple(filter(None, re.split('[\[\]]', w))) for w in words]
+        nodes = [tuple([_f for _f in re.split('[\[\]]', w) if _f]) for w in words]
         first = None
         prev = None
         prev_label = self.root
@@ -113,7 +113,7 @@ class Parser(BaseParser):
         :return:
         """
         words = path.split('.')
-        nodes = [tuple(filter(None, re.split('[\[\]]', w))) for w in words]
+        nodes = [tuple([_f for _f in re.split('[\[\]]', w) if _f]) for w in words]
         first = None
         prev = None
         prev_label = self.root
@@ -237,9 +237,9 @@ class Parser(BaseParser):
                 flat_paths[path].reducers.append(copied_n)
             else:
                 flat_paths[path] = Path(path, copied_n)
-        print flat_paths.values()
+        print(list(flat_paths.values()))
         for p in flat_paths:
-            print str(p)
+            print(str(p))
         return set(flat_paths.values())
 
     def parse_sorting(self, child):
