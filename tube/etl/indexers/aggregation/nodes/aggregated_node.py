@@ -1,6 +1,5 @@
 from tube.utils.dd import object_to_string
 from tube.etl.indexers.base.node import BaseNode
-from tube.etl.indexers.base.prop import PropFactory
 
 
 class AggregatedNode(BaseNode):
