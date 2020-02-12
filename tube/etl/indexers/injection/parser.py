@@ -121,7 +121,7 @@ class Parser(BaseParser):
         level += 1
         leaves = [c for c in self.collectors if len(c.children) == 0]
         len_non_leaves = len(self.collectors) - len(leaves)
-        while len(assigned_levels) != len_non_leaves:
+        while len(assigned_levels) <= len_non_leaves and len(just_assigned) > 0:
             new_assigned = set([])
             for collector in just_assigned:
                 for child in collector.children:
