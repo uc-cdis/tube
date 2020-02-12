@@ -65,21 +65,13 @@ class Translator(BaseTranslator):
         collected_leaf_dfs = {}
         collected_collecting_dfs = {}
         for root in self.parser.roots:
-            if root.root_child is None:
-                df = self.translate_table(root.tbl_name, props=root.props)
-                root_id = self.parser.get_prop_by_name('{}_id'.format(root.name)).id
-            else:
-                df = self.merge_auth_root(root)
-            props = root.props
+            df = self.translate_table(root.tbl_name, props=root.props) \
+                if root.root_child is None else self.merge_auth_root(root)
             for child in root.children:
                 edge_tbl = child.parents[root.name]
                 tmp_df = df.join(self.translate_edge(edge_tbl))
-                if root.root_child is None:
-                    tmp_df = tmp_df.map(lambda x: (x[1][1], ({root_id: x[0]},) + (x[1][0],)))\
-                        .mapValues(lambda x: merge_and_fill_empty_props(x, props, to_tuple=True))
-                else:
-                    tmp_df = tmp_df.map(lambda x: (x[1][1], x[1][0])) \
-                        .mapValues(lambda x: tuple([(k, v) for (k, v) in list(x.items())]))
+                tmp_df = tmp_df.map(lambda x: (x[1][1], x[1][0])) \
+                    .mapValues(lambda x: tuple([(k, v) for (k, v) in x.items()]))
                 self.collect_collecting_child(child, tmp_df, collected_collecting_dfs)
         return collected_collecting_dfs, collected_leaf_dfs
 
