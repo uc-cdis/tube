@@ -48,6 +48,7 @@ class Translator(object):
         return df.map(extract_link)
 
     def write(self, df):
+        self.update_types()
         df = self.restore_prop_name(df, PropFactory.list_props)
         self.writer.write_df(df, self.parser.name, self.parser.doc_type, self.parser.types)
         self.writer.create_guppy_array_config(self.parser.name, self.parser.types)

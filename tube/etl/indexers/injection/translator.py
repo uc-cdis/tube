@@ -57,7 +57,7 @@ class Translator(BaseTranslator):
             child = child.root_child
         project_id_prop = self.parser.get_prop_by_name('project_id')
         if project_id_prop is None:
-            project_id_prop = PropFactory.adding_prop(self.parser.doc_type, 'project_id', None, [])
+            project_id_prop = PropFactory.adding_prop(self.parser.doc_type, 'project_id', None, [], prop_type=(str,))
         root_id = project_id_prop.id
         return df.mapValues(lambda x: construct_project_id(x, props, root_id))
 

@@ -30,7 +30,7 @@ class Parser(object):
             if p.type is None:
                 prop = PropFactory.get_prop_by_name(p.src_index, p.src)
                 if prop is None:
-                    raise Exception('Field {} does not exist.'.format(p.src))
+                    continue
                 p.update_type(prop.type)
 
     def get_es_types(self):
