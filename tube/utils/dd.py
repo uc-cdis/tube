@@ -30,6 +30,10 @@ def get_edge_table(models, node_label, edge_name):
     return parent_label, edge.target_class.__tablename__
 
 
+def get_all_edges_table(models):
+    return [e.__tablename__ for e in models.Edge.get_subclasses() ]
+
+
 def get_child_table(models, node_name, edge_name):
     """
     Return the a table name indicated by node's name and edge name. Work as bidirectional link

@@ -1,12 +1,13 @@
 from copy import copy
+
 from tube.etl.indexers.base.lambdas import merge_and_fill_empty_props, merge_dictionary
-from tube.etl.indexers.base.translator import Translator as BaseTranslator
-from tube.utils.general import PROJECT_ID
-from .nodes.collecting_node import LeafNode
-from .parser import Parser
-from .lambdas import get_props_to_tuple, remove_props_from_tuple, get_frame_zero, \
-    seq_aggregate_with_prop, merge_aggregate_with_prop, construct_project_id
 from tube.etl.indexers.base.prop import PropFactory
+from tube.etl.indexers.base.translator import Translator as BaseTranslator
+from tube.etl.indexers.injecting.parser import Parser
+from tube.etl.indexers.injection.lambdas import get_props_to_tuple, seq_aggregate_with_prop, merge_aggregate_with_prop, \
+    remove_props_from_tuple, get_frame_zero
+from tube.etl.indexers.injection.nodes.collecting_node import LeafNode
+from tube.utils.general import PROJECT_ID, PROJECT_CODE, PROGRAM_NAME
 
 
 class Translator(BaseTranslator):
@@ -37,43 +38,51 @@ class Translator(BaseTranslator):
             child.no_parent_to_map -= 1
             return
         child.no_parent_to_map -= 1
-        if child.name not in collected_collecting_dfs:
-            collected_collecting_dfs[child.name] = edge_df
+        if len(child.props) > 0:
+            child_df = self.translate_table(child.tbl_name, props=child.props)
+            node = self.parser.get_prop_by_name('{}_id'.format(child.name))
+            node_id = node.id if node is not None else None
+            if node_id is not None:
+                child_df = child_df.map(lambda x: (x[0], merge_dictionary(x[1], {node_id: x[0]}, to_tuple=True)))
+            else:
+                child_df = child_df.mapValues(lambda x: tuple([(k, v) for (k, v) in x.items()]))
+            child_df = child_df.join(edge_df).mapValues(lambda x: x[0] + x[1])
         else:
-            collected_collecting_dfs[child.name] = collected_collecting_dfs[child.name].union(edge_df).distinct()
+            child_df = edge_df
+        if child.name not in collected_collecting_dfs:
+            collected_collecting_dfs[child.name] = child_df
+        else:
+            collected_collecting_dfs[child.name] = collected_collecting_dfs[child.name].fullOuterJoin(child_df)\
+                .mapValues(lambda x: tuple(list(set(x[0]) | set(x[1]))))
 
-    def merge_auth_root(self, root):
-        df = self.translate_table(root.tbl_name, props=root.props)
-        child = root.root_child
-        props = copy(root.props)
-        while child is not None:
-            edge_tbl = child.edge_to_parent
-            child_props = child.props
-            df = df.join(self.translate_edge(edge_tbl)) \
-                .map(lambda x: (x[1][1], x[1][0]))
-            tbl_name = child.tbl_name
-            df = df.join(self.translate_table(tbl_name, props=child_props)) \
-                .mapValues(lambda x: merge_and_fill_empty_props(x, child_props))
-            props.extend(child_props)
-            child = child.root_child
+    def merge_project(self, child, edge_df, collected_collecting_dfs):
+        if edge_df is None or edge_df.isEmpty():
+            child.no_parent_to_map -= 1
+            return
+        child.no_parent_to_map -= 1
+        child_df = self.translate_table(child.tbl_name, props=child.props)
+        project_code_id = self.parser.get_prop_by_name(PROJECT_CODE).id
+        child_df = child_df.join(edge_df).mapValues(lambda x: merge_dictionary(x[0], x[1]))
+        program_name_id = self.parser.get_prop_by_name(PROGRAM_NAME).id
+
         project_id_prop = self.parser.get_prop_by_name(PROJECT_ID)
         if project_id_prop is None:
             project_id_prop = PropFactory.adding_prop(self.parser.doc_type, PROJECT_ID, None, [], prop_type=(str,))
-        root_id = project_id_prop.id
-        return df.mapValues(lambda x: construct_project_id(x, props, root_id))
+        child_df = child_df.mapValues(
+            lambda x: merge_dictionary(
+                x, {project_id_prop.id: '{}-{}'.format(x.get(program_name_id), x.get(project_code_id))}))
+        collected_collecting_dfs[child.name] = child_df.mapValues(lambda x: tuple([(k, v) for (k, v) in x.items()]))
 
-    def merge_roots_to_children(self):
+    def join_program_to_project(self):
         collected_leaf_dfs = {}
         collected_collecting_dfs = {}
         for root in self.parser.roots:
-            df = self.translate_table(root.tbl_name, props=root.props) \
-                if root.root_child is None else self.merge_auth_root(root)
+            df = self.translate_table(root.tbl_name, props=root.props)
             for child in root.children:
                 edge_tbl = child.parents[root.name]
                 tmp_df = df.join(self.translate_edge(edge_tbl))
-                tmp_df = tmp_df.map(lambda x: (x[1][1], x[1][0])) \
-                    .mapValues(lambda x: tuple([(k, v) for (k, v) in x.items()]))
-                self.collect_collecting_child(child, tmp_df, collected_collecting_dfs)
+                tmp_df = tmp_df.map(lambda x: (x[1][1], x[1][0]))
+                self.merge_project(child, tmp_df, collected_collecting_dfs)
         return collected_collecting_dfs, collected_leaf_dfs
 
     def merge_collectors(self, collected_collecting_dfs):
@@ -99,7 +108,7 @@ class Translator(BaseTranslator):
             self.collect_leaf(leaf, df, collected_leaf_dfs)
 
     def translate(self):
-        collected_collecting_dfs, collected_leaf_dfs = self.merge_roots_to_children()
+        collected_collecting_dfs, collected_leaf_dfs = self.join_program_to_project()
         self.merge_collectors(collected_collecting_dfs)
         self.get_leaves(collected_collecting_dfs, collected_leaf_dfs)
         for (k, df) in list(collected_collecting_dfs.items()):
@@ -112,15 +121,22 @@ class Translator(BaseTranslator):
         else:
             return self.sc.parallelize([])
 
+    def clone_prop_with_iterator_fn(self, p):
+        prop = copy(self.parser.get_prop_by_name(p.name))
+        if p.fn is not None:
+            prop.fn = p.fn
+        else:
+            prop.fn = 'set'
+        return prop
+
     def get_aggregating_props(self):
         props = []
         for p in self.root_props:
-            prop = copy(self.parser.get_prop_by_name(p.name))
-            if p.fn is not None:
-                prop.fn = p.fn
-            else:
-                prop.fn = 'set'
-            props.append(prop)
+            props.append(self.clone_prop_with_iterator_fn(p))
+
+        for c in self.parser.collectors:
+            for p in c.props:
+                props.append(self.clone_prop_with_iterator_fn(p))
         return props
 
     def translate_final(self):

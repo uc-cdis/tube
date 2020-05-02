@@ -53,3 +53,7 @@ def get_resource_path_from_json(results, json_data):
     for project in user_project_to_resource:
         results[project] = user_project_to_resource[project]
     return results
+
+PROGRAM_NAME = 'program_name'
+PROJECT_CODE = 'project_code'
+PROJECT_ID = 'project_id'

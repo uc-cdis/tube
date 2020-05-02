@@ -84,3 +84,6 @@ class Translator(object):
 
     def translate_final(self):
         return self.load_from_hadoop()
+
+    def translate(self):
+        pass

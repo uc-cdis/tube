@@ -17,9 +17,12 @@ class RootNode(BaseNode):
 
 
 class CollectingNode(BaseNode):
-    def __init__(self, name, level=None):
+    def __init__(self, name, tbl_name, props=None, level=None):
         super(CollectingNode, self).__init__()
+        props = [] if props is None else props
         self.name = name
+        self.tbl_name = tbl_name
+        self.props = props
         self.level = level
         self.parents = {}
         self.non_leaf_children_count = 0
