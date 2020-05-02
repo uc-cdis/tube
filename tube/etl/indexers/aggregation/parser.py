@@ -1,6 +1,13 @@
 import re
-from tube.utils.dd import get_attribute_from_path, get_edge_table, get_child_table, get_multiplicity, \
-    get_node_table_name, get_properties_types, object_to_string
+from tube.utils.dd import (
+    get_attribute_from_path,
+    get_edge_table,
+    get_child_table,
+    get_multiplicity,
+    get_node_table_name,
+    get_properties_types,
+    object_to_string,
+)
 from .nodes.aggregated_node import AggregatedNode, Reducer
 from .nodes.direct_node import DirectNode
 from .nodes.joining_node import JoiningNode
@@ -17,7 +24,7 @@ class Path(object):
 
     @classmethod
     def create_path(cls, s_path):
-        return tuple(s_path.split('.'))
+        return tuple(s_path.split("."))
 
     def __key__(self):
         return self.path
@@ -44,18 +51,25 @@ class Parser(BaseParser):
         super(Parser, self).__init__(mapping, model)
         self.dictionary = dictionary
         self.props = self.get_host_props()
-        self.flatten_props = self.get_direct_children() if 'flatten_props' in mapping else []
+        self.flatten_props = (
+            self.get_direct_children() if "flatten_props" in mapping else []
+        )
         self.aggregated_nodes = []
-        if 'aggregated_props' in self.mapping:
+        if "aggregated_props" in self.mapping:
             self.aggregated_nodes = self.get_aggregation_nodes()
-        self.joining_nodes = self.get_joining_nodes() if 'joining_props' in self.mapping or 'joining' in self.mapping \
+        self.joining_nodes = (
+            self.get_joining_nodes()
+            if "joining_props" in self.mapping or "joining" in self.mapping
             else []
-        self.special_nodes = self.get_special_node() if 'special_props' in self.mapping else []
+        )
+        self.special_nodes = (
+            self.get_special_node() if "special_props" in self.mapping else []
+        )
         self.parent_nodes = self.get_parent_props()
 
     def json_to_parent_node(self, path):
-        words = path.split('.')
-        nodes = [tuple([_f for _f in re.split('[\[\]]', w) if _f]) for w in words]
+        words = path.split(".")
+        nodes = [tuple([_f for _f in re.split("[\[\]]", w) if _f]) for w in words]
         first = None
         prev = None
         prev_label = self.root
@@ -65,8 +79,12 @@ class Parser(BaseParser):
             parent_name, edge_tbl = get_edge_table(self.model, prev_label, n)
             parent_tbl = get_node_table_name(self.model, parent_name)
             if p is not None:
-                json_props = [{'name': p[0], 'src': p[1]} for p in self.get_src_name(p.split(','))]
-                props = self.create_props_from_json(self.doc_type, json_props, node_label=parent_name)
+                json_props = [
+                    {"name": p[0], "src": p[1]} for p in self.get_src_name(p.split(","))
+                ]
+                props = self.create_props_from_json(
+                    self.doc_type, json_props, node_label=parent_name
+                )
             else:
                 props = []
             cur = ParentNode(parent_name, parent_tbl, edge_tbl, props)
@@ -80,14 +98,18 @@ class Parser(BaseParser):
 
     def get_parent_props(self):
         list_nodes = []
-        json_parents = self.mapping.get('parent_props', [])
+        json_parents = self.mapping.get("parent_props", [])
         for r in json_parents:
-            if 'path' in r:
-                list_nodes.append(ParentChain(self.json_to_parent_node(r.get('path')), r.get('fn')))
+            if "path" in r:
+                list_nodes.append(
+                    ParentChain(self.json_to_parent_node(r.get("path")), r.get("fn"))
+                )
         return list_nodes
 
     def get_host_props(self):
-        return self.create_props_from_json(self.doc_type, self.mapping['props'], node_label=self.root)
+        return self.create_props_from_json(
+            self.doc_type, self.mapping["props"], node_label=self.root
+        )
 
     def get_aggregation_nodes(self):
         """
@@ -112,16 +134,18 @@ class Parser(BaseParser):
         :param path: path define the node and the prop to be aggregated
         :return:
         """
-        words = path.split('.')
-        nodes = [tuple([_f for _f in re.split('[\[\]]', w) if _f]) for w in words]
+        words = path.split(".")
+        nodes = [tuple([_f for _f in re.split("[\[\]]", w) if _f]) for w in words]
         first = None
         prev = None
         prev_label = self.root
         for (n, str_p) in nodes:
             child_name, edge_tbl = get_edge_table(self.model, prev_label, n)
             child_tbl = get_node_table_name(self.model, child_name)
-            json_props = [{'name': p, 'src': p} for p in str_p.split(',')]
-            props = self.create_props_from_json(self.doc_type, json_props, node_label=child_name)
+            json_props = [{"name": p, "src": p} for p in str_p.split(",")]
+            props = self.create_props_from_json(
+                self.doc_type, json_props, node_label=child_name
+            )
             cur = SpecialNode(child_name, child_tbl, edge_tbl, props)
             if prev is not None:
                 prev.child = cur
@@ -137,11 +161,16 @@ class Parser(BaseParser):
         :return:
         """
         lst_nodes = []
-        for s in self.mapping.get('special_props'):
-            if 'path' in s:
-                lst_nodes.append(SpecialChain(self.doc_type, s.get('name'),
-                                              self.json_to_special_node(s.get('path')),
-                                              s.get('fn', '').split(',')))
+        for s in self.mapping.get("special_props"):
+            if "path" in s:
+                lst_nodes.append(
+                    SpecialChain(
+                        self.doc_type,
+                        s.get("name"),
+                        self.json_to_special_node(s.get("path")),
+                        s.get("fn", "").split(","),
+                    )
+                )
         return lst_nodes
 
     def get_joining_nodes(self):
@@ -150,11 +179,15 @@ class Parser(BaseParser):
         :return:
         """
         joining_nodes = []
-        joining_props = self.mapping.get('joining_props', self.mapping.get('joining'))
+        joining_props = self.mapping.get("joining_props", self.mapping.get("joining"))
         for idx in joining_props:
-            json_props = [{'name': j.get('name'), 'src': j.get('src'),
-                           'fn': j.get('fn')} for j in idx['props']]
-            props = self.create_props_from_json(self.doc_type, json_props, index=idx.get('index'))
+            json_props = [
+                {"name": j.get("name"), "src": j.get("src"), "fn": j.get("fn")}
+                for j in idx["props"]
+            ]
+            props = self.create_props_from_json(
+                self.doc_type, json_props, index=idx.get("index")
+            )
             joining_nodes.append(JoiningNode(props, idx))
         return joining_nodes
 
@@ -171,28 +204,41 @@ class Parser(BaseParser):
         reversed_index = {}
         list_nodes = []
         for path in flat_paths:
-            n_name = self.mapping['root']
+            n_name = self.mapping["root"]
             current_parent_edge = None
             level = 0
             for i, p in enumerate(path.path):
                 if (n_name, current_parent_edge) in reversed_index:
-                    n_current = list_nodes[reversed_index[(n_name, current_parent_edge)]]
+                    n_current = list_nodes[
+                        reversed_index[(n_name, current_parent_edge)]
+                    ]
                 else:
-                    n_current = AggregatedNode(n_name, get_node_table_name(self.model, n_name),
-                                               current_parent_edge, level)
+                    n_current = AggregatedNode(
+                        n_name,
+                        get_node_table_name(self.model, n_name),
+                        current_parent_edge,
+                        level,
+                    )
                     list_nodes.append(n_current)
                     reversed_index[(n_name, current_parent_edge)] = len(list_nodes) - 1
 
                 child_name, edge_tbl = get_edge_table(self.model, n_name, p)
 
-                n_child = list_nodes[reversed_index[(child_name, edge_tbl)]] \
-                    if (child_name, edge_tbl) in reversed_index \
-                    else AggregatedNode(child_name, get_node_table_name(self.model, child_name), edge_tbl, level + 1)
+                n_child = (
+                    list_nodes[reversed_index[(child_name, edge_tbl)]]
+                    if (child_name, edge_tbl) in reversed_index
+                    else AggregatedNode(
+                        child_name,
+                        get_node_table_name(self.model, child_name),
+                        edge_tbl,
+                        level + 1,
+                    )
+                )
                 n_child.parent = n_current
                 if i == len(path.path) - 1:
                     for reducer in path.reducers:
                         prop = self.create_prop_from_json(self.doc_type, reducer, None)
-                        n_child.reducers.append(Reducer(prop, reducer['fn']))
+                        n_child.reducers.append(Reducer(prop, reducer["fn"]))
 
                 n_current.add_child(n_child)
                 if (child_name, edge_tbl) not in reversed_index:
@@ -227,12 +273,12 @@ class Parser(BaseParser):
         :return:
         """
         flat_paths = {}
-        aggregated_nodes = self.mapping['aggregated_props']
+        aggregated_nodes = self.mapping["aggregated_props"]
         for n in aggregated_nodes:
             copied_n = deepcopy(n)
-            if 'src' not in copied_n:
-                copied_n['src'] = None
-            path = copied_n.pop('path', None)
+            if "src" not in copied_n:
+                copied_n["src"] = None
+            path = copied_n.pop("path", None)
             if path in flat_paths:
                 flat_paths[path].reducers.append(copied_n)
             else:
@@ -243,12 +289,12 @@ class Parser(BaseParser):
         return set(flat_paths.values())
 
     def parse_sorting(self, child):
-        sorts = child['sorted_by'] if 'sorted_by' in child else None
+        sorts = child["sorted_by"] if "sorted_by" in child else None
         if sorts is None:
             return None, None
         sorts = sorts.split(",")
         if len(sorts) > 1:
-            desc_order = sorts[1].strip() == 'desc'
+            desc_order = sorts[1].strip() == "desc"
         else:
             desc_order = False
         return sorts[0], desc_order
@@ -257,22 +303,37 @@ class Parser(BaseParser):
         """
         Parse etlMapping file and return a list of direct children from the root
         """
-        children = self.mapping['flatten_props']
+        children = self.mapping["flatten_props"]
         nodes = []
-        bypass = self.mapping.get(
-            'settings', {}).get('bypass_multiplicity_check')
+        bypass = self.mapping.get("settings", {}).get("bypass_multiplicity_check")
         for child in children:
-            child_label, edge = get_edge_table(self.model, self.root, child['path'])
-            child_name, is_child = get_child_table(self.model, self.root, child['path'])
-            multiplicity = get_multiplicity(self.dictionary, self.root, child_label) if is_child else \
-                get_multiplicity(self.dictionary, child_label, self.root)
+            child_label, edge = get_edge_table(self.model, self.root, child["path"])
+            child_name, is_child = get_child_table(self.model, self.root, child["path"])
+            multiplicity = (
+                get_multiplicity(self.dictionary, self.root, child_label)
+                if is_child
+                else get_multiplicity(self.dictionary, child_label, self.root)
+            )
             sorted_by, desc_order = self.parse_sorting(child)
-            if not bypass and sorted_by is None and multiplicity != 'one_to_one' and multiplicity != 'one_to_many':
-                raise Exception("something bad has just happened\n"
-                                "the properties '{}' for '{}'\n"
-                                "for parent '{}'\n"
-                                "has multiplicity '{}' that cannot be used on in 'flatten_props'"
-                                "\n".format(child['props'], child['path'], child_label, multiplicity))
-            props = self.create_props_from_json(self.doc_type, child['props'], node_label=child_label)
-            nodes.append(DirectNode(child_name, edge, props, sorted_by, desc_order, is_child))
+            if (
+                not bypass
+                and sorted_by is None
+                and multiplicity != "one_to_one"
+                and multiplicity != "one_to_many"
+            ):
+                raise Exception(
+                    "something bad has just happened\n"
+                    "the properties '{}' for '{}'\n"
+                    "for parent '{}'\n"
+                    "has multiplicity '{}' that cannot be used on in 'flatten_props'"
+                    "\n".format(
+                        child["props"], child["path"], child_label, multiplicity
+                    )
+                )
+            props = self.create_props_from_json(
+                self.doc_type, child["props"], node_label=child_label
+            )
+            nodes.append(
+                DirectNode(child_name, edge, props, sorted_by, desc_order, is_child)
+            )
         return nodes

@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='tube',
-    version='0.0.1',
+    name="tube",
+    version="0.0.1",
     install_requires=[
         "cryptography>=2.1.2",
         "dictionaryutils~=3.0.2",

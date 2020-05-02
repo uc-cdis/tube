@@ -11,7 +11,9 @@ pools = {}
 
 
 def create_default_db_connection():
-    pools[connection_name] = ThreadedConnectionPool(1, 20, dsn=config.PYDBC, connect_timeout=30)
+    pools[connection_name] = ThreadedConnectionPool(
+        1, 20, dsn=config.PYDBC, connect_timeout=30
+    )
     return pools[connection_name]
 
 

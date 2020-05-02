@@ -5,19 +5,26 @@ import sys
 
 
 def extract_metadata(str_value):
-    '''
+    """
     Get all fields in _props (strs[3] in hadoop file) and node_id field (strs[4])
     :param str_value:
     :return:
-    '''
+    """
     origin_value = str_value
     str_value = str_value.replace("'", "###")
     str_value = str_value.replace('\\""', "##")
     strs = ast.literal_eval(str_value.replace('""', "'"))
     try:
-      props = json.loads(strs[3].replace("'", '"').replace("###", "'").replace('##', '\\"'), strict=False)
+        props = json.loads(
+            strs[3].replace("'", '"').replace("###", "'").replace("##", '\\"'),
+            strict=False,
+        )
     except Exception as ex:
-      raise Exception("ERROR IN SPARK: origin: {}, after replacing: {}".format(origin_value, str_value))
+        raise Exception(
+            "ERROR IN SPARK: origin: {}, after replacing: {}".format(
+                origin_value, str_value
+            )
+        )
     return tuple([strs[4], props])
 
 
@@ -49,13 +56,26 @@ def swap_key_value(df):
 
 def get_props(names, values):
     return lambda x: {
-        names[src]: values[src][v] if isinstance(v, collections.Hashable) and src in values and v in values[src] else v
-        for (src, v) in list(x.items()) if src in list(names.keys())
+        names[src]: values[src][v]
+        if isinstance(v, collections.Hashable) and src in values and v in values[src]
+        else v
+        for (src, v) in list(x.items())
+        if src in list(names.keys())
     }
 
 
 def get_props_empty_values(props):
     return {k.id: None for k in props}
+
+
+def merge_data_frames(x):
+    if (x[0] is None and x[1] is None):
+        return tuple([])
+    if (x[0] is None):
+        return x[1]
+    if (x[1] is None):
+        return x[0]
+    return tuple(list(set(x[0]) | set(x[1])))
 
 
 def get_number(num):
@@ -88,7 +108,11 @@ def merge_and_fill_empty_props(item, props, to_tuple=False):
     if item[1] is None and item[0] is None:
         return {} if not to_tuple else tuple([])
     if item[0] is None:
-        return item[1] if not to_tuple else tuple([(k, v) for (k, v) in list(item[1].items())])
+        return (
+            item[1]
+            if not to_tuple
+            else tuple([(k, v) for (k, v) in list(item[1].items())])
+        )
     if item[1] is None:
         return merge_dictionary(item[0], get_props_empty_values(props), to_tuple)
     return merge_dictionary(item[0], item[1], to_tuple)
@@ -124,41 +148,47 @@ def extend_list(x, y):
 
 
 def get_aggregation_func_by_name(func_name, is_merging=False):
-    if func_name == 'count':
+    if func_name == "count":
         if is_merging:
             return lambda x, y: x + y
         return lambda x, y: x + 1
-    if func_name == 'sum':
+    if func_name == "sum":
         return lambda x, y: x + y
-    if func_name == 'set':
+    if func_name == "set":
         return lambda x, y: union_sets(x, y)
-    if func_name == 'list':
+    if func_name == "list":
         return lambda x, y: extend_list(x, y)
-    if func_name == 'min':
-        return lambda x, y: None if x is None and y is None \
+    if func_name == "min":
+        return (
+            lambda x, y: None
+            if x is None and y is None
             else min([i for i in [x, y] if i is not None])
-    if func_name == 'max':
-        return lambda x, y: None if x is None and y is None \
+        )
+    if func_name == "max":
+        return (
+            lambda x, y: None
+            if x is None and y is None
             else max([i for i in [x, y] if i is not None])
+        )
 
 
 def get_single_frame_zero_by_func(func_name, output_name):
-    if func_name in ['set', 'list']:
+    if func_name in ["set", "list"]:
         return (func_name, output_name, [])
-    if func_name == 'count' or func_name == 'sum':
+    if func_name == "count" or func_name == "sum":
         return (func_name, output_name, 0)
-    if func_name in ['min', 'max']:
+    if func_name in ["min", "max"]:
         return (func_name, output_name, None)
-    return (func_name, output_name, '')
+    return (func_name, output_name, "")
 
 
 def get_single_frame_value(func_name, value):
-    if func_name in ['set', 'list']:
+    if func_name in ["set", "list"]:
         if value is None:
             return []
         return [value] if not isinstance(value, list) else value
-    if func_name == 'count':
+    if func_name == "count":
         return 1 if value is None else value
-    if func_name == 'sum':
+    if func_name == "sum":
         return 0 if value is None else value
     return value

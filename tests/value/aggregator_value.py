@@ -21,7 +21,7 @@ class AggregatorValue(Value):
         path, value_mapping = self.get_path_by_name(self.parser, name)
 
         fn = path["fn"]
-        if 'src' in path:
+        if "src" in path:
             src = path["src"]
         else:
             src = None
@@ -64,14 +64,18 @@ class AggregatorValue(Value):
                     return filtered[0], None
 
             if k == "flatten_props":
-                filtered = [i for i in v if name in [j['name'] for j in i["props"]]]
-                value_mappings = [x for x in chain(*(x.props for x in p.flatten_props)) if name == x.name]
+                filtered = [i for i in v if name in [j["name"] for j in i["props"]]]
+                value_mappings = [
+                    x
+                    for x in chain(*(x.props for x in p.flatten_props))
+                    if name == x.name
+                ]
                 if filtered:
                     filtered[0]["fn"] = "_get"
                     return filtered[0], value_mappings[0]
 
             if k == "props":
-                filtered = [i for i in v if name == i['name']]
+                filtered = [i for i in v if name == i["name"]]
                 value_mappings = [x for x in p.props if name == x.name]
                 if filtered:
                     return {"path": "", "fn": "_get"}, value_mappings[0]

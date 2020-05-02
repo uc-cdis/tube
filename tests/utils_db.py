@@ -22,20 +22,24 @@ class SQLQuery:
 
             self.join_clauses[(tuple(tables), fn, name)] = sql_join
 
-        key = '{}_{}_{}_{}_{}'.format(fn, tables[0], name, src, tables[-1])
+        key = "{}_{}_{}_{}_{}".format(fn, tables[0], name, src, tables[-1])
         if key in self.select_clauses:
             sql_select, group = self.select_clauses[key]
         else:
             query = "SELECT {gather}"
-            gather, group = self.generate_gather_clause(fn, tables[0], name, src, tables[-1])
+            gather, group = self.generate_gather_clause(
+                fn, tables[0], name, src, tables[-1]
+            )
             sql_select = SQL(query).format(gather=gather)
 
             self.select_clauses[key] = (sql_select, group)
 
         submitter_json = '{{"submitter_id": "{}"}}'.format(submitter_id)
-        sql_where = SQL("WHERE {last_node}.{_props} @> {submitter}").format(last_node=Identifier(tables[-1]),
-                                                                            _props=Identifier("_props"),
-                                                                            submitter=Literal(submitter_json))
+        sql_where = SQL("WHERE {last_node}.{_props} @> {submitter}").format(
+            last_node=Identifier(tables[-1]),
+            _props=Identifier("_props"),
+            submitter=Literal(submitter_json),
+        )
         if group:
             sql = SQL(" ").join([sql_select, sql_join, sql_where, group, SQL(";")])
         else:
@@ -65,10 +69,12 @@ class SQLQuery:
                 join_query = "JOIN {p2} ON ({p1}.{col} = {p2}.{node_id})"
                 col = Identifier("dst_id")
 
-            add = SQL(join_query).format(p1=Identifier(p1),
-                                         p2=Identifier(p2),
-                                         node_id=Identifier("node_id"),
-                                         col=col)
+            add = SQL(join_query).format(
+                p1=Identifier(p1),
+                p2=Identifier(p2),
+                node_id=Identifier("node_id"),
+                col=col,
+            )
 
             joins.append(add)
             left_is_node = not left_is_node
@@ -88,28 +94,29 @@ class SQLQuery:
         """
         group = None
         if aggregator == "_get":
-            select = SQL("{table}.{column} -> {field}").format(table=Identifier(table),
-                                                               column=Identifier("_props"),
-                                                               field=Literal(prop))
+            select = SQL("{table}.{column} -> {field}").format(
+                table=Identifier(table),
+                column=Identifier("_props"),
+                field=Literal(prop),
+            )
         elif aggregator == "count":
             select = SQL("COUNT(*)")
         elif aggregator == "set":
-            select = SQL("array_agg(DISTINCT {table}.{column}->{field}), {root}.{node_id}").format(
+            select = SQL(
+                "array_agg(DISTINCT {table}.{column}->{field}), {root}.{node_id}"
+            ).format(
                 table=Identifier(table),
                 column=Identifier("_props"),
                 field=Literal(src),
                 root=Identifier(root),
-                node_id=Identifier("node_id")
+                node_id=Identifier("node_id"),
             )
             group = SQL("GROUP BY {root}.{node_id} ORDER BY {root}.{node_id}").format(
-                root=Identifier(root),
-                node_id=Identifier("node_id")
+                root=Identifier(root), node_id=Identifier("node_id")
             )
         elif aggregator == "sum":
             select = SQL("SUM(coalesce(({table}.{props}->>{field})::int, 0))").format(
-                table=Identifier(table),
-                props=Identifier("_props"),
-                field=Literal(src)
+                table=Identifier(table), props=Identifier("_props"), field=Literal(src)
             )
         else:
             select = SQL("*")

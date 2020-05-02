@@ -7,6 +7,7 @@ def init_dictionary(url):
     # the gdcdatamodel expects dictionary initiated on load, so this can't be
     # imported on module level
     from gdcdatamodel import models as md
+
     return d, md
 
 
@@ -16,12 +17,12 @@ def init_dictionary(url):
 
 
 def get_edge_table(models, node_label, edge_name):
-    '''
+    """
     :param models: the model which node and edge belong to
     :param node_label: the label of a node
     :param edge_name: the back_ref label of an edge
     :return: (label of the source node, table name of edge specified by edge_name)
-    '''
+    """
     node = models.Node.get_subclass(node_label)
     edge = getattr(node, edge_name)
     parent_label = get_node_label(models, edge.target_class.__src_class__)
@@ -31,7 +32,7 @@ def get_edge_table(models, node_label, edge_name):
 
 
 def get_all_edges_table(models):
-    return [e.__tablename__ for e in models.Edge.get_subclasses() ]
+    return [e.__tablename__ for e in models.Edge.get_subclasses()]
 
 
 def get_child_table(models, node_name, edge_name):
@@ -48,7 +49,10 @@ def get_child_table(models, node_name, edge_name):
     src_label = get_node_label(models, src_class)
     if src_label != node_name:
         return models.Node.get_subclass_named(src_class).__tablename__, True
-    return models.Node.get_subclass_named(edge.target_class.__dst_class__).__tablename__, False
+    return (
+        models.Node.get_subclass_named(edge.target_class.__dst_class__).__tablename__,
+        False,
+    )
 
 
 def get_all_children_of_node(models, class_name):
@@ -92,12 +96,12 @@ def get_properties_types(models, node_name):
 
 def object_to_string(obj):
     # s = ','.join('{}: {}'.format(k, obj.__getattr__(k)) for k in obj.__dict__)
-    return '<{}>'.format(obj.__dict__)
+    return "<{}>".format(obj.__dict__)
 
 
 def get_attribute_from_path(models, root, path):
-    if path != '':
-        splitted_path = path.split('.')
+    if path != "":
+        splitted_path = path.split(".")
     else:
         splitted_path = []
 
@@ -109,20 +113,20 @@ def get_attribute_from_path(models, root, path):
 def get_multiplicity(dictionary, parent, child):
     schema = dictionary.schema
 
-    links = schema[child]['links']
+    links = schema[child]["links"]
 
     for link in links:
-        if 'subgroup' in link:
-            for l in link['subgroup']:
-                if l['target_type'] == parent:
-                    return l['multiplicity']
+        if "subgroup" in link:
+            for l in link["subgroup"]:
+                if l["target_type"] == parent:
+                    return l["multiplicity"]
         else:
-            if link['target_type'] == parent:
-                return link['multiplicity']
+            if link["target_type"] == parent:
+                return link["multiplicity"]
     return
 
 
 def get_node_category(dictionary, node):
     schema = dictionary.schema
     dd_node = schema[node]
-    return dd_node.get('category', None)
+    return dd_node.get("category", None)

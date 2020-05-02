@@ -1,6 +1,18 @@
-from tube.utils.dd import get_edge_table, get_node_table_name, get_node_label, get_parent_name, get_parent_label, \
-    object_to_string, get_all_children_of_node, get_node_category
-from tube.etl.indexers.injection.nodes.collecting_node import CollectingNode, RootNode, LeafNode
+from tube.utils.dd import (
+    get_edge_table,
+    get_node_table_name,
+    get_node_label,
+    get_parent_name,
+    get_parent_label,
+    object_to_string,
+    get_all_children_of_node,
+    get_node_category,
+)
+from tube.etl.indexers.injection.nodes.collecting_node import (
+    CollectingNode,
+    RootNode,
+    LeafNode,
+)
 from ..base.parser import Parser as BaseParser
 
 
@@ -12,7 +24,7 @@ class Path(object):
 
     @classmethod
     def create_path(cls, s_path):
-        return tuple(s_path.split('.'))
+        return tuple(s_path.split("."))
 
     def __key__(self):
         return (self.src,) + self.path
@@ -46,26 +58,33 @@ class Parser(BaseParser):
     def __init__(self, mapping, model, dictionary):
         super(Parser, self).__init__(mapping, model)
         self.dictionary = dictionary
-        self.props = self.create_props_from_json(self.doc_type, self.mapping['props'],
-                                                 node_label=self.get_first_node_label_with_category())
+        self.props = self.create_props_from_json(
+            self.doc_type,
+            self.mapping["props"],
+            node_label=self.get_first_node_label_with_category(),
+        )
         self.leaves = set([])
         self.collectors = []
         self.roots = []
         self.get_collecting_nodes()
 
     def get_first_node_label_with_category(self):
-        # if len(self.mapping['injecting_props'].items()) == 0:
-        #     return None
-        selected_category = self.mapping.get('category', 'data_file')
-        leaves_name = [k for (k, v) in list(self.dictionary.schema.items())
-                       if v.get('category', None) == selected_category]
+        selected_category = self.mapping.get("category", "data_file")
+        leaves_name = [
+            k
+            for (k, v) in list(self.dictionary.schema.items())
+            if v.get("category", None) == selected_category
+        ]
         if len(leaves_name) > 0:
             return leaves_name[0]
         return None
 
     def get_orphan_paths(self, selected_category, leaves):
-        leaves_name = [k for (k, v) in list(self.dictionary.schema.items())
-                       if v.get('category', None) == selected_category]
+        leaves_name = [
+            k
+            for (k, v) in list(self.dictionary.schema.items())
+            if v.get("category", None) == selected_category
+        ]
         orphan_leaves = set([])
         for name in leaves_name:
             self.leaves.add(LeafNode(name, get_node_table_name(self.model, name)))
@@ -73,24 +92,28 @@ class Parser(BaseParser):
                 orphan_leaves.add(name)
 
         if len(orphan_leaves) > 0:
-            return self.get_shortest_path_from_root(['program', 'project'], orphan_leaves)
+            return self.get_shortest_path_from_root(
+                ["program", "project"], orphan_leaves
+            )
         return set([])
 
     def get_collecting_nodes(self):
         def selected_category_comparer(dictionary, x):
             return get_node_category(dictionary, x) == selected_category
 
-        selected_category = self.mapping.get('category', 'data_file')
+        selected_category = self.mapping.get("category", "data_file")
         flat_paths = set([])
-        if 'injecting_props' in self.mapping:
-            for k, v in list(self.mapping['injecting_props'].items()):
+        if "injecting_props" in self.mapping:
+            for k, v in list(self.mapping["injecting_props"].items()):
                 flat_paths |= self.create_collecting_paths_from_root(
                     k, lambda x: selected_category_comparer(self.dictionary, x)
                 )
         leaves = [p.src for p in flat_paths]
 
-        if 'injecting_props' in self.mapping:
-            self.collectors, self.roots = self.construct_reversed_collection_tree(flat_paths)
+        if "injecting_props" in self.mapping:
+            self.collectors, self.roots = self.construct_reversed_collection_tree(
+                flat_paths
+            )
 
         flat_paths = self.get_orphan_paths(selected_category, leaves)
         orphan_collectors, auth_root = self.construct_auth_path_tree(flat_paths)
@@ -136,25 +159,44 @@ class Parser(BaseParser):
             level += 1
 
     def add_root_node(self, child, roots, segment):
-        root_name = get_node_label(self.model, get_parent_name(self.model, child.name, segment))
+        root_name = get_node_label(
+            self.model, get_parent_name(self.model, child.name, segment)
+        )
         _, edge_up_tbl = get_edge_table(self.model, child.name, segment)
-        root_tbl_name = get_node_table_name(self.model, get_parent_label(self.model, child.name, segment))
-        top_node = roots[root_name] if root_name in roots \
-            else RootNode(root_name, root_tbl_name,
-                          self.create_props_from_json(self.doc_type,
-                                                      self.mapping['injecting_props'][root_name]['props'],
-                                                      node_label=root_name))
+        root_tbl_name = get_node_table_name(
+            self.model, get_parent_label(self.model, child.name, segment)
+        )
+        top_node = (
+            roots[root_name]
+            if root_name in roots
+            else RootNode(
+                root_name,
+                root_tbl_name,
+                self.create_props_from_json(
+                    self.doc_type,
+                    self.mapping["injecting_props"][root_name]["props"],
+                    node_label=root_name,
+                ),
+            )
+        )
         child.add_parent(top_node.name, edge_up_tbl)
         top_node.add_child(child)
 
         roots[root_name] = top_node
 
     def add_collecting_node(self, child, collectors, fst):
-        parent_name = get_node_label(self.model, get_parent_name(self.model, child.name, fst))
+        parent_name = get_node_label(
+            self.model, get_parent_name(self.model, child.name, fst)
+        )
         _, edge_up_tbl = get_edge_table(self.model, child.name, fst)
-        tbl_name = get_node_table_name(self.model, get_parent_label(self.model, child.name, fst))
-        collecting_node = collectors[parent_name] if parent_name in collectors \
+        tbl_name = get_node_table_name(
+            self.model, get_parent_label(self.model, child.name, fst)
+        )
+        collecting_node = (
+            collectors[parent_name]
+            if parent_name in collectors
             else CollectingNode(parent_name, tbl_name)
+        )
         collecting_node.add_child(child)
         child.add_parent(collecting_node.name, edge_up_tbl)
         collectors[parent_name] = collecting_node
@@ -171,23 +213,34 @@ class Parser(BaseParser):
                 collectors[p.src] = CollectingNode(p.src, tbl_name)
             child = collectors[p.src]
             if len(segments) > 1:
-                for fst in segments[0:len(segments)-1]:
+                for fst in segments[0 : len(segments) - 1]:
                     child = self.add_collecting_node(child, collectors, fst)
             self.add_root_node(child, roots, segments[-1])
         return list(collectors.values()), list(roots.values())
 
     def create_auth_path_root(self):
-        program_table_name = get_node_table_name(self.model, 'program')
-        project_table_name = get_node_table_name(self.model, 'project')
-        _, edge_up_tbl = get_edge_table(self.model, 'project', 'programs')
-        root_program = RootNode('auth_path_root', program_table_name,
-                                self.create_props_from_json(self.doc_type,
-                                                            [{'name': 'program_name', 'src': 'name'}],
-                                                            node_label='program'))
-        root_project = RootNode('project', project_table_name,
-                                self.create_props_from_json(self.doc_type,
-                                                            [{'name': 'project_code', 'src': 'code'}],
-                                                            node_label='project'), edge_up_tbl)
+        program_table_name = get_node_table_name(self.model, "program")
+        project_table_name = get_node_table_name(self.model, "project")
+        _, edge_up_tbl = get_edge_table(self.model, "project", "programs")
+        root_program = RootNode(
+            "auth_path_root",
+            program_table_name,
+            self.create_props_from_json(
+                self.doc_type,
+                [{"name": "program_name", "src": "name"}],
+                node_label="program",
+            ),
+        )
+        root_project = RootNode(
+            "project",
+            project_table_name,
+            self.create_props_from_json(
+                self.doc_type,
+                [{"name": "project_code", "src": "code"}],
+                node_label="project",
+            ),
+            edge_up_tbl,
+        )
         root_program.root_child = root_project
         return root_program
 
@@ -198,16 +251,18 @@ class Parser(BaseParser):
             segments = list(p.path)
             _, edge_up_tbl = get_edge_table(self.model, p.src, segments[0])
             if p.src not in collectors:
-                collectors[p.src] = CollectingNode(p.src, get_node_table_name(self.model, p.src))
+                collectors[p.src] = CollectingNode(
+                    p.src, get_node_table_name(self.model, p.src)
+                )
             child = collectors[p.src]
             if len(segments) > 1:
-                for node in segments[0:len(segments)-2]:
+                for node in segments[0 : len(segments) - 2]:
                     child = self.add_collecting_node(child, collectors, node)
                 _, edge_up_tbl = get_edge_table(self.model, child.name, segments[-2])
             elif len(segments) == 1:
                 _, edge_up_tbl = get_edge_table(self.model, child.name, segments[-1])
             root.add_child(child)
-            child.add_parent('auth_path_root', edge_up_tbl)
+            child.add_parent("auth_path_root", edge_up_tbl)
         return list(collectors.values()), root
 
     def initialize_queue(self, label):
@@ -215,14 +270,16 @@ class Parser(BaseParser):
         processing_queue = []
         children = get_all_children_of_node(self.model, name)
         for child in children:
-            processing_queue.append(NodePath(child.__src_class__, child.__src_dst_assoc__))
+            processing_queue.append(
+                NodePath(child.__src_class__, child.__src_dst_assoc__)
+            )
         return processing_queue
 
     def create_collecting_paths_from_root(self, label, selector):
         flat_paths = set()
         processing_queue = self.initialize_queue(label)
         i = 0
-        while (i < len(processing_queue)):
+        while i < len(processing_queue):
             current_node = processing_queue[i]
             current_label = get_node_label(self.model, current_node.class_name)
             if selector(current_label):
@@ -231,7 +288,11 @@ class Parser(BaseParser):
             children = get_all_children_of_node(self.model, current_node.class_name)
             for child in children:
                 processing_queue.append(
-                    NodePath(child.__src_class__, '.'.join([child.__src_dst_assoc__, current_node.upper_path])))
+                    NodePath(
+                        child.__src_class__,
+                        ".".join([child.__src_dst_assoc__, current_node.upper_path]),
+                    )
+                )
             i += 1
         return flat_paths
 
@@ -250,6 +311,10 @@ class Parser(BaseParser):
             children = get_all_children_of_node(self.model, current_node.class_name)
             for child in children:
                 processing_queue.append(
-                    NodePath(child.__src_class__, '.'.join([child.__src_dst_assoc__, current_node.upper_path])))
+                    NodePath(
+                        child.__src_class__,
+                        ".".join([child.__src_dst_assoc__, current_node.upper_path]),
+                    )
+                )
             i += 1
         return flat_paths

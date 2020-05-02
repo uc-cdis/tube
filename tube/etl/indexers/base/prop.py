@@ -22,13 +22,30 @@ class PropFactory(object):
         return res
 
     @staticmethod
-    def adding_prop(doc_name, name, src, value_mappings, src_node=None, src_index=None, fn=None, prop_type=None):
+    def adding_prop(
+        doc_name,
+        name,
+        src,
+        value_mappings,
+        src_node=None,
+        src_index=None,
+        fn=None,
+        prop_type=None,
+    ):
         if doc_name not in PropFactory.prop_by_names:
             PropFactory.prop_by_names[doc_name] = {}
         prop = PropFactory.get_prop_by_name(doc_name, name)
         if prop is None:
-            prop = Prop(PropFactory.get_length(), name, src, PropFactory.create_value_mappings(value_mappings),
-                        src_node, src_index, fn, prop_type)
+            prop = Prop(
+                PropFactory.get_length(),
+                name,
+                src,
+                PropFactory.create_value_mappings(value_mappings),
+                src_node,
+                src_index,
+                fn,
+                prop_type,
+            )
             PropFactory.list_props.append(prop)
             PropFactory.prop_by_names.get(doc_name)[name] = prop
         return prop
@@ -50,7 +67,7 @@ class PropFactory(object):
 
     @staticmethod
     def get_prop_by_json(doc_name, p):
-        return PropFactory.get_prop_by_name(doc_name, p['name'])
+        return PropFactory.get_prop_by_name(doc_name, p["name"])
 
 
 class ValueMapping(object):
@@ -60,7 +77,17 @@ class ValueMapping(object):
 
 
 class Prop(object):
-    def __init__(self, id, name, src, value_mappings, src_node, src_index=None, fn=None, prop_type=None):
+    def __init__(
+        self,
+        id,
+        name,
+        src,
+        value_mappings,
+        src_node,
+        src_index=None,
+        fn=None,
+        prop_type=None,
+    ):
         self.id = id
         self.name = name
         self.src = src

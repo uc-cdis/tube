@@ -20,7 +20,9 @@ def test_total_number_equal_db(filename):
         assert total_in_files == total_subjects_in_db
 
 
-@pytest.mark.parametrize("filename,total,entries", [items_in_file(f) for f in test_files])
+@pytest.mark.parametrize(
+    "filename,total,entries", [items_in_file(f) for f in test_files]
+)
 def test_items_equal_db(filename, total, entries):
     with get_db_cursor("db") as cur:
         table = AsIs("node_{table}".format(table=filename.replace("_", "")))

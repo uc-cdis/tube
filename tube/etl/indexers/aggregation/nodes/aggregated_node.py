@@ -23,15 +23,18 @@ class AggregatedNode(BaseNode):
         return hash(self.__key__())
 
     def __repr__(self):
-        return '({}; {})'.format(str(self.__key__()), self.level)
+        return "({}; {})".format(str(self.__key__()), self.level)
 
     def __eq__(self, other):
-        return self.level == other.level and \
-               self.non_leaf_children_count == other.non_leaf_children_count
+        return (
+            self.level == other.level
+            and self.non_leaf_children_count == other.non_leaf_children_count
+        )
 
     def __lt__(self, other):
         return self.level > other.level or (
-            self.level == other.level and self.non_leaf_children_count < other.non_leaf_children_count
+            self.level == other.level
+            and self.non_leaf_children_count < other.non_leaf_children_count
         )
 
 
