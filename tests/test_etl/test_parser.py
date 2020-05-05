@@ -1,5 +1,5 @@
 import pytest
-from tube.etl.indexers.injecting.parser import Parser
+from tube.etl.indexers.injection.parser import Parser
 
 
 @pytest.fixture
