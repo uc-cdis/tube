@@ -15,7 +15,9 @@ class ESValue(Value):
         return self.val.__getattr__(item) if item in self.val else None
 
     def value(self):
-        results = get_item_from_elasticsearch(self.parser.name, self.doc_type, self.submitter_id)
+        results = get_item_from_elasticsearch(
+            self.parser.name, self.doc_type, self.submitter_id
+        )
         result_length = len(results)
         result = results[0]
         return result, result_length

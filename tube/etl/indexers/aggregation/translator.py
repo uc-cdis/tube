@@ -1,8 +1,18 @@
 import collections
-from tube.etl.indexers.base.lambdas import merge_and_fill_empty_props, merge_dictionary, swap_key_value
+from tube.etl.indexers.base.lambdas import (
+    merge_and_fill_empty_props,
+    merge_dictionary,
+    swap_key_value,
+)
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
-from tube.etl.indexers.aggregation.lambdas import intermediate_frame, merge_aggregate_with_reducer, \
-    seq_aggregate_with_reducer, get_frame_zero, get_normal_frame, get_single_frame_zero_by_func
+from tube.etl.indexers.aggregation.lambdas import (
+    intermediate_frame,
+    merge_aggregate_with_reducer,
+    seq_aggregate_with_reducer,
+    get_frame_zero,
+    get_normal_frame,
+    get_single_frame_zero_by_func,
+)
 from tube.utils.dd import get_node_table_name
 from .parser import Parser
 from ..base.lambdas import sort_by_field, swap_property_as_key, make_key_from_property
@@ -22,12 +32,17 @@ class Translator(BaseTranslator):
         :param edge_df: rdd of the edge connected from the parent to child node.
         :return:
         """
-        frame_zero = tuple([get_single_frame_zero_by_func(i[0], i[1]) for i in child_df.first()[1]])
-        temp_df = edge_df.leftOuterJoin(child_df).map(lambda x: (x[1][0], x[1][1])) \
+        frame_zero = tuple(
+            [get_single_frame_zero_by_func(i[0], i[1]) for i in child_df.first()[1]]
+        )
+        temp_df = (
+            edge_df.leftOuterJoin(child_df)
+            .map(lambda x: (x[1][0], x[1][1]))
             .mapValues(lambda x: x if x is not None else frame_zero)
-        return temp_df.aggregateByKey(frame_zero,
-                                      seq_aggregate_with_reducer,
-                                      merge_aggregate_with_reducer)
+        )
+        return temp_df.aggregateByKey(
+            frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer
+        )
 
     def aggregate_with_count_on_edge_tbl(self, df, edge_df, child):
         """
@@ -39,7 +54,7 @@ class Translator(BaseTranslator):
         """
         count_reducer = None
         for reducer in child.reducers:
-            if reducer.prop.src is None and reducer.fn == 'count':
+            if reducer.prop.src is None and reducer.fn == "count":
                 count_reducer = reducer
                 break
 
@@ -49,21 +64,38 @@ class Translator(BaseTranslator):
         else:
             # if there is no reducer, group by parent key and get out the number of children
             # only non-leaf nodes goes through this step
-            count_df = edge_df.groupByKey().mapValues(lambda x: len([i for i in x if i is not None])) \
+            count_df = (
+                edge_df.groupByKey()
+                .mapValues(lambda x: len([i for i in x if i is not None]))
                 .mapValues(intermediate_frame(count_reducer.prop))
+            )
             count_reducer.done = True
         # combine value lists new counted dataframe to existing one
-        return count_df if df is None else df.leftOuterJoin(count_df).mapValues(lambda x: x[0] + x[1])
+        return (
+            count_df
+            if df is None
+            else df.leftOuterJoin(count_df).mapValues(lambda x: x[0] + x[1])
+        )
 
     def aggregate_with_child_tbl(self, df, swapped_df, child):
-        child_df = self.translate_table(child.tbl_name, props=[rd.prop for rd in child.reducers
-                                                               if not rd.done and rd.prop.src is not None])\
-            .mapValues(get_normal_frame(child.reducers))
+        child_df = self.translate_table(
+            child.tbl_name,
+            props=[
+                rd.prop
+                for rd in child.reducers
+                if not rd.done and rd.prop.src is not None
+            ],
+        ).mapValues(get_normal_frame(child.reducers))
 
         frame_zero = get_frame_zero(child.reducers)
-        temp_df = swapped_df.leftOuterJoin(child_df).map(lambda x: (x[1][0], x[1][1]))\
+        temp_df = (
+            swapped_df.leftOuterJoin(child_df)
+            .map(lambda x: (x[1][0], x[1][1]))
             .mapValues(lambda x: x if x is not None else frame_zero)
-        temp_df = temp_df.aggregateByKey(frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer)
+        )
+        temp_df = temp_df.aggregateByKey(
+            frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer
+        )
         return df.leftOuterJoin(temp_df).mapValues(lambda x: x[0] + x[1])
 
     def aggregate_nested_properties(self):
@@ -81,25 +113,38 @@ class Translator(BaseTranslator):
             for child in n.children:
                 if child.no_children_to_map == 0:
                     # Read all associations from edge table that link between parent and child one
-                    edge_df = key_df.leftOuterJoin(self.translate_edge(child.edge_up_tbl)).mapValues(lambda x: x[1])
+                    edge_df = key_df.leftOuterJoin(
+                        self.translate_edge(child.edge_up_tbl)
+                    ).mapValues(lambda x: x[1])
                     df = self.aggregate_with_count_on_edge_tbl(df, edge_df, child)
-                    no_of_remaining_reducers = len([r for r in child.reducers if not r.done])
+                    no_of_remaining_reducers = len(
+                        [r for r in child.reducers if not r.done]
+                    )
                     if no_of_remaining_reducers > 0:
-                        df = self.aggregate_with_child_tbl(df, swap_key_value(edge_df), child)
+                        df = self.aggregate_with_child_tbl(
+                            df, swap_key_value(edge_df), child
+                        )
 
                     # aggregate values for child node (it is a sum for non-leaf node that has been in the hash,
                     # and a count leaf node)
-                    df = df if child.__key__() not in aggregated_dfs \
-                        else df.leftOuterJoin(self.aggregate_intermediate_data_frame(aggregated_dfs[child.__key__()],
-                                                                                     swap_key_value(edge_df))) \
-                        .mapValues(lambda x: x[0] + x[1])
+                    df = (
+                        df
+                        if child.__key__() not in aggregated_dfs
+                        else df.leftOuterJoin(
+                            self.aggregate_intermediate_data_frame(
+                                aggregated_dfs[child.__key__()], swap_key_value(edge_df)
+                            )
+                        ).mapValues(lambda x: x[0] + x[1])
+                    )
                     n.no_children_to_map -= 1
                     edge_df.unpersist()
                 else:
                     df = key_df
             aggregated_dfs[n.__key__()] = df
             key_df.unpersist()
-        return aggregated_dfs[self.parser.root].mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
+        return aggregated_dfs[self.parser.root].mapValues(
+            lambda x: {x1: x2 for (x0, x1, x2) in x}
+        )
 
     def get_direct_children(self, root_df):
         """
@@ -112,16 +157,27 @@ class Translator(BaseTranslator):
             edge_df = self.translate_edge(n.edge, not n.props_from_child)
             props = n.props
             if n.sorted_by is not None:
-                sorting_prop = PropFactory.adding_prop(self.parser.doc_type, n.sorted_by, n.sorted_by, [])
+                sorting_prop = PropFactory.adding_prop(
+                    self.parser.doc_type, n.sorted_by, n.sorted_by, []
+                )
                 props.append(sorting_prop)
             child_df = self.translate_table(n.tbl_name, props=props)
-            child_by_root = edge_df.join(child_df).map(lambda x: tuple([x[1][0], x[1][1]]))
+            child_by_root = edge_df.join(child_df).map(
+                lambda x: tuple([x[1][0], x[1][1]])
+            )
             if n.sorted_by is not None:
                 child_by_root = child_by_root.groupByKey()
-                child_by_root = child_by_root.mapValues(lambda it: sort_by_field(it, sorting_prop.id, n.desc_order)[0])
-                child_by_root = child_by_root.mapValues(lambda x: {k: v for (k, v) in list(x.items())
-                                                                   if k != sorting_prop.id})
-            root_df = root_df.leftOuterJoin(child_by_root).mapValues(lambda x: merge_and_fill_empty_props(x, n.props))
+                child_by_root = child_by_root.mapValues(
+                    lambda it: sort_by_field(it, sorting_prop.id, n.desc_order)[0]
+                )
+                child_by_root = child_by_root.mapValues(
+                    lambda x: {
+                        k: v for (k, v) in list(x.items()) if k != sorting_prop.id
+                    }
+                )
+            root_df = root_df.leftOuterJoin(child_by_root).mapValues(
+                lambda x: merge_and_fill_empty_props(x, n.props)
+            )
             child_df.unpersist()
             child_by_root.unpersist()
         return root_df
@@ -138,26 +194,32 @@ class Translator(BaseTranslator):
             src_prop = translator.parser.get_prop_by_name(r.prop.src)
             dst_prop = self.parser.get_prop_by_name(r.prop.name)
             if r.fn is None:
-                props_without_fn.append({'src': src_prop, 'dst': dst_prop})
+                props_without_fn.append({"src": src_prop, "dst": dst_prop})
             else:
-                props_with_fn.append({'src': src_prop, 'dst': dst_prop})
+                props_with_fn.append({"src": src_prop, "dst": dst_prop})
         return props_with_fn, props_without_fn
 
     def join_and_aggregate(self, df, joining_df, dual_props, joining_node):
         frame_zero = get_frame_zero(joining_node.getting_fields)
-        joining_df = self.get_props_from_df(joining_df, dual_props)\
-            .mapValues(get_normal_frame(joining_node.getting_fields))\
-            .aggregateByKey(frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer)\
+        joining_df = (
+            self.get_props_from_df(joining_df, dual_props)
+            .mapValues(get_normal_frame(joining_node.getting_fields))
+            .aggregateByKey(
+                frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer
+            )
             .mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
-        df = df.leftOuterJoin(joining_df)\
-            .mapValues(lambda x: merge_and_fill_empty_props(x, [p.get('dst') for p in dual_props]))
+        )
+        df = df.leftOuterJoin(joining_df).mapValues(
+            lambda x: merge_and_fill_empty_props(x, [p.get("dst") for p in dual_props])
+        )
         joining_df.unpersist()
         return df
 
     def join_no_aggregate(self, df, joining_df, dual_props):
         joining_df = self.get_props_from_df(joining_df, dual_props)
-        df = df.leftOuterJoin(joining_df)\
-            .mapValues(lambda x: merge_and_fill_empty_props(x, [p.get('dst') for p in dual_props]))
+        df = df.leftOuterJoin(joining_df).mapValues(
+            lambda x: merge_and_fill_empty_props(x, [p.get("dst") for p in dual_props])
+        )
         joining_df.unpersist()
         return df
 
@@ -177,20 +239,26 @@ class Translator(BaseTranslator):
         # based on join_on value in the etlMapping, we know what field is used as joining field.
         # We swap the index that have name of key field different than the name of joining field
         joining_df_key_id = translator.parser.get_key_prop().id
-        field_id_in_joining_df = translator.parser.get_prop_by_name(joining_node.joining_field).id
+        field_id_in_joining_df = translator.parser.get_prop_by_name(
+            joining_node.joining_field
+        ).id
         field_id_in_df = self.parser.get_prop_by_name(joining_node.joining_field).id
         df_key_id = self.parser.get_key_prop().id
 
         swap_df = False
         if joining_df_key_id != field_id_in_joining_df:
-            joining_df = swap_property_as_key(joining_df, field_id_in_joining_df, joining_df_key_id)
+            joining_df = swap_property_as_key(
+                joining_df, field_id_in_joining_df, joining_df_key_id
+            )
         else:
             df = swap_property_as_key(df, field_id_in_df, df_key_id)
             swap_df = True
 
         # Join can be done with or without an aggregation function like max, min, sum, ...
         # these two type of join requires different map-reduce steos
-        props_with_fn, props_without_fn = self.get_joining_props(translator, joining_node)
+        props_with_fn, props_without_fn = self.get_joining_props(
+            translator, joining_node
+        )
         if len(props_with_fn) > 0:
             df = self.join_and_aggregate(df, joining_df, props_with_fn, joining_node)
         if len(props_without_fn) > 0:
@@ -208,7 +276,9 @@ class Translator(BaseTranslator):
         root_df = self.get_direct_children(root_df)
         if len(self.parser.aggregated_nodes) == 0:
             return root_df
-        return root_df.join(self.aggregate_nested_properties()).mapValues(lambda x: merge_dictionary(x[0], x[1]))
+        return root_df.join(self.aggregate_nested_properties()).mapValues(
+            lambda x: merge_dictionary(x[0], x[1])
+        )
 
     def translate_joining_props(self, translators):
         """
@@ -235,8 +305,9 @@ class Translator(BaseTranslator):
                 edge_tbl = n.edge_up_tbl
                 df = df.join(self.translate_edge(edge_tbl, reversed=False))
                 if first:
-                    df = df.map(lambda x: (x[1][1], ({root_id: x[0]},) + (x[1][0],))) \
-                        .mapValues(lambda x: merge_dictionary(x[0], x[1]))
+                    df = df.map(
+                        lambda x: (x[1][1], ({root_id: x[0]},) + (x[1][0],))
+                    ).mapValues(lambda x: merge_dictionary(x[0], x[1]))
                     first = False
                 else:
                     df = df.map(lambda x: (x[1][1], x[1][0]))
@@ -244,11 +315,14 @@ class Translator(BaseTranslator):
                 tbl = n.tbl
                 n_df = self.translate_table(tbl, props=cur_props)
 
-                df = n_df.join(df) \
-                    .mapValues(lambda x: merge_and_fill_empty_props(x, cur_props))
+                df = n_df.join(df).mapValues(
+                    lambda x: merge_and_fill_empty_props(x, cur_props)
+                )
                 n = n.child
             df = df.map(lambda x: make_key_from_property(x[1], root_id))
-            root_df = root_df.leftOuterJoin(df).mapValues(lambda x: merge_dictionary(x[0], x[1]))
+            root_df = root_df.leftOuterJoin(df).mapValues(
+                lambda x: merge_dictionary(x[0], x[1])
+            )
         return root_df
 
     def translate_special(self, root_df):
@@ -262,7 +336,7 @@ class Translator(BaseTranslator):
         root_tbl = get_node_table_name(self.parser.model, self.parser.root)
         root_id = self.parser.get_key_prop().id
         for f in self.parser.special_nodes:
-            if f.fn[0] == 'sliding':
+            if f.fn[0] == "sliding":
                 df = self.translate_table(root_tbl, props=[])
                 n = f.head
                 first = True
@@ -270,22 +344,36 @@ class Translator(BaseTranslator):
                     edge_tbl = n.edge_up_tbl
                     df = df.join(self.translate_edge(edge_tbl))
                     if first:
-                        df = df.map(lambda x: (x[1][1], ({root_id: x[0]},) + (x[1][0],)))\
-                            .mapValues(lambda x: merge_dictionary(x[0], x[1]))
+                        df = df.map(
+                            lambda x: (x[1][1], ({root_id: x[0]},) + (x[1][0],))
+                        ).mapValues(lambda x: merge_dictionary(x[0], x[1]))
                         first = False
                     else:
                         df = df.map(lambda x: (x[1][1], x[1][0]))
                     cur_props = n.props
                     tbl = n.tbl
                     n_df = self.translate_table(tbl, props=cur_props)
-                    df = n_df.join(df) \
-                        .mapValues(lambda x: merge_and_fill_empty_props(x, cur_props))
+                    df = n_df.join(df).mapValues(
+                        lambda x: merge_and_fill_empty_props(x, cur_props)
+                    )
                     n = n.child
                 df = df.map(lambda x: make_key_from_property(x[1], root_id))
                 (n, fn1, fn2) = tuple(f.fn[1:])
                 fid = self.parser.get_prop_by_name(f.name).id
-                df = df.mapValues(lambda x: tuple([v for (k, v) in list(collections.OrderedDict(sorted(x.items())).items())]))
-                df = sliding(df, int(n.strip()), fn1.strip(), fn2.strip())\
-                    .mapValues(lambda x: {fid: x})
-                root_df = root_df.leftOuterJoin(df).mapValues(lambda x: merge_dictionary(x[0], x[1]))
+                df = df.mapValues(
+                    lambda x: tuple(
+                        [
+                            v
+                            for (k, v) in list(
+                                collections.OrderedDict(sorted(x.items())).items()
+                            )
+                        ]
+                    )
+                )
+                df = sliding(df, int(n.strip()), fn1.strip(), fn2.strip()).mapValues(
+                    lambda x: {fid: x}
+                )
+                root_df = root_df.leftOuterJoin(df).mapValues(
+                    lambda x: merge_dictionary(x[0], x[1])
+                )
         return root_df

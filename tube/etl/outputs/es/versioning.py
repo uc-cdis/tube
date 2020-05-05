@@ -5,19 +5,19 @@ from elasticsearch import helpers
 
 
 def get_index_name(index, version):
-    return '{}_{}'.format(index, version)
+    return "{}_{}".format(index, version)
 
 
 def get_backup_index_name(index, version):
-    return '{}_{}'.format(version, index)
+    return "{}_{}".format(version, index)
 
 
 def get_backup_alias(index):
-    return '{}_backup'.format(index)
+    return "{}_backup".format(index)
 
 
 def get_backup_version(index_name):
-    res = re.match('^[0-9]+', index_name)
+    res = re.match("^[0-9]+", index_name)
     if res is not None:
         return int(res.group()) + 1
     return 0
@@ -64,11 +64,14 @@ class Versioning(object):
         :param index_to_backup: name of index
         :return:
         """
-        backup_alias, backup_version, backup_index, old_backup = self.get_backup_info(index_to_backup)
+        backup_alias, backup_version, backup_index, old_backup = self.get_backup_info(
+            index_to_backup
+        )
         # create index to store the existing index
         self.es.indices.create(index=backup_index)
-        helpers.reindex(self.es, source_index=index_to_backup,
-                        target_index=backup_index)
+        helpers.reindex(
+            self.es, source_index=index_to_backup, target_index=backup_index
+        )
         self.es.indices.put_alias(index=backup_index, name=index_alias_name)
         self.es.indices.delete(index_to_backup)
         self.es.indices.put_alias(index=backup_index, name=backup_alias)
@@ -104,7 +107,7 @@ class Versioning(object):
 
         self.old_indices_to_forget = list(self.es.indices.get_alias(name=index).keys())
         self.last_index = sorted(self.old_indices_to_forget)[-1]
-        res = re.match('.*?([0-9]+)$', self.last_index)
+        res = re.match(".*?([0-9]+)$", self.last_index)
         if res is not None:
             return int(res.group(1)) + 1
         return 0

@@ -34,11 +34,12 @@ def value_diff(left, right):
 
         if items_not_equal and left_val is not None and right_val is not None:
             equal = False
-            diff = "{attr}: {left_val} != {right_val}".format(attr=name,
-                                                              left_val=left_val,
-                                                              right_val=right_val)
-            types = "types: {left_type} != {right_type}".format(left_type=type(left_val),
-                                                                right_type=type(right_val))
+            diff = "{attr}: {left_val} != {right_val}".format(
+                attr=name, left_val=left_val, right_val=right_val
+            )
+            types = "types: {left_type} != {right_type}".format(
+                left_type=type(left_val), right_type=type(right_val)
+            )
             diffs.append(diff)
             diffs.append(types)
 

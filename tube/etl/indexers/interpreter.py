@@ -1,6 +1,6 @@
 import yaml
 from .aggregation.translator import Translator as AggregatorTranslator
-from .injection.translator import Translator as CollectorTranslator
+from tube.etl.indexers.injection.translator import Translator as InjectionTranslator
 from .base.translator import Translator as BaseTranslator
 from tube.utils.dd import init_dictionary
 from tube.etl.outputs.es.writer import Writer
@@ -12,11 +12,15 @@ def create_translators(sc, config):
     writer = Writer(sc, config)
 
     translators = {}
-    for m in mappings['mappings']:
-        if m['type'] == 'aggregator':
-            translator = AggregatorTranslator(sc, config.HDFS_DIR, writer, m, model, dictionary)
-        elif m['type'] == 'collector':
-            translator = CollectorTranslator(sc, config.HDFS_DIR, writer, m, model, dictionary)
+    for m in mappings["mappings"]:
+        if m["type"] == "aggregator":
+            translator = AggregatorTranslator(
+                sc, config.HDFS_DIR, writer, m, model, dictionary
+            )
+        elif m["type"] == "collector":
+            translator = InjectionTranslator(
+                sc, config.HDFS_DIR, writer, m, model, dictionary
+            )
         else:
             translator = BaseTranslator(sc, config.HDFS_DIR, writer)
         translators[translator.parser.doc_type] = translator
@@ -35,8 +39,9 @@ def run_transform(translators):
         translator.current_step = 1
         if len(translator.parser.joining_nodes) > 0:
             need_to_join[translator.parser.doc_type] = translator
-            translator_to_translators[translator.parser.doc_type] = \
-                [j.joining_index for j in translator.parser.joining_nodes]
+            translator_to_translators[translator.parser.doc_type] = [
+                j.joining_index for j in translator.parser.joining_nodes
+            ]
 
     for v in list(need_to_join.values()):
         df = v.translate_joining_props(translators)
@@ -51,4 +56,4 @@ def run_transform(translators):
 def get_index_names(config):
     stream = open(config.MAPPING_FILE)
     mappings = yaml.load(stream, Loader=yaml.SafeLoader)
-    return [m['name'] for m in mappings['mappings']]
+    return [m["name"] for m in mappings["mappings"]]

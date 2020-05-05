@@ -1,12 +1,15 @@
 from tube.etl.indexers.base.prop import PropFactory
 
 
-class ParentChain():
+class ParentChain:
     """
     Special root is the abstract node give the access to the aggregation path of a special_prop in etlMapping
     """
+
     def __init__(self, head, fn):
-        self.head = head  # first ParentNode in the chain of nodes (like a link-list) helping to getting props
+        self.head = (
+            head
+        )  # first ParentNode in the chain of nodes (like a link-list) helping to getting props
         # from parent nodes in the dictionary
         self.fn = fn  # name of the function perform in this aggregation node
 
@@ -20,10 +23,11 @@ class ParentChain():
         return self.head.name
 
 
-class ParentNode():
+class ParentNode:
     """
     Special Node is a node in a chain of aggregation path that will be follow by the special aggregation
     """
+
     def __init__(self, name, tbl, edge_up_tbl, props):
         self.name = name
         self.tbl = tbl

@@ -4,14 +4,16 @@ import tube.settings as config
 
 
 def make_spark_context(config):
-    '''
+    """
     Makes a spark and sqlContext
-    '''
-    conf = SparkConf() \
-        .set('spark.executor.memory', config.SPARK_EXECUTOR_MEMORY) \
-        .set('spark.driver.memory', config.SPARK_DRIVER_MEMORY) \
+    """
+    conf = (
+        SparkConf()
+        .set("spark.executor.memory", config.SPARK_EXECUTOR_MEMORY)
+        .set("spark.driver.memory", config.SPARK_DRIVER_MEMORY)
         .setAppName(config.APP_NAME)
-    if config.RUNNING_MODE == 'Dev':
+    )
+    if config.RUNNING_MODE == "Dev":
         # We should only use the value of `config.spark_master` in
         # a test context. Production runs need to set the Spark Master
         # to 'yarn'. This is done in the arguments to `spark-submit`.
