@@ -1,7 +1,6 @@
 import yaml
 from .aggregation.translator import Translator as AggregatorTranslator
-from .injection.translator import Translator as CollectorTranslator
-from .injecting.translator import Translator as InjectingTranslator
+from tube.etl.indexers.injection.translator import Translator as InjectionTranslator
 from .base.translator import Translator as BaseTranslator
 from tube.utils.dd import init_dictionary
 from tube.etl.outputs.es.writer import Writer
@@ -19,7 +18,7 @@ def create_translators(sc, config):
                 sc, config.HDFS_DIR, writer, m, model, dictionary
             )
         elif m["type"] == "collector":
-            translator = InjectingTranslator(
+            translator = InjectionTranslator(
                 sc, config.HDFS_DIR, writer, m, model, dictionary
             )
         else:
