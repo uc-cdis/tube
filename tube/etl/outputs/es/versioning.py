@@ -112,6 +112,32 @@ class Versioning(object):
             return int(res.group(1)) + 1
         return 0
 
+    def get_next_index_version(self, index):
+        """
+        Get the next version of index that number will be added as a suffix into index name
+        :param index: original name/alias of index
+        :return: -1: if the alias does not exist while the index with that name exists
+                 0: if the alias does not exists,
+                 n: (n > 0) if there exists the alias and n is the new increased version.
+        """
+        alias_existed = self.es.indices.exists_alias(name=index)
+        if not alias_existed:
+            return get_index_name(index, 0)
+
+        self.old_indices_to_forget = list(self.es.indices.get_alias(name=index).keys())
+        last_index = sorted(self.old_indices_to_forget)[-1]
+        res = re.match(".*?([0-9]+)$", last_index)
+        if res is not None:
+            next_version = int(res.group(1)) + 1
+            versioned_index_name = get_index_name(index, next_version)
+            while self.es.indices.exists(index=versioned_index_name):
+                next_version = next_version + 1
+                versioned_index_name = get_index_name(index, next_version)
+            return versioned_index_name
+
+        return get_index_name(index, 0)
+
+
     def backup_old_index(self, index):
         """
         Create an empty versioned index.

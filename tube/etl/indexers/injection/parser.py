@@ -111,7 +111,7 @@ class Parser(BaseParser):
     def get_props_for_nodes(self):
         prop_nodes = {}
         for (k, v) in self.mapping["injecting_props"].items():
-            if k == "project" and "project_code" not in v.get("props").values():
+            if k == "project" and "project_code" not in [p.get("name") for p in v.get("props")]:
                 v.get("props").append({"name": PROJECT_CODE, "src": "code"})
             prop_nodes[k] = CollectingNode(
                 k,
