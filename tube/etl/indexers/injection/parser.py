@@ -110,7 +110,7 @@ class Parser(BaseParser):
 
     def get_props_for_nodes(self):
         prop_nodes = {}
-        for (k, v) in self.mapping["injecting_props"].items():
+        for (k, v) in self.mapping.get("injecting_props", {}).items():
             if k == "project" and "project_code" not in [p.get("name") for p in v.get("props")]:
                 v.get("props").append({"name": PROJECT_CODE, "src": "code"})
             prop_nodes[k] = CollectingNode(
@@ -144,11 +144,10 @@ class Parser(BaseParser):
         for l in leaves:
             self.leaves.add(LeafNode(l, get_node_table_name(self.model, l)))
 
-        if "injecting_props" in self.mapping:
-            nodes_with_props = self.get_props_for_nodes()
-            self.collectors, self.roots = self.create_tree_from_generated_edges(
-                flat_paths, nodes_with_props
-            )
+        nodes_with_props = self.get_props_for_nodes()
+        self.collectors, self.roots = self.create_tree_from_generated_edges(
+            flat_paths, nodes_with_props
+        )
 
         self.update_level()
         self.collectors.sort()
