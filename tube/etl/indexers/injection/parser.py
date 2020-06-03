@@ -110,16 +110,30 @@ class Parser(BaseParser):
 
     def get_props_for_nodes(self):
         prop_nodes = {}
+        roots = {}
         for (k, v) in self.mapping.get("injecting_props", {}).items():
             if k == "project" and "project_code" not in [p.get("name") for p in v.get("props")]:
                 v.get("props").append({"name": PROJECT_CODE, "src": "code"})
-            prop_nodes[k] = CollectingNode(
-                k,
-                get_node_table_name(self.model, k),
-                props=self.create_props_from_json(
-                    self.doc_type, v.get("props"), node_label=k
-                ),
-            )
+            if k != "program":
+                prop_nodes[k] = CollectingNode(
+                    k,
+                    get_node_table_name(self.model, k),
+                    props=self.create_props_from_json(
+                        self.doc_type, v.get("props"), node_label=k
+                    ),
+                )
+            else:
+                node_props = v.get("props")
+                node_props.append({"name": "program_name", "src": "name"})
+                roots[k] = RootNode(
+                    k,
+                    get_node_table_name(self.model, k),
+                    self.create_props_from_json(
+                        self.doc_type,
+                        node_props,
+                        node_label=k, is_additional=True
+                    ),
+                )
         if "project" not in prop_nodes.keys():
             prop_nodes["project"] = CollectingNode(
                 "project",
@@ -127,10 +141,10 @@ class Parser(BaseParser):
                 props=self.create_props_from_json(
                     self.doc_type,
                     [{"name": PROJECT_CODE, "src": "code"}],
-                    node_label="project",
+                    node_label="project", is_additional=True
                 ),
             )
-        return prop_nodes
+        return prop_nodes, roots
 
     def get_collecting_nodes(self):
         def selected_category_comparer(dictionary, x):
@@ -144,9 +158,9 @@ class Parser(BaseParser):
         for l in leaves:
             self.leaves.add(LeafNode(l, get_node_table_name(self.model, l)))
 
-        nodes_with_props = self.get_props_for_nodes()
+        nodes_with_props, roots = self.get_props_for_nodes()
         self.collectors, self.roots = self.create_tree_from_generated_edges(
-            flat_paths, nodes_with_props
+            flat_paths, nodes_with_props, roots
         )
 
         self.update_level()
@@ -204,13 +218,12 @@ class Parser(BaseParser):
                 self.create_props_from_json(
                     self.doc_type,
                     [{"name": "program_name", "src": "name"}],
-                    node_label=root_name,
+                    node_label=root_name, is_additional=True
                 ),
             )
         )
         child.add_parent(top_node.name, edge_up_tbl)
         top_node.add_child(child)
-
         roots[root_name] = top_node
 
     def add_collecting_node(self, child, collectors, fst):
@@ -231,9 +244,8 @@ class Parser(BaseParser):
         collectors[parent_name] = collecting_node
         return collecting_node
 
-    def create_tree_from_generated_edges(self, flat_paths, nodes_with_props):
+    def create_tree_from_generated_edges(self, flat_paths, nodes_with_props, roots):
         collectors = nodes_with_props
-        roots = {}
         checking_set = set(self.generated_edges)
         for p in flat_paths:
             segments = list(p.path)
