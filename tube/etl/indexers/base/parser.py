@@ -97,7 +97,9 @@ class Parser(object):
         lst = [tuple(p.split(":")) if ":" in p else tuple([p, p]) for p in props]
         return lst
 
-    def create_prop_from_json(self, doc_name, p, node_label=None, index=None, is_additional=False):
+    def create_prop_from_json(
+        self, doc_name, p, node_label=None, index=None, is_additional=False
+    ):
         value_mappings = p.get("value_mappings", [])
         src = p["src"] if "src" in p else p["name"]
         fn = p.get("fn")
@@ -112,7 +114,7 @@ class Parser(object):
             src_index=index,
             fn=fn,
             prop_type=prop_type,
-            is_additional=is_additional
+            is_additional=is_additional,
         )
         return prop
 
@@ -123,7 +125,11 @@ class Parser(object):
         for p in props_in_json:
             res.append(
                 self.create_prop_from_json(
-                    doc_name, p, node_label=node_label, index=index, is_additional=is_additional
+                    doc_name,
+                    p,
+                    node_label=node_label,
+                    index=index,
+                    is_additional=is_additional,
                 )
             )
         return res

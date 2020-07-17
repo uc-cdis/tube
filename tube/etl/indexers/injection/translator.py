@@ -1,6 +1,10 @@
 from copy import copy
 
-from tube.etl.indexers.base.lambdas import merge_and_fill_empty_props, merge_dictionary, merge_data_frames
+from tube.etl.indexers.base.lambdas import (
+    merge_and_fill_empty_props,
+    merge_dictionary,
+    merge_data_frames,
+)
 from tube.etl.indexers.base.prop import PropFactory
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from tube.etl.indexers.injection.parser import Parser
@@ -175,7 +179,7 @@ class Translator(BaseTranslator):
 
         for c in self.parser.collectors:
             for p in c.props:
-                if p.name != 'project_id':
+                if p.name != "project_id":
                     props.append(self.clone_prop_with_iterator_fn(p))
         return props
 

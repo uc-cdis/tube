@@ -44,14 +44,13 @@ class CollectingNode(BaseNode):
 
     def __eq__(self, other):
         return (
-            ((self.level is None and other.level is None) or self.level == other.level)
-            and self.non_leaf_children_count == other.non_leaf_children_count
-        )
+            (self.level is None and other.level is None) or self.level == other.level
+        ) and self.non_leaf_children_count == other.non_leaf_children_count
 
     def __lt__(self, other):
-        if (self.level is None and other.level is not None):
+        if self.level is None and other.level is not None:
             return False
-        elif (other.level is None or self.level is None):
+        elif other.level is None or self.level is None:
             return True
         return self.level < other.level or (
             self.level == other.level
