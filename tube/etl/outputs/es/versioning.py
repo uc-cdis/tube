@@ -137,7 +137,6 @@ class Versioning(object):
 
         return get_index_name(index, 0)
 
-
     def backup_old_index(self, index):
         """
         Create an empty versioned index.

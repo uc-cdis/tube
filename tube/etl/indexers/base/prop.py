@@ -46,7 +46,7 @@ class PropFactory(object):
                 src_index,
                 fn,
                 prop_type,
-                is_additional=is_additional
+                is_additional=is_additional,
             )
             PropFactory.list_props.append(prop)
             PropFactory.prop_by_names.get(doc_name)[name] = prop
@@ -89,7 +89,7 @@ class Prop(object):
         src_index=None,
         fn=None,
         prop_type=None,
-        is_additional=False
+        is_additional=False,
     ):
         self.id = id
         self.name = name

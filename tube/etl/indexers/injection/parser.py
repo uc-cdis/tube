@@ -12,7 +12,11 @@ from tube.utils.dd import (
 )
 from tube.utils.general import PROJECT_CODE
 from tube.etl.indexers.base.parser import Parser as BaseParser
-from tube.etl.indexers.injection.nodes.collecting_node import CollectingNode, RootNode, LeafNode
+from tube.etl.indexers.injection.nodes.collecting_node import (
+    CollectingNode,
+    RootNode,
+    LeafNode,
+)
 
 
 class Path(object):
@@ -82,16 +86,22 @@ class Parser(BaseParser):
     def get_all_edge_tables_in_db(self):
         with get_db_cursor("db") as cur:
             db_name = cur.connection.info.dbname
-            query_all_tb_names = "select table_name from information_schema.tables " \
-                                 "where table_schema='public' and table_catalog='{dbname}' and table_name like 'edge_%';"\
-                .format(dbname=db_name)
+            query_all_tb_names = (
+                "select table_name from information_schema.tables "
+                "where table_schema='public' and table_catalog='{dbname}' and table_name like 'edge_%';".format(
+                    dbname=db_name
+                )
+            )
             cur.execute(query_all_tb_names)
             edge_tbs_in_db = cur.fetchall()
         return edge_tbs_in_db
 
     def get_edges_having_data(self):
         list_tb_names_from_dict = get_all_edges_table(self.model)
-        tb_names = list(set(list_tb_names_from_dict) & set([i.get("table_name") for i in self.get_all_edge_tables_in_db()]))
+        tb_names = list(
+            set(list_tb_names_from_dict)
+            & set([i.get("table_name") for i in self.get_all_edge_tables_in_db()])
+        )
 
         query = ", ".join(
             "(select count(*) from {tb_name}) as {tb_name}".format(tb_name=tb_name)
@@ -112,7 +122,9 @@ class Parser(BaseParser):
         prop_nodes = {}
         roots = {}
         for (k, v) in self.mapping.get("injecting_props", {}).items():
-            if k == "project" and "project_code" not in [p.get("name") for p in v.get("props")]:
+            if k == "project" and "project_code" not in [
+                p.get("name") for p in v.get("props")
+            ]:
                 v.get("props").append({"name": PROJECT_CODE, "src": "code"})
             if k != "program":
                 prop_nodes[k] = CollectingNode(
@@ -129,9 +141,7 @@ class Parser(BaseParser):
                     k,
                     get_node_table_name(self.model, k),
                     self.create_props_from_json(
-                        self.doc_type,
-                        node_props,
-                        node_label=k, is_additional=True
+                        self.doc_type, node_props, node_label=k, is_additional=True
                     ),
                 )
         if "project" not in prop_nodes.keys():
@@ -141,7 +151,8 @@ class Parser(BaseParser):
                 props=self.create_props_from_json(
                     self.doc_type,
                     [{"name": PROJECT_CODE, "src": "code"}],
-                    node_label="project", is_additional=True
+                    node_label="project",
+                    is_additional=True,
                 ),
             )
         return prop_nodes, roots
@@ -218,7 +229,8 @@ class Parser(BaseParser):
                 self.create_props_from_json(
                     self.doc_type,
                     [{"name": "program_name", "src": "name"}],
-                    node_label=root_name, is_additional=True
+                    node_label=root_name,
+                    is_additional=True,
                 ),
             )
         )

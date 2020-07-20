@@ -69,11 +69,11 @@ def get_props_empty_values(props):
 
 
 def merge_data_frames(x):
-    if (x[0] is None and x[1] is None):
+    if x[0] is None and x[1] is None:
         return tuple([])
-    if (x[0] is None):
+    if x[0] is None:
         return x[1]
-    if (x[1] is None):
+    if x[1] is None:
         return x[0]
     return tuple(list(set(x[0]) | set(x[1])))
 
