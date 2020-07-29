@@ -56,11 +56,14 @@ def swap_key_value(df):
 
 def get_props(names, values):
     return lambda x: {
-        names[src]: values[src][v]
-        if isinstance(v, collections.Hashable) and src in values and v in values[src]
+        p_id: values[src][p_id][v]
+        if isinstance(v, collections.Hashable)
+        and src in values
+        and v in values[src][p_id]
         else v
         for (src, v) in list(x.items())
         if src in list(names.keys())
+        for p_id in names[src]
     }
 
 

@@ -4,7 +4,6 @@ from tube.utils.dd import (
     get_child_table,
     get_multiplicity,
     get_node_table_name,
-    get_properties_types,
     object_to_string,
 )
 from .nodes.aggregated_node import AggregatedNode, Reducer

@@ -72,8 +72,18 @@ class Translator(object):
     def get_props_from_data_row(self, df, props, to_tuple=False):
         if df.isEmpty():
             return df.mapValues(get_props_empty_values(props))
-        names = {p.src: p.id for p in props}
-        values = {p.src: {m.original: m.final for m in p.value_mappings} for p in props}
+        names = {}
+        values = {}
+        for p in props:
+            n = names.get(p.src, [])
+            n.append(p.id)
+            names[p.src] = n
+            v = values.get(p.src, {})
+            v[p.id] = {}
+            for m in p.value_mappings:
+                v[p.id][m.original] = m.final
+            values[p.src] = v
+
         return df.mapValues(get_props(names, values))
 
     def get_props_from_df(self, df, props):
