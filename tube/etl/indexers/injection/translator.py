@@ -84,12 +84,12 @@ class Translator(BaseTranslator):
             return
         child.no_parent_to_map -= 1
         child_df = self.translate_table(child.tbl_name, props=child.props)
-        project_code_id = self.parser.get_prop_by_name(PROJECT_CODE).id
         child_df = child_df.join(edge_df).mapValues(
             lambda x: merge_dictionary(x[0], x[1])
         )
-        program_name_id = self.parser.get_prop_by_name(PROGRAM_NAME).id
 
+        project_code_id = self.parser.get_prop_by_name(PROJECT_CODE).id
+        program_name_id = self.parser.get_prop_by_name(PROGRAM_NAME).id
         project_id_prop = self.parser.get_prop_by_name(PROJECT_ID)
         if project_id_prop is None:
             project_id_prop = PropFactory.adding_prop(

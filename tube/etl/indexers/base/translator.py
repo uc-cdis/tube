@@ -8,8 +8,8 @@ from .lambdas import (
     get_props_empty_values,
     get_number,
 )
+from tube.etl.indexers.base.prop import PropFactory
 from tube.utils.spark import save_rds
-from .prop import PropFactory
 
 
 class Translator(object):

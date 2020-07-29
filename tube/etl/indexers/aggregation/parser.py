@@ -1,6 +1,5 @@
 import re
 from tube.utils.dd import (
-    get_attribute_from_path,
     get_edge_table,
     get_child_table,
     get_multiplicity,
@@ -15,6 +14,7 @@ from .nodes.special_node import SpecialNode, SpecialChain
 from .nodes.parent_node import ParentChain, ParentNode
 from ..base.parser import Parser as BaseParser
 from copy import deepcopy
+from tube.utils.general import PROJECT_CODE, PROGRAM_NAME
 
 
 class Path(object):
@@ -106,7 +106,39 @@ class Parser(BaseParser):
                 )
         return list_nodes
 
+    def add_program_name_to_parent(self):
+        """
+        In case program name is not in self.mapping["parent_props"] while the root node is project. We must add that field
+        :return:
+        """
+        found_program = -1
+        i = -1
+        for path in self.mapping["parent_props"]:
+            p = path.get("path")
+            i += 1
+            if p.startswith("program"):
+                found_program = i
+        if found_program == -1:
+            self.mapping["parent_props"].append(
+                {"path": "programs[{PROGRAM_N}:name]".format(PROGRAM_N=PROGRAM_NAME)}
+            )
+            found_program = len(self.mapping["parent_props"]) - 1
+        program_path = self.mapping["parent_props"][found_program]
+        if program_path["path"].find(PROGRAM_NAME) == -1:
+            program_path += (
+                program_path[: len(program_path) - 1]
+                + "{PROGRAM_N}:name".format(PROGRAM_N=PROGRAM_NAME)
+                + "]"
+            )
+
     def get_host_props(self):
+        if self.root == "project":
+            if "project_code" not in [p.get("name") for p in self.mapping["props"]]:
+                self.mapping["props"].append({"name": PROJECT_CODE, "src": "code"})
+            if "parent_props" not in self.mapping:
+                self.mapping["parent_props"] = []
+            self.add_program_name_to_parent()
+
         return self.create_props_from_json(
             self.doc_type, self.mapping["props"], node_label=self.root
         )

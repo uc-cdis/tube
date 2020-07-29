@@ -13,10 +13,11 @@ from tube.etl.indexers.aggregation.lambdas import (
     get_normal_frame,
     get_single_frame_zero_by_func,
 )
+from tube.etl.indexers.base.prop import PropFactory
 from tube.utils.dd import get_node_table_name
+from tube.utils.general import PROJECT_ID, PROJECT_CODE, PROGRAM_NAME
 from .parser import Parser
 from ..base.lambdas import sort_by_field, swap_property_as_key, make_key_from_property
-from tube.etl.indexers.base.prop import PropFactory
 from .lambdas import sliding
 
 
@@ -268,12 +269,33 @@ class Translator(BaseTranslator):
             df = swap_property_as_key(df, df_key_id, field_id_in_df)
         return df
 
+    def ensure_project_id_exist(self, df):
+        project_id_prop = self.parser.get_prop_by_name(PROJECT_ID)
+        if project_id_prop is None:
+            project_id_prop = PropFactory.adding_prop(
+                self.parser.doc_type, PROJECT_ID, None, [], prop_type=(str,)
+            )
+            project_code_id = self.parser.get_prop_by_name(PROJECT_CODE).id
+            program_name_id = self.parser.get_prop_by_name(PROGRAM_NAME).id
+            df = df.mapValues(
+                lambda x: merge_dictionary(
+                    x,
+                    {
+                        project_id_prop.id: "{}-{}".format(
+                            x.get(program_name_id), x.get(project_code_id)
+                        )
+                    },
+                )
+            )
+        return df
+
     def translate(self):
         root_tbl = get_node_table_name(self.parser.model, self.parser.root)
         root_df = self.translate_table(root_tbl, props=self.parser.props)
         root_df = self.translate_special(root_df)
         root_df = self.translate_parent(root_df)
         root_df = self.get_direct_children(root_df)
+        root_df = self.ensure_project_id_exist(root_df)
         if len(self.parser.aggregated_nodes) == 0:
             return root_df
         return root_df.join(self.aggregate_nested_properties()).mapValues(
