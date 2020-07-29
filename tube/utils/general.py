@@ -55,6 +55,10 @@ def get_resource_path_from_json(results, json_data):
     return results
 
 
+def get_node_id_name(node_name):
+    return "_{}_id".format(node_name)
+
+
 PROGRAM_NAME = "program_name"
 PROJECT_CODE = "project_code"
 PROJECT_ID = "project_id"

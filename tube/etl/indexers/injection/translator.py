@@ -16,7 +16,7 @@ from tube.etl.indexers.injection.lambdas import (
     get_frame_zero,
 )
 from tube.etl.indexers.injection.nodes.collecting_node import LeafNode
-from tube.utils.general import PROJECT_ID, PROJECT_CODE, PROGRAM_NAME
+from tube.utils.general import PROJECT_ID, PROJECT_CODE, PROGRAM_NAME, get_node_id_name
 
 
 class Translator(BaseTranslator):
@@ -53,7 +53,7 @@ class Translator(BaseTranslator):
         child.no_parent_to_map -= 1
         if len(child.props) > 0:
             child_df = self.translate_table(child.tbl_name, props=child.props)
-            node = self.parser.get_prop_by_name("{}_id".format(child.name))
+            node = self.parser.get_prop_by_name(get_node_id_name(child.name))
             node_id = node.id if node is not None else None
             if node_id is not None:
                 child_df = child_df.map(

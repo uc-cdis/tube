@@ -124,11 +124,13 @@ class Parser(BaseParser):
             )
             found_program = len(self.mapping["parent_props"]) - 1
         program_path = self.mapping["parent_props"][found_program]
-        if program_path["path"].find(PROGRAM_NAME) == -1:
-            program_path += (
-                program_path[: len(program_path) - 1]
-                + "{PROGRAM_N}:name".format(PROGRAM_N=PROGRAM_NAME)
-                + "]"
+        program_path_val = program_path["path"]
+        if program_path_val.find(PROGRAM_NAME) == -1:
+            separator = "" if program_path_val.find("[]") > 0 else ","
+            program_path["path"] = "{}{SEP}{PROGRAM_N}:name]".format(
+                program_path_val[: len(program_path) - 1],
+                SEP=separator,
+                PROGRAM_N=PROGRAM_NAME,
             )
 
     def get_host_props(self):
