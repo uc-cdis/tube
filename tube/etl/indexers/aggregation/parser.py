@@ -113,10 +113,11 @@ class Parser(BaseParser):
         found_program = -1
         i = -1
         for path in self.mapping["parent_props"]:
-            p = path.get("path")
+            p = path["path"]
             i += 1
             if p.startswith("program"):
                 found_program = i
+                break
         if found_program == -1:
             self.mapping["parent_props"].append(
                 {"path": "programs[{PROGRAM_N}:name]".format(PROGRAM_N=PROGRAM_NAME)}

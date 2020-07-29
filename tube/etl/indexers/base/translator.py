@@ -72,7 +72,18 @@ class Translator(object):
     def get_props_from_data_row(self, df, props, to_tuple=False):
         if df.isEmpty():
             return df.mapValues(get_props_empty_values(props))
+        # names is dictionary which maps from the name of source fields in datatable to the list of ids
+        # of properties in dataframe
+        # example: names = {"gender": [1, 2], project_name: [3]}
         names = {}
+        # values is a dictionary which defines the mapping values (if exist) for each field.
+        # values = {
+        #   "gender": {
+        #       1: {"male": "M", "female": "F"},
+        #       2: {"male": "Male", "female": "Female}
+        #   },
+        #   "project_name": {3: {}}
+        # }
         values = {}
         for p in props:
             n = names.get(p.src, [])
