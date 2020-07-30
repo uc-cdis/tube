@@ -110,5 +110,11 @@ class Prop(object):
     def __repr__(self):
         return self.__str__()
 
+    def __eq__(self, other):
+        return self.id == other.id
+
+    def __ne__(self, other):
+        return self.id != other.id
+
     def update_type(self, prop_type):
         self.type = prop_type

@@ -1,3 +1,4 @@
+from tube.utils.general import get_node_id_name
 from ..base.prop import PropFactory
 from tube.utils.dd import get_properties_types
 
@@ -16,7 +17,7 @@ class Parser(object):
         self.joining_nodes = []
         PropFactory.adding_prop(
             self.doc_type,
-            "{}_id".format(self.doc_type),
+            get_node_id_name(self.doc_type),
             "",
             [],
             src_node=None,
@@ -67,7 +68,7 @@ class Parser(object):
 
     def get_key_prop(self):
         return PropFactory.get_prop_by_name(
-            self.doc_type, "{}_id".format(self.doc_type)
+            self.doc_type, get_node_id_name(self.doc_type)
         )
 
     def get_prop_by_name(self, name):
