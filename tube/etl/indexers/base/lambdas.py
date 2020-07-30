@@ -1,7 +1,6 @@
 import ast
 import json
 import collections
-import sys
 
 
 def extract_metadata(str_value):

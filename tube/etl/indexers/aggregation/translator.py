@@ -15,7 +15,13 @@ from tube.etl.indexers.aggregation.lambdas import (
 )
 from tube.etl.indexers.base.prop import PropFactory
 from tube.utils.dd import get_node_table_name
-from tube.utils.general import get_node_id_name, PROJECT_ID, PROJECT_CODE, PROGRAM_NAME
+from tube.utils.general import (
+    get_node_id_name,
+    get_node_id_name_without_prefix,
+    PROJECT_ID,
+    PROJECT_CODE,
+    PROGRAM_NAME,
+)
 from .parser import Parser
 from ..base.lambdas import sort_by_field, swap_property_as_key, make_key_from_property
 from .lambdas import sliding
@@ -193,6 +199,16 @@ class Translator(BaseTranslator):
         props_without_fn = []
         for r in joining_index.getting_fields:
             src_prop = translator.parser.get_prop_by_name(r.prop.src)
+            # field which is identity of a node is named as _{node}_id now
+            # before in etl-mapping for joining_props, we use {node}_id
+            # for backward compatibility, we check first with the value in mapping file.
+            # if there is not any Prop object like that, we check with new format _{node}_id
+            if src_prop is None and r.prop.src == get_node_id_name_without_prefix(
+                translator.parser.doc_type
+            ):
+                src_prop = translator.parser.get_prop_by_name(
+                    get_node_id_name(translator.parser.doc_type)
+                )
             dst_prop = self.parser.get_prop_by_name(r.prop.name)
             if r.fn is None:
                 props_without_fn.append({"src": src_prop, "dst": dst_prop})
@@ -243,6 +259,10 @@ class Translator(BaseTranslator):
         id_field_in_joining_df = translator.parser.get_prop_by_name(
             joining_node.joining_field
         ).id
+        # field which is identity of a node is named as _{node}_id now
+        # before in etl-mapping for joining_props, we use {node}_id
+        # for backward compatibility, we check first with the value in mapping file.
+        # if there is not any Prop object like that, we check with new format _{node}_id
         id_field_in_df = self.parser.get_prop_by_name(joining_node.joining_field)
         if id_field_in_df is None:
             id_field_in_df = self.parser.get_prop_by_name(
