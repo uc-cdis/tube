@@ -27,11 +27,17 @@ class Translator(BaseTranslator):
         for root in self.parser.roots:
             root_props.extend(root.props)
         self.root_props = list(set(root_props))
+        self.parser.additional_props.append(
+            PropFactory.add_additional_prop(self.parser.doc_type, "source_node", (str,))
+        )
 
     def collect_leaf(self, child, edge_df, collected_leaf_dfs, root_props=None):
         root_props = self.root_props if root_props is None else root_props
         if isinstance(child, LeafNode):
             child_df = self.translate_table(child.tbl_name, props=self.parser.props)
+            child_df = child_df.mapValues(
+                lambda x: merge_dictionary({"source_node": child.name}, x)
+            )
             if child_df.isEmpty():
                 return
             child_df = child_df.join(edge_df).mapValues(
