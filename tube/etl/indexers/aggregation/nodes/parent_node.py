@@ -7,9 +7,7 @@ class ParentChain:
     """
 
     def __init__(self, head, fn):
-        self.head = (
-            head
-        )  # first ParentNode in the chain of nodes (like a link-list) helping to getting props
+        self.head = head  # first ParentNode in the chain of nodes (like a link-list) helping to getting props
         # from parent nodes in the dictionary
         self.fn = fn  # name of the function perform in this aggregation node
 

@@ -1,6 +1,7 @@
 import yaml
 from .aggregation.translator import Translator as AggregatorTranslator
-from tube.etl.indexers.injection.translator import Translator as InjectionTranslator
+from .injection.translator import Translator as InjectionTranslator
+from .nested.translator import Translator as NestedTranslator
 from .base.translator import Translator as BaseTranslator
 from tube.utils.dd import init_dictionary
 from tube.etl.outputs.es.writer import Writer
@@ -24,6 +25,9 @@ def create_translators(sc, config):
         else:
             translator = BaseTranslator(sc, config.HDFS_DIR, writer)
         translators[translator.parser.doc_type] = translator
+    translators["nested"] = NestedTranslator(
+        sc, config.HDFS_DIR, writer, None, model, dictionary
+    )
     for translator in list(translators.values()):
         translator.update_types()
     return translators
@@ -37,7 +41,10 @@ def run_transform(translators):
         df = translator.translate()
         if df is None:
             continue
-        translator.save_to_hadoop(df)
+        if type(translator) == NestedTranslator:
+            translator.write(df)
+        else:
+            translator.save_to_hadoop(df)
         translator.current_step = 1
         if len(translator.parser.joining_nodes) > 0:
             need_to_join[translator.parser.doc_type] = translator
@@ -51,6 +58,8 @@ def run_transform(translators):
         v.current_step += 1
 
     for t in list(translators.values()):
+        if type(t) == NestedTranslator:
+            continue
         df = t.translate_final()
         t.write(df)
 

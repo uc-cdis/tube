@@ -1,6 +1,8 @@
 import os
+import json
 from .lambdas import (
-    extract_metadata,
+    extract_metadata_to_json,
+    extract_metadata_to_tuple,
     extract_link,
     extract_link_reverse,
     flatten_files_to_lists,
@@ -10,6 +12,8 @@ from .lambdas import (
 )
 from tube.etl.indexers.base.prop import PropFactory
 from tube.utils.spark import save_rds
+from pyspark.sql.context import SQLContext
+from tube.utils.general import get_node_id_name
 
 
 class Translator(object):
@@ -19,6 +23,7 @@ class Translator(object):
 
     def __init__(self, sc, hdfs_path, writer):
         self.sc = sc
+        self.sql_context = SQLContext(self.sc)
         self.writer = writer
         self.hdfs_path = hdfs_path
         self.parser = None
@@ -33,7 +38,7 @@ class Translator(object):
             df = self.sc.wholeTextFiles(
                 os.path.join(self.hdfs_path, table_name)
             ).flatMap(flatten_files_to_lists)
-            df = df.map(extract_metadata)
+            df = df.map(extract_metadata_to_tuple)
 
             if get_zero_frame:
                 if df.isEmpty():
@@ -46,6 +51,22 @@ class Translator(object):
             return df
         except Exception as ex:
             print("HAPPEN WITH NODE: {}".format(table_name))
+            print(ex)
+
+    def translate_table_to_dataframe(self, node):
+        node_tbl_name = node.tbl_name
+        node_name = node.name
+        try:
+            df = self.sc.wholeTextFiles(
+                os.path.join(self.hdfs_path, node_tbl_name)
+            ).flatMap(flatten_files_to_lists)
+            df = df.map(lambda x: extract_metadata_to_json(x, node_name))
+            if df is None or df.isEmpty():
+                return None
+            new_df = self.sql_context.read.json(df)
+            return new_df
+        except Exception as ex:
+            print("HAPPEN WITH NODE: {}".format(node_tbl_name))
             print(ex)
 
     def translate_edge(self, table_name, reversed=True):
@@ -61,10 +82,19 @@ class Translator(object):
             return df.map(extract_link_reverse)
         return df.map(extract_link)
 
+    def translate_edge_to_dataframe(self, table_name, src, dst):
+        src_id_name = get_node_id_name(src)
+        dst_id_name = get_node_id_name(dst)
+        df = self.translate_edge(table_name, reversed=False)
+        df = df.map(lambda x: json.dumps({src_id_name: x[0], dst_id_name: x[1]}))
+        if df is None or df.isEmpty():
+            return None
+        new_df = self.sql_context.read.json(df)
+        return new_df
+
     def write(self, df):
         self.update_types()
-        df = self.restore_prop_name(df, PropFactory.list_props)
-        self.writer.write_df(
+        self.writer.write_rdd(
             df, self.parser.name, self.parser.doc_type, self.parser.types
         )
         self.writer.create_guppy_array_config(self.parser.name, self.parser.types)

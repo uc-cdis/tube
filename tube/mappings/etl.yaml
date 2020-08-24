@@ -102,3 +102,7 @@ mappings:
           - name: subject_id
             src: id
           - name: project_id
+  - name: nested_index
+    type: nested
+    doc_type: nested
+    root: read_group

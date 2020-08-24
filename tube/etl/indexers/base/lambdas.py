@@ -1,6 +1,7 @@
 import ast
 import json
 import collections
+from tube.utils.general import get_node_id_name
 
 
 def extract_metadata(str_value):
@@ -10,9 +11,7 @@ def extract_metadata(str_value):
     :return:
     """
     origin_value = str_value
-    str_value = str_value.replace("'", "###")
-    str_value = str_value.replace('\\""', "##")
-    strs = ast.literal_eval(str_value.replace('""', "'"))
+    strs = pre_process_string(str_value)
     try:
         props = json.loads(
             strs[3].replace("'", '"').replace("###", "'").replace("##", '\\"'),
@@ -24,7 +23,36 @@ def extract_metadata(str_value):
                 origin_value, str_value
             )
         )
-    return tuple([strs[4], props])
+    return props
+
+
+def pre_process_string(str_value):
+    """
+    Get all fields in _props (strs[3] in hadoop file) and node_id field (strs[4])
+    :param str_value:
+    :return:
+    """
+    str_value = str_value.replace("'", "###")
+    str_value = str_value.replace('\\""', "##")
+    return ast.literal_eval(str_value.replace('""', "'"))
+
+
+def extract_metadata_to_tuple(str_value):
+    """
+    Get all fields in _props (strs[3] in hadoop file) and node_id field (strs[4])
+    :param str_value:
+    :return:
+    """
+    strs = pre_process_string(str_value)
+    return tuple([strs[4], extract_metadata(str_value)])
+
+
+def extract_metadata_to_json(str_value, node_name):
+    node_id_name = get_node_id_name(node_name)
+    strs = pre_process_string(str_value)
+    new_dict = {node_id_name: strs[4]}
+    new_dict.update(extract_metadata(str_value))
+    return json.dumps(new_dict)
 
 
 def extract_link(str_value):
@@ -46,7 +74,16 @@ def merge_dictionary(d1, d2, to_tuple=False):
     d0 = d1.copy()
     if d2 is not None and len(d2) > 0:
         d0.update(d2)
-    return d0 if not to_tuple else tuple([(k, v) for (k, v) in list(d0.items())])
+    return (
+        d0
+        if not to_tuple
+        else tuple(
+            [
+                (k, v) if type(v) != list else (k, tuple(v))
+                for (k, v) in list(d0.items())
+            ]
+        )
+    )
 
 
 def swap_key_value(df):
@@ -113,7 +150,12 @@ def merge_and_fill_empty_props(item, props, to_tuple=False):
         return (
             item[1]
             if not to_tuple
-            else tuple([(k, v) for (k, v) in list(item[1].items())])
+            else tuple(
+                [
+                    (k, v) if type(v) != list else (k, tuple(v))
+                    for (k, v) in list(item[1].items())
+                ]
+            )
         )
     if item[1] is None:
         return merge_dictionary(item[0], get_props_empty_values(props), to_tuple)
