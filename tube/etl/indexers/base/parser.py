@@ -15,6 +15,7 @@ class Parser(object):
         self.root = mapping["root"]
         self.doc_type = mapping["doc_type"]
         self.joining_nodes = []
+        self.additional_props = []
         PropFactory.adding_prop(
             self.doc_type,
             get_node_id_name(self.doc_type),
@@ -45,11 +46,17 @@ class Parser(object):
 
     def get_es_types(self):
         self.types = {}
-
-        for p in list(PropFactory.get_prop_by_doc_name(self.doc_type).values()):
+        types_to_convert_to_es_types = list(
+            PropFactory.get_prop_by_doc_name(self.doc_type).values()
+        )
+        if PropFactory.get_additional_prop_by_doc_name(self.doc_type) is not None:
+            types_to_convert_to_es_types += list(
+                PropFactory.get_additional_prop_by_doc_name(self.doc_type).values()
+            )
+        for p in types_to_convert_to_es_types:
             if p.type is not None:
                 is_array_type = p.type[0] == list
-                has_array_agg_fn = p.fn in ["set", "list"]
+                has_array_agg_fn = p.fn is not None and p.fn in ["set", "list"]
                 array_type_condition = is_array_type or has_array_agg_fn
                 self.types[p.name] = (
                     self.select_widest_type(p.type),

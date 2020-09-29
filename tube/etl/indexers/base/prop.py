@@ -3,11 +3,17 @@ from tube.utils.dd import object_to_string
 
 class PropFactory(object):
     list_props = []
+    list_additional_props = []
     prop_by_names = {}
+    additional_prop_by_names = {}
 
     @staticmethod
     def get_length():
         return len(PropFactory.list_props)
+
+    @staticmethod
+    def get_additional_length():
+        return len(PropFactory.list_additional_props)
 
     @staticmethod
     def create_value_mappings(value_mappings_in_json):
@@ -53,6 +59,27 @@ class PropFactory(object):
         return prop
 
     @staticmethod
+    def add_additional_prop(doc_name, name, prop_type=None):
+        if doc_name not in PropFactory.additional_prop_by_names:
+            PropFactory.additional_prop_by_names[doc_name] = {}
+        prop = PropFactory.get_additional_prop_by_name(doc_name, name)
+        if prop is None:
+            prop = Prop(
+                PropFactory.get_additional_length(),
+                name,
+                None,
+                [],
+                None,
+                None,
+                None,
+                prop_type,
+                is_additional=True,
+            )
+            PropFactory.list_additional_props.append(prop)
+            PropFactory.additional_prop_by_names.get(doc_name)[name] = prop
+        return prop
+
+    @staticmethod
     def get_prop_by_id(id):
         return PropFactory.list_props[id]
 
@@ -64,8 +91,19 @@ class PropFactory(object):
         return sub_dict_props.get(name)
 
     @staticmethod
+    def get_additional_prop_by_name(doc_name, name):
+        sub_dict_props = PropFactory.get_additional_prop_by_doc_name(doc_name)
+        if sub_dict_props is None:
+            return None
+        return sub_dict_props.get(name)
+
+    @staticmethod
     def get_prop_by_doc_name(doc_name):
         return PropFactory.prop_by_names.get(doc_name)
+
+    @staticmethod
+    def get_additional_prop_by_doc_name(doc_name):
+        return PropFactory.additional_prop_by_names.get(doc_name)
 
     @staticmethod
     def get_prop_by_json(doc_name, p):

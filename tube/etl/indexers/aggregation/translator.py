@@ -198,7 +198,7 @@ class Translator(BaseTranslator):
         props_with_fn = []
         props_without_fn = []
         for r in joining_index.getting_fields:
-            src_prop = translator.parser.get_prop_by_name(r.prop.src)
+            src_prop = translator.parser.get_prop_by_name(r.prop.name)
             # field which is identity of a node is named as _{node}_id now
             # before in etl-mapping for joining_props, we use {node}_id
             # for backward compatibility, we check first with the value in mapping file.
@@ -282,7 +282,7 @@ class Translator(BaseTranslator):
             joining_df = swap_property_as_key(
                 joining_df, id_field_in_joining_df, joining_df_key_id
             )
-        else:
+        if df_key_id != id_field_in_df_id:
             df = swap_property_as_key(df, id_field_in_df_id, df_key_id)
             swap_df = True
 
