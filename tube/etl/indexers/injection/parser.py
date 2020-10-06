@@ -10,7 +10,7 @@ from tube.utils.dd import (
     get_parent_label,
     get_node_category,
 )
-from tube.utils.general import PROJECT_CODE
+from tube.utils.general import PROJECT_CODE, PROGRAM_NAME
 from tube.etl.indexers.base.parser import Parser as BaseParser
 from tube.etl.indexers.injection.nodes.collecting_node import (
     CollectingNode,
@@ -43,6 +43,9 @@ class Path(object):
 
     def __eq__(self, other):
         return self.__key__() == other.__key__()
+
+    def __ne__(self, other):
+        return self.__key__() != other.__key__()
 
 
 class NodePath(object):
@@ -136,7 +139,7 @@ class Parser(BaseParser):
                 )
             else:
                 node_props = v.get("props")
-                node_props.append({"name": "program_name", "src": "name"})
+                node_props.append({"name": PROGRAM_NAME, "src": "name"})
                 roots[k] = RootNode(
                     k,
                     get_node_table_name(self.model, k),

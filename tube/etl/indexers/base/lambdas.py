@@ -1,7 +1,6 @@
 import ast
 import json
 import collections
-import sys
 
 
 def extract_metadata(str_value):
@@ -47,7 +46,16 @@ def merge_dictionary(d1, d2, to_tuple=False):
     d0 = d1.copy()
     if d2 is not None and len(d2) > 0:
         d0.update(d2)
-    return d0 if not to_tuple else tuple([(k, v) for (k, v) in list(d0.items())])
+    return (
+        d0
+        if not to_tuple
+        else tuple(
+            [
+                (k, v) if type(v) != list else (k, tuple(v))
+                for (k, v) in list(d0.items())
+            ]
+        )
+    )
 
 
 def swap_key_value(df):
@@ -56,11 +64,14 @@ def swap_key_value(df):
 
 def get_props(names, values):
     return lambda x: {
-        names[src]: values[src][v]
-        if isinstance(v, collections.Hashable) and src in values and v in values[src]
+        p_id: values[src][p_id][v]
+        if isinstance(v, collections.Hashable)
+        and src in values
+        and v in values[src][p_id]
         else v
         for (src, v) in list(x.items())
         if src in list(names.keys())
+        for p_id in names[src]
     }
 
 
@@ -111,7 +122,12 @@ def merge_and_fill_empty_props(item, props, to_tuple=False):
         return (
             item[1]
             if not to_tuple
-            else tuple([(k, v) for (k, v) in list(item[1].items())])
+            else tuple(
+                [
+                    (k, v) if type(v) != list else (k, tuple(v))
+                    for (k, v) in list(item[1].items())
+                ]
+            )
         )
     if item[1] is None:
         return merge_dictionary(item[0], get_props_empty_values(props), to_tuple)

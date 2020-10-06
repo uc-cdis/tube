@@ -9,10 +9,11 @@ from tube.etl.outputs.es.timestamp import (
 from tube.etl.outputs.es.versioning import Versioning
 from tube.etl.plugins import post_process_plugins, add_auth_resource_path_mapping
 from tube.etl.spark_base import SparkBase
+from tube.utils.general import get_node_id_name
 
 
 def json_export(x, doc_type):
-    x[1]["{}_id".format(doc_type)] = x[0]
+    x[1][get_node_id_name(doc_type)] = x[0]
     x[1]["node_id"] = x[0]  # redundant field for backward compatibility with arranger
     return (x[0], json.dumps(x[1]))
 
