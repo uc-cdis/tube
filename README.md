@@ -110,7 +110,6 @@ mappings:
 On another side, `injection` approach helps to embed the parent's id into the grand children nodes of dictionary. Redundantly embedding parent's id into grand children node reduces the time to perform join operation between nodes.
 
 The required field to be specified for each property is `name`. All `injecting_props` are grouped by the node containing the properties. In the example below, the node is `subject`.
-
 ```
   - name: file_genericcommons // another index
     doc_type: file // can be anything but must match guppy config
@@ -124,6 +123,7 @@ The required field to be specified for each property is `name`. All `injecting_p
       - name: data_format
       - name: data_type
       - name: state
+      - name: source_node // special built-in prop -- see note below
     injecting_props:
       subject:
         props:
@@ -131,3 +131,7 @@ The required field to be specified for each property is `name`. All `injecting_p
             src: id
           - name: project_id
 ```
+##### `source_node` Property
+A `collector` etlMapping can use the special built-in `source_node` property to include the node in the dictionary that the entity comes from. For example, if a data file is from the `reference_file` node on the dictionary, the value of `source_node` will be `"reference_file"`.
+
+This is useful if we are ETL-ing data files because in many dictionaries, data files can be located on one of several nodes, and sometimes it's helpful to know where each data file came from. For example, PFB export of data files in portal (https://github.com/uc-cdis/data-portal/pull/729) relies on `source_node` in order to tell the `pelican-export` job where in the dictionary to search for data files.

@@ -79,7 +79,10 @@ class Parser(object):
         )
 
     def get_prop_by_name(self, name):
-        return PropFactory.get_prop_by_name(self.doc_type, name)
+        prop = PropFactory.get_prop_by_name(self.doc_type, name)
+        if not prop:
+            print("DEBUG: prop '{}' not in '{}'".format(name, self.doc_type))
+        return prop
 
     def get_prop_type(self, fn, src, node_label=None, index=None):
         if fn is not None:
