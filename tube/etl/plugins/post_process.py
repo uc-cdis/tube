@@ -1,6 +1,6 @@
 import yaml
 
-from tube.settings import PROJECT_TO_RESOURCE_PATH
+from tube.config import PROJECT_TO_RESOURCE_PATH
 
 
 def add_auth_resource_path(df):
