@@ -3,7 +3,7 @@ from elasticsearch import Elasticsearch
 from elasticsearch import client
 from elasticsearch_dsl import Search
 
-import tube.settings as config
+import tube.config as config
 from tube.etl.indexers.interpreter import create_translators
 from tests.utils import items_in_file
 from tests.utils_db import SQLQuery

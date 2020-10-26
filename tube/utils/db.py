@@ -3,7 +3,7 @@ from contextlib import contextmanager
 from psycopg2.extras import DictCursor
 from psycopg2.pool import ThreadedConnectionPool
 
-import tube.settings as config
+import tube.config as config
 
 
 connection_name = "db"

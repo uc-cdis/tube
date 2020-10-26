@@ -21,7 +21,7 @@ def default_search_folders(app_name):
     ]
 
 
-def find_paths(file_name, app_name, search_folders=None):
+def find_path(file_name, app_name, search_folders=None):
     """
     Search the given folders for file_name
     search_folders defaults to default_search_folders if not specified
@@ -29,7 +29,10 @@ def find_paths(file_name, app_name, search_folders=None):
     """
     search_folders = search_folders or default_search_folders(app_name)
     possible_files = [os.path.join(folder, file_name) for folder in search_folders]
-    return [path for path in possible_files if os.path.exists(path)]
+    paths = [path for path in possible_files if os.path.exists(path)]
+    if not paths:
+        return []
+    return paths[0]
 
 
 def load_json(file_name, app_name, search_folders=None):
@@ -38,8 +41,8 @@ def load_json(file_name, app_name, search_folders=None):
 
     return the loaded json data or None if file not found
     """
-    actual_files = find_paths(file_name, app_name, search_folders)
-    if not actual_files:
-        return None
-    with open(actual_files[0], "r") as reader:
+    actual_file = find_path(file_name, app_name, search_folders)
+    if not actual_file:
+        return dict()
+    with open(actual_file, "r") as reader:
         return json.load(reader)

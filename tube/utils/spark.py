@@ -1,6 +1,6 @@
 from pyspark import SparkConf, SparkContext
 
-import tube.settings as config
+import tube.config as config
 
 
 def make_spark_context(config):
