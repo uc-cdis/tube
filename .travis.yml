@@ -63,7 +63,7 @@ before_script:
   - export ES_INDEX_NAME="etl"
   - export DICTIONARY_URL="https://s3.amazonaws.com/dictionary-artifacts/ndhdictionary/3.3.8/schema.json"
   - mkdir -p $XDG_DATA_HOME/gen3/tube
-  - cp tests/gen3/tube/{creds.json,etlMapping.yaml,user.yaml} $XDG_DATA_HOME/gen3/tube/
+  - cp tests/gen3/tube/{creds.json,analyzers.yaml,etlMapping.yaml,settings.yaml,user.yaml} $XDG_DATA_HOME/gen3/tube/
 
 script:
   - python -m pytest -v tests

@@ -26,7 +26,7 @@ class Writer(SparkBase):
         self.es = self.get_es()
         self.es.indices.get_alias()
         self.versioning = Versioning(self.es)
-        self.settings = settings_util.get_settings()
+        self.settings = settings_util.get_settings(config)
 
     def reset_status(self):
         self.versioning.reset_status()

@@ -1,7 +1,5 @@
 import yaml
 
-import tube.config as config
-
 
 def get_settings(config):
     settings = yaml.load(open(config.INDEX_SETTINGS_FILE), Loader=yaml.SafeLoader)
