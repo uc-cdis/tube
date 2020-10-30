@@ -38,8 +38,7 @@ class Writer(SparkBase):
         :return: JSON with proper mapping to be used in Elasticsearch
         """
         properties = settings_util.build_properties(self.config, field_types)
-
-        mapping = {"mappings": {doc_name: {"properties": properties}}}
+        mapping = {doc_name: {"properties": properties}}
         return mapping
 
     def get_es(self):
