@@ -38,7 +38,7 @@ class Writer(SparkBase):
         :return: JSON with proper mapping to be used in Elasticsearch
         """
         properties = settings_util.build_properties(self.config, field_types)
-        mapping = {doc_name: {"properties": properties}}
+        mapping = {"mappings": {doc_name: {"properties": properties}}}
         return mapping
 
     def get_es(self):
@@ -51,7 +51,12 @@ class Writer(SparkBase):
         return Elasticsearch([{"host": es_hosts, "port": es_port}])
 
     def create_new_index(self, index, mappings, settings):
-        body = dict(mappings=mappings, settings=settings)
+        """Creates an index of name index.
+        Expects mappings and settings to be dictionaries
+        where the top level key of each is mappings, settings
+        respectively.
+        """
+        body = dict(**mappings, **settings)
         self.es.indices.create(index=index, body=body)
         return index
 

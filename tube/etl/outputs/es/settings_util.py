@@ -2,8 +2,10 @@ import yaml
 
 
 def get_settings(config):
-    settings = yaml.load(open(config.INDEX_SETTINGS_FILE), Loader=yaml.SafeLoader)
-    return settings
+    settings_content = yaml.load(
+        open(config.INDEX_SETTINGS_FILE), Loader=yaml.SafeLoader
+    )
+    return {"settings": settings_content}
 
 
 def get_analyzer_settings(config):

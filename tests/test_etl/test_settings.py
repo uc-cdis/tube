@@ -9,17 +9,14 @@ from tube.etl.outputs.es.settings_util import (
 import tube.config as config
 
 
-# overwrite for tests
-config.INDEX_SETTINGS_FILE = os.getcwd() + "/tests/gen3/tube/settings.yaml"
-config.ANALYZERS_FILE = os.getcwd() + "/tests/gen3/tube/analyzers.yaml"
-
-
 def test_settings():
-    assert get_settings(config), "broken"
+    settings = get_settings(config)
+    assert len(settings.keys()) == 1
+    assert next(iter(settings.keys())) == "settings"
 
 
 def test_analyzer_settings():
-    assert get_analyzer_settings(config), "also broken"
+    assert get_analyzer_settings(config), "broken"
 
 
 def test_build_properties():
