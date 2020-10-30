@@ -38,8 +38,7 @@ before_script:
   - export REPOSITORY=cdis/tube
   - ./wait_for_quay.sh -r ${REPOSITORY} -b ${BRANCH//\//_} -d 30
   - git clone https://github.com/uc-cdis/compose-etl.git --branch master --single-branch
-  - cp -f tests/gen3/tube/etlMapping.yaml compose-etl/configs/etlMapping.yaml
-  - cp -f tests/gen3/tube/user.yaml compose-etl/configs/user.yaml
+  - cp -f tests/gen3/tube/{etlMapping,settings,user}.yaml compose-etl/configs/
   - cd compose-etl
   - export HOST_IP_ADDRESS="$(ip -f inet -o addr show docker0 | cut -d\  -f 7 | cut -d/ -f 1)"
   - |
