@@ -57,6 +57,7 @@ class Writer(SparkBase):
         respectively.
         """
         body = dict(**mappings, **settings)
+        print(body)
         self.es.indices.create(index=index, body=body)
         return index
 
