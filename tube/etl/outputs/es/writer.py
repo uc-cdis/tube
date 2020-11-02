@@ -90,7 +90,8 @@ class Writer(SparkBase):
                         "array": {"type": "keyword"},
                     }
                 }
-            }
+            },
+            "settings": self.settings,
         }
 
         latest_transaction_time = get_latest_utc_transaction_time()
