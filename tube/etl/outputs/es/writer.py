@@ -53,11 +53,10 @@ class Writer(SparkBase):
     def create_new_index(self, index, mappings, settings):
         """Creates an index of name index.
         Expects mappings and settings to be dictionaries
-        where the top level key of each is mappings, settings
+        where the top level key of each is "mappings," "settings"
         respectively.
         """
         body = dict(**mappings, **settings)
-        print(body)
         self.es.indices.create(index=index, body=body)
         return index
 
