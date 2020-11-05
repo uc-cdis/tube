@@ -153,10 +153,6 @@ class Versioning(object):
             self.backup_index = self.do_backup_index(index, versioned_index_name)
         return versioned_index_name
 
-    def create_new_index(self, mapping, versioned_index_name):
-        self.es.indices.create(index=versioned_index_name, body=mapping)
-        return versioned_index_name
-
     def putting_new_version_tag(self, index_to_write, index_name):
         self.es.indices.put_alias(index=index_to_write, name=index_name)
         self.clean_up(index_name)

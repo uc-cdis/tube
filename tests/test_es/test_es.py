@@ -1,9 +1,8 @@
 import pytest
 from elasticsearch import Elasticsearch
-from elasticsearch import client
 from elasticsearch_dsl import Search
 
-import tube.settings as config
+import tube.config as config
 from tube.etl.indexers.interpreter import create_translators
 from tests.utils import items_in_file
 from tests.utils_db import SQLQuery
@@ -47,11 +46,9 @@ def test_es_types(init_interpreter, doc_type):
     interpreter = init_interpreter
     parser = interpreter[doc_type].parser
     es = Elasticsearch([{"host": config.ES["es.nodes"], "port": config.ES["es.port"]}])
+    index_name = list(es.indices.get_alias(name=parser.name).keys())[0]
 
-    indices = client.IndicesClient(es)
-    index_name = list(indices.get_alias(name=parser.name).keys())[0]
-
-    mapping = indices.get_mapping(index=index_name)
+    mapping = es.indices.get_mapping(index=index_name)
 
     for k, t in list(mapping[index_name]["mappings"][doc_type]["properties"].items()):
         assert t["type"] != "text"

@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as et
-import tube.settings as config
+import tube.config as config
 
 
 CONFIG_PATH = "{}/etc/hadoop/".format(config.HADOOP_HOME)

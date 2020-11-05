@@ -1,0 +1,2 @@
+analyzer: ngram_analyzer
+search_analyzer: search_analyzer

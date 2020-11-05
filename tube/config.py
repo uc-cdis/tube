@@ -1,5 +1,7 @@
+import os
+
 from cdislogging import get_logger
-from tube.config_helper import *
+from tube.config_helper import find_path, load_json
 from .utils.general import get_resource_paths_from_yaml
 
 
@@ -57,9 +59,11 @@ ES_HADOOP_HOME_BIN = "{}/elasticsearch-hadoop-{}".format(
 HADOOP_HOST = os.getenv("HADOOP_HOST", "spark-service")
 # Searches same folders as load_json above
 
-MAPPING_FILE = find_paths("etlMapping.yaml", "tube")[0]
+MAPPING_FILE = find_path("etlMapping.yaml", "tube")
+INDEX_SETTINGS_FILE = find_path("settings.yaml", "tube")
+ANALYZERS_FILE = find_path("analyzers.yaml", "tube")
 try:
-    USERYAML_FILE = find_paths("user.yaml", "tube")[0]
+    USERYAML_FILE = find_path("user.yaml", "tube")
 except IndexError:
     USERYAML_FILE = None
 PROJECT_TO_RESOURCE_PATH = get_resource_paths_from_yaml(USERYAML_FILE)

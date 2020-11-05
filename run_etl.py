@@ -1,5 +1,5 @@
 import argparse
-import tube.settings as config
+import tube.config as config
 import tube.etl.indexers.interpreter as interpreter
 import traceback
 from tube.importers.sql_to_hdfs import SqlToHDFS
