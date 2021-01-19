@@ -48,6 +48,7 @@ class Parser(BaseParser):
 
     def __init__(self, mapping, model, dictionary):
         super(Parser, self).__init__(mapping, model)
+        self.reducer_by_prop = {}
         self.dictionary = dictionary
         self.props = self.get_host_props()
         self.flatten_props = (
@@ -71,7 +72,7 @@ class Parser(BaseParser):
         nodes = [tuple([_f for _f in re.split("[\[\]]", w) if _f]) for w in words]
         first = None
         prev = None
-        prev_label = self.root
+        prev_label = self.root.name
         for nd in nodes:
             n = nd[0]
             p = nd[1] if len(nd) > 1 else None
@@ -134,7 +135,7 @@ class Parser(BaseParser):
             )
 
     def get_host_props(self):
-        if self.root == "project":
+        if self.root.name == "project":
             if "project_code" not in [p.get("name") for p in self.mapping["props"]]:
                 self.mapping["props"].append({"name": PROJECT_CODE, "src": "code"})
             if "parent_props" not in self.mapping:
@@ -142,7 +143,7 @@ class Parser(BaseParser):
             self.add_program_name_to_parent()
 
         return self.create_props_from_json(
-            self.doc_type, self.mapping["props"], node_label=self.root
+            self.doc_type, self.mapping["props"], node_label=self.root.name
         )
 
     def get_aggregation_nodes(self):
@@ -172,7 +173,7 @@ class Parser(BaseParser):
         nodes = [tuple([_f for _f in re.split("[\[\]]", w) if _f]) for w in words]
         first = None
         prev = None
-        prev_label = self.root
+        prev_label = self.root.name
         for (n, str_p) in nodes:
             child_name, edge_tbl = get_edge_table(self.model, prev_label, n)
             child_tbl = get_node_table_name(self.model, child_name)
@@ -273,6 +274,7 @@ class Parser(BaseParser):
                     for reducer in path.reducers:
                         prop = self.create_prop_from_json(self.doc_type, reducer, None)
                         n_child.reducers.append(Reducer(prop, reducer["fn"]))
+                        self.reducer_by_prop[prop.name] = reducer["fn"]
 
                 n_current.add_child(n_child)
                 if (child_name, edge_tbl) not in reversed_index:
@@ -341,12 +343,16 @@ class Parser(BaseParser):
         nodes = []
         bypass = self.mapping.get("settings", {}).get("bypass_multiplicity_check")
         for child in children:
-            child_label, edge = get_edge_table(self.model, self.root, child["path"])
-            child_name, is_child = get_child_table(self.model, self.root, child["path"])
+            child_label, edge = get_edge_table(
+                self.model, self.root.name, child["path"]
+            )
+            child_name, is_child = get_child_table(
+                self.model, self.root.name, child["path"]
+            )
             multiplicity = (
-                get_multiplicity(self.dictionary, self.root, child_label)
+                get_multiplicity(self.dictionary, self.root.name, child_label)
                 if is_child
-                else get_multiplicity(self.dictionary, child_label, self.root)
+                else get_multiplicity(self.dictionary, child_label, self.root.name)
             )
             sorted_by, desc_order = self.parse_sorting(child)
             if (
@@ -368,6 +374,14 @@ class Parser(BaseParser):
                 self.doc_type, child["props"], node_label=child_label
             )
             nodes.append(
-                DirectNode(child_name, edge, props, sorted_by, desc_order, is_child)
+                DirectNode(
+                    child_label,
+                    child_name,
+                    edge,
+                    props,
+                    sorted_by,
+                    desc_order,
+                    is_child,
+                )
             )
         return nodes

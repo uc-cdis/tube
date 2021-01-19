@@ -1,15 +1,11 @@
 from tube.utils.dd import object_to_string
-from tube.etl.indexers.base.node import BaseNode
-from tube.etl.indexers.base.prop import PropFactory
+from tube.etl.indexers.base.node import BaseNode, BaseRootNode
 
 
-class RootNode(BaseNode):
+class RootNode(BaseRootNode):
     def __init__(self, name, tbl_name, props, edge_to_parent=None):
-        super(RootNode, self).__init__()
-        self.name = name
+        super(RootNode, self).__init__(name, tbl_name, props)
         self.edge_to_parent = edge_to_parent
-        self.tbl_name = tbl_name
-        self.props = props
         self.root_child = None
 
     def __repr__(self):

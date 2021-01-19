@@ -1,6 +1,10 @@
 import ast
 import json
 import collections
+import functools
+import pyspark.sql.functions as f
+import pyspark.sql.types as t
+from tube.utils.general import get_node_id_name
 
 
 def extract_metadata(str_value):
@@ -208,3 +212,17 @@ def get_single_frame_value(func_name, value):
     if func_name == "sum":
         return 0 if value is None else value
     return value
+
+
+def f_concat_udf(val):
+    return functools.reduce(lambda x, y: x + y, val)
+
+
+f_collect_list_udf = f.udf(f_concat_udf, t.ArrayType(t.StringType()))
+
+
+def f_set_union_udf(val):
+    return functools.reduce(lambda x, y: list(set(x) | set(y)), val)
+
+
+f_collect_set_udf = f.udf(f_set_union_udf, t.ArrayType(t.StringType()))

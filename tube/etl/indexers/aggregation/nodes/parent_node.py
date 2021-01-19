@@ -28,7 +28,7 @@ class ParentNode:
 
     def __init__(self, name, tbl, edge_up_tbl, props):
         self.name = name
-        self.tbl = tbl
+        self.tbl_name = tbl
         self.edge_up_tbl = edge_up_tbl
         self.props = props  # PropFactory.create_props_from_json(doc_name,
         self.child = None

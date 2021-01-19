@@ -11,6 +11,8 @@ from .lambdas import (
 from tube.etl.indexers.base.prop import PropFactory
 from tube.utils.spark import save_rds, get_all_files
 from pyspark.sql.context import SQLContext
+from pyspark.sql.types import StructType, StructField, StringType
+from tube.utils.general import get_node_id_name
 
 
 class Translator(object):
@@ -59,6 +61,50 @@ class Translator(object):
             print("HAPPEN WITH NODE: {}".format(table_name))
             print(ex)
 
+    def translate_table_to_dataframe(self, node, get_zero_frame=None, props=None):
+        """
+        Get data from SQL table to dataframe
+        :param node: node object
+        :param get_zero_frame: True if we want to have an empty frame value
+        :param props: subset of properties to be extracted. None means get all.
+        :return:
+        """
+        node_tbl_name = node.tbl_name
+        node_name = node.name
+        try:
+            df = self.sc.wholeTextFiles(
+                os.path.join(self.hdfs_path, node_tbl_name)
+            ).flatMap(flatten_files_to_lists)
+            df = df.map(lambda x: extract_metadata_to_json(x, node_name))
+            if get_zero_frame and (df is None or df.isEmpty()):
+                return self.get_empty_dateframe_with_name(node.name)
+            new_df = self.sql_context.read.json(df)
+            if props is not None:
+                cols = [p.src for p in props]
+                if get_node_id_name(node_name) not in cols:
+                    cols.append(get_node_id_name(node_name))
+                return new_df.select(*cols)
+            return new_df
+        except Exception as ex:
+            print("HAPPEN WITH NODE: {}".format(node_tbl_name))
+            print(ex)
+
+    def get_empty_dateframe_with_name(self, name):
+        schema = (
+            StructType([])
+            if name is None
+            else StructType([StructField(get_node_id_name(name), StringType(), False)])
+        )
+        return self.sc.parallelize([]).toDF(schema)
+
+    def get_empty_dateframe_with_columns(self, cols):
+        schema = (
+            StructType([])
+            if cols is None or len(cols) == 0
+            else StructType([StructField(c, StringType(), False) for c in cols])
+        )
+        return self.sc.parallelize([]).toDF(schema)
+
     def translate_edge(self, table_name, reversed=True):
         """
         Return the edge table that has two columns.
@@ -71,6 +117,16 @@ class Translator(object):
         if reversed:
             return df.map(extract_link_reverse)
         return df.map(extract_link)
+
+    def translate_edge_to_dataframe(self, table_name, src, dst):
+        src_id_name = get_node_id_name(src)
+        dst_id_name = get_node_id_name(dst)
+        df = self.translate_edge(table_name, reversed=False)
+        df = df.map(lambda x: json.dumps({src_id_name: x[0], dst_id_name: x[1]}))
+        if df is None or df.isEmpty():
+            return self.get_empty_dateframe_with_columns([src_id_name, dst_id_name])
+        new_df = self.sql_context.read.json(df)
+        return new_df
 
     def write(self, df):
         self.update_types()
@@ -133,6 +189,12 @@ class Translator(object):
 
     def load_from_hadoop(self):
         return self.sc.pickleFile(self.get_path_from_step(self.current_step - 1))
+
+    def load_from_hadoop_to_dateframe(self):
+        pickleRDD = self.sc.pickleFile(
+            self.get_path_from_step(self.current_step - 1)
+        ).collect()
+        return self.sc.createDataFrame(pickleRDD)
 
     def translate_joining_props(self, translators):
         pass

@@ -1,6 +1,8 @@
 from tube.utils.general import get_node_id_name
 from ..base.prop import PropFactory
+from .node import BaseRootNode
 from tube.utils.dd import get_properties_types
+from tube.utils.dd import get_node_table_name
 
 
 class Parser(object):
@@ -12,8 +14,21 @@ class Parser(object):
         self.mapping = mapping
         self.model = model
         self.name = mapping["name"]
-        self.root = mapping["root"]
         self.doc_type = mapping["doc_type"]
+        if (
+            mapping["root"] is not None
+            and mapping["root"] != "None"
+            and "props" in mapping
+        ):
+            self.root = BaseRootNode(
+                name=mapping["root"],
+                tbl_name=get_node_table_name(model, mapping["root"]),
+                props=self.create_props_from_json(
+                    self.doc_type, self.mapping["props"], node_label=mapping["root"]
+                ),
+            )
+        else:
+            self.root = None
         self.joining_nodes = []
         self.additional_props = []
         PropFactory.adding_prop(

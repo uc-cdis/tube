@@ -149,7 +149,7 @@ class Translator(BaseTranslator):
                     df = key_df
             aggregated_dfs[n.__key__()] = df
             key_df.unpersist()
-        return aggregated_dfs[self.parser.root].mapValues(
+        return aggregated_dfs[self.parser.root.name].mapValues(
             lambda x: {x1: x2 for (x0, x1, x2) in x}
         )
 
@@ -321,7 +321,7 @@ class Translator(BaseTranslator):
         return df
 
     def translate(self):
-        root_tbl = get_node_table_name(self.parser.model, self.parser.root)
+        root_tbl = self.parser.root.tbl_name
         root_df = self.translate_table(root_tbl, props=self.parser.props)
         root_df = self.translate_special(root_df)
         root_df = self.translate_parent(root_df)
@@ -348,10 +348,9 @@ class Translator(BaseTranslator):
     def translate_parent(self, root_df):
         if len(self.parser.parent_nodes) == 0:
             return root_df
-        root_tbl = get_node_table_name(self.parser.model, self.parser.root)
         root_id = self.parser.get_key_prop().id
         for f in self.parser.parent_nodes:
-            df = self.translate_table(root_tbl, props=[])
+            df = self.translate_table(self.parser.root.tbl_name, props=[])
             n = f.head
             first = True
             while n is not None:
@@ -386,11 +385,10 @@ class Translator(BaseTranslator):
         """
         if len(self.parser.special_nodes) == 0:
             return root_df
-        root_tbl = get_node_table_name(self.parser.model, self.parser.root)
         root_id = self.parser.get_key_prop().id
         for f in self.parser.special_nodes:
             if f.fn[0] == "sliding":
-                df = self.translate_table(root_tbl, props=[])
+                df = self.translate_table(self.parser.root.tbl_name, props=[])
                 n = f.head
                 first = True
                 while n is not None:
