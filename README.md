@@ -115,6 +115,7 @@ The required field to be specified for each property is `name`. All `injecting_p
     doc_type: file // can be anything but must match guppy config
     type: collector
     root: None
+    category: data_file // if omitted, the default is "data_file"
     props: // properties to collect from files
       - name: object_id
       - name: md5sum
