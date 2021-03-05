@@ -34,9 +34,7 @@ class Translator(BaseTranslator):
 
     def collect_leaf(self, child, edge_df, collected_leaf_dfs):
         if isinstance(child, LeafNode):
-            child_df = self.translate_table_to_dataframe(
-                child.tbl_name, props=self.parser.props
-            )
+            child_df = self.translate_table_to_dataframe(child, props=self.parser.props)
             if child_df.isEmpty():
                 return
             child_df = child_df.withColumn("source_node", fn.lit(child.name))
@@ -51,14 +49,12 @@ class Translator(BaseTranslator):
             child.done = True
 
     def collect_collecting_child(self, child, edge_df, collected_collecting_dfs):
-        if edge_df is None or edge_df.isEmpty():
+        if edge_df is None or len(edge_df.head(1)) == 0:
             child.no_parent_to_map -= 1
             return
         child.no_parent_to_map -= 1
         if len(child.props) > 0:
-            child_df = self.translate_table_to_dataframe(
-                child.tbl_name, props=child.props
-            )
+            child_df = self.translate_table_to_dataframe(child, props=child.props)
         else:
             child_df = edge_df
         if child.name not in collected_collecting_dfs:
@@ -69,11 +65,11 @@ class Translator(BaseTranslator):
             ].join(child_df, on=get_node_id_name(child.name))
 
     def merge_project(self, child, edge_df, collected_collecting_dfs):
-        if edge_df is None or edge_df.isEmpty():
+        if edge_df is None or len(edge_df.head(1)) == 0:
             child.no_parent_to_map -= 1
             return
         child.no_parent_to_map -= 1
-        child_df = self.translate_table_to_dataframe(child.tbl_name, props=child.props)
+        child_df = self.translate_table_to_dataframe(child, props=child.props)
         child_df = child_df.join(edge_df, on=get_node_id_name(child.name))
 
         child_df = child_df.withColumn(
@@ -85,7 +81,7 @@ class Translator(BaseTranslator):
         collected_leaf_dfs = {}
         collected_collecting_dfs = {}
         for root in self.parser.roots:
-            df = self.translate_table_to_dataframe(root.tbl_name, props=root.props)
+            df = self.translate_table_to_dataframe(root, props=root.props)
             for child in root.children:
                 edge_tbl = child.parents[root.name]
                 tmp_df = df.join(
