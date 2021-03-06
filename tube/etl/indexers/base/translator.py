@@ -12,6 +12,7 @@ from tube.etl.indexers.base.prop import PropFactory
 from tube.utils.spark import save_rds, get_all_files
 from pyspark.sql.context import SQLContext
 from pyspark.sql.types import StructType, StructField, StringType
+from pyspark.sql.functions import col
 from tube.utils.general import get_node_id_name
 
 
@@ -80,8 +81,14 @@ class Translator(object):
                 return self.get_empty_dateframe_with_name(node.name)
             new_df = self.sql_context.read.json(df)
             if props is not None:
-                cols = [p.src for p in props]
-                if get_node_id_name(node_name) not in cols:
+                col_names = [p.src for p in props]
+                cols = [
+                    col(p.src).alias(p.name)
+                    if p.src != "id"
+                    else col(get_node_id_name(node_name)).alias(p.name)
+                    for p in props
+                ]
+                if get_node_id_name(node_name) not in col_names:
                     cols.append(get_node_id_name(node_name))
                 return new_df.select(*cols)
             return new_df
