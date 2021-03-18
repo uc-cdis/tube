@@ -1,4 +1,6 @@
 import os
+import json
+import pyspark.sql.functions as f
 from .lambdas import (
     extract_metadata,
     extract_link,
@@ -9,11 +11,17 @@ from .lambdas import (
     get_number,
 )
 from tube.etl.indexers.base.prop import PropFactory
-from tube.utils.spark import save_rds, get_all_files
+from tube.utils.spark import save_rdd_of_dataframe, get_all_files
 from pyspark.sql.context import SQLContext
 from pyspark.sql.types import StructType, StructField, StringType
-from pyspark.sql.functions import col
 from tube.utils.general import get_node_id_name
+from pyspark.sql.functions import sort_array, struct, collect_list, col
+
+from .prop import PropFactory
+from ..base.lambdas import (
+    f_collect_list_udf,
+    f_collect_set_udf,
+)
 
 
 class Translator(object):
@@ -62,7 +70,9 @@ class Translator(object):
             print("HAPPEN WITH NODE: {}".format(table_name))
             print(ex)
 
-    def translate_table_to_dataframe(self, node, get_zero_frame=None, props=None):
+    def translate_table_to_dataframe(
+        self, node, get_zero_frame=None, props=None, key_name=None
+    ):
         """
         Get data from SQL table to dataframe
         :param node: node object
@@ -76,9 +86,16 @@ class Translator(object):
             df = self.sc.wholeTextFiles(
                 os.path.join(self.hdfs_path, node_tbl_name)
             ).flatMap(flatten_files_to_lists)
-            df = df.map(lambda x: extract_metadata_to_json(x, node_name))
+            if key_name is None:
+                df = df.map(lambda x: extract_metadata_to_json(x, node_name))
+            else:
+                df = df.map(
+                    lambda x: extract_metadata_to_json(
+                        x, node_name, pre_defined_id_name=key_name
+                    )
+                )
             if get_zero_frame and (df is None or df.isEmpty()):
-                return self.get_empty_dateframe_with_name(node.name)
+                return self.get_empty_dateframe_with_name(node.name, key_name=key_name)
             new_df = self.sql_context.read.json(df)
             if props is not None:
                 col_names = [p.src for p in props]
@@ -88,20 +105,25 @@ class Translator(object):
                     else col(get_node_id_name(node_name)).alias(p.name)
                     for p in props
                 ]
-                if get_node_id_name(node_name) not in col_names:
+                if "id" not in col_names and key_name is None:
                     cols.append(get_node_id_name(node_name))
+                elif key_name is not None:
+                    cols.append(key_name)
                 return new_df.select(*cols)
             return new_df
         except Exception as ex:
             print("HAPPEN WITH NODE: {}".format(node_tbl_name))
             print(ex)
 
-    def get_empty_dateframe_with_name(self, name):
-        schema = (
-            StructType([])
-            if name is None
-            else StructType([StructField(get_node_id_name(name), StringType(), False)])
-        )
+    def get_empty_dateframe_with_name(self, name, key_name=None):
+        if name is None and key_name is None:
+            schema = StructType([])
+        elif key_name is not None:
+            schema = StructType([StructField(key_name, StringType(), False)])
+        else:
+            schema = StructType(
+                [StructField(get_node_id_name(name), StringType(), False)]
+            )
         return self.sc.parallelize([]).toDF(schema)
 
     def get_empty_dateframe_with_columns(self, cols):
@@ -171,6 +193,27 @@ class Translator(object):
 
         return df.mapValues(get_props(names, values))
 
+    def reducer_to_agg_func_expr(self, func_name, value, alias=None, is_merging=False):
+        col_alias = alias if alias is not None else value
+        if func_name == "count":
+            if is_merging:
+                return f.sum(col(value)).alias(col_alias)
+            return f.count(col(value)).alias(col_alias)
+        if func_name == "sum":
+            return f.sum(col(value)).alias(col_alias)
+        if func_name == "set":
+            if is_merging:
+                return f_collect_set_udf(col(value)).alias(col_alias)
+            return f.collect_set(col(value)).alias(col_alias)
+        if func_name == "list":
+            if is_merging:
+                return f_collect_list_udf(col(value)).alias(col_alias)
+            return f.collect_list(col(value)).alias(col_alias)
+        if func_name == "min":
+            return f.min(col(value)).alias(col_alias)
+        if func_name == "max":
+            return f.min(col(value)).alias(col_alias)
+
     def get_props_from_df(self, df, props):
         if df.isEmpty():
             return df.mapValues(get_props_empty_values([p.get("dst") for p in props]))
@@ -191,17 +234,20 @@ class Translator(object):
         )
 
     def save_to_hadoop(self, df):
-        save_rds(df, self.get_path_from_step(self.current_step), self.sc)
+        save_rdd_of_dataframe(df, self.get_path_from_step(self.current_step), self.sc)
         df.unpersist()
 
     def load_from_hadoop(self):
         return self.sc.pickleFile(self.get_path_from_step(self.current_step - 1))
 
     def load_from_hadoop_to_dateframe(self):
-        pickleRDD = self.sc.pickleFile(
+        return self.sql_context.sparkSession.read.parquet(
             self.get_path_from_step(self.current_step - 1)
-        ).collect()
-        return self.sc.createDataFrame(pickleRDD)
+        )
+
+    def join_two_dataframe(self, df1, df2, how="inner"):
+        join_on_props = [p for p in df1.schema.names if p in df2.schema.names]
+        return df1.join(df2, on=join_on_props, how=how)
 
     def translate_joining_props(self, translators):
         pass

@@ -3,6 +3,14 @@ from ..base.prop import PropFactory
 from .node import BaseRootNode
 from tube.utils.dd import get_properties_types
 from tube.utils.dd import get_node_table_name
+from pyspark.sql.types import (
+    StructType,
+    StructField,
+    StringType,
+    ArrayType,
+    IntegerType,
+    FloatType,
+)
 
 
 class Parser(object):
@@ -117,6 +125,17 @@ class Parser(object):
                 return (str,)
             a = get_properties_types(self.model, node_label)
             return a.get(src)
+
+    def get_hadoop_type(self, prop):
+        if prop.fn is not None and prop.fn in ["list", "set"]:
+            return ArrayType(StringType())
+        if prop.type == (float,):
+            return FloatType()
+        if prop.type == (str,):
+            return StringType()
+        if prop.type == (int,):
+            return IntegerType()
+        return StringType()
 
     @staticmethod
     def get_src_name(props):

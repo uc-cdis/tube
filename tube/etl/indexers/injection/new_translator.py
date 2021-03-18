@@ -1,18 +1,11 @@
 from copy import copy
 
-from tube.etl.indexers.base.lambdas import merge_dictionary
 from tube.etl.indexers.base.prop import PropFactory
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from tube.etl.indexers.injection.parser import Parser
-from tube.etl.indexers.injection.lambdas import (
-    get_props_to_tuple,
-    seq_aggregate_with_prop,
-    merge_aggregate_with_prop,
-    remove_props_from_tuple,
-    get_frame_zero,
-)
 from tube.etl.indexers.injection.nodes.collecting_node import LeafNode
 from tube.utils.general import PROJECT_ID, PROJECT_CODE, PROGRAM_NAME, get_node_id_name
+from tube.utils.general import FILE_ID
 from pyspark.sql import functions as fn
 
 
@@ -31,16 +24,17 @@ class Translator(BaseTranslator):
     def collect_leaf(self, child, edge_df, collected_leaf_dfs):
         if isinstance(child, LeafNode):
             child_df = self.translate_table_to_dataframe(
-                child, props=self.parser.props, get_zero_frame=True
+                child, props=self.parser.props, get_zero_frame=True, key_name=FILE_ID
             )
             if len(child_df.head(1)) == 0:
                 return
             child_df = child_df.withColumn("source_node", fn.lit(child.name))
-            child_df = child_df.join(edge_df, on=get_node_id_name(child.name))
+            edge_df = edge_df.withColumnRenamed(get_node_id_name(child.name), FILE_ID)
+            child_df = child_df.join(edge_df, on=FILE_ID)
             rm_props = [
                 c
                 for c in child_df.schema.names
-                if c != PROJECT_ID
+                if c not in [PROJECT_ID, FILE_ID]
                 and not PropFactory.has_prop_in_doc_name(self.parser.doc_type, c)
             ]
             child_df = child_df.drop(*rm_props)
@@ -65,23 +59,17 @@ class Translator(BaseTranslator):
         if child.name not in collected_collecting_dfs:
             collected_collecting_dfs[child.name] = child_df
         else:
-            join_on_props = [
-                p
-                for p in collected_collecting_dfs[child.name].schema.names
-                if p in child_df.schema.names
-            ]
-            collected_collecting_dfs[child.name] = collected_collecting_dfs[
-                child.name
-            ].join(child_df, on=join_on_props)
+            collected_collecting_dfs[child.name] = self.join_two_dataframe(
+                collected_collecting_dfs[child.name], child_df
+            )
 
     def merge_project(self, child, edge_df, collected_collecting_dfs):
         if edge_df is None or len(edge_df.head(1)) == 0:
             child.no_parent_to_map -= 1
             return
         child.no_parent_to_map -= 1
-        child_node_id = get_node_id_name(child.name)
         child_df = self.translate_table_to_dataframe(child, props=child.props)
-        child_df = child_df.join(edge_df, on=child_node_id)
+        child_df = self.join_two_dataframe(child_df, edge_df)
 
         child_df = child_df.withColumn(
             PROJECT_ID, fn.concat_ws("-", fn.col(PROGRAM_NAME), fn.col(PROJECT_CODE))
@@ -98,13 +86,7 @@ class Translator(BaseTranslator):
                 child_df = self.translate_edge_to_dataframe(
                     edge_tbl, child.name, root.name
                 )
-                join_on_props = [
-                    p for p in df.schema.names if p in child_df.schema.names
-                ]
-                tmp_df = df.join(
-                    self.translate_edge_to_dataframe(edge_tbl, child.name, root.name),
-                    on=join_on_props,
-                )
+                tmp_df = self.join_two_dataframe(df, child_df)
                 self.merge_project(child, tmp_df, collected_collecting_dfs)
         return collected_collecting_dfs, collected_leaf_dfs
 
@@ -119,11 +101,11 @@ class Translator(BaseTranslator):
                         edge_df = None
                         if df is not None:
                             edge_tbl = child.parents[collector.name]
-                            edge_df = df.join(
+                            edge_df = self.join_two_dataframe(
+                                df,
                                 self.translate_edge_to_dataframe(
                                     edge_tbl, child.name, collector.name
                                 ),
-                                on=get_node_id_name(collector.name),
                             )
                         self.collect_collecting_child(
                             child, edge_df, collected_collecting_dfs
@@ -166,7 +148,7 @@ class Translator(BaseTranslator):
 
         for c in self.parser.collectors:
             for p in c.props:
-                if p.name != "project_id":
+                if p.name != PROJECT_ID:
                     props.append(self.clone_prop_with_iterator_fn(p))
         return props
 
@@ -176,25 +158,22 @@ class Translator(BaseTranslator):
         In the final step of file document, we must construct the list of root instance's id
         :return:
         """
-        df = self.load_from_hadoop()
+        df = self.load_from_hadoop_to_dateframe()
         aggregating_props = self.get_aggregating_props()
         if len(aggregating_props) == 0:
             return df
-        return df
-        # frame_zero = get_frame_zero(aggregating_props)
-        #
-        # prop_df = (
-        #     df.mapValues(lambda x: get_props_to_tuple(x, aggregating_props))
-        #     .aggregateByKey(
-        #         frame_zero, seq_aggregate_with_prop, merge_aggregate_with_prop
-        #     )
-        #     .mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
-        # )
-        #
-        # df = (
-        #     df.mapValues(lambda x: remove_props_from_tuple(x, aggregating_props))
-        #     .distinct()
-        #     .mapValues(lambda x: {x0: x1 for (x0, x1) in x})
-        # )
-        #
-        # return df.join(prop_df).mapValues(lambda x: merge_dictionary(x[0], x[1]))
+
+        expr = [
+            self.reducer_to_agg_func_expr(p.fn, p.name, is_merging=False)
+            for p in aggregating_props
+        ]
+        tmp_df = df.groupBy(FILE_ID).agg(*expr)
+
+        rm_props = [p.name for p in aggregating_props if p.name != FILE_ID]
+        df = df.drop(*rm_props)
+        return self.join_two_dataframe(df, tmp_df)
+
+    def write(self, df):
+        self.writer.write_dataframe(
+            df, self.parser.name, self.parser.doc_type, self.parser.types
+        )

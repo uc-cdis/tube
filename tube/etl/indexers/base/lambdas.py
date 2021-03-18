@@ -4,7 +4,7 @@ import collections
 import functools
 import pyspark.sql.functions as f
 import pyspark.sql.types as t
-from tube.utils.general import get_node_id_name
+from tube.utils.general import get_node_id_name, get_node_id_name_without_prefix
 
 
 def extract_metadata(str_value):
@@ -28,7 +28,40 @@ def extract_metadata(str_value):
                 origin_value, str_value
             )
         )
-    return tuple([strs[4], props])
+    return props
+
+
+def pre_process_string(str_value):
+    """
+    Get all fields in _props (strs[3] in hadoop file) and node_id field (strs[4])
+    :param str_value:
+    :return:
+    """
+    str_value = str_value.replace("'", "###")
+    str_value = str_value.replace('\\""', "##")
+    return ast.literal_eval(str_value.replace('""', "'"))
+
+
+def extract_metadata_to_tuple(str_value):
+    """
+    Get all fields in _props (strs[3] in hadoop file) and node_id field (strs[4])
+    :param str_value:
+    :return:
+    """
+    strs = pre_process_string(str_value)
+    return tuple([strs[4], extract_metadata(str_value)])
+
+
+def extract_metadata_to_json(str_value, node_name, pre_defined_id_name=None):
+    node_id_name = (
+        get_node_id_name(node_name)
+        if pre_defined_id_name is None
+        else pre_defined_id_name
+    )
+    strs = pre_process_string(str_value)
+    new_dict = {node_id_name: strs[4]}
+    new_dict.update(extract_metadata(str_value))
+    return json.dumps(new_dict)
 
 
 def extract_link(str_value):
@@ -215,14 +248,14 @@ def get_single_frame_value(func_name, value):
 
 
 def f_concat_udf(val):
-    return functools.reduce(lambda x, y: x + y, val)
+    return functools.reduce(lambda x, y: x + y, val, [])
 
 
 f_collect_list_udf = f.udf(f_concat_udf, t.ArrayType(t.StringType()))
 
 
 def f_set_union_udf(val):
-    return functools.reduce(lambda x, y: list(set(x) | set(y)), val)
+    return functools.reduce(lambda x, y: list(set(x) | set(y)), val, [])
 
 
 f_collect_set_udf = f.udf(f_set_union_udf, t.ArrayType(t.StringType()))

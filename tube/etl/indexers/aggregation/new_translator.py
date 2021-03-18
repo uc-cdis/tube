@@ -1,18 +1,5 @@
-from tube.etl.indexers.base.lambdas import (
-    merge_and_fill_empty_props,
-    merge_dictionary,
-    swap_key_value,
-)
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
-from tube.etl.indexers.aggregation.lambdas import (
-    intermediate_frame,
-    merge_aggregate_with_reducer,
-    seq_aggregate_with_reducer,
-    get_frame_zero,
-    get_normal_frame,
-    get_single_frame_zero_by_func,
-)
-from tube.etl.indexers.base.prop import PropFactory
+from tube.etl.indexers.base.prop import PropFactory, Prop
 from tube.utils.general import (
     get_node_id_name,
     get_node_id_name_without_prefix,
@@ -23,12 +10,6 @@ from tube.utils.general import (
 from pyspark.sql.functions import sort_array, struct, collect_list, col
 import pyspark.sql.functions as f
 from .parser import Parser
-from ..base.lambdas import (
-    swap_property_as_key,
-    make_key_from_property,
-    f_collect_list_udf,
-    f_collect_set_udf,
-)
 
 
 def prop_to_aggregated_fn(col_name, fn):
@@ -48,16 +29,39 @@ class Translator(BaseTranslator):
         :param edge_df: rdd of the edge connected from the parent to child node.
         :return:
         """
-        expr = [
-            self.reducer_to_agg_func_expr(self.parser.reducer_by_prop.get(n), n, False)
-            for n in child_df.schema.names
-            if n in self.parser.reducer_by_prop
-        ]
-        return (
-            edge_df.join(child_df, on=get_node_id_name(child.name), how="left_outer")
+        expr = []
+        for n in child_df.schema.names:
+            if n in self.parser.reducer_by_prop:
+                if self.parser.reducer_by_prop.get(n) in ["list", "set"]:
+                    expr.append(
+                        self.reducer_to_agg_func_expr(
+                            self.parser.reducer_by_prop.get(n), n, is_merging=False
+                        )
+                    )
+                else:
+                    expr.append(
+                        self.reducer_to_agg_func_expr(
+                            self.parser.reducer_by_prop.get(n), n, is_merging=True
+                        )
+                    )
+        tmp_df = (
+            self.join_two_dataframe(edge_df, child_df, how="left_outer")
             .groupBy(get_node_id_name(node_name))
             .agg(*expr)
         )
+
+        select_expr = [get_node_id_name(node_name)]
+        for n in child_df.schema.names:
+            if n in self.parser.reducer_by_prop and self.parser.reducer_by_prop.get(
+                n
+            ) in ["list", "set"]:
+                select_expr.append(
+                    self.reducer_to_agg_func_expr(
+                        self.parser.reducer_by_prop.get(n), n, is_merging=True
+                    )
+                )
+        tmp_df = tmp_df.select(*select_expr)
+        return self.join_two_dataframe(edge_df, tmp_df)
 
     def aggregate_with_count_on_edge_tbl(self, node_name, df, edge_df, child):
         """
@@ -88,31 +92,7 @@ class Translator(BaseTranslator):
             )
             count_reducer.done = True
         # combine value lists new counted dataframe to existing one
-        return (
-            count_df
-            if df is None
-            else df.join(count_df, on=get_node_id_name(node_name))
-        )
-
-    def reducer_to_agg_func_expr(self, func_name, value, is_merging):
-        if func_name == "count":
-            if is_merging:
-                return f.sum(col(value)).alias(value)
-            return f.count(col(value)).alias(value)
-        if func_name == "sum":
-            return f.sum(col(value)).alias(value)
-        if func_name == "set":
-            if is_merging:
-                return f_collect_set_udf(col(value)).alias(value)
-            return f.collect_set(col(value)).alias(value)
-        if func_name == "list":
-            if is_merging:
-                return f_collect_list_udf(col(value)).alias(value)
-            return f.collect_list(col(value)).alias(value)
-        if func_name == "min":
-            return f.min(col(value)).alias(value)
-        if func_name == "max":
-            return f.min(col(value)).alias(value)
+        return count_df if df is None else self.join_two_dataframe(df, count_df)
 
     def aggregate_with_child_tbl(self, df, parent_name, edge_df, child):
         child_df = self.translate_table_to_dataframe(
@@ -124,17 +104,14 @@ class Translator(BaseTranslator):
             ],
         )
 
-        temp_df = edge_df.join(
-            child_df, on=get_node_id_name(child.name), how="left_outer"
-        )
-
+        temp_df = self.join_two_dataframe(edge_df, child_df, how="left_outer")
         expr = [
-            self.reducer_to_agg_func_expr(rd.fn, rd.prop.src, False)
+            self.reducer_to_agg_func_expr(rd.fn, rd.prop.name, is_merging=False)
             for rd in child.reducers
             if not rd.done and rd.prop.src is not None
         ]
         temp_df = temp_df.groupBy(get_node_id_name(parent_name)).agg(*expr)
-        return df.join(temp_df, on=get_node_id_name(parent_name), how="left_outer")
+        return self.join_two_dataframe(df, temp_df, how="left_outer")
 
     def aggregate_nested_properties(self):
         """
@@ -151,11 +128,11 @@ class Translator(BaseTranslator):
             for child in n.children:
                 if child.no_children_to_map == 0:
                     # Read all associations from edge table that link between parent and child one
-                    edge_df = key_df.join(
+                    edge_df = self.join_two_dataframe(
+                        key_df,
                         self.translate_edge_to_dataframe(
                             child.edge_up_tbl, child.name, n.name
                         ),
-                        on=get_node_id_name(n.name),
                         how="left_outer",
                     )
                     df = self.aggregate_with_count_on_edge_tbl(
@@ -172,11 +149,11 @@ class Translator(BaseTranslator):
                     df = (
                         df
                         if child.__key__() not in aggregated_dfs
-                        else df.join(
+                        else self.join_two_dataframe(
+                            df,
                             self.aggregate_intermediate_data_frame(
                                 n.name, child, aggregated_dfs[child.__key__()], edge_df
                             ),
-                            on=get_node_id_name(n.name),
                         )
                     )
                     n.no_children_to_map -= 1
@@ -205,24 +182,28 @@ class Translator(BaseTranslator):
                     self.parser.doc_type, n.sorted_by, n.sorted_by, []
                 )
                 props.append(sorting_prop)
+
             child_df = self.translate_table_to_dataframe(n, props=props)
-            n_id = get_node_id_name(n.name)
-            child_by_root = (
-                edge_df.join(child_df, on=n_id, how="inner")
-                .groupBy(root_id)
-                .agg(
+            child_by_root = self.join_two_dataframe(edge_df, child_df)
+
+            if n.sorted_by is not None:
+                sorted_cols = []
+                for c in child_df.schema.names:
+                    if c == n.sorted_by:
+                        sorted_cols.append(c)
+                for c in child_df.schema.names:
+                    if c != n.sorted_by:
+                        sorted_cols.append(c)
+                child_by_root = child_by_root.groupBy(root_id).agg(
                     sort_array(
-                        collect_list(struct(*child_df.columns)),
+                        collect_list(struct(*sorted_cols)),
                         asc=False if n.desc_order else True,
                     )
                     .getItem(0)
                     .alias("sorted_col")
                 )
-            )
-            child_by_root = child_by_root.select(root_id, "sorted_col.*")
-            root_df = root_df.join(
-                child_by_root, on=get_node_id_name(self.parser.root.name)
-            )
+                child_by_root = child_by_root.select(root_id, "sorted_col.*")
+            root_df = self.join_two_dataframe(root_df, child_by_root)
             child_df.unpersist()
             child_by_root.unpersist()
         return root_df
@@ -244,9 +225,19 @@ class Translator(BaseTranslator):
             if src_prop is None and r.prop.src == get_node_id_name_without_prefix(
                 translator.parser.doc_type
             ):
-                src_prop = translator.parser.get_prop_by_name(
-                    get_node_id_name(translator.parser.doc_type)
-                )
+                src_prop = translator.parser.get_prop_by_name(r.prop.src)
+                if src_prop is None:
+                    src_prop = Prop(
+                        PropFactory.get_additional_length(),
+                        r.prop.src,
+                        None,
+                        [],
+                        None,
+                        None,
+                        None,
+                        (str,),
+                        is_additional=True,
+                    )
             dst_prop = self.parser.get_prop_by_name(r.prop.name)
             if r.fn is None:
                 props_without_fn.append({"src": src_prop, "dst": dst_prop})
@@ -255,26 +246,31 @@ class Translator(BaseTranslator):
         return props_with_fn, props_without_fn
 
     def join_and_aggregate(self, df, joining_df, dual_props, joining_node):
-        frame_zero = get_frame_zero(joining_node.getting_fields)
-        joining_df = (
-            self.get_props_from_df(joining_df, dual_props)
-            .mapValues(get_normal_frame(joining_node.getting_fields))
-            .aggregateByKey(
-                frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer
+        src_col_names = [p.get("src").name for p in dual_props]
+        src_col_names.append(joining_node.joining_field)
+        joining_df = joining_df.select(src_col_names)
+
+        expr = [
+            self.reducer_to_agg_func_expr(
+                p.fn, p.prop.src, alias=p.prop.name, is_merging=False
             )
-            .mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
+            for p in joining_node.getting_fields
+        ]
+        tmp_df = joining_df.groupBy(joining_node.joining_field).agg(*expr)
+
+        rm_props = [p for p in src_col_names if p != joining_node.joining_field]
+        joining_df = joining_df.drop(*rm_props).join(
+            tmp_df, on=joining_node.joining_field
         )
-        df = df.leftOuterJoin(joining_df).mapValues(
-            lambda x: merge_and_fill_empty_props(x, [p.get("dst") for p in dual_props])
-        )
+
+        df = df.join(joining_df, on=joining_node.joining_field)
         joining_df.unpersist()
         return df
 
-    def join_no_aggregate(self, df, joining_df, dual_props):
-        joining_df = self.get_props_from_df(joining_df, dual_props)
-        df = df.leftOuterJoin(joining_df).mapValues(
-            lambda x: merge_and_fill_empty_props(x, [p.get("dst") for p in dual_props])
-        )
+    def join_no_aggregate(self, df, joining_df, dual_props, joining_node):
+        expr = [col(p.get("src").name).alias(p.get("dst").name) for p in dual_props]
+        joining_df = joining_df.select(*expr)
+        df = df.join(joining_df, on=joining_node.joining_field)
         joining_df.unpersist()
         return df
 
@@ -289,50 +285,13 @@ class Translator(BaseTranslator):
         :return:
         """
         joining_df = translator.load_from_hadoop_to_dateframe()
-
-        # For joining two indices, we need to swap the property field and key of one of the index.
-        # based on join_on value in the etlMapping, we know what field is used as joining field.
-        # We swap the index that have name of key field different than the name of joining field
-        # joining_df_key_id = translator.parser.get_key_prop().id
-        # id_field_in_joining_df = translator.parser.get_prop_by_name(
-        #     joining_node.joining_field
-        # ).id
-        # # field which is identity of a node is named as _{node}_id now
-        # # before in etl-mapping for joining_props, we use {node}_id
-        # # for backward compatibility, we check first with the value in mapping file.
-        # # if there is not any Prop object like that, we check with new format _{node}_id
-        # id_field_in_df = self.parser.get_prop_by_name(joining_node.joining_field)
-        # if id_field_in_df is None:
-        #     id_field_in_df = self.parser.get_prop_by_name(
-        #         get_node_id_name(self.parser.doc_type)
-        #     )
-        # if id_field_in_df is None:
-        #     raise Exception(
-        #         "{} field does not exist in index {}".format(
-        #             joining_node.joining_field, self.parser.doc_type
-        #         )
-        #     )
-        # id_field_in_df_id = id_field_in_df.id
-        # df_key_id = self.parser.get_key_prop().id
-        #
-        # swap_df = False
-        # if joining_df_key_id != id_field_in_joining_df:
-        #     joining_df = swap_property_as_key(
-        #         joining_df, id_field_in_joining_df, joining_df_key_id
-        #     )
-        # if df_key_id != id_field_in_df_id:
-        #     df = swap_property_as_key(df, id_field_in_df_id, df_key_id)
-        #     swap_df = True
-        #
-        # # Join can be done with or without an aggregation function like max, min, sum, ...
-        # # these two type of join requires different map-reduce steos
         props_with_fn, props_without_fn = self.get_joining_props(
             translator, joining_node
         )
         if len(props_with_fn) > 0:
             df = self.join_and_aggregate(df, joining_df, props_with_fn, joining_node)
         if len(props_without_fn) > 0:
-            df = self.join_no_aggregate(df, joining_df, props_without_fn)
+            df = self.join_no_aggregate(df, joining_df, props_without_fn, joining_node)
         return df
 
     def ensure_project_id_exist(self, df):
@@ -359,12 +318,15 @@ class Translator(BaseTranslator):
         root_df = self.translate_parent(root_df)
         root_df = self.get_direct_children(root_df)
         root_df = self.ensure_project_id_exist(root_df)
+        agg_df = self.aggregate_nested_properties()
+        root_id = get_node_id_name(self.parser.root.name)
+        rm_props = [
+            p for p in agg_df.schema.names if p in root_df.schema.names and p != root_id
+        ]
+        agg_df = agg_df.drop(*rm_props)
         if len(self.parser.aggregated_nodes) == 0:
             return root_df
-        return root_df.join(
-            self.aggregate_nested_properties(),
-            on=get_node_id_name(self.parser.root.name),
-        )
+        return self.join_two_dataframe(root_df, agg_df)
 
     def translate_joining_props(self, translators):
         """
@@ -373,7 +335,7 @@ class Translator(BaseTranslator):
         :param translators: translators containing indices that need to be joined
         :return:
         """
-        df = self.load_froload_from_hadoop_to_dateframem_hadoop()
+        df = self.load_from_hadoop_to_dateframe()
         for j in self.parser.joining_nodes:
             df = self.join_to_an_index(df, translators[j.joining_index], j)
         return df
@@ -382,22 +344,27 @@ class Translator(BaseTranslator):
         if len(self.parser.parent_nodes) == 0:
             return root_df
         #        root_tbl = get_node_table_name(self.parser.model, self.parser.root)
-        root_id = get_node_id_name(self.parser.root.name)
         for f in self.parser.parent_nodes:
             df = self.translate_table_to_dataframe(self.parser.root, props=[])
             src = self.parser.root
             n = f.head
             while n is not None:
                 edge_tbl = n.edge_up_tbl
-                df = df.join(
-                    self.translate_edge_to_dataframe(edge_tbl, src.name, n.name),
-                    on=get_node_id_name(src.name),
-                    how="inner",
+                df = self.join_two_dataframe(
+                    df, self.translate_edge_to_dataframe(edge_tbl, src.name, n.name)
                 )
                 cur_props = n.props
                 n_df = self.translate_table_to_dataframe(n, props=cur_props)
-                df = n_df.join(df, on=get_node_id_name(n.name), how="inner")
+                df = self.join_two_dataframe(df, n_df)
                 src = n
                 n = n.child
-            root_df = root_df.join(df, on=root_id, how="left_outer")
+            root_df = self.join_two_dataframe(root_df, df, how="left_outer")
         return root_df
+
+    def translate_final(self):
+        return self.load_from_hadoop_to_dateframe()
+
+    def write(self, df):
+        self.writer.write_dataframe(
+            df, self.parser.name, self.parser.doc_type, self.parser.types
+        )

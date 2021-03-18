@@ -66,3 +66,4 @@ def get_node_id_name_without_prefix(name):
 PROGRAM_NAME = "program_name"
 PROJECT_CODE = "project_code"
 PROJECT_ID = "project_id"
+FILE_ID = "file_id"
