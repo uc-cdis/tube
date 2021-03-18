@@ -105,9 +105,8 @@ class Parser(object):
 
     @staticmethod
     def get_src_name(props):
-        # debug
         lst = [
-            tuple(p.strip().split(":")) if ":" in p else tuple([p.strip()] * 2)
+            tuple([e.strip() for e in p.split(":")]) if ":" in p else tuple([p.strip()] * 2)
             for p in props
         ]
         return lst
