@@ -19,7 +19,11 @@ from tube.utils.general import get_node_id_name
 def json_export(x, doc_type):
     x[1][get_node_id_name(doc_type)] = x[0]
     x[1]["node_id"] = x[0]  # redundant field for backward compatibility with arranger
-    return (x[0], json.dumps(x[1]))
+    return x[0], json.dumps(x[1])
+
+
+def json_export_df(x, doc_type):
+    return x[1][get_node_id_name(doc_type)], json.dumps(x[1])
 
 
 class Writer(SparkBase):

@@ -89,6 +89,6 @@ mappings:
     injecting_props:
       subject:
         props:
-          - name: subject_id
+          - name: _subject_id
             src: id
           - name: project_id

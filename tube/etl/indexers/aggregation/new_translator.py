@@ -21,6 +21,9 @@ class Translator(BaseTranslator):
     def __init__(self, sc, hdfs_path, writer, mapping, model, dictionary):
         super(Translator, self).__init__(sc, hdfs_path, writer)
         self.parser = Parser(mapping, model, dictionary)
+        self.mapping_dictionary = self.get_all_value_mapping_dict()
+        if self.sc is not None:
+            self.mapping_broadcasted = self.sc.broadcast(self.mapping_dictionary)
 
     def aggregate_intermediate_data_frame(self, node_name, child, child_df, edge_df):
         """
@@ -44,6 +47,10 @@ class Translator(BaseTranslator):
                             self.parser.reducer_by_prop.get(n), n, is_merging=True
                         )
                     )
+        if len(expr) == 0:
+            expr.append(
+                self.reducer_to_agg_func_expr("set", get_node_id_name(child.name))
+            )
         tmp_df = (
             self.join_two_dataframe(edge_df, child_df, how="left_outer")
             .groupBy(get_node_id_name(node_name))
@@ -81,7 +88,7 @@ class Translator(BaseTranslator):
         node_id = get_node_id_name(node_name)
         if count_reducer is None:
             # if there is no reducer, group by parent key and get out empty value
-            count_df = edge_df.select(node_id).dropDuplicates([node_id])
+            count_df = edge_df.select(node_id).drop_duplicates([node_id])
         else:
             # if there is reducer, group by parent key and get out the number of children
             # only non-leaf nodes goes through this step
@@ -92,7 +99,11 @@ class Translator(BaseTranslator):
             )
             count_reducer.done = True
         # combine value lists new counted dataframe to existing one
-        return count_df if df is None else self.join_two_dataframe(df, count_df)
+        return (
+            count_df
+            if df is None
+            else self.join_two_dataframe(df, count_df, how="left_outer")
+        )
 
     def aggregate_with_child_tbl(self, df, parent_name, edge_df, child):
         child_df = self.translate_table_to_dataframe(
@@ -154,6 +165,7 @@ class Translator(BaseTranslator):
                             self.aggregate_intermediate_data_frame(
                                 n.name, child, aggregated_dfs[child.__key__()], edge_df
                             ),
+                            how="left_outer",
                         )
                     )
                     n.no_children_to_map -= 1
@@ -203,7 +215,7 @@ class Translator(BaseTranslator):
                     .alias("sorted_col")
                 )
                 child_by_root = child_by_root.select(root_id, "sorted_col.*")
-            root_df = self.join_two_dataframe(root_df, child_by_root)
+            root_df = self.join_two_dataframe(root_df, child_by_root, how="left_outer")
             child_df.unpersist()
             child_by_root.unpersist()
         return root_df
@@ -317,6 +329,7 @@ class Translator(BaseTranslator):
         )
         root_df = self.translate_parent(root_df)
         root_df = self.get_direct_children(root_df)
+        root_df = root_df.drop_duplicates()
         root_df = self.ensure_project_id_exist(root_df)
         agg_df = self.aggregate_nested_properties()
         root_id = get_node_id_name(self.parser.root.name)
@@ -324,9 +337,13 @@ class Translator(BaseTranslator):
             p for p in agg_df.schema.names if p in root_df.schema.names and p != root_id
         ]
         agg_df = agg_df.drop(*rm_props)
+        agg_df = agg_df.drop_duplicates()
         if len(self.parser.aggregated_nodes) == 0:
-            return root_df
-        return self.join_two_dataframe(root_df, agg_df)
+            return root_df.drop_duplicates()
+        final_df = self.join_two_dataframe(root_df, agg_df)
+        root_df.unpersist()
+        agg_df.unpersist()
+        return final_df
 
     def translate_joining_props(self, translators):
         """

@@ -15,12 +15,14 @@ from tube.utils.spark import save_rdd_of_dataframe, get_all_files
 from pyspark.sql.context import SQLContext
 from pyspark.sql.types import StructType, StructField, StringType
 from tube.utils.general import get_node_id_name
-from pyspark.sql.functions import sort_array, struct, collect_list, col
+from pyspark.sql.functions import collect_list, col
 
 from .prop import PropFactory
 from ..base.lambdas import (
     f_collect_list_udf,
     f_collect_set_udf,
+    extract_metadata_to_json,
+    map_with_dictionary,
 )
 
 
@@ -37,10 +39,22 @@ class Translator(object):
         self.hdfs_path = hdfs_path
         self.parser = None
         self.current_step = 0
+        self.mapping_dictionary = {}
+        self.mapping_broadcasted = None
 
     def update_types(self):
         self.parser.update_prop_types()
         self.parser.get_es_types()
+
+    def add_some_additional_props(self, keep_props):
+        keep_props.append(self.parser.get_key_prop().name)
+
+    def remove_unnecessary_columns(self, df):
+        props = list(PropFactory.get_prop_by_doc_name(self.parser.doc_type).values())
+        keep_props = [p.name for p in props]
+        self.add_some_additional_props(keep_props)
+        rm_props = [p for p in df.schema.names if p not in keep_props]
+        return df.drop(*rm_props)
 
     def translate_table(self, table_name, get_zero_frame=None, props=None):
         try:
@@ -97,14 +111,26 @@ class Translator(object):
             if get_zero_frame and (df is None or df.isEmpty()):
                 return self.get_empty_dateframe_with_name(node.name, key_name=key_name)
             new_df = self.sql_context.read.json(df)
+            df.unpersist()
             if props is not None:
                 col_names = [p.src for p in props]
-                cols = [
-                    col(p.src).alias(p.name)
-                    if p.src != "id"
-                    else col(get_node_id_name(node_name)).alias(p.name)
-                    for p in props
-                ]
+                cols = []
+                for p in props:
+                    if p.src not in new_df.schema.names:
+                        continue
+                    if p.src == "id":
+                        cols.append(col(get_node_id_name(node_name)).alias(p.name))
+                    elif (
+                        p.name in self.mapping_dictionary
+                        and self.mapping_broadcasted is not None
+                    ):
+                        cols.append(
+                            map_with_dictionary(self.mapping_broadcasted, p.src)(
+                                col(p.src)
+                            ).alias(p.name)
+                        )
+                    else:
+                        cols.append(col(p.src).alias(p.name))
                 if "id" not in col_names and key_name is None:
                     cols.append(get_node_id_name(node_name))
                 elif key_name is not None:
@@ -247,13 +273,22 @@ class Translator(object):
 
     def join_two_dataframe(self, df1, df2, how="inner"):
         join_on_props = [p for p in df1.schema.names if p in df2.schema.names]
-        return df1.join(df2, on=join_on_props, how=how)
+        return df1.join(df2, on=join_on_props, how=how).drop_duplicates()
 
     def translate_joining_props(self, translators):
         pass
 
     def translate_final(self):
         return self.load_from_hadoop()
+
+    def get_all_value_mapping_dict(self):
+        m_dict = {}
+        for p in PropFactory.get_prop_by_doc_name(self.parser.doc_type).values():
+            for v in p.value_mappings:
+                if p.name not in m_dict:
+                    m_dict[p.name] = {}
+                m_dict[p.name][v.original] = v.final
+        return m_dict
 
     def translate(self):
         pass

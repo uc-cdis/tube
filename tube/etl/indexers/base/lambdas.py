@@ -259,3 +259,10 @@ def f_set_union_udf(val):
 
 
 f_collect_set_udf = f.udf(f_set_union_udf, t.ArrayType(t.StringType()))
+
+
+def map_with_dictionary(mapping_broadcasted, p):
+    def map_value_from_dict(v):
+        return mapping_broadcasted.value.get(p).get(v)
+
+    return f.udf(map_value_from_dict)

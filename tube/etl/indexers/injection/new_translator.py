@@ -5,7 +5,6 @@ from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from tube.etl.indexers.injection.parser import Parser
 from tube.etl.indexers.injection.nodes.collecting_node import LeafNode
 from tube.utils.general import PROJECT_ID, PROJECT_CODE, PROGRAM_NAME, get_node_id_name
-from tube.utils.general import FILE_ID
 from pyspark.sql import functions as fn
 
 
@@ -24,24 +23,32 @@ class Translator(BaseTranslator):
     def collect_leaf(self, child, edge_df, collected_leaf_dfs):
         if isinstance(child, LeafNode):
             child_df = self.translate_table_to_dataframe(
-                child, props=self.parser.props, get_zero_frame=True, key_name=FILE_ID
+                child,
+                props=self.parser.props,
+                get_zero_frame=True,
+                key_name=self.parser.get_key_prop().name,
             )
             if len(child_df.head(1)) == 0:
                 return
             child_df = child_df.withColumn("source_node", fn.lit(child.name))
-            edge_df = edge_df.withColumnRenamed(get_node_id_name(child.name), FILE_ID)
-            child_df = child_df.join(edge_df, on=FILE_ID)
+            edge_df = edge_df.withColumnRenamed(
+                get_node_id_name(child.name), get_node_id_name(self.parser.doc_type)
+            )
+            child_df = self.join_two_dataframe(child_df, edge_df)
+            #  child_df.join(edge_df, on=self.parser.get_key_prop().name)
             rm_props = [
                 c
                 for c in child_df.schema.names
-                if c not in [PROJECT_ID, FILE_ID]
+                if c not in [PROJECT_ID, self.parser.get_key_prop().name, "source_node"]
                 and not PropFactory.has_prop_in_doc_name(self.parser.doc_type, c)
             ]
+            if len(child_df.head(1)) == 0:
+                return
             child_df = child_df.drop(*rm_props)
             collected_leaf_dfs["final"] = (
                 child_df
                 if "final" not in collected_leaf_dfs
-                else collected_leaf_dfs["final"].union(child_df).distinct()
+                else collected_leaf_dfs["final"].unionByName(child_df).distinct()
             )
             if child.name in collected_leaf_dfs:
                 collected_leaf_dfs[child.name].unpersist()
@@ -56,12 +63,22 @@ class Translator(BaseTranslator):
             child_df = self.translate_table_to_dataframe(child, props=child.props)
         else:
             child_df = edge_df
+
+        additional_props = []
+        self.add_some_additional_props(additional_props)
+        additional_props.append(get_node_id_name(child.name))
+        rm_props = [
+            p
+            for p in child_df.schema.names
+            if p not in PropFactory.get_prop_by_doc_name(self.parser.doc_type)
+            and p not in additional_props
+        ]
         if child.name not in collected_collecting_dfs:
-            collected_collecting_dfs[child.name] = child_df
+            collected_collecting_dfs[child.name] = child_df.drop(*rm_props)
         else:
             collected_collecting_dfs[child.name] = self.join_two_dataframe(
                 collected_collecting_dfs[child.name], child_df
-            )
+            ).drop(*rm_props)
 
     def merge_project(self, child, edge_df, collected_collecting_dfs):
         if edge_df is None or len(edge_df.head(1)) == 0:
@@ -110,6 +127,7 @@ class Translator(BaseTranslator):
                         self.collect_collecting_child(
                             child, edge_df, collected_collecting_dfs
                         )
+                        edge_df.unpersist()
                     collector.done = True
                     done_once = True
 
@@ -119,6 +137,11 @@ class Translator(BaseTranslator):
                 leaf.name, self.get_empty_dateframe_with_name(leaf.name)
             )
             self.collect_leaf(leaf, df, collected_leaf_dfs)
+
+    def add_some_additional_props(self, keep_props):
+        super(Translator, self).add_some_additional_props(keep_props)
+        keep_props.append(PROJECT_ID)
+        keep_props.append("source_node")
 
     def translate(self):
         collected_collecting_dfs, collected_leaf_dfs = self.join_program_to_project()
@@ -166,10 +189,15 @@ class Translator(BaseTranslator):
         expr = [
             self.reducer_to_agg_func_expr(p.fn, p.name, is_merging=False)
             for p in aggregating_props
+            if p.name in df.columns
         ]
-        tmp_df = df.groupBy(FILE_ID).agg(*expr)
+        tmp_df = df.groupBy(self.parser.get_key_prop().name).agg(*expr)
 
-        rm_props = [p.name for p in aggregating_props if p.name != FILE_ID]
+        rm_props = [
+            p.name
+            for p in aggregating_props
+            if p.name != self.parser.get_key_prop().name
+        ]
         df = df.drop(*rm_props)
         return self.join_two_dataframe(df, tmp_df)
 
