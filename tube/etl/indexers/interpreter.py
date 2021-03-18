@@ -1,7 +1,6 @@
 import yaml
 from .aggregation.new_translator import Translator as AggregatorTranslator
 from .injection.new_translator import Translator as InjectionTranslator
-from .nested.translator import Translator as NestedTranslator
 from .base.translator import Translator as BaseTranslator
 from tube.utils.dd import init_dictionary
 from tube.etl.outputs.es.writer import Writer

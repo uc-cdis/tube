@@ -14,12 +14,13 @@ from tube.utils.spark import save_rdd_of_dataframe
 from pyspark.sql.context import SQLContext
 from pyspark.sql.types import StructType, StructField, StringType
 from tube.utils.general import get_node_id_name
-from pyspark.sql.functions import sort_array, struct, collect_list, col
+from pyspark.sql.functions import collect_list, col
 
 from .prop import PropFactory
 from ..base.lambdas import (
     f_collect_list_udf,
     f_collect_set_udf,
+    extract_metadata_to_json,
 )
 
 
@@ -30,6 +31,7 @@ class Translator(object):
 
     def __init__(self, sc, hdfs_path, writer):
         self.sc = sc
+        self.sql_context = SQLContext(self.sc)
         self.writer = writer
         self.hdfs_path = hdfs_path
         self.parser = None

@@ -2,6 +2,7 @@ import json
 
 from elasticsearch import Elasticsearch
 
+
 from tube.etl.outputs.es.timestamp import (
     putting_timestamp,
     get_latest_utc_transaction_time,
@@ -19,7 +20,11 @@ from tube.utils.general import get_node_id_name
 def json_export(x, doc_type):
     x[1][get_node_id_name(doc_type)] = x[0]
     x[1]["node_id"] = x[0]  # redundant field for backward compatibility with arranger
-    return (x[0], json.dumps(x[1]))
+    return x[0], json.dumps(x[1])
+
+
+def json_export_df(x, doc_type):
+    return x[1][get_node_id_name(doc_type)], json.dumps(x[1])
 
 
 class Writer(SparkBase):
@@ -134,7 +139,7 @@ class Writer(SparkBase):
         except Exception as e:
             print(e)
 
-    def write_df(self, df, index, doc_type, types):
+    def write_rdd(self, df, index, doc_type, types):
         """
         Function to write the data frame to ElasticSearch
         :param df: data frame to be written
@@ -143,19 +148,17 @@ class Writer(SparkBase):
         :param types:
         :return:
         """
-        try:
-            for plugin in post_process_plugins:
-                df = df.map(lambda x: plugin(x))
-            self.reset_status()
-            index_to_write = self.versioning.create_new_index(
-                mapping, self.versioning.get_next_index_version(index)
-            )
-            self.write_to_new_index(df, index_to_write, doc_type)
-            self.versioning.putting_new_version_tag(index_to_write, index)
-            putting_timestamp(self.es, index_to_write)
-            self.reset_status()
-        except Exception as e:
-            print(e)
+        for plugin in post_process_plugins:
+            df = df.map(lambda x: plugin(x))
+        types = add_auth_resource_path_mapping(types)
+
+        mapping = self.generate_mapping(doc_type, types)
+        self.reset_status()
+        index_to_write = self.versioning.create_new_index(
+            mapping, self.versioning.get_next_index_version(index)
+        )
+        self.write_to_es(df, index_to_write, index, doc_type, self.write_to_new_index)
+        return index_to_write
 
     def write_dataframe(self, df, index, doc_type, types):
         self.reset_status()
@@ -172,3 +175,21 @@ class Writer(SparkBase):
             df, index_to_write, index, doc_type, self.write_df_to_new_index
         )
         return index_to_write
+
+    def write_to_es(self, df, index_to_write, index, doc_type, fn):
+        """
+        Function to write the data frame to ElasticSearch
+        :param df: data frame to be written
+        :param index_to_write: exact name of index
+        :param index: name of the index (alias)
+        :param doc_type: document type's name
+        :param types:
+        :return:
+        """
+        try:
+            fn(df, index_to_write, doc_type)
+            self.versioning.putting_new_version_tag(index_to_write, index)
+            putting_timestamp(self.es, index_to_write)
+            self.reset_status()
+        except Exception as e:
+            print(e)
