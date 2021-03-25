@@ -1,5 +1,5 @@
 # To check running container: docker exec -it tube /bin/bash
-FROM python:3.7-stretch
+FROM quay.io/cdis/python:3.7-stretch
 
 ENV DEBIAN_FRONTEND=noninteractive \
     SQOOP_VERSION="1.4.7" \
