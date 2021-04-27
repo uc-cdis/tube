@@ -105,7 +105,10 @@ class Parser(object):
 
     @staticmethod
     def get_src_name(props):
-        lst = [tuple(p.split(":")) if ":" in p else tuple([p, p]) for p in props]
+        lst = [
+            tuple([e.strip() for e in p.split(":")]) if ":" in p else tuple([p.strip()] * 2)
+            for p in props
+        ]
         return lst
 
     def create_prop_from_json(
