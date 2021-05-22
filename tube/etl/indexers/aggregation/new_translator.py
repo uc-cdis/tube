@@ -373,9 +373,11 @@ class Translator(BaseTranslator):
                 cur_props = n.props
                 n_df = self.translate_table_to_dataframe(n, props=cur_props)
                 df = self.join_two_dataframe(df, n_df)
+                n_df.unpersist()
                 src = n
                 n = n.child
             root_df = self.join_two_dataframe(root_df, df, how="left_outer")
+            df.unpersist()
         return root_df
 
     def translate_final(self):
