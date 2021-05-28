@@ -1,0 +1,115 @@
+version: '3'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.4.2
+    container_name: elasticsearch
+    environment:
+      - cluster.name=elasticsearch-cluster
+      - bootstrap.memory_lock=false
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - devnet
+    healthcheck:
+        test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
+        interval: 30s
+        timeout: 30s
+        retries: 10
+  tube:
+    build: .
+    command: >
+      bash -c "
+        sleep 30 &&
+        pip install -r dev-requirements.txt && 
+        python run_config.py && 
+        python run_etl.py -s import && 
+        python run_etl.py -s transform &&
+        echo 'ETL COMPLETE' && 
+        while :; do sleep 1; done
+      "
+    networks:
+      - devnet
+    environment:
+      - "DICTIONARY_URL=${DICTIONARY_URL:-https://s3.amazonaws.com/dictionary-artifacts/ndhdictionary/master/schema.json}"
+      - ES_URL=elasticsearch
+      - ES_INDEX_NAME=etl
+      - HADOOP_URL=hdfs://spark:9000
+      - HADOOP_HOST=spark
+    volumes:
+      - "${ETL_MAPPING:-./tests/gen3/tube/etlMapping.yaml}:/usr/share/gen3/tube/etlMapping.yaml"
+      - ./tests/gen3/tube/compose-creds.json:/usr/share/gen3/tube/creds.json
+      - ./tests/gen3/tube/user.yaml:/usr/share/gen3/tube/user.yaml
+      - ./dev-requirements.txt:/tmp/dev-requirements.txt
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+      spark:
+        condition: service_healthy
+  spark:
+    image: "quay.io/cdis/gen3-spark:master"
+    command: bash -c "
+        python run_config.py && 
+        hdfs namenode -format && 
+        hdfs --daemon start namenode && 
+        hdfs --daemon start datanode && 
+        yarn --daemon start resourcemanager && 
+        yarn --daemon start nodemanager && 
+        hdfs dfsadmin -safemode leave &&  
+        hdfs dfs -mkdir /result && 
+        echo READY &&
+        touch /tmp/ready.flag && 
+        while true; do sleep 5; done
+      "
+    expose:
+      - 22
+      - 8030
+      - 8031
+      - 8032
+      - 9000
+    networks:
+      - devnet
+    environment:
+      - HADOOP_URL=hdfs://0.0.0.0:9000
+      - HADOOP_HOST=0.0.0.0
+    mem_limit: 1g
+    healthcheck:
+      test: bash -c "[ -f /tmp/ready.flag ]"
+      interval: 2s
+      retries: 100
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: mypass
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_DB: metadata_db
+    networks:
+      - devnet  
+    expose:
+      - 5432
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 1s
+      retries: 100
+  db_init:
+    image: postgres
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - "${METADATA_DB:-./tests/metadata_db.sql}:/tmp/metadata_db.sql"
+    networks:
+      - devnet
+    command: >
+      bash -c "
+        (dropdb -h db -U postgres metadata_db || true) && createdb -h db -U postgres metadata_db && 
+        psql -h db -d metadata_db -U postgres -f /tmp/metadata_db.sql
+      "
+networks:
+  devnet:

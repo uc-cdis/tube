@@ -6,25 +6,15 @@ import collections
 def extract_metadata(str_value):
     """
     Get all fields in _props (strs[3] in hadoop file) and node_id field (strs[4])
-    :param str_value:
+    :param str_value: plaintext dump of one row in HDFS file
     :return:
     """
-    origin_value = str_value
-    str_value = str_value.replace("'", "###")
-    str_value = str_value.replace('\\""', "##")
-    strs = ast.literal_eval(str_value.replace('""', "'"))
+    _, __, ___, props_text, node_id = ast.literal_eval(str_value)
     try:
-        props = json.loads(
-            strs[3].replace("'", '"').replace("###", "'").replace("##", '\\"'),
-            strict=False,
-        )
+        props = json.loads(props_text, strict=False)
     except Exception as ex:
-        raise Exception(
-            "ERROR IN SPARK: origin: {}, after replacing: {}".format(
-                origin_value, str_value
-            )
-        )
-    return tuple([strs[4], props])
+        raise Exception("ERROR IN SPARK when parsing _props json {}".format(props_text))
+    return tuple([node_id, props])
 
 
 def extract_link(str_value):

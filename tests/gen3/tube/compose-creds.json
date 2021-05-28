@@ -1,0 +1,7 @@
+{
+  "db_host": "db",
+  "db_port": "5432",
+  "db_username": "postgres",
+  "db_password": "postgres",
+  "db_database": "metadata_db"
+}

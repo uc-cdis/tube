@@ -41,6 +41,8 @@ class SqlToHDFS(object):
             "temp",
             "--enclosed-by",
             '"',
+            "--escaped-by",
+            "\\",
             "--exclude-tables",
             "transaction_documents,transaction_logs,transaction_snapshots,_voided_edges,_voided_nodes",
             "--map-column-java",
@@ -76,6 +78,8 @@ class SqlToHDFS(object):
             "temp",
             "--enclosed-by",
             '"',
+            "--escaped-by",
+            "\\",
             "--map-column-java",
             "_props=String,acl=String,_sysan=String,{}".format(optional_fields),
         ]

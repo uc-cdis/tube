@@ -136,3 +136,34 @@ The required field to be specified for each property is `name`. All `injecting_p
 A `collector` etlMapping can use the special built-in `source_node` property to include the node in the dictionary that the entity comes from. For example, if a data file is from the `reference_file` node on the dictionary, the value of `source_node` will be `"reference_file"`.
 
 This is useful if we are ETL-ing data files because in many dictionaries, data files can be located on one of several nodes, and sometimes it's helpful to know where each data file came from. For example, PFB export of data files in portal (https://github.com/uc-cdis/data-portal/pull/729) relies on `source_node` in order to tell the `pelican-export` job where in the dictionary to search for data files.
+
+## Testing
+
+All services required to run a local ETL are provided in `docker-compose.yml`
+
+First, enable elasticsearch's virtual memory system requirements:
+
+`sudo sysctl -w vm.max_map_count=262144`
+
+Then, running 
+
+`docker-compose up --force-recreate --build`
+
+will start an ETL. 
+
+By default, unit tests are setup to ensure correctness against a provided sheepdog dump. 
+Running `docker-compose exec tube python -m pytest tests/` will run unit tests against the completed ETL.
+
+Optionally, set any of:
+
+`EXPORT ETL_MAPPING=./{yourETLMapping}.yml`
+
+`EXPORT DICTIONARY_URL="your_dictionary_url"`
+
+`EXPORT METADATA_DB=./{your_sheepdog_db_dump}.sql`
+
+to run ETL on non-default data. To acquire a sheepdog dump for a dev commons, run
+`ssh {you}@cdistest.csoc < tests/dump_sheepdog.txt > out.sql`
+
+Note, however, that many unit tests are written to the spec of default data 
+and may fail even after a successful ETL of any other data.

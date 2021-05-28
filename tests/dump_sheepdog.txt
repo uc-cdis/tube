@@ -1,0 +1,12 @@
+# Usage: ssh {you}@cdistest.csoc < dump_sheepdog.txt > dump.sql
+
+DB_HOST=$(cat Gen3Secrets/creds.json | jq -r .sheepdog.db_host)
+DB_USERNAME=$(cat Gen3Secrets/creds.json | jq -r .sheepdog.db_username)
+DB_PASSWORD=$(cat Gen3Secrets/creds.json | jq -r .sheepdog.db_password)
+DB_DATABASE=$(cat Gen3Secrets/creds.json | jq -r .sheepdog.db_database)
+
+PGPASSWORD=$DB_PASSWORD \
+pg_dump \
+-h $DB_HOST \
+-U $DB_USERNAME \
+-d $DB_DATABASE \
