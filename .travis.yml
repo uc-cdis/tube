@@ -36,7 +36,9 @@ before_script:
   - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
   - echo "TRAVIS_BRANCH=$TRAVIS_BRANCH, PR=$PR, BRANCH=$BRANCH"
   - export REPOSITORY=cdis/tube
-  - ./wait_for_quay.sh -r ${REPOSITORY} -b ${BRANCH//\//_} -d 30
+  - export BUILD_STATUS=$(./wait_for_quay.sh -r ${REPOSITORY} -b ${BRANCH//\//_} -d 30 -a 5)
+  - export QUAY_BUILD_STATUS=$(echo $BUILD_STATUS | tr " " "\n" | tail -1)
+  - echo $QUAY_BUILD_STATUS
   - git clone https://github.com/uc-cdis/compose-etl.git --branch master --single-branch
   - cp -f tests/gen3/tube/etlMapping.yaml compose-etl/configs/etlMapping.yaml
   - cp -f tests/gen3/tube/user.yaml compose-etl/configs/user.yaml
@@ -51,7 +53,12 @@ before_script:
       "db_database": "metadata_db"
     }
     ' > configs/creds.json
-  - sed -i "s/tube:master/tube:${BRANCH//\//_}/g" docker-compose.yml
+  - if [[ "$QUAY_BUILD_STATUS" -ne "complete" ]] || [[ "$QUAY_BUILD_STATUS" -eq "null" ]];
+    then { 
+      echo  "Could not find the quay build, using default."; };
+    else {
+      echo "Found quay build, updating docker-compose image";
+      sed -i "s/tube:master/tube:${BRANCH//\//_}/g" docker-compose.yml; }; fi
   - sudo sysctl -w vm.max_map_count=262144
   - docker-compose up -d spark elasticsearch
   - sleep 60

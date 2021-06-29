@@ -4,7 +4,21 @@ import pytest
 from psycopg2.extensions import AsIs
 
 from tests.utils import test_files, items_in_file
-from tube.utils.db import get_db_cursor
+from tube.utils.db import get_db_cursor, create_default_db_connection
+import tube.settings as config
+from unittest.mock import patch
+
+
+def test_create_default_db_connection_ssl():
+    with patch.object(config, "DB_USE_SSL", True):
+        cur = create_default_db_connection()
+        assert "sslmode=require" in cur.getconn().dsn
+
+
+def test_create_default_db_connection_no_ssl():
+    with patch.object(config, "DB_USE_SSL", False):
+        cur = create_default_db_connection()
+        assert "sslmode=require" not in cur.getconn().dsn
 
 
 @pytest.mark.parametrize("filename", test_files)
