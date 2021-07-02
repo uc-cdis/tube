@@ -137,6 +137,15 @@ class Parser(object):
             return IntegerType()
         return StringType()
 
+    def get_hadoop_type_ignore_fn(self, prop):
+        if prop.type == (float,):
+            return FloatType()
+        if prop.type == (str,):
+            return StringType()
+        if prop.type == (int,):
+            return IntegerType()
+        return StringType()
+
     @staticmethod
     def get_src_name(props):
         lst = [

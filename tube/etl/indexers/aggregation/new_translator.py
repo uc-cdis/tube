@@ -174,6 +174,8 @@ class Translator(BaseTranslator):
                     df = key_df
             aggregated_dfs[n.__key__()] = df
             key_df.unpersist()
+        if self.parser.root.name not in aggregated_dfs:
+            return None
         return aggregated_dfs[self.parser.root.name]
 
     def get_direct_children(self, root_df):
@@ -260,10 +262,9 @@ class Translator(BaseTranslator):
     def join_and_aggregate(self, df, joining_df, dual_props, joining_node):
         src_col_names = [p.get("src").name for p in dual_props]
         src_col_names.append(joining_node.joining_field)
-        for c in src_col_names:
-            if c not in joining_df.schema.names:
-                joining_df = joining_df.withColumn(c, lit(None))
-        joining_df = joining_df.select(src_col_names)
+        all_expr = [lit(None) for c in src_col_names if c not in joining_df.columns]
+        all_expr.extend(src_col_names)
+        joining_df = joining_df.select(*all_expr)
 
         expr = [
             self.reducer_to_agg_func_expr(
@@ -315,13 +316,11 @@ class Translator(BaseTranslator):
             project_id_prop = PropFactory.adding_prop(
                 self.parser.doc_type, PROJECT_ID, None, [], prop_type=(str,)
             )
-            project_code_id = self.parser.get_prop_by_name(PROJECT_CODE).id
-            program_name_id = self.parser.get_prop_by_name(PROGRAM_NAME).id
-            df = df.select(
-                "*",
-                ("{}-{}".format(col(program_name_id), col(project_code_id))).alias(
-                    project_id_prop.id
-                ),
+            project_code_col_name = self.parser.get_prop_by_name(PROJECT_CODE).name
+            program_name_col_name = self.parser.get_prop_by_name(PROGRAM_NAME).name
+            df = df.select("*").withColumn(
+                project_id_prop.name,
+                col(program_name_col_name) + "-" + col(project_code_col_name),
             )
         return df
 
@@ -335,17 +334,23 @@ class Translator(BaseTranslator):
         root_df = root_df.drop_duplicates()
         root_df = self.ensure_project_id_exist(root_df)
         agg_df = self.aggregate_nested_properties()
-        root_id = get_node_id_name(self.parser.root.name)
-        rm_props = [
-            p for p in agg_df.schema.names if p in root_df.schema.names and p != root_id
-        ]
-        agg_df = agg_df.drop(*rm_props)
-        agg_df = agg_df.drop_duplicates()
+        if agg_df is not None:
+            root_id = get_node_id_name(self.parser.root.name)
+            rm_props = [
+                p
+                for p in agg_df.schema.names
+                if p in root_df.schema.names and p != root_id
+            ]
+            agg_df = agg_df.drop(*rm_props)
+            agg_df = agg_df.drop_duplicates()
         if len(self.parser.aggregated_nodes) == 0:
             return root_df.drop_duplicates()
-        final_df = self.join_two_dataframe(root_df, agg_df)
+        final_df = (
+            self.join_two_dataframe(root_df, agg_df) if agg_df is not None else root_df
+        )
         root_df.unpersist()
-        agg_df.unpersist()
+        if agg_df is not None:
+            agg_df.unpersist()
         return final_df
 
     def translate_joining_props(self, translators):

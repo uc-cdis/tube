@@ -7,16 +7,13 @@ import pyspark.sql.types as t
 from tube.utils.general import get_node_id_name, get_node_id_name_without_prefix
 
 
-def extract_metadata(str_value):
+def extract_metadata(str_value, strs):
     """
     Get all fields in _props (strs[3] in hadoop file) and node_id field (strs[4])
     :param str_value:
     :return:
     """
     origin_value = str_value
-    str_value = str_value.replace("'", "###")
-    str_value = str_value.replace('\\""', "##")
-    strs = ast.literal_eval(str_value.replace('""', "'"))
     try:
         props = json.loads(
             strs[3].replace("'", '"').replace("###", "'").replace("##", '\\"'),
@@ -49,7 +46,7 @@ def extract_metadata_to_tuple(str_value):
     :return:
     """
     strs = pre_process_string(str_value)
-    return tuple([strs[4], extract_metadata(str_value)])
+    return tuple([strs[4], extract_metadata(str_value, strs)])
 
 
 def extract_metadata_to_json(str_value, node_name, pre_defined_id_name=None):
@@ -60,7 +57,7 @@ def extract_metadata_to_json(str_value, node_name, pre_defined_id_name=None):
     )
     strs = pre_process_string(str_value)
     new_dict = {node_id_name: strs[4]}
-    new_dict.update(extract_metadata(str_value))
+    new_dict.update(extract_metadata(str_value, strs))
     return json.dumps(new_dict)
 
 

@@ -10,7 +10,6 @@ from .lambdas import (
     get_props_empty_values,
     get_number,
 )
-from tube.etl.indexers.base.prop import PropFactory
 from tube.utils.spark import save_rdd_of_dataframe, get_all_files
 from pyspark.sql.context import SQLContext
 from pyspark.sql.types import StructType, StructField, StringType
@@ -86,7 +85,7 @@ class Translator(object):
             if len(files) > 1:
                 for f in files[1:]:
                     df = df.union(self.sc.textFile(f))
-            df = df.map(extract_metadata)
+            df = df.map(extract_metadata_to_tuple)
 
             if get_zero_frame:
                 if df.isEmpty():

@@ -45,6 +45,16 @@ class Translator(BaseTranslator):
             if len(child_df.head(1)) == 0:
                 return
             child_df = child_df.drop(*rm_props)
+            select_expr = child_df.columns
+            prop_list = PropFactory.get_prop_by_doc_name(self.parser.doc_type)
+            for p in prop_list.values():
+                if p.name not in child_df.columns:
+                    select_expr.append(
+                        fn.lit(None)
+                        .cast(self.parser.get_hadoop_type_ignore_fn(p))
+                        .alias(p.name)
+                    )
+            child_df = child_df.select(*select_expr)
             collected_leaf_dfs["final"] = (
                 child_df
                 if "final" not in collected_leaf_dfs
@@ -127,7 +137,8 @@ class Translator(BaseTranslator):
                         self.collect_collecting_child(
                             child, edge_df, collected_collecting_dfs
                         )
-                        edge_df.unpersist()
+                        if edge_df is not None:
+                            edge_df.unpersist()
                     collector.done = True
                     done_once = True
 
