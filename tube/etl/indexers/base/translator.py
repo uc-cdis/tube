@@ -292,6 +292,8 @@ class Translator(object):
 
     def join_two_dataframe(self, df1, df2, how="inner"):
         join_on_props = [p for p in df1.schema.names if p in df2.schema.names]
+        if len(join_on_props) == 0:
+            return self.get_empty_dateframe_with_columns([])
         return df1.join(df2, on=join_on_props, how=how).drop_duplicates()
 
     def translate_joining_props(self, translators):

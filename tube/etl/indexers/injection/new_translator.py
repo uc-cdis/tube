@@ -148,7 +148,7 @@ class Translator(BaseTranslator):
         self.merge_collectors(collected_collecting_dfs)
         self.get_leaves(collected_collecting_dfs, collected_leaf_dfs)
         for (k, df) in list(collected_collecting_dfs.items()):
-            if k != "final":
+            if k != "final" and df is not None:
                 df.unpersist()
 
         if "final" in collected_leaf_dfs:

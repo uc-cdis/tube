@@ -7,7 +7,7 @@ from tube.utils.general import (
     PROJECT_CODE,
     PROGRAM_NAME,
 )
-from pyspark.sql.functions import sort_array, struct, collect_list, col
+from pyspark.sql.functions import sort_array, struct, collect_list, col, lit
 import pyspark.sql.functions as f
 from .parser import Parser
 
@@ -260,6 +260,9 @@ class Translator(BaseTranslator):
     def join_and_aggregate(self, df, joining_df, dual_props, joining_node):
         src_col_names = [p.get("src").name for p in dual_props]
         src_col_names.append(joining_node.joining_field)
+        for c in src_col_names:
+            if c not in joining_df.schema.names:
+                joining_df = joining_df.withColumn(c, lit(None))
         joining_df = joining_df.select(src_col_names)
 
         expr = [
@@ -275,14 +278,14 @@ class Translator(BaseTranslator):
             tmp_df, on=joining_node.joining_field
         )
 
-        df = df.join(joining_df, on=joining_node.joining_field)
+        df = df.join(joining_df, on=joining_node.joining_field, how="left_outer")
         joining_df.unpersist()
         return df
 
     def join_no_aggregate(self, df, joining_df, dual_props, joining_node):
         expr = [col(p.get("src").name).alias(p.get("dst").name) for p in dual_props]
         joining_df = joining_df.select(*expr)
-        df = df.join(joining_df, on=joining_node.joining_field)
+        df = df.join(joining_df, on=joining_node.joining_field, how="left_outer")
         joining_df.unpersist()
         return df
 
