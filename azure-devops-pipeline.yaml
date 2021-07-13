@@ -1,0 +1,251 @@
+trigger:
+  branches:
+    include:
+      - master
+
+variables:
+  - name: SP_CLIENT_ID
+    value: "MY_AZ_SP_CLIENT_ID"
+  - name: SP_CLIENT_PASS
+    value: "MY_AZ_SP_CLIENT_PASS"
+  - name: TENANT_ID
+    value: "MY_AZ_TENANT_ID"
+  - name: ACR_NAME
+    value: "myacrname"
+  - name: LOCAL_POSTGRESQL_HOSTNAME
+    value: localhost
+  - name: LOCAL_POSTGRESQL_USERNAME
+    value: postgres
+  - name: LOCAL_POSTGRESQL_PASSWORD
+    value: postgres
+  - name: LOCAL_POSTGRESQL_PORT
+    value: 5433
+  - name: DESIRED_LOCAL_POSTGRESQL_PORT
+    value: 5432
+  - name: METADATA_DB_NAME
+    value: metadata_db
+  - name: REPOSITORY_NAME
+    value: cdis/tube
+  - name: REPOSITORY_BRANCH_NAME
+    value: 2020.09
+  - name: DICTIONARY_URL
+    value: https://s3.amazonaws.com/dictionary-artifacts/ndhdictionary/3.3.8/schema.json
+  - name: DOCKER_HOST_INTERNAL
+    value: host.docker.internal
+
+stages:
+  - stage: build
+    jobs:
+      - job: run_build_push_acr
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+        # Use Python version
+        # Use the specified version of Python from the tool cache, optionally adding it to the PATH
+        - task: UsePythonVersion@0
+          inputs:
+            versionSpec: '3.7' 
+            addToPath: true 
+        - script: |-
+            sudo apt-get update && apt-get install -y --no-install-recommends \
+            build-essential \
+            openjdk-8-jdk-headless;
+
+            # dependency for pyscopg2 - which is dependency for sqlalchemy postgres engine
+            sudo apt-get install -y --no-install-recommends libpq-dev
+
+            sudo apt-get install -y --no-install-recommends postgresql-client \
+            wget \
+            unzip \
+            git;
+
+            # dependency for cryptography
+            sudo apt-get install -y --no-install-recommends libffi-dev libssl-dev
+
+            sudo apt-get install -y --no-install-recommends vim curl
+            sudo rm -rf /var/lib/apt/lists/*
+          displayName: Install Dependencies
+
+        - script: |-
+            # install psql
+            sudo apt install postgresql-client-common
+            sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+            wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+            sudo apt-get update
+            sudo apt-get install postgresql-12
+            sudo sed -i 's:port = $(LOCAL_POSTGRESQL_PORT):port = $(DESIRED_LOCAL_POSTGRESQL_PORT):g' /etc/postgresql/12/main/postgresql.conf 
+            sudo pg_ctlcluster 12 main start
+
+            # Allow remote access connectivity
+            sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/12/main/postgresql.conf
+
+            # Allow remote access given a password
+            sudo sed -i "s/host    all             all             127.0.0.1\/32            md5/host     all             all             0.0.0.0\/0               md5/g" /etc/postgresql/12/main/pg_hba.conf
+
+            # Allow firewall access
+            sudo ufw allow 5432/tcp
+
+            # wait for psql to be ready
+            tail /var/log/postgresql/postgresql-12-main.log | sed '/^database system is ready to accept connections$/ q'
+
+            # changing a port requires a restart
+            sudo pg_ctlcluster 12 main restart
+
+            # wait for psql to be ready
+            tail /var/log/postgresql/postgresql-12-main.log | sed '/^database system is ready to accept connections$/ q'
+
+            # Setup Test Database
+            curDir=$(pwd)
+            ls "${curDir}/deployment/scripts/postgresql/postgresql_init.sql"
+            sudo -u "$(LOCAL_POSTGRESQL_USERNAME)" psql -f "${curDir}/deployment/scripts/postgresql/postgresql_init.sql" -p "$(DESIRED_LOCAL_POSTGRESQL_PORT)"
+
+            CONNECTION_STRING="host=$(LOCAL_POSTGRESQL_HOSTNAME) port=$(DESIRED_LOCAL_POSTGRESQL_PORT) dbname=$(METADATA_DB_NAME) user=$(LOCAL_POSTGRESQL_USERNAME) password=$(LOCAL_POSTGRESQL_PASSWORD)"
+            psql "$CONNECTION_STRING" -f tests/metadata_db.sql metadata_db
+          displayName: Setup Local PostgreSQL for Testing
+          env:
+            PGPORT: $(DESIRED_LOCAL_POSTGRESQL_PORT)
+
+        - script: |-
+            export BRANCH=$(REPOSITORY_BRANCH_NAME)
+            export REPOSITORY=$(REPOSITORY_NAME)
+            # using older tag which isn't available from curl -s -X GET https://quay.io/api/v1/repository/cdis/tube/build/
+            ./wait_for_quay.sh -r $(REPOSITORY_NAME) -b $(REPOSITORY_BRANCH_NAME) -d 30 -a 5
+            git clone https://github.com/uc-cdis/compose-etl.git --branch master --single-branch
+            cp -f tests/gen3/tube/etlMapping.yaml compose-etl/configs/etlMapping.yaml
+            cp -f tests/gen3/tube/user.yaml compose-etl/configs/user.yaml
+            cd compose-etl
+
+            export DOCKERHOST=$(ifconfig eth0 | grep inet | head -n 1 | cut -d: -f2 | awk '{print $2}')
+            echo $DOCKERHOST
+
+            echo '
+            {
+              "db_host": "'$(DOCKER_HOST_INTERNAL)'",
+              "db_username": "postgres",
+              "db_password": "postgres",
+              "db_database": "metadata_db"
+            }
+            ' > configs/creds.json
+
+            sed -i "s/tube:master/tube:$(REPOSITORY_BRANCH_NAME)/g" docker-compose.yml
+            sed -i "s/spark:master/spark:$(REPOSITORY_BRANCH_NAME)/g" docker-compose.yml
+            sed -i "s/- devnet/&\n    extra_hosts:\n      - $(DOCKER_HOST_INTERNAL):$DOCKERHOST/g" docker-compose.yml
+
+            sudo sysctl -w vm.max_map_count=262144
+            docker-compose up -d spark elasticsearch
+            sleep 60
+            docker-compose logs
+
+            CONNECTION_STRING="host=$(DOCKER_HOST_INTERNAL) port=$(DESIRED_LOCAL_POSTGRESQL_PORT) dbname=$(METADATA_DB_NAME) user=$(LOCAL_POSTGRESQL_USERNAME) password=$(LOCAL_POSTGRESQL_PASSWORD)";
+
+            docker-compose run tube bash -c "echo 'options use-vc' >> /etc/resolv.conf; \
+              ping $(DOCKER_HOST_INTERNAL) -w 2 -c 4; \
+              apt install postgresql-client-common; \
+              psql '$CONNECTION_STRING' -c 'select * from pg_catalog.pg_tables'; \
+              python -m pip install gdcdictionary; \
+              python run_config.py && python run_etl.py --force";
+            cd -
+
+            CONNECTION_STRING="host=$(LOCAL_POSTGRESQL_HOSTNAME) port=$(DESIRED_LOCAL_POSTGRESQL_PORT) dbname=$(METADATA_DB_NAME) user=$(LOCAL_POSTGRESQL_USERNAME) password=$(LOCAL_POSTGRESQL_PASSWORD)"
+            echo 'Verify schema'
+            psql "$CONNECTION_STRING" -c "select * from pg_catalog.pg_tables where schemaname = 'public'";
+
+            export XDG_DATA_HOME="$HOME/.local/share"
+            export ES_URL="localhost"
+            export ES_INDEX_NAME="etl"
+            export DICTIONARY_URL=$(DICTIONARY_URL)
+
+            mkdir -p $XDG_DATA_HOME/gen3/tube
+
+            # Copy tube test settings for use with etl-compose
+            cp tests/gen3/tube/{creds.json,etlMapping.yaml,user.yaml} $XDG_DATA_HOME/gen3/tube/
+
+            ls $XDG_DATA_HOME/gen3/tube
+            ls -l $XDG_DATA_HOME/gen3/tube/creds.json
+            cat $XDG_DATA_HOME/gen3/tube/etlMapping.yaml
+            cat $XDG_DATA_HOME/gen3/tube/user.yaml
+
+            # check elastic search indices
+            echo 'check elastic search indices'
+            curl -X GET "$ES_URL:9200/_cat/indices?v" 
+
+          displayName: Configure Test Settings
+          env:
+            PGPORT: $(DESIRED_LOCAL_POSTGRESQL_PORT)
+
+        - script: |-
+            python3 -m pip uninstall -y six || true
+            python3 -m pip install pypandoc
+            python3 -m pip install pytest-cov==2.5.1
+            python3 -m pip install pytest==3.2.3
+            python3 -m pip install psycopg2-binary==2.8.4
+            python3 -m pip install -r dev-requirements.txt
+            python3 -m pip install -r requirements.txt
+            sudo apt update
+            sudo apt install -y jq
+          displayName: Install Testing Dependencies
+
+        - script: |-
+            export XDG_DATA_HOME="$HOME/.local/share"
+            export ES_URL="localhost"
+            export ES_INDEX_NAME="etl"
+            export DICTIONARY_URL=$(DICTIONARY_URL)
+
+            # Check if ES is running.  Otherwise will need to merge steps (or re-run compose)
+            curl -X GET "$ES_URL:9200/_cat/indices?v"
+
+            # verify files are populated
+            ls -l $XDG_DATA_HOME/gen3/tube
+            cat $XDG_DATA_HOME/gen3/tube/etlMapping.yaml
+            cat $XDG_DATA_HOME/gen3/tube/user.yaml
+
+            python3 -m pip freeze > cur_requirements.txt
+            cat cur_requirements.txt
+
+            echo 'Check connectivity'
+            CONNECTION_STRING="host=$(LOCAL_POSTGRESQL_HOSTNAME) port=$(DESIRED_LOCAL_POSTGRESQL_PORT) dbname=metadata_db user=$(LOCAL_POSTGRESQL_USERNAME) password=$(LOCAL_POSTGRESQL_PASSWORD)"
+            psql "$CONNECTION_STRING" -c "select * from pg_catalog.pg_tables where schemaname = 'public'";
+
+            python3 -m pytest -vv --cov-report xml --junitxml="test-results.xml" tests
+          displayName: Run Tests
+          env:
+            PGPORT: $(DESIRED_LOCAL_POSTGRESQL_PORT)
+            DICTIONARY_URL: $(DICTIONARY_URL)
+
+        - task: PublishTestResults@2
+          condition: succeededOrFailed()
+          inputs:
+            testResultsFiles: '**/test-*.xml'
+            testRunTitle: 'Publish test results for Python $(python.version)'
+
+        - task: PublishCodeCoverageResults@1
+          inputs:
+            codeCoverageTool: Cobertura
+            summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
+            reportDirectory: '$(System.DefaultWorkingDirectory)/**/htmlcov'
+
+        - script: |-
+            set -e
+            echo "az login --service-principal --username $(SP_CLIENT_ID) --password $(SP_CLIENT_PASS) --tenant $(TENANT_ID)"
+            az login --service-principal --username "$(SP_CLIENT_ID)" --password "$(SP_CLIENT_PASS)" --tenant "$(TENANT_ID)"
+          displayName: Azure Login
+
+        - script: |-
+            set -e
+            echo "PWD:"
+            pwd
+            ls -a
+            export BUILD_REPO_NAME=$(echo $(Build.Repository.Name) | tr '[:upper:]' '[:lower:]')
+            export IMAGE_TAG=$(echo $(Build.SourceBranchName) | tr / - | tr . - | tr _ - )-$(Build.BuildNumber)
+            export IMAGE_NAME=$BUILD_REPO_NAME:$IMAGE_TAG
+            echo "Image Name: $IMAGE_NAME"
+            ACR_BUILD_COMMAND="az acr build -r $(ACR_NAME) --image $IMAGE_NAME ."
+
+            cd ./
+            echo "PWD:"
+            pwd
+            ls -a
+            echo "ACR BUILD COMMAND: $ACR_BUILD_COMMAND"
+            $ACR_BUILD_COMMAND
+          displayName: ACR Build and Publish
+  
