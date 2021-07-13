@@ -11,9 +11,22 @@ pools = {}
 
 
 def create_default_db_connection():
-    pools[connection_name] = ThreadedConnectionPool(
-        1, 20, dsn=config.PYDBC, connect_timeout=30
-    )
+    if config.DB_USE_SSL:
+        pools[connection_name] = ThreadedConnectionPool(
+            1,
+            20,
+            dbname=config.DB_DATABASE,
+            user=config.DB_USERNAME,
+            password=config.DB_PASSWORD,
+            host=config.DB_HOST,
+            port=config.DB_PORT,
+            sslmode="require",
+            connect_timeout=30,
+        )
+    else:
+        pools[connection_name] = ThreadedConnectionPool(
+            1, 20, dsn=config.PYDBC, connect_timeout=30
+        )
     return pools[connection_name]
 
 
