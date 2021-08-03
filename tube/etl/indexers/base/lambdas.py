@@ -106,12 +106,13 @@ def make_key_from_property(x1, prop_name):
 
 def use_property_as_key(x0, x1, prop_name, new_prop_name):
     key = x1.pop(prop_name, None)
-    x1[new_prop_name] = x0
+    if new_prop_name is not None:
+        x1[new_prop_name] = x0
     x0 = key
     return (x0, x1)
 
 
-def swap_property_as_key(df, prop_name, new_prop_name):
+def swap_property_as_key(df, prop_name, new_prop_name=None):
     return df.map(lambda x: use_property_as_key(x[0], x[1], prop_name, new_prop_name))
 
 
