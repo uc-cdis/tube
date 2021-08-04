@@ -6,7 +6,7 @@ class JoiningNode(BaseNode):
     def __init__(self, props, json_join):
         super(JoiningNode, self).__init__()
         self.joining_index = json_join["index"]
-        self.joining_fields = [f.strip() for f in json_join["join_on"].split(",")]
+        self.joining_field = json_join["join_on"]
         self.getting_fields = [Reducer(p, p.fn) for p in props]
 
     def __key__(self):

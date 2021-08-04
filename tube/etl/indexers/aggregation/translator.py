@@ -26,38 +26,6 @@ from .parser import Parser
 from ..base.lambdas import sort_by_field, swap_property_as_key, make_key_from_property
 from .lambdas import sliding
 
-COMPOSITE_JOINING_FIELD = "_joining_keys_"
-
-
-def create_composite_field_from_joining_fields(df, id_fields, key_id):
-    if len(id_fields) > 1:
-        return df.map(
-            lambda x: (
-                x[0],
-                merge_dictionary(
-                    x[1],
-                    {
-                        COMPOSITE_JOINING_FIELD: tuple(
-                            [
-                                x[1].get(f_id) if f_id != key_id else x[0]
-                                for f_id in id_fields
-                            ]
-                        )
-                    },
-                ),
-            )
-        )
-    f_id = id_fields[0]
-    return df.map(
-        lambda x: (
-            x[0],
-            merge_dictionary(
-                x[1],
-                {COMPOSITE_JOINING_FIELD: x[1].get(f_id) if f_id != key_id else x[0]},
-            ),
-        )
-    )
-
 
 class Translator(BaseTranslator):
     def __init__(self, sc, hdfs_path, writer, mapping, model, dictionary):
@@ -288,46 +256,34 @@ class Translator(BaseTranslator):
         # based on join_on value in the etlMapping, we know what field is used as joining field.
         # We swap the index that have name of key field different than the name of joining field
         joining_df_key_id = translator.parser.get_key_prop().id
-        id_fields_in_joining_df = [
-            translator.parser.get_prop_by_name(f).id
-            for f in joining_node.joining_fields
-        ]
+        id_field_in_joining_df = translator.parser.get_prop_by_name(
+            joining_node.joining_field
+        ).id
         # field which is identity of a node is named as _{node}_id now
         # before in etl-mapping for joining_props, we use {node}_id
         # for backward compatibility, we check first with the value in mapping file.
         # if there is not any Prop object like that, we check with new format _{node}_id
-        id_fields_in_df = [
-            self.parser.get_prop_by_name(f) for f in joining_node.joining_fields
-        ]
-        if id_fields_in_df is None:
-            id_fields_in_df = self.parser.get_prop_by_name(
+        id_field_in_df = self.parser.get_prop_by_name(joining_node.joining_field)
+        if id_field_in_df is None:
+            id_field_in_df = self.parser.get_prop_by_name(
                 get_node_id_name(self.parser.doc_type)
             )
-        if id_fields_in_df is None:
+        if id_field_in_df is None:
             raise Exception(
-                "one of {} fields do not exist in index {}".format(
-                    joining_node.joining_fields, self.parser.doc_type
+                "{} field does not exist in index {}".format(
+                    joining_node.joining_field, self.parser.doc_type
                 )
             )
-        id_fields_in_df_id = [f.id for f in id_fields_in_df]
+        id_field_in_df_id = id_field_in_df.id
         df_key_id = self.parser.get_key_prop().id
 
         swap_df = False
-        if (
-            len(id_fields_in_joining_df) > 1
-            or joining_df_key_id not in id_fields_in_joining_df
-        ):
-            joining_df = create_composite_field_from_joining_fields(
-                joining_df, id_fields_in_joining_df, joining_df_key_id
-            )
+        if joining_df_key_id != id_field_in_joining_df:
             joining_df = swap_property_as_key(
-                joining_df, COMPOSITE_JOINING_FIELD, joining_df_key_id
+                joining_df, id_field_in_joining_df, joining_df_key_id
             )
-        if len(id_fields_in_df_id) > 1 or df_key_id not in id_fields_in_df_id:
-            df = create_composite_field_from_joining_fields(
-                df, id_fields_in_df_id, df_key_id
-            )
-            df = swap_property_as_key(df, COMPOSITE_JOINING_FIELD, df_key_id)
+        if df_key_id != id_field_in_df_id:
+            df = swap_property_as_key(df, id_field_in_df_id, df_key_id)
             swap_df = True
 
         # Join can be done with or without an aggregation function like max, min, sum, ...
@@ -341,7 +297,7 @@ class Translator(BaseTranslator):
             df = self.join_no_aggregate(df, joining_df, props_without_fn)
 
         if swap_df:
-            df = swap_property_as_key(df, df_key_id)
+            df = swap_property_as_key(df, df_key_id, id_field_in_df_id)
         return df
 
     def ensure_project_id_exist(self, df):
