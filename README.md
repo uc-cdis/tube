@@ -33,7 +33,7 @@ For all the indices, the properties (`props`) are a fundamental concept represen
 - `value_mappings`: the list of value renaming which use the alter the value of field in the final index comparing with the source-of-truth database.
 - `sorted_by`: the way to choose **ONE** node out of the list of value multiple nodes of a `many-to-*` relationship.
 
-Created properties will be grouped by the two approaches aforementioned (`aggregation, colleciton`)
+Created properties will be grouped by the two approaches aforementioned (`aggregation, collection`)
 
 ### Aggregation ETL
 By `aggregation` ETL approach, we can produce the properties that are:
@@ -136,3 +136,37 @@ The required field to be specified for each property is `name`. All `injecting_p
 A `collector` etlMapping can use the special built-in `source_node` property to include the node in the dictionary that the entity comes from. For example, if a data file is from the `reference_file` node on the dictionary, the value of `source_node` will be `"reference_file"`.
 
 This is useful if we are ETL-ing data files because in many dictionaries, data files can be located on one of several nodes, and sometimes it's helpful to know where each data file came from. For example, PFB export of data files in portal (https://github.com/uc-cdis/data-portal/pull/729) relies on `source_node` in order to tell the `pelican-export` job where in the dictionary to search for data files.
+
+## Configure SSL
+
+If you're using a PostgreSQL Database server with ssl connectivity, you can update the `creds.json`.
+
+`db_use_ssl` is currently optional.
+
+```json
+{
+   "db_host": "localhost",
+   "db_username": "postgres",
+   "db_password": "postgres",
+   "db_database": "metadata_db",
+   "db_use_ssl" : false
+}
+```
+vs. Azure PostgreSQL which uses ssl by default:
+
+```json
+{
+    "db_host": "my-server.postgres.database.azure.com",
+    "db_username": "my-user@my-server",
+    "db_password": "mypassword",
+    "db_database": "metadata_db",
+    "db_use_ssl" : true
+}
+```
+
+The `creds.json` could be added to the following path to get picked up by `tube`:
+
+```bash
+export XDG_DATA_HOME="$HOME/.local/share"
+ls $XDG_DATA_HOME/gen3/tube/creds.json
+```
