@@ -18,7 +18,7 @@ def make_spark_context(config):
         # a test context. Production runs need to set the Spark Master
         # to 'yarn'. This is done in the arguments to `spark-submit`.
         conf = conf.setMaster(config.SPARK_MASTER)
-    sc = SparkContext(conf=conf, pyFiles=[])
+    sc = SparkContext.getOrCreate(conf=conf)
 
     # Configure logging
     log4j = sc._jvm.org.apache.log4j
