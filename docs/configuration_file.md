@@ -29,16 +29,16 @@ The Gen3 Tube ETL is configured through an `etlMapping.yaml` configuration file,
 
 ```
 mappings:                         # list of mappings - one mapping per index to create
-  - name: my-data-commons_subject # ElasticSearch index name
-    doc_type: subject             # document type - used to query the index. The Guppy config must match
-    type: aggregator              # mapping type ("aggregator" or "collector")
-    root: subject                 # if "aggregator": root node in the input database
-    < properties mapping >
-  - name: my-data-commons_file
-    doc_type: file
-    type: collector
-    category: data_file           # if "collector": node category to collect properties from. Default: "data_file"
-    < properties mapping >
+- name: my-data-commons_subject # ElasticSearch index name
+  doc_type: subject             # document type - used to query the index. The Guppy config must match
+  type: aggregator              # mapping type ("aggregator" or "collector")
+  root: subject                 # if "aggregator": root node in the input database
+  < properties mapping >
+- name: my-data-commons_file
+  doc_type: file
+  type: collector
+  category: data_file           # if "collector": node category to collect properties from. Default: "data_file"
+  < properties mapping >
 ```
 
 ##### Properties
@@ -71,20 +71,20 @@ props:
 Example:
 ```
 mappings:
-  - name: my-data-commons_subject # ElasticSearch index name
-    doc_type: subject             # document type - used to query the index. The Guppy config must match
-    type: aggregator
-    root: subject                 # root node in the input database
-    props:
-    - [...]
-    flatten_props:
-    - [...]
-    aggregated_props:
-    - [...]
-    parent_props:
-    - [...]
-    joining_props:
-    - [...]
+- name: my-data-commons_subject # ElasticSearch index name
+  doc_type: subject             # document type - used to query the index. The Guppy config must match
+  type: aggregator
+  root: subject                 # root node in the input database
+  props:
+  - [...]
+  flatten_props:
+  - [...]
+  aggregated_props:
+  - [...]
+  parent_props:
+  - [...]
+  joining_props:
+  - [...]
 ```
 
 #### props
@@ -186,14 +186,15 @@ The "injection" approach allows us to redundantly embed the parent node's ID int
 
 Example:
 ```
-  - name: my-data-commons_file # ElasticSearch index name
-    doc_type: file             # document type - used to query the index. The Guppy config must match
-    type: collector
-    category: data_file        # node category to collect properties from. Default: "data_file"
-    props:
-    - [...]
-    injecting_props:
-    - [...]
+mappings:
+- name: my-data-commons_file # ElasticSearch index name
+  doc_type: file             # document type - used to query the index. The Guppy config must match
+  type: collector
+  category: data_file        # node category to collect properties from. Default: "data_file"
+  props:
+  - [...]
+  injecting_props:
+  - [...]
 ```
 
 #### props
@@ -213,7 +214,7 @@ This is useful for working with data files because in many dictionaries, data fi
 
 #### injecting_props
 
-All `injecting_props` are grouped by the node containing the properties. In the example below, the node is `subject`.
+All `injecting_props` are grouped by the node containing the properties. In the example below, that node is `subject`.
 
 ```
 
