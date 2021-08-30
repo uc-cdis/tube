@@ -1,0 +1,60 @@
+mappings:
+  - name: clinical_data_genericcommons
+    doc_type: subjectwhat is in the guppy config in the manifest.json
+    type: aggregator
+    root: subject
+    props:
+    - name: submitter_id
+    - name: project_id
+    parent_props:
+    - path: studies[study_objective,study_submitter_id:submitter_id]
+    flatten_props:
+    - path: demographics
+      props:
+      - name: gender
+        value_mappings:
+        - female: Female
+        - male: Male
+        - unspecified: Not Specified
+        - not reported: Not Specified
+        - unknown: Unknown
+      - name: race
+      - name: ethnicity
+      - name: year_of_birth
+      - name: study_center
+        src: country_of_birth
+    - path: diagnoses
+      props:
+      - name: comorbidity_anemia
+      - name: comorbidity_renal_disease
+      - name: primary_diagnosis
+      - name: type_of_resistance
+      sorted_by: updated_datetime, desc
+    aggregated_props:
+    - name: _samples_count
+      path: samples
+      fn: count
+    - name: _aliquots_count
+      path: samples.aliquots
+      fn: count
+    - name: _read_groups_count
+      path: samples.aliquots.read_groups
+      fn: count
+    - name: _type_of_resistances
+      src: type_of_resistance
+      path: diagnoses
+      fn: set
+    - name: treatment_status
+      src: treatment_status
+      path: follow_ups.treatments
+      fn: list
+    joining_props:
+    - index: file
+      join_on: case_id
+      props:
+      - name: data_format
+        src: data_format
+        fn: set
+      - name: data_type
+        src: data_type
+        fn: set

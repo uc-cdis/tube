@@ -103,7 +103,7 @@ First, make sure you have already [imported your Azure DevOps Pipeline](https://
 
 Click on the pipeline and then click edit, which will let you update the variables in the Azure DevOps pipeline:
 
-![Click on Variables](pipeline_config_1.png)
+![Click on Variables](img/azure_devops_pipeline_config_1.png)
 
 Variable Name | Description  
 ------ | ------
@@ -124,8 +124,8 @@ DOCKER_HOST_INTERNAL | This is the internal docker host name.  The default value
 
 After updating the variables, be sure to click **save**:
 
-![Save updated variables](pipeline_config_2.png)
+![Save updated variables](img/azure_devops_pipeline_config_2.png)
 
 You can run the pipeline to validate the `tube` build and push to ACR.
 
-![Run the pipeline](pipeline_config_3.png)
+![Run the pipeline](img/azure_devops_pipeline_config_3.png)
