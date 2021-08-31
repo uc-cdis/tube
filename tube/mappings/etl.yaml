@@ -77,7 +77,7 @@ mappings:
         fn: sum
     joining_props:
       - index: file
-        join_on: subject_id
+        join_on: subject_id, project_id
         props:
           - name: data_format
             src: data_format

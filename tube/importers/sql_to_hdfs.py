@@ -10,7 +10,18 @@ class SqlToHDFS(object):
         self.formatter = formatter
 
     def get_all_tables(self):
-        conn = psycopg2.connect(self.config.PYDBC)
+        conn = None
+        if self.config.DB_USE_SSL:
+            conn = psycopg2.connect(
+                dbname=self.config.DB_DATABASE,
+                user=self.config.DB_USERNAME,
+                password=self.config.DB_PASSWORD,
+                host=self.config.DB_HOST,
+                port=self.config.DB_PORT,
+                sslmode="require",
+            )
+        else:
+            conn = psycopg2.connect(self.config.PYDBC)
         cursor = conn.cursor()
         cursor.execute(
             "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'"
