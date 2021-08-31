@@ -1,6 +1,0 @@
-{
-  "rules": {
-    "test-portal-pfbExportTest": ["**"],
-    "test-etl-etlTest": ["**"]
-  }
-}
