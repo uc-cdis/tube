@@ -48,7 +48,7 @@ class Translator(object):
 
     def update_types(self):
         self.parser.update_prop_types()
-        self.parser.get_es_types()
+        return self.parser.get_es_types()
 
     def add_some_additional_props(self, keep_props):
         keep_props.append(self.parser.get_key_prop().name)
@@ -203,7 +203,7 @@ class Translator(object):
         self.writer.write_dataframe(
             df, self.parser.name, self.parser.doc_type, self.parser.types
         )
-        self.writer.create_guppy_array_config(self.parser.name, self.parser.types)
+        self.writer.create_guppy_array_config(self.parser.name, self.parser.prop_types)
 
     def get_props_from_data_row(self, df, props, to_tuple=False):
         if df.isEmpty():

@@ -1,7 +1,6 @@
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from tube.etl.indexers.aggregation.nested.parser import Parser
-from tube.utils.general import get_node_id_name
-from tube.utils.dd import get_parent_label
+from tube.utils.general import get_node_id_name, replace_dot_with_dash
 from pyspark.sql.functions import struct, collect_list
 
 
@@ -10,6 +9,15 @@ class Translator(BaseTranslator):
         super(Translator, self).__init__(sc, hdfs_path, writer)
         self.parser = Parser(mapping, model, dictionary)
         self.collected_node_dfs = {}
+        self.updated_types = False
+
+    def update_types(self):
+        if self.updated_types:
+            return self.parser.types
+        self.parser.update_prop_types()
+        self.parser.get_es_types()
+        self.updated_types = True
+        return self.parser.types
 
     def collect_tree(self):
         print("Start transforming the tree")
@@ -55,7 +63,7 @@ class Translator(BaseTranslator):
         id_field = get_node_id_name(node_name)
         child_name = child.name
         cols = self.get_cols_from_node(child_name, child.props, child_df)
-        child_path_name = child.path
+        child_path_name = replace_dot_with_dash(child.path)
         node_df = node_df.join(
             child_df.groupBy(id_field).agg(
                 collect_list(struct(*cols)).alias("{}".format(child_path_name))
@@ -70,7 +78,11 @@ class Translator(BaseTranslator):
 
     def write(self, df):
         self.writer.write_dataframe(
-            df, self.parser.name, self.parser.doc_type, self.parser.types
+            df,
+            self.parser.name,
+            self.parser.doc_type,
+            self.parser.types,
+            self.parser.prop_types,
         )
 
     def translate(self):

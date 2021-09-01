@@ -1,15 +1,9 @@
-from tube.utils.db import get_db_cursor
 from tube.utils.dd import (
     get_edge_table,
-    get_all_edges_table,
-    get_node_label,
-    get_parent_name,
     get_node_table_name,
-    get_parent_label,
-    get_all_children_of_node,
-    object_to_string,
     get_properties_types,
 )
+from tube.utils.general import replace_dot_with_dash
 from tube.etl.indexers.aggregation.nodes.nested_node import NestedNode
 from tube.etl.indexers.base.parser import Parser as BaseParser
 
@@ -108,17 +102,20 @@ class Parser(BaseParser):
         es_type = {str: "keyword", float: "float", int: "long"}
         prop_types = get_properties_types(self.model, node.name)
         properties = {
-            prop_name: {"type": es_type.get(self.select_widest_type(prop_type))}
-            for prop_name, prop_type in prop_types.items()
+            p.name: {
+                "type": es_type.get(self.select_widest_type(prop_types.get(p.src)))
+            }
+            for p in node.props
         }
-        current_type = {node.name: {"properties": properties}}
+        current_type = {replace_dot_with_dash(node.path): {"properties": properties}}
         for child in node.children:
-            if child.name in self.collected_types:
-                child_types = self.collected_types.get(child.name)
-                if "type" not in child_types[child.name]:
-                    child_types[child.name]["type"] = "nested"
+            if child.path in self.collected_types:
+                child_types = self.collected_types.get(child.path)
+                if "type" not in child_types[replace_dot_with_dash(child.path)]:
+                    child_types[replace_dot_with_dash(child.path)]["type"] = "nested"
                 properties.update(child_types)
-        for name, parent in node.parent_nodes.items():
+        parent = node.parent_node
+        if parent is not None:
             parent.children_ready_to_nest_types.append(node)
             if len(parent.children_ready_to_nest_types) == len(parent.children):
                 queue.append(parent)
@@ -131,6 +128,7 @@ class Parser(BaseParser):
         i: int = 0
         while i < len(queue):
             type = self.create_mapping_json(queue[i], queue)
-            self.collected_types[queue[i].name] = type
+            self.collected_types[queue[i].path] = type
             i += 1
-        self.types = self.collected_types[queue[len(queue) - 1].name]
+        self.types = self.collected_types[queue[len(queue) - 1].path]
+        return self.types

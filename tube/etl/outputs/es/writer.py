@@ -145,7 +145,7 @@ class Writer(SparkBase):
         """
         for plugin in post_process_plugins:
             df = df.map(lambda x: plugin(x))
-        types = add_auth_resource_path_mapping(types)
+        types = add_auth_resource_path_mapping(doc_type, types)
 
         mapping = self.generate_mapping(doc_type, types)
         self.reset_status()
@@ -157,14 +157,13 @@ class Writer(SparkBase):
 
     def write_dataframe(self, df, index, doc_type, types):
         self.reset_status()
-        types = add_auth_resource_path_mapping(types)
+        types = add_auth_resource_path_mapping(doc_type, types)
 
-        mapping = self.generate_mapping(doc_type, types)
         for plugin in post_process_plugins_on_dataframe:
             df = plugin(df)
 
         index_to_write = self.versioning.create_new_index(
-            mapping, self.versioning.get_next_index_version(index)
+            {"mappings": types}, self.versioning.get_next_index_version(index)
         )
         self.write_to_es(
             df, index_to_write, index, doc_type, self.write_df_to_new_index

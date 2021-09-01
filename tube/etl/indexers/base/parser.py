@@ -26,7 +26,29 @@ class Parser(object):
             fn=None,
             prop_type=(str,),
         )
-        self.types = []
+        self.prop_types = {}
+        self.types = {}
+
+    @staticmethod
+    def generate_es_mapping_types(doc_name, field_types):
+        """
+        :param doc_name: name of the Elasticsearch document to create mapping for
+        :param field_types: dictionary of field and their types
+        :return: JSON with proper mapping to be used in Elasticsearch
+        """
+        es_type = {str: "keyword", float: "float", int: "long"}
+
+        properties = {
+            k: {"type": es_type[v[0]]}
+            if v[0] is not str
+            else {"type": es_type[v[0]], "fields": {"analyzed": {"type": "text"}}}
+            for k, v in list(field_types.items())
+        }
+
+        # explicitly mapping 'node_id'
+        properties["node_id"] = {"type": "keyword"}
+
+        return {doc_name: {"properties": properties}}
 
     def update_prop_types(self):
         """
@@ -45,7 +67,7 @@ class Parser(object):
                 p.update_type(prop.type)
 
     def get_es_types(self):
-        self.types = {}
+        types = {}
         types_to_convert_to_es_types = list(
             PropFactory.get_prop_by_doc_name(self.doc_type).values()
         )
@@ -58,10 +80,13 @@ class Parser(object):
                 is_array_type = p.type[0] == list
                 has_array_agg_fn = p.fn is not None and p.fn in ["set", "list"]
                 array_type_condition = is_array_type or has_array_agg_fn
-                self.types[p.name] = (
+                types[p.name] = (
                     self.select_widest_type(p.type),
                     1 if array_type_condition else 0,
                 )
+        self.prop_types = types
+        self.types = self.generate_es_mapping_types(self.doc_type, types)
+        return self.types
 
     def select_widest_type(self, types):
         if str in types:

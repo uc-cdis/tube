@@ -84,6 +84,14 @@ class Translator(BaseTranslator):
             else None
         )
 
+    def update_types(self):
+        es_mapping = super(Translator, self).update_types()
+        properties = es_mapping.get(self.parser.doc_type).get("properties")
+        if self.nested_translator is not None:
+            nested_types = self.nested_translator.update_types()
+            properties.update(nested_types[self.parser.root]["properties"])
+        return es_mapping
+
     def aggregate_intermediate_data_frame(self, child_df, edge_df):
         """
         Perform aggregation in the intermediate steps (attached to a AggregationNode - child node)
