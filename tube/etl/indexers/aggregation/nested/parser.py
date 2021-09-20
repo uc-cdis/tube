@@ -21,10 +21,15 @@ class Parser(BaseParser):
         self.root_node = None
         self.dictionary = dictionary
         self.root_node = NestedNode(
-            self.root, get_node_table_name(self.model, self.root), self.root, props=[]
+            self.root,
+            get_node_table_name(self.model, self.root),
+            self.root,
+            self.root,
+            props=[],
         )
         self.get_nested_props(mapping)
         self.update_level()
+        self.array_types = []
         self.collected_types = {}
 
     def get_nested_props(self, mapping):
@@ -35,12 +40,13 @@ class Parser(BaseParser):
             )
 
     def parse_nested_props(self, mapping, nested_parent_node, parent_label):
-        paths = mapping.get("path").split(".")
+        path = mapping.get("path")
+        path_components = path.split(".")
         parent_edge_up_tbls = []
 
         current_node_label = None
         current_parent_label = parent_label
-        for p in paths:
+        for p in path_components:
             current_node_label, edge_up_tbl = get_edge_table(
                 self.model, current_parent_label, p
             )
@@ -57,7 +63,8 @@ class Parser(BaseParser):
         current_nested_node = NestedNode(
             current_node_label,
             tbl_name,
-            mapping.get("path"),
+            path,
+            mapping.get("name", replace_dot_with_dash(path)),
             props=props,
             parent_node=nested_parent_node,
             parent_edge_up_tbl=parent_edge_up_tbls,
@@ -107,12 +114,13 @@ class Parser(BaseParser):
             }
             for p in node.props
         }
-        current_type = {replace_dot_with_dash(node.path): {"properties": properties}}
+        current_type = {node.display_name: {"properties": properties}}
         for child in node.children:
             if child.path in self.collected_types:
                 child_types = self.collected_types.get(child.path)
-                if "type" not in child_types[replace_dot_with_dash(child.path)]:
-                    child_types[replace_dot_with_dash(child.path)]["type"] = "nested"
+                if "type" not in child_types[child.display_name]:
+                    child_types[child.display_name]["type"] = "nested"
+                    self.array_types.append(child.display_name)
                 properties.update(child_types)
         parent = node.parent_node
         if parent is not None:

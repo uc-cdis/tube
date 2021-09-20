@@ -63,10 +63,9 @@ class Translator(BaseTranslator):
         id_field = get_node_id_name(node_name)
         child_name = child.name
         cols = self.get_cols_from_node(child_name, child.props, child_df)
-        child_path_name = replace_dot_with_dash(child.path)
         node_df = node_df.join(
             child_df.groupBy(id_field).agg(
-                collect_list(struct(*cols)).alias("{}".format(child_path_name))
+                collect_list(struct(*cols)).alias(child.display_name)
             ),
             on=id_field,
         )

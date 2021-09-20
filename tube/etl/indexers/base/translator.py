@@ -203,9 +203,10 @@ class Translator(object):
         self.writer.write_dataframe(
             df, self.parser.name, self.parser.doc_type, self.parser.types
         )
-        self.writer.create_guppy_array_config(self.parser.name, self.parser.prop_types)
+        self.writer.create_guppy_array_config(self.parser)
 
-    def get_props_from_data_row(self, df, props, to_tuple=False):
+    @staticmethod
+    def get_props_from_data_row(df, props, to_tuple=False):
         if df.isEmpty():
             return df.mapValues(get_props_empty_values(props))
         # names is dictionary which maps from the name of source fields in datatable to the list of ids

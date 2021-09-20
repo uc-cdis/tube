@@ -376,39 +376,3 @@ class Parser(BaseParser):
                 DirectNode(child_name, edge, props, sorted_by, desc_order, is_child)
             )
         return nodes
-
-    def get_nested_props(self, mapping):
-        nested_indices = mapping.get("nested_props", [])
-        for n_idx in nested_indices:
-            self.nest_props.append(self.parse_nested_props(n_idx, self.root_node, None))
-
-    def parse_nested_props(self, mapping, nested_parent_node):
-        name = mapping.get("name")
-        paths = mapping.get("path").split(".").reverse()
-
-        child_label, edge = get_edge_table(
-            self.model, nested_parent_node, mapping.get("path")
-        )
-        tbl_name = get_node_table_name(self.model, child_label)
-
-        props = self.create_props_from_json(
-            self.doc_type, mapping.get("props"), node_label=child_label
-        )
-
-        current_nested_node = NestedNode(
-            name,
-            tbl_name,
-            mapping.get("path"),
-            props=props,
-            parent_node=nested_parent_node,
-        )
-        nested_idxes = mapping.get("nested_props", [])
-        for n_idx in nested_idxes:
-            current_nested_node.children.add(
-                self.parse_nested_props(n_idx, current_nested_node)
-            )
-
-        if len(current_nested_node.children) == 0:
-            self.nest_leaves.append(current_nested_node)
-
-        return current_nested_node

@@ -26,7 +26,8 @@ mappings:
           - name: vital_status
           - name: year_of_birth
     nested_props:
-      - path: diagnoses
+      - name: diagnoses
+        path: diagnoses
         props:
           - name: visit_id
           - name: morphology

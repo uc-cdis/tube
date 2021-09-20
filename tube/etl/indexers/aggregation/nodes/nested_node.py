@@ -7,6 +7,7 @@ class NestedNode(BaseNode):
         name,
         tbl_name,
         path,
+        display_name,
         props=None,
         parent_node=None,
         parent_edge_up_tbl=None,
@@ -19,6 +20,7 @@ class NestedNode(BaseNode):
         self.props = props
         self.level = level
         self.path = path
+        self.display_name = display_name
         self.parent_edge_up_tbl = (
             [] if parent_edge_up_tbl is None else parent_edge_up_tbl
         )

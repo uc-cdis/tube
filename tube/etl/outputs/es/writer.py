@@ -33,27 +33,6 @@ class Writer(SparkBase):
     def reset_status(self):
         self.versioning.reset_status()
 
-    def generate_mapping(self, doc_name, field_types):
-        """
-        :param doc_name: name of the Elasticsearch document to create mapping for
-        :param field_types: dictionary of field and their types
-        :return: JSON with proper mapping to be used in Elasticsearch
-        """
-        es_type = {str: "keyword", float: "float", int: "long"}
-
-        properties = {
-            k: {"type": es_type[v[0]]}
-            if v[0] is not str
-            else {"type": es_type[v[0]], "fields": {"analyzed": {"type": "text"}}}
-            for k, v in list(field_types.items())
-        }
-
-        # explicitly mapping 'node_id'
-        properties["node_id"] = {"type": "keyword"}
-
-        mapping = {"mappings": {doc_name: {"properties": properties}}}
-        return mapping
-
     def get_es(self):
         """
         Create ElasticSearch instance
@@ -94,12 +73,14 @@ class Writer(SparkBase):
             index
         )
 
-    def create_guppy_array_config(self, etl_index_name, types):
+    def create_guppy_array_config(self, parser):  # etl_index_name, types, array_types):
         """
         Create index with Guppy configuration for array fields
-        :param etl_index_name:
-        :param types:
+        :param parser:
         """
+        etl_index_name = parser.name
+        types = parser.types.get(parser.doc_type).get("properties")
+        array_types = parser.array_types
         index = "{}-array-config".format(etl_index_name)
         alias = "{}_array-config".format(etl_index_name.split("_")[0])
 
@@ -118,7 +99,9 @@ class Writer(SparkBase):
 
         doc = {
             "timestamp": latest_transaction_time,
-            "array": ["{}".format(k) for k, v in list(types.items()) if v[1]],
+            "array": [
+                "{}".format(k) for k, v in list(types.items()) if k in array_types
+            ],
         }
 
         try:
@@ -133,27 +116,6 @@ class Writer(SparkBase):
             self.reset_status()
         except Exception as e:
             print(e)
-
-    def write_rdd(self, df, index, doc_type, types):
-        """
-        Function to write the data frame to ElasticSearch
-        :param df: data frame to be written
-        :param index: name of the index
-        :param doc_type: document type's name
-        :param types:
-        :return:
-        """
-        for plugin in post_process_plugins:
-            df = df.map(lambda x: plugin(x))
-        types = add_auth_resource_path_mapping(doc_type, types)
-
-        mapping = self.generate_mapping(doc_type, types)
-        self.reset_status()
-        index_to_write = self.versioning.create_new_index(
-            mapping, self.versioning.get_next_index_version(index)
-        )
-        self.write_to_es(df, index_to_write, index, doc_type, self.write_to_new_index)
-        return index_to_write
 
     def write_dataframe(self, df, index, doc_type, types):
         self.reset_status()

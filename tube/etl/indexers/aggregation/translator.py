@@ -89,6 +89,9 @@ class Translator(BaseTranslator):
         properties = es_mapping.get(self.parser.doc_type).get("properties")
         if self.nested_translator is not None:
             nested_types = self.nested_translator.update_types()
+            for a in self.nested_translator.parser.array_types:
+                if a not in self.parser.array_types:
+                    self.parser.array_types.append(a)
             properties.update(nested_types[self.parser.root]["properties"])
         return es_mapping
 
