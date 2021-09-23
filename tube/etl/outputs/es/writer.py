@@ -7,7 +7,11 @@ from tube.etl.outputs.es.timestamp import (
     get_latest_utc_transaction_time,
 )
 from tube.etl.outputs.es.versioning import Versioning
-from tube.etl.plugins import post_process_plugins, add_auth_resource_path_mapping
+from tube.etl.plugins import (
+    post_process_plugins,
+    add_auth_resource_path_mapping,
+    post_process_plugins_on_dataframe,
+)
 from tube.etl.spark_base import SparkBase
 from tube.utils.general import get_node_id_name
 
@@ -28,27 +32,6 @@ class Writer(SparkBase):
 
     def reset_status(self):
         self.versioning.reset_status()
-
-    def generate_mapping(self, doc_name, field_types):
-        """
-        :param doc_name: name of the Elasticsearch document to create mapping for
-        :param field_types: dictionary of field and their types
-        :return: JSON with proper mapping to be used in Elasticsearch
-        """
-        es_type = {str: "keyword", float: "float", int: "long"}
-
-        properties = {
-            k: {"type": es_type[v[0]]}
-            if v[0] is not str
-            else {"type": es_type[v[0]], "fields": {"analyzed": {"type": "text"}}}
-            for k, v in list(field_types.items())
-        }
-
-        # explicitly mapping 'node_id'
-        properties["node_id"] = {"type": "keyword"}
-
-        mapping = {"mappings": {doc_name: {"properties": properties}}}
-        return mapping
 
     def get_es(self):
         """
@@ -71,12 +54,33 @@ class Writer(SparkBase):
             conf=es_config,
         )
 
-    def create_guppy_array_config(self, etl_index_name, types):
+    def write_df_to_new_index(self, df, index, doc_type):
+        es_config = self.es_config
+        es_config["es.resource"] = index + "/{}".format(doc_type)
+        df.coalesce(1).write.format("org.elasticsearch.spark.sql").option(
+            "es.nodes", es_config["es.nodes"]
+        ).option("es.port", es_config["es.port"]).option(
+            "es.nodes.wan.only", "true"
+        ).option(
+            "es.nodes.discovery", es_config["es.nodes.discovery"]
+        ).option(
+            "es.nodes.data.only", es_config["es.nodes.data.only"]
+        ).option(
+            "es.nodes.client.only", es_config["es.nodes.client.only"]
+        ).option(
+            "es.resource", es_config["es.resource"]
+        ).save(
+            index
+        )
+
+    def create_guppy_array_config(self, parser):  # etl_index_name, types, array_types):
         """
         Create index with Guppy configuration for array fields
-        :param etl_index_name:
-        :param types:
+        :param parser:
         """
+        etl_index_name = parser.name
+        types = parser.types.get(parser.doc_type).get("properties")
+        array_types = parser.array_types
         index = "{}-array-config".format(etl_index_name)
         alias = "{}_array-config".format(etl_index_name.split("_")[0])
 
@@ -95,7 +99,9 @@ class Writer(SparkBase):
 
         doc = {
             "timestamp": latest_transaction_time,
-            "array": ["{}".format(k) for k, v in list(types.items()) if v[1]],
+            "array": [
+                "{}".format(k) for k, v in list(types.items()) if k in array_types
+            ],
         }
 
         try:
@@ -111,27 +117,33 @@ class Writer(SparkBase):
         except Exception as e:
             print(e)
 
-    def write_df(self, df, index, doc_type, types):
+    def write_dataframe(self, df, index, doc_type, types):
+        self.reset_status()
+        types = add_auth_resource_path_mapping(doc_type, types)
+
+        for plugin in post_process_plugins_on_dataframe:
+            df = plugin(df)
+
+        index_to_write = self.versioning.create_new_index(
+            {"mappings": types}, self.versioning.get_next_index_version(index)
+        )
+        self.write_to_es(
+            df, index_to_write, index, doc_type, self.write_df_to_new_index
+        )
+        return index_to_write
+
+    def write_to_es(self, df, index_to_write, index, doc_type, fn):
         """
         Function to write the data frame to ElasticSearch
         :param df: data frame to be written
-        :param index: name of the index
+        :param index_to_write: exact name of index
+        :param index: name of the index (alias)
         :param doc_type: document type's name
         :param types:
         :return:
         """
         try:
-            for plugin in post_process_plugins:
-                df = df.map(lambda x: plugin(x))
-
-            types = add_auth_resource_path_mapping(types)
-            mapping = self.generate_mapping(doc_type, types)
-
-            self.reset_status()
-            index_to_write = self.versioning.create_new_index(
-                mapping, self.versioning.get_next_index_version(index)
-            )
-            self.write_to_new_index(df, index_to_write, doc_type)
+            fn(df, index_to_write, doc_type)
             self.versioning.putting_new_version_tag(index_to_write, index)
             putting_timestamp(self.es, index_to_write)
             self.reset_status()

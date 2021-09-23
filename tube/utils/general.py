@@ -63,6 +63,10 @@ def get_node_id_name_without_prefix(name):
     return "{}_id".format(name)
 
 
+def replace_dot_with_dash(s):
+    return s.replace(".", "_")
+
+
 PROGRAM_NAME = "program_name"
 PROJECT_CODE = "project_code"
 PROJECT_ID = "project_id"

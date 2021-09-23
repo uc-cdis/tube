@@ -201,19 +201,9 @@ class Parser(BaseParser):
         level += 1
         leaves = [c for c in self.collectors if len(c.children) == 0]
         len_non_leaves = len(self.collectors) - len(leaves)
-        while len(assigned_levels) <= len_non_leaves and len(just_assigned) > 0:
-            new_assigned = set([])
-            for collector in just_assigned:
-                for child in collector.children:
-                    if child in assigned_levels:
-                        continue
-                    child.level = level
-                    if len(child.children) == 0:
-                        continue
-                    new_assigned.add(child)
-            just_assigned = new_assigned
-            assigned_levels = assigned_levels.union(new_assigned)
-            level += 1
+        self.update_level_for_non_leaves(
+            level, assigned_levels, just_assigned, len_non_leaves
+        )
 
     def add_root_node(self, child, roots, segment):
         root_name = get_node_label(

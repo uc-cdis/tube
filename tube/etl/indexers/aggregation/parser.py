@@ -11,6 +11,7 @@ from .nodes.direct_node import DirectNode
 from .nodes.joining_node import JoiningNode
 from .nodes.special_node import SpecialNode, SpecialChain
 from .nodes.parent_node import ParentChain, ParentNode
+from .nodes.nested_node import NestedNode
 from ..base.parser import Parser as BaseParser
 from copy import deepcopy
 from tube.utils.general import PROJECT_CODE, PROGRAM_NAME
@@ -53,6 +54,9 @@ class Parser(BaseParser):
         self.flatten_props = (
             self.get_direct_children() if "flatten_props" in mapping else []
         )
+        self.nest_props = []
+        self.nest_leaves = []
+
         self.aggregated_nodes = []
         if "aggregated_props" in self.mapping:
             self.aggregated_nodes = self.get_aggregation_nodes()
@@ -294,7 +298,7 @@ class Parser(BaseParser):
         return leaves
 
     @classmethod
-    def non_leaves_count(self, set_to_count, leaves):
+    def non_leaves_count(cls, set_to_count, leaves):
         count = 0
         for n in set_to_count:
             if n not in leaves:
@@ -307,7 +311,7 @@ class Parser(BaseParser):
         :return:
         """
         flat_paths = {}
-        aggregated_nodes = self.mapping["aggregated_props"]
+        aggregated_nodes = self.mapping.get("aggregated_props", [])
         for n in aggregated_nodes:
             copied_n = deepcopy(n)
             if "src" not in copied_n:
@@ -322,7 +326,8 @@ class Parser(BaseParser):
             print(str(p))
         return set(flat_paths.values())
 
-    def parse_sorting(self, child):
+    @staticmethod
+    def parse_sorting(child):
         sorts = child["sorted_by"] if "sorted_by" in child else None
         if sorts is None:
             return None, None
@@ -337,7 +342,7 @@ class Parser(BaseParser):
         """
         Parse etlMapping file and return a list of direct children from the root
         """
-        children = self.mapping["flatten_props"]
+        children = self.mapping.get("flatten_props", [])
         nodes = []
         bypass = self.mapping.get("settings", {}).get("bypass_multiplicity_check")
         for child in children:
