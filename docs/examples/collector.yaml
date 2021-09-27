@@ -1,0 +1,21 @@
+mappings:
+  - name: file_genericcommons
+    doc_type: file
+    type: collector
+    root: None
+    category: data_file
+    props:
+    - name: object_id
+    - name: md5sum
+    - name: file_name
+    - name: file_size
+    - name: data_format
+    - name: data_type
+    - name: state
+    - name: source_node
+    injecting_props:
+      subject:
+        props:
+        - name: subject_id
+          src: id
+        - name: project_id
