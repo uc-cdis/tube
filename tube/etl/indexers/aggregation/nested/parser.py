@@ -3,7 +3,7 @@ from tube.utils.dd import (
     get_node_table_name,
     get_properties_types,
 )
-from tube.utils.general import replace_dot_with_dash
+from tube.utils.general import replace_dot_with_dash, get_node_id_name
 from tube.etl.indexers.aggregation.nodes.nested_node import NestedNode
 from tube.etl.indexers.base.parser import Parser as BaseParser
 
@@ -108,11 +108,17 @@ class Parser(BaseParser):
     def create_mapping_json(self, node, queue):
         es_type = {str: "keyword", float: "float", int: "long"}
         prop_types = get_properties_types(self.model, node.name)
-        properties = {
-            p.name: {
-                "type": es_type.get(self.select_widest_type(prop_types.get(p.src)))
-            }
-            for p in node.props
+        id_prop = get_node_id_name(node.name)
+        properties = {}
+        for p in node.props:
+            p_type = self.select_widest_type(prop_types.get(p.src))
+            properties[p.name] = {"type": es_type.get(p_type)}
+            if p_type is str:
+                properties[p.name]["fields"] = {"analyzed": {"type": "text"}}
+
+        properties[id_prop] = {
+            "type": "keyword",
+            "fields": {"analyzed": {"type": "text"}},
         }
         current_type = {node.display_name: {"properties": properties}}
         for child in node.children:

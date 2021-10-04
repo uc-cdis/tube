@@ -1,6 +1,6 @@
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from tube.etl.indexers.aggregation.nested.parser import Parser
-from tube.utils.general import get_node_id_name, replace_dot_with_dash
+from tube.utils.general import get_node_id_name
 from pyspark.sql.functions import struct, collect_list
 
 
@@ -62,7 +62,8 @@ class Translator(BaseTranslator):
     def collect_structural_df(self, node_df, node_name, child_df, child):
         id_field = get_node_id_name(node_name)
         child_name = child.name
-        cols = self.get_cols_from_node(child_name, child.props, child_df)
+        nested_props = [c_child.display_name for c_child in child.children]
+        cols = self.get_cols_from_node(child_name, child.props, nested_props, child_df)
         node_df = node_df.join(
             child_df.groupBy(id_field).agg(
                 collect_list(struct(*cols)).alias(child.display_name)
