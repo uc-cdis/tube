@@ -20,7 +20,7 @@ from tube.etl.indexers.injection.nodes.collecting_node import LeafNode
 from tube.utils.general import PROJECT_ID, PROJECT_CODE, PROGRAM_NAME, get_node_id_name
 
 
-def json_export_with_no_key_for_injection_translator(x, doc_type, root_name):
+def json_export_with_no_key_for_injection_translator(x):
     x[1]["node_id"] = x[0]  # redundant field for backward compatibility with arranger
     return json.dumps(x[1])
 
@@ -196,16 +196,16 @@ class Translator(BaseTranslator):
         return props
 
     def final_transform_rdd_to_df(self, rdd):
+        print("Start transforming from rdd to df in injection translator")
         self.update_types()
+        print(rdd.first())
         rdd = self.restore_prop_name(rdd, PropFactory.list_props)
-        doc_type = self.parser.doc_type
-        root_name = self.parser.root
-        rdd = rdd.map(
-            lambda x: json_export_with_no_key_for_injection_translator(
-                x, doc_type, root_name
-            )
-        )
+        print(rdd.first())
+        rdd = rdd.map(lambda x: json_export_with_no_key_for_injection_translator(x))
+        print(rdd.first())
         new_df = self.sql_context.read.json(rdd)
+        print("End transforming from rdd to df in injection translator")
+        print(new_df.head())
         rdd.unpersist()
         return new_df
 
@@ -215,8 +215,11 @@ class Translator(BaseTranslator):
         In the final step of file document, we must construct the list of root instance's id
         :return:
         """
+        print("Start final translate")
         rdd = self.load_from_hadoop()
         aggregating_props = self.get_aggregating_props()
+        print("Continue final translate")
+        print(rdd.first())
         if len(aggregating_props) > 0:
 
             frame_zero = get_frame_zero(aggregating_props)
@@ -236,4 +239,6 @@ class Translator(BaseTranslator):
             )
 
             rdd = rdd.join(prop_df).mapValues(lambda x: merge_dictionary(x[0], x[1]))
+        print("Continue final translate 2")
+        print(rdd.first())
         return self.final_transform_rdd_to_df(rdd)

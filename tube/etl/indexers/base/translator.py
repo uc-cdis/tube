@@ -281,12 +281,14 @@ class Translator(object):
         pass
 
     def final_transform_rdd_to_df(self, rdd):
+        print("Start transforming from rdd to df in base translator")
         self.update_types()
         rdd = self.restore_prop_name(rdd, PropFactory.list_props)
         doc_type = self.parser.doc_type
         root_name = self.parser.root
         rdd = rdd.map(lambda x: json_export_with_no_key(x, doc_type, root_name))
         new_df = self.sql_context.read.json(rdd)
+        print("End transforming from rdd to df in base translator")
         rdd.unpersist()
         return new_df
 

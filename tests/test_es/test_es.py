@@ -53,8 +53,14 @@ def test_es_types(init_interpreter, doc_type):
 
     mapping = indices.get_mapping(index=index_name)
 
+    assert "_None_id" not in mapping[index_name]["mappings"][doc_type]["properties"]
+    list_errors = []
     for k, t in list(mapping[index_name]["mappings"][doc_type]["properties"].items()):
-        assert t["type"] != "text"
+        try:
+            assert t["type"] != "text", f"field {k} has type as text"
+        except AssertionError as ex:
+            list_errors.append(ex)
+    assert list_errors == []
 
 
 @pytest.mark.parametrize(
