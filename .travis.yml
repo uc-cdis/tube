@@ -3,12 +3,12 @@ sudo: required
 language: python
 
 python:
-  - "2.7"
   - "3.7"
+  - "3.8"
 
 matrix:
  allow_failures:
-   - python: "2.7"
+   - python: "3.8"
 
 cache: pip
 
@@ -53,12 +53,10 @@ before_script:
       "db_database": "metadata_db"
     }
     ' > configs/creds.json
-  - if [[ "$QUAY_BUILD_STATUS" -ne "complete" ]] || [[ "$QUAY_BUILD_STATUS" -eq "null" ]];
-    then {
-      echo  "Could not find the quay build, using default."; };
-    else {
-      echo "Found quay build, updating docker-compose image";
-      sed -i "s/tube:master/tube:${BRANCH//\//_}/g" docker-compose.yml; }; fi
+  - if [[ "$QUAY_BUILD_STATUS" != "complete" ]] || [[ "$QUAY_BUILD_STATUS" == "null" ]];
+    then { echo "Could not find the quay build, using default."; }
+    else { echo "Found quay build, updating docker-compose image"; sed -i "s/tube:master/tube:${BRANCH//\//_}/g" docker-compose.yml; };
+    fi
   - sudo sysctl -w vm.max_map_count=262144
   - docker-compose up -d spark elasticsearch
   - sleep 60
