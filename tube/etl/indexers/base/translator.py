@@ -100,7 +100,7 @@ class Translator(object):
             print("HAPPEN WITH NODE: {}".format(table_name))
             print(ex)
 
-    def get_cols_from_node(self, node_name, props, df, key_name=None):
+    def get_cols_from_node(self, node_name, props, nested_props, df, key_name=None):
         col_names = [p.src for p in props]
         cols = []
         for p in props:
@@ -119,6 +119,8 @@ class Translator(object):
                 )
             else:
                 cols.append(col(p.src).alias(p.name))
+        for p in nested_props:
+            cols.append(col(p))
         if "id" not in col_names and key_name is None:
             cols.append(get_node_id_name(node_name))
         elif key_name is not None:
@@ -150,7 +152,7 @@ class Translator(object):
             new_df = self.sql_context.read.json(df)
             df.unpersist()
             if props is not None:
-                cols = self.get_cols_from_node(node_name, props, new_df, key_name)
+                cols = self.get_cols_from_node(node_name, props, [], new_df, key_name)
                 return new_df.select(*cols)
             return new_df
         except Exception as ex:
@@ -279,12 +281,14 @@ class Translator(object):
         pass
 
     def final_transform_rdd_to_df(self, rdd):
+        print("Start transforming from rdd to df in base translator")
         self.update_types()
         rdd = self.restore_prop_name(rdd, PropFactory.list_props)
         doc_type = self.parser.doc_type
         root_name = self.parser.root
         rdd = rdd.map(lambda x: json_export_with_no_key(x, doc_type, root_name))
         new_df = self.sql_context.read.json(rdd)
+        print("End transforming from rdd to df in base translator")
         rdd.unpersist()
         return new_df
 

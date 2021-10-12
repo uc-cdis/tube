@@ -86,4 +86,6 @@ WORKDIR /tube
 #RUN chmod +x /tini
 #ENTRYPOINT ["/tini", "--"]
 
+ENV PYTHONUNBUFFERED 1
+
 RUN python setup.py develop

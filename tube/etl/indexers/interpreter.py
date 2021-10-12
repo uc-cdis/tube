@@ -51,6 +51,7 @@ def run_transform(translators):
         v.current_step += 1
 
     for t in list(translators.values()):
+        print(t.__dict__)
         df = t.translate_final()
         t.write(df)
 
