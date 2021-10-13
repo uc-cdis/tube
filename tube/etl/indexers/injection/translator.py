@@ -5,14 +5,14 @@ from tube.etl.indexers.base.lambdas import (
     merge_and_fill_empty_props,
     merge_dictionary,
     merge_data_frames,
+    seq_aggregate_with_reducer,
+    merge_aggregate_with_reducer,
 )
 from tube.etl.indexers.base.prop import PropFactory
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from tube.etl.indexers.injection.parser import Parser
 from tube.etl.indexers.injection.lambdas import (
     get_props_to_tuple,
-    seq_aggregate_with_prop,
-    merge_aggregate_with_prop,
     remove_props_from_tuple,
     get_frame_zero,
 )
@@ -196,16 +196,10 @@ class Translator(BaseTranslator):
         return props
 
     def final_transform_rdd_to_df(self, rdd):
-        print("Start transforming from rdd to df in injection translator")
         self.update_types()
-        print(rdd.first())
         rdd = self.restore_prop_name(rdd, PropFactory.list_props)
-        print(rdd.first())
         rdd = rdd.map(lambda x: json_export_with_no_key_for_injection_translator(x))
-        print(rdd.first())
         new_df = self.sql_context.read.json(rdd)
-        print("End transforming from rdd to df in injection translator")
-        print(new_df.head())
         rdd.unpersist()
         return new_df
 
@@ -215,11 +209,8 @@ class Translator(BaseTranslator):
         In the final step of file document, we must construct the list of root instance's id
         :return:
         """
-        print("Start final translate")
         rdd = self.load_from_hadoop()
         aggregating_props = self.get_aggregating_props()
-        print("Continue final translate")
-        print(rdd.first())
         if len(aggregating_props) > 0:
 
             frame_zero = get_frame_zero(aggregating_props)
@@ -227,7 +218,7 @@ class Translator(BaseTranslator):
             prop_df = (
                 rdd.mapValues(lambda x: get_props_to_tuple(x, aggregating_props))
                 .aggregateByKey(
-                    frame_zero, seq_aggregate_with_prop, merge_aggregate_with_prop
+                    frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer
                 )
                 .mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
             )
@@ -239,6 +230,4 @@ class Translator(BaseTranslator):
             )
 
             rdd = rdd.join(prop_df).mapValues(lambda x: merge_dictionary(x[0], x[1]))
-        print("Continue final translate 2")
-        print(rdd.first())
         return self.final_transform_rdd_to_df(rdd)

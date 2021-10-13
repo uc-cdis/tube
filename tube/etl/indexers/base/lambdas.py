@@ -248,3 +248,31 @@ def map_with_dictionary(mapping_broadcasted, p):
         return mapping_broadcasted.value.get(p).get(v)
 
     return f.udf(map_value_from_dict)
+
+
+def seq_aggregate_with_reducer(x, y):
+    """
+    Sequencing function that works with the dataframe created by get_normal_frame
+    :param x:
+    :param y:
+    :return:
+    """
+    res = []
+    for i in range(0, len(x)):
+        res.append(
+            (x[i][0], x[i][1], get_aggregation_func_by_name(x[i][0])(x[i][2], y[i][2]))
+        )
+    return tuple(res)
+
+
+def merge_aggregate_with_reducer(x, y):
+    res = []
+    for i in range(0, len(x)):
+        res.append(
+            (
+                x[i][0],
+                x[i][1],
+                get_aggregation_func_by_name(x[i][0], True)(x[i][2], y[i][2]),
+            )
+        )
+    return tuple(res)
