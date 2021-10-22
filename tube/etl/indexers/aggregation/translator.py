@@ -23,8 +23,10 @@ from tube.utils.general import (
     PROGRAM_NAME,
 )
 from .parser import Parser
+from .nested.translator import Translator as NestedTranslator
 from ..base.lambdas import sort_by_field, swap_property_as_key, make_key_from_property
 from .lambdas import sliding
+import json
 
 COMPOSITE_JOINING_FIELD = "_joining_keys_"
 
@@ -63,6 +65,35 @@ class Translator(BaseTranslator):
     def __init__(self, sc, hdfs_path, writer, mapping, model, dictionary):
         super(Translator, self).__init__(sc, hdfs_path, writer)
         self.parser = Parser(mapping, model, dictionary)
+        nest_props = mapping.get("nested_props")
+        self.nested_translator = (
+            NestedTranslator(
+                sc,
+                hdfs_path,
+                writer,
+                {
+                    "root": mapping.get("root"),
+                    "doc_type": mapping.get("doc_type"),
+                    "name": mapping.get("name"),
+                    "nested_props": mapping.get("nested_props"),
+                },
+                model,
+                dictionary,
+            )
+            if nest_props is not None
+            else None
+        )
+
+    def update_types(self):
+        es_mapping = super(Translator, self).update_types()
+        properties = es_mapping.get(self.parser.doc_type).get("properties")
+        if self.nested_translator is not None:
+            nested_types = self.nested_translator.update_types()
+            for a in self.nested_translator.parser.array_types:
+                if a not in self.parser.array_types:
+                    self.parser.array_types.append(a)
+            properties.update(nested_types[self.parser.root]["properties"])
+        return es_mapping
 
     def aggregate_intermediate_data_frame(self, child_df, edge_df):
         """
@@ -474,3 +505,14 @@ class Translator(BaseTranslator):
                     lambda x: merge_dictionary(x[0], x[1])
                 )
         return root_df
+
+    def translate_final(self):
+        nested_df = (
+            self.nested_translator.translate()
+            if self.nested_translator is not None
+            else None
+        )
+        df = super(Translator, self).translate_final()
+        if self.nested_translator is None:
+            return df
+        return self.join_two_dataframe(df, nested_df, how="left_outer")
