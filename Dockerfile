@@ -30,6 +30,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libffi-dev \
     # dependency for cryptography
     libssl-dev \
+    libssl1.0.2 \
+    libgnutls30 \
     vim \
     curl \
     g++ \
