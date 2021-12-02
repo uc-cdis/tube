@@ -1,22 +1,28 @@
+import json
 from copy import copy
 
 from tube.etl.indexers.base.lambdas import (
     merge_and_fill_empty_props,
     merge_dictionary,
     merge_data_frames,
+    seq_aggregate_with_reducer,
+    merge_aggregate_with_reducer,
 )
 from tube.etl.indexers.base.prop import PropFactory
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from tube.etl.indexers.injection.parser import Parser
 from tube.etl.indexers.injection.lambdas import (
     get_props_to_tuple,
-    seq_aggregate_with_prop,
-    merge_aggregate_with_prop,
     remove_props_from_tuple,
     get_frame_zero,
 )
 from tube.etl.indexers.injection.nodes.collecting_node import LeafNode
 from tube.utils.general import PROJECT_ID, PROJECT_CODE, PROGRAM_NAME, get_node_id_name
+
+
+def json_export_with_no_key_for_injection_translator(x):
+    x[1]["node_id"] = x[0]  # redundant field for backward compatibility with arranger
+    return json.dumps(x[1])
 
 
 class Translator(BaseTranslator):
@@ -189,6 +195,14 @@ class Translator(BaseTranslator):
                     props.append(self.clone_prop_with_iterator_fn(p))
         return props
 
+    def final_transform_rdd_to_df(self, rdd):
+        self.update_types()
+        rdd = self.restore_prop_name(rdd, PropFactory.list_props)
+        rdd = rdd.map(lambda x: json_export_with_no_key_for_injection_translator(x))
+        new_df = self.sql_context.read.json(rdd)
+        rdd.unpersist()
+        return new_df
+
     def translate_final(self):
         """
         Because one file can belong to multiple root nodes (case, subject).
@@ -204,7 +218,7 @@ class Translator(BaseTranslator):
             prop_df = (
                 rdd.mapValues(lambda x: get_props_to_tuple(x, aggregating_props))
                 .aggregateByKey(
-                    frame_zero, seq_aggregate_with_prop, merge_aggregate_with_prop
+                    frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer
                 )
                 .mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
             )

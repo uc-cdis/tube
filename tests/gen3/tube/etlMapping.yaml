@@ -25,6 +25,8 @@ mappings:
           - name: ethnicity
           - name: vital_status
           - name: year_of_birth
+    parent_props:
+      - path: studies[study_objective,study_submitter_id:submitter_id]
     nested_props:
       - name: diagnoses
         path: diagnoses
@@ -99,6 +101,6 @@ mappings:
     injecting_props:
       subject:
         props:
-          - name: subject_id
+          - name: _subject_id
             src: id
           - name: project_id

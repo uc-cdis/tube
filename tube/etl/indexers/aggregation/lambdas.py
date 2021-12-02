@@ -32,32 +32,38 @@ def get_normal_frame(reducers):
     )
 
 
-def seq_aggregate_with_reducer(x, y):
+def get_normal_dict_item():
+    """
+    Create a tuple for every value, this tuple include (func-name, output_field_name, value).
+    It helps spark workers know directly what to do when reading the dataframe
+    :param reducers:
+    :return:
+    """
+    return lambda x: {k: [v] if not isinstance(v, list) else v for k, v in x.items()}
+
+
+def seq_or_merge_aggregate_dictionary_with_set_fn(x, y):
     """
     Sequencing function that works with the dataframe created by get_normal_frame
     :param x:
     :param y:
     :return:
     """
-    res = []
-    for i in range(0, len(x)):
-        res.append(
-            (x[i][0], x[i][1], get_aggregation_func_by_name(x[i][0])(x[i][2], y[i][2]))
-        )
-    return tuple(res)
+    res = {}
+    for k, v in x.items():
+        if v is None and y.get(k) is None:
+            res[k] = []
+        elif v is None and y.get(k) is not None:
+            res[k] = y.get(k)
+        elif v is not None and y.get(k) is None:
+            res[k] = v
+        else:
+            res[k] = list(set(v) | set(y.get(k)))
+    return res
 
 
-def merge_aggregate_with_reducer(x, y):
-    res = []
-    for i in range(0, len(x)):
-        res.append(
-            (
-                x[i][0],
-                x[i][1],
-                get_aggregation_func_by_name(x[i][0], True)(x[i][2], y[i][2]),
-            )
-        )
-    return tuple(res)
+def get_dict_zero_with_set_fn(props):
+    return {p.id: [] for p in props}
 
 
 def intermediate_frame(prop):

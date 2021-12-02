@@ -7,11 +7,12 @@ from tube.etl.indexers.base.lambdas import (
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from tube.etl.indexers.aggregation.lambdas import (
     intermediate_frame,
-    merge_aggregate_with_reducer,
-    seq_aggregate_with_reducer,
     get_frame_zero,
     get_normal_frame,
     get_single_frame_zero_by_func,
+    get_dict_zero_with_set_fn,
+    seq_or_merge_aggregate_dictionary_with_set_fn,
+    get_normal_dict_item,
 )
 from tube.etl.indexers.base.prop import PropFactory
 from tube.utils.dd import get_node_table_name
@@ -24,9 +25,14 @@ from tube.utils.general import (
 )
 from .parser import Parser
 from .nested.translator import Translator as NestedTranslator
-from ..base.lambdas import sort_by_field, swap_property_as_key, make_key_from_property
+from ..base.lambdas import (
+    sort_by_field,
+    swap_property_as_key,
+    make_key_from_property,
+    merge_aggregate_with_reducer,
+    seq_aggregate_with_reducer,
+)
 from .lambdas import sliding
-import json
 
 COMPOSITE_JOINING_FIELD = "_joining_keys_"
 
@@ -95,7 +101,8 @@ class Translator(BaseTranslator):
             properties.update(nested_types[self.parser.root]["properties"])
         return es_mapping
 
-    def aggregate_intermediate_data_frame(self, child_df, edge_df):
+    @staticmethod
+    def aggregate_intermediate_data_frame(child_df, edge_df):
         """
         Perform aggregation in the intermediate steps (attached to a AggregationNode - child node)
         :param child_df: rdd of the child table which will be aggregated
@@ -114,7 +121,8 @@ class Translator(BaseTranslator):
             frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer
         )
 
-    def aggregate_with_count_on_edge_tbl(self, df, edge_df, child):
+    @staticmethod
+    def aggregate_with_count_on_edge_tbl(df, edge_df, child):
         """
         Do the aggregation which only based on the edge table (count, sum, ...)
         :param df:
@@ -420,34 +428,48 @@ class Translator(BaseTranslator):
             df = self.join_to_an_index(df, translators[j.joining_index], j)
         return df
 
+    def walk_through_graph(self, root_tbl, root_id, f, is_reversal=True):
+        df = self.translate_table(root_tbl, props=[])
+        n = f.head
+        first = True
+        list_props = []
+        while n is not None:
+            edge_tbl = n.edge_up_tbl
+            df = df.join(self.translate_edge(edge_tbl, reversed=is_reversal))
+            if first:
+                df = df.map(
+                    lambda x: (x[1][1], ({root_id: x[0]},) + (x[1][0],))
+                ).mapValues(lambda x: merge_dictionary(x[0], x[1]))
+                first = False
+            else:
+                df = df.map(lambda x: (x[1][1], x[1][0]))
+            cur_props = n.props
+            list_props.extend(cur_props)
+            tbl = n.tbl
+            n_df = self.translate_table(tbl, props=cur_props)
+            df = n_df.join(df).mapValues(
+                lambda x: merge_and_fill_empty_props(x, cur_props)
+            )
+            n = n.child
+        dict_zero = get_dict_zero_with_set_fn(list_props)
+        df = (
+            df.map(lambda x: make_key_from_property(x[1], root_id))
+            .mapValues(get_normal_dict_item())
+            .aggregateByKey(
+                dict_zero,
+                seq_or_merge_aggregate_dictionary_with_set_fn,
+                seq_or_merge_aggregate_dictionary_with_set_fn,
+            )
+        )
+        return df
+
     def translate_parent(self, root_df):
         if len(self.parser.parent_nodes) == 0:
             return root_df
         root_tbl = get_node_table_name(self.parser.model, self.parser.root)
         root_id = self.parser.get_key_prop().id
         for f in self.parser.parent_nodes:
-            df = self.translate_table(root_tbl, props=[])
-            n = f.head
-            first = True
-            while n is not None:
-                edge_tbl = n.edge_up_tbl
-                df = df.join(self.translate_edge(edge_tbl, reversed=False))
-                if first:
-                    df = df.map(
-                        lambda x: (x[1][1], ({root_id: x[0]},) + (x[1][0],))
-                    ).mapValues(lambda x: merge_dictionary(x[0], x[1]))
-                    first = False
-                else:
-                    df = df.map(lambda x: (x[1][1], x[1][0]))
-                cur_props = n.props
-                tbl = n.tbl
-                n_df = self.translate_table(tbl, props=cur_props)
-
-                df = n_df.join(df).mapValues(
-                    lambda x: merge_and_fill_empty_props(x, cur_props)
-                )
-                n = n.child
-            df = df.map(lambda x: make_key_from_property(x[1], root_id))
+            df = self.walk_through_graph(root_tbl, root_id, f, is_reversal=False)
             root_df = root_df.leftOuterJoin(df).mapValues(
                 lambda x: merge_dictionary(x[0], x[1])
             )
@@ -465,27 +487,7 @@ class Translator(BaseTranslator):
         root_id = self.parser.get_key_prop().id
         for f in self.parser.special_nodes:
             if f.fn[0] == "sliding":
-                df = self.translate_table(root_tbl, props=[])
-                n = f.head
-                first = True
-                while n is not None:
-                    edge_tbl = n.edge_up_tbl
-                    df = df.join(self.translate_edge(edge_tbl))
-                    if first:
-                        df = df.map(
-                            lambda x: (x[1][1], ({root_id: x[0]},) + (x[1][0],))
-                        ).mapValues(lambda x: merge_dictionary(x[0], x[1]))
-                        first = False
-                    else:
-                        df = df.map(lambda x: (x[1][1], x[1][0]))
-                    cur_props = n.props
-                    tbl = n.tbl
-                    n_df = self.translate_table(tbl, props=cur_props)
-                    df = n_df.join(df).mapValues(
-                        lambda x: merge_and_fill_empty_props(x, cur_props)
-                    )
-                    n = n.child
-                df = df.map(lambda x: make_key_from_property(x[1], root_id))
+                df = self.walk_through_graph(root_tbl, root_id, f)
                 (n, fn1, fn2) = tuple(f.fn[1:])
                 fid = self.parser.get_prop_by_name(f.name).id
                 df = df.mapValues(
