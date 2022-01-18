@@ -1,6 +1,7 @@
 import collections
 from tube.etl.indexers.base.lambdas import (
     merge_and_fill_empty_props,
+    merge_two_dicts_with_subset_props_from_left,
     merge_dictionary,
     swap_key_value,
 )
@@ -39,6 +40,7 @@ COMPOSITE_JOINING_FIELD = "_joining_keys_"
 
 def create_composite_field_from_joining_fields(df, id_fields, key_id):
     if len(id_fields) > 1:
+        df = df.filter(lambda x: len([x[1].get(f_id) is None for f_id in id_fields]) < len(id_fields))
         return df.map(
             lambda x: (
                 x[0],
@@ -56,6 +58,7 @@ def create_composite_field_from_joining_fields(df, id_fields, key_id):
             )
         )
     f_id = id_fields[0]
+    df = df.filter(lambda x: x[1].get(f_id) is not None)
     return df.map(
         lambda x: (
             x[0],
@@ -287,7 +290,7 @@ class Translator(BaseTranslator):
                 props_with_fn.append({"src": src_prop, "dst": dst_prop})
         return props_with_fn, props_without_fn
 
-    def join_and_aggregate(self, df, joining_df, dual_props, joining_node):
+    def join_and_aggregate(self, df, joining_df, left_props, dual_props, joining_node):
         frame_zero = get_frame_zero(joining_node.getting_fields)
         joining_df = (
             self.get_props_from_df(joining_df, dual_props)
@@ -297,31 +300,32 @@ class Translator(BaseTranslator):
             )
             .mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
         )
-        df = df.leftOuterJoin(joining_df).mapValues(
-            lambda x: merge_and_fill_empty_props(x, [p.get("dst") for p in dual_props])
+        df = df.join(joining_df).mapValues(
+            lambda x: merge_two_dicts_with_subset_props_from_left(x, left_props, [p.get("dst") for p in dual_props])
         )
         joining_df.unpersist()
         return df
 
-    def join_no_aggregate(self, df, joining_df, dual_props):
+    def join_no_aggregate(self, df, joining_df, left_props, dual_props):
         joining_df = self.get_props_from_df(joining_df, dual_props)
-        df = df.leftOuterJoin(joining_df).mapValues(
-            lambda x: merge_and_fill_empty_props(x, [p.get("dst") for p in dual_props])
+        df = df.join(joining_df).mapValues(
+            lambda x: merge_two_dicts_with_subset_props_from_left(x, left_props, [p.get("dst") for p in dual_props])
         )
         joining_df.unpersist()
         return df
 
-    def join_to_an_index(self, df, translator, joining_node):
+    def join_to_an_index(self, original_df, translator, joining_node):
         """
         Perform the join between indices. It will:
          - load rdd to be join from HDFS
          - Joining with df
-        :param df: rdd of translator that does the join
+        :param original_df: rdd of translator that does the join
         :param translator: translator has rdd to be join this translator
         :param joining_node: joining_node define in yaml file.
         :return:
         """
         joining_df = translator.load_from_hadoop()
+        changing_df = self.load_from_hadoop()
 
         # For joining two indices, we need to swap the property field and key of one of the index.
         # based on join_on value in the etlMapping, we know what field is used as joining field.
@@ -363,10 +367,10 @@ class Translator(BaseTranslator):
                 joining_df, COMPOSITE_JOINING_FIELD, joining_df_key_id
             )
         if len(id_fields_in_df_id) > 1 or df_key_id not in id_fields_in_df_id:
-            df = create_composite_field_from_joining_fields(
-                df, id_fields_in_df_id, df_key_id
+            changing_df = create_composite_field_from_joining_fields(
+                changing_df, id_fields_in_df_id, df_key_id
             )
-            df = swap_property_as_key(df, COMPOSITE_JOINING_FIELD, df_key_id)
+            changing_df = swap_property_as_key(changing_df, COMPOSITE_JOINING_FIELD, df_key_id)
             swap_df = True
 
         # Join can be done with or without an aggregation function like max, min, sum, ...
@@ -374,14 +378,21 @@ class Translator(BaseTranslator):
         props_with_fn, props_without_fn = self.get_joining_props(
             translator, joining_node
         )
+        left_props = [df_key_id] if swap_df else []
         if len(props_with_fn) > 0:
-            df = self.join_and_aggregate(df, joining_df, props_with_fn, joining_node)
+            changing_df = self.join_and_aggregate(changing_df, joining_df, left_props, props_with_fn, joining_node)
         if len(props_without_fn) > 0:
-            df = self.join_no_aggregate(df, joining_df, props_without_fn)
+            changing_df = self.join_no_aggregate(changing_df, joining_df, left_props, props_without_fn)
 
         if swap_df:
-            df = swap_property_as_key(df, df_key_id)
-        return df
+            changing_df = swap_property_as_key(changing_df, df_key_id)
+
+        all_props = props_with_fn + props_without_fn
+        changing_df = original_df.leftOuterJoin(changing_df).mapValues(
+            lambda x: merge_and_fill_empty_props(x, [p.get("dst") for p in all_props])
+        )
+
+        return changing_df
 
     def ensure_project_id_exist(self, df):
         project_id_prop = self.parser.get_prop_by_name(PROJECT_ID)

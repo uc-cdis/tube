@@ -148,23 +148,39 @@ def swap_property_as_key(df, prop_name, new_prop_name=None):
     return df.map(lambda x: use_property_as_key(x[0], x[1], prop_name, new_prop_name))
 
 
-def merge_and_fill_empty_props(item, props, to_tuple=False):
-    if item[1] is None and item[0] is None:
+def merge_sub_dictionaries_and_fill_empty_props(left_rdd, right_rdd, right_props, to_tuple):
+    if right_rdd is None and left_rdd is None:
         return {} if not to_tuple else tuple([])
-    if item[0] is None:
+    if left_rdd is None:
         return (
-            item[1]
+            right_rdd
             if not to_tuple
             else tuple(
                 [
                     (k, v) if type(v) != list else (k, tuple(v))
-                    for (k, v) in list(item[1].items())
+                    for (k, v) in list(right_rdd.items())
                 ]
             )
         )
-    if item[1] is None:
-        return merge_dictionary(item[0], get_props_empty_values(props), to_tuple)
-    return merge_dictionary(item[0], item[1], to_tuple)
+    if right_rdd is None:
+        return merge_dictionary(left_rdd, get_props_empty_values(right_props), to_tuple)
+    return merge_dictionary(left_rdd, right_rdd, to_tuple)
+
+
+def merge_and_fill_empty_props(item, props, to_tuple=False):
+    return merge_sub_dictionaries_and_fill_empty_props(item[0], item[1], props, to_tuple)
+
+
+def merge_two_dicts_with_subset_props_from_left(item, left_props, right_props, to_tuple=False):
+    """
+    :param item: merged values of joined rdds
+    :param left_props: properties get from left side rdd
+    :param right_props: properties get from right side rdd
+    :param to_tuple: convert final merge values to tuple or not
+    :return: return a merged dictionary
+    """
+    item_0_to_get = {k: v for (k, v) in item[0].items() if k in left_props}
+    return merge_sub_dictionaries_and_fill_empty_props(item_0_to_get, item[1], right_props, to_tuple)
 
 
 def sort_by_field(x, field, reversed):
