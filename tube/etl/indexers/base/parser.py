@@ -120,10 +120,13 @@ class Parser(object):
     def get_prop_type(self, fn, src, node_label=None, index=None):
         if fn is not None:
             if fn in ["count", "sum", "min", "max"]:
-                return (float,)
+                return float,
             elif fn in ["set", "list"]:
-                return (str,)
-            return (str,)
+                if node_label is not None:
+                    a = get_properties_types(self.model, node_label)
+                    return a.get(src)
+                return str,
+            return str,
         elif index is not None:
             return None
         else:
@@ -132,7 +135,7 @@ class Parser(object):
                     "An index property must have at least one of [path, fn, index] is set"
                 )
             if src == "id":
-                return (str,)
+                return str,
             a = get_properties_types(self.model, node_label)
             return a.get(src)
 
