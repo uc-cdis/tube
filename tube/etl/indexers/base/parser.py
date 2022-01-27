@@ -8,7 +8,8 @@ class Parser(object):
     The main entry point into the index export process for the mutation indices
     """
 
-    def __init__(self, mapping, model):
+    def __init__(self, dictionary, mapping, model):
+        self.dictionary = dictionary
         self.mapping = mapping
         self.model = model
         self.name = mapping["name"]
@@ -117,17 +118,27 @@ class Parser(object):
             print("DEBUG: prop '{}' not in '{}'".format(name, self.doc_type))
         return prop
 
+    def get_prop_type_of_field_in_dictionary(self, node_label, prop):
+        dict_types = {"number": float, "string": str, "integer": int}
+        node_prop = self.dictionary.schema.get(node_label).get("properties").get(prop)
+        return dict_types.get(node_prop.get("items").get("type")),
+
     def get_prop_type(self, fn, src, node_label=None, index=None):
-        if fn is not None:
+        if fn is not None and index is None:
             if fn in ["count", "sum", "min", "max"]:
                 return float,
             elif fn in ["set", "list"]:
                 if node_label is not None:
                     a = get_properties_types(self.model, node_label)
+                    if a.get(src) == (list,):
+                        return self.get_prop_type_of_field_in_dictionary(node_label, src)
                     return a.get(src)
                 return str,
             return str,
         elif index is not None:
+            index_prop = PropFactory.get_prop_by_name(index, src)
+            if index_prop:
+                return index_prop.type
             return None
         else:
             if node_label is None:
@@ -137,6 +148,8 @@ class Parser(object):
             if src == "id":
                 return str,
             a = get_properties_types(self.model, node_label)
+            if a.get(src) == (list, ):
+                return self.get_prop_type_of_field_in_dictionary(node_label, src)
             return a.get(src)
 
     @staticmethod

@@ -14,12 +14,11 @@ class Parser(BaseParser):
     """
 
     def __init__(self, mapping, model, dictionary):
-        super(Parser, self).__init__(mapping, model)
+        super(Parser, self).__init__(dictionary, mapping, model)
 
         self.leaves = []
         self.collectors = []
         self.root_node = None
-        self.dictionary = dictionary
         self.root_node = NestedNode(
             self.root,
             get_node_table_name(self.model, self.root),

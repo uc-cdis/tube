@@ -48,8 +48,7 @@ class Parser(BaseParser):
     """
 
     def __init__(self, mapping, model, dictionary):
-        super(Parser, self).__init__(mapping, model)
-        self.dictionary = dictionary
+        super(Parser, self).__init__(dictionary, mapping, model)
         self.props = self.get_host_props()
         self.flatten_props = (
             self.get_direct_children() if "flatten_props" in mapping else []

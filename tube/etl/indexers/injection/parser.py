@@ -62,8 +62,7 @@ class NodePath(object):
 
 class Parser(BaseParser):
     def __init__(self, mapping, model, dictionary):
-        super(Parser, self).__init__(mapping, model)
-        self.dictionary = dictionary
+        super(Parser, self).__init__(dictionary, mapping, model)
         self.props = self.create_props_from_json(
             self.doc_type,
             self.mapping["props"],

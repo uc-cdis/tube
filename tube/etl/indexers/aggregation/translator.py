@@ -4,6 +4,12 @@ from tube.etl.indexers.base.lambdas import (
     merge_two_dicts_with_subset_props_from_left,
     merge_dictionary,
     swap_key_value,
+    sort_by_field,
+    swap_property_as_key,
+    make_key_from_property,
+    merge_aggregate_with_reducer,
+    seq_aggregate_with_reducer,
+    flatmap_nested_list_rdd,
 )
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from tube.etl.indexers.aggregation.lambdas import (
@@ -26,13 +32,6 @@ from tube.utils.general import (
 )
 from .parser import Parser
 from .nested.translator import Translator as NestedTranslator
-from ..base.lambdas import (
-    sort_by_field,
-    swap_property_as_key,
-    make_key_from_property,
-    merge_aggregate_with_reducer,
-    seq_aggregate_with_reducer,
-)
 from .lambdas import sliding
 
 COMPOSITE_JOINING_FIELD = "_joining_keys_"
@@ -298,6 +297,7 @@ class Translator(BaseTranslator):
             .aggregateByKey(
                 frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer
             )
+            .mapValues(lambda x: flatmap_nested_list_rdd(x))
             .mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
         )
         df = df.join(joining_df).mapValues(

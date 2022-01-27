@@ -61,12 +61,12 @@ def extract_metadata_to_json(str_value, node_name, pre_defined_id_name=None):
 
 def extract_link(str_value):
     strs = ast.literal_eval(str_value)
-    return (strs[4], strs[5])
+    return strs[4], strs[5]
 
 
 def extract_link_reverse(str_value):
     strs = ast.literal_eval(str_value)
-    return (strs[5], strs[4])
+    return strs[5], strs[4]
 
 
 def flatten_files_to_lists(pair):
@@ -133,7 +133,7 @@ def get_number(num):
 def make_key_from_property(x1, prop_name):
     key = x1.pop(prop_name, None)
     x0 = key
-    return (x0, x1)
+    return x0, x1
 
 
 def use_property_as_key(x0, x1, prop_name, new_prop_name):
@@ -141,7 +141,7 @@ def use_property_as_key(x0, x1, prop_name, new_prop_name):
     if new_prop_name is not None:
         x1[new_prop_name] = x0
     x0 = key
-    return (x0, x1)
+    return x0, x1
 
 
 def swap_property_as_key(df, prop_name, new_prop_name=None):
@@ -187,6 +187,16 @@ def sort_by_field(x, field, reversed):
     if not reversed:
         return sorted(x, key=lambda k: k[field])
     return sorted(x, key=lambda k: k[field], reverse=reversed)
+
+
+def flatten_nested_list(x):
+    res = []
+    for xi in x:
+        if isinstance(xi, list) or isinstance(xi, tuple):
+            res.extend(flatten_nested_list(xi))
+        else:
+            res.append(xi)
+    return res
 
 
 def union_sets(x, y):
@@ -239,19 +249,21 @@ def get_aggregation_func_by_name(func_name, is_merging=False):
 
 def get_single_frame_zero_by_func(func_name, output_name):
     if func_name in ["set", "list"]:
-        return (func_name, output_name, [])
+        return func_name, output_name, []
     if func_name == "count" or func_name == "sum":
-        return (func_name, output_name, 0)
+        return func_name, output_name, 0
     if func_name in ["min", "max"]:
-        return (func_name, output_name, None)
-    return (func_name, output_name, "")
+        return func_name, output_name, None
+    return func_name, output_name, ""
 
 
 def get_single_frame_value(func_name, value):
     if func_name in ["set", "list"]:
         if value is None:
             return []
-        return [value] if not isinstance(value, list) else value
+        if isinstance(value, list):
+            return value
+        return [value]
     if func_name == "count":
         return 1 if value is None else value
     if func_name == "sum":
@@ -291,4 +303,14 @@ def merge_aggregate_with_reducer(x, y):
                 get_aggregation_func_by_name(x[i][0], True)(x[i][2], y[i][2]),
             )
         )
+    return tuple(res)
+
+
+def flatmap_nested_list_rdd(x):
+    res = []
+    for (x0, x1, x2) in range(0, len(x)):
+        if x0 in ["set", "list"] and len(x2) > 0:
+            res.append((x0, x1, flatten_nested_list(x2)))
+        else:
+            res.append((x0, x1, x2))
     return tuple(res)
