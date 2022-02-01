@@ -121,7 +121,7 @@ class Parser(object):
     def get_prop_type_of_field_in_dictionary(self, node_label, prop):
         dict_types = {"number": float, "string": str, "integer": int}
         node_prop = self.dictionary.schema.get(node_label).get("properties").get(prop)
-        return dict_types.get(node_prop.get("items").get("type")),
+        return list, dict_types.get(node_prop.get("items").get("type"))
 
     def get_prop_type(self, fn, src, node_label=None, index=None):
         if fn is not None and index is None:
