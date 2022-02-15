@@ -9,6 +9,7 @@ from tube.utils.dd import (
     get_node_table_name,
     get_parent_label,
     get_node_category,
+    get_properties_types,
 )
 from tube.utils.general import PROJECT_CODE, PROGRAM_NAME
 from tube.etl.indexers.base.parser import Parser as BaseParser
@@ -63,10 +64,13 @@ class NodePath(object):
 class Parser(BaseParser):
     def __init__(self, mapping, model, dictionary):
         super(Parser, self).__init__(dictionary, mapping, model)
+        selected_category = self.mapping.get("category", "data_file")
+        self.prop_types_from_dictionary[selected_category], dict_props = self.get_all_props_by_category(selected_category)
+        self.dictionary.schema[selected_category] = {"properties": dict_props}
         self.props = self.create_props_from_json(
             self.doc_type,
             self.mapping["props"],
-            node_label=self.get_first_node_label_with_category(),
+            node_label=selected_category,
         )
         self.leaves = set([])
         self.collectors = []
@@ -74,16 +78,19 @@ class Parser(BaseParser):
         self.generated_edges = self.get_edges_having_data()
         self.get_collecting_nodes()
 
-    def get_first_node_label_with_category(self):
-        selected_category = self.mapping.get("category", "data_file")
+    def get_all_props_by_category(self, selected_category):
         leaves_name = [
             k
             for (k, v) in list(self.dictionary.schema.items())
             if v.get("category", None) == selected_category
         ]
-        if len(leaves_name) > 0:
-            return leaves_name[0]
-        return None
+        all_props = {}
+        properties = {}
+        for leaf in leaves_name:
+            leaf_props = get_properties_types(self.model, leaf)
+            properties.update(self.dictionary.schema.get(leaf).get("properties"))
+            all_props.update(leaf_props)
+        return all_props, properties
 
     def get_all_edge_tables_in_db(self):
         with get_db_cursor("db") as cur:
