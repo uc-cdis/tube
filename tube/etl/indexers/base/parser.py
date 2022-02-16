@@ -8,7 +8,8 @@ class Parser(object):
     The main entry point into the index export process for the mutation indices
     """
 
-    def __init__(self, mapping, model):
+    def __init__(self, dictionary, mapping, model):
+        self.dictionary = dictionary
         self.mapping = mapping
         self.model = model
         self.name = mapping["name"]
@@ -17,6 +18,7 @@ class Parser(object):
         self.joining_nodes = []
         self.additional_props = []
         self.array_types = []
+        self.prop_types_from_dictionary = {}
         PropFactory.adding_prop(
             self.doc_type,
             get_node_id_name(self.doc_type),
@@ -29,6 +31,11 @@ class Parser(object):
         )
         self.prop_types = {}
         self.types = {}
+
+    def get_possible_properties_types(self, models, node_label):
+        if node_label not in self.prop_types_from_dictionary:
+            return get_properties_types(models=models, node_name=node_label)
+        return self.prop_types_from_dictionary.get(node_label)
 
     @staticmethod
     def generate_es_mapping_types(doc_name, field_types):
@@ -117,14 +124,27 @@ class Parser(object):
             print("DEBUG: prop '{}' not in '{}'".format(name, self.doc_type))
         return prop
 
+    def get_prop_type_of_field_in_dictionary(self, node_label, prop):
+        dict_types = {"number": float, "string": str, "integer": int}
+        node_prop = self.dictionary.schema.get(node_label).get("properties").get(prop)
+        return list, dict_types.get(node_prop.get("items").get("type"))
+
     def get_prop_type(self, fn, src, node_label=None, index=None):
-        if fn is not None:
+        if fn is not None and index is None:
             if fn in ["count", "sum", "min", "max"]:
-                return (float,)
+                return float,
             elif fn in ["set", "list"]:
-                return (str,)
-            return (str,)
+                if node_label is not None:
+                    a = self.get_possible_properties_types(self.model, node_label)
+                    if a.get(src) == (list,):
+                        return self.get_prop_type_of_field_in_dictionary(node_label, src)
+                    return a.get(src)
+                return str,
+            return str,
         elif index is not None:
+            index_prop = PropFactory.get_prop_by_name(index, src)
+            if index_prop:
+                return index_prop.type
             return None
         else:
             if node_label is None:
@@ -132,8 +152,10 @@ class Parser(object):
                     "An index property must have at least one of [path, fn, index] is set"
                 )
             if src == "id":
-                return (str,)
-            a = get_properties_types(self.model, node_label)
+                return str,
+            a = self.get_possible_properties_types(self.model, node_label)
+            if a.get(src) == (list, ):
+                return self.get_prop_type_of_field_in_dictionary(node_label, src)
             return a.get(src)
 
     @staticmethod

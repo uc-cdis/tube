@@ -61,12 +61,12 @@ def extract_metadata_to_json(str_value, node_name, pre_defined_id_name=None):
 
 def extract_link(str_value):
     strs = ast.literal_eval(str_value)
-    return (strs[4], strs[5])
+    return strs[4], strs[5]
 
 
 def extract_link_reverse(str_value):
     strs = ast.literal_eval(str_value)
-    return (strs[5], strs[4])
+    return strs[5], strs[4]
 
 
 def flatten_files_to_lists(pair):
@@ -133,7 +133,7 @@ def get_number(num):
 def make_key_from_property(x1, prop_name):
     key = x1.pop(prop_name, None)
     x0 = key
-    return (x0, x1)
+    return x0, x1
 
 
 def use_property_as_key(x0, x1, prop_name, new_prop_name):
@@ -141,36 +141,62 @@ def use_property_as_key(x0, x1, prop_name, new_prop_name):
     if new_prop_name is not None:
         x1[new_prop_name] = x0
     x0 = key
-    return (x0, x1)
+    return x0, x1
 
 
 def swap_property_as_key(df, prop_name, new_prop_name=None):
     return df.map(lambda x: use_property_as_key(x[0], x[1], prop_name, new_prop_name))
 
 
-def merge_and_fill_empty_props(item, props, to_tuple=False):
-    if item[1] is None and item[0] is None:
+def merge_sub_dictionaries_and_fill_empty_props(left_rdd, right_rdd, right_props, to_tuple):
+    if right_rdd is None and left_rdd is None:
         return {} if not to_tuple else tuple([])
-    if item[0] is None:
+    if left_rdd is None:
         return (
-            item[1]
+            right_rdd
             if not to_tuple
             else tuple(
                 [
                     (k, v) if type(v) != list else (k, tuple(v))
-                    for (k, v) in list(item[1].items())
+                    for (k, v) in list(right_rdd.items())
                 ]
             )
         )
-    if item[1] is None:
-        return merge_dictionary(item[0], get_props_empty_values(props), to_tuple)
-    return merge_dictionary(item[0], item[1], to_tuple)
+    if right_rdd is None:
+        return merge_dictionary(left_rdd, get_props_empty_values(right_props), to_tuple)
+    return merge_dictionary(left_rdd, right_rdd, to_tuple)
+
+
+def merge_and_fill_empty_props(item, props, to_tuple=False):
+    return merge_sub_dictionaries_and_fill_empty_props(item[0], item[1], props, to_tuple)
+
+
+def merge_two_dicts_with_subset_props_from_left(item, left_props, right_props, to_tuple=False):
+    """
+    :param item: merged values of joined rdds
+    :param left_props: properties get from left side rdd
+    :param right_props: properties get from right side rdd
+    :param to_tuple: convert final merge values to tuple or not
+    :return: return a merged dictionary
+    """
+    item_0_to_get = {k: v for (k, v) in item[0].items() if k in left_props}
+    return merge_sub_dictionaries_and_fill_empty_props(item_0_to_get, item[1], right_props, to_tuple)
 
 
 def sort_by_field(x, field, reversed):
     if not reversed:
         return sorted(x, key=lambda k: k[field])
     return sorted(x, key=lambda k: k[field], reverse=reversed)
+
+
+def flatten_nested_list(x):
+    res = []
+    for xi in x:
+        if isinstance(xi, list) or isinstance(xi, tuple):
+            res.extend(flatten_nested_list(xi))
+        else:
+            res.append(xi)
+    return res
 
 
 def union_sets(x, y):
@@ -223,19 +249,21 @@ def get_aggregation_func_by_name(func_name, is_merging=False):
 
 def get_single_frame_zero_by_func(func_name, output_name):
     if func_name in ["set", "list"]:
-        return (func_name, output_name, [])
+        return func_name, output_name, []
     if func_name == "count" or func_name == "sum":
-        return (func_name, output_name, 0)
+        return func_name, output_name, 0
     if func_name in ["min", "max"]:
-        return (func_name, output_name, None)
-    return (func_name, output_name, "")
+        return func_name, output_name, None
+    return func_name, output_name, ""
 
 
 def get_single_frame_value(func_name, value):
     if func_name in ["set", "list"]:
         if value is None:
             return []
-        return [value] if not isinstance(value, list) else value
+        if isinstance(value, list):
+            return value
+        return [value]
     if func_name == "count":
         return 1 if value is None else value
     if func_name == "sum":
@@ -275,4 +303,14 @@ def merge_aggregate_with_reducer(x, y):
                 get_aggregation_func_by_name(x[i][0], True)(x[i][2], y[i][2]),
             )
         )
+    return tuple(res)
+
+
+def flatmap_nested_list_rdd(x):
+    res = []
+    for (x0, x1, x2) in x:
+        if x0 in ["set", "list"] and len(x2) > 0:
+            res.append((x0, x1, flatten_nested_list(x2)))
+        else:
+            res.append((x0, x1, x2))
     return tuple(res)
