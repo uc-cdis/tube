@@ -20,7 +20,8 @@ from tube.etl.indexers.injection.nodes.collecting_node import LeafNode
 from tube.utils.general import PROJECT_ID, PROJECT_CODE, PROGRAM_NAME, get_node_id_name
 
 
-def json_export_with_no_key_for_injection_translator(x):
+def json_export_with_no_key_for_injection_translator(x, doc_type):
+    x[1][get_node_id_name(doc_type)] = x[0]
     x[1]["node_id"] = x[0]  # redundant field for backward compatibility with arranger
     return json.dumps(x[1])
 
@@ -198,7 +199,8 @@ class Translator(BaseTranslator):
     def final_transform_rdd_to_df(self, rdd):
         self.update_types()
         rdd = self.restore_prop_name(rdd, PropFactory.list_props)
-        rdd = rdd.map(lambda x: json_export_with_no_key_for_injection_translator(x))
+        doc_type = self.parser.doc_type
+        rdd = rdd.map(lambda x: json_export_with_no_key_for_injection_translator(x, doc_type))
         new_df = self.sql_context.read.json(rdd)
         rdd.unpersist()
         return new_df
