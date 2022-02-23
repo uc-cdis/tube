@@ -27,6 +27,7 @@ class Parser(object):
             [],
             src_node=None,
             src_index=None,
+            filter=None,
             fn=None,
             prop_type=(str,),
         )
@@ -133,15 +134,17 @@ class Parser(object):
     def get_prop_type(self, fn, src, node_label=None, index=None):
         if fn is not None and index is None:
             if fn in ["count", "sum", "min", "max"]:
-                return float,
+                return (float,)
             elif fn in ["set", "list"]:
                 if node_label is not None:
                     a = self.get_possible_properties_types(self.model, node_label)
                     if a.get(src) == (list,):
-                        return self.get_prop_type_of_field_in_dictionary(node_label, src)
+                        return self.get_prop_type_of_field_in_dictionary(
+                            node_label, src
+                        )
                     return a.get(src)
-                return str,
-            return str,
+                return (str,)
+            return (str,)
         elif index is not None:
             index_prop = PropFactory.get_prop_by_name(index, src)
             if index_prop:
@@ -153,9 +156,9 @@ class Parser(object):
                     "An index property must have at least one of [path, fn, index] is set"
                 )
             if src == "id":
-                return str,
+                return (str,)
             a = self.get_possible_properties_types(self.model, node_label)
-            if a.get(src) == (list, ):
+            if a.get(src) == (list,):
                 return self.get_prop_type_of_field_in_dictionary(node_label, src)
             return a.get(src)
 
@@ -178,7 +181,7 @@ class Parser(object):
         value_mappings = p.get("value_mappings", [])
         src = p["src"] if "src" in p else p["name"]
         fn = p.get("fn")
-
+        filter = self.get_filter(p)
 
         prop_type = self.get_prop_type(fn, src, node_label=node_label, index=index)
         prop = PropFactory.adding_prop(
@@ -188,6 +191,7 @@ class Parser(object):
             value_mappings,
             src_node=node_label,
             src_index=index,
+            filter=filter,
             fn=fn,
             prop_type=prop_type,
             is_additional=is_additional,
