@@ -124,6 +124,7 @@ class Prop(object):
         src,
         value_mappings,
         src_node,
+        filter=None,
         src_index=None,
         fn=None,
         prop_type=None,
@@ -138,6 +139,7 @@ class Prop(object):
         self.fn = fn
         self.type = prop_type
         self.is_additional = is_additional
+        self.filter = filter
 
     def __hash__(self):
         return self.id
