@@ -1,5 +1,6 @@
 from tube.utils.general import get_node_id_name
 from ..base.prop import PropFactory
+from ..base.filter import Filter
 from tube.utils.dd import get_properties_types
 
 
@@ -168,12 +169,16 @@ class Parser(object):
         ]
         return lst
 
+    def get_filter(self, json_prop):
+        return Filter(json_prop.get("filters"))
+
     def create_prop_from_json(
         self, doc_name, p, node_label=None, index=None, is_additional=False
     ):
         value_mappings = p.get("value_mappings", [])
         src = p["src"] if "src" in p else p["name"]
         fn = p.get("fn")
+
 
         prop_type = self.get_prop_type(fn, src, node_label=node_label, index=index)
         prop = PropFactory.adding_prop(
