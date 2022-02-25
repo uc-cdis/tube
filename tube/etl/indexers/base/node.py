@@ -1,8 +1,20 @@
+from tube.etl.indexers.base.logic import CompoundLogic, SimpleLogic
 from tube.utils.dd import object_to_string
 
 
-class BaseNode(object):
+class BaseNode:
+    def __init__(self, json_filter):
+        if json_filter is None:
+            return
+        if json_filter.get("op").lower() in ["and", "or"]:
+            self.filter = CompoundLogic(json_filter)
+        else:
+            self.filter = SimpleLogic(json_filter)
+
+
+class BaseCompoundNode(BaseNode):
     def __init__(self):
+        super().__init__()
         self.children = set([])
         self.no_children_to_map = 0
 
