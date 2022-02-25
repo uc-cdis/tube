@@ -1,8 +1,8 @@
 from tube.utils.dd import object_to_string
-from tube.etl.indexers.base.node import BaseNode
+from tube.etl.indexers.base.node import BaseCompoundNode
 
 
-class AggregatedNode(BaseNode):
+class AggregatedNode(BaseCompoundNode):
     def __init__(self, name, tbl_name, edge_up_tbl, level):
         super(AggregatedNode, self).__init__()
         self.name = name

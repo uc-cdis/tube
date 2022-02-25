@@ -1,7 +1,7 @@
-from tube.etl.indexers.base.node import BaseNode
+from tube.etl.indexers.base.node import BaseCompoundNode
 
 
-class NestedNode(BaseNode):
+class NestedNode(BaseCompoundNode):
     def __init__(
         self,
         name,

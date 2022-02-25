@@ -1,9 +1,9 @@
 from tube.utils.dd import object_to_string
-from tube.etl.indexers.base.node import BaseNode
+from tube.etl.indexers.base.node import BaseCompoundNode
 from tube.etl.indexers.base.prop import PropFactory
 
 
-class RootNode(BaseNode):
+class RootNode(BaseCompoundNode):
     def __init__(self, name, tbl_name, props, edge_to_parent=None):
         super(RootNode, self).__init__()
         self.name = name
@@ -16,7 +16,7 @@ class RootNode(BaseNode):
         return self.name
 
 
-class CollectingNode(BaseNode):
+class CollectingNode(BaseCompoundNode):
     def __init__(self, name, tbl_name, props=None, level=None):
         super(CollectingNode, self).__init__()
         props = [] if props is None else props
