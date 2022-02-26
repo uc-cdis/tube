@@ -39,7 +39,10 @@ COMPOSITE_JOINING_FIELD = "_joining_keys_"
 
 def create_composite_field_from_joining_fields(df, id_fields, key_id):
     if len(id_fields) > 1:
-        df = df.filter(lambda x: len([x[1].get(f_id) is None for f_id in id_fields]) < len(id_fields))
+        df = df.filter(
+            lambda x: len([x[1].get(f_id) is None for f_id in id_fields])
+            < len(id_fields)
+        )
         return df.map(
             lambda x: (
                 x[0],
@@ -301,7 +304,9 @@ class Translator(BaseTranslator):
             .mapValues(lambda x: {x1: x2 for (x0, x1, x2) in x})
         )
         df = df.join(joining_df).mapValues(
-            lambda x: merge_two_dicts_with_subset_props_from_left(x, left_props, [p.get("dst") for p in dual_props])
+            lambda x: merge_two_dicts_with_subset_props_from_left(
+                x, left_props, [p.get("dst") for p in dual_props]
+            )
         )
         joining_df.unpersist()
         return df
@@ -309,7 +314,9 @@ class Translator(BaseTranslator):
     def join_no_aggregate(self, df, joining_df, left_props, dual_props):
         joining_df = self.get_props_from_df(joining_df, dual_props)
         df = df.join(joining_df).mapValues(
-            lambda x: merge_two_dicts_with_subset_props_from_left(x, left_props, [p.get("dst") for p in dual_props])
+            lambda x: merge_two_dicts_with_subset_props_from_left(
+                x, left_props, [p.get("dst") for p in dual_props]
+            )
         )
         joining_df.unpersist()
         return df
@@ -317,8 +324,8 @@ class Translator(BaseTranslator):
     def join_to_an_index(self, original_df, translator, joining_node):
         """
         Perform the join between indices. It will:
-         - load rdd to be join from HDFS
-         - Joining with df
+        - load rdd to be join from HDFS
+        - Joining with df
         :param original_df: rdd of translator that does the join
         :param translator: translator has rdd to be join this translator
         :param joining_node: joining_node define in yaml file.
@@ -370,7 +377,9 @@ class Translator(BaseTranslator):
             changing_df = create_composite_field_from_joining_fields(
                 changing_df, id_fields_in_df_id, df_key_id
             )
-            changing_df = swap_property_as_key(changing_df, COMPOSITE_JOINING_FIELD, df_key_id)
+            changing_df = swap_property_as_key(
+                changing_df, COMPOSITE_JOINING_FIELD, df_key_id
+            )
             swap_df = True
 
         # Join can be done with or without an aggregation function like max, min, sum, ...
@@ -380,9 +389,13 @@ class Translator(BaseTranslator):
         )
         left_props = [df_key_id] if swap_df else []
         if len(props_with_fn) > 0:
-            changing_df = self.join_and_aggregate(changing_df, joining_df, left_props, props_with_fn, joining_node)
+            changing_df = self.join_and_aggregate(
+                changing_df, joining_df, left_props, props_with_fn, joining_node
+            )
         if len(props_without_fn) > 0:
-            changing_df = self.join_no_aggregate(changing_df, joining_df, left_props, props_without_fn)
+            changing_df = self.join_no_aggregate(
+                changing_df, joining_df, left_props, props_without_fn
+            )
 
         if swap_df:
             changing_df = swap_property_as_key(changing_df, df_key_id)

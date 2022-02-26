@@ -3,8 +3,8 @@ from tube.etl.indexers.aggregation.nodes.aggregated_node import Reducer
 
 
 class JoiningNode(BaseCompoundNode):
-    def __init__(self, props, json_join):
-        super(JoiningNode, self).__init__()
+    def __init__(self, props, json_join, json_filter=None):
+        super(JoiningNode, self).__init__(json_filter)
         self.joining_index = json_join["index"]
         self.joining_fields = [f.strip() for f in json_join["join_on"].split(",")]
         self.getting_fields = [Reducer(p, p.fn) for p in props]
