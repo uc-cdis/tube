@@ -27,7 +27,6 @@ class Parser(object):
             [],
             src_node=None,
             src_index=None,
-            prop_filter=None,
             fn=None,
             prop_type=(str,),
         )
@@ -172,9 +171,6 @@ class Parser(object):
         ]
         return lst
 
-    def get_filters(self, json_prop):
-        return Filter(json_prop.get("filters"))
-
     def create_prop_from_json(
         self, doc_name, p, node_label=None, index=None, is_additional=False
     ):
@@ -197,7 +193,7 @@ class Parser(object):
         return prop
 
     def create_props_from_json(
-        self, doc_name, props_in_json, filters_in_json=None, node_label=None, index=None, is_additional=False
+        self, doc_name, props_in_json, node_label=None, index=None, is_additional=False,
     ):
         res = []
         for p in props_in_json:
