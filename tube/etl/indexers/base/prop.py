@@ -35,7 +35,6 @@ class PropFactory(object):
         value_mappings,
         src_node=None,
         src_index=None,
-        prop_filter=None,
         fn=None,
         prop_type=None,
         is_additional=False,
@@ -51,7 +50,6 @@ class PropFactory(object):
                 PropFactory.create_value_mappings(value_mappings),
                 src_node,
                 src_index,
-                prop_filter,
                 fn,
                 prop_type,
                 is_additional=is_additional,
@@ -71,7 +69,6 @@ class PropFactory(object):
                 name,
                 None,
                 [],
-                None,
                 None,
                 None,
                 None,
@@ -128,7 +125,6 @@ class Prop(object):
         value_mappings,
         src_node,
         src_index=None,
-        prop_filter=None,
         fn=None,
         prop_type=None,
         is_additional=False,
@@ -142,7 +138,6 @@ class Prop(object):
         self.fn = fn
         self.type = prop_type
         self.is_additional = is_additional
-        self.prop_filter = filter
 
     def __hash__(self):
         return self.id
