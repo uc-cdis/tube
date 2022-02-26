@@ -1,6 +1,5 @@
 from tube.utils.general import get_node_id_name
 from ..base.prop import PropFactory
-from ..base.logic import Filter
 from tube.utils.dd import get_properties_types
 
 
