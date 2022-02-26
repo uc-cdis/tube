@@ -13,8 +13,8 @@ class BaseNode:
 
 
 class BaseCompoundNode(BaseNode):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, json_filter=None):
+        super(BaseCompoundNode, self).__init__(json_filter)
         self.children = set([])
         self.no_children_to_map = 0
 

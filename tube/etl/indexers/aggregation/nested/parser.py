@@ -67,6 +67,7 @@ class Parser(BaseParser):
             props=props,
             parent_node=nested_parent_node,
             parent_edge_up_tbl=parent_edge_up_tbls,
+            json_filter=mapping.get("filters"),
         )
         nested_idxes = mapping.get("nested_props", [])
         for n_idx in nested_idxes:

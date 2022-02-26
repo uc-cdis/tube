@@ -17,8 +17,8 @@ class RootNode(BaseCompoundNode):
 
 
 class CollectingNode(BaseCompoundNode):
-    def __init__(self, name, tbl_name, props=None, level=None):
-        super(CollectingNode, self).__init__()
+    def __init__(self, name, tbl_name, props=None, level=None, json_filter=None):
+        super(CollectingNode, self).__init__(json_filter)
         props = [] if props is None else props
         self.name = name
         self.tbl_name = tbl_name
