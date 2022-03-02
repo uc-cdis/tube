@@ -40,7 +40,7 @@ class Writer(SparkBase):
         """
         es_hosts = self.es_config["es.nodes"]
         es_port = self.es_config["es.port"]
-        return Elasticsearch([{"host": es_hosts, "port": es_port}])
+        return Elasticsearch([{"host": es_hosts, "port": es_port}], timeout=30)
 
     def write_to_new_index(self, df, index, doc_type):
         df = df.map(lambda x: json_export(x, doc_type))
@@ -99,9 +99,7 @@ class Writer(SparkBase):
 
         doc = {
             "timestamp": latest_transaction_time,
-            "array": [
-                "{}".format(k) for k in array_types
-            ],
+            "array": ["{}".format(k) for k in array_types],
         }
 
         try:
