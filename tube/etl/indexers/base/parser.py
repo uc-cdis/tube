@@ -93,7 +93,8 @@ class Parser(object):
                         self.select_widest_type(p.type),
                         1,
                     )
-                    self.array_types.append(p.name)
+                    if p.name not in self.array_types:
+                        self.array_types.append(p.name)
                 else:
                     types[p.name] = (
                         self.select_widest_type(p.type),
