@@ -137,6 +137,8 @@ class Parser(object):
             elif fn in ["set", "list"]:
                 if node_label is not None:
                     a = self.get_possible_properties_types(self.model, node_label)
+                    if src == "id":
+                        return str,
                     if a.get(src) == (list,):
                         return self.get_prop_type_of_field_in_dictionary(node_label, src)
                     return a.get(src)
