@@ -1,15 +1,13 @@
-from tube.etl.indexers.base.logic import CompoundLogic, SimpleLogic
+from tube.etl.indexers.base.single_query import SingleQuery
 from tube.utils.dd import object_to_string
 
 
 class BaseNode:
-    def __init__(self, json_filter):
-        if json_filter is None:
-            return
-        if json_filter.get("op").lower() in ["and", "or"]:
-            self.filter = CompoundLogic(json_filter)
-        else:
-            self.filter = SimpleLogic(json_filter)
+    def __init__(self):
+        self.queries = []
+
+    def add_query(self, query):
+        self.queries.append(query)
 
 
 class BaseCompoundNode(BaseNode):
@@ -24,3 +22,7 @@ class BaseCompoundNode(BaseNode):
 
     def __str__(self):
         return object_to_string(self)
+
+# SELECT a, b, count(a), sum(b)
+# FROM table_t t
+# WHERE t.id = something

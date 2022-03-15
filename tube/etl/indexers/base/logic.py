@@ -18,6 +18,7 @@ class CompoundLogic(BaseLogic):
             SimpleLogic(logic) if logic.get("op").lower() not in ["and", "or"] else CompoundLogic(logic)
             for logic in json_filter.get("logics")
         ]
+        self.children_node_logics = []  # list of compound logic to all the children (like summary_drug_use)
         self.all_props = self.get_all_props()
 
     def get_all_props(self):
@@ -35,7 +36,7 @@ class CompoundLogic(BaseLogic):
 #   - op: or
 #     logics:
 #      - op: and
-#        logic:
+#        logics:
 #        - prop: year_of_brith
 #          op: >
 #          value: 16
