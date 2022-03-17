@@ -9,7 +9,8 @@ from tube.etl.indexers.base.lambdas import (
     make_key_from_property,
     merge_aggregate_with_reducer,
     seq_aggregate_with_reducer,
-    flatmap_nested_list_rdd, from_program_name_project_code_to_project_id,
+    flatmap_nested_list_rdd,
+    from_program_name_project_code_to_project_id,
 )
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from tube.etl.indexers.aggregation.lambdas import (
