@@ -9,7 +9,7 @@ from tube.etl.indexers.base.lambdas import (
     make_key_from_property,
     merge_aggregate_with_reducer,
     seq_aggregate_with_reducer,
-    flatmap_nested_list_rdd,
+    flatmap_nested_list_rdd, from_program_name_project_code_to_project_id,
 )
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from tube.etl.indexers.aggregation.lambdas import (
@@ -402,14 +402,10 @@ class Translator(BaseTranslator):
             )
             project_code_id = self.parser.get_prop_by_name(PROJECT_CODE).id
             program_name_id = self.parser.get_prop_by_name(PROGRAM_NAME).id
+            project_id_id = project_id_prop.id
             df = df.mapValues(
-                lambda x: merge_dictionary(
-                    x,
-                    {
-                        project_id_prop.id: "{}-{}".format(
-                            x.get(program_name_id), x.get(project_code_id)
-                        )
-                    },
+                lambda x: from_program_name_project_code_to_project_id(
+                    x, project_id_id, program_name_id, project_code_id
                 )
             )
         return df
