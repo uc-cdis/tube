@@ -314,3 +314,18 @@ def flatmap_nested_list_rdd(x):
         else:
             res.append((x0, x1, x2))
     return tuple(res)
+
+
+def from_program_name_project_code_to_project_id(x, project_id_id, program_name_id, project_code_id):
+    programs = x.get(program_name_id)
+    if not isinstance(programs, list):
+        programs = [programs]
+    projects = x.get(project_code_id)
+    if not isinstance(projects, list):
+        projects = [projects]
+
+    list_project_ids = ["{}-{}".format(pg, pj) for pg in programs for pj in projects]
+    if len(list_project_ids) == 1:
+        list_project_ids = list_project_ids[0]
+
+    return merge_dictionary(x, {project_id_id: list_project_ids})

@@ -45,7 +45,8 @@ def test_items_equal_db(filename, total, entries):
 
         prop_json = cur.fetchall()
         prop_json = [item["_props"] for item in prop_json]
-        prop_json = sorted(prop_json, key=itemgetter("submitter_id"))
+        kwy_field = "submitter_id" if filename != "project" else "code"
+        prop_json = sorted(prop_json, key=itemgetter(kwy_field))
 
         for x, y in zip(entries, prop_json):
             keys_x = set(x.keys())

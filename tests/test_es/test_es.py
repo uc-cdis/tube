@@ -67,7 +67,7 @@ def test_es_types(init_interpreter, doc_type):
     "doc_type", [dt.parser.doc_type for dt in list(init_interpreter().values())]
 )
 def test_get_list_from_path(init_interpreter, doc_type):
-    if doc_type == "file":
+    if doc_type in ["file", "project"]:
         return
     interpreter = init_interpreter
     items = items_in_file(doc_type)[2]

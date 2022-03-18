@@ -12,7 +12,8 @@ def items_in_file(filename):
 
     with open(in_json_path, "r") as f:
         entries = json.load(f)
-        entries = sorted(entries, key=itemgetter("submitter_id"))
+        key_field = "submitter_id" if filename != "project" else "code"
+        entries = sorted(entries, key=itemgetter(key_field))
     total_entries = len(entries)
 
     return filename, total_entries, entries
