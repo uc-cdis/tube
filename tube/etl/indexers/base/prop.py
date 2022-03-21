@@ -38,6 +38,7 @@ class PropFactory(object):
         fn=None,
         prop_type=None,
         is_additional=False,
+        is_displayed=True,
     ):
         if doc_name not in PropFactory.prop_by_names:
             PropFactory.prop_by_names[doc_name] = {}
@@ -53,6 +54,7 @@ class PropFactory(object):
                 fn,
                 prop_type,
                 is_additional=is_additional,
+                is_displayed=is_displayed,
             )
             PropFactory.list_props.append(prop)
             PropFactory.prop_by_names.get(doc_name)[name] = prop
@@ -128,6 +130,7 @@ class Prop(object):
         fn=None,
         prop_type=None,
         is_additional=False,
+        is_displayed=True,
     ):
         self.id = id
         self.name = name
@@ -138,6 +141,7 @@ class Prop(object):
         self.fn = fn
         self.type = prop_type
         self.is_additional = is_additional
+        self.is_filter_only = is_displayed
 
     def __hash__(self):
         return self.id

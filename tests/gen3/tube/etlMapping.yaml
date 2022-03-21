@@ -219,3 +219,12 @@ mappings:
           - name: _subject_id
             src: id
           - name: project_id
+  - name: dataset
+    doc_type: project
+    type: aggregator
+    root: project
+    props:
+      - name: code
+      - name: name
+    parent_props:
+      - path: programs[program_name:name]
