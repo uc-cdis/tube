@@ -37,6 +37,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get --only-upgrade install libpq-dev
+
 #RUN pip install pip==9.0.3
 #RUN pip install --upgrade pip
 #RUN pip install --upgrade setuptools
