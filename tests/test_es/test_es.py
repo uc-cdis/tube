@@ -15,11 +15,12 @@ from tests.value.value import value_diff
 
 @pytest.fixture
 def init_interpreter():
-    return create_translators(None, config)
+    list_translators = create_translators(None, config)
+    return [dt.parser.doc_type for dt in list(list_translators.values())]
 
 
 @pytest.mark.parametrize(
-    "doc_type", [dt.parser.doc_type for dt in list(init_interpreter().values())]
+    "doc_type", init_interpreter
 )
 def test_auth_resource_path_exist(init_interpreter, doc_type):
     """
