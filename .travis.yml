@@ -1,3 +1,5 @@
+dist: focal
+
 sudo: required
 
 language: python
