@@ -9,7 +9,7 @@ hdfs==2.1.0
 psqlgraph==3.0.1
 py2neo==4.3.0
 psycopg2==2.9.3
-pyspark==2.4.4
+pyspark==2.4.8
 requests>=2.20.0
 setuptools==36.6.0
 six==1.12.0
