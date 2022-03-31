@@ -1,0 +1,45 @@
+[tool.poetry]
+name = "tube"
+version = "0.6.3"
+description = "Gen3 ETL Service"
+authors = ["CTDS UChicago <cdis@uchicago.edu>"]
+license = "Apache-2.0"
+readme = "README.md"
+repository = "https://github.com/uc-cdis/tube"
+include = [
+  "NOTICE",
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+cdislogging = "1.0.0"
+cryptography = "^2.1.2"
+dictionaryutils = "^3.0.2"
+elasticsearch = "6.3.1"
+elasticsearch-dsl = "6.2.1"
+gdcdictionary = "1.2.0"
+gen3datamodel = "3.0.2"
+hdfs = "2.1.0"
+psqlgraph = "3.0.1"
+py2neo = "4.3.0"
+psycopg2 = "2.9.3"
+pyspark = "2.4.4"
+requests = "^2.20.0"
+setuptools = "36.6.0"
+six = "1.12.0"
+Werkzeug = "0.15.3"
+ipaddress = "1.0.23"
+
+[tool.poetry.dev-dependencies]
+pytest="5.4.3"
+pytest-cov="3.0.0"
+codacy-coverage="^1.3.11"
+mock="2.0.0"
+moto="1.1.24"
+
+[tool.poetry.scripts]
+fence-create = 'bin.fence_create:main'
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

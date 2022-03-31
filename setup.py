@@ -10,7 +10,7 @@ setup(
         "gen3datamodel~=3.0.2",
         "psqlgraph~=3.0.1",
         "psycopg2~=2.9.3",
-        "pyspark~=2.4.4",
+        "pyspark~=3.0.0",
         "requests>=2.18.0<3.0.0",
         "setuptools==36.6.0",
         "six~=1.12.0",
