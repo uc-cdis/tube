@@ -39,9 +39,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN apt-get --only-upgrade install libpq-dev
 
-#RUN pip install pip==9.0.3
-#RUN pip install --upgrade pip
-#RUN pip install --upgrade setuptools
+RUN pip install --upgrade poetry
 
 RUN wget ${SQOOP_INSTALLATION_URL} \
     && mkdir -p $SQOOP_HOME \
@@ -79,11 +77,12 @@ RUN mkdir -p $ACCUMULO_HOME $HIVE_HOME $HBASE_HOME $HCAT_HOME $ZOOKEEPER_HOME
 
 ENV PATH=${SQOOP_HOME}/bin:${HADOOP_HOME}/sbin:$HADOOP_HOME/bin:${JAVA_HOME}/bin:${PATH}
 
-COPY requirements.txt /tube/
-RUN pip install --no-cache-dir -r /tube/requirements.txt
-
 COPY . /tube
 WORKDIR /tube
+
+RUN poetry config virtualenvs.create false \
+    && poetry install -vv --no-dev --no-interaction \
+    && poetry show -v
 
 #ENV TINI_VERSION v0.18.0
 #ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
@@ -91,5 +90,3 @@ WORKDIR /tube
 #ENTRYPOINT ["/tini", "--"]
 
 ENV PYTHONUNBUFFERED 1
-
-RUN python setup.py develop

@@ -7,10 +7,12 @@ language: python
 python:
   - "3.8"
   - "3.9"
+  - "3.10"
 
 matrix:
  allow_failures:
    - python: "3.9"
+   - python: "3.10"
 
 cache: pip
 
@@ -23,8 +25,9 @@ services:
 
 install:
   - pip uninstall -y six || true
-  - pip install -r dev-requirements.txt
-  - pip install -r requirements.txt
+  - curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+  - source $HOME/.poetry/env
+  - poetry install -vv
   - psql -c 'SELECT version();' -U postgres
   - psql -U postgres -c "create database metadata_db;"
   - psql -U postgres -f tests/metadata_db.sql metadata_db
