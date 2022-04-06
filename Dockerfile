@@ -1,5 +1,5 @@
 # To check running container: docker exec -it tube /bin/bash
-FROM quay.io/cdis/python:3.7-stretch
+FROM quay.io/cdis/python:3.8.13-bullseye
 
 ENV DEBIAN_FRONTEND=noninteractive \
     SQOOP_VERSION="1.4.7" \
@@ -12,14 +12,14 @@ ENV SQOOP_INSTALLATION_URL="http://archive.apache.org/dist/sqoop/${SQOOP_VERSION
     SQOOP_HOME="/sqoop" \
     HADOOP_HOME="/hadoop" \
     ES_HADOOP_HOME="/es-hadoop" \
-    JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/"
+    JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/"
 
 RUN mkdir -p /usr/share/man/man1
 RUN mkdir -p /usr/share/man/man7
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
-    openjdk-8-jdk-headless \
+    openjdk-11-jdk \
     # dependency for pyscopg2 - which is dependency for sqlalchemy postgres engine
     libpq-dev \
     postgresql-client \
@@ -30,16 +30,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libffi-dev \
     # dependency for cryptography
     libssl-dev \
-    libssl1.0.2 \
+    libssl1.1 \
     libgnutls30 \
     vim \
     curl \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
-#RUN pip install pip==9.0.3
-#RUN pip install --upgrade pip
-#RUN pip install --upgrade setuptools
+RUN apt-get --only-upgrade install libpq-dev
+
+RUN pip install --upgrade poetry
 
 RUN wget ${SQOOP_INSTALLATION_URL} \
     && mkdir -p $SQOOP_HOME \
@@ -77,11 +77,12 @@ RUN mkdir -p $ACCUMULO_HOME $HIVE_HOME $HBASE_HOME $HCAT_HOME $ZOOKEEPER_HOME
 
 ENV PATH=${SQOOP_HOME}/bin:${HADOOP_HOME}/sbin:$HADOOP_HOME/bin:${JAVA_HOME}/bin:${PATH}
 
-COPY requirements.txt /tube/
-RUN pip install --no-cache-dir -r /tube/requirements.txt
-
 COPY . /tube
 WORKDIR /tube
+
+RUN poetry config virtualenvs.create false \
+    && poetry install -vv --no-dev --no-interaction \
+    && poetry show -v
 
 #ENV TINI_VERSION v0.18.0
 #ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
@@ -89,5 +90,3 @@ WORKDIR /tube
 #ENTRYPOINT ["/tini", "--"]
 
 ENV PYTHONUNBUFFERED 1
-
-RUN python setup.py develop
