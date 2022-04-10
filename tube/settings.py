@@ -41,6 +41,7 @@ HDFS_DIR = "/result"
 RUNNING_MODE = os.getenv("RUNNING_MODE", "Dev")  # 'Prod' or 'Dev'
 
 PARALLEL_JOBS = 1
+LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
 
 ES = {
     "es.nodes": ES_URL,
