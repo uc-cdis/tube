@@ -1,9 +1,9 @@
 # To check running container: docker exec -it tube /bin/bash
-FROM quay.io/cdis/python:3.8.13-bullseye
+FROM  exoplatform/ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
     SQOOP_VERSION="1.4.7" \
-    HADOOP_VERSION="3.1.1" \
+    HADOOP_VERSION="3.3.2" \
     ES_HADOOP_VERSION="6.4.0"
 
 ENV SQOOP_INSTALLATION_URL="http://archive.apache.org/dist/sqoop/${SQOOP_VERSION}/sqoop-${SQOOP_VERSION}.bin__hadoop-2.6.0.tar.gz" \
@@ -12,14 +12,18 @@ ENV SQOOP_INSTALLATION_URL="http://archive.apache.org/dist/sqoop/${SQOOP_VERSION
     SQOOP_HOME="/sqoop" \
     HADOOP_HOME="/hadoop" \
     ES_HADOOP_HOME="/es-hadoop" \
-    JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/"
+    JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/"
 
 RUN mkdir -p /usr/share/man/man1
 RUN mkdir -p /usr/share/man/man7
 
+RUN apt-get update && apt-get -y install software-properties-common
+RUN add-apt-repository ppa:deadsnakes/ppa
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    software-properties-common \
     build-essential \
-    openjdk-11-jdk \
+    openjdk-8-jdk-headless \
     # dependency for pyscopg2 - which is dependency for sqlalchemy postgres engine
     libpq-dev \
     postgresql-client \
@@ -39,6 +43,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN apt-get --only-upgrade install libpq-dev
 
+RUN add-apt-repository ppa:deadsnakes/ppa && apt-get update
+
+RUN apt-get -y install python3.7
+RUN ln -s -f $(which python3.7) /usr/bin/python
+RUN ln -s -f $(which python3.7) /usr/bin/python3
+
+RUN apt-get -y install python3-pip
+RUN ln -s -f $(which pip3) /usr/bin/pip
+
 RUN pip install --upgrade poetry
 
 RUN wget ${SQOOP_INSTALLATION_URL} \
@@ -48,6 +61,10 @@ RUN wget ${SQOOP_INSTALLATION_URL} \
     && rm -rf $SQOOP_HOME/docs
 
 RUN wget https://jdbc.postgresql.org/download/postgresql-42.2.4.jar -O $SQOOP_HOME/lib/postgresql-42.2.4.jar
+RUN wget https://dlcdn.apache.org//commons/lang/binaries/commons-lang-2.6-bin.tar.gz \
+    && tar -xvf commons-lang-2.6-bin.tar.gz \
+    && rm commons-lang-2.6-bin.tar.gz \
+    && mv commons-lang-2.6/commons-lang-2.6.jar $SQOOP_HOME/lib/
 
 RUN wget ${HADOOP_INSTALLATION_URL} \
     && mkdir -p $HADOOP_HOME \

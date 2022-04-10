@@ -11,6 +11,7 @@ def make_spark_context(config):
         SparkConf()
         .set("spark.executor.memory", config.SPARK_EXECUTOR_MEMORY)
         .set("spark.driver.memory", config.SPARK_DRIVER_MEMORY)
+        .set("spark.python.profile", True)
         .setAppName(config.APP_NAME)
     )
     if config.RUNNING_MODE == "Dev":
@@ -22,7 +23,7 @@ def make_spark_context(config):
 
     # Configure logging
     log4j = sc._jvm.org.apache.log4j
-    log4j.LogManager.getRootLogger().setLevel(log4j.Level.WARN)
+    log4j.LogManager.getRootLogger().setLevel(log4j.Level.INFO)
 
     return sc
 
