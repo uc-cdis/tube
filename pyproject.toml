@@ -13,7 +13,7 @@ include = [
 [tool.poetry.dependencies]
 python = "^3.7"
 cdislogging = "1.1.1"
-cryptography = "^2.1.2"
+cryptography = "^3.3.2"
 dictionaryutils = "^3.0.2"
 elasticsearch = "6.4.0"
 elasticsearch-dsl = "6.4.0"
