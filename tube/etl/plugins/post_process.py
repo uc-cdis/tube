@@ -45,4 +45,7 @@ udf_auth = f.udf(project_id_to_auth_resource_path, StringType())
 
 
 def add_auth_resource_path_to_dataframe(df):
+    if "project_id" not in df.columns:
+        print(f"There is no project_id in list of [{df.columns}]")
+        return df
     return df.withColumn("auth_resource_path", udf_auth("project_id")).drop_duplicates()
