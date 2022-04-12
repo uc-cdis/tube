@@ -1,9 +1,9 @@
 # To check running container: docker exec -it tube /bin/bash
-FROM quay.io/cdis/python:3.7-stretch
+FROM  exoplatform/ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
     SQOOP_VERSION="1.4.7" \
-    HADOOP_VERSION="3.1.1" \
+    HADOOP_VERSION="3.3.2" \
     ES_HADOOP_VERSION="6.4.0"
 
 ENV SQOOP_INSTALLATION_URL="http://archive.apache.org/dist/sqoop/${SQOOP_VERSION}/sqoop-${SQOOP_VERSION}.bin__hadoop-2.6.0.tar.gz" \
@@ -17,7 +17,11 @@ ENV SQOOP_INSTALLATION_URL="http://archive.apache.org/dist/sqoop/${SQOOP_VERSION
 RUN mkdir -p /usr/share/man/man1
 RUN mkdir -p /usr/share/man/man7
 
+RUN apt-get update && apt-get -y install software-properties-common
+RUN add-apt-repository ppa:deadsnakes/ppa
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    software-properties-common \
     build-essential \
     openjdk-8-jdk-headless \
     # dependency for pyscopg2 - which is dependency for sqlalchemy postgres engine
@@ -30,16 +34,25 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libffi-dev \
     # dependency for cryptography
     libssl-dev \
-    libssl1.0.2 \
+    libssl1.1 \
     libgnutls30 \
     vim \
     curl \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
-#RUN pip install pip==9.0.3
-#RUN pip install --upgrade pip
-#RUN pip install --upgrade setuptools
+RUN apt-get --only-upgrade install libpq-dev
+
+RUN add-apt-repository ppa:deadsnakes/ppa && apt-get update
+
+RUN apt-get -y install python3.7
+RUN ln -s -f $(which python3.7) /usr/bin/python
+RUN ln -s -f $(which python3.7) /usr/bin/python3
+
+RUN apt-get -y install python3-pip
+RUN ln -s -f $(which pip3) /usr/bin/pip
+
+RUN pip install --upgrade poetry
 
 RUN wget ${SQOOP_INSTALLATION_URL} \
     && mkdir -p $SQOOP_HOME \
@@ -48,6 +61,10 @@ RUN wget ${SQOOP_INSTALLATION_URL} \
     && rm -rf $SQOOP_HOME/docs
 
 RUN wget https://jdbc.postgresql.org/download/postgresql-42.2.4.jar -O $SQOOP_HOME/lib/postgresql-42.2.4.jar
+RUN wget https://dlcdn.apache.org//commons/lang/binaries/commons-lang-2.6-bin.tar.gz \
+    && tar -xvf commons-lang-2.6-bin.tar.gz \
+    && rm commons-lang-2.6-bin.tar.gz \
+    && mv commons-lang-2.6/commons-lang-2.6.jar $SQOOP_HOME/lib/
 
 RUN wget ${HADOOP_INSTALLATION_URL} \
     && mkdir -p $HADOOP_HOME \
@@ -77,11 +94,12 @@ RUN mkdir -p $ACCUMULO_HOME $HIVE_HOME $HBASE_HOME $HCAT_HOME $ZOOKEEPER_HOME
 
 ENV PATH=${SQOOP_HOME}/bin:${HADOOP_HOME}/sbin:$HADOOP_HOME/bin:${JAVA_HOME}/bin:${PATH}
 
-COPY requirements.txt /tube/
-RUN pip install --no-cache-dir -r /tube/requirements.txt
-
 COPY . /tube
 WORKDIR /tube
+
+RUN poetry config virtualenvs.create false \
+    && poetry install -vv --no-dev --no-interaction \
+    && poetry show -v
 
 #ENV TINI_VERSION v0.18.0
 #ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
@@ -89,5 +107,3 @@ WORKDIR /tube
 #ENTRYPOINT ["/tini", "--"]
 
 ENV PYTHONUNBUFFERED 1
-
-RUN python setup.py develop
