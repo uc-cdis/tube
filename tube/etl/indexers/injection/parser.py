@@ -65,12 +65,13 @@ class Parser(BaseParser):
     def __init__(self, mapping, model, dictionary):
         super(Parser, self).__init__(dictionary, mapping, model)
         selected_category = self.mapping.get("category", "data_file")
-        self.prop_types_from_dictionary[selected_category], dict_props = self.get_all_props_by_category(selected_category)
+        (
+            self.prop_types_from_dictionary[selected_category],
+            dict_props,
+        ) = self.get_all_props_by_category(selected_category)
         self.dictionary.schema[selected_category] = {"properties": dict_props}
         self.props = self.create_props_from_json(
-            self.doc_type,
-            self.mapping["props"],
-            node_label=selected_category,
+            self.doc_type, self.mapping["props"], node_label=selected_category
         )
         self.leaves = set([])
         self.collectors = []
