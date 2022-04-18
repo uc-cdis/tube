@@ -82,7 +82,8 @@ class Parser(BaseParser):
             parent_tbl = get_node_table_name(self.model, parent_name)
             if p is not None:
                 json_props = [
-                    {"name": p[0], "src": p[1], "fn": "set"} for p in self.get_src_name(p.split(","))
+                    {"name": p[0], "src": p[1], "fn": "set"}
+                    for p in self.get_src_name(p.split(","))
                 ]
                 props = self.create_props_from_json(
                     self.doc_type, json_props, node_label=parent_name
