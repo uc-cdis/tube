@@ -133,6 +133,9 @@ class Parser(object):
 
     def get_prop_type_of_field_in_dictionary(self, node_label, prop):
         node_prop = self.dictionary.schema.get(node_label).get("properties").get(prop)
+        if node_prop is None:
+            print(f"WARN: Field {prop} is not presenting in {node_label}")
+            return (str,)
         some_of = node_prop.get("anyOf") or node_prop.get("oneOf")
         try:
             if "type" not in node_prop and some_of is not None:
