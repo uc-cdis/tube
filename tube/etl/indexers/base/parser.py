@@ -49,6 +49,7 @@ class Parser(object):
         properties = {
             k: {"type": es_type[v[0]]}
             if v[0] is not str
+            and v[0] is not bool  # the check of bool is for backward compatibility
             else {"type": es_type[v[0]], "fields": {"analyzed": {"type": "text"}}}
             for k, v in list(field_types.items())
         }
@@ -217,7 +218,7 @@ class Parser(object):
         return lst
 
     def create_prop_from_json(
-        self, doc_name, p, node_label=None, index=None, is_additional=False
+            self, doc_name, p, node_label=None, index=None, is_additional=False
     ):
         value_mappings = p.get("value_mappings", [])
         src = p["src"] if "src" in p else p["name"]
@@ -238,7 +239,7 @@ class Parser(object):
         return prop
 
     def create_props_from_json(
-        self, doc_name, props_in_json, node_label=None, index=None, is_additional=False
+            self, doc_name, props_in_json, node_label=None, index=None, is_additional=False
     ):
         res = []
         for p in props_in_json:
@@ -255,7 +256,7 @@ class Parser(object):
 
     @staticmethod
     def update_level_for_non_leaves(
-        level, assigned_levels, just_assigned, len_non_leaves
+            level, assigned_levels, just_assigned, len_non_leaves
     ):
         while len(assigned_levels) <= len_non_leaves and len(just_assigned) > 0:
             new_assigned = set([])
