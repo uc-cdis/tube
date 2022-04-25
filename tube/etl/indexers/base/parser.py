@@ -49,6 +49,7 @@ class Parser(object):
         properties = {
             k: {"type": es_type[v[0]]}
             if v[0] is not str
+            and v[0] is not bool  # the check of bool is for backward compatibility
             else {"type": es_type[v[0]], "fields": {"analyzed": {"type": "text"}}}
             for k, v in list(field_types.items())
         }

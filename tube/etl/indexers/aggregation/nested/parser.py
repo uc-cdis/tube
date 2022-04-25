@@ -108,7 +108,7 @@ class Parser(BaseParser):
         for p in node.props:
             p_type = self.select_widest_type(prop_types.get(p.src))
             properties[p.name] = {"type": es_type.get(p_type)}
-            if p_type is str:
+            if p_type is str or p_type is bool:
                 properties[p.name]["fields"] = {"analyzed": {"type": "text"}}
 
         properties[id_prop] = {
