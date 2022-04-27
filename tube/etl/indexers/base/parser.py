@@ -44,7 +44,7 @@ class Parser(object):
         :param field_types: dictionary of field and their types
         :return: JSON with proper mapping to be used in Elasticsearch
         """
-        es_type = {str: "keyword", float: "float", int: "long", bool: "boolean"}
+        es_type = {str: "keyword", float: "float", int: "long", bool: "keyword"}
 
         properties = {
             k: {"type": es_type[v[0]]}
