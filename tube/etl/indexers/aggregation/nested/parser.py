@@ -1,8 +1,4 @@
-from tube.utils.dd import (
-    get_edge_table,
-    get_node_table_name,
-    get_properties_types,
-)
+from tube.utils.dd import get_edge_table, get_node_table_name, get_properties_types
 from tube.utils.general import replace_dot_with_dash, get_node_id_name
 from tube.etl.indexers.aggregation.nodes.nested_node import NestedNode
 from tube.etl.indexers.base.parser import Parser as BaseParser
@@ -113,7 +109,7 @@ class Parser(BaseParser):
         for p in node.props:
             p_type = self.select_widest_type(prop_types.get(p.src))
             properties[p.name] = {"type": es_type.get(p_type)}
-            if p_type is str:
+            if p_type is str or p_type is bool:
                 properties[p.name]["fields"] = {"analyzed": {"type": "text"}}
 
         properties[id_prop] = {
@@ -126,7 +122,6 @@ class Parser(BaseParser):
                 child_types = self.collected_types.get(child.path)
                 if "type" not in child_types[child.display_name]:
                     child_types[child.display_name]["type"] = "nested"
-                    self.array_types.append(child.display_name)
                 properties.update(child_types)
         parent = node.parent_node
         if parent is not None:
@@ -145,4 +140,16 @@ class Parser(BaseParser):
             self.collected_types[queue[i].path] = type
             i += 1
         self.types = self.collected_types[queue[len(queue) - 1].path]
+        self.update_array_types()
         return self.types
+
+    def update_path_for_a_type(self, p_type, current_path):
+        for k, v in p_type.get("properties").items():
+            if v.get("type") == "nested":
+                path_to_add = ".".join([p for p in (current_path, k) if p != ""])
+                self.array_types.append(path_to_add)
+                self.update_path_for_a_type(v, path_to_add)
+
+    def update_array_types(self):
+        for k, v in self.types.items():
+            self.update_path_for_a_type(v, "")

@@ -44,11 +44,12 @@ class Parser(object):
         :param field_types: dictionary of field and their types
         :return: JSON with proper mapping to be used in Elasticsearch
         """
-        es_type = {str: "keyword", float: "float", int: "long"}
+        es_type = {str: "keyword", float: "float", int: "long", bool: "keyword"}
 
         properties = {
             k: {"type": es_type[v[0]]}
             if v[0] is not str
+            and v[0] is not bool  # the check of bool is for backward compatibility
             else {"type": es_type[v[0]], "fields": {"analyzed": {"type": "text"}}}
             for k, v in list(field_types.items())
         }
@@ -89,28 +90,24 @@ class Parser(object):
                 has_array_agg_fn = p.fn is not None and p.fn in ["set", "list"]
                 array_type_condition = is_array_type or has_array_agg_fn
                 if array_type_condition:
-                    types[p.name] = (
-                        self.select_widest_type(p.type),
-                        1,
-                    )
-                    if p.name not in self.array_types:
-                        self.array_types.append(p.name)
+                    types[p.name] = (self.select_widest_type(p.type), 1)
+                    self.array_types.append(p.name)
                 else:
-                    types[p.name] = (
-                        self.select_widest_type(p.type),
-                        0,
-                    )
+                    types[p.name] = (self.select_widest_type(p.type), 0)
         self.prop_types = types
         self.types = self.generate_es_mapping_types(self.doc_type, types)
         return self.types
 
-    def select_widest_type(self, types):
+    @staticmethod
+    def select_widest_type(types):
         if str in types:
             return str
         elif float in types:
             return float
         elif int in types:
             return int
+        elif bool in types:
+            return bool
         else:
             return str
 
@@ -125,10 +122,67 @@ class Parser(object):
             print("DEBUG: prop '{}' not in '{}'".format(name, self.doc_type))
         return prop
 
+    def parse_any_of_one_of(self, some_of):
+        for prop in some_of:
+            try:
+                res = self.parse_single_complex_type(prop)
+            except Exception as ex:
+                print(f"WARN: {ex}")
+                continue
+            return res
+        raise Exception(f"Cannot find type in dictionary for {some_of}")
+
     def get_prop_type_of_field_in_dictionary(self, node_label, prop):
-        dict_types = {"number": float, "string": str, "integer": int}
         node_prop = self.dictionary.schema.get(node_label).get("properties").get(prop)
-        return list, dict_types.get(node_prop.get("items").get("type"))
+        if node_prop is None:
+            print(f"WARN: Field {prop} is not presenting in {node_label}")
+            return (str,)
+        some_of = node_prop.get("anyOf") or node_prop.get("oneOf")
+        try:
+            if "type" not in node_prop and some_of is not None:
+                return self.parse_any_of_one_of(some_of)
+            return self.parse_single_complex_type(node_prop)
+        except Exception as ex:
+            raise Exception(f"Happened with {node_label} and {prop}. " + str(ex))
+
+    @staticmethod
+    def get_type_from_pre_defined_dict(t):
+        dict_types = {
+            "number": float,
+            "string": str,
+            "integer": int,
+            "array": list,
+            "boolean": bool,
+        }
+        return dict_types.get(t)
+
+    @staticmethod
+    def get_type_from_list_types(list_types):
+        for t in list_types:
+            p_type = Parser.get_type_from_pre_defined_dict(t)
+            if p_type is not None:
+                return p_type
+        return None
+
+    @staticmethod
+    def parse_single_complex_type(prop):
+        p_type = prop.get("type")
+        if p_type is None and "enum" in prop:
+            return (str,)
+        first_type = (
+            Parser.get_type_from_list_types(p_type)
+            if type(p_type) is list
+            else Parser.get_type_from_pre_defined_dict(p_type)
+        )
+        if first_type is None:
+            raise Exception(f"Cannot find type in dictionary for {prop}")
+        items = prop.get("items")
+        if items is not None:
+            second_type = Parser.get_type_from_pre_defined_dict(
+                prop.get("items").get("type")
+            )
+            return first_type, second_type
+        return (first_type,)
 
     def get_prop_type(self, fn, src, node_label=None, index=None):
         if fn is not None and index is None:
@@ -136,14 +190,7 @@ class Parser(object):
                 return (float,)
             elif fn in ["set", "list"]:
                 if node_label is not None:
-                    a = self.get_possible_properties_types(self.model, node_label)
-                    if src == "id":
-                        return str,
-                    if a.get(src) == (list,):
-                        return self.get_prop_type_of_field_in_dictionary(
-                            node_label, src
-                        )
-                    return a.get(src)
+                    return self.get_prop_type_of_field_in_dictionary(node_label, src)
                 return (str,)
             return (str,)
         elif index is not None:
@@ -158,10 +205,7 @@ class Parser(object):
                 )
             if src == "id":
                 return (str,)
-            a = self.get_possible_properties_types(self.model, node_label)
-            if a.get(src) == (list,):
-                return self.get_prop_type_of_field_in_dictionary(node_label, src)
-            return a.get(src)
+            return self.get_prop_type_of_field_in_dictionary(node_label, src)
 
     @staticmethod
     def get_src_name(props):

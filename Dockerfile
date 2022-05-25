@@ -1,5 +1,5 @@
 # To check running container: docker exec -it tube /bin/bash
-FROM  exoplatform/ubuntu:20.04
+FROM  ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive \
     SQOOP_VERSION="1.4.7" \
@@ -49,7 +49,7 @@ RUN apt-get -y install python3.7
 RUN ln -s -f $(which python3.7) /usr/bin/python
 RUN ln -s -f $(which python3.7) /usr/bin/python3
 
-RUN apt-get -y install python3-pip
+RUN apt-get -y install python3-pip python3.7-distutils
 RUN ln -s -f $(which pip3) /usr/bin/pip
 
 RUN pip install --upgrade poetry

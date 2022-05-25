@@ -148,7 +148,9 @@ def swap_property_as_key(df, prop_name, new_prop_name=None):
     return df.map(lambda x: use_property_as_key(x[0], x[1], prop_name, new_prop_name))
 
 
-def merge_sub_dictionaries_and_fill_empty_props(left_rdd, right_rdd, right_props, to_tuple):
+def merge_sub_dictionaries_and_fill_empty_props(
+    left_rdd, right_rdd, right_props, to_tuple
+):
     if right_rdd is None and left_rdd is None:
         return {} if not to_tuple else tuple([])
     if left_rdd is None:
@@ -168,10 +170,14 @@ def merge_sub_dictionaries_and_fill_empty_props(left_rdd, right_rdd, right_props
 
 
 def merge_and_fill_empty_props(item, props, to_tuple=False):
-    return merge_sub_dictionaries_and_fill_empty_props(item[0], item[1], props, to_tuple)
+    return merge_sub_dictionaries_and_fill_empty_props(
+        item[0], item[1], props, to_tuple
+    )
 
 
-def merge_two_dicts_with_subset_props_from_left(item, left_props, right_props, to_tuple=False):
+def merge_two_dicts_with_subset_props_from_left(
+    item, left_props, right_props, to_tuple=False
+):
     """
     :param item: merged values of joined rdds
     :param left_props: properties get from left side rdd
@@ -180,7 +186,9 @@ def merge_two_dicts_with_subset_props_from_left(item, left_props, right_props, t
     :return: return a merged dictionary
     """
     item_0_to_get = {k: v for (k, v) in item[0].items() if k in left_props}
-    return merge_sub_dictionaries_and_fill_empty_props(item_0_to_get, item[1], right_props, to_tuple)
+    return merge_sub_dictionaries_and_fill_empty_props(
+        item_0_to_get, item[1], right_props, to_tuple
+    )
 
 
 def sort_by_field(x, field, reversed):
@@ -316,7 +324,9 @@ def flatmap_nested_list_rdd(x):
     return tuple(res)
 
 
-def from_program_name_project_code_to_project_id(x, project_id_id, program_name_id, project_code_id):
+def from_program_name_project_code_to_project_id(
+    x, project_id_id, program_name_id, project_code_id
+):
     programs = x.get(program_name_id)
     if not isinstance(programs, list):
         programs = [programs]

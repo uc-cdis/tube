@@ -200,7 +200,9 @@ class Translator(BaseTranslator):
         self.update_types()
         rdd = self.restore_prop_name(rdd, PropFactory.list_props)
         doc_type = self.parser.doc_type
-        rdd = rdd.map(lambda x: json_export_with_no_key_for_injection_translator(x, doc_type))
+        rdd = rdd.map(
+            lambda x: json_export_with_no_key_for_injection_translator(x, doc_type)
+        )
         new_df = self.sql_context.read.json(rdd)
         rdd.unpersist()
         return new_df
