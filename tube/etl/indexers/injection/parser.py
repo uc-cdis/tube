@@ -71,7 +71,7 @@ class Parser(BaseParser):
         ) = self.get_all_props_by_category(selected_category)
         self.dictionary.schema[selected_category] = {"properties": dict_props}
         self.props = self.create_props_from_json(
-            self.doc_type, self.mapping["props"], node_label=selected_category
+            self.doc_type, self.mapping["props"], node_label=selected_category,
         )
         self.leaves = set([])
         self.collectors = []

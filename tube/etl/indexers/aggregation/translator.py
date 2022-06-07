@@ -31,9 +31,11 @@ from tube.utils.general import (
     PROJECT_CODE,
     PROGRAM_NAME,
 )
+from pyspark.sql.functions import col, array_contains, expr
 from .parser import Parser
 from .nested.translator import Translator as NestedTranslator
 from .lambdas import sliding
+from tube.etl.indexers.base.logic import execute_filter
 
 COMPOSITE_JOINING_FIELD = "_joining_keys_"
 
@@ -325,8 +327,8 @@ class Translator(BaseTranslator):
     def join_to_an_index(self, original_df, translator, joining_node):
         """
         Perform the join between indices. It will:
-         - load rdd to be join from HDFS
-         - Joining with df
+        - load rdd to be join from HDFS
+        - Joining with df
         :param original_df: rdd of translator that does the join
         :param translator: translator has rdd to be join this translator
         :param joining_node: joining_node define in yaml file.
@@ -538,4 +540,5 @@ class Translator(BaseTranslator):
         df = super(Translator, self).translate_final()
         if self.nested_translator is None:
             return df
-        return self.join_two_dataframe(df, nested_df, how="left_outer")
+        unfiltered_df = self.join_two_dataframe(df, nested_df, how="left_outer")
+        return execute_filter(unfiltered_df, self.parser.filter) if self.parser.filter else unfiltered_df

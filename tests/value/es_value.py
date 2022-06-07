@@ -12,6 +12,8 @@ class ESValue(Value):
         self.val, self.length = self.value()
 
     def __getattr__(self, item):
+        if self.val is None:
+            return None
         return self.val.__getattr__(item) if item in self.val else None
 
     def value(self):
@@ -19,5 +21,7 @@ class ESValue(Value):
             self.parser.name, self.doc_type, self.submitter_id
         )
         result_length = len(results)
+        if len(results) == 0:
+            return None, 0
         result = results[0]
         return result, result_length

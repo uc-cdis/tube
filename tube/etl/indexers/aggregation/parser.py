@@ -11,10 +11,10 @@ from .nodes.direct_node import DirectNode
 from .nodes.joining_node import JoiningNode
 from .nodes.special_node import SpecialNode, SpecialChain
 from .nodes.parent_node import ParentChain, ParentNode
-from .nodes.nested_node import NestedNode
 from ..base.parser import Parser as BaseParser
 from copy import deepcopy
 from tube.utils.general import PROJECT_CODE, PROGRAM_NAME
+from tube.etl.indexers.base.logic import create_filter_from_json
 
 
 class Path(object):
@@ -57,6 +57,8 @@ class Parser(BaseParser):
         self.nest_leaves = []
 
         self.aggregated_nodes = []
+        if "filter" in self.mapping:
+            self.filter = create_filter_from_json(self.mapping.get("filter"))
         if "aggregated_props" in self.mapping:
             self.aggregated_nodes = self.get_aggregation_nodes()
         self.joining_nodes = (
@@ -373,6 +375,13 @@ class Parser(BaseParser):
                 self.doc_type, child["props"], node_label=child_label
             )
             nodes.append(
-                DirectNode(child_name, edge, props, sorted_by, desc_order, is_child)
+                DirectNode(
+                    child_name,
+                    edge,
+                    props,
+                    sorted_by,
+                    desc_order,
+                    is_child,
+                )
             )
         return nodes
