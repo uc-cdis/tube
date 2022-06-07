@@ -11,10 +11,9 @@ def create_filter_from_json(json_filter):
 
 
 class SingleQuery:
-    def __init__(self, props, filter_json, reducers):
+    def __init__(self, props, filter_json):
         self.props = props
         self.filter = create_filter_from_json(filter_json)
-        self.reducers = reducers  # list of reducers that have the same filter
 
     def get_filter_props(self):
         return self.filter.all_props

@@ -8,13 +8,12 @@ class NestedNode(BaseCompoundNode):
         tbl_name,
         path,
         display_name,
-        json_filter=None,
         props=None,
         parent_node=None,
         parent_edge_up_tbl=None,
         level=None,
     ):
-        super(NestedNode, self).__init__(json_filter)
+        super(NestedNode, self).__init__()
         props = [] if props is None else props
         self.name = name
         self.tbl_name = tbl_name

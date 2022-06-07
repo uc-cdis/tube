@@ -143,7 +143,6 @@ class Parser(BaseParser):
                     props=self.create_props_from_json(
                         self.doc_type, v.get("props"), node_label=k
                     ),
-                    json_filter=v.get("filters"),
                 )
             else:
                 node_props = v.get("props")

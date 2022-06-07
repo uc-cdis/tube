@@ -6,33 +6,14 @@ mappings:
     type: aggregator
     root: subject
     filter:
-      - op: and
-        logics:
-          - op: or
-            logics:
-            - op: and
-              logics:
-              - prop: demographis.year_of_brith
-                op: >
-                value: 16
-              - prop: demographis.gender
-                op: =
-                value: Male
-              - props: studies.study_objective
-                op: in
-                value: ["a", "b", "d"]
-            - op: and
-              logics:
-                - prop: demographis.year_of_brith
-                  op: >
-                  value: 18
-                - prop: demographis.gender
-                  op: =
-                  value: Female
-                - props: studies.study_objective
-                  op: in
-                  value: ["a", "b", "d"]
-    # studies -> subjects -> demographics
+      op: or
+      logics:
+        - prop: demographis.gender
+          op: "="
+          value: M
+        - prop: demographis.gender
+          op: "="
+          value: F
     props:
       - name: submitter_id
       - name: project_id
@@ -87,37 +68,6 @@ mappings:
               - name: year_of_treatment
               - name: treatment_outcome
               - name: treatment_type
-            filter:
-              - op: or
-                logics:
-                - op: and
-                  logics:
-                    - prop: year_of_treatment
-                      op: >
-                      value: 1
-                    - prop: treatment_outcome
-                      op: =
-                      value: Cured
-                    - prop: diagnoses.tumor_stage
-                      op: =
-                      value: 3
-                    - props: demographics.gender
-                      op: =
-                      value: Male
-                - op: and
-                  logics:
-                    - prop: year_of_treatment
-                      op: >
-                      value: 2
-                    - prop: treatment_outcome
-                      op: =
-                      value: Failed
-                    - prop: diagnoses.tumor_stage
-                      op: =
-                      value: 2
-                    - props: demographics.gender
-                      op: =
-                      value: Female
     aggregated_props:
       - name: _follow_ups_count
         path: follow_ups

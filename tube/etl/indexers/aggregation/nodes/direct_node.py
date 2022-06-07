@@ -3,8 +3,8 @@ from tube.utils.dd import object_to_string
 
 
 class DirectNode(BaseNode):
-    def __init__(self, name, edge, props, json_filter=None, sorted_by=None, desc_order=False, props_from_child=True):
-        super().__init__(json_filter)
+    def __init__(self, name, edge, props, sorted_by=None, desc_order=False, props_from_child=True):
+        super().__init__()
         self.tbl_name = name
         self.edge = edge
         self.props = props

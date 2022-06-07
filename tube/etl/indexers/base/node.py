@@ -1,4 +1,3 @@
-from tube.etl.indexers.base.single_query import SingleQuery
 from tube.utils.dd import object_to_string
 
 
@@ -11,8 +10,8 @@ class BaseNode:
 
 
 class BaseCompoundNode(BaseNode):
-    def __init__(self, json_filter=None):
-        super(BaseCompoundNode, self).__init__(json_filter)
+    def __init__(self):
+        super(BaseCompoundNode, self).__init__()
         self.children = set([])
         self.no_children_to_map = 0
 

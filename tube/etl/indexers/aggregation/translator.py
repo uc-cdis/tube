@@ -31,9 +31,11 @@ from tube.utils.general import (
     PROJECT_CODE,
     PROGRAM_NAME,
 )
+from pyspark.sql.functions import col, array_contains, expr
 from .parser import Parser
 from .nested.translator import Translator as NestedTranslator
 from .lambdas import sliding
+from tube.etl.indexers.base.logic import SimpleLogic, CompoundLogic
 
 COMPOSITE_JOINING_FIELD = "_joining_keys_"
 
@@ -529,6 +531,35 @@ class Translator(BaseTranslator):
                 )
         return root_df
 
+    def build_filter_query(self, current_logic, new_fields):
+        if type(current_logic) == CompoundLogic:
+            return f" {current_logic.op} ".join([
+                self.build_filter_query(logic, new_fields)
+                for logic in current_logic.logics
+            ])
+        if type(current_logic) == SimpleLogic:
+            if current_logic.op == "contains":
+                new_fields.append(expr(f"array_contains({current_logic.prop}, {current_logic.value})"))
+                return f"__new_field_condition_{len(new_fields)} = True"
+            if current_logic.op == "in" and type(current_logic.value) == list:
+                s_value = ",".join(s for s in current_logic.value)
+                value_in_query = f"({s_value})"
+            elif type(current_logic.value) == str:
+                value_in_query = f"'{current_logic.value}'"
+            else:
+                value_in_query = current_logic.value
+            return f"{current_logic.prop} {current_logic.op} {value_in_query}"
+
+    def filter_nested_data(self, unfiltered_df):
+        new_fields = []
+        conditions = self.build_filter_query(self.parser.filter, new_fields)
+        i = 0
+        while i < len(new_fields):
+            unfiltered_df = unfiltered_df.withColumn(f"__new_field_condition_{i+1}", new_fields[i])
+            i += 1
+        filtered_df = unfiltered_df.filter(conditions)
+        return filtered_df
+
     def translate_final(self):
         nested_df = (
             self.nested_translator.translate()
@@ -538,4 +569,5 @@ class Translator(BaseTranslator):
         df = super(Translator, self).translate_final()
         if self.nested_translator is None:
             return df
-        return self.join_two_dataframe(df, nested_df, how="left_outer")
+        unfiltered_df = self.join_two_dataframe(df, nested_df, how="left_outer")
+        return self.filter_nested_data(unfiltered_df) if self.parser.filter else unfiltered_df

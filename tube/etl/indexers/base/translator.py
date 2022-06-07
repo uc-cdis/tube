@@ -107,7 +107,7 @@ class Translator(object):
                           value: any_value
                   
     '''
-    def translate_table(self, table_name, get_zero_frame=None, props=None, filters=None):
+    def translate_table(self, table_name, get_zero_frame=None, props=None):
         try:
             rdd, is_empty = self.read_text_files_of_table(
                 table_name, self.get_frame_zero_rdd
