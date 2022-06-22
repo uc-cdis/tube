@@ -54,17 +54,17 @@ def test_es_types(doc_type):
             list_errors.append(ex)
     assert list_errors == []
 
-import json
-def get_valid_submitted_ids():
-    with open("tests/test_data/diagnosis.json","r") as diagnosis_file:
-        entries = json.load(diagnosis_file)
-        return {entry["subjects"]["submitter_id"] for entry in entries if entry["classification_of_tumor"] in ["metastasis", "other", "Unknown"]}
 
 @pytest.mark.parametrize("doc_type", doc_types)
 def test_get_list_from_path(doc_type):
     if doc_type in ["file", "project"]:
         return
+    excluded_file_name = f".{doc_type}-excluded"
     items = items_in_file(doc_type)[2]
+    excluded_submitted_ids = set(
+        [item["submitter_id"] for item in items_in_file(excluded_file_name)[2]]
+    )
+
     parser = dict_translators[doc_type].parser
     names = get_names(parser)
 
@@ -72,12 +72,10 @@ def test_get_list_from_path(doc_type):
     sql = SQLQuery()
 
     fails = []
-    valid_ids = get_valid_submitted_ids()
     for item in items:
         submitter_id = item["submitter_id"]
-        if submitter_id not in valid_ids:
+        if submitter_id in excluded_submitted_ids:
             continue
-
         results = ESValue(parser, submitter_id, doc_type, names)
 
         result_length = results.length
