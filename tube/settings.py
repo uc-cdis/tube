@@ -30,9 +30,6 @@ JDBC = (
 PYDBC = "postgresql://{}:{}@{}:{}/{}".format(
     DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE
 )
-print("Printing EnvURLS -- ")
-print(JDBC)
-print(PYDBC)
 DICTIONARY_URL = os.getenv(
     "DICTIONARY_URL",
     "https://s3.amazonaws.com/dictionary-artifacts/datadictionary/develop/schema.json",
