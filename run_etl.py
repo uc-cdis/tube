@@ -14,7 +14,6 @@ def run_import():
     Define the spark context and parse agruments into config
     """
     try:
-        raise Exception("Intentional Exception")
         sql_to_hdfs = SqlToHDFS(config, BaseFormatter())
         stream = sql_to_hdfs.generate_import_all_tables()
         if stream is None:
@@ -24,11 +23,11 @@ def run_import():
     except Exception as ex:
         print("ERROR when running import to hadoop")
         print(traceback.format_exc())
+        raise
 
 
 def run_transform():
     try:
-        raise Exception("Intentional Transform Exception")
         sc = make_spark_context(config)
         translators = interpreter.create_translators(sc, config)
         interpreter.run_transform(translators)
@@ -36,6 +35,7 @@ def run_transform():
     except Exception as ex:
         print("ERROR when running transformation")
         print(traceback.format_exc())
+        raise
 
 
 def config_by_args():
