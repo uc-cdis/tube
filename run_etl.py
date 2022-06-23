@@ -14,6 +14,7 @@ def run_import():
     Define the spark context and parse agruments into config
     """
     try:
+        raise Exception("Intentional Exception")
         sql_to_hdfs = SqlToHDFS(config, BaseFormatter())
         stream = sql_to_hdfs.generate_import_all_tables()
         if stream is None:
