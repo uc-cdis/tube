@@ -375,13 +375,6 @@ class Parser(BaseParser):
                 self.doc_type, child["props"], node_label=child_label
             )
             nodes.append(
-                DirectNode(
-                    child_name,
-                    edge,
-                    props,
-                    sorted_by,
-                    desc_order,
-                    is_child,
-                )
+                DirectNode(child_name, edge, props, sorted_by, desc_order, is_child)
             )
         return nodes

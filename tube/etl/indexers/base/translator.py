@@ -78,7 +78,7 @@ class Translator(object):
         )  # to create the frame for empty node
         return df.mapValues(lambda x: [])
 
-    '''
+    """
         mappings:
          - name: tb
            doc_type: subject
@@ -106,7 +106,8 @@ class Translator(object):
                         - prop: comorbidity_anemia
                           value: any_value
                   
-    '''
+    """
+
     def translate_table(self, table_name, get_zero_frame=None, props=None):
         try:
             rdd, is_empty = self.read_text_files_of_table(

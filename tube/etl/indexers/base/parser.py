@@ -90,10 +90,7 @@ class Parser(object):
                 has_array_agg_fn = p.fn is not None and p.fn in ["set", "list"]
                 array_type_condition = is_array_type or has_array_agg_fn
                 if array_type_condition:
-                    types[p.name] = (
-                        self.select_widest_type(p.type),
-                        1,
-                    )
+                    types[p.name] = (self.select_widest_type(p.type), 1)
                     if p.name not in self.array_types:
                         self.array_types.append(p.name)
                 else:
@@ -196,7 +193,7 @@ class Parser(object):
                 if node_label is not None:
                     a = self.get_possible_properties_types(self.model, node_label)
                     if src == "id":
-                        return str,
+                        return (str,)
                     if a.get(src) == (list,):
                         return self.get_prop_type_of_field_in_dictionary(
                             node_label, src
@@ -253,7 +250,7 @@ class Parser(object):
         return prop
 
     def create_props_from_json(
-        self, doc_name, props_in_json, node_label=None, index=None, is_additional=False,
+        self, doc_name, props_in_json, node_label=None, index=None, is_additional=False
     ):
         res = []
         for p in props_in_json:

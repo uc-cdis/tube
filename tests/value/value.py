@@ -18,8 +18,11 @@ class Value(object):
 
 def value_diff(left, right):
     equal = True
-    if left.names != right.names or (left.val is None and right.val is not None) \
-            or (left.val is not None and right.val is None):
+    if (
+        left.names != right.names
+        or (left.val is None and right.val is not None)
+        or (left.val is not None and right.val is None)
+    ):
         equal = False
 
     diffs = ["attr: left != right"]

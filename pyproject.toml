@@ -41,5 +41,5 @@ moto="1.1.24"
 fence-create = 'bin.fence_create:main'
 
 [build-system]
-requires = ["poetry>=0.12"]
+requires = ["setuptools=36.6.0","poetry>=0.12"]
 build-backend = "poetry.masonry.api"

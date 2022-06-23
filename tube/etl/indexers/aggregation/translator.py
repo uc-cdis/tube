@@ -541,4 +541,8 @@ class Translator(BaseTranslator):
         if self.nested_translator is None:
             return df
         unfiltered_df = self.join_two_dataframe(df, nested_df, how="left_outer")
-        return execute_filter(unfiltered_df, self.parser.filter) if self.parser.filter else unfiltered_df
+        return (
+            execute_filter(unfiltered_df, self.parser.filter)
+            if self.parser.filter
+            else unfiltered_df
+        )
