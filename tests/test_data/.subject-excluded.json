@@ -1,0 +1,887 @@
+[
+    {
+        "cohort_id": 18,
+        "cohort_name": "8e23b92035",
+        "hiv_status": true,
+        "index_date": "Initial Treatment",
+        "primary_site": "Blood",
+        "species": "Mus musculus",
+        "strain": "f4a33fb218",
+        "studies": {
+            "submitter_id": "study_0caa7a2f80"
+        },
+        "study_center": "Bronx",
+        "submitter_id": "subject_b97103f685",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 86,
+        "cohort_name": "de8c4fdc25",
+        "hiv_status": false,
+        "index_date": "Postmenstrual",
+        "primary_site": "Lung",
+        "species": "Sus scrofa",
+        "strain": "7da67a7427",
+        "studies": {
+            "submitter_id": "study_587a3c6eff"
+        },
+        "study_center": "Miami",
+        "submitter_id": "subject_bb8d35682c",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 50,
+        "cohort_name": "08f503d090",
+        "hiv_status": true,
+        "index_date": "Study Enrollment",
+        "primary_site": "Eye",
+        "species": "Mus musculus",
+        "strain": "7d14ec8c97",
+        "studies": {
+            "submitter_id": "study_f2d25ccf3f"
+        },
+        "study_center": "Birmingham",
+        "submitter_id": "subject_224379a40b",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 99,
+        "cohort_name": "d4b4987171",
+        "hiv_status": false,
+        "index_date": "Postmenstrual",
+        "primary_site": "Other and unspecified female genital organs",
+        "species": "Rattus rattus",
+        "strain": "9d326f05cb",
+        "studies": {
+            "submitter_id": "study_017eb6718b"
+        },
+        "study_center": "Miami",
+        "submitter_id": "subject_e79e962a72",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 32,
+        "cohort_name": "cc6da086f9",
+        "hiv_status": true,
+        "index_date": "Study Enrollment",
+        "primary_site": "Lip",
+        "species": "Mustela putorius furo",
+        "strain": "9262de0a8c",
+        "studies": {
+            "submitter_id": "study_17c5a284b3"
+        },
+        "study_center": "Birmingham",
+        "submitter_id": "subject_3b65076830",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 88,
+        "cohort_name": "ff42ee49d2",
+        "hiv_status": true,
+        "index_date": "Vaccine Administration",
+        "primary_site": "Unknown",
+        "species": "Drosophila melanogaster",
+        "strain": "dadd4773b6",
+        "studies": {
+            "submitter_id": "study_5d34354346"
+        },
+        "study_center": "Miami",
+        "submitter_id": "subject_98dee5ab9f",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 72,
+        "cohort_name": "f96abe092c",
+        "hiv_status": true,
+        "index_date": "Postmenstrual",
+        "primary_site": "Adrenal Gland",
+        "species": "Rattus rattus",
+        "strain": "3b6ed0a2b2",
+        "studies": {
+            "submitter_id": "study_babc499be3"
+        },
+        "study_center": "Atlanta",
+        "submitter_id": "subject_c45c7af2fd",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 47,
+        "cohort_name": "a6af46c5d2",
+        "hiv_status": true,
+        "index_date": "Not Specified",
+        "primary_site": "Thyroid gland",
+        "species": "Drosophila melanogaster",
+        "strain": "f96eed4136",
+        "studies": {
+            "submitter_id": "study_223991a7b2"
+        },
+        "study_center": "Pittsburgh",
+        "submitter_id": "subject_c0d1344b90",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 44,
+        "cohort_name": "77f7b57608",
+        "hiv_status": false,
+        "index_date": "Other",
+        "primary_site": "Bone",
+        "species": "Sus scrofa",
+        "strain": "782ac0d7e4",
+        "studies": {
+            "submitter_id": "study_631d14a5ee"
+        },
+        "study_center": "Chicago",
+        "submitter_id": "subject_0cacca0e1d",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 26,
+        "cohort_name": "a4d44acbfa",
+        "hiv_status": false,
+        "index_date": "Vaccine Administration",
+        "primary_site": "Liver",
+        "species": "Homo sapiens",
+        "strain": "fd537f58d3",
+        "studies": {
+            "submitter_id": "study_a9890229da"
+        },
+        "study_center": "San Francisco",
+        "submitter_id": "subject_6460949536",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 11,
+        "cohort_name": "ea04b301a1",
+        "hiv_status": false,
+        "index_date": "Baseline Visit",
+        "primary_site": "Bones, joints and articular cartilage of other and unspecified sites",
+        "species": "Mus musculus",
+        "strain": "fe32b9a14f",
+        "studies": {
+            "submitter_id": "study_631d14a5ee"
+        },
+        "study_center": "Birmingham",
+        "submitter_id": "subject_7aaabc2f05",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 43,
+        "cohort_name": "1fd0d42839",
+        "hiv_status": false,
+        "index_date": "Study Enrollment",
+        "primary_site": "Eye",
+        "species": "Homo sapiens",
+        "strain": "c552a9be2c",
+        "studies": {
+            "submitter_id": "study_6556b5a615"
+        },
+        "study_center": "Bronx",
+        "submitter_id": "subject_5fa248ee7a",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 1,
+        "cohort_name": "703566aa41",
+        "hiv_status": true,
+        "index_date": "Study Enrollment",
+        "primary_site": "Hypopharynx",
+        "species": "Rattus rattus",
+        "strain": "250648c0f5",
+        "studies": {
+            "submitter_id": "study_2d9388fb36"
+        },
+        "study_center": "Miami",
+        "submitter_id": "subject_4ac16b404a",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 80,
+        "cohort_name": "3d5d2e9a2e",
+        "hiv_status": false,
+        "index_date": "Baseline Visit",
+        "primary_site": "Other and unspecified major salivary glands",
+        "species": "Mustela putorius furo",
+        "strain": "2521fbf943",
+        "studies": {
+            "submitter_id": "study_f8aecca0a6"
+        },
+        "study_center": "Washington",
+        "submitter_id": "subject_601943af83",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 2,
+        "cohort_name": "727e72cc0d",
+        "hiv_status": true,
+        "index_date": "Postmenstrual",
+        "primary_site": "Lung",
+        "species": "Sus scrofa",
+        "strain": "bdd7b84de6",
+        "studies": {
+            "submitter_id": "study_f69d40d50f"
+        },
+        "study_center": "Birmingham",
+        "submitter_id": "subject_70e75bf21f",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 98,
+        "cohort_name": "e91204f221",
+        "hiv_status": false,
+        "index_date": "Not Specified",
+        "primary_site": "Trachea",
+        "species": "Drosophila melanogaster",
+        "strain": "7f94299efc",
+        "studies": {
+            "submitter_id": "study_5510b6a651"
+        },
+        "study_center": "Pittsburgh",
+        "submitter_id": "subject_a73bdaad77",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 63,
+        "cohort_name": "678c2b5118",
+        "hiv_status": false,
+        "index_date": "Infection",
+        "primary_site": "Uterus",
+        "species": "Homo sapiens",
+        "strain": "36f93a12ec",
+        "studies": {
+            "submitter_id": "study_67c522c127"
+        },
+        "study_center": "Los Angeles",
+        "submitter_id": "subject_5818f3aef6",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 20,
+        "cohort_name": "0af653b3b7",
+        "hiv_status": true,
+        "index_date": "Vaccine Administration",
+        "primary_site": "Connective, subcutaneous and other soft tissues",
+        "species": "Rattus rattus",
+        "strain": "6fbf3b09d5",
+        "studies": {
+            "submitter_id": "study_f9ad57a0fb"
+        },
+        "study_center": "Bronx",
+        "submitter_id": "subject_1bdcc07656",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 13,
+        "cohort_name": "ff215935e0",
+        "hiv_status": true,
+        "index_date": "First Patient Visit",
+        "primary_site": "Other and unspecified female genital organs",
+        "species": "Rattus rattus",
+        "strain": "ec2e811d8b",
+        "studies": {
+            "submitter_id": "study_f014f04dc5"
+        },
+        "study_center": "Pittsburgh",
+        "submitter_id": "subject_015c5ec387",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 72,
+        "cohort_name": "93d28b8b00",
+        "hiv_status": true,
+        "index_date": "Other",
+        "primary_site": "Other and unspecified major salivary glands",
+        "species": "Rattus rattus",
+        "strain": "053925e661",
+        "studies": {
+            "submitter_id": "study_a9890229da"
+        },
+        "study_center": "Chapel Hill",
+        "submitter_id": "subject_acaa909ec5",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 29,
+        "cohort_name": "e100e5a3c5",
+        "hiv_status": false,
+        "index_date": "Other",
+        "primary_site": "Bone",
+        "species": "Rattus rattus",
+        "strain": "2251858e37",
+        "studies": {
+            "submitter_id": "study_587a3c6eff"
+        },
+        "study_center": "Chapel Hill",
+        "submitter_id": "subject_13681c6d88",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 75,
+        "cohort_name": "ab6bc5f2cb",
+        "hiv_status": true,
+        "index_date": "First Patient Visit",
+        "primary_site": "Soft Tissue",
+        "species": "Sus scrofa",
+        "strain": "9d2e01167f",
+        "studies": {
+            "submitter_id": "study_65238315a7"
+        },
+        "study_center": "San Francisco",
+        "submitter_id": "subject_5427c8dfaf",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 85,
+        "cohort_name": "cdcc393d1e",
+        "hiv_status": true,
+        "index_date": "Diagnosis",
+        "primary_site": "Retroperitoneum and peritoneum",
+        "species": "Mus musculus",
+        "strain": "4633271286",
+        "studies": {
+            "submitter_id": "study_ffacb85998"
+        },
+        "study_center": "Bronx",
+        "submitter_id": "subject_57880f628d",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 76,
+        "cohort_name": "ea93d4aeb9",
+        "hiv_status": false,
+        "index_date": "Vaccine Administration",
+        "primary_site": "Thyroid gland",
+        "species": "Rattus rattus",
+        "strain": "c5221a4e88",
+        "studies": {
+            "submitter_id": "study_0caa7a2f80"
+        },
+        "study_center": "Birmingham",
+        "submitter_id": "subject_4bdd9c155d",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 93,
+        "cohort_name": "19d119f20b",
+        "hiv_status": false,
+        "index_date": "Baseline Visit",
+        "primary_site": "Spinal cord, cranial nerves, and other parts of central nervous system",
+        "species": "Drosophila melanogaster",
+        "strain": "362f51c77b",
+        "studies": {
+            "submitter_id": "study_67c522c127"
+        },
+        "study_center": "Los Angeles",
+        "submitter_id": "subject_3327fab75f",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 31,
+        "cohort_name": "ac14a83b32",
+        "hiv_status": false,
+        "index_date": "Diagnosis",
+        "primary_site": "Rectosigmoid junction",
+        "species": "Sus scrofa",
+        "strain": "cb2df2aeb8",
+        "studies": {
+            "submitter_id": "study_ffacb85998"
+        },
+        "study_center": "Birmingham",
+        "submitter_id": "subject_e932b3d508",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 67,
+        "cohort_name": "6999e7b4f1",
+        "hiv_status": false,
+        "index_date": "Infection",
+        "primary_site": "Soft Tissue",
+        "species": "Rattus rattus",
+        "strain": "02c4d552e7",
+        "studies": {
+            "submitter_id": "study_f8aecca0a6"
+        },
+        "study_center": "Pittsburgh",
+        "submitter_id": "subject_85da47c775",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 99,
+        "cohort_name": "a6bfcae554",
+        "hiv_status": true,
+        "index_date": "Baseline Visit",
+        "primary_site": "Bones, joints and articular cartilage of limbs",
+        "species": "Drosophila melanogaster",
+        "strain": "d098e11f9b",
+        "studies": {
+            "submitter_id": "study_3dced909c7"
+        },
+        "study_center": "Atlanta",
+        "submitter_id": "subject_3776d93c27",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 72,
+        "cohort_name": "12c3c6af3b",
+        "hiv_status": false,
+        "index_date": "First Patient Visit",
+        "primary_site": "Pancreas",
+        "species": "Drosophila melanogaster",
+        "strain": "bfd697bd60",
+        "studies": {
+            "submitter_id": "study_d87f192087"
+        },
+        "study_center": "Brooklyn",
+        "submitter_id": "subject_c0e52d1a73",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 58,
+        "cohort_name": "2c8bd16472",
+        "hiv_status": false,
+        "index_date": "First Patient Visit",
+        "primary_site": "Soft Tissue",
+        "species": "Homo sapiens",
+        "strain": "8be058b024",
+        "studies": {
+            "submitter_id": "study_f014f04dc5"
+        },
+        "study_center": "Pittsburgh",
+        "submitter_id": "subject_8671c2a876",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 31,
+        "cohort_name": "9cb0cc5dec",
+        "hiv_status": false,
+        "index_date": "Vaccine Administration",
+        "primary_site": "Lymph nodes",
+        "species": "Sus scrofa",
+        "strain": "2b665c3b2f",
+        "studies": {
+            "submitter_id": "study_5e01704109"
+        },
+        "study_center": "San Francisco",
+        "submitter_id": "subject_5c1738e8ea",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 54,
+        "cohort_name": "2a6fae298e",
+        "hiv_status": false,
+        "index_date": "Postmenstrual",
+        "primary_site": "Adrenal Gland",
+        "species": "Rattus rattus",
+        "strain": "9d43d1b066",
+        "studies": {
+            "submitter_id": "study_f69d40d50f"
+        },
+        "study_center": "Chicago",
+        "submitter_id": "subject_4badb8c874",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 52,
+        "cohort_name": "2864ff23cb",
+        "hiv_status": true,
+        "index_date": "Vaccine Administration",
+        "primary_site": "Heart, mediastinum, and pleura",
+        "species": "Mustela putorius furo",
+        "strain": "29b6a93144",
+        "studies": {
+            "submitter_id": "study_35bece6c2f"
+        },
+        "study_center": "Los Angeles",
+        "submitter_id": "subject_d2ddf6c8a6",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 72,
+        "cohort_name": "d5c8fc5155",
+        "hiv_status": false,
+        "index_date": "Vaccine Administration",
+        "primary_site": "Soft Tissue",
+        "species": "Mustela putorius furo",
+        "strain": "b6f498a668",
+        "studies": {
+            "submitter_id": "study_038655f5ec"
+        },
+        "study_center": "Atlanta",
+        "submitter_id": "subject_9dd8fb2295",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 44,
+        "cohort_name": "8c99b0ae20",
+        "hiv_status": true,
+        "index_date": "Infection",
+        "primary_site": "Brain",
+        "species": "Mus musculus",
+        "strain": "204f22d9a3",
+        "studies": {
+            "submitter_id": "study_2d9388fb36"
+        },
+        "study_center": "Atlanta",
+        "submitter_id": "subject_de74551675",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 53,
+        "cohort_name": "2fd603689e",
+        "hiv_status": true,
+        "index_date": "Initial Treatment",
+        "primary_site": "Bone Marrow",
+        "species": "Rattus rattus",
+        "strain": "b69c1899c9",
+        "studies": {
+            "submitter_id": "study_6be1e81736"
+        },
+        "study_center": "Miami",
+        "submitter_id": "subject_f6e1215155",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 48,
+        "cohort_name": "fa51a6ef84",
+        "hiv_status": true,
+        "index_date": "Postmenstrual",
+        "primary_site": "Pancreas",
+        "species": "Rattus rattus",
+        "strain": "e4974ef7bf",
+        "studies": {
+            "submitter_id": "study_05e99633c6"
+        },
+        "study_center": "Baltimore",
+        "submitter_id": "subject_30b8c1f0dd",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 0,
+        "cohort_name": "7985499689",
+        "hiv_status": true,
+        "index_date": "Initial Treatment",
+        "primary_site": "Uterus",
+        "species": "Sus scrofa",
+        "strain": "cda96de851",
+        "studies": {
+            "submitter_id": "study_d0575ef861"
+        },
+        "study_center": "Brooklyn",
+        "submitter_id": "subject_e348bf617c",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 67,
+        "cohort_name": "115d75e457",
+        "hiv_status": false,
+        "index_date": "Vaccine Administration",
+        "primary_site": "Other and unspecified urinary organs",
+        "species": "Rattus rattus",
+        "strain": "e7466819d0",
+        "studies": {
+            "submitter_id": "study_430ec5fc17"
+        },
+        "study_center": "Chicago",
+        "submitter_id": "subject_a2f4052924",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 16,
+        "cohort_name": "e18f526c14",
+        "hiv_status": true,
+        "index_date": "First Patient Visit",
+        "primary_site": "Cervix uteri",
+        "species": "Homo sapiens",
+        "strain": "5779045d2e",
+        "studies": {
+            "submitter_id": "study_500409ed84"
+        },
+        "study_center": "San Francisco",
+        "submitter_id": "subject_c4613896c9",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 33,
+        "cohort_name": "ff13ac6a51",
+        "hiv_status": false,
+        "index_date": "First Patient Visit",
+        "primary_site": "Lymph nodes",
+        "species": "Mus musculus",
+        "strain": "8fa7e025bd",
+        "studies": {
+            "submitter_id": "study_6953c82151"
+        },
+        "study_center": "Chicago",
+        "submitter_id": "subject_a915ee0c73",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 35,
+        "cohort_name": "1e9a451bce",
+        "hiv_status": false,
+        "index_date": "Baseline Visit",
+        "primary_site": "Breast",
+        "species": "Mustela putorius furo",
+        "strain": "838b905e98",
+        "studies": {
+            "submitter_id": "study_f8aecca0a6"
+        },
+        "study_center": "San Francisco",
+        "submitter_id": "subject_036869ebdc",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 12,
+        "cohort_name": "99abc7a437",
+        "hiv_status": true,
+        "index_date": "Initial Treatment",
+        "primary_site": "Corpus uteri",
+        "species": "Rattus rattus",
+        "strain": "12d1f6ff67",
+        "studies": {
+            "submitter_id": "study_14db385e1b"
+        },
+        "study_center": "Bronx",
+        "submitter_id": "subject_a27acd8feb",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 26,
+        "cohort_name": "1665614e43",
+        "hiv_status": true,
+        "index_date": "Other",
+        "primary_site": "Hematopoietic and reticuloendothelial systems",
+        "species": "Rattus rattus",
+        "strain": "0b3e29c990",
+        "studies": {
+            "submitter_id": "study_d71d5ca2f4"
+        },
+        "study_center": "Miami",
+        "submitter_id": "subject_a383391f3d",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 17,
+        "cohort_name": "207ba85ad9",
+        "hiv_status": true,
+        "index_date": "Not Specified",
+        "primary_site": "Thyroid",
+        "species": "Mus musculus",
+        "strain": "90bf8bbd22",
+        "studies": {
+            "submitter_id": "study_f16b9ea5fe"
+        },
+        "study_center": "Washington",
+        "submitter_id": "subject_8792cd8649",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 2,
+        "cohort_name": "a57a09bae9",
+        "hiv_status": false,
+        "index_date": "Other",
+        "primary_site": "Unknown primary site",
+        "species": "Rattus rattus",
+        "strain": "d35104ca9c",
+        "studies": {
+            "submitter_id": "study_17849729c7"
+        },
+        "study_center": "Brooklyn",
+        "submitter_id": "subject_83da697cc1",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 4,
+        "cohort_name": "872b8e85ec",
+        "hiv_status": true,
+        "index_date": "Other",
+        "primary_site": "Connective, subcutaneous and other soft tissues",
+        "species": "Sus scrofa",
+        "strain": "57b7969165",
+        "studies": {
+            "submitter_id": "study_02db28f19c"
+        },
+        "study_center": "Los Angeles",
+        "submitter_id": "subject_a69f892d49",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 5,
+        "cohort_name": "19ad76c878",
+        "hiv_status": false,
+        "index_date": "Postmenstrual",
+        "primary_site": "Bones, joints and articular cartilage of other and unspecified sites",
+        "species": "Rattus rattus",
+        "strain": "2074346441",
+        "studies": {
+            "submitter_id": "study_0242b427b3"
+        },
+        "study_center": "Birmingham",
+        "submitter_id": "subject_ef2e3e3e73",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 2,
+        "cohort_name": "410f2c87fe",
+        "hiv_status": true,
+        "index_date": "Diagnosis",
+        "primary_site": "Lip",
+        "species": "Sus scrofa",
+        "strain": "89cf1fbe82",
+        "studies": {
+            "submitter_id": "study_dec814955a"
+        },
+        "study_center": "Pittsburgh",
+        "submitter_id": "subject_59852b2218",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 15,
+        "cohort_name": "c94bf0d87d",
+        "hiv_status": false,
+        "index_date": "Other",
+        "primary_site": "Pyriform sinus",
+        "species": "Sus scrofa",
+        "strain": "3d0ac7191e",
+        "studies": {
+            "submitter_id": "study_038655f5ec"
+        },
+        "study_center": "Miami",
+        "submitter_id": "subject_54d590f2d1",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 57,
+        "cohort_name": "0c4a8b498d",
+        "hiv_status": false,
+        "index_date": "Vaccine Administration",
+        "primary_site": "Pleura",
+        "species": "Mustela putorius furo",
+        "strain": "fb4d7fe892",
+        "studies": {
+            "submitter_id": "study_17849729c7"
+        },
+        "study_center": "Washington",
+        "submitter_id": "subject_c45e41e33f",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 90,
+        "cohort_name": "d8346234c3",
+        "hiv_status": false,
+        "index_date": "Infection",
+        "primary_site": "Brain",
+        "species": "Homo sapiens",
+        "strain": "8941372c7f",
+        "studies": {
+            "submitter_id": "study_587a3c6eff"
+        },
+        "study_center": "Atlanta",
+        "submitter_id": "subject_7ede054691",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 15,
+        "cohort_name": "e24fde8a77",
+        "hiv_status": true,
+        "index_date": "Study Enrollment",
+        "primary_site": "Bronchus and lung",
+        "species": "Rattus rattus",
+        "strain": "2891fd678c",
+        "studies": {
+            "submitter_id": "study_06af10b4de"
+        },
+        "study_center": "Baltimore",
+        "submitter_id": "subject_24d39e82e8",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 43,
+        "cohort_name": "d8f9e7df5d",
+        "hiv_status": false,
+        "index_date": "Postmenstrual",
+        "primary_site": "Colorectal",
+        "species": "Rattus rattus",
+        "strain": "60d0703792",
+        "studies": {
+            "submitter_id": "study_05e99633c6"
+        },
+        "study_center": "Atlanta",
+        "submitter_id": "subject_a54dbc0ede",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 48,
+        "cohort_name": "31b0ba066f",
+        "hiv_status": false,
+        "index_date": "First Patient Visit",
+        "primary_site": "Corpus uteri",
+        "species": "Rattus rattus",
+        "strain": "f3f3b5f152",
+        "studies": {
+            "submitter_id": "study_f8aecca0a6"
+        },
+        "study_center": "Washington",
+        "submitter_id": "subject_3acb46b021",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 44,
+        "cohort_name": "c68650fdd3",
+        "hiv_status": false,
+        "index_date": "Baseline Visit",
+        "primary_site": "Unknown primary site",
+        "species": "Drosophila melanogaster",
+        "strain": "7de3fdca60",
+        "studies": {
+            "submitter_id": "study_4572279d80"
+        },
+        "study_center": "Birmingham",
+        "submitter_id": "subject_bf3c8fb892",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 27,
+        "cohort_name": "28dec6276f",
+        "hiv_status": false,
+        "index_date": "Vaccine Administration",
+        "primary_site": "Uterus",
+        "species": "Sus scrofa",
+        "strain": "dae10fb4cc",
+        "studies": {
+            "submitter_id": "study_5d34354346"
+        },
+        "study_center": "Brooklyn",
+        "submitter_id": "subject_ff6bef4a99",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 34,
+        "cohort_name": "65d3b7cd81",
+        "hiv_status": false,
+        "index_date": "Initial Treatment",
+        "primary_site": "Pyriform sinus",
+        "species": "Homo sapiens",
+        "strain": "81215456a1",
+        "studies": {
+            "submitter_id": "study_9fc61e79af"
+        },
+        "study_center": "Baltimore",
+        "submitter_id": "subject_0870542665",
+        "type": "subject"
+    },
+    {
+        "cohort_id": 96,
+        "cohort_name": "859aa33dd5",
+        "hiv_status": true,
+        "index_date": "Not Specified",
+        "primary_site": "Eye",
+        "species": "Mus musculus",
+        "strain": "2ea6df5ec8",
+        "studies": {
+            "submitter_id": "study_14db385e1b"
+        },
+        "study_center": "Chicago",
+        "submitter_id": "subject_399301bc26",
+        "type": "subject"
+    }
+]
