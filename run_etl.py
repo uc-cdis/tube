@@ -24,11 +24,11 @@ def run_import():
     except Exception as ex:
         print("ERROR when running import to hadoop")
         print(traceback.format_exc())
-        raise
 
 
 def run_transform():
     try:
+        raise Exception("Intentional Transform Exception")
         sc = make_spark_context(config)
         translators = interpreter.create_translators(sc, config)
         interpreter.run_transform(translators)
@@ -36,7 +36,6 @@ def run_transform():
     except Exception as ex:
         print("ERROR when running transformation")
         print(traceback.format_exc())
-        raise
 
 
 def config_by_args():
