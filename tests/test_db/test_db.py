@@ -9,6 +9,7 @@ from tube.utils.db import get_db_cursor, create_default_db_connection
 import tube.settings as config
 
 
+@pytest.mark.ssl
 def test_create_default_db_connection_ssl():
     with patch.object(config, "DB_USE_SSL", True):
         cur = create_default_db_connection()
