@@ -114,6 +114,7 @@ class Writer(SparkBase):
             self.reset_status()
         except Exception as e:
             print(e)
+            raise
 
     def write_dataframe(self, df, index, doc_type, types):
         self.reset_status()
@@ -147,3 +148,4 @@ class Writer(SparkBase):
             self.reset_status()
         except Exception as e:
             print(e)
+            raise
