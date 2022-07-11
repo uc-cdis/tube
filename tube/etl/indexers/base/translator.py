@@ -129,6 +129,7 @@ class Translator(object):
         except Exception as ex:
             print("HAPPEN WITH NODE: {}".format(table_name))
             print(ex)
+            raise
 
     def get_cols_from_node(self, node_name, props, nested_props, df, key_name=None):
         col_names = [p.src for p in props]
@@ -188,6 +189,7 @@ class Translator(object):
         except Exception as ex:
             print("HAPPEN WITH NODE: {}".format(node_tbl_name))
             print(ex)
+            raise
 
     def get_empty_dataframe_with_name(self, name, key_name=None):
         if name is None and key_name is None:
