@@ -91,7 +91,8 @@ class Parser(object):
                 array_type_condition = is_array_type or has_array_agg_fn
                 if array_type_condition:
                     types[p.name] = (self.select_widest_type(p.type), 1)
-                    self.array_types.append(p.name)
+                    if p.name not in self.array_types:
+                        self.array_types.append(p.name)
                 else:
                     types[p.name] = (self.select_widest_type(p.type), 0)
         self.prop_types = types
@@ -190,7 +191,14 @@ class Parser(object):
                 return (float,)
             elif fn in ["set", "list"]:
                 if node_label is not None:
-                    return self.get_prop_type_of_field_in_dictionary(node_label, src)
+                    a = self.get_possible_properties_types(self.model, node_label)
+                    if src == "id":
+                        return (str,)
+                    if a.get(src) == (list,):
+                        return self.get_prop_type_of_field_in_dictionary(
+                            node_label, src
+                        )
+                    return a.get(src)
                 return (str,)
             return (str,)
         elif index is not None:
@@ -205,7 +213,10 @@ class Parser(object):
                 )
             if src == "id":
                 return (str,)
-            return self.get_prop_type_of_field_in_dictionary(node_label, src)
+            a = self.get_possible_properties_types(self.model, node_label)
+            if a.get(src) == (list,):
+                return self.get_prop_type_of_field_in_dictionary(node_label, src)
+            return a.get(src)
 
     @staticmethod
     def get_src_name(props):

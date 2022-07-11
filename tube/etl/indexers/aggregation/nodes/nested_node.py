@@ -1,4 +1,5 @@
 from tube.etl.indexers.base.node import BaseNode
+from tube.etl.indexers.base.logic import create_filter_from_json
 
 
 class NestedNode(BaseNode):
@@ -12,6 +13,7 @@ class NestedNode(BaseNode):
         parent_node=None,
         parent_edge_up_tbl=None,
         level=None,
+        json_filter=None,
     ):
         super(NestedNode, self).__init__()
         props = [] if props is None else props
@@ -28,6 +30,7 @@ class NestedNode(BaseNode):
         self.non_leaf_children_count = 0
         self.children_ready_to_join = []
         self.children_ready_to_nest_types = []
+        self.filter = create_filter_from_json(json_filter)
 
     def __key__(self):
         if self.parent_edge_up_tbl is not None and len(self.parent_edge_up_tbl) > 0:

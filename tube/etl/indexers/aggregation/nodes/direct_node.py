@@ -1,11 +1,12 @@
+from tube.etl.indexers.base.node import BaseNode
 from tube.utils.dd import object_to_string
-from tube.etl.indexers.base.prop import PropFactory
 
 
-class DirectNode(object):
+class DirectNode(BaseNode):
     def __init__(
         self, name, edge, props, sorted_by=None, desc_order=False, props_from_child=True
     ):
+        super().__init__()
         self.tbl_name = name
         self.edge = edge
         self.props = props
