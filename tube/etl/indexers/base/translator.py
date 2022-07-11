@@ -78,24 +78,54 @@ class Translator(object):
         )  # to create the frame for empty node
         return df.mapValues(lambda x: [])
 
+    """
+        mappings:
+         - name: tb
+           doc_type: subject
+           type: aggregator
+           root: subject
+           props:
+             - name: submitter_id
+             - name: project_id
+             - name: species
+             - name: amikacin_res_phenotype
+             - name: capreomycin_res_phenotype
+           flatten_props: 
+             - path: diagnoses
+               props:
+                 - name: comorbidity_anemia
+                 - name: comorbidity_renal_disease
+               filters:
+                   - op: and
+                     props:
+                        - prop: update_date
+                          fn: min/max/greater/less/equal/
+                          value: update_date_value
+                        - prop: type_of_resistance
+                          value: type_of_resistance_value
+                        - prop: comorbidity_anemia
+                          value: any_value
+                  
+    """
+
     def translate_table(self, table_name, get_zero_frame=None, props=None):
         try:
-            df, is_empty = self.read_text_files_of_table(
+            rdd, is_empty = self.read_text_files_of_table(
                 table_name, self.get_frame_zero_rdd
             )
             if is_empty:
-                return df
-            df = df.map(extract_metadata_to_tuple)
+                return rdd
+            rdd = rdd.map(extract_metadata_to_tuple)
 
             if get_zero_frame:
-                if df.isEmpty():
-                    df = self.sc.parallelize(
+                if rdd.isEmpty():
+                    rdd = self.sc.parallelize(
                         [("__BLANK_ID__", "__BLANK_VALUE__")]
                     )  # to create the frame for empty node
-                return df.mapValues(lambda x: [])
+                return rdd.mapValues(lambda x: [])
             if props is not None:
-                return self.get_props_from_data_row(df, props)
-            return df
+                return self.get_props_from_data_row(rdd, props)
+            return rdd
         except Exception as ex:
             print("HAPPEN WITH NODE: {}".format(table_name))
             print(ex)

@@ -2,6 +2,7 @@ from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from tube.etl.indexers.aggregation.nested.parser import Parser
 from tube.utils.general import get_node_id_name
 from pyspark.sql.functions import struct, collect_list
+from tube.etl.indexers.base.logic import execute_filter
 
 
 class Translator(BaseTranslator):
@@ -29,6 +30,8 @@ class Translator(BaseTranslator):
         while i < len(queue):
             df = self.collect_node(queue[i], queue)
             if df is not None:
+                if queue[i].filter is not None:
+                    df = execute_filter(df, queue[i].filter)
                 self.collected_node_dfs[queue[i].name] = df
             i += 1
         return self.collected_node_dfs[queue[len(queue) - 1].name]

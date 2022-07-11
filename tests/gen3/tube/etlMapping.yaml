@@ -1,8 +1,22 @@
+# Where to put the filter class (in Prop, Node, or Index
+# WHen should we perform the filter
 mappings:
   - name: etl
     doc_type: subject
     type: aggregator
     root: subject
+    filter:
+      op: or
+      logics:
+        - prop: diagnoses.classification_of_tumor
+          op: contains
+          value: metastasis
+        - prop: diagnoses.classification_of_tumor
+          op: contains
+          value: other
+        - prop: diagnoses.classification_of_tumor
+          op: contains
+          value: Unknown
     props:
       - name: submitter_id
       - name: project_id
@@ -37,6 +51,14 @@ mappings:
           - name: tumor_grade
           - name: tumor_stage
           - name: type_of_resistance
+          - name: classification_of_tumor
+        nested_props:
+          - name: treatments
+            path: treatments
+            props:
+              - name: year_of_treatment
+              - name: treatment_outcome
+              - name: treatment_type
     aggregated_props:
       - name: _follow_ups_count
         path: follow_ups
@@ -75,7 +97,11 @@ mappings:
         src: regimen_or_line_of_therapy
         path: diagnoses.treatments
         fn: set
-      - name: _type_of_resistances
+      - name: _type_of_resistances_female_failed
+        src: type_of_resistance
+        path: diagnoses
+        fn: set
+      - name: _type_of_resistances_male_cured
         src: type_of_resistance
         path: diagnoses
         fn: set

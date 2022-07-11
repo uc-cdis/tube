@@ -1,8 +1,10 @@
+from tube.etl.indexers.base.logic import CompoundLogic, SimpleLogic
 from tube.utils.dd import object_to_string
 
 
-class BaseNode(object):
+class BaseNode:
     def __init__(self):
+        super(BaseNode, self).__init__()
         self.children = set([])
         self.no_children_to_map = 0
 
@@ -12,3 +14,8 @@ class BaseNode(object):
 
     def __str__(self):
         return object_to_string(self)
+
+
+# SELECT a, b, count(a), sum(b)
+# FROM table_t t
+# WHERE t.id = something

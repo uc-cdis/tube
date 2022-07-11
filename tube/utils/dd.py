@@ -18,7 +18,7 @@ def init_dictionary(url):
 
 def get_edge_table(models, node_label, edge_name):
     """
-    :param models: the model which node and edge belong to
+    :param models: the model to which node and edge belong to
     :param node_label: the label of a node
     :param edge_name: the back_ref label of an edge
     :return: (label of the source node, table name of edge specified by edge_name)
