@@ -190,16 +190,12 @@ class Parser(object):
             if fn in ["count", "sum", "min", "max"]:
                 return (float,)
             elif fn in ["set", "list"]:
-                if node_label is not None:
-                    a = self.get_possible_properties_types(self.model, node_label)
-                    if src == "id":
-                        return (str,)
-                    if a.get(src) == (list,):
-                        return self.get_prop_type_of_field_in_dictionary(
-                            node_label, src
-                        )
-                    return a.get(src)
-                return (str,)
+                if node_label is None or src == "id":
+                    return (str,)
+                a = self.get_possible_properties_types(self.model, node_label)
+                if a.get(src) == (list,):
+                    return self.get_prop_type_of_field_in_dictionary(node_label, src)
+                return a.get(src)
             return (str,)
         elif index is not None:
             index_prop = PropFactory.get_prop_by_name(index, src)

@@ -12,16 +12,11 @@ class ESValue(Value):
         self.val, self.length = self.value()
 
     def __getattr__(self, item):
-        if self.val is None:
-            return None
-        return self.val.__getattr__(item) if item in self.val else None
+        return self.val.__getattr__(item) if self.val and item in self.val else None
 
     def value(self):
         results = get_item_from_elasticsearch(
             self.parser.name, self.doc_type, self.submitter_id
         )
-        result_length = len(results)
-        if len(results) == 0:
-            return None, 0
-        result = results[0]
-        return result, result_length
+        result = results[0] if len(results) > 0 else None
+        return result, len(results)
