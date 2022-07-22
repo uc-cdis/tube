@@ -31,7 +31,6 @@ from tube.utils.general import (
     PROJECT_CODE,
     PROGRAM_NAME,
 )
-from pyspark.sql.functions import col, array_contains, expr
 from .parser import Parser
 from .nested.translator import Translator as NestedTranslator
 from .lambdas import sliding
@@ -538,11 +537,6 @@ class Translator(BaseTranslator):
             else None
         )
         df = super(Translator, self).translate_final()
-        if self.nested_translator is None:
-            return df
-        unfiltered_df = self.join_two_dataframe(df, nested_df, how="left_outer")
-        return (
-            execute_filter(unfiltered_df, self.parser.filter)
-            if self.parser.filter
-            else unfiltered_df
-        )
+        if self.nested_translator is not None:
+            df = self.join_two_dataframe(df, nested_df, how="left_outer")
+        return execute_filter(df, self.parser.filter) if self.parser.filter else df

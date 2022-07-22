@@ -1,5 +1,3 @@
-# Where to put the filter class (in Prop, Node, or Index
-# WHen should we perform the filter
 mappings:
   - name: etl
     doc_type: subject
