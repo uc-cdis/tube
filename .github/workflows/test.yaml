@@ -39,7 +39,7 @@ jobs:
       # For more information, see https://docs.npmjs.com/cli/ci.html
       - name: Make dir cor compose-etl
         working-directory: ..
-        run: git clone https://github.com/uc-cdis/compose-etl.git --branch feat/build --single-branch
+        run: git clone https://github.com/uc-cdis/compose-etl.git --branch feat/spark3 --single-branch
       - name: Get all files
         run: ls ..
       - name: Get all files
@@ -63,13 +63,12 @@ jobs:
       - name: change max_map_count
         working-directory: ../compose-etl
         run: sudo sysctl -w vm.max_map_count=262144
-      - name: Install python 3.7
+      - name: Installation
         run: |
-          sudo add-apt-repository ppa:deadsnakes/ppa && sudo apt-get update
-          sudo apt-get -y install python3.7
-          sudo ln -s -f $(which python3.7) /usr/bin/python
-          sudo ln -s -f $(which python3.7) /usr/bin/python3
-          sudo apt-get -y install python3-pip python3.7-distutils
+          sudo apt-get -y install python3.9
+          sudo ln -s -f $(which python3.9) /usr/bin/python
+          sudo ln -s -f $(which python3.9) /usr/bin/python3
+          sudo apt-get -y install python3-pip python3.9-distutils
           sudo ln -s -f $(which pip3) /usr/bin/pip
           pip install --upgrade poetry
           poetry config virtualenvs.create false

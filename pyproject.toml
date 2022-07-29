@@ -11,7 +11,7 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.9"
 cdislogging = "1.1.1"
 cryptography = "^2.1.2"
 dictionaryutils = "^3.0.2"
@@ -23,7 +23,7 @@ hdfs = "2.7.0"
 psycopg2-binary="2.9.3"
 psqlgraph = "3.0.1"
 py2neo = "4.3.0"
-pyspark = "2.4.8"
+pyspark = "3.3.0"
 requests = "^2.20.0"
 setuptools = "36.6.0"
 six = "1.12.0"

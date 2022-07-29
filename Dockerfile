@@ -1,5 +1,5 @@
 # To check running container: docker exec -it tube /bin/bash
-FROM  ubuntu:20.04
+FROM quay.io/cdis/python:python3.9-buster-stable
 
 ENV DEBIAN_FRONTEND=noninteractive \
     SQOOP_VERSION="1.4.7" \
@@ -12,18 +12,15 @@ ENV SQOOP_INSTALLATION_URL="http://archive.apache.org/dist/sqoop/${SQOOP_VERSION
     SQOOP_HOME="/sqoop" \
     HADOOP_HOME="/hadoop" \
     ES_HADOOP_HOME="/es-hadoop" \
-    JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/"
+    JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/"
 
 RUN mkdir -p /usr/share/man/man1
 RUN mkdir -p /usr/share/man/man7
 
-RUN apt-get update && apt-get -y install software-properties-common
-RUN add-apt-repository ppa:deadsnakes/ppa
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
     software-properties-common \
     build-essential \
-    openjdk-8-jdk-headless \
+    openjdk-11-jdk \
     # dependency for pyscopg2 - which is dependency for sqlalchemy postgres engine
     libpq-dev \
     postgresql-client \
@@ -42,15 +39,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get --only-upgrade install libpq-dev
-
-RUN add-apt-repository ppa:deadsnakes/ppa && apt-get update
-
-RUN apt-get -y install python3.7
-RUN ln -s -f $(which python3.7) /usr/bin/python
-RUN ln -s -f $(which python3.7) /usr/bin/python3
-
-RUN apt-get -y install python3-pip python3.7-distutils
-RUN ln -s -f $(which pip3) /usr/bin/pip
 
 RUN pip install --upgrade poetry
 
