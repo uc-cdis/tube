@@ -57,8 +57,11 @@ class Parser(BaseParser):
         self.nest_leaves = []
 
         self.aggregated_nodes = []
-        if "filter" in self.mapping:
-            self.filter = create_filter_from_json(self.mapping.get("filter"))
+        self.filter = (
+            create_filter_from_json(self.mapping.get("filter"))
+            if "filter" in self.mapping
+            else None
+        )
         if "aggregated_props" in self.mapping:
             self.aggregated_nodes = self.get_aggregation_nodes()
         self.joining_nodes = (

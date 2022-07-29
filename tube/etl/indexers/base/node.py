@@ -1,4 +1,3 @@
-from tube.etl.indexers.base.logic import CompoundLogic, SimpleLogic
 from tube.utils.dd import object_to_string
 
 
@@ -14,8 +13,3 @@ class BaseNode:
 
     def __str__(self):
         return object_to_string(self)
-
-
-# SELECT a, b, count(a), sum(b)
-# FROM table_t t
-# WHERE t.id = something
