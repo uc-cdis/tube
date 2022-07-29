@@ -16,7 +16,11 @@
     psql -U postgres -c "create database metadata_db;"
     psql -U postgres -f tests/metadata_db.sql metadata_db
     ```
-* For the next two steps you need the location in which postgres config files are located, say `<PG_HOME>`. It can be retrieved by running the following command 
+* Sometimes, there could be issues connecting to psql database which can be identified and fixed by looking at [postgres.conf](https://www.postgresql.org/docs/8.2/runtime-config-connection.html) and [pg_hba.conf](https://www.postgresql.org/docs/8.2/auth-pg-hba-conf.html) files.
+
+> Note: The next two steps may be used as a reference.
+
+*  The location of these postgres config files(say `<PG_HOME>`)  can be retrieved by running the following command 
     ```bash 
     psql -U postgres -c 'SHOW config_file'
     ```
@@ -26,9 +30,7 @@
     sudo sed -i "s|# DO NOT DISABLE!|host all all 0.0.0.0/0 trust\n\n# DO NOT DISABLE!|g" <PG_HOME>/pg_hba.conf
     ```
     * For Mac users, the first argument for `sed -i` is supposed to be an empty string since Mac uses BSD based sed which [is different from GNU based sed](https://unix.stackexchange.com/questions/401905/bsd-sed-vs-gnu-sed-and-i)
-    * More info about the config files can be found here 
-        * [pg_hba.conf](https://www.postgresql.org/docs/8.2/auth-pg-hba-conf.html)
-        * [postgres.conf](https://www.postgresql.org/docs/8.2/runtime-config-connection.html)
+    
 * After updating the above config files [restart postgres service](https://sqlserverguides.com/restart-postgres/) .
 
 
