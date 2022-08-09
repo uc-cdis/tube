@@ -4,7 +4,7 @@ FROM quay.io/cdis/python:python3.9-buster-stable
 ENV DEBIAN_FRONTEND=noninteractive \
     SQOOP_VERSION="1.4.7" \
     HADOOP_VERSION="3.3.2" \
-    ES_HADOOP_VERSION="6.4.0"
+    ES_HADOOP_VERSION="8.3.3"
 
 ENV SQOOP_INSTALLATION_URL="http://archive.apache.org/dist/sqoop/${SQOOP_VERSION}/sqoop-${SQOOP_VERSION}.bin__hadoop-2.6.0.tar.gz" \
     HADOOP_INSTALLATION_URL="http://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz" \

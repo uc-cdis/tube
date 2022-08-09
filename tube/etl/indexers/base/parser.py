@@ -1,6 +1,15 @@
 from tube.utils.general import get_node_id_name
+from tube.utils.dd import get_properties_types, get_node_table_name
+from .node import BaseRootNode
 from ..base.prop import PropFactory
-from tube.utils.dd import get_properties_types
+from pyspark.sql.types import (
+    StructType,
+    StructField,
+    StringType,
+    ArrayType,
+    IntegerType,
+    FloatType,
+)
 
 
 class Parser(object):
@@ -9,16 +18,30 @@ class Parser(object):
     """
 
     def __init__(self, dictionary, mapping, model):
+        self.prop_types_from_dictionary = {}
         self.dictionary = dictionary
         self.mapping = mapping
         self.model = model
         self.name = mapping["name"]
-        self.root = mapping["root"]
         self.doc_type = mapping["doc_type"]
+        if (
+            mapping["root"] is not None
+            and mapping["root"] != "None"
+            and ("props" in mapping or "nested_props" in mapping)
+        ):
+            props = self.mapping["props"] if "props" in mapping else []
+            self.root = BaseRootNode(
+                name=mapping["root"],
+                tbl_name=get_node_table_name(model, mapping["root"]),
+                props=self.create_props_from_json(
+                    self.doc_type, props, node_label=mapping["root"]
+                ),
+            )
+        else:
+            self.root = None
         self.joining_nodes = []
         self.additional_props = []
         self.array_types = []
-        self.prop_types_from_dictionary = {}
         PropFactory.adding_prop(
             self.doc_type,
             get_node_id_name(self.doc_type),
@@ -230,6 +253,8 @@ class Parser(object):
         value_mappings = p.get("value_mappings", [])
         src = p["src"] if "src" in p else p["name"]
         fn = p.get("fn")
+        if src is None and fn != "count":
+            src = p["name"]
 
         prop_type = self.get_prop_type(fn, src, node_label=node_label, index=index)
         prop = PropFactory.adding_prop(
@@ -278,3 +303,22 @@ class Parser(object):
             just_assigned = new_assigned
             assigned_levels = assigned_levels.union(new_assigned)
             level += 1
+    def get_hadoop_type(self, prop):
+        if prop.fn is not None and prop.fn in ["list", "set"]:
+            return ArrayType(StringType())
+        if prop.type == (float,):
+            return FloatType()
+        if prop.type == (str,):
+            return StringType()
+        if prop.type == (int,):
+            return IntegerType()
+        return StringType()
+
+    def get_hadoop_type_ignore_fn(self, prop):
+        if prop.type == (float,):
+            return FloatType()
+        if prop.type == (str,):
+            return StringType()
+        if prop.type == (int,):
+            return IntegerType()
+        return StringType()

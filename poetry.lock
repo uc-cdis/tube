@@ -22,7 +22,7 @@ tests_no_zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>
 
 [[package]]
 name = "avro"
-version = "1.11.0"
+version = "1.11.1"
 description = "Avro is a serialization and RPC framework."
 category = "main"
 optional = false
@@ -174,7 +174,7 @@ python-versions = "*"
 
 [[package]]
 name = "coverage"
-version = "6.4.2"
+version = "6.4.3"
 description = "Code coverage measurement for Python"
 category = "dev"
 optional = false
@@ -712,6 +712,17 @@ pandas_on_spark = ["numpy (>=1.15)", "pandas (>=1.0.5)", "pyarrow (>=1.0.0)"]
 sql = ["pandas (>=1.0.5)", "pyarrow (>=1.0.0)"]
 
 [[package]]
+name = "pyspark-stubs"
+version = "2.3.0.post2"
+description = "A collection of the Apache Spark stub files"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+pyspark = ">=2.3.0"
+
+[[package]]
 name = "pytest"
 version = "5.4.3"
 description = "pytest: simple powerful testing with Python"
@@ -933,14 +944,12 @@ python-versions = ">=3.4"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "e161075d1178eb9aa545d7060383677600aa3d569ae30fa5d262d62e1b0b20ef"
+content-hash = "c69f44014c35e4ce5ddaefb3cd0e62d7388200b8a28143809aca3cb46b293ea8"
 
 [metadata.files]
 atomicwrites = []
 attrs = []
-avro = [
-    {file = "avro-1.11.0.tar.gz", hash = "sha256:1206365cc30ad561493f735329857dd078533459cee4e928aec2505f341ce445"},
-]
+avro = []
 aws-xray-sdk = []
 boto = [
     {file = "boto-2.49.0-py2.py3-none-any.whl", hash = "sha256:147758d41ae7240dc989f0039f27da8ca0d53734be0eb869ef16e3adcfa462e8"},
@@ -1314,6 +1323,7 @@ pyrsistent = [
     {file = "pyrsistent-0.18.1.tar.gz", hash = "sha256:d4d61f8b993a7255ba714df3aca52700f8125289f84f704cf80916517c46eb96"},
 ]
 pyspark = []
+pyspark-stubs = []
 pytest = [
     {file = "pytest-5.4.3-py3-none-any.whl", hash = "sha256:5c0db86b698e8f170ba4582a492248919255fcd4c79b1ee64ace34301fb589a1"},
     {file = "pytest-5.4.3.tar.gz", hash = "sha256:7979331bfcba207414f5e1263b5a0f8f521d0f457318836a7355531ed1a4c7d8"},

@@ -7,12 +7,14 @@ from .lambdas import (
     get_props,
     get_props_empty_values,
     get_number,
+    f_collect_list_udf,
+    f_collect_set_udf,
 )
 from tube.utils.spark import save_rdd_of_dataframe, get_all_files, save_rdds
 from pyspark.sql.context import SQLContext
 from pyspark.sql.types import StructType, StructField, StringType
 from tube.utils.general import get_node_id_name
-from pyspark.sql.functions import collect_list, col
+from pyspark.sql.functions import col, min, sum, count, collect_set, collect_list
 
 from .prop import PropFactory
 from tube.etl.indexers.base.lambdas import (
@@ -102,13 +104,18 @@ class Translator(object):
             raise
 
     def get_cols_from_node(self, node_name, props, nested_props, df, key_name=None):
-        col_names = [p.src for p in props]
+        node_id_name = get_node_id_name(node_name)
+        for p in props:
+            if p.src == "id":
+                p.src = get_node_id_name(node_name)
+            if p.name == key_name:
+                p.src = get_node_id_name(node_name)
+        col_srcs = [p.src for p in props]
+        col_aliases = [p.name for p in props]
         cols = []
         for p in props:
             if p.src not in df.schema.names:
                 continue
-            if p.src == "id":
-                cols.append(col(get_node_id_name(node_name)).alias(p.name))
             elif (
                 p.name in self.mapping_dictionary
                 and self.mapping_broadcasted is not None
@@ -122,9 +129,9 @@ class Translator(object):
                 cols.append(col(p.src).alias(p.name))
         for p in nested_props:
             cols.append(col(p))
-        if "id" not in col_names and key_name is None:
+        if "id" not in col_srcs and node_id_name not in col_srcs and key_name is None:
             cols.append(get_node_id_name(node_name))
-        elif key_name is not None:
+        elif key_name not in col_aliases and key_name is not None:
             cols.append(key_name)
         return cols
 
@@ -237,6 +244,27 @@ class Translator(object):
             values[p.src] = v
 
         return df.mapValues(get_props(names, values))
+
+    def reducer_to_agg_func_expr(self, func_name, value, alias=None, is_merging=False):
+        col_alias = alias if alias is not None else value
+        if func_name == "count":
+            if is_merging:
+                return sum(col(value)).alias(col_alias)
+            return count(col(value)).alias(col_alias)
+        if func_name == "sum":
+            return sum(col(value)).alias(col_alias)
+        if func_name == "set":
+            if is_merging:
+                return f_collect_set_udf(col(value)).alias(col_alias)
+            return collect_set(col(value)).alias(col_alias)
+        if func_name == "list":
+            if is_merging:
+                return f_collect_list_udf(col(value)).alias(col_alias)
+            return collect_list(col(value)).alias(col_alias)
+        if func_name == "min":
+            return min(col(value)).alias(col_alias)
+        if func_name == "max":
+            return min(col(value)).alias(col_alias)
 
     def get_props_from_df(self, df, props):
         if df.isEmpty():
