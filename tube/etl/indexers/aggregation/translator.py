@@ -35,7 +35,13 @@ from .parser import Parser
 from .nested.translator import Translator as NestedTranslator
 from .lambdas import sliding
 from tube.etl.indexers.base.logic import execute_filter
-from pyspark.sql.types import StructType, StructField, IntegerType, StringType, ArrayType
+from pyspark.sql.types import(
+    StructType,
+    StructField,
+    IntegerType,
+    StringType,
+    ArrayType
+)
 
 COMPOSITE_JOINING_FIELD = "_joining_keys_"
 
@@ -76,23 +82,32 @@ def create_composite_field_from_joining_fields(df, id_fields, key_id):
 
 
 def get_normal_frame_schema():
-    return StructType([
-        StructField("guid", StringType(), False),
-        StructField("agg", ArrayType(
-            StructType([
-                StructField("fn", StringType(), False),
-                StructField("field_id", IntegerType(), False),
-                StructField("arr", ArrayType(StringType()))
-            ])
-        ))
-    ])
+    return StructType(
+        [
+            StructField("guid", StringType(), False),
+            StructField(
+                "agg",
+                ArrayType(
+                    StructType(
+                        [
+                            StructField("fn", StringType(), False),
+                            StructField("field_id", IntegerType(), False),
+                            StructField("arr", ArrayType(StringType()))
+                        ]
+                    )
+                ),
+            ),
+        ]
+    )
 
 
 def get_edge_schema():
-    return StructType([
-        StructField("guid", StringType(), False),
-        StructField("a_guid", StringType(), False)
-    ])
+    return StructType(
+        [
+            StructField("guid", StringType(), False),
+            StructField("a_guid", StringType(), False),
+        ]
+    )
 
 
 class Translator(BaseTranslator):
@@ -200,9 +215,8 @@ class Translator(BaseTranslator):
         temp_rdd = temp_df.rdd
 
         frame_zero = get_frame_zero(child.reducers)
-        temp_rdd = (
-            temp_rdd.map(lambda x: (x[1], x[2]))
-            .mapValues(lambda x: x if x is not None else frame_zero)
+        temp_rdd = temp_rdd.map(lambda x: (x[1], x[2])).mapValues(
+            lambda x: x if x is not None else frame_zero
         )
         temp_rdd = temp_rdd.aggregateByKey(
             frame_zero, seq_aggregate_with_reducer, merge_aggregate_with_reducer
@@ -452,7 +466,9 @@ class Translator(BaseTranslator):
         return df
 
     def translate(self):
-        root_df = self.translate_table(self.parser.root.tbl_name, props=self.parser.props)
+        root_df = self.translate_table(
+            self.parser.root.tbl_name, props=self.parser.props
+        )
         root_df = self.translate_special(root_df)
         root_df = self.translate_parent(root_df)
         root_df = self.get_direct_children(root_df)

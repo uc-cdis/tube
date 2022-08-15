@@ -303,6 +303,7 @@ class Parser(object):
             just_assigned = new_assigned
             assigned_levels = assigned_levels.union(new_assigned)
             level += 1
+
     def get_hadoop_type(self, prop):
         if prop.fn is not None and prop.fn in ["list", "set"]:
             return ArrayType(StringType())

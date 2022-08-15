@@ -11,7 +11,15 @@ from .parser import Parser
 from .nested.translator import Translator as NestedTranslator
 from tube.utils.dd import get_node_table_name
 from tube.etl.indexers.base.logic import execute_filter
-from pyspark.sql.functions import sort_array, struct, collect_list, col, lit, sum, concat_ws
+from pyspark.sql.functions import (
+    col,
+    collect_list,
+    concat_ws,
+    lit,
+    sort_array,
+    struct,
+    sum
+)
 
 
 def prop_to_aggregated_fn(col_name, fn):
@@ -383,7 +391,9 @@ class Translator(BaseTranslator):
         return df
 
     def walk_through_graph(self, root_id, p):
-        df = self.translate_table_to_dataframe(self.parser.root, props=[self.parser.get_prop_by_name(root_id)])
+        df = self.translate_table_to_dataframe(
+            self.parser.root, props=[self.parser.get_prop_by_name(root_id)]
+        )
         src = self.parser.root
         n = p.head
         expr = []
@@ -394,17 +404,15 @@ class Translator(BaseTranslator):
             )
             cur_props = n.props
             for prop in cur_props:
-                expr.append(self.reducer_to_agg_func_expr(
-                    "set", prop.name, is_merging=False
-                ))
+                expr.append(
+                    self.reducer_to_agg_func_expr("set", prop.name, is_merging=False)
+                )
             n_df = self.translate_table_to_dataframe(n, props=cur_props)
             df = self.join_two_dataframe(df, n_df)
             n_df.unpersist()
             src = n
             n = n.child
-        df = (
-            df.groupBy(root_id).agg(*expr)
-        )
+        df = (df.groupBy(root_id).agg(*expr))
         return df
 
     def translate_parent(self, root_df):
@@ -425,8 +433,6 @@ class Translator(BaseTranslator):
         df = self.load_from_hadoop_to_dateframe()
         if self.nested_translator is not None:
             df = self.join_two_dataframe(df, nested_df, how="left_outer")
-        import pdb
-        pdb.set_trace()
         return execute_filter(df, self.parser.filter) if self.parser.filter else df
 
     def write(self, df):

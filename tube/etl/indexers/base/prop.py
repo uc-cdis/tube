@@ -116,6 +116,7 @@ class PropFactory(object):
             and name in PropFactory.prop_by_names.get(doc_name)
         )
 
+
 class ValueMapping(object):
     def __init__(self, original, final):
         self.original = original

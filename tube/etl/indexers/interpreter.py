@@ -1,5 +1,7 @@
 import yaml
-from tube.etl.indexers.aggregation.new_translator import Translator as AggregatorTranslator
+from tube.etl.indexers.aggregation.new_translator import (
+    Translator as AggregatorTranslator
+)
 from tube.etl.indexers.injection.new_translator import Translator as InjectionTranslator
 from .base.translator import Translator as BaseTranslator
 from tube.utils.dd import init_dictionary
@@ -46,15 +48,17 @@ def run_transform(translators):
             ]
 
     for v in list(need_to_join.values()):
+        if v.current_step == 0:
+            continue
         df = v.translate_joining_props(translators)
         v.save_dataframe_to_hadoop(df)
         v.current_step += 1
 
     for t in list(translators.values()):
         print(t.__dict__)
+        if t.current_step == 0:
+            continue
         df = t.translate_final()
-        import pdb
-        pdb.set_trace()
         t.write(df)
 
 

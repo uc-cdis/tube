@@ -353,8 +353,12 @@ class Parser(BaseParser):
         nodes = []
         bypass = self.mapping.get("settings", {}).get("bypass_multiplicity_check")
         for child in children:
-            child_label, edge = get_edge_table(self.model, self.root.name, child["path"])
-            child_name, is_child = get_child_table(self.model, self.root.name, child["path"])
+            child_label, edge = get_edge_table(
+                self.model, self.root.name, child["path"]
+            )
+            child_name, is_child = get_child_table(
+                self.model, self.root.name, child["path"]
+            )
             multiplicity = (
                 get_multiplicity(self.dictionary, self.root.name, child_label)
                 if is_child

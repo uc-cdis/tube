@@ -36,9 +36,7 @@ class Translator(BaseTranslator):
             if len(child_df.head(1)) == 0:
                 return
             child_df = child_df.withColumn("source_node", fn.lit(child.name))
-            edge_df = edge_df.withColumnRenamed(
-                get_node_id_name(child.name), key_name
-            )
+            edge_df = edge_df.withColumnRenamed(get_node_id_name(child.name), key_name)
             child_df = self.join_two_dataframe(child_df, edge_df)
             #  child_df.join(edge_df, on=self.parser.get_key_prop().name)
             rm_props = [

@@ -4,15 +4,21 @@ FROM quay.io/cdis/python:python3.9-buster-stable
 ENV DEBIAN_FRONTEND=noninteractive \
     SQOOP_VERSION="1.4.7" \
     HADOOP_VERSION="3.3.2" \
-    ES_HADOOP_VERSION="8.3.3"
+    ES_HADOOP_VERSION="8.3.3" \
+    MAVEN_ES_URL="https://search.maven.org/remotecontent?filepath=org/elasticsearch" \
+    ES_SPARK_30_2_12="elasticsearch-spark-30_2.12" \
+    ES_SPARK_20_2_11="elasticsearch-spark-20_2.11"
+
+ENV MAVEN_ES_SPARK_VERSION="${MAVEN_ES_URL}/${ES_SPARK_30_2_12}/${ES_HADOOP_VERSION}/${ES_SPARK_30_2_12}-${ES_HADOOP_VERSION}"
 
 ENV SQOOP_INSTALLATION_URL="http://archive.apache.org/dist/sqoop/${SQOOP_VERSION}/sqoop-${SQOOP_VERSION}.bin__hadoop-2.6.0.tar.gz" \
     HADOOP_INSTALLATION_URL="http://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz" \
-    ES_HADOOP_INSTALLATION_URL="https://artifacts.elastic.co/downloads/elasticsearch-hadoop/elasticsearch-hadoop-${ES_HADOOP_VERSION}.zip"\
+    ES_HADOOP_INSTALLATION_URL="https://artifacts.elastic.co/downloads/elasticsearch-hadoop/elasticsearch-hadoop-${ES_HADOOP_VERSION}.zip" \
     SQOOP_HOME="/sqoop" \
     HADOOP_HOME="/hadoop" \
     ES_HADOOP_HOME="/es-hadoop" \
     JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/"
+ENV ES_HADOOP_HOME_VERSION="${ES_HADOOP_HOME}/elasticsearch-hadoop-${ES_HADOOP_VERSION}"
 
 RUN mkdir -p /usr/share/man/man1
 RUN mkdir -p /usr/share/man/man7
@@ -64,6 +70,10 @@ RUN wget ${ES_HADOOP_INSTALLATION_URL} \
     && mkdir -p $ES_HADOOP_HOME \
     && unzip elasticsearch-hadoop-${ES_HADOOP_VERSION}.zip -d ${ES_HADOOP_HOME} \
     && rm elasticsearch-hadoop-${ES_HADOOP_VERSION}.zip
+
+RUN wget ${MAVEN_ES_SPARK_VERSION}.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${ES_SPARK_20_2_11}-${ES_HADOOP_VERSION}.jar
+RUN wget ${MAVEN_ES_SPARK_VERSION}-javadoc.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${ES_SPARK_20_2_11}-${ES_HADOOP_VERSION}-javadoc.jar
+RUN wget ${MAVEN_ES_SPARK_VERSION}-sources.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${ES_SPARK_20_2_11}-${ES_HADOOP_VERSION}-sources.jar
 
 ENV HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop \
     HADOOP_MAPRED_HOME=$HADOOP_HOME \
