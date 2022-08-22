@@ -9,7 +9,6 @@ from tube.utils.general import (
 )
 from .parser import Parser
 from .nested.translator import Translator as NestedTranslator
-from tube.utils.dd import get_node_table_name
 from tube.etl.indexers.base.logic import execute_filter
 from pyspark.sql.functions import (
     col,
@@ -18,7 +17,7 @@ from pyspark.sql.functions import (
     lit,
     sort_array,
     struct,
-    sum
+    sum,
 )
 
 
@@ -52,6 +51,17 @@ class Translator(BaseTranslator):
             if nest_props is not None
             else None
         )
+
+    def update_types(self):
+        es_mapping = super(Translator, self).update_types()
+        properties = es_mapping.get(self.parser.doc_type).get("properties")
+        if self.nested_translator is not None:
+            nested_types = self.nested_translator.update_types()
+            for a in self.nested_translator.parser.array_types:
+                if a not in self.parser.array_types:
+                    self.parser.array_types.append(a)
+            properties.update(nested_types[self.parser.root.name]["properties"])
+        return es_mapping
 
     def aggregate_intermediate_data_frame(self, node_name, child, child_df, edge_df):
         """
@@ -96,7 +106,7 @@ class Translator(BaseTranslator):
                     )
                 )
         tmp_df = tmp_df.select(*select_expr)
-        return self.join_two_dataframe(edge_df, tmp_df)
+        return tmp_df
 
     def aggregate_with_count_on_edge_tbl(self, node_name, df, edge_df, child):
         """
@@ -227,7 +237,8 @@ class Translator(BaseTranslator):
 
             child_df = self.translate_table_to_dataframe(n, props=props)
             child_by_root = self.join_two_dataframe(edge_df, child_df)
-
+            if child_by_root.rdd.isEmpty():
+                continue
             if n.sorted_by is not None:
                 sorted_cols = []
                 for c in child_df.schema.names:
@@ -245,6 +256,9 @@ class Translator(BaseTranslator):
                     .alias("sorted_col")
                 )
                 child_by_root = child_by_root.select(root_id, "sorted_col.*")
+            selected_cols = [p.name for p in props]
+            selected_cols.append(root_id)
+            child_by_root = child_by_root.select(*selected_cols)
             root_df = self.join_two_dataframe(root_df, child_by_root, how="left_outer")
             child_df.unpersist()
             child_by_root.unpersist()
@@ -412,7 +426,7 @@ class Translator(BaseTranslator):
             n_df.unpersist()
             src = n
             n = n.child
-        df = (df.groupBy(root_id).agg(*expr))
+        df = df.groupBy(root_id).agg(*expr)
         return df
 
     def translate_parent(self, root_df):
@@ -430,10 +444,15 @@ class Translator(BaseTranslator):
             if self.nested_translator is not None
             else None
         )
+        self.update_types()
         df = self.load_from_hadoop_to_dateframe()
         if self.nested_translator is not None:
             df = self.join_two_dataframe(df, nested_df, how="left_outer")
-        return execute_filter(df, self.parser.filter) if self.parser.filter else df
+        filtered_df = (
+            execute_filter(df, self.parser.filter) if self.parser.filter else df
+        )
+
+        return filtered_df
 
     def write(self, df):
         self.writer.write_dataframe(

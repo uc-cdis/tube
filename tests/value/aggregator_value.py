@@ -21,10 +21,7 @@ class AggregatorValue(Value):
         path, value_mapping = self.get_path_by_name(self.parser, name)
 
         fn = path["fn"]
-        if "src" in path:
-            src = path["src"]
-        else:
-            src = None
+        src = path.get("src", path.get("name", None))
 
         tables = self.get_table_list_from_path(self.parser, self.doc_type, path["path"])
         val = self.sql[tables, fn, name, src, self.submitter_id]

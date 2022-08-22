@@ -251,8 +251,8 @@ class Parser(object):
         self, doc_name, p, node_label=None, index=None, is_additional=False
     ):
         value_mappings = p.get("value_mappings", [])
-        src = p["src"] if "src" in p else p["name"]
         fn = p.get("fn")
+        src = p.get("src", None)
         if src is None and fn != "count":
             src = p["name"]
 

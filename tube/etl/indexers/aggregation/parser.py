@@ -42,6 +42,25 @@ class Path(object):
         return self.__key__() == other.__key__()
 
 
+def create_paths(aggregated_nodes, flat_paths=None):
+    """
+    create all possible paths from mapping file.
+    :return:
+    """
+    flat_paths = {} if flat_paths is None else flat_paths
+    for n in aggregated_nodes:
+        copied_n = deepcopy(n)
+        path = copied_n.pop("path", None)
+        if path in flat_paths:
+            flat_paths[path].reducers.append(copied_n)
+        else:
+            flat_paths[path] = Path(path, copied_n)
+    print(list(flat_paths.values()))
+    for p in flat_paths:
+        print(str(p))
+    return flat_paths
+
+
 class Parser(BaseParser):
     """
     The main entry point into the index export process for the mutation indices
@@ -63,7 +82,7 @@ class Parser(BaseParser):
             if "filter" in self.mapping
             else None
         )
-        if "aggregated_props" in self.mapping:
+        if "aggregated_props" in self.mapping or self.filter is not None:
             self.aggregated_nodes = self.get_aggregation_nodes()
         self.joining_nodes = (
             self.get_joining_nodes()
@@ -155,17 +174,39 @@ class Parser(BaseParser):
             self.doc_type, self.mapping["props"], node_label=self.root.name
         )
 
+    def create_json_for_agg_filter_props(self):
+        json_props = []
+        added = set([])
+        if self.filter is None:
+            return json_props
+        for agg_prop in self.filter.get_agg_props():
+            path_and_src = agg_prop.split(".")
+            prop_name = "__".join(path_and_src)
+            if prop_name not in added:
+                src = path_and_src[-1]
+                path = ".".join(path_and_src[:-1])
+                json_props.append(
+                    {"name": prop_name, "path": path, "fn": "set", "src": src}
+                )
+                added.add(prop_name)
+        return json_props
+
     def get_aggregation_nodes(self):
         """
         Get aggregation nodes of aggregation tree which will produce aggregated_props
         :return:
         """
-        flat_paths = self.create_paths()
+        flat_paths = create_paths(self.mapping.get("aggregated_props", []))
+        flat_paths = create_paths(
+            self.create_json_for_agg_filter_props(), flat_paths
+        ).values()
+        print(f"list all flat_paths of {self.root.name}")
         for p in flat_paths:
             print(str(p))
+        print(f"End list all flat_paths of {self.root.name}")
         list_nodes, leaves = self.construct_aggregation_tree(flat_paths)
 
-        aggregated_nodes = [l for l in list_nodes if l not in leaves]
+        aggregated_nodes = [n for n in list_nodes if n not in leaves]
 
         for p in aggregated_nodes:
             p.non_leaf_children_count = Parser.non_leaves_count(p.children, leaves)
@@ -311,27 +352,6 @@ class Parser(BaseParser):
             if n not in leaves:
                 count += 1
         return count
-
-    def create_paths(self):
-        """
-        create all possible paths from mapping file.
-        :return:
-        """
-        flat_paths = {}
-        aggregated_nodes = self.mapping.get("aggregated_props", [])
-        for n in aggregated_nodes:
-            copied_n = deepcopy(n)
-            if "src" not in copied_n:
-                copied_n["src"] = None
-            path = copied_n.pop("path", None)
-            if path in flat_paths:
-                flat_paths[path].reducers.append(copied_n)
-            else:
-                flat_paths[path] = Path(path, copied_n)
-        print(list(flat_paths.values()))
-        for p in flat_paths:
-            print(str(p))
-        return set(flat_paths.values())
 
     @staticmethod
     def parse_sorting(child):

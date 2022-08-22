@@ -35,12 +35,12 @@ from .parser import Parser
 from .nested.translator import Translator as NestedTranslator
 from .lambdas import sliding
 from tube.etl.indexers.base.logic import execute_filter
-from pyspark.sql.types import(
+from pyspark.sql.types import (
     StructType,
     StructField,
     IntegerType,
     StringType,
-    ArrayType
+    ArrayType,
 )
 
 COMPOSITE_JOINING_FIELD = "_joining_keys_"
@@ -92,7 +92,7 @@ def get_normal_frame_schema():
                         [
                             StructField("fn", StringType(), False),
                             StructField("field_id", IntegerType(), False),
-                            StructField("arr", ArrayType(StringType()))
+                            StructField("arr", ArrayType(StringType())),
                         ]
                     )
                 ),

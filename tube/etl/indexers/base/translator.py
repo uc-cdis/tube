@@ -159,7 +159,7 @@ class Translator(object):
                 return self.get_empty_dataframe_with_name(node.name, key_name=key_name)
             new_df = self.sql_context.read.json(df)
             df.unpersist()
-            if props is not None:
+            if props is not None and not new_df.rdd.isEmpty():
                 cols = self.get_cols_from_node(node_name, props, [], new_df, key_name)
                 return new_df.select(*cols)
             return new_df
@@ -191,6 +191,7 @@ class Translator(object):
         """
         Return the edge table that has two columns.
         :param table_name:
+        :param reversed:
         :return: [(child_node_id, parent_node_id)] if not reversed other wise [(parent_node_id, child_node_id)]
         """
         df = self.sc.wholeTextFiles(os.path.join(self.hdfs_path, table_name)).flatMap(
@@ -245,7 +246,8 @@ class Translator(object):
 
         return df.mapValues(get_props(names, values))
 
-    def reducer_to_agg_func_expr(self, func_name, value, alias=None, is_merging=False):
+    @staticmethod
+    def reducer_to_agg_func_expr(func_name, value, alias=None, is_merging=False):
         col_alias = alias if alias is not None else value
         if func_name == "count":
             if is_merging:

@@ -1,6 +1,6 @@
 import yaml
 from tube.etl.indexers.aggregation.new_translator import (
-    Translator as AggregatorTranslator
+    Translator as AggregatorTranslator,
 )
 from tube.etl.indexers.injection.new_translator import Translator as InjectionTranslator
 from .base.translator import Translator as BaseTranslator
