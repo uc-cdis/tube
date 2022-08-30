@@ -30,9 +30,10 @@ jobs:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: install dependencies
+      - name: install psql
         run: |
-          sudo apt-get install --yes --no-install-recommends jq postgresql-client software-properties-common build-essential libffi-dev libssl-dev libssl1.1 libgnutls30 python3.9 python3-pip python3-testresources
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends jq postgresql-client libffi-dev libssl-dev libssl1.1 libgnutls30 python3.9 python3-pip
           sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
           sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1
       # Performs a clean installation of all dependencies in the `package.json` file
@@ -52,8 +53,6 @@ jobs:
           cp -f tests/gen3/tube/user.yaml ../compose-etl/configs/user.yaml
       - name: Init postgres database
         run: psql -d postgresql://postgres:postgres@localhost/metadata_db -f tests/metadata_db.sql
-      - name: install jq
-        run: sudo apt install -y jq
       - name: Create credential file
         working-directory: ../compose-etl
         run: echo "{\"db_host\":\"host.docker.internal\",\"db_username\":\"postgres\",\"db_password\":\"postgres\",\"db_database\":\"metadata_db\"}" > configs/creds.json
@@ -63,10 +62,11 @@ jobs:
       - name: change max_map_count
         working-directory: ../compose-etl
         run: sudo sysctl -w vm.max_map_count=262144
-      - name: Install with poetry
+      - name: Installation
         run: |
-          pwd
-          python -m pip install -r requirements.txt
+          python3.9 pip install --upgrade poetry
+          poetry config virtualenvs.create false
+          poetry install -vv --no-interaction
       - name: Run spark and ElasticSearch
         working-directory: ../compose-etl
         run: docker-compose up -d spark elasticsearch
