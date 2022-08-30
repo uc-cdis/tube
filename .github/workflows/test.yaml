@@ -30,7 +30,7 @@ jobs:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: install psql
+      - name: Installing dependencies
         run: |
           sudo apt-get update
           sudo apt-get install --yes --no-install-recommends jq postgresql-client libffi-dev libssl-dev libssl1.1 libgnutls30 python3.9 python3-pip
@@ -47,7 +47,7 @@ jobs:
         run: ls ../..
       - name: Get current directory
         run: pwd
-      - name: Install and copy files
+      - name: Copy configuration files
         run: |
           cp -f tests/gen3/tube/etlMapping.yaml ../compose-etl/configs/etlMapping.yaml
           cp -f tests/gen3/tube/user.yaml ../compose-etl/configs/user.yaml
@@ -59,10 +59,10 @@ jobs:
       - name: Replace tube branch
         working-directory: ../compose-etl
         run: sed -i "s/tube:master/tube:${BRANCH//\//_}/g" docker-compose.yml
-      - name: change max_map_count
+      - name: change max_map_count (needed for running Elasticsearch in container)
         working-directory: ../compose-etl
         run: sudo sysctl -w vm.max_map_count=262144
-      - name: Installation
+      - name: Install poetry, dependencies and tube
         run: |
           python3.9 -m pip install --upgrade poetry
           python3.9 -m poetry config virtualenvs.create false
@@ -70,14 +70,14 @@ jobs:
       - name: Run spark and ElasticSearch
         working-directory: ../compose-etl
         run: docker-compose up -d spark elasticsearch
-      - name: wait for the container up and running
+      - name: Wait for the container to be up and running
         run: sleep 60
-      - name: checking with log
+      - name: Checking logs
         working-directory: ../compose-etl
         run: docker-compose logs
-      - name: check all container
+      - name: Check all container
         run: docker ps
-      - name: check all docker network
+      - name: Check all docker network
         run: docker network ls
       - name: Make XDG_DATA_HOME's tube
         run: mkdir -p $XDG_DATA_HOME/gen3/tube
@@ -90,7 +90,7 @@ jobs:
       - name: Run etl process
         working-directory: ../compose-etl
         run: docker-compose run tube bash -c "python run_config.py; python run_etl.py"
-      - name: Run test
+      - name: Run tests
         # Runs a script that creates a PostgreSQL table, populates
         # the table with data, and then retrieves the data.
         run: python -m pytest -v tests -m "not ssl"
