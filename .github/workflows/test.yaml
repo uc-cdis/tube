@@ -64,7 +64,7 @@ jobs:
         run: sudo sysctl -w vm.max_map_count=262144
       - name: Installation
         run: |
-          python3.9 pip install --upgrade poetry
+          python3.9 -m pip install --upgrade poetry
           poetry config virtualenvs.create false
           poetry install -vv --no-interaction
       - name: Run spark and ElasticSearch
