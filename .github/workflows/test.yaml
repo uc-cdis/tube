@@ -65,8 +65,8 @@ jobs:
       - name: Installation
         run: |
           python3.9 -m pip install --upgrade poetry
-          poetry config virtualenvs.create false
-          poetry install -vv --no-interaction
+          python3.9 -m poetry config virtualenvs.create false
+          python3.9 -m poetry install -vv --no-interaction
       - name: Run spark and ElasticSearch
         working-directory: ../compose-etl
         run: docker-compose up -d spark elasticsearch
