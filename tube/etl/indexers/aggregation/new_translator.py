@@ -173,7 +173,7 @@ class Translator(BaseTranslator):
         aggregated_dfs = {}
         for n in self.parser.aggregated_nodes:
             df = None
-            key_df = self.translate_table_to_dataframe(n, get_zero_frame=True, props=[])
+            key_df = self.translate_table_to_dataframe(n.tbl_name, get_zero_frame=True, props=[])
             for child in n.children:
                 if child.no_children_to_map == 0:
                     # Read all associations from edge table that link between parent and child one
@@ -235,7 +235,7 @@ class Translator(BaseTranslator):
                 )
                 props.append(sorting_prop)
 
-            child_df = self.translate_table_to_dataframe(n, props=props)
+            child_df = self.translate_table_to_dataframe(n.tbl_name, props=props)
             child_by_root = self.join_two_dataframe(edge_df, child_df)
             if child_by_root.rdd.isEmpty():
                 continue
