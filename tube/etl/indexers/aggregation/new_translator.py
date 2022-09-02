@@ -173,7 +173,7 @@ class Translator(BaseTranslator):
         aggregated_dfs = {}
         for n in self.parser.aggregated_nodes:
             df = None
-            key_df = self.translate_table_to_dataframe(n.tbl_name, get_zero_frame=True, props=[])
+            key_df = self.translate_table_to_dataframe(n, get_zero_frame=True, props=[])
             for child in n.children:
                 if child.no_children_to_map == 0:
                     # Read all associations from edge table that link between parent and child one
@@ -235,7 +235,7 @@ class Translator(BaseTranslator):
                 )
                 props.append(sorting_prop)
 
-            child_df = self.translate_table_to_dataframe(n.tbl_name, props=props)
+            child_df = self.translate_table_to_dataframe(n, props=props)
             child_by_root = self.join_two_dataframe(edge_df, child_df)
             if child_by_root.rdd.isEmpty():
                 continue
@@ -404,10 +404,7 @@ class Translator(BaseTranslator):
             df = self.join_to_an_index(df, translators[j.joining_index], j)
         return df
 
-    def walk_through_graph(self, root_id, p):
-        df = self.translate_table_to_dataframe(
-            self.parser.root, props=[self.parser.get_prop_by_name(root_id)]
-        )
+    def walk_through_graph(self, df, root_id, p):
         src = self.parser.root
         n = p.head
         expr = []
@@ -432,8 +429,10 @@ class Translator(BaseTranslator):
     def translate_parent(self, root_df):
         if len(self.parser.parent_nodes) == 0:
             return root_df
+        cols = self.get_cols_from_node(self.parser.root.name, [], [], root_df)
         for p in self.parser.parent_nodes:
-            df = self.walk_through_graph(get_node_id_name(self.parser.root.name), p)
+            root_key_df = root_df.select(cols)
+            df = self.walk_through_graph(root_key_df, get_node_id_name(self.parser.root.name), p)
             root_df = self.join_two_dataframe(root_df, df, how="left_outer")
             df.unpersist()
         return root_df
