@@ -96,7 +96,7 @@ COPY . /tube
 WORKDIR /tube
 
 RUN poetry config virtualenvs.create false \
-    && poetry install -vv --no-dev --no-interaction \
+    && poetry install -vv --only main --no-interaction \
     && poetry show -v
 
 #ENV TINI_VERSION v0.18.0

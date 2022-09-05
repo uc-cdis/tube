@@ -278,21 +278,13 @@ class Translator(BaseTranslator):
             # before in etl-mapping for joining_props, we use {node}_id
             # for backward compatibility, we check first with the value in mapping file.
             # if there is not any Prop object like that, we check with new format _{node}_id
-            if src_prop is None and r.prop.src == get_node_id_name_without_prefix(
-                translator.parser.doc_type
-            ):
+            if src_prop is None:
                 src_prop = translator.parser.get_prop_by_name(r.prop.src)
-                if src_prop is None:
-                    src_prop = Prop(
-                        PropFactory.get_additional_length(),
-                        r.prop.src,
-                        None,
-                        [],
-                        None,
-                        None,
-                        None,
-                        (str,),
-                        is_additional=True,
+                if src_prop is None and r.prop.src == get_node_id_name_without_prefix(
+                    translator.parser.doc_type
+                ):
+                    src_prop = translator.parser.get_prop_by_name(
+                        get_node_id_name(translator.parser.doc_type)
                     )
             dst_prop = self.parser.get_prop_by_name(r.prop.name)
             if r.fn is None:
