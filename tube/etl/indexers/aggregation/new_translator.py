@@ -241,24 +241,24 @@ class Translator(BaseTranslator):
                 continue
             if n.sorted_by is not None:
                 sorted_cols = []
+                non_sorted_cols = []
                 for c in child_df.schema.names:
                     if c == n.sorted_by:
                         sorted_cols.append(c)
-                for c in child_df.schema.names:
-                    if c != n.sorted_by:
-                        sorted_cols.append(c)
+                    else:
+                        non_sorted_cols.append(c)
+                selected_with_sort = sorted_cols
+                selected_with_sort.extend(non_sorted_cols)
+                selected_with_sort.append(root_id)
                 child_by_root = child_by_root.groupBy(root_id).agg(
                     sort_array(
-                        collect_list(struct(*sorted_cols)),
+                        collect_list(struct(*selected_with_sort)),
                         asc=False if n.desc_order else True,
                     )
                     .getItem(0)
                     .alias("sorted_col")
-                )
-                child_by_root = child_by_root.select(root_id, "sorted_col.*")
-            selected_cols = [p.name for p in props]
-            selected_cols.append(root_id)
-            child_by_root = child_by_root.select(*selected_cols)
+                ).select("sorted_col.*")
+            child_by_root = self.select_existing_field_from_df(child_by_root, props, [root_id])
             root_df = self.join_two_dataframe(root_df, child_by_root, how="left_outer")
             child_df.unpersist()
             child_by_root.unpersist()

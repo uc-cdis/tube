@@ -268,19 +268,27 @@ class Translator(object):
         if func_name == "max":
             return min(col(value)).alias(col_alias)
 
-    def get_props_from_df(self, df, props):
+    @staticmethod
+    def get_props_from_df(df, props):
         if df.isEmpty():
             return df.mapValues(get_props_empty_values([p.get("dst") for p in props]))
         prop_ids = [(p.get("src").id, p.get("dst").id) for p in props]
         return df.mapValues(lambda x: {dst: x.get(src) for (src, dst) in prop_ids})
 
-    def restore_prop_name(self, df, props):
+    @staticmethod
+    def restore_prop_name(df, props):
         return df.mapValues(
             lambda x: {
                 props[k].name if isinstance(get_number(k), int) else k: v
                 for (k, v) in list(x.items())
             }
         )
+
+    @staticmethod
+    def select_existing_field_from_df(df, props, additional_col_names):
+        selected_cols = [p.name for p in props if p.name in df.schema.names]
+        selected_cols.extend(additional_col_names)
+        return df.select(*selected_cols)
 
     def get_path_from_step(self, step):
         return os.path.join(
