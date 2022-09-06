@@ -5,13 +5,13 @@ jobs:
   # Label of the container job
   runner-job:
     # Containers must run in Linux based operating systems
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     # Service containers to run with `container-job`
     services:
       # Label used to access the service container
       postgres:
         # Docker Hub image
-        image: postgres:13.7
+        image: postgres:13
         # Provide the password for postgres
         env:
           POSTGRES_PASSWORD: postgres
@@ -30,11 +30,13 @@ jobs:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: install psql
+      - name: install dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install --yes --no-install-recommends postgresql-client libffi-dev libssl-dev libssl1.1 libgnutls30
-          sudo apt-get --only-upgrade install libpq-dev
+          sudo apt-get install --yes --no-install-recommends jq postgresql-client libffi-dev libssl-dev libssl1.1 libgnutls30 python3.9 python3-pip python3-testresources
+          sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
+          sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1
+          python3.9 -m pip install --upgrade poetry
+          pip uninstall -y urllib3
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
       - name: Make dir cor compose-etl
@@ -63,18 +65,10 @@ jobs:
       - name: change max_map_count
         working-directory: ../compose-etl
         run: sudo sysctl -w vm.max_map_count=262144
-      - name: Installation with poetry
+      - name: Install with poetry
         run: |
-          sudo apt-get -y install python3.9 python3-testresources
-          sudo ln -s -f $(which python3.9) /usr/bin/python
-          sudo ln -s -f $(which python3.9) /usr/bin/python3
-          curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-          python3.9 get-pip.py --user
-          sudo apt-get -y install python3.9-distutils
-          sudo ln -s -f $(which pip3) /usr/bin/pip
-          pip install --upgrade poetry
-          poetry config virtualenvs.create false
-          poetry install -vv --no-interaction
+          pwd
+          python3.9 -m poetry install -vvv --no-dev --no-interaction
       - name: Run spark and ElasticSearch
         working-directory: ../compose-etl
         run: docker-compose up -d spark elasticsearch
@@ -101,7 +95,7 @@ jobs:
       - name: Run test
         # Runs a script that creates a PostgreSQL table, populates
         # the table with data, and then retrieves the data.
-        run: python -m pytest -v tests -m "not ssl"
+        run: python3.9 -m poetry run pytest -v tests -m "not ssl"
         # Environment variables used by the `client.js` script to create a new PostgreSQL table.
         env:
           # The hostname used to communicate with the PostgreSQL service container

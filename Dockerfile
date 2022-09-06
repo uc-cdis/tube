@@ -26,7 +26,7 @@ RUN mkdir -p /usr/share/man/man7
 RUN apt-get update && apt-get install -y --no-install-recommends \
     software-properties-common \
     build-essential \
-    openjdk-11-jdk \
+    openjdk-11-jdk-headless \
     # dependency for pyscopg2 - which is dependency for sqlalchemy postgres engine
     libpq-dev \
     postgresql-client \
