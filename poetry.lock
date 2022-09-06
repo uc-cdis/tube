@@ -205,15 +205,15 @@ test = ["pytest (>=6.2.0)", "pytest-benchmark", "pytest-cov", "pytest-subtests",
 
 [[package]]
 name = "dictionaryutils"
-version = "3.4.4"
-description = "Python wrapper and metaschema for datadictionary."
+version = "3.2.0"
+description = ""
 category = "main"
 optional = false
-python-versions = ">=3.6,<3.10"
+python-versions = "*"
 
 [package.dependencies]
-cdislogging = ">=1.0.0,<2.0.0"
-jsonschema = ">=2.5,<4"
+cdislogging = ">=1.0,<2.0"
+jsonschema = ">=3.2,<4.0"
 PyYAML = ">=5.1,<6.0"
 requests = ">=2.18,<3.0"
 
@@ -946,8 +946,8 @@ python-versions = ">=3.4"
 
 [metadata]
 lock-version = "1.1"
-python-versions = "3.9"
-content-hash = "4056bcb3457d11d5a7429fc9f654604e04608db1ac9a87a50682cebb0715017a"
+python-versions = "^3.9"
+content-hash = "371e7e14fb5a4152e978e59d4a89c76987afb082ba4d5a92d35a83250966bf5c"
 
 [metadata.files]
 atomicwrites = []
@@ -980,7 +980,10 @@ cookies = [
 ]
 coverage = []
 cryptography = []
-dictionaryutils = []
+dictionaryutils = [
+    {file = "dictionaryutils-3.2.0-py3.6.egg", hash = "sha256:5454a9ec232662b38f315a3c0103ea57a2993a48ba1b4a3f180e8ed888383cb0"},
+    {file = "dictionaryutils-3.2.0.tar.gz", hash = "sha256:e1949e5ec6183f94c4841c296c91c8cf86139504625d849d089e2f49b726734b"},
+]
 docker = [
     {file = "docker-5.0.3-py2.py3-none-any.whl", hash = "sha256:7a79bb439e3df59d0a72621775d600bc8bc8b422d285824cb37103eab91d1ce0"},
     {file = "docker-5.0.3.tar.gz", hash = "sha256:d916a26b62970e7c2f554110ed6af04c7ccff8e9f81ad17d0d40c75637e227fb"},
