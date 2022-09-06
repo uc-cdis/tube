@@ -122,6 +122,75 @@ flatten_props:
   sorted_by: updated_datetime, desc
 ```
 
+#### nested_props
+Properties from the children nodes that can be nested into the parent node. THe nested properties are defined under an aggregator starting with keyword `nested_props` black.
+
+Every `nested_props` block has following required fields `name, path, props`. In which, `name` is field in elasticsearch index that we want to be appeared. `path` is the path leading to the children nodes that we want to get the data out. `props` is the properties that we want to add into the nested structure.
+
+In the example below. We can create under `subject` index a nested structure of `tumor_assessments`. The `tumor_assessments` can be linked to `subject` by a direct link or indirect link via `events`. We can have both in the same index (if necessary) by just naming it differently. In this example, we will get some fields of the intermediate node `events` and add into the nested structure.
+
+```
+mappings
+  - name: pcdc
+    doc_type: subject
+    type: aggregator
+    root: subject
+    props:
+      - name: subject_submitter_id
+        src: submitter_id
+      - name: project_id
+      - name: age_at_enrollment
+      - name: year_at_enrollment
+    nested_props:
+      - name: tumor_under_subject_directly
+        path: tumor_assessments
+        props:
+          - name: tumor_classification
+          - name: tumor_site
+      - name: event_and_tumor_under_subject
+        nested_props:
+        - name: event_under
+          path: events
+          props:
+            - name: time_when_it_happen
+            - name: others_props
+          nested_props:
+            - name: tumor_under_event
+              path: tumor_assessments
+              props:
+                - name: tumor_classification
+                - name: tumor_site
+```
+
+In the following example, if we don't want to get any data field of the intermediate node `event`, we can specify the path as `events.tumor_assessments`
+
+```
+mappings
+  - name: pcdc
+    doc_type: subject
+    type: aggregator
+    root: subject
+    props:
+      - name: subject_submitter_id
+        src: submitter_id
+      - name: honest_broker_subject_id
+      - name: project_id
+      - name: age_at_enrollment
+      - name: year_at_enrollment
+    nested_props:
+      - name: tumor_under_subject_directly
+        path: tumor_assessments
+        props:
+          - name: tumor_classification
+          - name: tumor_site
+      - name: event_and_tumor_under_subject
+        path: events.tumor_assessments
+        props:
+          - name: tumor_classification
+          - name: tumor_site
+```
+
+
 #### parent_props
 Properties from other nodes which are "above" the root node in the graph data model (parent nodes). Example:
 ```
