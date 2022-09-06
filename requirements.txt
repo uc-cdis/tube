@@ -1,13 +1,22 @@
-attrs==22.1.0; python_version >= "3.5"
+atomicwrites==1.4.1; python_version >= "3.6" and python_full_version < "3.0.0" and sys_platform == "win32" or sys_platform == "win32" and python_version >= "3.6" and python_full_version >= "3.4.0"
+attrs==22.1.0; python_version >= "3.6"
 avro==1.11.1; python_version >= "3.6"
+aws-xray-sdk==2.10.0
+boto3==1.24.66; python_version >= "3.7"
 boto==2.49.0
+botocore==1.27.66; python_version >= "3.7"
 cdislogging==1.1.1
 cdisutils==1.2.2
 certifi==2022.6.15; python_version >= "3.7" and python_version < "4"
-cffi==1.15.1; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
+cffi==1.15.1; python_version >= "3.6"
 charset-normalizer==2.1.1; python_version >= "3.7" and python_version < "4" and python_full_version >= "3.6.0"
+codacy-coverage==1.3.11
+colorama==0.4.5; python_version >= "3.6" and python_full_version < "3.0.0" and sys_platform == "win32" or sys_platform == "win32" and python_version >= "3.6" and python_full_version >= "3.5.0"
+cookies==2.2.1
+coverage==6.4.4; python_version >= "3.7"
 cryptography==37.0.4; python_version >= "3.6"
 dictionaryutils==3.2.0
+docker==5.0.3; python_version >= "3.6"
 docopt==0.6.2
 elasticsearch-dsl==6.4.0
 elasticsearch==6.4.0
@@ -21,32 +30,49 @@ idna==3.3; python_version >= "3.7" and python_version < "4"
 indexclient==2.1.0
 interchange==2021.0.4
 ipaddress==1.0.23
+jinja2==3.1.2; python_version >= "3.7"
+jmespath==1.0.1; python_version >= "3.7"
 jsonschema==3.2.0
 markupsafe==2.1.1; python_version >= "3.7"
+mock==4.0.3; python_version >= "3.6"
 monotonic==1.6
+more-itertools==8.14.0; python_version >= "3.6"
+moto==1.1.24
 ndg-httpsclient==0.5.1; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.4.0"
 openpyxl==3.0.10; python_version >= "3.6"
 packaging==21.3; python_version >= "3.6"
 pansi==2020.7.3
+pluggy==0.13.1; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
 progressbar==2.5
 psqlgraph==3.0.1
 psycopg2-binary==2.9.3; python_version >= "3.6"
 py2neo==2021.2.3
 py4j==0.10.9.5; python_version >= "3.7"
+py==1.11.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.5.0" and python_version >= "3.6"
+pyaml==21.10.1
 pyasn1==0.4.8; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.4.0"
 pycparser==2.21; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
 pygments==2.13.0; python_version >= "3.6"
 pyopenssl==22.0.0; python_version >= "3.6" and python_full_version < "3.0.0" or python_full_version >= "3.4.0" and python_version >= "3.6"
 pyparsing==3.0.9; python_full_version >= "3.6.8" and python_version >= "3.6"
 pyrsistent==0.18.1; python_version >= "3.7"
+pyspark-stubs==2.3.0.post2
 pyspark==3.3.0; python_version >= "3.7"
-python-dateutil==2.8.2; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.3.0"
+pytest-cov==3.0.0; python_version >= "3.6"
+pytest==5.4.3; python_version >= "3.5"
+python-dateutil==2.8.2; python_version >= "3.7" and python_full_version < "3.0.0" or python_full_version >= "3.3.0" and python_version >= "3.7"
 pytz==2022.2.1
+pywin32==227; sys_platform == "win32" and python_version >= "3.6"
 pyyaml==5.4.1; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.6.0"
 requests==2.28.1; python_version >= "3.7" and python_version < "4"
+s3transfer==0.6.0; python_version >= "3.7"
 six==1.16.0; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.3.0")
 sqlalchemy==1.4.40; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.6.0"
+tomli==2.0.1; python_full_version <= "3.11.0a6" and python_version >= "3.7"
 urllib3==1.25.10; (python_version >= "2.7" and python_full_version < "3.0.0") or (python_full_version >= "3.5.0" and python_version < "4")
+wcwidth==0.2.5; python_version >= "3.6"
+websocket-client==1.4.1; python_version >= "3.7"
 werkzeug==2.2.2; python_version >= "3.7"
+wrapt==1.14.1; python_version >= "2.7" and python_full_version < "3.0.0" or python_full_version >= "3.5.0"
 xlocal==0.5
 xmltodict==0.13.0; python_version >= "3.4"

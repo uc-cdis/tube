@@ -250,15 +250,21 @@ class Translator(BaseTranslator):
                 selected_with_sort = sorted_cols
                 selected_with_sort.extend(non_sorted_cols)
                 selected_with_sort.append(root_id)
-                child_by_root = child_by_root.groupBy(root_id).agg(
-                    sort_array(
-                        collect_list(struct(*selected_with_sort)),
-                        asc=False if n.desc_order else True,
+                child_by_root = (
+                    child_by_root.groupBy(root_id)
+                    .agg(
+                        sort_array(
+                            collect_list(struct(*selected_with_sort)),
+                            asc=False if n.desc_order else True,
+                        )
+                        .getItem(0)
+                        .alias("sorted_col")
                     )
-                    .getItem(0)
-                    .alias("sorted_col")
-                ).select("sorted_col.*")
-            child_by_root = self.select_existing_field_from_df(child_by_root, props, [root_id])
+                    .select("sorted_col.*")
+                )
+            child_by_root = self.select_existing_field_from_df(
+                child_by_root, props, [root_id]
+            )
             root_df = self.join_two_dataframe(root_df, child_by_root, how="left_outer")
             child_df.unpersist()
             child_by_root.unpersist()
@@ -424,7 +430,9 @@ class Translator(BaseTranslator):
         cols = self.get_cols_from_node(self.parser.root.name, [], [], root_df)
         for p in self.parser.parent_nodes:
             root_key_df = root_df.select(cols)
-            df = self.walk_through_graph(root_key_df, get_node_id_name(self.parser.root.name), p)
+            df = self.walk_through_graph(
+                root_key_df, get_node_id_name(self.parser.root.name), p
+            )
             root_df = self.join_two_dataframe(root_df, df, how="left_outer")
             df.unpersist()
         return root_df

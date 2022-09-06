@@ -66,7 +66,7 @@ jobs:
       - name: Install with poetry
         run: |
           pwd
-          python3.9 -m pip install -r requirements.txt
+          python -m pip install -r requirements.txt
       - name: Run spark and ElasticSearch
         working-directory: ../compose-etl
         run: docker-compose up -d spark elasticsearch
@@ -93,7 +93,7 @@ jobs:
       - name: Run test
         # Runs a script that creates a PostgreSQL table, populates
         # the table with data, and then retrieves the data.
-        run: python3.9 -m poetry run pytest -v tests -m "not ssl"
+        run: python -m pytest -v tests -m "not ssl"
         # Environment variables used by the `client.js` script to create a new PostgreSQL table.
         env:
           # The hostname used to communicate with the PostgreSQL service container
