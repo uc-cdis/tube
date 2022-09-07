@@ -4,6 +4,7 @@
 - [Configuration file](#configuration-file)
   - [The aggregation ETL ("aggregator" mapping)](#the-aggregation-etl-aggregator-mapping)
     - [flatten_props](#flatten_props)
+    - [nested_props](#nested_props)
     - [parent_props](#parent_props)
     - [aggregated_props](#aggregated_props)
     - [joining_props](#joining_props)
@@ -123,7 +124,7 @@ flatten_props:
 ```
 
 #### nested_props
-Properties from the children nodes that can be nested into the parent node. THe nested properties are defined under an aggregator starting with keyword `nested_props` black.
+Properties from the children nodes that can be nested into the parent node. THe nested properties are defined under an aggregator starting with keyword `nested_props` block.
 
 Every `nested_props` block has following required fields `name, path, props`. In which, `name` is field in elasticsearch index that we want to be appeared. `path` is the path leading to the children nodes that we want to get the data out. `props` is the properties that we want to add into the nested structure.
 
