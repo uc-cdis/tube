@@ -52,8 +52,6 @@ jobs:
           cp -f tests/gen3/tube/user.yaml ../compose-etl/configs/user.yaml
       - name: Init postgres database
         run: psql -d postgresql://postgres:postgres@localhost/metadata_db -f tests/metadata_db.sql
-      - name: install jq
-        run: sudo apt install -y jq
       - name: Create credential file
         working-directory: ../compose-etl
         run: echo "{\"db_host\":\"host.docker.internal\",\"db_username\":\"postgres\",\"db_password\":\"postgres\",\"db_database\":\"metadata_db\"}" > configs/creds.json
@@ -65,9 +63,9 @@ jobs:
         run: sudo sysctl -w vm.max_map_count=262144
       - name: Install with poetry
         run: |
-          pip install --upgrade poetry
-          poetry config virtualenvs.create true
-          poetry install -vv --no-interaction
+          python3.9 -m pip install --upgrade poetry
+          python3.9 -m poetry config virtualenvs.create false
+          python3.9 -m poetry install -vv --no-interaction
       - name: Run spark and ElasticSearch
         working-directory: ../compose-etl
         run: docker-compose up -d spark elasticsearch
