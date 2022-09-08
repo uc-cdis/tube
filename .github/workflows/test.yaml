@@ -65,8 +65,9 @@ jobs:
         run: sudo sysctl -w vm.max_map_count=262144
       - name: Install with poetry
         run: |
-          pwd
-          python -m pip install -r requirements.txt
+          pip install --upgrade poetry
+          poetry config virtualenvs.create true
+          poetry install -vv --no-interaction
       - name: Run spark and ElasticSearch
         working-directory: ../compose-etl
         run: docker-compose up -d spark elasticsearch
