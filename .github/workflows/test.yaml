@@ -64,7 +64,7 @@ jobs:
         run: sudo sysctl -w vm.max_map_count=262144
       - name: Install poetry, dependencies and tube
         run: |
-          python3.9 -m pip install --upgrade poetry
+          python3.9 -m pip install --upgrade pip poetry requests
           python3.9 -m poetry config virtualenvs.create true
           python3.9 -m poetry install -vv --no-interaction
       - name: Run spark and ElasticSearch
