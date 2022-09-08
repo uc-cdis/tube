@@ -24,7 +24,6 @@ RUN mkdir -p /usr/share/man/man1
 RUN mkdir -p /usr/share/man/man7
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    software-properties-common \
     build-essential \
     openjdk-11-jdk-headless \
     # dependency for pyscopg2 - which is dependency for sqlalchemy postgres engine
@@ -42,11 +41,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     vim \
     curl \
     g++ \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1 \
+    && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1
 
-RUN apt-get --only-upgrade install libpq-dev
-
-RUN pip install --upgrade poetry
+RUN python3.9 -m pip install --upgrade pip poetry requests \
+    && python3.9 -m poetry config virtualenvs.create true
 
 RUN wget ${SQOOP_INSTALLATION_URL} \
     && mkdir -p $SQOOP_HOME \
@@ -95,7 +95,7 @@ ENV PATH=${SQOOP_HOME}/bin:${HADOOP_HOME}/sbin:$HADOOP_HOME/bin:${JAVA_HOME}/bin
 COPY . /tube
 WORKDIR /tube
 
-RUN  python3.9 -m pip install -r requirements.txt
+RUN python3.9 -m poetry install -vv --no-interaction
 
 #ENV TINI_VERSION v0.18.0
 #ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
