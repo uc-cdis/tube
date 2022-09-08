@@ -33,7 +33,7 @@ jobs:
       - name: Installing dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install --yes --no-install-recommends jq postgresql-client libffi-dev libssl-dev libssl1.1 libgnutls30 python3.9 python3-pip
+          sudo apt-get install --yes --no-install-recommends jq postgresql-client python3.9 python3-pip
           sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
           sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1
       # Performs a clean installation of all dependencies in the `package.json` file
@@ -66,7 +66,7 @@ jobs:
         run: |
           python3.9 -m pip install --upgrade pip poetry requests
           python3.9 -m poetry config virtualenvs.create true
-          python3.9 -m poetry install -vv --no-interaction
+          python3.9 -m poetry install -vv --no-interaction --dev-dependency
       - name: Run spark and ElasticSearch
         working-directory: ../compose-etl
         run: docker-compose up -d spark elasticsearch
@@ -93,7 +93,7 @@ jobs:
       - name: Run tests
         # Runs a script that creates a PostgreSQL table, populates
         # the table with data, and then retrieves the data.
-        run: python -m pytest -v tests -m "not ssl"
+        run: python3.9 -m pytest -v tests -m "not ssl"
         # Environment variables used by the `client.js` script to create a new PostgreSQL table.
         env:
           # The hostname used to communicate with the PostgreSQL service container
