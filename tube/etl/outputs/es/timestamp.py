@@ -72,13 +72,13 @@ def check_to_run_etl(es, index_names):
 
 
 def timestamp_from_transaction_time(dt):
-    return "time_{trans_time}".format(trans_time=dt.isoformat("T"))
+    return "time_{trans_time}".format(trans_time=dt.strftime("%Y-%m-%dT%H-%M-%S"))
 
 
 def get_timestamp_from_index(es, versioned_index):
     res = es.indices.get_alias(index=versioned_index, name="time_*")
     iso_str = list(res[versioned_index]["aliases"].keys())[0].replace("plus", "+")[5:]
-    return datetime.strptime(iso_str, "%Y-%m-%dT%H:%M:%S.%f")
+    return datetime.strptime(iso_str, "%Y-%m-%dT%H-%M-%S")
 
 
 def putting_timestamp(es, index_to_write):

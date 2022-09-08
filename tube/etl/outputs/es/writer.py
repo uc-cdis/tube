@@ -56,7 +56,7 @@ class Writer(SparkBase):
 
     def write_df_to_new_index(self, df, index, doc_type):
         es_config = self.es_config
-        es_config["es.resource"] = index + "/{}".format(doc_type)
+        es_config["es.resource"] = index
         df.coalesce(1).write.format("org.elasticsearch.spark.sql").option(
             "es.nodes", es_config["es.nodes"]
         ).option("es.port", es_config["es.port"]).option(
@@ -86,7 +86,7 @@ class Writer(SparkBase):
 
         mapping = {
             "mappings": {
-                "_doc": {
+                "type_name": {
                     "properties": {
                         "timestamp": {"type": "date"},
                         "array": {"type": "keyword"},
@@ -124,7 +124,7 @@ class Writer(SparkBase):
             df = plugin(df)
 
         index_to_write = self.versioning.create_new_index(
-            {"mappings": types}, self.versioning.get_next_index_version(index)
+            {"mappings": types.get(doc_type)}, self.versioning.get_next_index_version(index)
         )
         self.write_to_es(
             df, index_to_write, index, doc_type, self.write_df_to_new_index
