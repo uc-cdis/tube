@@ -65,7 +65,7 @@ jobs:
       - name: Install poetry, dependencies and tube
         run: |
           python3.9 -m pip install --upgrade poetry
-          python3.9 -m poetry config virtualenvs.create false
+          python3.9 -m poetry config virtualenvs.create true
           python3.9 -m poetry install -vv --no-interaction
       - name: Run spark and ElasticSearch
         working-directory: ../compose-etl
