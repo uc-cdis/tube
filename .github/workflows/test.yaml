@@ -89,7 +89,7 @@ jobs:
           XDG_DATA_HOME: /home/runner/work/tube
       - name: Run etl process
         working-directory: ../compose-etl
-        run: docker-compose run tube bash -c "python run_config.py; python run_etl.py"
+        run: docker-compose run tube bash -c "python -m poetry run python run_config.py; python -m poetry run python run_etl.py"
       - name: Run tests
         # Runs a script that creates a PostgreSQL table, populates
         # the table with data, and then retrieves the data.
