@@ -43,8 +43,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
-RUN python -m pip install --upgrade pip poetry requests \
-    && python -m poetry config virtualenvs.create true
+RUN python -m pip install --upgrade pip poetry requests
 
 RUN wget ${SQOOP_INSTALLATION_URL} \
     && mkdir -p $SQOOP_HOME \
@@ -95,13 +94,16 @@ WORKDIR /tube
 # copy ONLY poetry artifact, install the dependencies but not fence
 # this will make sure than the dependencies is cached
 COPY poetry.lock pyproject.toml /tube/
-RUN python -m poetry install -vv --no-root --only main --no-interaction \
+RUN python -m poetry config virtualenvs.create false \
+    && python -m poetry install -vv --no-root --only main --no-interaction \
     && python -m poetry show -v
 
 # copy source code ONLY after installing dependencies
 COPY . /tube
 
-RUN python -m poetry install -vv --only main --no-interaction
+RUN python -m poetry config virtualenvs.create false \
+    && python -m poetry install -vv --only main --no-interaction \
+    && python -m poetry show -v
 
 #ENV TINI_VERSION v0.18.0
 #ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
