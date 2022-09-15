@@ -7,6 +7,7 @@ class DirectNode(BaseNode):
         self, name, edge, props, sorted_by=None, desc_order=False, props_from_child=True
     ):
         super().__init__()
+        self.name = name
         self.tbl_name = name
         self.edge = edge
         self.props = props

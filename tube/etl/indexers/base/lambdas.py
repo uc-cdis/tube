@@ -1,6 +1,8 @@
 import ast
 import json
 import collections
+import functools
+import pyspark.sql.types as t
 import pyspark.sql.functions as f
 from tube.utils.general import get_node_id_name
 
@@ -279,13 +281,6 @@ def get_single_frame_value(func_name, value):
     return value
 
 
-def map_with_dictionary(mapping_broadcasted, p):
-    def map_value_from_dict(v):
-        return mapping_broadcasted.value.get(p).get(v)
-
-    return f.udf(map_value_from_dict)
-
-
 def seq_aggregate_with_reducer(x, y):
     """
     Sequencing function that works with the dataframe created by get_normal_frame
@@ -339,3 +334,24 @@ def from_program_name_project_code_to_project_id(
         list_project_ids = list_project_ids[0]
 
     return merge_dictionary(x, {project_id_id: list_project_ids})
+
+
+def f_concat_udf(val):
+    return functools.reduce(lambda x, y: x + y, val, [])
+
+
+f_collect_list_udf = f.udf(f_concat_udf, t.ArrayType(t.StringType()))
+
+
+def f_set_union_udf(val):
+    return functools.reduce(lambda x, y: list(set(x) | set(y)), val, [])
+
+
+f_collect_set_udf = f.udf(f_set_union_udf, t.ArrayType(t.StringType()))
+
+
+def map_with_dictionary(mapping_broadcasted, p):
+    def map_value_from_dict(v):
+        return mapping_broadcasted.value.get(p).get(v)
+
+    return f.udf(map_value_from_dict)
