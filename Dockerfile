@@ -24,7 +24,6 @@ RUN mkdir -p /usr/share/man/man1
 RUN mkdir -p /usr/share/man/man7
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    software-properties-common \
     build-essential \
     openjdk-11-jdk-headless \
     # dependency for pyscopg2 - which is dependency for sqlalchemy postgres engine
@@ -44,9 +43,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get --only-upgrade install libpq-dev
-
-RUN pip install --upgrade poetry
+RUN python -m pip install --upgrade pip poetry requests
 
 RUN wget ${SQOOP_INSTALLATION_URL} \
     && mkdir -p $SQOOP_HOME \
@@ -92,10 +89,21 @@ RUN mkdir -p $ACCUMULO_HOME $HIVE_HOME $HBASE_HOME $HCAT_HOME $ZOOKEEPER_HOME
 
 ENV PATH=${SQOOP_HOME}/bin:${HADOOP_HOME}/sbin:$HADOOP_HOME/bin:${JAVA_HOME}/bin:${PATH}
 
-COPY . /tube
 WORKDIR /tube
 
-RUN  python3.9 -m pip install -r requirements.txt
+# copy ONLY poetry artifact, install the dependencies but not fence
+# this will make sure than the dependencies is cached
+COPY poetry.lock pyproject.toml /tube/
+RUN python -m poetry config virtualenvs.create false \
+    && python -m poetry install -vv --no-root --only main --no-interaction \
+    && python -m poetry show -v
+
+# copy source code ONLY after installing dependencies
+COPY . /tube
+
+RUN python -m poetry config virtualenvs.create false \
+    && python -m poetry install -vv --only main --no-interaction \
+    && python -m poetry show -v
 
 #ENV TINI_VERSION v0.18.0
 #ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini

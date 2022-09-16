@@ -45,7 +45,7 @@ class Writer(SparkBase):
     def write_to_new_index(self, df, index, doc_type):
         df = df.map(lambda x: json_export(x, doc_type))
         es_config = self.es_config
-        es_config["es.resource"] = index + "/{}".format(doc_type)
+        es_config["es.resource"] = index
         df.saveAsNewAPIHadoopFile(
             path="-",
             outputFormatClass="org.elasticsearch.hadoop.mr.EsOutputFormat",
@@ -124,7 +124,8 @@ class Writer(SparkBase):
             df = plugin(df)
 
         index_to_write = self.versioning.create_new_index(
-            {"mappings": types.get(doc_type)}, self.versioning.get_next_index_version(index)
+            {"mappings": types.get(doc_type)},
+            self.versioning.get_next_index_version(index),
         )
         self.write_to_es(
             df, index_to_write, index, doc_type, self.write_df_to_new_index

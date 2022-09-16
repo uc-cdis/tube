@@ -98,6 +98,17 @@ class Parser(object):
                     continue
                 p.update_type(prop.type)
 
+    def get_python_type_of_prop(self, p, array_types):
+        is_array_type = p.type[0] == list
+        has_array_agg_fn = p.fn is not None and p.fn in ["set", "list"]
+        array_type_condition = is_array_type or has_array_agg_fn
+        if array_type_condition:
+            if array_types is not None and p.name not in array_types:
+                array_types.append(p.name)
+            return (self.select_widest_type(p.type), 1)
+        else:
+            return (self.select_widest_type(p.type), 0)
+
     def get_es_types(self):
         types = {}
         types_to_convert_to_es_types = list(
@@ -109,24 +120,14 @@ class Parser(object):
             )
         for p in types_to_convert_to_es_types:
             if p.type is not None:
-                is_array_type = p.type[0] == list
-                has_array_agg_fn = p.fn is not None and p.fn in ["set", "list"]
-                array_type_condition = is_array_type or has_array_agg_fn
-                if array_type_condition:
-                    types[p.name] = (self.select_widest_type(p.type), 1)
-                    if p.name not in self.array_types:
-                        self.array_types.append(p.name)
-                else:
-                    types[p.name] = (self.select_widest_type(p.type), 0)
+                types[p.name] = self.get_python_type_of_prop(p, self.array_types)
         self.prop_types = types
         self.types = self.generate_es_mapping_types(self.doc_type, types)
         return self.types
 
     @staticmethod
     def select_widest_type(types):
-        if str in types:
-            return str
-        elif float in types:
+        if float in types:
             return float
         elif int in types:
             return int
@@ -233,7 +234,7 @@ class Parser(object):
             if src == "id":
                 return (str,)
             a = self.get_possible_properties_types(self.model, node_label)
-            if a.get(src) == (list,):
+            if a.get(src)[0] is list:
                 return self.get_prop_type_of_field_in_dictionary(node_label, src)
             return a.get(src)
 
@@ -315,11 +316,16 @@ class Parser(object):
             return IntegerType()
         return StringType()
 
-    def get_hadoop_type_ignore_fn(self, prop):
-        if prop.type == (float,):
+    def get_hadoop_simple_type(self, p_type):
+        if p_type is float:
             return FloatType()
-        if prop.type == (str,):
+        if p_type is str:
             return StringType()
-        if prop.type == (int,):
+        if p_type is int:
             return IntegerType()
         return StringType()
+
+    def get_hadoop_type_ignore_fn(self, prop):
+        if prop.type[0] is list:
+            return ArrayType(self.get_hadoop_simple_type(prop.type[1]))
+        return self.get_hadoop_simple_type(prop.type[0])
