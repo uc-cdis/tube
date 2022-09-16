@@ -1,11 +1,20 @@
-name: Tube unit-test
+name: Build image and push to Quay and run unit-test
 on: push
 
 jobs:
   # Label of the container job
+  ci:
+    name: Build Image and Push to Quay
+    uses: uc-cdis/.github/.github/workflows/image_build_push.yaml@master
+    secrets:
+      ECR_AWS_ACCESS_KEY_ID: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
+      ECR_AWS_SECRET_ACCESS_KEY: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
+      QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
+      QUAY_ROBOT_TOKEN: ${{ secrets.QUAY_ROBOT_TOKEN }}
   runner-job:
     # Containers must run in Linux based operating systems
     runs-on: ubuntu-20.04
+    needs: ci
     # Service containers to run with `container-job`
     services:
       # Label used to access the service container
@@ -25,7 +34,6 @@ jobs:
         ports:
           # Maps tcp port 5432 on service container to the host
           - 5432:5432
-
     steps:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code

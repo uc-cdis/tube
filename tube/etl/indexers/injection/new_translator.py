@@ -6,6 +6,7 @@ from tube.etl.indexers.injection.parser import Parser
 from tube.etl.indexers.injection.nodes.collecting_node import LeafNode
 from tube.utils.general import PROJECT_ID, PROJECT_CODE, PROGRAM_NAME, get_node_id_name
 from pyspark.sql import functions as fn
+from tube.settings import logger
 
 
 class Translator(BaseTranslator):
@@ -57,6 +58,14 @@ class Translator(BaseTranslator):
                         .cast(self.parser.get_hadoop_type_ignore_fn(p))
                         .alias(p.name)
                     )
+            if "final" in collected_leaf_dfs:
+                logger.info(
+                    f"collected_leaf_dfs types: {collected_leaf_dfs['final'].dtypes}"
+                )
+                logger.info(select_expr)
+                logger.info(
+                    f"collected_leaf_dfs data: {collected_leaf_dfs['final'].head()}"
+                )
             child_df = child_df.select(*select_expr)
             collected_leaf_dfs["final"] = (
                 child_df
