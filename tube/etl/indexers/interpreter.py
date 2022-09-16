@@ -37,7 +37,7 @@ def run_transform(translators):
 
     for translator in list(translators.values()):
         df = translator.translate()
-        if df is None or df.isEmpty():
+        if df is None or df.rdd.isEmpty():
             continue
         translator.save_dataframe_to_hadoop(df)
         translator.current_step = 1
