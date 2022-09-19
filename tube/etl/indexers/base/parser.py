@@ -234,7 +234,7 @@ class Parser(object):
             if src == "id":
                 return (str,)
             a = self.get_possible_properties_types(self.model, node_label)
-            if a.get(src)[0] is list:
+            if a is not None and a.get(src)[0] is list:
                 return self.get_prop_type_of_field_in_dictionary(node_label, src)
             return a.get(src)
 

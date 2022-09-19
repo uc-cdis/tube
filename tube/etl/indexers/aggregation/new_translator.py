@@ -412,15 +412,25 @@ class Translator(BaseTranslator):
                 df, self.translate_edge_to_dataframe(edge_tbl, src.name, n.name)
             )
             cur_props = n.props
-            for prop in cur_props:
-                expr.append(
-                    self.reducer_to_agg_func_expr("set", prop.name, is_merging=False)
-                )
             n_df = self.translate_table_to_dataframe(n, props=cur_props)
             df = self.join_two_dataframe(df, n_df)
             n_df.unpersist()
             src = n
             n = n.child
+
+            for prop in cur_props:
+                if prop.name in df.columns:
+                    expr.append(
+                        self.reducer_to_agg_func_expr(
+                            "set", prop.name, is_merging=False
+                        )
+                    )
+                else:
+                    expr.append(
+                        lit(None)
+                        .cast(self.parser.get_hadoop_type_ignore_fn(prop))
+                        .alias(prop.name)
+                    )
         df = df.groupBy(root_id).agg(*expr)
         return df
 
