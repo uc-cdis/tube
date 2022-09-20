@@ -5,13 +5,13 @@ jobs:
   # Label of the container job
   runner-job:
     # Containers must run in Linux based operating systems
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     # Service containers to run with `container-job`
     services:
       # Label used to access the service container
       postgres:
         # Docker Hub image
-        image: postgres:13
+        image: postgres:13.7
         # Provide the password for postgres
         env:
           POSTGRES_PASSWORD: postgres
@@ -30,54 +30,61 @@ jobs:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: Installing dependencies
+      - name: install psql
         run: |
           sudo apt-get update
-          sudo apt-get install --yes --no-install-recommends jq postgresql-client python3.9 python3-pip
-          sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
-          sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1
+          sudo apt-get install --yes --no-install-recommends postgresql-client libffi-dev libssl-dev libssl1.1 libgnutls30
+          sudo apt-get --only-upgrade install libpq-dev
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
       - name: Make dir cor compose-etl
         working-directory: ..
-        run: git clone https://github.com/uc-cdis/compose-etl.git --branch feat/spark3 --single-branch
+        run: git clone https://github.com/uc-cdis/compose-etl.git --branch feat/build --single-branch
       - name: Get all files
         run: ls ..
       - name: Get all files
         run: ls ../..
       - name: Get current directory
         run: pwd
-      - name: Copy configuration files
+      - name: Install and copy files
         run: |
           cp -f tests/gen3/tube/etlMapping.yaml ../compose-etl/configs/etlMapping.yaml
           cp -f tests/gen3/tube/user.yaml ../compose-etl/configs/user.yaml
       - name: Init postgres database
         run: psql -d postgresql://postgres:postgres@localhost/metadata_db -f tests/metadata_db.sql
+      - name: install jq
+        run: sudo apt install -y jq
       - name: Create credential file
         working-directory: ../compose-etl
         run: echo "{\"db_host\":\"host.docker.internal\",\"db_username\":\"postgres\",\"db_password\":\"postgres\",\"db_database\":\"metadata_db\"}" > configs/creds.json
       - name: Replace tube branch
         working-directory: ../compose-etl
         run: sed -i "s/tube:master/tube:${BRANCH//\//_}/g" docker-compose.yml
-      - name: change max_map_count (needed for running Elasticsearch in container)
+      - name: change max_map_count
         working-directory: ../compose-etl
         run: sudo sysctl -w vm.max_map_count=262144
-      - name: Install poetry, dependencies and tube
+      - name: Install python 3.7
         run: |
-          python3.9 -m pip install --upgrade pip poetry requests
-          python3.9 -m poetry config virtualenvs.create true
-          python3.9 -m poetry install -vv --no-interaction --with dev
+          sudo add-apt-repository ppa:deadsnakes/ppa && sudo apt-get update
+          sudo apt-get -y install python3.7
+          sudo ln -s -f $(which python3.7) /usr/bin/python
+          sudo ln -s -f $(which python3.7) /usr/bin/python3
+          sudo apt-get -y install python3-pip python3.7-distutils
+          sudo ln -s -f $(which pip3) /usr/bin/pip
+          pip install --upgrade poetry
+          poetry config virtualenvs.create false
+          poetry install -vv --no-interaction
       - name: Run spark and ElasticSearch
         working-directory: ../compose-etl
         run: docker-compose up -d spark elasticsearch
-      - name: Wait for the container to be up and running
+      - name: wait for the container up and running
         run: sleep 60
-      - name: Checking logs
+      - name: checking with log
         working-directory: ../compose-etl
         run: docker-compose logs
-      - name: Check all container
+      - name: check all container
         run: docker ps
-      - name: Check all docker network
+      - name: check all docker network
         run: docker network ls
       - name: Make XDG_DATA_HOME's tube
         run: mkdir -p $XDG_DATA_HOME/gen3/tube
@@ -90,10 +97,10 @@ jobs:
       - name: Run etl process
         working-directory: ../compose-etl
         run: docker-compose run tube bash -c "python run_config.py; python run_etl.py"
-      - name: Run tests
+      - name: Run test
         # Runs a script that creates a PostgreSQL table, populates
         # the table with data, and then retrieves the data.
-        run: python3.9 -m poetry run pytest -v tests -m "not ssl"
+        run: python -m pytest -v tests -m "not ssl"
         # Environment variables used by the `client.js` script to create a new PostgreSQL table.
         env:
           # The hostname used to communicate with the PostgreSQL service container

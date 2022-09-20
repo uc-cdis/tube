@@ -42,25 +42,6 @@ class Path(object):
         return self.__key__() == other.__key__()
 
 
-def create_paths(aggregated_nodes, flat_paths=None):
-    """
-    create all possible paths from mapping file.
-    :return:
-    """
-    flat_paths = {} if flat_paths is None else flat_paths
-    for n in aggregated_nodes:
-        copied_n = deepcopy(n)
-        path = copied_n.pop("path", None)
-        if path in flat_paths:
-            flat_paths[path].reducers.append(copied_n)
-        else:
-            flat_paths[path] = Path(path, copied_n)
-    print(list(flat_paths.values()))
-    for p in flat_paths:
-        print(str(p))
-    return flat_paths
-
-
 class Parser(BaseParser):
     """
     The main entry point into the index export process for the mutation indices
@@ -68,7 +49,6 @@ class Parser(BaseParser):
 
     def __init__(self, mapping, model, dictionary):
         super(Parser, self).__init__(dictionary, mapping, model)
-        self.reducer_by_prop = {}
         self.props = self.get_host_props()
         self.flatten_props = (
             self.get_direct_children() if "flatten_props" in mapping else []
@@ -82,7 +62,7 @@ class Parser(BaseParser):
             if "filter" in self.mapping
             else None
         )
-        if "aggregated_props" in self.mapping or self.filter is not None:
+        if "aggregated_props" in self.mapping:
             self.aggregated_nodes = self.get_aggregation_nodes()
         self.joining_nodes = (
             self.get_joining_nodes()
@@ -99,7 +79,7 @@ class Parser(BaseParser):
         nodes = [tuple([_f for _f in re.split("[\[\]]", w) if _f]) for w in words]
         first = None
         prev = None
-        prev_label = self.root.name
+        prev_label = self.root
         for nd in nodes:
             n = nd[0]
             p = nd[1] if len(nd) > 1 else None
@@ -163,7 +143,7 @@ class Parser(BaseParser):
             )
 
     def get_host_props(self):
-        if self.root.name == "project":
+        if self.root == "project":
             if "project_code" not in [p.get("name") for p in self.mapping["props"]]:
                 self.mapping["props"].append({"name": PROJECT_CODE, "src": "code"})
             if "parent_props" not in self.mapping:
@@ -171,42 +151,20 @@ class Parser(BaseParser):
             self.add_program_name_to_parent()
 
         return self.create_props_from_json(
-            self.doc_type, self.mapping["props"], node_label=self.root.name
+            self.doc_type, self.mapping["props"], node_label=self.root
         )
-
-    def create_json_for_agg_filter_props(self):
-        json_props = []
-        added = set([])
-        if self.filter is None:
-            return json_props
-        for agg_prop in self.filter.get_agg_props():
-            path_and_src = agg_prop.split(".")
-            prop_name = "__".join(path_and_src)
-            if prop_name not in added:
-                src = path_and_src[-1]
-                path = ".".join(path_and_src[:-1])
-                json_props.append(
-                    {"name": prop_name, "path": path, "fn": "set", "src": src}
-                )
-                added.add(prop_name)
-        return json_props
 
     def get_aggregation_nodes(self):
         """
         Get aggregation nodes of aggregation tree which will produce aggregated_props
         :return:
         """
-        flat_paths = create_paths(self.mapping.get("aggregated_props", []))
-        flat_paths = create_paths(
-            self.create_json_for_agg_filter_props(), flat_paths
-        ).values()
-        print(f"list all flat_paths of {self.root.name}")
+        flat_paths = self.create_paths()
         for p in flat_paths:
             print(str(p))
-        print(f"End list all flat_paths of {self.root.name}")
         list_nodes, leaves = self.construct_aggregation_tree(flat_paths)
 
-        aggregated_nodes = [n for n in list_nodes if n not in leaves]
+        aggregated_nodes = [l for l in list_nodes if l not in leaves]
 
         for p in aggregated_nodes:
             p.non_leaf_children_count = Parser.non_leaves_count(p.children, leaves)
@@ -323,8 +281,7 @@ class Parser(BaseParser):
                 if i == len(path.path) - 1:
                     for reducer in path.reducers:
                         prop = self.create_prop_from_json(self.doc_type, reducer, None)
-                        n_child.add_reducer(Reducer(prop, reducer["fn"]))
-                        self.reducer_by_prop[prop.name] = reducer["fn"]
+                        n_child.reducers.append(Reducer(prop, reducer["fn"]))
 
                 n_current.add_child(n_child)
                 if (child_name, edge_tbl) not in reversed_index:
@@ -353,6 +310,27 @@ class Parser(BaseParser):
                 count += 1
         return count
 
+    def create_paths(self):
+        """
+        create all possible paths from mapping file.
+        :return:
+        """
+        flat_paths = {}
+        aggregated_nodes = self.mapping.get("aggregated_props", [])
+        for n in aggregated_nodes:
+            copied_n = deepcopy(n)
+            if "src" not in copied_n:
+                copied_n["src"] = None
+            path = copied_n.pop("path", None)
+            if path in flat_paths:
+                flat_paths[path].reducers.append(copied_n)
+            else:
+                flat_paths[path] = Path(path, copied_n)
+        print(list(flat_paths.values()))
+        for p in flat_paths:
+            print(str(p))
+        return set(flat_paths.values())
+
     @staticmethod
     def parse_sorting(child):
         sorts = child["sorted_by"] if "sorted_by" in child else None
@@ -373,14 +351,10 @@ class Parser(BaseParser):
         nodes = []
         bypass = self.mapping.get("settings", {}).get("bypass_multiplicity_check")
         for child in children:
-            child_label, edge = get_edge_table(
-                self.model, self.root.name, child["path"]
-            )
-            child_name, is_child = get_child_table(
-                self.model, self.root.name, child["path"]
-            )
+            child_label, edge = get_edge_table(self.model, self.root, child["path"])
+            child_name, is_child = get_child_table(self.model, self.root, child["path"])
             multiplicity = (
-                get_multiplicity(self.dictionary, self.root.name, child_label)
+                get_multiplicity(self.dictionary, self.root, child_label)
                 if is_child
                 else get_multiplicity(self.dictionary, child_label, self.root)
             )

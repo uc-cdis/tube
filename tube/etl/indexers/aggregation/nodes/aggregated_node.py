@@ -11,7 +11,6 @@ class AggregatedNode(BaseNode):
         self.level = level
         self.parent = None
         self.non_leaf_children_count = 0
-        self.props = []
         self.reducers = []
         self.done = False
 
@@ -19,10 +18,6 @@ class AggregatedNode(BaseNode):
         if self.edge_up_tbl is not None:
             return self.name, self.edge_up_tbl
         return self.name
-
-    def add_reducer(self, reducer):
-        self.reducers.append(reducer)
-        self.props.append(reducer.prop)
 
     def __hash__(self):
         return hash(self.__key__())

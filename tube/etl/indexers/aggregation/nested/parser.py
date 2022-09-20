@@ -11,14 +11,15 @@ class Parser(BaseParser):
 
     def __init__(self, mapping, model, dictionary):
         super(Parser, self).__init__(dictionary, mapping, model)
+
         self.leaves = []
         self.collectors = []
         self.root_node = None
         self.root_node = NestedNode(
-            self.root.name,
-            get_node_table_name(self.model, self.root.name),
-            self.root.name,
-            self.root.name,
+            self.root,
+            get_node_table_name(self.model, self.root),
+            self.root,
+            self.root,
             props=[],
         )
         self.get_nested_props(mapping)
@@ -30,7 +31,7 @@ class Parser(BaseParser):
         nested_indices = mapping.get("nested_props", [])
         for n_idx in nested_indices:
             self.root_node.children.add(
-                self.parse_nested_props(n_idx, self.root_node, self.root.name)
+                self.parse_nested_props(n_idx, self.root_node, self.root)
             )
 
     def parse_nested_props(self, mapping, nested_parent_node, parent_label):
