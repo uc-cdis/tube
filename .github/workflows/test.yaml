@@ -36,19 +36,17 @@ jobs:
           sudo apt-get install --yes --no-install-recommends jq postgresql-client python3.9 python3-pip
           sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
           sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1
+      # Performs a clean installation of all dependencies in the `package.json` file
+      # For more information, see https://docs.npmjs.com/cli/ci.html
       - name: Make dir cor compose-etl
         working-directory: ..
-        run: git clone https://github.com/uc-cdis/compose-etl.git --branch master --single-branch
+        run: git clone https://github.com/uc-cdis/compose-etl.git --branch feat/spark3 --single-branch
       - name: Get all files
         run: ls ..
       - name: Get all files
         run: ls ../..
       - name: Get current directory
         run: pwd
-      - name: Extract branch name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
       - name: Copy configuration files
         run: |
           cp -f tests/gen3/tube/etlMapping.yaml ../compose-etl/configs/etlMapping.yaml
@@ -60,9 +58,7 @@ jobs:
         run: echo "{\"db_host\":\"host.docker.internal\",\"db_username\":\"postgres\",\"db_password\":\"postgres\",\"db_database\":\"metadata_db\"}" > configs/creds.json
       - name: Replace tube branch
         working-directory: ../compose-etl
-        run: |
-          BRANCH=${{ steps.extract_branch.outputs.branch }}
-          sed -i "s/tube:master/tube:${BRANCH//\//_}/g" docker-compose.yml
+        run: sed -i "s/tube:master/tube:${BRANCH//\//_}/g" docker-compose.yml
       - name: change max_map_count (needed for running Elasticsearch in container)
         working-directory: ../compose-etl
         run: sudo sysctl -w vm.max_map_count=262144
