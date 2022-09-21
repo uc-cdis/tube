@@ -366,6 +366,8 @@ class Translator(BaseTranslator):
         root_df = self.translate_table_to_dataframe(
             self.parser.root, props=self.parser.props
         )
+        if root_df.rdd.isEmpty():
+            return root_df
         root_df = self.translate_parent(root_df)
         root_df = self.get_direct_children(root_df)
         root_df = root_df.drop_duplicates()
