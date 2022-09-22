@@ -405,7 +405,9 @@ class Translator(BaseTranslator):
         """
         df = self.load_from_hadoop_to_dateframe()
         for j in self.parser.joining_nodes:
-            df = self.join_to_an_index(df, translators[j.joining_index], j)
+            joining_index_translator = translators[j.joining_index]
+            if joining_index_translator.current_step > 0:
+                df = self.join_to_an_index(df, joining_index_translator, j)
         return df
 
     def walk_through_graph(self, df, root_id, p):
