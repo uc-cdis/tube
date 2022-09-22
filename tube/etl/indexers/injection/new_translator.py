@@ -120,6 +120,8 @@ class Translator(BaseTranslator):
         collected_collecting_dfs = {}
         for root in self.parser.roots:
             df = self.translate_table_to_dataframe(root, props=root.props)
+            if df.rdd.isEmpty():
+                return collected_collecting_dfs, collected_leaf_dfs
             for child in root.children:
                 edge_tbl = child.parents[root.name]
                 child_df = self.translate_edge_to_dataframe(
@@ -168,6 +170,8 @@ class Translator(BaseTranslator):
 
     def translate(self):
         collected_collecting_dfs, collected_leaf_dfs = self.join_program_to_project()
+        if len(collected_collecting_dfs) == 0 and len(collected_leaf_dfs) == 0:
+            return self.get_empty_dataframe_with_name(None)
         self.merge_collectors(collected_collecting_dfs)
         self.get_leaves(collected_collecting_dfs, collected_leaf_dfs)
         for (k, df) in list(collected_collecting_dfs.items()):
