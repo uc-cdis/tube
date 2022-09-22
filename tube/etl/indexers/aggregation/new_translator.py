@@ -154,6 +154,8 @@ class Translator(BaseTranslator):
         )
 
         temp_df = self.join_two_dataframe(edge_df, child_df, how="left_outer")
+        if temp_df.rdd.isEmpty():
+            return df
         expr = [
             self.reducer_to_agg_func_expr(rd.fn, rd.prop.name, is_merging=False)
             for rd in child.reducers
@@ -187,6 +189,8 @@ class Translator(BaseTranslator):
                     df = self.aggregate_with_count_on_edge_tbl(
                         n.name, df, edge_df, child
                     )
+                    if df.rdd.isEmpty():
+                        continue
                     no_of_remaining_reducers = len(
                         [r for r in child.reducers if not r.done]
                     )
@@ -373,7 +377,7 @@ class Translator(BaseTranslator):
         root_df = root_df.drop_duplicates()
         root_df = self.ensure_project_id_exist(root_df)
         agg_df = self.aggregate_nested_properties()
-        if agg_df is not None:
+        if agg_df is not None and not agg_df.rdd.isEmpty():
             root_id = get_node_id_name(self.parser.root.name)
             rm_props = [
                 p
