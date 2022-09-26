@@ -3,8 +3,6 @@ from tube.utils.dd import get_properties_types, get_node_table_name
 from .node import BaseRootNode
 from ..base.prop import PropFactory
 from pyspark.sql.types import (
-    StructType,
-    StructField,
     StringType,
     ArrayType,
     IntegerType,
