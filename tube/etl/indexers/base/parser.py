@@ -232,12 +232,7 @@ class Parser(object):
             if src == "id":
                 return (str,)
             a = self.get_possible_properties_types(self.model, node_label)
-            if (
-                a is not None
-                and src in a
-                and a.get(src) is list
-                and a.get(src)[0] is list
-            ):
+            if src in a and type(a.get(src)) is tuple and a.get(src)[0] is list:
                 return self.get_prop_type_of_field_in_dictionary(node_label, src)
             return a.get(src)
 
@@ -330,5 +325,7 @@ class Parser(object):
 
     def get_hadoop_type_ignore_fn(self, prop):
         if prop.type[0] is list:
-            return ArrayType(self.get_hadoop_simple_type(prop.type[1]))
+            if len(prop.type) > 1:
+                return ArrayType(self.get_hadoop_simple_type(prop.type[1]))
+            return ArrayType(StringType())
         return self.get_hadoop_simple_type(prop.type[0])
