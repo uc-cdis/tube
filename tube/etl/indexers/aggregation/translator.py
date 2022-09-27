@@ -112,8 +112,9 @@ def get_edge_schema():
 
 class Translator(BaseTranslator):
     def __init__(self, sc, hdfs_path, writer, mapping, model, dictionary):
-        super(Translator, self).__init__(sc, hdfs_path, writer)
-        self.parser = Parser(mapping, model, dictionary)
+        super(Translator, self).__init__(
+            sc, hdfs_path, writer, Parser(mapping, model, dictionary)
+        )
         nest_props = mapping.get("nested_props")
         self.nested_translator = (
             NestedTranslator(

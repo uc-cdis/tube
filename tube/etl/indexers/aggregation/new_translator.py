@@ -28,8 +28,9 @@ def prop_to_aggregated_fn(col_name, fn):
 
 class Translator(BaseTranslator):
     def __init__(self, sc, hdfs_path, writer, mapping, model, dictionary):
-        super(Translator, self).__init__(sc, hdfs_path, writer)
-        self.parser = Parser(mapping, model, dictionary)
+        super(Translator, self).__init__(
+            sc, hdfs_path, writer, Parser(mapping, model, dictionary)
+        )
         self.mapping_dictionary = self.get_all_value_mapping_dict()
         if self.sc is not None:
             self.mapping_broadcasted = self.sc.broadcast(self.mapping_dictionary)

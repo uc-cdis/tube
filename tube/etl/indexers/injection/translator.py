@@ -28,8 +28,9 @@ def json_export_with_no_key_for_injection_translator(x, doc_type):
 
 class Translator(BaseTranslator):
     def __init__(self, sc, hdfs_path, writer, mapping, model, dictionary):
-        super(Translator, self).__init__(sc, hdfs_path, writer)
-        self.parser = Parser(mapping, model, dictionary)
+        super(Translator, self).__init__(
+            sc, hdfs_path, writer, Parser(mapping, model, dictionary)
+        )
         root_props = []
         for root in self.parser.roots:
             root_props.extend(root.props)
