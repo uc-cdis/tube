@@ -324,6 +324,8 @@ class Parser(object):
         return StringType()
 
     def get_hadoop_type_ignore_fn(self, prop):
+        if prop.type is None:
+            return StringType()
         if prop.type[0] is list:
             if len(prop.type) > 1:
                 return ArrayType(self.get_hadoop_simple_type(prop.type[1]))

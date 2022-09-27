@@ -176,8 +176,6 @@ class Translator(BaseTranslator):
     def create_index_schema(self):
         data_types = {}
         for prop in self.parser.props:
-            data_types[prop.name] = self.parser.get_hadoop_type_ignore_fn(prop)
-        for prop in self.parser.props:
             if prop.name not in data_types:
                 data_types[prop.name] = self.parser.get_hadoop_type_ignore_fn(prop)
         fields = []
