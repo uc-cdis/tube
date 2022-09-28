@@ -39,8 +39,8 @@ class Writer(SparkBase):
         :return:
         """
         es_hosts = self.es_config["es.nodes"]
-        es_port = self.es_config["es.port"]
-        return Elasticsearch([{"host": es_hosts, "port": es_port}])
+        es_port = int(self.es_config["es.port"])
+        return Elasticsearch([{"host": es_hosts, "port": es_port, "scheme": "http"}])
 
     def write_to_new_index(self, df, index, doc_type):
         df = df.map(lambda x: json_export(x, doc_type))
