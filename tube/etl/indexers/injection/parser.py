@@ -177,12 +177,16 @@ class Parser(BaseParser):
         )
         leaves = set([p.src for p in flat_paths])
         for l in leaves:
-            self.leaves.add(LeafNode(l, get_node_table_name(self.model, l)))
+            self.leaves.add(LeafNode(l, get_node_table_name(self.model, l), self.props))
 
         nodes_with_props, roots = self.get_props_for_nodes()
         self.collectors, self.roots = self.create_tree_from_generated_edges(
             flat_paths, nodes_with_props, roots
         )
+        for collecting_node in self.collectors:
+            self.props.extend(collecting_node.props)
+        for root_node in self.roots:
+            self.props.extend(root_node.props)
 
         self.update_level()
         self.collectors.sort()
