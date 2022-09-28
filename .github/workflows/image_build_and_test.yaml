@@ -1,11 +1,20 @@
-name: Tube unit-test
+name: Build image and push to Quay and run unit-test
 on: push
 
 jobs:
   # Label of the container job
+  ci:
+    name: Build Image and Push to Quay
+    uses: uc-cdis/.github/.github/workflows/image_build_push.yaml@master
+    secrets:
+      ECR_AWS_ACCESS_KEY_ID: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
+      ECR_AWS_SECRET_ACCESS_KEY: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
+      QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
+      QUAY_ROBOT_TOKEN: ${{ secrets.QUAY_ROBOT_TOKEN }}
   runner-job:
     # Containers must run in Linux based operating systems
     runs-on: ubuntu-20.04
+    needs: ci
     # Service containers to run with `container-job`
     services:
       # Label used to access the service container
@@ -25,7 +34,6 @@ jobs:
         ports:
           # Maps tcp port 5432 on service container to the host
           - 5432:5432
-
     steps:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
@@ -36,17 +44,19 @@ jobs:
           sudo apt-get install --yes --no-install-recommends jq postgresql-client python3.9 python3-pip
           sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
           sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1
-      # Performs a clean installation of all dependencies in the `package.json` file
-      # For more information, see https://docs.npmjs.com/cli/ci.html
       - name: Make dir cor compose-etl
         working-directory: ..
-        run: git clone https://github.com/uc-cdis/compose-etl.git --branch feat/spark3 --single-branch
+        run: git clone https://github.com/uc-cdis/compose-etl.git --branch master --single-branch
       - name: Get all files
         run: ls ..
       - name: Get all files
         run: ls ../..
       - name: Get current directory
         run: pwd
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
       - name: Copy configuration files
         run: |
           cp -f tests/gen3/tube/etlMapping.yaml ../compose-etl/configs/etlMapping.yaml
@@ -58,7 +68,9 @@ jobs:
         run: echo "{\"db_host\":\"host.docker.internal\",\"db_username\":\"postgres\",\"db_password\":\"postgres\",\"db_database\":\"metadata_db\"}" > configs/creds.json
       - name: Replace tube branch
         working-directory: ../compose-etl
-        run: sed -i "s/tube:master/tube:${BRANCH//\//_}/g" docker-compose.yml
+        run: |
+          BRANCH=${{ steps.extract_branch.outputs.branch }}
+          sed -i "s/tube:master/tube:${BRANCH//\//_}/g" docker-compose.yml
       - name: change max_map_count (needed for running Elasticsearch in container)
         working-directory: ../compose-etl
         run: sudo sysctl -w vm.max_map_count=262144

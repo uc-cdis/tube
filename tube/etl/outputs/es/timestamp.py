@@ -1,5 +1,5 @@
 import re
-from datetime import datetime
+from datetime import datetime, date, timedelta
 import calendar
 from psycopg2.sql import SQL, Identifier
 from tube.utils.db import execute_sql_query_return_first_item
@@ -31,7 +31,14 @@ def get_latest_utc_transaction_time():
     query = SQL(" ").join(
         [select_clause, from_clause, where_clause, limit_clause, SQL(";")]
     )
-    return to_utc_time(execute_sql_query_return_first_item(query)[2])
+    query_result_time = execute_sql_query_return_first_item(query)
+    if query_result_time is None:
+        latest_time = datetime.combine(
+            date.today() - timedelta(days=1), datetime.min.time()
+        )
+    else:
+        latest_time = query_result_time[2]
+    return to_utc_time(latest_time)
 
 
 def check_exists_all_indices(es, index_names):

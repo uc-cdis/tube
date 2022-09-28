@@ -33,6 +33,8 @@ def value_diff(left, right):
         if isinstance(right_val, list) and left_val is not None:
             # This should check that left_val is an AttrList, probably
             items_not_equal = sorted(left_val) != sorted(right_val)
+        elif isinstance(right_val, float):
+            items_not_equal = abs(left_val - right_val) > 0.001
         else:
             items_not_equal = left_val != right_val
 

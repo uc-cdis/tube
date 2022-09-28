@@ -28,8 +28,9 @@ def prop_to_aggregated_fn(col_name, fn):
 
 class Translator(BaseTranslator):
     def __init__(self, sc, hdfs_path, writer, mapping, model, dictionary):
-        super(Translator, self).__init__(sc, hdfs_path, writer)
-        self.parser = Parser(mapping, model, dictionary)
+        super(Translator, self).__init__(
+            sc, hdfs_path, writer, Parser(mapping, model, dictionary)
+        )
         self.mapping_dictionary = self.get_all_value_mapping_dict()
         if self.sc is not None:
             self.mapping_broadcasted = self.sc.broadcast(self.mapping_dictionary)
@@ -130,6 +131,9 @@ class Translator(BaseTranslator):
         else:
             # if there is reducer, group by parent key and get out the number of children
             # only non-leaf nodes goes through this step
+            print(node_name)
+            print(child)
+            print(edge_df.head(1))
             count_df = (
                 edge_df.groupBy(node_id)
                 .count()
@@ -154,6 +158,8 @@ class Translator(BaseTranslator):
         )
 
         temp_df = self.join_two_dataframe(edge_df, child_df, how="left_outer")
+        if temp_df.rdd.isEmpty():
+            return df
         expr = [
             self.reducer_to_agg_func_expr(rd.fn, rd.prop.name, is_merging=False)
             for rd in child.reducers
@@ -187,6 +193,8 @@ class Translator(BaseTranslator):
                     df = self.aggregate_with_count_on_edge_tbl(
                         n.name, df, edge_df, child
                     )
+                    if df.rdd.isEmpty():
+                        continue
                     no_of_remaining_reducers = len(
                         [r for r in child.reducers if not r.done]
                     )
@@ -366,12 +374,14 @@ class Translator(BaseTranslator):
         root_df = self.translate_table_to_dataframe(
             self.parser.root, props=self.parser.props
         )
+        if root_df.rdd.isEmpty():
+            return root_df
         root_df = self.translate_parent(root_df)
         root_df = self.get_direct_children(root_df)
         root_df = root_df.drop_duplicates()
         root_df = self.ensure_project_id_exist(root_df)
         agg_df = self.aggregate_nested_properties()
-        if agg_df is not None:
+        if agg_df is not None and not agg_df.rdd.isEmpty():
             root_id = get_node_id_name(self.parser.root.name)
             rm_props = [
                 p
@@ -399,7 +409,9 @@ class Translator(BaseTranslator):
         """
         df = self.load_from_hadoop_to_dateframe()
         for j in self.parser.joining_nodes:
-            df = self.join_to_an_index(df, translators[j.joining_index], j)
+            joining_index_translator = translators[j.joining_index]
+            if joining_index_translator.current_step > 0:
+                df = self.join_to_an_index(df, joining_index_translator, j)
         return df
 
     def walk_through_graph(self, df, root_id, p):
@@ -412,15 +424,25 @@ class Translator(BaseTranslator):
                 df, self.translate_edge_to_dataframe(edge_tbl, src.name, n.name)
             )
             cur_props = n.props
-            for prop in cur_props:
-                expr.append(
-                    self.reducer_to_agg_func_expr("set", prop.name, is_merging=False)
-                )
             n_df = self.translate_table_to_dataframe(n, props=cur_props)
             df = self.join_two_dataframe(df, n_df)
             n_df.unpersist()
             src = n
             n = n.child
+
+            for prop in cur_props:
+                if prop.name in df.columns:
+                    expr.append(
+                        self.reducer_to_agg_func_expr(
+                            "set", prop.name, is_merging=False
+                        )
+                    )
+                else:
+                    expr.append(
+                        lit(None)
+                        .cast(self.parser.get_hadoop_type_ignore_fn(prop))
+                        .alias(prop.name)
+                    )
         df = df.groupBy(root_id).agg(*expr)
         return df
 

@@ -1,17 +1,23 @@
 from copy import copy
+from pyspark.sql import functions as fn
+from pyspark.sql.types import StructField, StructType
 
 from tube.etl.indexers.base.prop import PropFactory
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from tube.etl.indexers.injection.parser import Parser
 from tube.etl.indexers.injection.nodes.collecting_node import LeafNode
 from tube.utils.general import PROJECT_ID, PROJECT_CODE, PROGRAM_NAME, get_node_id_name
-from pyspark.sql import functions as fn
+from tube.settings import logger
+from pyspark.sql.types import (
+    StringType,
+)
 
 
 class Translator(BaseTranslator):
     def __init__(self, sc, hdfs_path, writer, mapping, model, dictionary):
-        super(Translator, self).__init__(sc, hdfs_path, writer)
-        self.parser = Parser(mapping, model, dictionary)
+        super(Translator, self).__init__(
+            sc, hdfs_path, writer, Parser(mapping, model, dictionary)
+        )
         root_props = []
         for root in self.parser.roots:
             root_props.extend(root.props)
@@ -57,6 +63,14 @@ class Translator(BaseTranslator):
                         .cast(self.parser.get_hadoop_type_ignore_fn(p))
                         .alias(p.name)
                     )
+            if "final" in collected_leaf_dfs:
+                logger.info(
+                    f"collected_leaf_dfs types: {collected_leaf_dfs['final'].dtypes}"
+                )
+                logger.info(select_expr)
+                logger.info(
+                    f"collected_leaf_dfs data: {collected_leaf_dfs['final'].head()}"
+                )
             child_df = child_df.select(*select_expr)
             collected_leaf_dfs["final"] = (
                 child_df
@@ -111,6 +125,8 @@ class Translator(BaseTranslator):
         collected_collecting_dfs = {}
         for root in self.parser.roots:
             df = self.translate_table_to_dataframe(root, props=root.props)
+            if df.rdd.isEmpty():
+                return collected_collecting_dfs, collected_leaf_dfs
             for child in root.children:
                 edge_tbl = child.parents[root.name]
                 child_df = self.translate_edge_to_dataframe(
@@ -148,7 +164,7 @@ class Translator(BaseTranslator):
     def get_leaves(self, collected_collecting_dfs, collected_leaf_dfs):
         for leaf in self.parser.leaves:
             df = collected_collecting_dfs.get(
-                leaf.name, self.get_empty_dataframe_with_name(leaf.name)
+                leaf.name, self.get_empty_dataframe_with_name(leaf)
             )
             self.collect_leaf(leaf, df, collected_leaf_dfs)
 
@@ -157,8 +173,27 @@ class Translator(BaseTranslator):
         keep_props.append(PROJECT_ID)
         keep_props.append("source_node")
 
+    def create_index_schema(self):
+        data_types = {}
+        for prop in self.parser.props:
+            if prop.name not in data_types:
+                data_types[prop.name] = self.parser.get_hadoop_type_ignore_fn(prop)
+        fields = []
+        for k, v in data_types.items():
+            fields.append(StructField(k, v, True))
+        fields.append(
+            StructField(get_node_id_name(self.parser.doc_type), StringType(), True)
+        )
+        return StructType(fields=fields)
+
+    def create_empty_dataframe(self):
+        schema = self.create_index_schema()
+        return self.sql_context.createDataFrame(self.sc.emptyRDD(), schema)
+
     def translate(self):
         collected_collecting_dfs, collected_leaf_dfs = self.join_program_to_project()
+        if len(collected_collecting_dfs) == 0 and len(collected_leaf_dfs) == 0:
+            return self.create_empty_dataframe()
         self.merge_collectors(collected_collecting_dfs)
         self.get_leaves(collected_collecting_dfs, collected_leaf_dfs)
         for (k, df) in list(collected_collecting_dfs.items()):
@@ -168,7 +203,7 @@ class Translator(BaseTranslator):
         if "final" in collected_leaf_dfs:
             return collected_leaf_dfs["final"]
         else:
-            return self.get_empty_dataframe_with_name(None)
+            return self.create_empty_dataframe()
 
     def clone_prop_with_iterator_fn(self, p):
         prop = copy(self.parser.get_prop_by_name(p.name))
