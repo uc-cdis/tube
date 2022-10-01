@@ -7,6 +7,7 @@ from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from tube.etl.indexers.injection.parser import Parser
 from tube.etl.indexers.injection.nodes.collecting_node import LeafNode
 from tube.utils.general import PROJECT_ID, PROJECT_CODE, PROGRAM_NAME, get_node_id_name
+from tube.utils.spark import get_hadoop_type_ignore_fn
 from tube.settings import logger
 from pyspark.sql.types import (
     StringType,
@@ -59,9 +60,7 @@ class Translator(BaseTranslator):
             for p in prop_list.values():
                 if p.name not in child_df.columns:
                     select_expr.append(
-                        fn.lit(None)
-                        .cast(self.parser.get_hadoop_type_ignore_fn(p))
-                        .alias(p.name)
+                        fn.lit(None).cast(get_hadoop_type_ignore_fn(p)).alias(p.name)
                     )
             if "final" in collected_leaf_dfs:
                 logger.info(
@@ -177,7 +176,7 @@ class Translator(BaseTranslator):
         data_types = {}
         for prop in self.parser.props:
             if prop.name not in data_types:
-                data_types[prop.name] = self.parser.get_hadoop_type_ignore_fn(prop)
+                data_types[prop.name] = get_hadoop_type_ignore_fn(prop)
         fields = []
         for k, v in data_types.items():
             fields.append(StructField(k, v, True))

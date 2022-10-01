@@ -1,4 +1,10 @@
 from pyspark import SparkConf, SparkContext
+from pyspark.sql.types import (
+    StringType,
+    ArrayType,
+    IntegerType,
+    FloatType,
+)
 
 import tube.settings as config
 
@@ -68,3 +74,35 @@ def get_all_files(path, sc):
     for p in status:
         files.append(p.getPath().toString())
     return files
+
+
+def get_hadoop_type(prop):
+    if prop.fn is not None and prop.fn in ["list", "set"]:
+        return ArrayType(StringType())
+    if prop.type == (float,):
+        return FloatType()
+    if prop.type == (str,):
+        return StringType()
+    if prop.type == (int,):
+        return IntegerType()
+    return StringType()
+
+
+def get_hadoop_simple_type(p_type):
+    if p_type is float:
+        return FloatType()
+    if p_type is str:
+        return StringType()
+    if p_type is int:
+        return IntegerType()
+    return StringType()
+
+
+def get_hadoop_type_ignore_fn(prop):
+    if prop.type is None:
+        return StringType()
+    if prop.type[0] is list:
+        if len(prop.type) > 1:
+            return ArrayType(get_hadoop_simple_type(prop.type[1]))
+        return ArrayType(StringType())
+    return get_hadoop_simple_type(prop.type[0])

@@ -123,6 +123,8 @@ class Translator(object):
         col_aliases = [p.name for p in props]
         cols = []
         for p in props:
+            if p.name not in df.schema.names and p.src not in df.schema.names:
+                continue
             if (
                 p.name in self.mapping_dictionary
                 and self.mapping_broadcasted is not None
@@ -142,16 +144,6 @@ class Translator(object):
             cols.append(key_name)
         return cols
 
-    def create_schema(self, node):
-        data_types = {}
-        for p in node.props:
-            field_name = p.src if p.src is not None else p.name
-            data_types[field_name] = self.parser.get_hadoop_type_ignore_fn(p)
-        fields = [StructField(get_node_id_name(node.name), StringType(), True)]
-        for k, v in data_types.items():
-            fields.append(StructField(k, v, True))
-        return StructType(fields=fields)
-
     def translate_table_to_dataframe(
         self, node, get_zero_frame=None, props=None, key_name=None
     ):
@@ -169,7 +161,7 @@ class Translator(object):
         try:
             print(f"Create scheme for node: {node.name}")
             print(f"With props: {node.props}")
-            schema = self.create_schema(node)
+            schema = self.parser.create_schema(node)
             df, is_empty = self.read_text_files_of_table(
                 node_tbl_name, self.get_empty_dataframe_with_name
             )
@@ -190,7 +182,7 @@ class Translator(object):
             raise
 
     def get_empty_dataframe_with_name(self, node, key_name=None):
-        schema = self.create_schema(node)
+        schema = self.parser.create_schema(node)
         if node is None and key_name is None:
             schema = StructType([])
         elif key_name is not None:

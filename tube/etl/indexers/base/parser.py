@@ -1,13 +1,14 @@
+from pyspark.sql.types import (
+    StructField,
+    StringType,
+    StructType,
+)
+
+from tube.etl.indexers.base.node import BaseRootNode
+from tube.etl.indexers.base.prop import PropFactory
 from tube.utils.general import get_node_id_name
 from tube.utils.dd import get_properties_types, get_node_table_name
-from .node import BaseRootNode
-from ..base.prop import PropFactory
-from pyspark.sql.types import (
-    StringType,
-    ArrayType,
-    IntegerType,
-    FloatType,
-)
+from tube.utils.spark import get_hadoop_type_ignore_fn
 
 
 class Parser(object):
@@ -303,31 +304,14 @@ class Parser(object):
             assigned_levels = assigned_levels.union(new_assigned)
             level += 1
 
-    def get_hadoop_type(self, prop):
-        if prop.fn is not None and prop.fn in ["list", "set"]:
-            return ArrayType(StringType())
-        if prop.type == (float,):
-            return FloatType()
-        if prop.type == (str,):
-            return StringType()
-        if prop.type == (int,):
-            return IntegerType()
-        return StringType()
-
-    def get_hadoop_simple_type(self, p_type):
-        if p_type is float:
-            return FloatType()
-        if p_type is str:
-            return StringType()
-        if p_type is int:
-            return IntegerType()
-        return StringType()
-
-    def get_hadoop_type_ignore_fn(self, prop):
-        if prop.type is None:
-            return StringType()
-        if prop.type[0] is list:
-            if len(prop.type) > 1:
-                return ArrayType(self.get_hadoop_simple_type(prop.type[1]))
-            return ArrayType(StringType())
-        return self.get_hadoop_simple_type(prop.type[0])
+    def create_schema(self, node):
+        data_types = {}
+        prop_from_this_node = get_properties_types(self.model, node.name)
+        for p in node.props:
+            field_name = p.src if p.src is not None else p.name
+            if field_name in prop_from_this_node:
+                data_types[field_name] = get_hadoop_type_ignore_fn(p)
+        fields = [StructField(get_node_id_name(node.name), StringType(), True)]
+        for k, v in data_types.items():
+            fields.append(StructField(k, v, True))
+        return StructType(fields=fields)
