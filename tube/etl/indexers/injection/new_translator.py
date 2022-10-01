@@ -7,6 +7,7 @@ from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from tube.etl.indexers.injection.parser import Parser
 from tube.etl.indexers.injection.nodes.collecting_node import LeafNode
 from tube.utils.general import PROJECT_ID, PROJECT_CODE, PROGRAM_NAME, get_node_id_name
+from tube.utils.spark import get_hadoop_type_ignore_fn
 from tube.settings import logger
 from pyspark.sql.types import (
     StringType,
@@ -43,7 +44,7 @@ class Translator(BaseTranslator):
                 return
             child_df = child_df.withColumn("source_node", fn.lit(child.name))
             edge_df = edge_df.withColumnRenamed(get_node_id_name(child.name), key_name)
-            child_df = self.join_two_dataframe(child_df, edge_df)
+            child_df = self.join_two_dataframe(edge_df, child_df, how="left_outer")
             #  child_df.join(edge_df, on=self.parser.get_key_prop().name)
             rm_props = [
                 c
@@ -59,9 +60,7 @@ class Translator(BaseTranslator):
             for p in prop_list.values():
                 if p.name not in child_df.columns:
                     select_expr.append(
-                        fn.lit(None)
-                        .cast(self.parser.get_hadoop_type_ignore_fn(p))
-                        .alias(p.name)
+                        fn.lit(None).cast(get_hadoop_type_ignore_fn(p)).alias(p.name)
                     )
             if "final" in collected_leaf_dfs:
                 logger.info(
@@ -88,6 +87,7 @@ class Translator(BaseTranslator):
         child.no_parent_to_map -= 1
         if len(child.props) > 0:
             child_df = self.translate_table_to_dataframe(child, props=child.props)
+            child_df = self.join_two_dataframe(child_df, edge_df)
         else:
             child_df = edge_df
 
@@ -104,7 +104,7 @@ class Translator(BaseTranslator):
             collected_collecting_dfs[child.name] = child_df.drop(*rm_props)
         else:
             collected_collecting_dfs[child.name] = self.join_two_dataframe(
-                collected_collecting_dfs[child.name], child_df
+                collected_collecting_dfs[child.name], child_df, how="full_outer"
             ).drop(*rm_props)
 
     def merge_project(self, child, edge_df, collected_collecting_dfs):
@@ -177,7 +177,7 @@ class Translator(BaseTranslator):
         data_types = {}
         for prop in self.parser.props:
             if prop.name not in data_types:
-                data_types[prop.name] = self.parser.get_hadoop_type_ignore_fn(prop)
+                data_types[prop.name] = get_hadoop_type_ignore_fn(prop)
         fields = []
         for k, v in data_types.items():
             fields.append(StructField(k, v, True))
@@ -192,8 +192,6 @@ class Translator(BaseTranslator):
 
     def translate(self):
         collected_collecting_dfs, collected_leaf_dfs = self.join_program_to_project()
-        if len(collected_collecting_dfs) == 0 and len(collected_leaf_dfs) == 0:
-            return self.create_empty_dataframe()
         self.merge_collectors(collected_collecting_dfs)
         self.get_leaves(collected_collecting_dfs, collected_leaf_dfs)
         for (k, df) in list(collected_collecting_dfs.items()):
