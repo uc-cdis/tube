@@ -376,7 +376,7 @@ class Parser(BaseParser):
             child_label, edge = get_edge_table(
                 self.model, self.root.name, child["path"]
             )
-            child_name, is_child = get_child_table(
+            child_tbl, is_child = get_child_table(
                 self.model, self.root.name, child["path"]
             )
             multiplicity = (
@@ -404,6 +404,8 @@ class Parser(BaseParser):
                 self.doc_type, child["props"], node_label=child_label
             )
             nodes.append(
-                DirectNode(child_name, edge, props, sorted_by, desc_order, is_child)
+                DirectNode(
+                    child_label, child_tbl, edge, props, sorted_by, desc_order, is_child
+                )
             )
         return nodes
