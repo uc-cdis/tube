@@ -191,8 +191,6 @@ class Translator(BaseTranslator):
 
     def translate(self):
         collected_collecting_dfs, collected_leaf_dfs = self.join_program_to_project()
-        if len(collected_collecting_dfs) == 0 and len(collected_leaf_dfs) == 0:
-            return self.create_empty_dataframe()
         self.merge_collectors(collected_collecting_dfs)
         self.get_leaves(collected_collecting_dfs, collected_leaf_dfs)
         for (k, df) in list(collected_collecting_dfs.items()):
