@@ -34,10 +34,10 @@ def test_auth_resource_path_exist(doc_type):
         index=parser.name, body={"query": {"match_all": {}}}, size=9999
     )
 
+    hit_response = response["hits"]["hits"]
     auth_resource_path = "/programs/jnkns/projects/jenkins"
-
-    for hit in response:
-        assert hit.auth_resource_path == auth_resource_path
+    for hit in hit_response:
+        assert hit.get("_source").get("auth_resource_path") == auth_resource_path
 
 
 @pytest.mark.parametrize("doc_type", doc_types)
@@ -63,7 +63,7 @@ def test_es_types(doc_type):
 
     # assert "_None_id" not in mapping[index_name]["mappings"][doc_type]["properties"]
     list_errors = []
-    for k, t in list(mapping[index_name]["mappings"][doc_type]["properties"].items()):
+    for k, t in list(mapping[index_name]["mappings"]["properties"].items()):
         try:
             assert t["type"] != "text", f"field {k} has type as text"
         except AssertionError as ex:
