@@ -134,9 +134,6 @@ class Translator(BaseTranslator):
         else:
             # if there is reducer, group by parent key and get out the number of children
             # only non-leaf nodes goes through this step
-            print(node_name)
-            print(child)
-            print(edge_df.head(1))
             count_df = (
                 edge_df.groupBy(node_id)
                 .count()
@@ -324,15 +321,16 @@ class Translator(BaseTranslator):
             for p in joining_node.getting_fields
         ]
         tmp_df = joining_df.groupBy(joining_node.joining_fields).agg(*expr)
-
         rm_props = [p for p in src_col_names if p not in joining_node.joining_fields]
         joining_df = joining_df.drop(*rm_props).join(
             tmp_df, on=joining_node.joining_fields
         )
+        tmp_df.unpersist()
 
-        df = df.join(joining_df, on=joining_node.joining_fields, how="left_outer")
+        res_df = df.join(joining_df, on=joining_node.joining_fields, how="left_outer")
+        df.unpersist()
         joining_df.unpersist()
-        return df
+        return res_df
 
     def join_no_aggregate(self, df, joining_df, dual_props, joining_node):
         expr = [col(p.get("src").name).alias(p.get("dst").name) for p in dual_props]

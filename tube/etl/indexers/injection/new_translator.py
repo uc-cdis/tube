@@ -55,6 +55,7 @@ class Translator(BaseTranslator):
             if len(child_df.head(1)) == 0:
                 return
             child_df = child_df.drop(*rm_props)
+
             select_expr = child_df.columns
             prop_list = PropFactory.get_prop_by_doc_name(self.parser.doc_type)
             for p in prop_list.values():
@@ -65,10 +66,6 @@ class Translator(BaseTranslator):
             if "final" in collected_leaf_dfs:
                 logger.info(
                     f"collected_leaf_dfs types: {collected_leaf_dfs['final'].dtypes}"
-                )
-                logger.info(select_expr)
-                logger.info(
-                    f"collected_leaf_dfs data: {collected_leaf_dfs['final'].head()}"
                 )
             child_df = child_df.select(*select_expr)
             collected_leaf_dfs["final"] = (
@@ -87,7 +84,7 @@ class Translator(BaseTranslator):
         child.no_parent_to_map -= 1
         if len(child.props) > 0:
             child_df = self.translate_table_to_dataframe(child, props=child.props)
-            child_df = self.join_two_dataframe(child_df, edge_df)
+            child_df = self.join_two_dataframe(edge_df, child_df)
         else:
             child_df = edge_df
 

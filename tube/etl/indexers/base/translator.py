@@ -160,7 +160,6 @@ class Translator(object):
         props = props if props is not None else node.props
         try:
             print(f"Create scheme for node: {node.name}")
-            print(f"With props: {node.props}")
             schema = self.parser.create_schema(node)
             df, is_empty = self.read_text_files_of_table(
                 node_tbl_name, self.get_empty_dataframe_with_name
@@ -329,7 +328,10 @@ class Translator(object):
         join_on_props = [p for p in df1.schema.names if p in df2.schema.names]
         if len(join_on_props) == 0:
             return self.get_empty_dataframe_with_columns([])
-        return df1.join(df2, on=join_on_props, how=how).drop_duplicates()
+        res_df = df1.join(df2, on=join_on_props, how=how).drop_duplicates()
+        df1.unpersist()
+        df2.unpersist()
+        return res_df
 
     def translate_joining_props(self, translators):
         pass
