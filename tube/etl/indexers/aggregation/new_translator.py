@@ -134,9 +134,6 @@ class Translator(BaseTranslator):
         else:
             # if there is reducer, group by parent key and get out the number of children
             # only non-leaf nodes goes through this step
-            print(node_name)
-            print(child)
-            print(edge_df.head(1))
             count_df = (
                 edge_df.groupBy(node_id)
                 .count()
