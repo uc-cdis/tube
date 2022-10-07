@@ -1,5 +1,5 @@
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
-from tube.etl.indexers.base.prop import PropFactory, Prop
+from tube.etl.indexers.base.prop import PropFactory
 from tube.utils.general import (
     get_node_id_name,
     get_node_id_name_without_prefix,
@@ -7,8 +7,11 @@ from tube.utils.general import (
     PROJECT_CODE,
     PROGRAM_NAME,
 )
-from .parser import Parser
-from .nested.translator import Translator as NestedTranslator
+from tube.utils.spark import get_hadoop_type_ignore_fn
+from tube.etl.indexers.aggregation.parser import Parser
+from tube.etl.indexers.aggregation.nested.translator import (
+    Translator as NestedTranslator,
+)
 from tube.etl.indexers.base.logic import execute_filter
 from pyspark.sql.functions import (
     col,
@@ -131,9 +134,6 @@ class Translator(BaseTranslator):
         else:
             # if there is reducer, group by parent key and get out the number of children
             # only non-leaf nodes goes through this step
-            print(node_name)
-            print(child)
-            print(edge_df.head(1))
             count_df = (
                 edge_df.groupBy(node_id)
                 .count()
@@ -321,15 +321,16 @@ class Translator(BaseTranslator):
             for p in joining_node.getting_fields
         ]
         tmp_df = joining_df.groupBy(joining_node.joining_fields).agg(*expr)
-
         rm_props = [p for p in src_col_names if p not in joining_node.joining_fields]
         joining_df = joining_df.drop(*rm_props).join(
             tmp_df, on=joining_node.joining_fields
         )
+        tmp_df.unpersist()
 
-        df = df.join(joining_df, on=joining_node.joining_fields, how="left_outer")
+        res_df = df.join(joining_df, on=joining_node.joining_fields, how="left_outer")
+        df.unpersist()
         joining_df.unpersist()
-        return df
+        return res_df
 
     def join_no_aggregate(self, df, joining_df, dual_props, joining_node):
         expr = [col(p.get("src").name).alias(p.get("dst").name) for p in dual_props]
@@ -439,9 +440,7 @@ class Translator(BaseTranslator):
                     )
                 else:
                     expr.append(
-                        lit(None)
-                        .cast(self.parser.get_hadoop_type_ignore_fn(prop))
-                        .alias(prop.name)
+                        lit(None).cast(get_hadoop_type_ignore_fn(prop)).alias(prop.name)
                     )
         df = df.groupBy(root_id).agg(*expr)
         return df
