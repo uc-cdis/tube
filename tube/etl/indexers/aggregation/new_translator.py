@@ -473,8 +473,3 @@ class Translator(BaseTranslator):
         )
 
         return filtered_df
-
-    def write(self, df):
-        self.writer.write_dataframe(
-            df, self.parser.name, self.parser.doc_type, self.parser.types
-        )

@@ -80,15 +80,6 @@ class Translator(BaseTranslator):
         node_df = self.translate_edge_to_dataframe(edge_tbl, src, dst)
         return node_df
 
-    def write(self, df):
-        self.writer.write_dataframe(
-            df,
-            self.parser.name,
-            self.parser.doc_type,
-            self.parser.types,
-            self.parser.prop_types,
-        )
-
     def translate(self):
         return self.collect_tree()
 
