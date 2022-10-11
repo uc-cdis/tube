@@ -244,8 +244,3 @@ class Translator(BaseTranslator):
         ]
         df = df.drop(*rm_props)
         return self.join_two_dataframe(df, tmp_df)
-
-    def write(self, df):
-        self.writer.write_dataframe(
-            df, self.parser.name, self.parser.doc_type, self.parser.types
-        )
