@@ -1,6 +1,14 @@
+from pyspark.sql.types import (
+    StructField,
+    StringType,
+    StructType,
+)
+
+from tube.etl.indexers.base.node import BaseRootNode
+from tube.etl.indexers.base.prop import PropFactory
 from tube.utils.general import get_node_id_name
-from ..base.prop import PropFactory
-from tube.utils.dd import get_properties_types
+from tube.utils.dd import get_properties_types, get_node_table_name
+from tube.utils.spark import get_hadoop_type_ignore_fn
 
 
 class Parser(object):
@@ -9,16 +17,30 @@ class Parser(object):
     """
 
     def __init__(self, dictionary, mapping, model):
+        self.prop_types_from_dictionary = {}
         self.dictionary = dictionary
         self.mapping = mapping
         self.model = model
         self.name = mapping["name"]
-        self.root = mapping["root"]
         self.doc_type = mapping["doc_type"]
+        if (
+            mapping["root"] is not None
+            and mapping["root"] != "None"
+            and ("props" in mapping or "nested_props" in mapping)
+        ):
+            props = self.mapping["props"] if "props" in mapping else []
+            self.root = BaseRootNode(
+                name=mapping["root"],
+                tbl_name=get_node_table_name(model, mapping["root"]),
+                props=self.create_props_from_json(
+                    self.doc_type, props, node_label=mapping["root"]
+                ),
+            )
+        else:
+            self.root = None
         self.joining_nodes = []
         self.additional_props = []
         self.array_types = []
-        self.prop_types_from_dictionary = {}
         PropFactory.adding_prop(
             self.doc_type,
             get_node_id_name(self.doc_type),
@@ -75,6 +97,17 @@ class Parser(object):
                     continue
                 p.update_type(prop.type)
 
+    def get_python_type_of_prop(self, p, array_types):
+        is_array_type = p.type[0] == list
+        has_array_agg_fn = p.fn is not None and p.fn in ["set", "list"]
+        array_type_condition = is_array_type or has_array_agg_fn
+        if array_type_condition:
+            if array_types is not None and p.name not in array_types:
+                array_types.append(p.name)
+            return (self.select_widest_type(p.type), 1)
+        else:
+            return (self.select_widest_type(p.type), 0)
+
     def get_es_types(self):
         types = {}
         types_to_convert_to_es_types = list(
@@ -86,24 +119,14 @@ class Parser(object):
             )
         for p in types_to_convert_to_es_types:
             if p.type is not None:
-                is_array_type = p.type[0] == list
-                has_array_agg_fn = p.fn is not None and p.fn in ["set", "list"]
-                array_type_condition = is_array_type or has_array_agg_fn
-                if array_type_condition:
-                    types[p.name] = (self.select_widest_type(p.type), 1)
-                    if p.name not in self.array_types:
-                        self.array_types.append(p.name)
-                else:
-                    types[p.name] = (self.select_widest_type(p.type), 0)
+                types[p.name] = self.get_python_type_of_prop(p, self.array_types)
         self.prop_types = types
         self.types = self.generate_es_mapping_types(self.doc_type, types)
         return self.types
 
     @staticmethod
     def select_widest_type(types):
-        if str in types:
-            return str
-        elif float in types:
+        if float in types:
             return float
         elif int in types:
             return int
@@ -210,7 +233,7 @@ class Parser(object):
             if src == "id":
                 return (str,)
             a = self.get_possible_properties_types(self.model, node_label)
-            if a.get(src) == (list,):
+            if src in a and type(a.get(src)) is tuple and a.get(src)[0] is list:
                 return self.get_prop_type_of_field_in_dictionary(node_label, src)
             return a.get(src)
 
@@ -228,8 +251,10 @@ class Parser(object):
         self, doc_name, p, node_label=None, index=None, is_additional=False
     ):
         value_mappings = p.get("value_mappings", [])
-        src = p["src"] if "src" in p else p["name"]
         fn = p.get("fn")
+        src = p.get("src", None)
+        if src is None and fn != "count":
+            src = p["name"]
 
         prop_type = self.get_prop_type(fn, src, node_label=node_label, index=index)
         prop = PropFactory.adding_prop(
@@ -278,3 +303,15 @@ class Parser(object):
             just_assigned = new_assigned
             assigned_levels = assigned_levels.union(new_assigned)
             level += 1
+
+    def create_schema(self, node):
+        data_types = {}
+        prop_from_this_node = get_properties_types(self.model, node.name)
+        for p in node.props:
+            field_name = p.src if p.src is not None else p.name
+            if field_name in prop_from_this_node:
+                data_types[field_name] = get_hadoop_type_ignore_fn(p)
+        fields = [StructField(get_node_id_name(node.name), StringType(), True)]
+        for k, v in data_types.items():
+            fields.append(StructField(k, v, True))
+        return StructType(fields=fields)

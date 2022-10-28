@@ -7,8 +7,9 @@ from tube.etl.indexers.base.logic import execute_filter
 
 class Translator(BaseTranslator):
     def __init__(self, sc, hdfs_path, writer, mapping, model, dictionary):
-        super(Translator, self).__init__(sc, hdfs_path, writer)
-        self.parser = Parser(mapping, model, dictionary)
+        super(Translator, self).__init__(
+            sc, hdfs_path, writer, Parser(mapping, model, dictionary)
+        )
         self.collected_node_dfs = {}
         self.updated_types = False
 
@@ -78,15 +79,6 @@ class Translator(BaseTranslator):
     def collect_edge(self, edge_tbl, src, dst):
         node_df = self.translate_edge_to_dataframe(edge_tbl, src, dst)
         return node_df
-
-    def write(self, df):
-        self.writer.write_dataframe(
-            df,
-            self.parser.name,
-            self.parser.doc_type,
-            self.parser.types,
-            self.parser.prop_types,
-        )
 
     def translate(self):
         return self.collect_tree()

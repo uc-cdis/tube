@@ -109,6 +109,13 @@ class PropFactory(object):
     def get_prop_by_json(doc_name, p):
         return PropFactory.get_prop_by_name(doc_name, p["name"])
 
+    @staticmethod
+    def has_prop_in_doc_name(doc_name, name):
+        return (
+            doc_name in PropFactory.prop_by_names
+            and name in PropFactory.prop_by_names.get(doc_name)
+        )
+
 
 class ValueMapping(object):
     def __init__(self, original, final):

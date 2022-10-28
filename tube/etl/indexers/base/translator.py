@@ -1,25 +1,27 @@
 import os
 import json
+from pyspark.sql.context import SQLContext
+from pyspark.sql.types import StructType, StructField, StringType
+from pyspark.sql.functions import col, min, sum, count, collect_set, collect_list
+
 from .lambdas import (
     extract_link,
     extract_link_reverse,
+    extract_metadata_to_json,
+    extract_metadata_to_tuple,
     flatten_files_to_lists,
     get_props,
     get_props_empty_values,
     get_number,
-)
-from tube.utils.spark import save_rdd_of_dataframe, get_all_files, save_rdds
-from pyspark.sql.context import SQLContext
-from pyspark.sql.types import StructType, StructField, StringType
-from tube.utils.general import get_node_id_name
-from pyspark.sql.functions import collect_list, col
-
-from .prop import PropFactory
-from tube.etl.indexers.base.lambdas import (
-    extract_metadata_to_json,
-    extract_metadata_to_tuple,
+    f_collect_list_udf,
+    f_collect_set_udf,
     map_with_dictionary,
 )
+from .prop import PropFactory
+from .parser import Parser
+
+from tube.utils.spark import save_rdd_of_dataframe, get_all_files, save_rdds
+from tube.utils.general import get_node_id_name
 
 
 def json_export_with_no_key(x, doc_type, root_name):
@@ -35,13 +37,13 @@ class Translator(object):
     The main entry point into the index export process for the mutation indices
     """
 
-    def __init__(self, sc, hdfs_path, writer):
+    def __init__(self, sc, hdfs_path, writer, parser: Parser):
         self.sc = sc
         if sc is not None:
             self.sql_context = SQLContext(self.sc)
         self.writer = writer
         self.hdfs_path = hdfs_path
-        self.parser = None
+        self.parser = parser
         self.current_step = 0
         self.mapping_dictionary = {}
         self.mapping_broadcasted = None
@@ -60,10 +62,7 @@ class Translator(object):
         rm_props = [p for p in df.schema.names if p not in keep_props]
         return df.drop(*rm_props)
 
-    def read_text_files_of_table(self, table_name, fn_frame_zero):
-        files = get_all_files(os.path.join(self.hdfs_path, table_name), self.sc)
-        if len(files) == 0:
-            return fn_frame_zero(), True
+    def read_text_from_non_empty_file(self, files):
         df = None
         if len(files) > 0:
             df = self.sc.textFile(files[0])
@@ -71,6 +70,18 @@ class Translator(object):
             for f in files[1:]:
                 df = df.union(self.sc.textFile(f))
         return df, False
+
+    def read_text_files_of_table(self, table_name, fn_frame_zero):
+        files = get_all_files(os.path.join(self.hdfs_path, table_name), self.sc)
+        if len(files) == 0:
+            return fn_frame_zero(), True
+        return self.read_text_from_non_empty_file(files)
+
+    def read_text_files_of_node(self, node, fn_frame_zero):
+        files = get_all_files(os.path.join(self.hdfs_path, node.tbl_name), self.sc)
+        if len(files) == 0:
+            return fn_frame_zero(node), True
+        return self.read_text_from_non_empty_file(files)
 
     def get_frame_zero_rdd(self):
         df = self.sc.parallelize(
@@ -102,14 +113,19 @@ class Translator(object):
             raise
 
     def get_cols_from_node(self, node_name, props, nested_props, df, key_name=None):
-        col_names = [p.src for p in props]
+        node_id_name = get_node_id_name(node_name)
+        for p in props:
+            if p.src == "id":
+                p.src = get_node_id_name(node_name)
+            if p.name == key_name:
+                p.src = get_node_id_name(node_name)
+        col_srcs = [p.src for p in props]
+        col_aliases = [p.name for p in props]
         cols = []
         for p in props:
-            if p.src not in df.schema.names:
+            if p.name not in df.schema.names and p.src not in df.schema.names:
                 continue
-            if p.src == "id":
-                cols.append(col(get_node_id_name(node_name)).alias(p.name))
-            elif (
+            if (
                 p.name in self.mapping_dictionary
                 and self.mapping_broadcasted is not None
             ):
@@ -122,9 +138,9 @@ class Translator(object):
                 cols.append(col(p.src).alias(p.name))
         for p in nested_props:
             cols.append(col(p))
-        if "id" not in col_names and key_name is None:
+        if "id" not in col_srcs and node_id_name not in col_srcs and key_name is None:
             cols.append(get_node_id_name(node_name))
-        elif key_name is not None:
+        elif key_name not in col_aliases and key_name is not None:
             cols.append(key_name)
         return cols
 
@@ -136,12 +152,15 @@ class Translator(object):
         :param node: node object
         :param get_zero_frame: True if we want to have an empty frame value
         :param props: subset of properties to be extracted. None means get all.
+        :param key_name:
         :return:
         """
         node_tbl_name = node.tbl_name
         node_name = node.name
         props = props if props is not None else node.props
         try:
+            print(f"Create scheme for node: {node.name}")
+            schema = self.parser.create_schema(node)
             df, is_empty = self.read_text_files_of_table(
                 node_tbl_name, self.get_empty_dataframe_with_name
             )
@@ -149,10 +168,10 @@ class Translator(object):
                 return df
             df = df.map(lambda x: extract_metadata_to_json(x, node_name))
             if get_zero_frame and (df is None or df.isEmpty()):
-                return self.get_empty_dataframe_with_name(node.name, key_name=key_name)
-            new_df = self.sql_context.read.json(df)
+                return self.get_empty_dataframe_with_name(node, key_name=key_name)
+            new_df = self.sql_context.read.json(df, schema=schema)
             df.unpersist()
-            if props is not None:
+            if props is not None and not new_df.rdd.isEmpty():
                 cols = self.get_cols_from_node(node_name, props, [], new_df, key_name)
                 return new_df.select(*cols)
             return new_df
@@ -161,16 +180,17 @@ class Translator(object):
             print(ex)
             raise
 
-    def get_empty_dataframe_with_name(self, name, key_name=None):
-        if name is None and key_name is None:
+    def get_empty_dataframe_with_name(self, node, key_name=None):
+        schema = self.parser.create_schema(node)
+        if node is None and key_name is None:
             schema = StructType([])
         elif key_name is not None:
-            schema = StructType([StructField(key_name, StringType(), False)])
+            schema.fields.append(StructField(key_name, StringType(), False))
         else:
-            schema = StructType(
-                [StructField(get_node_id_name(name), StringType(), False)]
+            schema.fields.append(
+                StructField(get_node_id_name(node.name), StringType(), False)
             )
-        return self.sc.parallelize([]).toDF(schema)
+        return self.sql_context.createDataFrame(self.sc.emptyRDD(), schema)
 
     def get_empty_dataframe_with_columns(self, cols):
         schema = (
@@ -184,6 +204,7 @@ class Translator(object):
         """
         Return the edge table that has two columns.
         :param table_name:
+        :param reversed:
         :return: [(child_node_id, parent_node_id)] if not reversed other wise [(parent_node_id, child_node_id)]
         """
         df = self.sc.wholeTextFiles(os.path.join(self.hdfs_path, table_name)).flatMap(
@@ -238,19 +259,49 @@ class Translator(object):
 
         return df.mapValues(get_props(names, values))
 
-    def get_props_from_df(self, df, props):
+    @staticmethod
+    def reducer_to_agg_func_expr(func_name, value, alias=None, is_merging=False):
+        col_alias = alias if alias is not None else value
+        if func_name == "count":
+            if is_merging:
+                return sum(col(value)).alias(col_alias)
+            return count(col(value)).alias(col_alias)
+        if func_name == "sum":
+            return sum(col(value)).alias(col_alias)
+        if func_name == "set":
+            if is_merging:
+                return f_collect_set_udf(col(value)).alias(col_alias)
+            return collect_set(col(value)).alias(col_alias)
+        if func_name == "list":
+            if is_merging:
+                return f_collect_list_udf(col(value)).alias(col_alias)
+            return collect_list(col(value)).alias(col_alias)
+        if func_name == "min":
+            return min(col(value)).alias(col_alias)
+        if func_name == "max":
+            return min(col(value)).alias(col_alias)
+
+    @staticmethod
+    def get_props_from_df(df, props):
         if df.isEmpty():
             return df.mapValues(get_props_empty_values([p.get("dst") for p in props]))
         prop_ids = [(p.get("src").id, p.get("dst").id) for p in props]
         return df.mapValues(lambda x: {dst: x.get(src) for (src, dst) in prop_ids})
 
-    def restore_prop_name(self, df, props):
+    @staticmethod
+    def restore_prop_name(df, props):
         return df.mapValues(
             lambda x: {
                 props[k].name if isinstance(get_number(k), int) else k: v
                 for (k, v) in list(x.items())
             }
         )
+
+    @staticmethod
+    def select_existing_field_from_df(df, props, additional_col_names):
+        selected_cols = [p.name for p in props if p.name in df.schema.names]
+        selected_cols.extend(additional_col_names)
+        return df.select(*selected_cols)
 
     def get_path_from_step(self, step):
         return os.path.join(
@@ -277,7 +328,10 @@ class Translator(object):
         join_on_props = [p for p in df1.schema.names if p in df2.schema.names]
         if len(join_on_props) == 0:
             return self.get_empty_dataframe_with_columns([])
-        return df1.join(df2, on=join_on_props, how=how).drop_duplicates()
+        res_df = df1.join(df2, on=join_on_props, how=how).drop_duplicates()
+        df1.unpersist()
+        df2.unpersist()
+        return res_df
 
     def translate_joining_props(self, translators):
         pass
