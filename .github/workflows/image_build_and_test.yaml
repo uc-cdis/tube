@@ -46,7 +46,7 @@ jobs:
           sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1
       - name: Make dir cor compose-etl
         working-directory: ..
-        run: git clone https://github.com/uc-cdis/compose-etl.git --branch master --single-branch
+        run: git clone https://github.com/uc-cdis/compose-etl.git --branch feat/es-8 --single-branch
       - name: Get all files
         run: ls ..
       - name: Get all files

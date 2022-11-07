@@ -160,6 +160,7 @@ class Translator(object):
         props = props if props is not None else node.props
         try:
             print(f"Create scheme for node: {node.name}")
+            print(f"With props: {node.props}")
             schema = self.parser.create_schema(node)
             df, is_empty = self.read_text_files_of_table(
                 node_tbl_name, self.get_empty_dataframe_with_name
