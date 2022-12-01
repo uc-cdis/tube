@@ -47,6 +47,16 @@ jobs:
           sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
           sudo update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.9 1
 
+      - name: Install poetry, python dependencies and tube
+        run: |
+          python3.9 -m pip install --upgrade pip poetry requests
+          python3.9 -m poetry config virtualenvs.create true
+          python3.9 -m poetry install -vv --no-interaction --with dev
+
+      - name: Run standalone tests
+        # Run the tests that do not require Spark and ElasticSearch
+        run: python3.9 -m poetry run pytest -v tests/standalone_tests --cov=tube --cov-report term-missing --cov-report xml
+
       - name: Make dir cor compose-etl
         working-directory: ..
         run: git clone https://github.com/uc-cdis/compose-etl.git --branch master --single-branch
@@ -83,16 +93,6 @@ jobs:
       - name: change max_map_count (needed for running Elasticsearch in container)
         working-directory: ../compose-etl
         run: sudo sysctl -w vm.max_map_count=262144
-
-      - name: Install poetry, dependencies and tube
-        run: |
-          python3.9 -m pip install --upgrade pip poetry requests
-          python3.9 -m poetry config virtualenvs.create true
-          python3.9 -m poetry install -vv --no-interaction --with dev
-
-      - name: Run standalone tests
-        # Run the tests that do not require Spark and ElasticSearch
-        run: python3.9 -m poetry run pytest -v tests/standalone_tests --cov=tube --cov-report term-missing --cov-report xml
 
       - name: Run spark and ElasticSearch
         working-directory: ../compose-etl
