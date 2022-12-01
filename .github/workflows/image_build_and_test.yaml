@@ -134,4 +134,4 @@ jobs:
           XDG_DATA_HOME: /home/runner/work/tube
           ES_INDEX_NAME: etl
         # Skip SSL tests marked with `@pytest.mark.ssl`
-        run: python3.9 -m poetry run pytest -v tests/integrated_tests -m "not ssl" --cov=tube --cov-report term-missing
+        run: python3.9 -m poetry run pytest -v tests/integrated_tests -m "not ssl" --cov=tube --cov-append --cov-report term-missing
