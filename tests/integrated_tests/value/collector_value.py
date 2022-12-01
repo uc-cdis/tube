@@ -1,4 +1,4 @@
-from tests.value.value import Value
+from tests.integrated_tests.value.value import Value
 
 
 class CollectorValue(Value):

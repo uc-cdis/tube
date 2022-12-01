@@ -17,7 +17,7 @@ jobs:
   test:
     name: Run tests
     runs-on: ubuntu-20.04
-    needs: ci
+    needs: build
 
     services:
       postgres:
@@ -64,11 +64,11 @@ jobs:
 
       - name: Copy configuration files
         run: |
-          cp -f tests/gen3/tube/etlMapping.yaml ../compose-etl/configs/etlMapping.yaml
-          cp -f tests/gen3/tube/user.yaml ../compose-etl/configs/user.yaml
+          cp -f tests/integrated_tests/gen3/tube/etlMapping.yaml ../compose-etl/configs/etlMapping.yaml
+          cp -f tests/integrated_tests/gen3/tube/user.yaml ../compose-etl/configs/user.yaml
 
       - name: Init postgres database
-        run: psql -d postgresql://postgres:postgres@localhost/metadata_db -f tests/metadata_db.sql
+        run: psql -d postgresql://postgres:postgres@localhost/metadata_db -f tests/integrated_tests/metadata_db.sql
 
       - name: Create credential file
         working-directory: ../compose-etl
@@ -117,7 +117,7 @@ jobs:
           XDG_DATA_HOME: /home/runner/work/tube
 
       - name: Copy file to the XDG_DATA_HOME folder
-        run: cp tests/gen3/tube/{creds.json,etlMapping.yaml,user.yaml} $XDG_DATA_HOME/gen3/tube/
+        run: cp tests/integrated_tests/gen3/tube/{creds.json,etlMapping.yaml,user.yaml} $XDG_DATA_HOME/gen3/tube/
         env:
           XDG_DATA_HOME: /home/runner/work/tube
 

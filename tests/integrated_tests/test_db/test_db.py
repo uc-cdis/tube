@@ -4,7 +4,7 @@ from unittest.mock import patch
 import pytest
 from psycopg2.extensions import AsIs
 
-from tests.utils import test_files, items_in_file
+from tests.integrated_tests.utils import test_files, items_in_file
 from tube.utils.db import get_db_cursor, create_default_db_connection
 import tube.settings as config
 
