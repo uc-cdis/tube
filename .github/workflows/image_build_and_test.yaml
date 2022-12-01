@@ -105,7 +105,8 @@ jobs:
       - name: Run tests
         # Runs a script that creates a PostgreSQL table, populates
         # the table with data, and then retrieves the data.
-        run: python3.9 -m poetry run pytest -v tests -m "not ssl"
+        # Skip SSL tests marked with `@pytest.mark.ssl`.
+        run: python3.9 -m poetry run pytest -v tests -m "not ssl" --cov=tube --cov-report term-missing
         # Environment variables used by the `client.js` script to create a new PostgreSQL table.
         env:
           # The hostname used to communicate with the PostgreSQL service container
