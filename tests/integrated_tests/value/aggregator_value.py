@@ -1,6 +1,6 @@
 from itertools import chain
 
-from tests.value.value import Value
+from tests.integrated_tests.value.value import Value
 from tube.utils.dd import get_edge_table, get_node_table_name
 
 

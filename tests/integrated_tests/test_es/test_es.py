@@ -5,12 +5,12 @@ from elasticsearch_dsl import Search
 
 import tube.settings as config
 from tube.etl.indexers.interpreter import create_translators
-from tests.utils import items_in_file
-from tests.utils_db import SQLQuery
-from tests.utils_es import get_names
-from tests.value.aggregator_value import AggregatorValue
-from tests.value.es_value import ESValue
-from tests.value.value import value_diff
+from tests.integrated_tests.utils import items_in_file
+from tests.integrated_tests.utils_db import SQLQuery
+from tests.integrated_tests.utils_es import get_names
+from tests.integrated_tests.value.aggregator_value import AggregatorValue
+from tests.integrated_tests.value.es_value import ESValue
+from tests.integrated_tests.value.value import value_diff
 
 dict_translators = create_translators(None, config)
 doc_types = [dt.parser.doc_type for dt in list(dict_translators.values())]

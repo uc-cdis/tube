@@ -1,5 +1,5 @@
-from tests.utils_es import get_item_from_elasticsearch
-from tests.value.value import Value
+from tests.integrated_tests.utils_es import get_item_from_elasticsearch
+from tests.integrated_tests.value.value import Value
 
 
 class ESValue(Value):

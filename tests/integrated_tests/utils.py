@@ -3,7 +3,7 @@ import json
 import os
 from operator import itemgetter
 
-test_data_folder = "./tests/test_data"
+test_data_folder = "./tests/integrated_tests/test_data"
 
 
 def items_in_file(filename):

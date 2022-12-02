@@ -1,6 +1,6 @@
 from psycopg2.sql import SQL, Identifier, Literal
 
-from tests.utils import pairwise
+from tests.integrated_tests.utils import pairwise
 from tube.utils.db import execute_sql_query_return_first_field
 
 
