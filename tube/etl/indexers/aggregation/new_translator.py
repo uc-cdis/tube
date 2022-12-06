@@ -22,6 +22,7 @@ from pyspark.sql.functions import (
     struct,
     sum,
 )
+from copy import deepcopy
 
 
 def prop_to_aggregated_fn(col_name, fn):
@@ -237,13 +238,14 @@ class Translator(BaseTranslator):
                 n.edge, n.name, self.parser.root.name
             )
             props = n.props
+            additional_props = deepcopy(n.props)
             if n.sorted_by is not None:
                 sorting_prop = PropFactory.adding_prop(
                     self.parser.doc_type, n.sorted_by, n.sorted_by, []
                 )
-                props.append(sorting_prop)
+                additional_props.append(sorting_prop)
 
-            child_df = self.translate_table_to_dataframe(n, props=props)
+            child_df = self.translate_table_to_dataframe(n, props=additional_props)
             child_by_root = self.join_two_dataframe(edge_df, child_df)
             if child_by_root.rdd.isEmpty():
                 continue
