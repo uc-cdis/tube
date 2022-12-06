@@ -22,6 +22,7 @@ from pyspark.sql.functions import (
     struct,
     sum,
 )
+from copy import deepcopy
 
 
 def prop_to_aggregated_fn(col_name, fn):
@@ -237,7 +238,7 @@ class Translator(BaseTranslator):
                 n.edge, n.name, self.parser.root.name
             )
             props = n.props
-            additional_props = n.props
+            additional_props = deepcopy(n.props)
             if n.sorted_by is not None:
                 sorting_prop = PropFactory.adding_prop(
                     self.parser.doc_type, n.sorted_by, n.sorted_by, []
