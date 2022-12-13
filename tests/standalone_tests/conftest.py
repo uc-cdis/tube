@@ -11,7 +11,14 @@ CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 def mock_config_files(request):
     """
     This fixture automatically points Tube to default configuration files.
-    To disable it for a test, mark it with: `@pytest.mark.noautosetup`.
+
+    To disable it for a test, mark it with:
+        `@pytest.mark.noautosetup`.
+
+    Optionally configure it by providing a mapping from file name to file path:
+        @pytest.mark.parametrize("mock_config_files", [{"creds.json": "path/to/creds.json"}], indirect=True)
+        def test_something(mock_config_files):
+            ...
     """
     if "noautosetup" in request.keywords._markers:
         yield
@@ -55,14 +62,12 @@ def mock_configs(request):
         def test_something(mock_configs):
             ...
     """
-    paths_mapping = {}
-    if hasattr(request, "param"):
-        paths_mapping = request.param
+    data_mapping = request.param if hasattr(request, "param") else {}
 
     def load_json_mock(file_name, *args, **kwargs):
         data = None
-        if file_name in paths_mapping:
-            data = paths_mapping[file_name]
+        if file_name in data_mapping:
+            data = data_mapping[file_name]
         if data:
             return data
         else:
