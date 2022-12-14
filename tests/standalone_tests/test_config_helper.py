@@ -1,6 +1,8 @@
-from . import config_helper
+from tube import config_helper
 import os
 import time
+
+import pytest
 
 # WORKSPACE == Jenkins workspace
 TEST_ROOT = (
@@ -29,6 +31,7 @@ def setup():
         writer.write(TEST_JSON)
 
 
+@pytest.mark.noautosetup
 def test_find_paths():
     setup()
     path_list = config_helper.find_paths(TEST_FILENAME, APP_NAME)
@@ -38,6 +41,7 @@ def test_find_paths():
     assert path_list[0] == bla_path
 
 
+@pytest.mark.noautosetup
 def test_load_json():
     setup()
     data = config_helper.load_json(TEST_FILENAME, APP_NAME)
