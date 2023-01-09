@@ -420,6 +420,7 @@ class Translator(BaseTranslator):
     def walk_through_graph(self, df, root_id, p):
         src = self.parser.root
         n = p.head
+        relation = p.relation
         expr = []
         while n is not None:
             edge_tbl = n.edge_up_tbl
@@ -433,11 +434,12 @@ class Translator(BaseTranslator):
             src = n
             n = n.child
 
+            agg_fn = "set" if relation == "1-n" or relation == "n-1" else "first"
             for prop in cur_props:
                 if prop.name in df.columns:
                     expr.append(
                         self.reducer_to_agg_func_expr(
-                            "set", prop.name, is_merging=False
+                            agg_fn, prop.name, is_merging=False
                         )
                     )
                 else:

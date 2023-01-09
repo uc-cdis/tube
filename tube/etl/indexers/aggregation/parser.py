@@ -129,8 +129,11 @@ class Parser(BaseParser):
         json_parents = self.mapping.get("parent_props", [])
         for r in json_parents:
             if "path" in r:
+                relation = "1-n" if "relation" not in r else r.get("relation").lower()
                 list_nodes.append(
-                    ParentChain(self.json_to_parent_node(r.get("path")), r.get("fn"))
+                    ParentChain(
+                        self.json_to_parent_node(r.get("path")), relation, r.get("fn")
+                    )
                 )
         return list_nodes
 
@@ -224,7 +227,7 @@ class Parser(BaseParser):
         first = None
         prev = None
         prev_label = self.root
-        for (n, str_p) in nodes:
+        for n, str_p in nodes:
             child_name, edge_tbl = get_edge_table(self.model, prev_label, n)
             child_tbl = get_node_table_name(self.model, child_name)
             json_props = [{"name": p, "src": p} for p in str_p.split(",")]

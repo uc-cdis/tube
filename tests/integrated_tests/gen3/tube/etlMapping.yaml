@@ -39,6 +39,7 @@ mappings:
           - name: year_of_birth
     parent_props:
       - path: studies[study_objective,study_submitter_id:submitter_id]
+        relation: 1-1
     nested_props:
       - name: diagnoses
         path: diagnoses

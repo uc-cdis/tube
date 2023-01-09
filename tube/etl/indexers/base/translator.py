@@ -2,7 +2,7 @@ import os
 import json
 from pyspark.sql.context import SQLContext
 from pyspark.sql.types import StructType, StructField, StringType
-from pyspark.sql.functions import col, min, sum, count, collect_set, collect_list
+from pyspark.sql.functions import col, min, sum, count, collect_set, collect_list, first
 
 from .lambdas import (
     extract_link,
@@ -280,6 +280,8 @@ class Translator(object):
             return min(col(value)).alias(col_alias)
         if func_name == "max":
             return min(col(value)).alias(col_alias)
+        if func_name == "first":
+            return first(col(value)).alias(col_alias)
 
     @staticmethod
     def get_props_from_df(df, props):
