@@ -6,10 +6,11 @@ class ParentChain:
     Special root is the abstract node give the access to the aggregation path of a special_prop in etlMapping
     """
 
-    def __init__(self, head, fn):
+    def __init__(self, head, relation, fn):
         self.head = head  # first ParentNode in the chain of nodes (like a link-list) helping to getting props
         # from parent nodes in the dictionary
         self.fn = fn  # name of the function perform in this aggregation node
+        self.relation = relation
 
     def __key__(self):
         return self.head.name
