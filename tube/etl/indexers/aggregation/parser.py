@@ -94,7 +94,7 @@ class Parser(BaseParser):
         )
         self.parent_nodes = self.get_parent_props()
 
-    def json_to_parent_node(self, path):
+    def json_to_parent_node(self, path, agg_fn):
         words = path.split(".")
         nodes = [tuple([_f for _f in re.split("[\[\]]", w) if _f]) for w in words]
         first = None
@@ -107,7 +107,7 @@ class Parser(BaseParser):
             parent_tbl = get_node_table_name(self.model, parent_name)
             if p is not None:
                 json_props = [
-                    {"name": p[0], "src": p[1], "fn": "set"}
+                    {"name": p[0], "src": p[1], "fn": agg_fn}
                     for p in self.get_src_name(p.split(","))
                 ]
                 props = self.create_props_from_json(
@@ -130,9 +130,12 @@ class Parser(BaseParser):
         for r in json_parents:
             if "path" in r:
                 relation = "1-n" if "relation" not in r else r.get("relation").lower()
+                agg_fn = "set" if relation != "1-1" else "first"
                 list_nodes.append(
                     ParentChain(
-                        self.json_to_parent_node(r.get("path")), relation, r.get("fn")
+                        self.json_to_parent_node(r.get("path"), agg_fn),
+                        relation,
+                        agg_fn,
                     )
                 )
         return list_nodes
