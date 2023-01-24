@@ -27,7 +27,7 @@ def build_filter_query(current_logic, new_fields, fields_to_be_removed):
         else:
             value_in_query = current_logic.value
         if current_logic.op == "contains":
-            prop_name = current_logic.prop.replace(".", "__")
+            prop_name = current_logic.prop  # .replace(".", "__")
             new_fields.append(expr(f"array_contains({prop_name}, {value_in_query})"))
             new_field_name = f"__new_field_condition_{len(new_fields)}"
             fields_to_be_removed.extend([prop_name, new_field_name])

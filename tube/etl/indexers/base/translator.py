@@ -182,14 +182,13 @@ class Translator(object):
 
     def get_empty_dataframe_with_name(self, node, key_name=None):
         schema = self.parser.create_schema(node)
+        node_id_name = get_node_id_name(node.name)
         if node is None and key_name is None:
             schema = StructType([])
         elif key_name is not None:
             schema.fields.append(StructField(key_name, StringType(), False))
-        else:
-            schema.fields.append(
-                StructField(get_node_id_name(node.name), StringType(), False)
-            )
+        elif node_id_name not in schema.names:
+            schema.fields.append(StructField(node_id_name, StringType(), False))
         return self.sql_context.createDataFrame(self.sc.emptyRDD(), schema)
 
     def get_empty_dataframe_with_columns(self, cols):
