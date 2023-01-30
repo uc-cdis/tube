@@ -73,6 +73,8 @@ class Parser(BaseParser):
         self.props = self.create_props_from_json(
             self.doc_type, self.mapping["props"], node_label=selected_category
         )
+        self.leaf_props = []
+        self.leaf_props.extend(self.props)
         self.leaves = set([])
         self.collectors = []
         self.roots = []
@@ -131,7 +133,7 @@ class Parser(BaseParser):
     def get_props_for_nodes(self):
         prop_nodes = {}
         roots = {}
-        for (k, v) in self.mapping.get("injecting_props", {}).items():
+        for k, v in self.mapping.get("injecting_props", {}).items():
             if k == "project" and "project_code" not in [
                 p.get("name") for p in v.get("props")
             ]:
@@ -177,7 +179,9 @@ class Parser(BaseParser):
         )
         leaves = set([p.src for p in flat_paths])
         for l in leaves:
-            self.leaves.add(LeafNode(l, get_node_table_name(self.model, l), self.props))
+            self.leaves.add(
+                LeafNode(l, get_node_table_name(self.model, l), self.leaf_props)
+            )
 
         nodes_with_props, roots = self.get_props_for_nodes()
         self.collectors, self.roots = self.create_tree_from_generated_edges(

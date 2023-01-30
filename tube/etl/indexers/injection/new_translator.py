@@ -32,7 +32,7 @@ class Translator(BaseTranslator):
             key_name = self.parser.get_key_prop().name
             key_prop = PropFactory.get_prop_by_name(self.parser.doc_type, key_name)
             props = []
-            props.extend(self.parser.props)
+            props.extend(child.props)
             props.append(key_prop)
             child_df = self.translate_table_to_dataframe(
                 child,
@@ -191,7 +191,7 @@ class Translator(BaseTranslator):
         collected_collecting_dfs, collected_leaf_dfs = self.join_program_to_project()
         self.merge_collectors(collected_collecting_dfs)
         self.get_leaves(collected_collecting_dfs, collected_leaf_dfs)
-        for (k, df) in list(collected_collecting_dfs.items()):
+        for k, df in list(collected_collecting_dfs.items()):
             if k != "final" and df is not None:
                 df.unpersist()
 
