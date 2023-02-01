@@ -234,9 +234,17 @@ class Translator(BaseTranslator):
         for p in aggregating_props:
             if p.name in df.columns:
                 if len(p.type) > 1 and p.type[0] is list and p.fn in ["list", "set"]:
-                    self.reducer_to_agg_func_expr(p.fn, p.name, is_merging=True)
+                    expr.append(
+                        self.reducer_to_agg_func_expr(
+                            p.fn, p.name, is_merging=True, is_flattening=True
+                        )
+                    )
                 else:
-                    self.reducer_to_agg_func_expr(p.fn, p.name, is_merging=False)
+                    expr.append(
+                        self.reducer_to_agg_func_expr(p.fn, p.name, is_merging=False)
+                    )
+        if len(expr) == 0:
+            return df
         tmp_df = df.groupBy(self.parser.get_key_prop().name).agg(*expr)
 
         rm_props = [
