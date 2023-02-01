@@ -269,11 +269,11 @@ class Translator(object):
             return sum(col(value)).alias(col_alias)
         if func_name == "set":
             if is_merging:
-                return f_collect_set_udf(col(value)).alias(col_alias)
+                return f_collect_set_udf(collect_set(col(value))).alias(col_alias)
             return collect_set(col(value)).alias(col_alias)
         if func_name == "list":
             if is_merging:
-                return f_collect_list_udf(col(value)).alias(col_alias)
+                return f_collect_list_udf(collect_list(col(value))).alias(col_alias)
             return collect_list(col(value)).alias(col_alias)
         if func_name == "min":
             return min(col(value)).alias(col_alias)
