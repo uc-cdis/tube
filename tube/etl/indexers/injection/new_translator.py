@@ -230,11 +230,21 @@ class Translator(BaseTranslator):
         if len(aggregating_props) == 0:
             return df
 
-        expr = [
-            self.reducer_to_agg_func_expr(p.fn, p.name, is_merging=False)
-            for p in aggregating_props
-            if p.name in df.columns
-        ]
+        expr = []
+        for p in aggregating_props:
+            if p.name in df.columns:
+                if len(p.type) > 1 and p.type[0] is list and p.fn in ["list", "set"]:
+                    expr.append(
+                        self.reducer_to_agg_func_expr(
+                            p.fn, p.name, is_merging=True, is_flattening=True
+                        )
+                    )
+                else:
+                    expr.append(
+                        self.reducer_to_agg_func_expr(p.fn, p.name, is_merging=False)
+                    )
+        if len(expr) == 0:
+            return df
         tmp_df = df.groupBy(self.parser.get_key_prop().name).agg(*expr)
 
         rm_props = [

@@ -259,7 +259,9 @@ class Translator(object):
         return df.mapValues(get_props(names, values))
 
     @staticmethod
-    def reducer_to_agg_func_expr(func_name, value, alias=None, is_merging=False):
+    def reducer_to_agg_func_expr(
+        func_name, value, alias=None, is_merging=False, is_flattening=False
+    ):
         col_alias = alias if alias is not None else value
         if func_name == "count":
             if is_merging:
@@ -269,11 +271,17 @@ class Translator(object):
             return sum(col(value)).alias(col_alias)
         if func_name == "set":
             if is_merging:
-                return f_collect_set_udf(col(value)).alias(col_alias)
+                if is_flattening:
+                    return f_collect_set_udf(collect_set(col(value))).alias(col_alias)
+                else:
+                    return f_collect_set_udf(col(value)).alias(col_alias)
             return collect_set(col(value)).alias(col_alias)
         if func_name == "list":
             if is_merging:
-                return f_collect_list_udf(col(value)).alias(col_alias)
+                if is_flattening:
+                    return f_collect_list_udf(collect_list(col(value))).alias(col_alias)
+                else:
+                    return f_collect_list_udf(col(value)).alias(col_alias)
             return collect_list(col(value)).alias(col_alias)
         if func_name == "min":
             return min(col(value)).alias(col_alias)
