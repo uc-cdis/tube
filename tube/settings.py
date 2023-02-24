@@ -1,4 +1,5 @@
 import os
+import tube.enums as enums
 
 from cdislogging import get_logger
 from tube.config_helper import find_paths, load_json
@@ -40,7 +41,7 @@ ES_URL = os.getenv("ES_URL", "esproxy-service")
 
 HDFS_DIR = "/result"
 # Three modes: Test, Dev, Prod
-RUNNING_MODE = os.getenv("RUNNING_MODE", "Dev")  # 'Prod' or 'Dev'
+RUNNING_MODE = os.getenv("RUNNING_MODE", enums.RUNNING_MODE_DEV)  # 'Prod' or 'Dev'
 
 PARALLEL_JOBS = 1
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")

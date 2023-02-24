@@ -7,24 +7,25 @@ from pyspark.sql.types import (
 )
 
 import tube.settings as config
+import tube.enums as enums
 
 
-def make_spark_context(config):
+def make_spark_context(tube_config):
     """
     Makes a spark and sqlContext
     """
     conf = (
         SparkConf()
-        .set("spark.executor.memory", config.SPARK_EXECUTOR_MEMORY)
-        .set("spark.driver.memory", config.SPARK_DRIVER_MEMORY)
-        .set("spark.python.profile", True)
+        .set("spark.executor.memory", tube_config.SPARK_EXECUTOR_MEMORY)
+        .set("spark.driver.memory", tube_config.SPARK_DRIVER_MEMORY)
+        .set("spark.python.profile", "true")
         .setAppName(config.APP_NAME)
     )
-    if config.RUNNING_MODE == "Dev":
+    if tube_config.RUNNING_MODE == enums.RUNNING_MODE_DEV:
         # We should only use the value of `config.spark_master` in
         # a test context. Production runs need to set the Spark Master
         # to 'yarn'. This is done in the arguments to `spark-submit`.
-        conf = conf.setMaster(config.SPARK_MASTER)
+        conf = conf.setMaster(tube_config.SPARK_MASTER)
     sc = SparkContext.getOrCreate(conf=conf)
 
     # Configure logging

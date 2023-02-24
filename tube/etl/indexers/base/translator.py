@@ -1,5 +1,7 @@
 import os
 import json
+import tube.settings as config
+
 from pyspark.sql.context import SQLContext
 from pyspark.sql.types import StructType, StructField, StringType
 from pyspark.sql.functions import col, min, sum, count, collect_set, collect_list, first
@@ -22,7 +24,6 @@ from .parser import Parser
 
 from tube.utils.spark import save_rdd_of_dataframe, get_all_files, save_rdds
 from tube.utils.general import get_node_id_name
-
 
 def json_export_with_no_key(x, doc_type, root_name):
     x[1][get_node_id_name(doc_type)] = x[0]
@@ -174,7 +175,10 @@ class Translator(object):
             if props is not None and not new_df.rdd.isEmpty():
                 cols = self.get_cols_from_node(node_name, props, [], new_df, key_name)
                 return new_df.select(*cols)
-            return new_df
+            return self.return_dataframe(
+                new_df,
+                f"{Translator.translate_table_to_dataframe.__qualname__}__{node.name}"
+            )
         except Exception as ex:
             print("HAPPEN WITH NODE: {}".format(node_tbl_name))
             print(ex)
@@ -314,12 +318,18 @@ class Translator(object):
 
     def get_path_from_step(self, step):
         return os.path.join(
-            self.hdfs_path, "output", "{}_{}".format(self.parser.doc_type, str(step))
+            self.hdfs_path, "output", "{}__{}".format(self.parser.doc_type, str(step))
         )
 
     def save_dataframe_to_hadoop(self, df):
         save_rdd_of_dataframe(df, self.get_path_from_step(self.current_step), self.sc)
         df.unpersist()
+
+    def return_dataframe(self, df, dataframe_name):
+        if config.RUNNING_MODE == "PreTest":
+            step_name = f"{self.current_step}_{dataframe_name}"
+            save_rdd_of_dataframe(df, self.get_path_from_step(step_name), self.sc)
+        return df
 
     def save_to_hadoop(self, df):
         save_rdds(df, self.get_path_from_step(self.current_step), self.sc)

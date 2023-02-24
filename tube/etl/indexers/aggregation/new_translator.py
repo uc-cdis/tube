@@ -111,7 +111,7 @@ class Translator(BaseTranslator):
                     )
                 )
         tmp_df = tmp_df.select(*select_expr)
-        return tmp_df
+        return self.return_dataframe(tmp_df, Translator.aggregate_intermediate_data_frame.__qualname__)
 
     def aggregate_with_count_on_edge_tbl(self, node_name, df, edge_df, child):
         """
@@ -142,11 +142,12 @@ class Translator(BaseTranslator):
             )
             count_reducer.done = True
         # combine value lists new counted dataframe to existing one
-        return (
+        result = (
             count_df
             if df is None
             else self.join_two_dataframe(df, count_df, how="left_outer")
         )
+        return self.return_dataframe(result, Translator.aggregate_with_count_on_edge_tbl.__qualname__)
 
     def aggregate_with_child_tbl(self, df, parent_name, edge_df, child):
         child_df = self.translate_table_to_dataframe(
@@ -167,7 +168,8 @@ class Translator(BaseTranslator):
             if not rd.done and rd.prop.src is not None
         ]
         temp_df = temp_df.groupBy(get_node_id_name(parent_name)).agg(*expr)
-        return self.join_two_dataframe(df, temp_df, how="left_outer")
+        result = self.join_two_dataframe(df, temp_df, how="left_outer")
+        return self.return_dataframe(result, Translator.aggregate_with_child_tbl.__qualname__)
 
     def aggregate_nested_properties(self):
         """
@@ -223,7 +225,10 @@ class Translator(BaseTranslator):
             key_df.unpersist()
         if self.parser.root.name not in aggregated_dfs:
             return None
-        return aggregated_dfs[self.parser.root.name]
+        return self.return_dataframe(
+            aggregated_dfs[self.parser.root.name],
+            Translator.aggregate_nested_properties.__qualname__
+        )
 
     def get_direct_children(self, root_df):
         """
@@ -278,7 +283,7 @@ class Translator(BaseTranslator):
             root_df = self.join_two_dataframe(root_df, child_by_root, how="left_outer")
             child_df.unpersist()
             child_by_root.unpersist()
-        return root_df
+        return self.return_dataframe(root_df, Translator.get_direct_children.__qualname__)
 
     def get_joining_props(self, translator, joining_index):
         """
@@ -332,14 +337,14 @@ class Translator(BaseTranslator):
         res_df = df.join(joining_df, on=joining_node.joining_fields, how="left_outer")
         df.unpersist()
         joining_df.unpersist()
-        return res_df
+        return self.return_dataframe(res_df, Translator.join_and_aggregate.__qualname__)
 
     def join_no_aggregate(self, df, joining_df, dual_props, joining_node):
         expr = [col(p.get("src").name).alias(p.get("dst").name) for p in dual_props]
         joining_df = joining_df.select(*expr)
         df = df.join(joining_df, on=joining_node.joining_fields, how="left_outer")
         joining_df.unpersist()
-        return df
+        return self.return_dataframe(df, Translator.join_no_aggregate.__qualname__)
 
     def join_to_an_index(self, df, translator, joining_node):
         """
@@ -359,7 +364,7 @@ class Translator(BaseTranslator):
             df = self.join_and_aggregate(df, joining_df, props_with_fn, joining_node)
         if len(props_without_fn) > 0:
             df = self.join_no_aggregate(df, joining_df, props_without_fn, joining_node)
-        return df
+        return self.return_dataframe(df, Translator.join_to_an_index.__qualname__)
 
     def ensure_project_id_exist(self, df):
         project_id_prop = self.parser.get_prop_by_name(PROJECT_ID)
@@ -371,7 +376,7 @@ class Translator(BaseTranslator):
                 project_id_prop.name,
                 concat_ws("-", col(PROGRAM_NAME), col(PROJECT_CODE)),
             )
-        return df
+        return self.return_dataframe(df, Translator.ensure_project_id_exist.__qualname__)
 
     def translate(self):
         root_df = self.translate_table_to_dataframe(
@@ -415,7 +420,7 @@ class Translator(BaseTranslator):
             joining_index_translator = translators[j.joining_index]
             if joining_index_translator.current_step > 0:
                 df = self.join_to_an_index(df, joining_index_translator, j)
-        return df
+        return self.return_dataframe(df, Translator.translate_joining_props.__qualname__)
 
     def walk_through_graph(self, df, root_id, p):
         src = self.parser.root
@@ -443,7 +448,7 @@ class Translator(BaseTranslator):
                         lit(None).cast(get_hadoop_type_ignore_fn(prop)).alias(prop.name)
                     )
         df = df.groupBy(root_id).agg(*expr)
-        return df
+        return self.return_dataframe(df, Translator.walk_through_graph.__qualname__)
 
     def translate_parent(self, root_df):
         if len(self.parser.parent_nodes) == 0:
@@ -456,7 +461,7 @@ class Translator(BaseTranslator):
             )
             root_df = self.join_two_dataframe(root_df, df, how="left_outer")
             df.unpersist()
-        return root_df
+        return self.return_dataframe(root_df, Translator.walk_through_graph.__qualname__)
 
     def translate_final(self):
         nested_df = (
@@ -472,4 +477,4 @@ class Translator(BaseTranslator):
             execute_filter(df, self.parser.filter) if self.parser.filter else df
         )
 
-        return filtered_df
+        return self.return_dataframe(filtered_df, Translator.translate_final.__qualname__)
