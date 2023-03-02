@@ -1,0 +1,89 @@
+mappings:
+  - name: qa-ibd
+    doc_type: participant
+    type: aggregator
+    root: participant
+    props:
+      - name: submitter_id
+      - name: project_id
+    parent_props:
+      - path: centers[country]
+      - path: centers[name]
+      - path: centers[investigator_name]
+    flatten_props:
+      - path: demographics
+        props:
+          - name: gender
+          - name: race
+          - name: jewish
+          - name: hispanic
+      - path: diagnoses
+        props:
+          - name: ibd_affection_status
+          - name: diagnosis
+          - name: control
+        sorted_by: updated_datetime, desc
+    aggregated_props:
+      - name: _samples_count
+        path: samples
+        fn: count
+  - name: qa-ibd_file
+    doc_type: file
+    type: collector
+    root: None
+    category: data_file
+    props:
+      - name: object_id
+      - name: md5sum
+      - name: file_name
+      - name: file_size
+      - name: data_format
+      - name: data_type
+      - name: state
+  - name: qa-ibd_supplementary_file
+    doc_type: supplementary_file
+    type: collector
+    root: None
+    category: supplementary_data_file
+    props:
+      - name: object_id
+      - name: md5sum
+      - name: file_name
+      - name: file_size
+      - name: data_format
+      - name: data_type
+      - name: data_category
+    injecting_props:
+      publication:
+        props:
+          - name: first_author
+            src: first_author
+            fn: set
+          - name: pmid
+            src: pmid
+            fn: set
+          - name: doi
+            src: doi
+            fn: set
+          - name: year
+            src: year
+            fn: set
+  - name: qa-ibd_project
+    doc_type: project
+    type: aggregator
+    root: project
+    props:
+      - name: code
+      - name: name
+      - name: title
+      - name: brief_summary
+      - name: description
+      - name: principle_investigator
+      - name: estimated_study_completion
+      - name: data_type
+      - name: publisher
+      - name: study_design_allocation
+      - name: study_phase
+      - name: availability_type
+    parent_props:
+      - path: programs[program_name:name]
