@@ -1,3 +1,5 @@
+import os
+
 from pyspark import SparkConf, SparkContext
 from pyspark.sql.types import (
     StringType,
@@ -68,7 +70,7 @@ def save_rdds(df, path, sc):
     df.saveAsPickleFile(path)
 
 
-def get_all_files(path, sc):
+def get_all_files_from_hdfs(path, sc):
     fs, opath, sc = get_hdfs_file_handler(sc)
     status = fs.listStatus(opath(path))
     files = []
@@ -76,6 +78,11 @@ def get_all_files(path, sc):
         files.append(p.getPath().toString())
     return files
 
+
+def get_all_files(path, sc):
+    if config.RUNNING_MODE.lower() == enums.RUNNING_MODE_TEST.lower():
+        return [os.path.abspath(os.path.join(path, f)) for f in  os.listdir(path)]
+    return get_all_files_from_hdfs(path, sc)
 
 def get_hadoop_type(prop):
     if prop.fn is not None and prop.fn in ["list", "set"]:

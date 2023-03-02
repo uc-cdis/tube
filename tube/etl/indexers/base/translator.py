@@ -1,6 +1,7 @@
 import os
 import json
 import tube.settings as config
+import tube.enums as enums
 
 from pyspark.sql.context import SQLContext
 from pyspark.sql.types import StructType, StructField, StringType
@@ -32,12 +33,14 @@ def json_export_with_no_key(x, doc_type, root_name):
     x[1]["node_id"] = x[0]  # redundant field for backward compatibility with arranger
     return json.dumps(x[1])
 
+func_name_to_dataframe_name = {
+    "translate_table_to_dataframe": ""
+}
 
 class Translator(object):
     """
     The main entry point into the index export process for the mutation indices
     """
-
     def __init__(self, sc, hdfs_path, writer, parser: Parser):
         self.sc = sc
         if sc is not None:
@@ -73,7 +76,9 @@ class Translator(object):
         return df, False
 
     def read_text_files_of_table(self, table_name, fn_frame_zero):
-        files = get_all_files(os.path.join(self.hdfs_path, table_name), self.sc)
+        path = os.path.join(self.hdfs_path, table_name)
+        print(f"Path: {path}")
+        files = get_all_files(path, self.sc)
         if len(files) == 0:
             return fn_frame_zero(), True
         return self.read_text_from_non_empty_file(files)
@@ -326,7 +331,7 @@ class Translator(object):
         df.unpersist()
 
     def return_dataframe(self, df, dataframe_name):
-        if config.RUNNING_MODE == "PreTest":
+        if config.RUNNING_MODE.lower() == enums.RUNNING_MODE_PRE_TEST.lower():
             step_name = f"{self.current_step}_{dataframe_name}"
             save_rdd_of_dataframe(df, self.get_path_from_step(step_name), self.sc)
         return df

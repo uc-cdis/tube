@@ -461,7 +461,7 @@ class Translator(BaseTranslator):
             )
             root_df = self.join_two_dataframe(root_df, df, how="left_outer")
             df.unpersist()
-        return self.return_dataframe(root_df, Translator.walk_through_graph.__qualname__)
+        return self.return_dataframe(root_df, Translator.translate_parent.__qualname__)
 
     def translate_final(self):
         nested_df = (

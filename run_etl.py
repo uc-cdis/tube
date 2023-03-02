@@ -85,9 +85,15 @@ def main():
     index_names = interpreter.get_index_names(config)
 
     if args.force or check_to_run_etl(es, index_names):
-        if args.step == enums.RUNNING_STEP_IMPORT or args.step == enums.RUNNING_STEP_ALL:
+        if (
+            args.step == enums.RUNNING_STEP_IMPORT
+            or args.step == enums.RUNNING_STEP_ALL
+        ):
             run_import()
-        if args.step == enums.RUNNING_STEP_TRANSFORM or args.step == enums.RUNNING_STEP_ALL:
+        if (
+            args.step == enums.RUNNING_STEP_TRANSFORM
+            or args.step == enums.RUNNING_STEP_ALL
+        ):
             run_transform()
     else:
         print("Nothing's new")
