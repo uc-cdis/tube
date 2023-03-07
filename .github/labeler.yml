@@ -1,4 +1,2 @@
-test-portal-pfbExportTest:
-  - '**/*'
-test-etl-etlTest:
+test-apis-etlTest:
   - '**/*'
