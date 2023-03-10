@@ -88,10 +88,8 @@ def assert_dataframe_equality(expected_df, checking_df, key_column):
         return
 
     assert_null(expected_df, checking_df, diff)
-    print(f"Differences: {diff}")
-    assert diff == []
+    assert diff == [],  f"Differences: {diff}"
 
     assert_schema(expected_df, checking_df, diff)
     assert_data(expected_df, checking_df, diff, key_column)
-    print(f"Differences: {diff}")
-    assert diff == []
+    assert diff == [],  f"Differences: {diff}"
