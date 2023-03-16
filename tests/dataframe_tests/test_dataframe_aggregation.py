@@ -22,6 +22,11 @@ def test_get_direct_children_with_parent(spark_context):
     assert_dataframe_equality(expected_df, result_df, get_node_id_name("participant"))
 
 def test_ensure_project_id_exist(spark_context):
+    """
+    This function is to test function ensure_project_id_exist
+    :param spark_context:
+    :return: It assert that the dataframe out of ensure_project_id_exist has project_id field
+    """
     input_df, expected_df = get_input_output_dataframes(
         get_spark_session(spark_context),
         "participant__0_Translator.get_direct_children",

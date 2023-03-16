@@ -33,10 +33,6 @@ def json_export_with_no_key(x, doc_type, root_name):
     x[1]["node_id"] = x[0]  # redundant field for backward compatibility with arranger
     return json.dumps(x[1])
 
-func_name_to_dataframe_name = {
-    "translate_table_to_dataframe": ""
-}
-
 class Translator(object):
     """
     The main entry point into the index export process for the mutation indices
