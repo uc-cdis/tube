@@ -20,7 +20,7 @@ def make_spark_context(tube_config):
         SparkConf()
         .set("spark.executor.memory", tube_config.SPARK_EXECUTOR_MEMORY)
         .set("spark.driver.memory", tube_config.SPARK_DRIVER_MEMORY)
-        .set("spark.python.profile", "true")
+        .set("spark.python.profile", "false")
         .setAppName(config.APP_NAME)
     )
     if tube_config.RUNNING_MODE == enums.RUNNING_MODE_DEV:

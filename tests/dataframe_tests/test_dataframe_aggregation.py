@@ -50,13 +50,3 @@ def test_ensure_project_id_exist_without_project_id_in_input_df(spark_context):
     translator = get_translator(spark_context, config, "project", "aggregation")
     result_df = translator.ensure_project_id_exist(input_df)
     assert_dataframe_equality(expected_df, result_df, get_node_id_name("project"))
-
-# def test_aggregate_nested_properties(spark_context):
-#     _, expected_df = get_input_output_dataframes(
-#         get_spark_session(spark_context),
-#         None,
-#         "participant__0_Translator.ensure_project_id_exist"
-#     )
-#     translator = get_translator(spark_context, config, "participant", "aggregation")
-#     result_df = translator.aggregate_nested_properties()
-#     assert_dataframe_equality(expected_df, result_df)
