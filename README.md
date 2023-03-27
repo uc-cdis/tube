@@ -22,3 +22,8 @@ The Gen3 Tube ETL is designed to translate data from a graph data model, stored 
 * [Local development installation guide](docs/INSTALL.md)
 * [How to run unit tests locally](docs/run_tube_tests_locally.md)
 * [Configuring SSL](docs/configure_ssl.md)
+
+
+## Gen3 graph data flow
+
+<img src="docs/img/Gen3 graph data flow.png" width="70%">
