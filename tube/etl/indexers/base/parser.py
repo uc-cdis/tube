@@ -208,6 +208,12 @@ class Parser(object):
             return first_type, second_type
         return (first_type,)
 
+    def get_type_of_item_for_list_type(self, node_label, src):
+        a = self.get_possible_properties_types(self.model, node_label)
+        if src in a and type(a.get(src)) is tuple and a.get(src)[0] is list:
+            return self.get_prop_type_of_field_in_dictionary(node_label, src)
+        return a.get(src)
+
     def get_prop_type(self, fn, src, node_label=None, index=None):
         if fn is not None and index is None:
             if fn in ["count", "sum", "min", "max"]:
@@ -215,10 +221,7 @@ class Parser(object):
             elif fn in ["set", "list"]:
                 if node_label is None or src == "id":
                     return (str,)
-                a = self.get_possible_properties_types(self.model, node_label)
-                if a.get(src) == (list,):
-                    return self.get_prop_type_of_field_in_dictionary(node_label, src)
-                return a.get(src)
+                return self.get_type_of_item_for_list_type(node_label, src)
             return (str,)
         elif index is not None:
             index_prop = PropFactory.get_prop_by_name(index, src)
@@ -232,10 +235,7 @@ class Parser(object):
                 )
             if src == "id":
                 return (str,)
-            a = self.get_possible_properties_types(self.model, node_label)
-            if src in a and type(a.get(src)) is tuple and a.get(src)[0] is list:
-                return self.get_prop_type_of_field_in_dictionary(node_label, src)
-            return a.get(src)
+            return self.get_type_of_item_for_list_type(node_label, src)
 
     @staticmethod
     def get_src_name(props):
