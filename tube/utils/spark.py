@@ -1,3 +1,5 @@
+import os
+
 from pyspark import SparkConf, SparkContext
 from pyspark.sql.types import (
     StringType,
@@ -7,24 +9,25 @@ from pyspark.sql.types import (
 )
 
 import tube.settings as config
+import tube.enums as enums
 
 
-def make_spark_context(config):
+def make_spark_context(tube_config):
     """
     Makes a spark and sqlContext
     """
     conf = (
         SparkConf()
-        .set("spark.executor.memory", config.SPARK_EXECUTOR_MEMORY)
-        .set("spark.driver.memory", config.SPARK_DRIVER_MEMORY)
-        .set("spark.python.profile", True)
+        .set("spark.executor.memory", tube_config.SPARK_EXECUTOR_MEMORY)
+        .set("spark.driver.memory", tube_config.SPARK_DRIVER_MEMORY)
+        .set("spark.python.profile", "false")
         .setAppName(config.APP_NAME)
     )
-    if config.RUNNING_MODE == "Dev":
+    if tube_config.RUNNING_MODE == enums.RUNNING_MODE_DEV:
         # We should only use the value of `config.spark_master` in
         # a test context. Production runs need to set the Spark Master
         # to 'yarn'. This is done in the arguments to `spark-submit`.
-        conf = conf.setMaster(config.SPARK_MASTER)
+        conf = conf.setMaster(tube_config.SPARK_MASTER)
     sc = SparkContext.getOrCreate(conf=conf)
 
     # Configure logging
@@ -67,7 +70,7 @@ def save_rdds(df, path, sc):
     df.saveAsPickleFile(path)
 
 
-def get_all_files(path, sc):
+def get_all_files_from_hdfs(path, sc):
     fs, opath, sc = get_hdfs_file_handler(sc)
     status = fs.listStatus(opath(path))
     files = []
@@ -75,6 +78,11 @@ def get_all_files(path, sc):
         files.append(p.getPath().toString())
     return files
 
+
+def get_all_files(path, sc):
+    if config.RUNNING_MODE.lower() == enums.RUNNING_MODE_TEST.lower():
+        return [os.path.abspath(os.path.join(path, f)) for f in  os.listdir(path)]
+    return get_all_files_from_hdfs(path, sc)
 
 def get_hadoop_type(prop):
     if prop.fn is not None and prop.fn in ["list", "set"]:

@@ -1,5 +1,6 @@
 import argparse
 import tube.settings as config
+import tube.enums as enums
 import tube.etl.indexers.interpreter as interpreter
 import traceback
 from tube.importers.sql_to_hdfs import SqlToHDFS
@@ -49,7 +50,7 @@ def config_by_args():
         "--config",
         help="The configuration set to run with",
         type=str,
-        choices=["Test", "Dev", "Prod"],
+        choices=enums.RUNNING_MODE_CHOICES,
         default="Dev",
     )
     parser.add_argument(
@@ -60,7 +61,7 @@ def config_by_args():
         "--step",
         help="The step to run with",
         type=str,
-        choices=["import", "transform", "all"],
+        choices=enums.RUNNING_STEP_CHOICES,
         default="all",
     )
     parser.add_argument(
@@ -84,9 +85,15 @@ def main():
     index_names = interpreter.get_index_names(config)
 
     if args.force or check_to_run_etl(es, index_names):
-        if args.step == "import" or args.step == "all":
+        if (
+            args.step == enums.RUNNING_STEP_IMPORT
+            or args.step == enums.RUNNING_STEP_ALL
+        ):
             run_import()
-        if args.step == "transform" or args.step == "all":
+        if (
+            args.step == enums.RUNNING_STEP_TRANSFORM
+            or args.step == enums.RUNNING_STEP_ALL
+        ):
             run_transform()
     else:
         print("Nothing's new")

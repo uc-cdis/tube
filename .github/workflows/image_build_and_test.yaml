@@ -120,7 +120,6 @@ jobs:
         run: cp tests/integrated_tests/gen3/tube/{creds.json,etlMapping.yaml,user.yaml} $XDG_DATA_HOME/gen3/tube/
         env:
           XDG_DATA_HOME: /home/runner/work/tube
-
       - name: Run ETL process
         working-directory: ../compose-etl
         run: docker-compose run tube bash -c "python run_config.py; python run_etl.py"
@@ -135,6 +134,23 @@ jobs:
           ES_INDEX_NAME: etl
         # Skip SSL tests marked with `@pytest.mark.ssl`
         run: python3.9 -m poetry run pytest -v tests/integrated_tests -m "not ssl" --cov=tube --cov-append --cov-report term-missing --cov-report xml
+
+      - name: Run dataframe tests
+        # Run the tests that require Spark and ElasticSearch
+        env:
+          ES_URL: localhost
+          POSTGRES_PORT: 5432
+          DICTIONARY_URL: https://s3.amazonaws.com/dictionary-artifacts/ibdgc-dictionary/1.6.10/schema.json
+          XDG_DATA_HOME: /home/runner/work/tube
+          RUNNING_MODE: Test
+          HADOOP_VERSION: 3.3.2
+          ES_INDEX_NAME: etl
+          ES_HADOOP_VERSION: 8.3.3
+          ES_HADOOP_HOME: /home/runner/work/tube
+          ES_SPARK_30_2_12: elasticsearch-spark-30_2.12
+          ES_SPARK_20_2_11: elasticsearch-spark-20_2.11
+        # Skip SSL tests marked with `@pytest.mark.ssl`
+        run: python3.9 -m poetry run pytest -v tests/dataframe_tests -m "not ssl" --cov=tube --cov-append --cov-report term-missing --cov-report xml
 
       - name: Submit coverage report
         env:

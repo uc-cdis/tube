@@ -103,6 +103,10 @@ class Translator(BaseTranslator):
             collected_collecting_dfs[child.name] = self.join_two_dataframe(
                 collected_collecting_dfs[child.name], child_df, how="full_outer"
             ).drop(*rm_props)
+        self.return_dataframe(
+            collected_collecting_dfs[child.name],
+            f"{Translator.collect_collecting_child.__qualname__}__collected_collecting_dfs__{child.name}"
+        )
 
     def merge_project(self, child, edge_df, collected_collecting_dfs):
         if edge_df is None or len(edge_df.head(1)) == 0:
@@ -115,15 +119,17 @@ class Translator(BaseTranslator):
         child_df = child_df.withColumn(
             PROJECT_ID, fn.concat_ws("-", fn.col(PROGRAM_NAME), fn.col(PROJECT_CODE))
         )
-        collected_collecting_dfs[child.name] = child_df
+        collected_collecting_dfs[child.name] = self.return_dataframe(
+            child_df,
+            f"{Translator.merge_project.__qualname__}__collected_collecting_dfs__{child.name}"
+        )
 
     def join_program_to_project(self):
-        collected_leaf_dfs = {}
         collected_collecting_dfs = {}
         for root in self.parser.roots:
             df = self.translate_table_to_dataframe(root, props=root.props)
             if df.rdd.isEmpty():
-                return collected_collecting_dfs, collected_leaf_dfs
+                return collected_collecting_dfs
             for child in root.children:
                 edge_tbl = child.parents[root.name]
                 child_df = self.translate_edge_to_dataframe(
@@ -131,7 +137,7 @@ class Translator(BaseTranslator):
                 )
                 tmp_df = self.join_two_dataframe(df, child_df)
                 self.merge_project(child, tmp_df, collected_collecting_dfs)
-        return collected_collecting_dfs, collected_leaf_dfs
+        return collected_collecting_dfs
 
     def merge_collectors(self, collected_collecting_dfs):
         done_once = True
@@ -188,8 +194,9 @@ class Translator(BaseTranslator):
         return self.sql_context.createDataFrame(self.sc.emptyRDD(), schema)
 
     def translate(self):
-        collected_collecting_dfs, collected_leaf_dfs = self.join_program_to_project()
+        collected_collecting_dfs = self.join_program_to_project()
         self.merge_collectors(collected_collecting_dfs)
+        collected_leaf_dfs = {}
         self.get_leaves(collected_collecting_dfs, collected_leaf_dfs)
         for k, df in list(collected_collecting_dfs.items()):
             if k != "final" and df is not None:
