@@ -4,20 +4,21 @@ from tests.dataframe_tests.util import (
     initialize_mappings,
     get_translator,
     assert_dataframe_equality,
-    get_input_output_dataframes
+    get_input_output_dataframes,
+    mock_dictionary_url
 )
 from unittest.mock import patch
 from tube.utils.general import get_node_id_name
 
-DICTIONARY_URL = "https://s3.amazonaws.com/dictionary-artifacts/ibdgc-dictionary/1.6.10/schema.json"
-initialize_mappings()
+initialize_mappings("ibdgc")
 
 @patch(
     "tube.etl.indexers.injection.parser.Parser.get_edges_having_data"
 )
-def test_collect_collecting_child(mock_get_edges_having_data, spark_context):
+def test_collect_collecting_child(mock_get_edges_having_data, spark_context, schema_context):
     input_df, expected_df = get_input_output_dataframes(
         get_spark_session(spark_context),
+        "ibdgc",
         None,
         "file__0_Translator.collect_collecting_child__collected_collecting_dfs__aligned_reads"
     )
@@ -30,6 +31,7 @@ def test_collect_collecting_child(mock_get_edges_having_data, spark_context):
     for n in collecting_nodes:
         input_df, expected_df = get_input_output_dataframes(
             get_spark_session(spark_context),
+            "ibdgc",
             None,
             f"file__0_Translator.collect_collecting_child__collected_collecting_dfs__{n}"
         )
@@ -51,7 +53,9 @@ def test_collect_collecting_child(mock_get_edges_having_data, spark_context):
         "edge_pubertalstageperformedatvisit", "edge_176f8285_prmedafrcomeco", "edge_9197510c_comecodafrpr",
         "edge_surgeryperformedatvisit", "edge_samplederivedfromparticipant"
     ]
-    translator = get_translator(spark_context, config, "file", "injection")
+    with schema_context as _schema:
+        _schema.return_value = mock_dictionary_url("ibdgc")
+        translator = get_translator(spark_context, config, "ibdgc", "file", "injection")
     collected_collecting_dfs = translator.join_program_to_project()
     translator.merge_collectors(collected_collecting_dfs)
     print(f"Collected collecting dfs: {collected_collecting_dfs}")

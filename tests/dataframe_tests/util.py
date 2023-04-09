@@ -1,9 +1,16 @@
+import json
+import os.path
+
 import yaml
+from collections import namedtuple
+from jsonschema import RefResolver
 from pyspark.sql import SQLContext
 from tube.etl.outputs.es.writer import Writer
 from tube.utils.dd import init_dictionary
 from tube.etl.indexers.aggregation.new_translator import Translator as AggregationTranslator
 from tube.etl.indexers.injection.new_translator import Translator as InjectionTranslator
+
+ResolverPair = namedtuple("ResolverPair", ["resolver", "source"])
 
 def load_from_local_file_to_dataframe(spark_session, file_path):
     return spark_session.read.parquet(file_path)
@@ -12,35 +19,52 @@ def get_spark_session(spark_context):
     sql_context = SQLContext(spark_context)
     return sql_context.sparkSession
 
-MAPPING_FILE = "./tests/dataframe_tests/test_data/etlMapping.yaml"
+MAPPING_FILE = "etlMapping.yaml"
 TEST_DATA_HOME = "./tests/dataframe_tests/test_data"
 mappings = {}
 
-def initialize_mappings():
-    list_mappings = yaml.load(open(MAPPING_FILE), Loader=yaml.SafeLoader)
+def initialize_mappings(schema_name):
+    list_mappings = yaml.load(open(os.path.join(TEST_DATA_HOME, schema_name, MAPPING_FILE)), Loader=yaml.SafeLoader)
     for mapping in list_mappings["mappings"]:
         mappings[mapping.get("doc_type")] = mapping
 
 def get_mapping(mapping_name):
     return mappings.get(mapping_name)
 
-def get_translator(spark_context, config, mapping_name, indexer_type):
+def mock_dictionary_url(schema_name):
+    all_schema = json.load(open(os.path.join(TEST_DATA_HOME, schema_name, "schema.json")))
+    schemas = {}
+    resolvers = {}
+    for key, schema in all_schema.items():
+        schemas[key] = schema
+        resolver = RefResolver("{}#".format(key), schema)
+        resolvers[key] = ResolverPair(resolver, schema)
+    return schemas, resolvers
+
+
+def get_translator(spark_context, config, schema_name, mapping_name, indexer_type):
     dictionary, model = init_dictionary(config.DICTIONARY_URL)
     writer = Writer(spark_context, config)
     mapping = get_mapping(mapping_name)
-    hdfs_path = f"{TEST_DATA_HOME}/graphs"
+    hdfs_path = os.path.join(TEST_DATA_HOME, schema_name, "graphs")
     if indexer_type.lower() == "aggregation":
         return AggregationTranslator(spark_context, hdfs_path, writer, mapping, model, dictionary)
     elif indexer_type.lower() == "injection":
         return InjectionTranslator(spark_context, hdfs_path, writer, mapping, model, dictionary)
 
 
-def get_input_output_dataframes(spark_session, input_parquet_file, output_parquet_file):
+def get_input_output_dataframes(spark_session, schema_name, input_parquet_file, output_parquet_file):
     input_df = (
-        load_from_local_file_to_dataframe(spark_session, f"{TEST_DATA_HOME}/dataframe/{input_parquet_file}")
+        load_from_local_file_to_dataframe(
+            spark_session,
+            os.path.join(TEST_DATA_HOME, schema_name, "dataframe", input_parquet_file)
+        )
         if input_parquet_file else None
     )
-    expected_df = load_from_local_file_to_dataframe(spark_session, f"{TEST_DATA_HOME}/dataframe/{output_parquet_file}")
+    expected_df = load_from_local_file_to_dataframe(
+        spark_session,
+        os.path.join(TEST_DATA_HOME, schema_name, "dataframe", output_parquet_file)
+    )
     return input_df, expected_df
 
 
