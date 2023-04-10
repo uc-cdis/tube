@@ -1,3 +1,4 @@
+import pytest
 import tube.settings as config
 from tests.dataframe_tests.util import (
     get_spark_session,
@@ -9,13 +10,15 @@ from tests.dataframe_tests.util import (
 )
 from unittest.mock import patch
 from tube.utils.general import get_node_id_name
+from tube.utils.spark import make_spark_context
 
 initialize_mappings("ibdgc")
 
+@pytest.mark.parametrize("schema_context", ["ibdgc"], indirect=True)
 @patch(
     "tube.etl.indexers.injection.parser.Parser.get_edges_having_data"
 )
-def test_collect_collecting_child(mock_get_edges_having_data, spark_context, schema_context):
+def test_collect_collecting_child(mock_get_edges_having_data, schema_context, spark_context):
     input_df, expected_df = get_input_output_dataframes(
         get_spark_session(spark_context),
         "ibdgc",
@@ -53,9 +56,7 @@ def test_collect_collecting_child(mock_get_edges_having_data, spark_context, sch
         "edge_pubertalstageperformedatvisit", "edge_176f8285_prmedafrcomeco", "edge_9197510c_comecodafrpr",
         "edge_surgeryperformedatvisit", "edge_samplederivedfromparticipant"
     ]
-    with schema_context as _schema:
-        _schema.return_value = mock_dictionary_url("ibdgc")
-        translator = get_translator(spark_context, config, "ibdgc", "file", "injection")
+    translator = get_translator(spark_context, config, "ibdgc", "file", "injection")
     collected_collecting_dfs = translator.join_program_to_project()
     translator.merge_collectors(collected_collecting_dfs)
     print(f"Collected collecting dfs: {collected_collecting_dfs}")
