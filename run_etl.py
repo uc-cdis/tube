@@ -8,6 +8,7 @@ from tube.formatters import BaseFormatter
 from tube.utils.spark import make_spark_context
 from tube.etl.outputs.es.timestamp import check_to_run_etl
 from elasticsearch import Elasticsearch
+from py4j.protocol import Py4JJavaError
 
 
 def run_import():
@@ -32,8 +33,13 @@ def run_transform():
         sc = make_spark_context(config)
         translators = interpreter.create_translators(sc, config)
         interpreter.run_transform(translators)
+    except Py4JJavaError as py4J_ex:
+        print("ERROR when connecting to spark. Please roll spark")
+        print(py4J_ex)
+        print(traceback.format_exc())
     except Exception as ex:
         print("ERROR when running transformation")
+        print(ex)
         print(traceback.format_exc())
         raise
     finally:

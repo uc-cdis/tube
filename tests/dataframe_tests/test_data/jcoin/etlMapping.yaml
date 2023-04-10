@@ -1,0 +1,143 @@
+mappings:
+  - name: jcoin_etl
+    doc_type: participant
+    type: aggregator
+    root: participant
+    props:
+      - name: submitter_id
+      - name: project_id
+      - name: quarter_recruited
+      - name: role_in_project
+      - name: current_client_status
+    parent_props:
+      - path: protocols[protocol,protocol_submitter_id:submitter_id].projects[project_name:name]
+    flatten_props:
+      - path: demographics
+        props:
+          - name: gender
+          - name: race
+          - name: hispanic
+      - path: moud_uses
+        props:
+          - name: U15
+
+  - name: jcoin_etl_time_points
+    doc_type: time_point
+    type: aggregator
+    root: time_point
+    props:
+      - name: submitter_id
+      - name: project_id
+      - name: days_from_baseline_session
+      - name: visit_name
+      - name: visit_type
+      - name: visit_number
+    parent_props:
+      - path: participants.protocols[protocol,protocol_submitter_id:submitter_id].projects[project_name:name]
+      - path: participants[quarter_recruited,role_in_project,current_client_status]
+    flatten_props:
+      - path: substance_uses
+        props:
+          - name: S3a_category
+          - name: S4a_category
+          - name: S4f_category
+          - name: S4g_category
+          - name: S4h_category
+          - name: S4j_category
+          - name: S1a
+          - name: S1b
+          - name: S2a
+          - name: S2b
+          - name: S2c
+          - name: S3a
+          - name: S3b
+          - name: S4a
+          - name: S4b
+          - name: S4f
+          - name: S4g
+          - name: S4h
+          - name: S4j
+          - name: S4k
+      - path: justice_involvements
+        props:
+          - name: J1_category
+          - name: J1a_category
+          - name: J2_category
+          - name: J2a_category
+          - name: J2d_category
+          - name: J3c_and_d_category
+          - name: J5a_category
+          - name: J1
+          - name: J2
+          - name: J3d
+          - name: J3e
+          - name: J3f
+          - name: J4a
+          - name: J4b
+      - path: demographic_households
+        props:
+          - name: D7a
+          - name: D7c
+          - name: D7d
+          - name: D9a
+      - path: risk_of_harm_and_consequences
+        props:
+          - name: R1d
+          - name: R1g
+
+  - name: jcoin_file
+    doc_type: file
+    type: collector
+    root: None
+    category: data_file
+    props:
+      - name: object_id
+      - name: md5sum
+      - name: file_name
+      - name: file_size
+      - name: data_format
+      - name: data_type
+      - name: state
+      - name: data_category
+    injecting_props:
+      core_metadata_collection:
+        props:
+          - name: cmc_data_type
+            src: data_type
+            fn: set
+          - name: cmc_title
+            src: title
+            fn: set
+          - name: cmc_subject
+            src: subject
+            fn: set
+          - name: cmc_source
+            src: source
+            fn: set
+          - name: cmc_relation
+            src: relation
+            fn: set
+      project:
+        props:
+          - name: project_code
+            src: code
+            fn: set
+          - name: project_name
+            src: name
+            fn: set
+  - name: jcoin_saes
+    doc_type: serious_adverse_event
+    type: aggregator
+    root: serious_adverse_event
+    props:
+      - name: project_id
+      - name: submitter_id
+      - name: quarter_of_sae
+      - name: is_related_to_study
+      - name: was_expected
+      - name: on_opioid_medication
+      - name: gender
+      - name: race
+      - name: hispanic
+    parent_props:
+      - path: protocols[protocol,protocol_submitter_id:submitter_id].projects[project_name:name]
