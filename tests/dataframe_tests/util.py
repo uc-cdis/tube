@@ -5,10 +5,6 @@ import yaml
 from collections import namedtuple
 from jsonschema import RefResolver
 from pyspark.sql import SQLContext
-from tube.etl.outputs.es.writer import Writer
-from tube.utils.dd import init_dictionary
-from tube.etl.indexers.aggregation.new_translator import Translator as AggregationTranslator
-from tube.etl.indexers.injection.new_translator import Translator as InjectionTranslator
 
 ResolverPair = namedtuple("ResolverPair", ["resolver", "source"])
 
@@ -31,13 +27,17 @@ def initialize_mappings(schema_name, mapping_name):
 
 
 def mock_dictionary_url(schema_name):
-    all_schema = json.load(open(os.path.join(TEST_DATA_HOME, schema_name, "schema.json")))
+    selected_schema_path = os.path.join(TEST_DATA_HOME, schema_name, "schema.json")
+    print(selected_schema_path)
+    all_schema = json.load(open(selected_schema_path))
+
     schemas = {}
     resolvers = {}
     for key, schema in all_schema.items():
         schemas[key] = schema
         resolver = RefResolver("{}#".format(key), schema)
         resolvers[key] = ResolverPair(resolver, schema)
+    print(schema)
     return schemas, resolvers
 
 

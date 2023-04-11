@@ -1,18 +1,52 @@
 import pytest
-from tests.dataframe_tests.util import (
-    initialize_mappings,
-    get_input_output_dataframes,
-    get_spark_session,
-)
-from tube.utils.dd import init_dictionary
+from unittest.mock import patch
 
-@pytest.mark.parametrize("translator", [("midrc", "file", "injection")], indirect=True)
-def test_injection_parser(translator):
-    input_df, expected_df = get_input_output_dataframes(
-        get_spark_session(translator.sc),
-        "ibdgc",
-        "participant__0_Translator.translate_parent",
-        "participant__0_Translator.get_direct_children"
+@pytest.mark.parametrize("translator", [("midrc", "imaging_data_file", "injection", [
+    "edge_crseriesfilerelatedtoimagingstudy",
+    "edge_xaseriesfilerelatedtoimagingstudy",
+    "edge_ptseriesfilerelatedtoimagingstudy",
+    "edge_rfseriesfilerelatedtoimagingstudy",
+    "edge_ctseriesfilerelatedtoimagingstudy",
+    "edge_dxseriesfilerelatedtoimagingstudy",
+    "edge_imagingstudyrelatedtocase",
+    "edge_nmseriesfilerelatedtoimagingstudy",
+    "edge_casememberofdataset",
+    "edge_datasetperformedforproject",
+    "edge_projectmemberofprogram"
+])], indirect=True)
+def test_create_props_from_json(translator):
+    props = translator.parser.create_props_from_json(
+        translator.parser.doc_type,
+        [
+            {'name': '_imaging_study_id', 'src': 'id', 'fn': 'set'},
+            {'name': 'age_at_imaging', 'src': 'age_at_imaging', 'fn': 'set'},
+            {'name': 'body_part_examined', 'src': 'body_part_examined', 'fn': 'set'},
+            {'name': 'days_from_study_to_neg_covid_test', 'src': 'days_from_study_to_neg_covid_test', 'fn': 'set'},
+            {'name': 'days_from_study_to_pos_covid_test', 'src': 'days_from_study_to_pos_covid_test', 'fn': 'set'},
+            {'name': 'days_to_study', 'src': 'days_to_study', 'fn': 'set'},
+            {'name': 'study_description', 'src': 'study_description', 'fn': 'set'},
+            {'name': 'study_modality', 'src': 'study_modality', 'fn': 'set'},
+            {'name': 'study_location', 'src': 'study_location', 'fn': 'set'},
+            {'name': 'study_year', 'src': 'study_year', 'fn': 'set'},
+            {'name': 'study_year_shifted', 'src': 'study_year_shifted', 'fn': 'set'},
+            {'name': 'study_uid', 'src': 'study_uid', 'fn': 'set'}
+        ]
     )
-    dictionary, model = init_dictionary("abc")
-    print(dictionary.schema)
+    types_to_check = {
+        "_imaging_study_id": (str,),
+        "age_at_imaging": (float, int, str),
+        "body_part_examined": (list, str,),
+        "days_from_study_to_neg_covid_test": (list, int),
+        "days_from_study_to_pos_covid_test": (list, int),
+        "days_to_study": (float, int, str),
+        "study_description": (str, str),
+        "study_modality": (list, str,),
+        "study_location": (str, str,),
+        "study_year": (int, str,),
+        "study_year_shifted": (bool, str,),
+        "study_uid": (str, str,)
+    }
+    actual_types = {}
+    for p in props:
+        actual_types[p.name] = p.type
+    assert actual_types == types_to_check

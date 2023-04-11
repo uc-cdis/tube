@@ -4,14 +4,25 @@ from tests.dataframe_tests.util import (
     assert_dataframe_equality,
     get_input_output_dataframes,
 )
-from unittest.mock import patch
 from tube.utils.general import get_node_id_name
 
-@pytest.mark.parametrize("translator", [("ibdgc", "file", "injection")], indirect=True)
-@patch(
-    "tube.etl.indexers.injection.parser.Parser.get_edges_having_data"
-)
-def test_collect_collecting_child(mock_get_edges_having_data, translator):
+@pytest.mark.parametrize("translator", [("ibdgc", "file", "injection", [
+        "edge_qcworkflowperformedonrawsnpgenotype", "edge_ebf408fc_sufidafrcomeco", "edge_d0f931be_alredafrcomeco",
+        "edge_diagnosisdescribesvisit", "edge_supplementaryfiledatafromproject", "edge_4c2316bf_alcowopeonsualre",
+        "edge_centercontributedtoproject", "edge_f882ed04_refidafrcomeco", "edge_aed49361_madilopeatvi",
+        "edge_exposureperformedatvisit", "edge_64a2ed15_suunredafrregr", "edge_0b990528_alwopeonsualre",
+        "edge_demographicdescribesparticipant", "edge_aliquotderivedfromsample", "edge_publicationreferstoproject",
+        "edge_bb548516_exinmapeatvi", "edge_projectmemberofprogram", "edge_5db8cb04_gevaindefrsigeva",
+        "edge_readgroupderivedfromaliquot", "edge_participantrecruitedatcenter", "edge_keyworddescribeproject",
+        "edge_1eebce42_anfidafrcomeco", "edge_6dd7191b_diacantrpeatvi", "edge_aliasidentifiesparticipant",
+        "edge_sampleididentifiessample", "edge_familyhistoryperformedatvisit", "edge_32dd5475_sigevadafrcomeco",
+        "edge_561d0dc7_sufidafrpu", "edge_6fadb507_gemucawopeonsualre", "edge_9c338d5d_rasngedafrcomeco",
+        "edge_diagnosisdescribesparticipant", "edge_acknowledgementcontributetoproject",
+        "edge_visitdescribesparticipant", "edge_54e02e8f_sualredafrcomeco", "edge_eeedc770_sufidafrcomeco",
+        "edge_pubertalstageperformedatvisit", "edge_176f8285_prmedafrcomeco", "edge_9197510c_comecodafrpr",
+        "edge_surgeryperformedatvisit", "edge_samplederivedfromparticipant"
+    ])], indirect=True)
+def test_collect_collecting_child(translator):
     input_df, expected_df = get_input_output_dataframes(
         get_spark_session(translator.sc),
         "ibdgc",
@@ -33,22 +44,6 @@ def test_collect_collecting_child(mock_get_edges_having_data, translator):
         )
         expected_collected_collecting_dfs[n] = expected_df
 
-    mock_get_edges_having_data.return_value = [
-        "edge_qcworkflowperformedonrawsnpgenotype", "edge_ebf408fc_sufidafrcomeco", "edge_d0f931be_alredafrcomeco",
-        "edge_diagnosisdescribesvisit", "edge_supplementaryfiledatafromproject", "edge_4c2316bf_alcowopeonsualre",
-        "edge_centercontributedtoproject", "edge_f882ed04_refidafrcomeco", "edge_aed49361_madilopeatvi",
-        "edge_exposureperformedatvisit", "edge_64a2ed15_suunredafrregr", "edge_0b990528_alwopeonsualre",
-        "edge_demographicdescribesparticipant", "edge_aliquotderivedfromsample", "edge_publicationreferstoproject",
-        "edge_bb548516_exinmapeatvi", "edge_projectmemberofprogram", "edge_5db8cb04_gevaindefrsigeva",
-        "edge_readgroupderivedfromaliquot", "edge_participantrecruitedatcenter", "edge_keyworddescribeproject",
-        "edge_1eebce42_anfidafrcomeco", "edge_6dd7191b_diacantrpeatvi", "edge_aliasidentifiesparticipant",
-        "edge_sampleididentifiessample", "edge_familyhistoryperformedatvisit", "edge_32dd5475_sigevadafrcomeco",
-        "edge_561d0dc7_sufidafrpu", "edge_6fadb507_gemucawopeonsualre", "edge_9c338d5d_rasngedafrcomeco",
-        "edge_diagnosisdescribesparticipant", "edge_acknowledgementcontributetoproject",
-        "edge_visitdescribesparticipant", "edge_54e02e8f_sualredafrcomeco", "edge_eeedc770_sufidafrcomeco",
-        "edge_pubertalstageperformedatvisit", "edge_176f8285_prmedafrcomeco", "edge_9197510c_comecodafrpr",
-        "edge_surgeryperformedatvisit", "edge_samplederivedfromparticipant"
-    ]
     collected_collecting_dfs = translator.join_program_to_project()
     translator.merge_collectors(collected_collecting_dfs)
     print(f"Collected collecting dfs: {collected_collecting_dfs}")

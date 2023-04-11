@@ -6,7 +6,7 @@ from tests.dataframe_tests.util import (
 )
 from tube.utils.general import get_node_id_name
 
-@pytest.mark.parametrize("translator", [("ibdgc", "participant", "aggregation")], indirect=True)
+@pytest.mark.parametrize("translator", [("ibdgc", "participant", "aggregation", [])], indirect=True)
 def test_get_direct_children_with_parent(translator):
     input_df, expected_df = get_input_output_dataframes(
         get_spark_session(translator.sc),
@@ -17,7 +17,7 @@ def test_get_direct_children_with_parent(translator):
     result_df = translator.get_direct_children(input_df)
     assert_dataframe_equality(expected_df, result_df, get_node_id_name("participant"))
 
-@pytest.mark.parametrize("translator", [("ibdgc", "participant", "aggregation")], indirect=True)
+@pytest.mark.parametrize("translator", [("ibdgc", "participant", "aggregation", [])], indirect=True)
 def test_ensure_project_id_exist_with_project_id_in_input_df(translator):
     """
     This function is to test function ensure_project_id_exist with etlMapping has project_id
@@ -33,7 +33,7 @@ def test_ensure_project_id_exist_with_project_id_in_input_df(translator):
     result_df = translator.ensure_project_id_exist(input_df)
     assert_dataframe_equality(expected_df, result_df, get_node_id_name("participant"))
 
-@pytest.mark.parametrize("translator", [("ibdgc", "participant", "aggregation")], indirect=True)
+@pytest.mark.parametrize("translator", [("ibdgc", "project", "aggregation", [])], indirect=True)
 def test_ensure_project_id_exist_without_project_id_in_input_df(translator):
     """
     This function is to test function ensure_project_id_exist

@@ -78,6 +78,9 @@ class Parser(BaseParser):
         self.leaves = set([])
         self.collectors = []
         self.roots = []
+        self.generated_edges = []
+
+    def update_props_with_edges_having_data(self):
         self.generated_edges = self.get_edges_having_data()
         self.get_collecting_nodes()
 
