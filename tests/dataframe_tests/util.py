@@ -21,15 +21,14 @@ def get_spark_session(spark_context):
 
 MAPPING_FILE = "etlMapping.yaml"
 TEST_DATA_HOME = "./tests/dataframe_tests/test_data"
-mappings = {}
 
-def initialize_mappings(schema_name):
+def initialize_mappings(schema_name, mapping_name):
+    mappings = {}
     list_mappings = yaml.load(open(os.path.join(TEST_DATA_HOME, schema_name, MAPPING_FILE)), Loader=yaml.SafeLoader)
     for mapping in list_mappings["mappings"]:
         mappings[mapping.get("doc_type")] = mapping
-
-def get_mapping(mapping_name):
     return mappings.get(mapping_name)
+
 
 def mock_dictionary_url(schema_name):
     all_schema = json.load(open(os.path.join(TEST_DATA_HOME, schema_name, "schema.json")))
@@ -40,17 +39,6 @@ def mock_dictionary_url(schema_name):
         resolver = RefResolver("{}#".format(key), schema)
         resolvers[key] = ResolverPair(resolver, schema)
     return schemas, resolvers
-
-
-def get_translator(spark_context, config, schema_name, mapping_name, indexer_type):
-    dictionary, model = init_dictionary(config.DICTIONARY_URL)
-    writer = Writer(spark_context, config)
-    mapping = get_mapping(mapping_name)
-    hdfs_path = os.path.join(TEST_DATA_HOME, schema_name, "graphs")
-    if indexer_type.lower() == "aggregation":
-        return AggregationTranslator(spark_context, hdfs_path, writer, mapping, model, dictionary)
-    elif indexer_type.lower() == "injection":
-        return InjectionTranslator(spark_context, hdfs_path, writer, mapping, model, dictionary)
 
 
 def get_input_output_dataframes(spark_session, schema_name, input_parquet_file, output_parquet_file):
