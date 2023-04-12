@@ -1,6 +1,7 @@
 import pytest
 from unittest.mock import patch
 
+@pytest.mark.schema_midrc
 @pytest.mark.parametrize("translator", [("midrc", "imaging_data_file", "injection", [
     "edge_crseriesfilerelatedtoimagingstudy",
     "edge_xaseriesfilerelatedtoimagingstudy",

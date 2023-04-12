@@ -6,6 +6,7 @@ from tests.dataframe_tests.util import (
 )
 from tube.utils.general import get_node_id_name
 
+@pytest.mark.schema_ibdgc
 @pytest.mark.parametrize("translator", [("ibdgc", "participant", "aggregation", [])], indirect=True)
 def test_get_direct_children_with_parent(translator):
     """
@@ -22,6 +23,7 @@ def test_get_direct_children_with_parent(translator):
     result_df = translator.get_direct_children(input_df)
     assert_dataframe_equality(expected_df, result_df, get_node_id_name("participant"))
 
+@pytest.mark.schema_ibdgc
 @pytest.mark.parametrize("translator", [("ibdgc", "participant", "aggregation", [])], indirect=True)
 def test_ensure_project_id_exist_with_project_id_in_input_df(translator):
     """
@@ -38,6 +40,7 @@ def test_ensure_project_id_exist_with_project_id_in_input_df(translator):
     result_df = translator.ensure_project_id_exist(input_df)
     assert_dataframe_equality(expected_df, result_df, get_node_id_name("participant"))
 
+@pytest.mark.schema_ibdgc
 @pytest.mark.parametrize("translator", [("ibdgc", "project", "aggregation", [])], indirect=True)
 def test_ensure_project_id_exist_without_project_id_in_input_df(translator):
     """
@@ -54,6 +57,7 @@ def test_ensure_project_id_exist_without_project_id_in_input_df(translator):
     result_df = translator.ensure_project_id_exist(input_df)
     assert_dataframe_equality(expected_df, result_df, get_node_id_name("project"))
 
+@pytest.mark.schema_ibdgc
 @pytest.mark.parametrize("translator", [("ibdgc", "participant", "aggregation", [])], indirect=True)
 def test_translate_parent(translator):
     """

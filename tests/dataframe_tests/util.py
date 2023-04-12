@@ -42,9 +42,9 @@ def mock_dictionary_url(schema_name):
     return schemas, resolvers
 
 
-def get_dataframes_from_names(spark_session, schema_name, parquest_files):
+def get_dataframes_from_names(spark_session, schema_name, parquet_files):
     dataframes = []
-    for parquest_file in parquest_files:
+    for parquest_file in parquet_files:
         dataframes.append(load_from_local_file_to_dataframe(
             spark_session,
             os.path.join(TEST_DATA_HOME, schema_name, "dataframe", parquest_file)
@@ -67,6 +67,8 @@ def assert_schema(expected_df, checking_df, diff):
             diff.append(f"Schema field expected vs real value: {v} is not in checking value")
         elif v.dataType != checking_fields.get(k).dataType:
             checking_type = checking_fields.get(k).dataType
+            # Dataframe loaded from an existing file will have some minor difference in schema
+            # nullable vs not nullable for ArrayType field. This block is to resolve this minor difference
             if (
                 isinstance(v.dataType, ArrayType) and isinstance(checking_type, ArrayType)
                 and v.dataType.elementType == checking_type.elementType

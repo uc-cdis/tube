@@ -6,6 +6,7 @@ from tests.dataframe_tests.util import (
 )
 from tube.utils.general import get_node_id_name
 
+@pytest.mark.schema_ibdgc
 @pytest.mark.parametrize("translator", [("ibdgc", "file", "injection", [
         "edge_qcworkflowperformedonrawsnpgenotype", "edge_ebf408fc_sufidafrcomeco", "edge_d0f931be_alredafrcomeco",
         "edge_diagnosisdescribesvisit", "edge_supplementaryfiledatafromproject", "edge_4c2316bf_alcowopeonsualre",
