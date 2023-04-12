@@ -136,7 +136,10 @@ jobs:
           ES_SPARK_30_2_12: elasticsearch-spark-30_2.12
           ES_SPARK_20_2_11: elasticsearch-spark-20_2.11
         # Skip SSL tests marked with `@pytest.mark.ssl`
-        run: python3.9 -m poetry run pytest -v tests/dataframe_tests -m "not ssl" --cov=tube --cov-append --cov-report term-missing --cov-report xml
+        run: | 
+          python3.9 -m poetry run pytest -v tests/dataframe_tests/test_dataframe_aggregation.py -m "not ssl" --cov=tube --cov-append --cov-report term-missing --cov-report xml
+          python3.9 -m poetry run pytest -v tests/dataframe_tests/test_dataframe_injection.py -m "not ssl" --cov=tube --cov-append --cov-report term-missing --cov-report xml
+          python3.9 -m poetry run pytest -v tests/dataframe_tests/test_parser.py -m "not ssl" --cov=tube --cov-append --cov-report term-missing --cov-report xml
 
       - name: Submit coverage report
         env:

@@ -28,10 +28,9 @@ def translator(patch_dictionary_url, mock_get_edges_having_data, request):
     print(schema_name)
     dictionary_url_patcher = patch(
         "dictionaryutils.load_schemas_from_url",
-        return_value=mock_dictionary_url(schema_name)
+        return_value=mock_dictionary_url(schema_name),
     )
     dictionary_url_patcher.start()
-
     dictionary, model = init_dictionary("nor_used_url")
 
     for e in model.Edge.get_subclasses():
@@ -48,7 +47,7 @@ def translator(patch_dictionary_url, mock_get_edges_having_data, request):
     elif indexer_type.lower() == "injection":
         edges_having_data_patcher = patch(
             "tube.etl.indexers.injection.parser.Parser.get_edges_having_data",
-            return_value=edges_having_data
+            return_value=edges_having_data,
         )
         edges_having_data_patcher.start()
         translator = InjectionTranslator(
