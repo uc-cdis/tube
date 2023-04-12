@@ -5,6 +5,7 @@ import yaml
 from collections import namedtuple
 from jsonschema import RefResolver
 from pyspark.sql import SQLContext
+from pyspark.sql.types import StructType, StructField, StringType, ArrayType
 
 ResolverPair = namedtuple("ResolverPair", ["resolver", "source"])
 
@@ -65,6 +66,12 @@ def assert_schema(expected_df, checking_df, diff):
         if k not in checking_fields:
             diff.append(f"Schema field expected vs real value: {v} is not in checking value")
         elif v.dataType != checking_fields.get(k).dataType:
+            checking_type = checking_fields.get(k).dataType
+            if (
+                isinstance(v.dataType, ArrayType) and isinstance(checking_type, ArrayType)
+                and v.dataType.elementType == checking_type.elementType
+            ):
+                continue
             diff.append(f"Schema field expected vs real value: {v} != {checking_fields.get(k)}")
     for k, v in checking_fields.items():
         if k not in expected_fields:

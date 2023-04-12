@@ -111,6 +111,6 @@ def get_hadoop_type_ignore_fn(prop):
         return StringType()
     if prop.type[0] is list:
         if len(prop.type) > 1:
-            return ArrayType(get_hadoop_simple_type(prop.type[1]))
-        return ArrayType(StringType())
+            return ArrayType(get_hadoop_simple_type(prop.type[1]), containsNull=True)
+        return ArrayType(StringType(), containsNull=True)
     return get_hadoop_simple_type(prop.type[0])

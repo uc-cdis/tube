@@ -33,6 +33,8 @@ def json_export_with_no_key(x, doc_type, root_name):
     x[1]["node_id"] = x[0]  # redundant field for backward compatibility with arranger
     return json.dumps(x[1])
 
+cached_dataframe = {}
+
 class Translator(object):
     """
     The main entry point into the index export process for the mutation indices
@@ -175,7 +177,7 @@ class Translator(object):
             df.unpersist()
             if props is not None and not new_df.rdd.isEmpty():
                 cols = self.get_cols_from_node(node_name, props, [], new_df, key_name)
-                return new_df.select(*cols)
+                new_df = new_df.select(*cols)
             return self.return_dataframe(
                 new_df,
                 f"{Translator.translate_table_to_dataframe.__qualname__}__{node.name}"
@@ -318,8 +320,15 @@ class Translator(object):
         return df.select(*selected_cols)
 
     def get_path_from_step(self, step):
+        dataframe_name = f"{self.parser.doc_type}__{str(step)}"
+        if dataframe_name not in cached_dataframe:
+            current_number = 0
+        else:
+            current_number = cached_dataframe.get(dataframe_name) + 1
+            dataframe_name = f"{dataframe_name}_{current_number}"
+        cached_dataframe[dataframe_name] = current_number
         return os.path.join(
-            self.hdfs_path, "output", "{}__{}".format(self.parser.doc_type, str(step))
+            self.hdfs_path, "output", dataframe_name
         )
 
     def save_dataframe_to_hadoop(self, df):
