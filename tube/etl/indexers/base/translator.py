@@ -320,6 +320,21 @@ class Translator(object):
         return df.select(*selected_cols)
 
     def get_path_from_step(self, step):
+        return os.path.join(
+            self.hdfs_path, "output", "{}__{}".format(self.parser.doc_type, str(step))
+        )
+
+    def save_dataframe_to_hadoop(self, df):
+        save_rdd_of_dataframe(df, self.get_path_from_step(self.current_step), self.sc)
+        df.unpersist()
+
+    def return_dataframe(self, df, dataframe_name):
+        if config.RUNNING_MODE.lower() == enums.RUNNING_MODE_PRE_TEST.lower():
+            step_name = f"{self.current_step}_{dataframe_name}"
+            save_rdd_of_dataframe(df, self.get_path_to_save_dataframe(step_name), self.sc)
+        return df
+
+    def get_path_to_save_dataframe(self, step):
         dataframe_name = f"{self.parser.doc_type}__{str(step)}"
         if dataframe_name not in cached_dataframe:
             current_number = 0
@@ -330,16 +345,6 @@ class Translator(object):
         return os.path.join(
             self.hdfs_path, "output", dataframe_name
         )
-
-    def save_dataframe_to_hadoop(self, df):
-        save_rdd_of_dataframe(df, self.get_path_from_step(self.current_step), self.sc)
-        df.unpersist()
-
-    def return_dataframe(self, df, dataframe_name):
-        if config.RUNNING_MODE.lower() == enums.RUNNING_MODE_PRE_TEST.lower():
-            step_name = f"{self.current_step}_{dataframe_name}"
-            save_rdd_of_dataframe(df, self.get_path_from_step(step_name), self.sc)
-        return df
 
     def save_to_hadoop(self, df):
         save_rdds(df, self.get_path_from_step(self.current_step), self.sc)
