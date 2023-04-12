@@ -2,7 +2,7 @@ import pytest
 from tests.dataframe_tests.util import (
     get_spark_session,
     assert_dataframe_equality,
-    get_input_output_dataframes,
+    get_dataframes_from_names,
 )
 from tube.utils.general import get_node_id_name
 
@@ -23,11 +23,10 @@ from tube.utils.general import get_node_id_name
         "edge_surgeryperformedatvisit", "edge_samplederivedfromparticipant"
     ])], indirect=True)
 def test_collect_collecting_child(translator):
-    input_df, expected_df = get_input_output_dataframes(
+    [expected_df] = get_dataframes_from_names(
         get_spark_session(translator.sc),
         "ibdgc",
-        None,
-        "file__0_Translator.collect_collecting_child__collected_collecting_dfs__aligned_reads"
+        ["file__0_Translator.collect_collecting_child__collected_collecting_dfs__aligned_reads"]
     )
     collecting_nodes = ["participant", "publication", "sample","aligned_reads", "aliquot", "annotation_file", "center",
                         "core_metadata_collection", "raw_snp_genotype", "read_group", "reference_file",
@@ -36,11 +35,10 @@ def test_collect_collecting_child(translator):
 
     expected_collected_collecting_dfs = {}
     for n in collecting_nodes:
-        input_df, expected_df = get_input_output_dataframes(
+        [expected_df] = get_dataframes_from_names(
             get_spark_session(translator.sc),
             "ibdgc",
-            None,
-            f"file__0_Translator.collect_collecting_child__collected_collecting_dfs__{n}"
+            [f"file__0_Translator.collect_collecting_child__collected_collecting_dfs__{n}"]
         )
         expected_collected_collecting_dfs[n] = expected_df
 

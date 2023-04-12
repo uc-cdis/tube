@@ -25,11 +25,6 @@ from pyspark.sql.functions import (
 from copy import deepcopy
 
 
-def prop_to_aggregated_fn(col_name, fn):
-    if fn == "count" or fn == "sum":
-        return sum(col_name).alias(col_name)
-
-
 class Translator(BaseTranslator):
     def __init__(self, sc, hdfs_path, writer, mapping, model, dictionary):
         super(Translator, self).__init__(

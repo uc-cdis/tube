@@ -41,19 +41,14 @@ def mock_dictionary_url(schema_name):
     return schemas, resolvers
 
 
-def get_input_output_dataframes(spark_session, schema_name, input_parquet_file, output_parquet_file):
-    input_df = (
-        load_from_local_file_to_dataframe(
+def get_dataframes_from_names(spark_session, schema_name, parquest_files):
+    dataframes = []
+    for parquest_file in parquest_files:
+        dataframes.append(load_from_local_file_to_dataframe(
             spark_session,
-            os.path.join(TEST_DATA_HOME, schema_name, "dataframe", input_parquet_file)
-        )
-        if input_parquet_file else None
-    )
-    expected_df = load_from_local_file_to_dataframe(
-        spark_session,
-        os.path.join(TEST_DATA_HOME, schema_name, "dataframe", output_parquet_file)
-    )
-    return input_df, expected_df
+            os.path.join(TEST_DATA_HOME, schema_name, "dataframe", parquest_file)
+        ))
+    return dataframes
 
 
 def schema_to_dict_fields(schema):
