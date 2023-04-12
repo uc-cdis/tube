@@ -106,7 +106,10 @@ class Translator(BaseTranslator):
                     )
                 )
         tmp_df = tmp_df.select(*select_expr)
-        return self.return_dataframe(tmp_df, Translator.aggregate_intermediate_data_frame.__qualname__)
+        return self.return_dataframe(
+            tmp_df,
+            f"{Translator.aggregate_intermediate_data_frame.__qualname__}__{node_name}__{child.name}"
+        )
 
     def aggregate_with_count_on_edge_tbl(self, node_name, df, edge_df, child):
         """
@@ -142,7 +145,10 @@ class Translator(BaseTranslator):
             if df is None
             else self.join_two_dataframe(df, count_df, how="left_outer")
         )
-        return self.return_dataframe(result, Translator.aggregate_with_count_on_edge_tbl.__qualname__)
+        return self.return_dataframe(
+            result,
+            f"{Translator.aggregate_with_count_on_edge_tbl.__qualname__}__{node_name}__{child.name}"
+        )
 
     def aggregate_with_child_tbl(self, df, parent_name, edge_df, child):
         child_df = self.translate_table_to_dataframe(
@@ -164,7 +170,10 @@ class Translator(BaseTranslator):
         ]
         temp_df = temp_df.groupBy(get_node_id_name(parent_name)).agg(*expr)
         result = self.join_two_dataframe(df, temp_df, how="left_outer")
-        return self.return_dataframe(result, Translator.aggregate_with_child_tbl.__qualname__)
+        return self.return_dataframe(
+            result,
+            f"{Translator.aggregate_with_child_tbl.__qualname__}__{parent_name}__{child.name}"
+        )
 
     def aggregate_nested_properties(self):
         """
