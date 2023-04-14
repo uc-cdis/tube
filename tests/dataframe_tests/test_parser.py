@@ -63,7 +63,7 @@ def test_create_props_from_json(translator):
 def test_aggregate_with_nested_properties(translator):
     [expected_df] = get_dataframes_from_names(
         get_spark_session(translator.sc),
-        "ibdgc",
+        "midrc",
         ["imaging_study__0_Translator.aggregate_nested_properties"]
     )
     actual_df = translator.aggregate_nested_properties()
