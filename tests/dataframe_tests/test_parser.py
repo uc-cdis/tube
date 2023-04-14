@@ -4,6 +4,7 @@ from tests.dataframe_tests.util import (
     assert_dataframe_equality,
     get_dataframes_from_names,
 )
+from tube.utils.general import get_node_id_name
 
 
 @pytest.mark.schema_midrc
@@ -68,5 +69,5 @@ def test_aggregate_with_nested_properties(translator):
     )
     actual_df = translator.aggregate_nested_properties()
     assert_dataframe_equality(
-        expected_df, actual_df, "imaging_study"
+        expected_df, actual_df, get_node_id_name("imaging_study")
     )
