@@ -1,5 +1,10 @@
 import pytest
-from unittest.mock import patch
+from tests.dataframe_tests.util import (
+    get_spark_session,
+    assert_dataframe_equality,
+    get_dataframes_from_names,
+)
+
 
 @pytest.mark.schema_midrc
 @pytest.mark.parametrize("translator", [("midrc", "imaging_data_file", "injection", [
@@ -51,3 +56,17 @@ def test_create_props_from_json(translator):
     for p in props:
         actual_types[p.name] = p.type
     assert actual_types == types_to_check
+
+
+@pytest.mark.schema_midrc
+@pytest.mark.parametrize("translator", [("midrc", "imaging_study", "aggregation", [])], indirect=True)
+def test_aggregate_with_nested_properties(translator):
+    [expected_df] = get_dataframes_from_names(
+        get_spark_session(translator.sc),
+        "ibdgc",
+        ["imaging_study__0_Translator.aggregate_nested_properties"]
+    )
+    actual_df = translator.aggregate_nested_properties()
+    assert_dataframe_equality(
+        expected_df, actual_df, "imaging_study"
+    )
