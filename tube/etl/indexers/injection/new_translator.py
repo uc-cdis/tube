@@ -19,6 +19,7 @@ class Translator(BaseTranslator):
         super(Translator, self).__init__(
             sc, hdfs_path, writer, Parser(mapping, model, dictionary)
         )
+        self.parser.update_props_with_edges_having_data()
         root_props = []
         for root in self.parser.roots:
             root_props.extend(root.props)

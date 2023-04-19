@@ -1,0 +1,221 @@
+mappings:
+  - name: midrc_case
+    doc_type: case
+    type: aggregator
+    root: case
+    props:
+      - name: project_id
+      - name: submitter_id
+      - name: sex
+      - name: race
+      - name: age_at_index
+      - name: index_event
+      - name: zip
+      - name: covid19_positive
+      - name: ethnicity
+    aggregated_props:
+      - name: _imaging_studies_count
+        path: imaging_studies
+        fn: count
+      - name: _ct_series_file_count
+        path: imaging_studies.ct_series_files
+        fn: count
+      - name: _cr_series_file_count
+        path: imaging_studies.cr_series_files
+        fn: count
+      - name: _dx_series_file_count
+        path: imaging_studies.dx_series_files
+        fn: count
+      - name: _mr_series_file_count
+        path: imaging_studies.mr_series_files
+        fn: count
+    parent_props:
+      - path: datasets[dataset_submitter_id:submitter_id]
+    joining_props:
+      - index: imaging_data_file
+        join_on: _case_id
+        props:
+          - name: object_id
+            src: object_id
+            fn: set
+          - name: data_format
+            src: data_format
+            fn: set
+          - name: data_type
+            src: data_type
+            fn: set
+          - name: data_category
+            src: data_category
+            fn: set
+  - name: midrc_measurement
+    doc_type: measurement
+    type: aggregator
+    root: measurement
+    props:
+      - name: project_id
+      - name: submitter_id
+      - name: case_ids
+      - name: test_days_from_index
+      - name: test_method
+      - name: test_name
+      - name: test_result_text
+  - name: midrc_imaging_study
+    doc_type: imaging_study
+    type: aggregator
+    root: imaging_study
+    props:
+      - name: project_id
+      - name: submitter_id
+      - name: case_ids
+      - name: age_at_imaging
+      - name: body_part_examined
+      - name: days_from_study_to_neg_covid_test
+      - name: days_from_study_to_pos_covid_test
+      - name: days_to_study
+      - name: loinc_code
+      - name: loinc_contrast
+      - name: loinc_long_common_name
+      - name: loinc_method
+      - name: loinc_system
+      - name: study_description
+      - name: study_location
+      - name: study_modality
+      - name: study_year
+      - name: study_year_shifted
+      - name: study_uid
+    aggregated_props:
+      - name: _cr_series_file_count
+        path: cr_series_files
+        fn: count
+      - name: _ct_series_file_count
+        path: ct_series_files
+        fn: count
+      - name: _dx_series_file_count
+        path: dx_series_files
+        fn: count
+      - name: _mr_series_file_count
+        path: mr_series_files
+        fn: count
+    parent_props:
+      - path: cases[sex,race,age_at_index,index_event,zip,covid19_positive,ethnicity].datasets[dataset_submitter_id:submitter_id]
+    joining_props:
+      - index: imaging_data_file
+        join_on: _imaging_study_id
+        props:
+          - name: object_id
+            src: object_id
+            fn: set
+          - name: data_format
+            src: data_format
+            fn: set
+          - name: data_type
+            src: data_type
+            fn: set
+          - name: data_category
+            src: data_category
+            fn: set
+  - name: midrc_imaging_data_file
+    doc_type: imaging_data_file
+    type: collector
+    root: None
+    category: imaging_data_file
+    props:
+      - name: project_id
+      - name: submitter_id
+      - name: series_uid
+      - name: case_ids
+      - name: object_id
+      - name: md5sum
+      - name: file_name
+      - name: file_size
+      - name: data_format
+      - name: data_type
+      - name: data_category
+      - name: acquisition_type
+      - name: contrast_bolus_agent
+      - name: convolution_kernel
+      - name: detector_type
+      - name: exposure_modulation_type
+      - name: image_type
+      - name: imager_pixel_spacing
+      - name: lossy_image_compression
+      - name: manufacturer
+      - name: manufacturer_model_name
+      - name: modality
+      - name: multiframe_images
+      - name: patient_position
+      - name: pixel_spacing
+      - name: radiopharmaceutical
+      - name: series_description
+      - name: slice_thickness
+      - name: spacing_between_slices
+      - name: spatial_resolution
+      - name: transducer_type
+      - name: view_position
+    injecting_props:
+      dataset:
+        props:
+          - name: _dataset_id
+            src: id
+            fn: set
+      case:
+        props:
+          - name: _case_id
+            src: id
+            fn: set
+          - name: age_at_index
+            src: age_at_index
+            fn: set
+          - name: covid19_positive
+            src: covid19_positive
+            fn: set
+          - name: index_event
+            src: index_event
+            fn: set
+          - name: race
+            src: race
+            fn: set
+          - name: sex
+            src: sex
+            fn: set
+          - name: zip
+            src: zip
+            fn: set
+      imaging_study:
+        props:
+          - name: _imaging_study_id
+            src: id
+            fn: set
+          - name: age_at_imaging
+            src: age_at_imaging
+            fn: set
+          - name: body_part_examined
+            src: body_part_examined
+            fn: set
+          - name: days_from_study_to_neg_covid_test
+            src: days_from_study_to_neg_covid_test
+            fn: set
+          - name: days_from_study_to_pos_covid_test
+            src: days_from_study_to_pos_covid_test
+            fn: set
+          - name: days_to_study
+            src: days_to_study
+            fn: set
+          - name: study_description
+            src: study_description
+            fn: set
+          - name: study_modality
+            src: study_modality
+            fn: set
+          - name: study_location
+            src: study_location
+            fn: set
+          - name: study_year
+            src: study_year
+            fn: set
+          - name: study_year_shifted
+            src: study_year_shifted
+            fn: set
+          - name: study_uid
+            src: study_uid
+            fn: set

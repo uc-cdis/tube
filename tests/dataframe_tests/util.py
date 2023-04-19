@@ -1,9 +1,13 @@
+import json
+import os.path
+
 import yaml
+from collections import namedtuple
+from jsonschema import RefResolver
 from pyspark.sql import SQLContext
-from tube.etl.outputs.es.writer import Writer
-from tube.utils.dd import init_dictionary
-from tube.etl.indexers.aggregation.new_translator import Translator as AggregationTranslator
-from tube.etl.indexers.injection.new_translator import Translator as InjectionTranslator
+from pyspark.sql.types import StructType, StructField, StringType, ArrayType
+
+ResolverPair = namedtuple("ResolverPair", ["resolver", "source"])
 
 def load_from_local_file_to_dataframe(spark_session, file_path):
     return spark_session.read.parquet(file_path)
@@ -12,36 +16,40 @@ def get_spark_session(spark_context):
     sql_context = SQLContext(spark_context)
     return sql_context.sparkSession
 
-MAPPING_FILE = "./tests/dataframe_tests/test_data/etlMapping.yaml"
+MAPPING_FILE = "etlMapping.yaml"
 TEST_DATA_HOME = "./tests/dataframe_tests/test_data"
-mappings = {}
 
-def initialize_mappings():
-    list_mappings = yaml.load(open(MAPPING_FILE), Loader=yaml.SafeLoader)
+def initialize_mappings(schema_name, mapping_name):
+    mappings = {}
+    list_mappings = yaml.load(open(os.path.join(TEST_DATA_HOME, schema_name, MAPPING_FILE)), Loader=yaml.SafeLoader)
     for mapping in list_mappings["mappings"]:
         mappings[mapping.get("doc_type")] = mapping
-
-def get_mapping(mapping_name):
     return mappings.get(mapping_name)
 
-def get_translator(spark_context, config, mapping_name, indexer_type):
-    dictionary, model = init_dictionary(config.DICTIONARY_URL)
-    writer = Writer(spark_context, config)
-    mapping = get_mapping(mapping_name)
-    hdfs_path = f"{TEST_DATA_HOME}/graphs"
-    if indexer_type.lower() == "aggregation":
-        return AggregationTranslator(spark_context, hdfs_path, writer, mapping, model, dictionary)
-    elif indexer_type.lower() == "injection":
-        return InjectionTranslator(spark_context, hdfs_path, writer, mapping, model, dictionary)
+
+def mock_dictionary_url(schema_name):
+    selected_schema_path = os.path.join(TEST_DATA_HOME, schema_name, "schema.json")
+    print(selected_schema_path)
+    all_schema = json.load(open(selected_schema_path))
+
+    schemas = {}
+    resolvers = {}
+    for key, schema in all_schema.items():
+        schemas[key] = schema
+        resolver = RefResolver("{}#".format(key), schema)
+        resolvers[key] = ResolverPair(resolver, schema)
+    print(schema)
+    return schemas, resolvers
 
 
-def get_input_output_dataframes(spark_session, input_parquet_file, output_parquet_file):
-    input_df = (
-        load_from_local_file_to_dataframe(spark_session, f"{TEST_DATA_HOME}/dataframe/{input_parquet_file}")
-        if input_parquet_file else None
-    )
-    expected_df = load_from_local_file_to_dataframe(spark_session, f"{TEST_DATA_HOME}/dataframe/{output_parquet_file}")
-    return input_df, expected_df
+def get_dataframes_from_names(spark_session, schema_name, parquet_files):
+    dataframes = []
+    for parquest_file in parquet_files:
+        dataframes.append(load_from_local_file_to_dataframe(
+            spark_session,
+            os.path.join(TEST_DATA_HOME, schema_name, "dataframe", parquest_file)
+        ))
+    return dataframes
 
 
 def schema_to_dict_fields(schema):
@@ -58,6 +66,14 @@ def assert_schema(expected_df, checking_df, diff):
         if k not in checking_fields:
             diff.append(f"Schema field expected vs real value: {v} is not in checking value")
         elif v.dataType != checking_fields.get(k).dataType:
+            checking_type = checking_fields.get(k).dataType
+            # Dataframe loaded from an existing file will have some minor difference in schema
+            # nullable vs not nullable for ArrayType field. This block is to resolve this minor difference
+            if (
+                isinstance(v.dataType, ArrayType) and isinstance(checking_type, ArrayType)
+                and v.dataType.elementType == checking_type.elementType
+            ):
+                continue
             diff.append(f"Schema field expected vs real value: {v} != {checking_fields.get(k)}")
     for k, v in checking_fields.items():
         if k not in expected_fields:
