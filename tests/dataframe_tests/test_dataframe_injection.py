@@ -53,3 +53,46 @@ def test_collect_collecting_child(translator):
         assert_dataframe_equality(
             expected_collected_collecting_dfs.get(n), collected_collecting_dfs.get(n), get_node_id_name(n)
         )
+
+@pytest.mark.schema_jcoin
+@pytest.mark.parametrize("translator", [("jcoin", "file", "injection", [
+        "edge_0029a6d1_admedapeatfoup", "edge_122d81fe_orrepeatfoup", "edge_16158be2_imoumepeatfoup",
+        "edge_176f8285_prmedafrcomeco", "edge_21fa3fe9_riofhaancopeatfoup", "edge_22014405_juinqupeatfoup",
+        "edge_2d0f7d59_moqudepa", "edge_3b95de47_orclstpeatfoup", "edge_5feaa397_riofhaancopeattipo",
+        "edge_638e0a47_trprqupeatfoup", "edge_67a7e2d0_trprpeattipo", "edge_87949a9c_stattomopeatfoup",
+        "edge_9197510c_comecodafrpr", "edge_a3b21dc3_utsequpeatfoup", "edge_acknowledgementcontributetoproject",
+        "edge_centerperformedatfollowup", "edge_d200dca4_seadevreatpr", "edge_d56b01d7_badepeatfoup",
+        "edge_d68708cb_alreindafrcomeco", "edge_d8606352_utsepeattipo", "edge_demographicdescribesparticipant",
+        "edge_e7e94b83_juinpeattipo", "edge_e92eeb59_dehopeattipo", "edge_enrollmentdescribesparticipant",
+        "edge_environmentrecruitedatcenter", "edge_f4044444_debadepa", "edge_f882ed04_refidafrcomeco",
+        "edge_followupdescribesparticipant", "edge_healthperformedatfollowup", "edge_keyworddescribeproject",
+        "edge_mouduseperformedatparticipant", "edge_organizationrecruitedatcenter", "edge_oudperformedatfollowup",
+        "edge_participantrecruitedatprotocol", "edge_practitionerrecruitedatcenter", "edge_projectmemberofprogram",
+        "edge_promisperformedatfollowup", "edge_promisperformedattimepoint", "edge_protocolcontributedtoproject",
+        "edge_publicationreferstoproject", "edge_recoveryperformedatfollowup", "edge_substanceuseperformedatfollowup",
+        "edge_substanceuseperformedattimepoint", "edge_systemrecruitedatcenter", "edge_timepointdescribesparticipant"
+    ])], indirect=True)
+def test_get_leaves(translator):
+    collecting_nodes = ["core_metadata_collection", "reference_file"]
+
+    input_collected_collecting_dfs = {}
+    for n in collecting_nodes:
+        [input_df] = get_dataframes_from_names(
+            get_spark_session(translator.sc),
+            "jcoin",
+            [f"file__0_Translator.collect_collecting_child__collected_collecting_dfs__{n}"]
+        )
+        input_collected_collecting_dfs[n] = input_df
+    [expected_collect_leaf_final] = get_dataframes_from_names(
+        get_spark_session(translator.sc),
+        "jcoin",
+        ["file__0_Translator.translate__collected_leaf_dfs"]
+    )
+
+    collected_leaf_dfs = {}
+    collected_collecting_dfs = translator.get_leaves(input_collected_collecting_dfs, collected_leaf_dfs)
+    translator.merge_collectors(collected_collecting_dfs)
+    print(f"Collected collecting dfs: {collected_collecting_dfs}")
+    assert_dataframe_equality(
+        expected_collect_leaf_final, collected_leaf_dfs.get("final"), "_file_id"
+    )

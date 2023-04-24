@@ -204,9 +204,13 @@ class Translator(BaseTranslator):
                 df.unpersist()
 
         if "final" in collected_leaf_dfs:
-            return collected_leaf_dfs["final"]
+            final_df = collected_leaf_dfs["final"]
         else:
-            return self.create_empty_dataframe()
+            final_df = self.create_empty_dataframe()
+        return self.return_dataframe(
+            final_df,
+            f"{Translator.translate.__qualname__}__collected_leaf_dfs"
+        )
 
     def clone_prop_with_iterator_fn(self, p):
         prop = copy(self.parser.get_prop_by_name(p.name))
@@ -261,4 +265,8 @@ class Translator(BaseTranslator):
             if p.name != self.parser.get_key_prop().name
         ]
         df = df.drop(*rm_props)
-        return self.join_two_dataframe(df, tmp_df)
+        final_df = self.join_two_dataframe(df, tmp_df)
+        return self.return_dataframe(
+            final_df,
+            f"{Translator.translate_final.__qualname__}__translate_final"
+        )
