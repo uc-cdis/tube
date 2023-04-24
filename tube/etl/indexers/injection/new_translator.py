@@ -231,18 +231,9 @@ class Translator(BaseTranslator):
                     props.append(self.clone_prop_with_iterator_fn(p))
         return props
 
-    def translate_final(self):
-        """
-        Because one file can belong to multiple root nodes (case, subject).
-        In the final step of file document, we must construct the list of root instance's id
-        :return:
-        """
-        df = self.load_from_hadoop_to_dateframe()
-        aggregating_props = self.get_aggregating_props()
-        if len(aggregating_props) == 0:
-            return df
-
+    def flatten_nested_list(self, df):
         expr = []
+        aggregating_props = self.get_aggregating_props()
         for p in aggregating_props:
             if p.name in df.columns:
                 if len(p.type) > 1 and p.type[0] is list and p.fn in ["list", "set"]:
@@ -266,6 +257,20 @@ class Translator(BaseTranslator):
         ]
         df = df.drop(*rm_props)
         final_df = self.join_two_dataframe(df, tmp_df)
+        return final_df
+
+    def translate_final(self):
+        """
+        Because one file can belong to multiple root nodes (case, subject).
+        In the final step of file document, we must construct the list of root instance's id
+        :return:
+        """
+        df = self.load_from_hadoop_to_dateframe()
+        aggregating_props = self.get_aggregating_props()
+        if len(aggregating_props) == 0:
+            return df
+
+        final_df = self.flatten_nested_list(df)
         return self.return_dataframe(
             final_df,
             f"{Translator.translate_final.__qualname__}__translate_final"

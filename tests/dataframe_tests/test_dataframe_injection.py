@@ -90,9 +90,36 @@ def test_get_leaves(translator):
     )
 
     collected_leaf_dfs = {}
-    collected_collecting_dfs = translator.get_leaves(input_collected_collecting_dfs, collected_leaf_dfs)
-    translator.merge_collectors(collected_collecting_dfs)
-    print(f"Collected collecting dfs: {collected_collecting_dfs}")
+    translator.get_leaves(input_collected_collecting_dfs, collected_leaf_dfs)
+    translator.merge_collectors(collected_leaf_dfs)
+    print(f"Collected collecting dfs: {collected_leaf_dfs}")
     assert_dataframe_equality(
         expected_collect_leaf_final, collected_leaf_dfs.get("final"), "_file_id"
+    )
+
+@pytest.mark.schema_midrc
+@pytest.mark.parametrize("translator", [("midrc", "imaging_data_file", "injection", [
+        "edge_crseriesfilerelatedtoimagingstudy", "edge_dxseriesfilerelatedtoimagingstudy",
+        "edge_mrseriesfilerelatedtoimagingstudy", "edge_ctseriesfilerelatedtoimagingstudy",
+        "edge_0c3e44da_crsefidafrcomeco", "edge_a4f04f84_dxsefidafrcomeco", "edge_d04a5ba2_mrsefidafrcomeco",
+        "edge_0b8a28a9_ctsefidafrcomeco", "edge_9197510c_comecodafrpr", "edge_casememberofdataset",
+        "edge_ctscanrelatedtoimagingstudy", "edge_ctscanrelatedtosubject", "edge_ctseriesrelatedtoctscan",
+        "edge_datareleasedescribesroot", "edge_datasetperformedforproject", "edge_ef9975fc_cotofidafrimex",
+        "edge_imagingstudyrelatedtocase", "edge_projectmemberofprogram",
+    ])], indirect=True)
+def test_flatten_nested_list(translator):
+    [collected_leaf_df, final_df] = get_dataframes_from_names(
+        get_spark_session(translator.sc),
+        "midrc",
+        [
+            "imaging_data_file__0_Translator.translate__collected_leaf_dfs",
+            "imaging_data_file__1_Translator.translate_final__translate_final"
+        ]
+    )
+
+    collected_leaf_dfs = {}
+    actual_final_df = translator.flatten_nested_list(collected_leaf_df)
+    print(f"Actual df: {actual_final_df}")
+    assert_dataframe_equality(
+        final_df, actual_final_df, "_imaging_data_file_id"
     )

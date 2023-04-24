@@ -90,11 +90,17 @@ def assert_null(expected_df, checking_df, diff):
 
 
 def assert_data(expected_df, checking_df, diff, key_column):
+    columns = expected_df.columns
     expected_collection = expected_df.sort(key_column).collect()
     checking_collection = checking_df.sort(key_column).collect()
     zip_collection = zip(expected_collection, checking_collection)
     for expected, checking in zip_collection:
-        if expected != checking:
+        is_diff = False
+        for col in columns:
+            if expected.__getitem__(col) != checking.__getitem__(col):
+                is_diff = True
+                break
+        if is_diff:
             diff.append(f"Datarow expected vs real value: {expected} != {checking}")
 
 
