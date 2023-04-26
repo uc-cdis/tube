@@ -139,8 +139,8 @@ def test_flatten_nested_list(translator):
             "imaging_data_file__1_Translator.translate_final__translate_final"
         ]
     )
-
-    actual_final_df = translator.flatten_nested_list(collected_leaf_df)
+    aggregating_props = translator.get_aggregating_props()
+    actual_final_df = translator.flatten_nested_list(collected_leaf_df, aggregating_props)
     print(f"Actual df: {actual_final_df}")
     assert_dataframe_equality(
         final_df, actual_final_df, "_imaging_data_file_id"
