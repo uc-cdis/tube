@@ -231,9 +231,8 @@ class Translator(BaseTranslator):
                     props.append(self.clone_prop_with_iterator_fn(p))
         return props
 
-    def flatten_nested_list(self, df):
+    def flatten_nested_list(self, df, aggregating_props):
         expr = []
-        aggregating_props = self.get_aggregating_props()
         for p in aggregating_props:
             if p.name in df.columns:
                 if len(p.type) > 1 and p.type[0] is list and p.fn in ["list", "set"]:
@@ -270,7 +269,7 @@ class Translator(BaseTranslator):
         if len(aggregating_props) == 0:
             return df
 
-        final_df = self.flatten_nested_list(df)
+        final_df = self.flatten_nested_list(df, aggregating_props)
         return self.return_dataframe(
             final_df,
             f"{Translator.translate_final.__qualname__}__translate_final"

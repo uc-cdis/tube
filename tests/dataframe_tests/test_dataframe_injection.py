@@ -24,6 +24,13 @@ from tube.utils.general import get_node_id_name
         "edge_surgeryperformedatvisit", "edge_samplederivedfromparticipant"
     ])], indirect=True)
 def test_collect_collecting_child(translator):
+    """
+    Test function which makes dataframe contains data of all collecting nodes.
+    - no input dataframe
+    - aggregated dataframe containing all collecting nodes' data
+    :param translator:
+    :return:
+    """
     [expected_df] = get_dataframes_from_names(
         get_spark_session(translator.sc),
         "ibdgc",
@@ -73,6 +80,15 @@ def test_collect_collecting_child(translator):
         "edge_substanceuseperformedattimepoint", "edge_systemrecruitedatcenter", "edge_timepointdescribesparticipant"
     ])], indirect=True)
 def test_get_leaves(translator):
+    """
+    Test get_leaves function to ensure that the function working correctly.
+    This also include the test case where there are two properties
+    with the same source field in dictionary but being renamed in the index
+    - input collected collecting node's dataframe
+    - expected final dataframe which have all leaf nodes
+    :param translator:
+    :return:
+    """
     collecting_nodes = ["core_metadata_collection", "reference_file"]
 
     input_collected_collecting_dfs = {}
@@ -108,6 +124,13 @@ def test_get_leaves(translator):
         "edge_imagingstudyrelatedtocase", "edge_projectmemberofprogram",
     ])], indirect=True)
 def test_flatten_nested_list(translator):
+    """
+    Test to ensure the created dataframe will not contains any array being nested in another array
+    - input dataframe with leaf nodes containing nested list
+    - expected dataframe with leaf nodes no longer containing nested list
+    :param translator:
+    :return:
+    """
     [collected_leaf_df, final_df] = get_dataframes_from_names(
         get_spark_session(translator.sc),
         "midrc",
@@ -117,7 +140,6 @@ def test_flatten_nested_list(translator):
         ]
     )
 
-    collected_leaf_dfs = {}
     actual_final_df = translator.flatten_nested_list(collected_leaf_df)
     print(f"Actual df: {actual_final_df}")
     assert_dataframe_equality(
