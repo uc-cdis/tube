@@ -24,6 +24,13 @@ from tube.utils.general import get_node_id_name
         "edge_surgeryperformedatvisit", "edge_samplederivedfromparticipant"
     ])], indirect=True)
 def test_collect_collecting_child(translator):
+    """
+    Test function which makes dataframe contains data of all collecting nodes.
+    - no input dataframe
+    - aggregated dataframe containing all collecting nodes' data
+    :param translator:
+    :return:
+    """
     [expected_df] = get_dataframes_from_names(
         get_spark_session(translator.sc),
         "ibdgc",
@@ -53,3 +60,88 @@ def test_collect_collecting_child(translator):
         assert_dataframe_equality(
             expected_collected_collecting_dfs.get(n), collected_collecting_dfs.get(n), get_node_id_name(n)
         )
+
+@pytest.mark.schema_jcoin
+@pytest.mark.parametrize("translator", [("jcoin", "file", "injection", [
+        "edge_0029a6d1_admedapeatfoup", "edge_122d81fe_orrepeatfoup", "edge_16158be2_imoumepeatfoup",
+        "edge_176f8285_prmedafrcomeco", "edge_21fa3fe9_riofhaancopeatfoup", "edge_22014405_juinqupeatfoup",
+        "edge_2d0f7d59_moqudepa", "edge_3b95de47_orclstpeatfoup", "edge_5feaa397_riofhaancopeattipo",
+        "edge_638e0a47_trprqupeatfoup", "edge_67a7e2d0_trprpeattipo", "edge_87949a9c_stattomopeatfoup",
+        "edge_9197510c_comecodafrpr", "edge_a3b21dc3_utsequpeatfoup", "edge_acknowledgementcontributetoproject",
+        "edge_centerperformedatfollowup", "edge_d200dca4_seadevreatpr", "edge_d56b01d7_badepeatfoup",
+        "edge_d68708cb_alreindafrcomeco", "edge_d8606352_utsepeattipo", "edge_demographicdescribesparticipant",
+        "edge_e7e94b83_juinpeattipo", "edge_e92eeb59_dehopeattipo", "edge_enrollmentdescribesparticipant",
+        "edge_environmentrecruitedatcenter", "edge_f4044444_debadepa", "edge_f882ed04_refidafrcomeco",
+        "edge_followupdescribesparticipant", "edge_healthperformedatfollowup", "edge_keyworddescribeproject",
+        "edge_mouduseperformedatparticipant", "edge_organizationrecruitedatcenter", "edge_oudperformedatfollowup",
+        "edge_participantrecruitedatprotocol", "edge_practitionerrecruitedatcenter", "edge_projectmemberofprogram",
+        "edge_promisperformedatfollowup", "edge_promisperformedattimepoint", "edge_protocolcontributedtoproject",
+        "edge_publicationreferstoproject", "edge_recoveryperformedatfollowup", "edge_substanceuseperformedatfollowup",
+        "edge_substanceuseperformedattimepoint", "edge_systemrecruitedatcenter", "edge_timepointdescribesparticipant"
+    ])], indirect=True)
+def test_get_leaves(translator):
+    """
+    Test get_leaves function to ensure that the function working correctly.
+    This also include the test case where there are two properties
+    with the same source field in dictionary but being renamed in the index
+    - input collected collecting node's dataframe
+    - expected final dataframe which have all leaf nodes
+    :param translator:
+    :return:
+    """
+    collecting_nodes = ["core_metadata_collection", "reference_file"]
+
+    input_collected_collecting_dfs = {}
+    for n in collecting_nodes:
+        [input_df] = get_dataframes_from_names(
+            get_spark_session(translator.sc),
+            "jcoin",
+            [f"file__0_Translator.collect_collecting_child__collected_collecting_dfs__{n}"]
+        )
+        input_collected_collecting_dfs[n] = input_df
+    [expected_collect_leaf_final] = get_dataframes_from_names(
+        get_spark_session(translator.sc),
+        "jcoin",
+        ["file__0_Translator.translate__collected_leaf_dfs"]
+    )
+
+    collected_leaf_dfs = {}
+    translator.get_leaves(input_collected_collecting_dfs, collected_leaf_dfs)
+    translator.merge_collectors(collected_leaf_dfs)
+    print(f"Collected collecting dfs: {collected_leaf_dfs}")
+    assert_dataframe_equality(
+        expected_collect_leaf_final, collected_leaf_dfs.get("final"), "_file_id"
+    )
+
+@pytest.mark.schema_midrc
+@pytest.mark.parametrize("translator", [("midrc", "imaging_data_file", "injection", [
+        "edge_crseriesfilerelatedtoimagingstudy", "edge_dxseriesfilerelatedtoimagingstudy",
+        "edge_mrseriesfilerelatedtoimagingstudy", "edge_ctseriesfilerelatedtoimagingstudy",
+        "edge_0c3e44da_crsefidafrcomeco", "edge_a4f04f84_dxsefidafrcomeco", "edge_d04a5ba2_mrsefidafrcomeco",
+        "edge_0b8a28a9_ctsefidafrcomeco", "edge_9197510c_comecodafrpr", "edge_casememberofdataset",
+        "edge_ctscanrelatedtoimagingstudy", "edge_ctscanrelatedtosubject", "edge_ctseriesrelatedtoctscan",
+        "edge_datareleasedescribesroot", "edge_datasetperformedforproject", "edge_ef9975fc_cotofidafrimex",
+        "edge_imagingstudyrelatedtocase", "edge_projectmemberofprogram",
+    ])], indirect=True)
+def test_flatten_nested_list(translator):
+    """
+    Test to ensure the created dataframe will not contains any array being nested in another array
+    - input dataframe with leaf nodes containing nested list
+    - expected dataframe with leaf nodes no longer containing nested list
+    :param translator:
+    :return:
+    """
+    [collected_leaf_df, final_df] = get_dataframes_from_names(
+        get_spark_session(translator.sc),
+        "midrc",
+        [
+            "imaging_data_file__0_Translator.translate__collected_leaf_dfs",
+            "imaging_data_file__1_Translator.translate_final__translate_final"
+        ]
+    )
+    aggregating_props = translator.get_aggregating_props()
+    actual_final_df = translator.flatten_nested_list(collected_leaf_df, aggregating_props)
+    print(f"Actual df: {actual_final_df}")
+    assert_dataframe_equality(
+        final_df, actual_final_df, "_imaging_data_file_id"
+    )

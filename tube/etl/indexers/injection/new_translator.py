@@ -204,9 +204,13 @@ class Translator(BaseTranslator):
                 df.unpersist()
 
         if "final" in collected_leaf_dfs:
-            return collected_leaf_dfs["final"]
+            final_df = collected_leaf_dfs["final"]
         else:
-            return self.create_empty_dataframe()
+            final_df = self.create_empty_dataframe()
+        return self.return_dataframe(
+            final_df,
+            f"{Translator.translate.__qualname__}__collected_leaf_dfs"
+        )
 
     def clone_prop_with_iterator_fn(self, p):
         prop = copy(self.parser.get_prop_by_name(p.name))
@@ -227,17 +231,7 @@ class Translator(BaseTranslator):
                     props.append(self.clone_prop_with_iterator_fn(p))
         return props
 
-    def translate_final(self):
-        """
-        Because one file can belong to multiple root nodes (case, subject).
-        In the final step of file document, we must construct the list of root instance's id
-        :return:
-        """
-        df = self.load_from_hadoop_to_dateframe()
-        aggregating_props = self.get_aggregating_props()
-        if len(aggregating_props) == 0:
-            return df
-
+    def flatten_nested_list(self, df, aggregating_props):
         expr = []
         for p in aggregating_props:
             if p.name in df.columns:
@@ -261,4 +255,22 @@ class Translator(BaseTranslator):
             if p.name != self.parser.get_key_prop().name
         ]
         df = df.drop(*rm_props)
-        return self.join_two_dataframe(df, tmp_df)
+        final_df = self.join_two_dataframe(df, tmp_df)
+        return final_df
+
+    def translate_final(self):
+        """
+        Because one file can belong to multiple root nodes (case, subject).
+        In the final step of file document, we must construct the list of root instance's id
+        :return:
+        """
+        df = self.load_from_hadoop_to_dateframe()
+        aggregating_props = self.get_aggregating_props()
+        if len(aggregating_props) == 0:
+            return df
+
+        final_df = self.flatten_nested_list(df, aggregating_props)
+        return self.return_dataframe(
+            final_df,
+            f"{Translator.translate_final.__qualname__}__translate_final"
+        )
