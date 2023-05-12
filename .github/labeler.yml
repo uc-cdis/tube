@@ -1,4 +1,2 @@
-test-portal-pfbExportTest:
-  - '**/*'
-test-apis-etlTest:
+'@requires-tube':
   - '**/*'
