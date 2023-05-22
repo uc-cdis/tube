@@ -109,6 +109,7 @@ def test_get_leaves(translator):
     translator.get_leaves(input_collected_collecting_dfs, collected_leaf_dfs)
     translator.merge_collectors(collected_leaf_dfs)
     print(f"Collected collecting dfs: {collected_leaf_dfs}")
+    print(collected_leaf_dfs.get("final").schema)
     assert_dataframe_equality(
         expected_collect_leaf_final, collected_leaf_dfs.get("final"), "_file_id"
     )
