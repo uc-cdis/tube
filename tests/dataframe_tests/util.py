@@ -5,11 +5,13 @@ import yaml
 from collections import namedtuple
 from jsonschema import RefResolver
 from pyspark.sql import SQLContext
-from pyspark.sql.types import StructType, StructField, StringType, ArrayType
+from pyspark.sql.types import ArrayType
 
 ResolverPair = namedtuple("ResolverPair", ["resolver", "source"])
 
-def load_from_local_file_to_dataframe(spark_session, file_path):
+def load_from_local_file_to_dataframe(spark_session, file_path, schema=None):
+    if schema is not None:
+        return spark_session.read.schema(schema).parquet(file_path)
     return spark_session.read.parquet(file_path)
 
 def get_spark_session(spark_context):
@@ -42,12 +44,16 @@ def mock_dictionary_url(schema_name):
     return schemas, resolvers
 
 
-def get_dataframes_from_names(spark_session, schema_name, parquet_files):
+def get_dataframes_from_names(spark_session, schema_name, parquet_files, schemas=None):
     dataframes = []
     for parquest_file in parquet_files:
+        schema = None
+        if schemas is not None:
+            schema=schemas.get(parquest_file)
         dataframes.append(load_from_local_file_to_dataframe(
             spark_session,
-            os.path.join(TEST_DATA_HOME, schema_name, "dataframe", parquest_file)
+            os.path.join(TEST_DATA_HOME, schema_name, "dataframe", parquest_file),
+            schema=schema
         ))
     return dataframes
 
