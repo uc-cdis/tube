@@ -73,6 +73,7 @@ class Translator(BaseTranslator):
                 collect_list(struct(*cols)).alias(child.display_name)
             ),
             on=id_field,
+            how="left",
         )
         return node_df
 
