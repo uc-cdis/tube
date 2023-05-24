@@ -100,17 +100,17 @@ def test_get_leaves(translator):
             [f"file__0_Translator.collect_collecting_child__collected_collecting_dfs__{n}"]
         )
         input_collected_collecting_dfs[n] = input_df
-    schema = StructType([StructField('_file_id', StringType(), True), StructField('project_code', StringType(), True),
-                StructField('project_name', StringType(), True), StructField('program_name', StringType(), True),
-                StructField('project_id', StringType(), True), StructField('cmc_data_type', StringType(), True),
-                StructField('cmc_title', StringType(), True), StructField('cmc_subject', StringType(), True),
-                StructField('cmc_source', StringType(), True), StructField('cmc_relation', StringType(), True),
-                StructField('object_id', StringType(), True), StructField('md5sum', StringType(), True),
-                StructField('file_name', StringType(), True), StructField('file_size', LongType(), True),
-                StructField('data_format', StringType(), True), StructField('data_type', StringType(), True),
-                StructField('state', StringType(), True), StructField('data_category', StringType(), True),
-                StructField('source_node', StringType(), True)]
-    )
+    # schema = StructType([StructField('_file_id', StringType(), True), StructField('project_code', StringType(), True),
+    #             StructField('project_name', StringType(), True), StructField('program_name', StringType(), True),
+    #             StructField('project_id', StringType(), True), StructField('cmc_data_type', StringType(), True),
+    #             StructField('cmc_title', StringType(), True), StructField('cmc_subject', StringType(), True),
+    #             StructField('cmc_source', StringType(), True), StructField('cmc_relation', StringType(), True),
+    #             StructField('object_id', StringType(), True), StructField('md5sum', StringType(), True),
+    #             StructField('file_name', StringType(), True), StructField('file_size', LongType(), True),
+    #             StructField('data_format', StringType(), True), StructField('data_type', StringType(), True),
+    #             StructField('state', StringType(), True), StructField('data_category', StringType(), True),
+    #             StructField('source_node', StringType(), True)]
+    # )
     [expected_collect_leaf_final] = get_dataframes_from_names(
         get_spark_session(translator.sc),
         "jcoin",
