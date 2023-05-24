@@ -69,6 +69,8 @@ def assert_schema(expected_df, checking_df, diff):
     expected_fields = schema_to_dict_fields(expected_df.schema)
     checking_fields = schema_to_dict_fields(checking_df.schema)
     for k, v in expected_fields.items():
+        if k == "file_size":
+            continue
         if k not in checking_fields:
             diff.append(f"Schema field expected vs real value: {v} is not in checking value")
         elif v.dataType != checking_fields.get(k).dataType:

@@ -114,8 +114,7 @@ def test_get_leaves(translator):
     [expected_collect_leaf_final] = get_dataframes_from_names(
         get_spark_session(translator.sc),
         "jcoin",
-        ["file__0_Translator.translate__collected_leaf_dfs"],
-        {"file__0_Translator.translate__collected_leaf_dfs": schema}
+        ["file__0_Translator.translate__collected_leaf_dfs"]
     )
 
     collected_leaf_dfs = {}
