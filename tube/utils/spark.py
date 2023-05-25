@@ -4,7 +4,7 @@ from pyspark import SparkConf, SparkContext
 from pyspark.sql.types import (
     StringType,
     ArrayType,
-    IntegerType,
+    LongType,
     FloatType,
 )
 
@@ -81,8 +81,9 @@ def get_all_files_from_hdfs(path, sc):
 
 def get_all_files(path, sc):
     if config.RUNNING_MODE.lower() == enums.RUNNING_MODE_TEST.lower():
-        return [os.path.abspath(os.path.join(path, f)) for f in  os.listdir(path)]
+        return [os.path.abspath(os.path.join(path, f)) for f in os.listdir(path)]
     return get_all_files_from_hdfs(path, sc)
+
 
 def get_hadoop_type(prop):
     if prop.fn is not None and prop.fn in ["list", "set"]:
@@ -92,7 +93,7 @@ def get_hadoop_type(prop):
     if prop.type == (str,):
         return StringType()
     if prop.type == (int,):
-        return IntegerType()
+        return LongType()
     return StringType()
 
 
@@ -102,7 +103,7 @@ def get_hadoop_simple_type(p_type):
     if p_type is str:
         return StringType()
     if p_type is int:
-        return IntegerType()
+        return LongType()
     return StringType()
 
 

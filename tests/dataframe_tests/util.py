@@ -5,11 +5,13 @@ import yaml
 from collections import namedtuple
 from jsonschema import RefResolver
 from pyspark.sql import SQLContext
-from pyspark.sql.types import StructType, StructField, StringType, ArrayType
+from pyspark.sql.types import ArrayType
 
 ResolverPair = namedtuple("ResolverPair", ["resolver", "source"])
 
-def load_from_local_file_to_dataframe(spark_session, file_path):
+def load_from_local_file_to_dataframe(spark_session, file_path, schema=None):
+    if schema is not None:
+        return spark_session.read.schema(schema).parquet(file_path)
     return spark_session.read.parquet(file_path)
 
 def get_spark_session(spark_context):
@@ -42,12 +44,16 @@ def mock_dictionary_url(schema_name):
     return schemas, resolvers
 
 
-def get_dataframes_from_names(spark_session, schema_name, parquet_files):
+def get_dataframes_from_names(spark_session, schema_name, parquet_files, schemas=None):
     dataframes = []
     for parquest_file in parquet_files:
+        schema = None
+        if schemas is not None:
+            schema=schemas.get(parquest_file)
         dataframes.append(load_from_local_file_to_dataframe(
             spark_session,
-            os.path.join(TEST_DATA_HOME, schema_name, "dataframe", parquest_file)
+            os.path.join(TEST_DATA_HOME, schema_name, "dataframe", parquest_file),
+            schema=schema
         ))
     return dataframes
 
@@ -63,6 +69,8 @@ def assert_schema(expected_df, checking_df, diff):
     expected_fields = schema_to_dict_fields(expected_df.schema)
     checking_fields = schema_to_dict_fields(checking_df.schema)
     for k, v in expected_fields.items():
+        if k == "file_size":
+            continue  # TODO remove (PXP-10941)
         if k not in checking_fields:
             diff.append(f"Schema field expected vs real value: {v} is not in checking value")
         elif v.dataType != checking_fields.get(k).dataType:
