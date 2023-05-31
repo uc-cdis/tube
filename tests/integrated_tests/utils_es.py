@@ -7,15 +7,25 @@ import tube.settings as config
 
 
 def get_item_from_elasticsearch(index, doc_type, item):
-    es = Elasticsearch([{"host": config.ES["es.nodes"], "port": config.ES["es.port"]}])
-    s = Search(using=es, index=index, doc_type=doc_type).query(
-        "match", submitter_id=item
+    es = Elasticsearch(
+        [
+            {
+                "host": config.ES["es.nodes"],
+                "port": int(config.ES["es.port"]),
+                "scheme": "http",
+            }
+        ]
     )
-    total = s.count()
-    s = s[0:total]
-    results = s.execute()
-    return results
-
+    search_results = es.search(
+        index=index, body={"query": {"match": {"submitter_id": item}}}, size=9999
+    )
+    print("Response:")
+    print(search_results)
+    result = search_results["hits"]["hits"]
+    total = len(result)
+    hits = result[0:total]
+    # results = s.execute()
+    return [h.get("_source") for h in hits]
 
 def get_names(p):
     mapping = p.mapping

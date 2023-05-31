@@ -12,7 +12,7 @@ class ESValue(Value):
         self.val, self.length = self.value()
 
     def __getattr__(self, item):
-        return self.val.__getattr__(item) if self.val and item in self.val else None
+        return self.val.get(item) if self.val and item in self.val else None
 
     def value(self):
         results = get_item_from_elasticsearch(
