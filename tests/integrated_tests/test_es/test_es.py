@@ -1,7 +1,6 @@
 import pytest
 from elasticsearch import Elasticsearch
 from elasticsearch import client
-from elasticsearch_dsl import Search
 
 import tube.settings as config
 from tube.etl.indexers.interpreter import create_translators
@@ -22,15 +21,23 @@ def test_auth_resource_path_exist(doc_type):
     Check that the field "auth_resource_path" exist
     """
     parser = dict_translators[doc_type].parser
-    es = Elasticsearch([{"host": config.ES["es.nodes"], "port": config.ES["es.port"]}])
-    s = Search(using=es, index=parser.name, doc_type=doc_type)
-    response = s.execute()
+    es = Elasticsearch(
+        [
+            {
+                "host": config.ES["es.nodes"],
+                "port": int(config.ES["es.port"]),
+                "scheme": "http",
+            }
+        ]
+    )
+    response = es.search(
+        index=parser.name, body={"query": {"match_all": {}}}, size=9999
+    )
 
+    hit_response = response["hits"]["hits"]
     auth_resource_path = "/programs/jnkns/projects/jenkins"
-
-    for hit in response:
-        assert hit.auth_resource_path == auth_resource_path
-
+    for hit in hit_response:
+        assert hit.get("_source").get("auth_resource_path") == auth_resource_path
 
 @pytest.mark.parametrize("doc_type", doc_types)
 def test_es_types(doc_type):
@@ -38,7 +45,15 @@ def test_es_types(doc_type):
     Check that no field have "text" type
     """
     parser = dict_translators[doc_type].parser
-    es = Elasticsearch([{"host": config.ES["es.nodes"], "port": config.ES["es.port"]}])
+    es = Elasticsearch(
+        [
+            {
+                "host": config.ES["es.nodes"],
+                "port": int(config.ES["es.port"]),
+                "scheme": "http",
+            }
+        ]
+    )
 
     indices = client.IndicesClient(es)
     index_name = list(indices.get_alias(name=parser.name).keys())[0]
@@ -47,7 +62,7 @@ def test_es_types(doc_type):
 
     # assert "_None_id" not in mapping[index_name]["mappings"][doc_type]["properties"]
     list_errors = []
-    for k, t in list(mapping[index_name]["mappings"][doc_type]["properties"].items()):
+    for k, t in list(mapping[index_name]["mappings"]["properties"].items()):
         try:
             assert t["type"] != "text", f"field {k} has type as text"
         except AssertionError as ex:

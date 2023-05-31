@@ -59,7 +59,7 @@ jobs:
 
       - name: Make dir cor compose-etl
         working-directory: ..
-        run: git clone https://github.com/uc-cdis/compose-etl.git --branch master --single-branch
+        run: git clone https://github.com/uc-cdis/compose-etl.git --branch feat/es-7 --single-branch
 
       - name: List all files and current directory
         run: |

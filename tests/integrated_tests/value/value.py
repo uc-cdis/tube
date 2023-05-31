@@ -27,7 +27,9 @@ def value_diff(left, right):
 
     diffs = ["attr: left != right"]
     for name in left.names:
-        left_val = left.__getattr__(name)
+        print(left)
+        print(left.__dict__)
+        left_val = left.val.get(name)
         right_val = right.__getattr__(name)
 
         if isinstance(right_val, list) and left_val is not None:
