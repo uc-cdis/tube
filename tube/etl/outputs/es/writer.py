@@ -86,11 +86,9 @@ class Writer(SparkBase):
 
         mapping = {
             "mappings": {
-                "type_name": {
-                    "properties": {
-                        "timestamp": {"type": "date"},
-                        "array": {"type": "keyword"},
-                    }
+                "properties": {
+                    "timestamp": {"type": "date"},
+                    "array": {"type": "keyword"},
                 }
             }
         }
@@ -107,7 +105,7 @@ class Writer(SparkBase):
             index_to_write = self.versioning.create_new_index(
                 mapping, self.versioning.get_next_index_version(index)
             )
-            self.es.index(index_to_write, "_doc", id=etl_index_name, body=doc)
+            self.es.index(index_to_write, body=doc, id=etl_index_name)
             self.versioning.putting_new_version_tag(index_to_write, index)
             self.versioning.putting_new_version_tag(index_to_write, alias)
             putting_timestamp(self.es, index_to_write)
@@ -125,7 +123,7 @@ class Writer(SparkBase):
 
         index_to_write = self.versioning.create_new_index(
             {"mappings": types.get(doc_type)},
-            self.versioning.get_next_index_version(index)
+            self.versioning.get_next_index_version(index),
         )
         self.write_to_es(
             df, index_to_write, index, doc_type, self.write_df_to_new_index

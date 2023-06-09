@@ -26,6 +26,7 @@ from .parser import Parser
 from tube.utils.spark import save_rdd_of_dataframe, get_all_files, save_rdds
 from tube.utils.general import get_node_id_name
 
+
 def json_export_with_no_key(x, doc_type, root_name):
     x[1][get_node_id_name(doc_type)] = x[0]
     if root_name is not None and doc_type != root_name:
@@ -33,12 +34,15 @@ def json_export_with_no_key(x, doc_type, root_name):
     x[1]["node_id"] = x[0]  # redundant field for backward compatibility with arranger
     return json.dumps(x[1])
 
+
 cached_dataframe = {}
+
 
 class Translator(object):
     """
     The main entry point into the index export process for the mutation indices
     """
+
     def __init__(self, sc, hdfs_path, writer, parser: Parser):
         self.sc = sc
         if sc is not None:
@@ -181,7 +185,7 @@ class Translator(object):
                 new_df = new_df.select(*cols)
             return self.return_dataframe(
                 new_df,
-                f"{Translator.translate_table_to_dataframe.__qualname__}__{node.name}"
+                f"{Translator.translate_table_to_dataframe.__qualname__}__{node.name}",
             )
         except Exception as ex:
             print("HAPPEN WITH NODE: {}".format(node_tbl_name))
@@ -332,7 +336,9 @@ class Translator(object):
     def return_dataframe(self, df, dataframe_name):
         if config.RUNNING_MODE.lower() == enums.RUNNING_MODE_PRE_TEST.lower():
             step_name = f"{self.current_step}_{dataframe_name}"
-            save_rdd_of_dataframe(df, self.get_path_to_save_dataframe(step_name), self.sc)
+            save_rdd_of_dataframe(
+                df, self.get_path_to_save_dataframe(step_name), self.sc
+            )
         return df
 
     def get_path_to_save_dataframe(self, step):
@@ -343,9 +349,7 @@ class Translator(object):
             current_number = cached_dataframe.get(dataframe_name) + 1
             dataframe_name = f"{dataframe_name}_{current_number}"
         cached_dataframe[dataframe_name] = current_number
-        return os.path.join(
-            self.hdfs_path, "output", dataframe_name
-        )
+        return os.path.join(self.hdfs_path, "output", dataframe_name)
 
     def save_to_hadoop(self, df):
         save_rdds(df, self.get_path_from_step(self.current_step), self.sc)

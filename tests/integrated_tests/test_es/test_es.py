@@ -39,6 +39,7 @@ def test_auth_resource_path_exist(doc_type):
     for hit in hit_response:
         assert hit.get("_source").get("auth_resource_path") == auth_resource_path
 
+
 @pytest.mark.parametrize("doc_type", doc_types)
 def test_es_types(doc_type):
     """
