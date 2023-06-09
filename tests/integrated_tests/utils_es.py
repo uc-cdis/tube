@@ -1,7 +1,6 @@
 from itertools import chain
 
 from elasticsearch import Elasticsearch
-from elasticsearch_dsl import Search
 
 import tube.settings as config
 
@@ -26,6 +25,7 @@ def get_item_from_elasticsearch(index, doc_type, item):
     hits = result[0:total]
     # results = s.execute()
     return [h.get("_source") for h in hits]
+
 
 def get_names(p):
     mapping = p.mapping
