@@ -17,19 +17,17 @@ LIST_TABLES_FILES = "tables.txt"
 #    and setup $XDG_DATA_HOME/.local/share/gen3/tube/creds.json
 #
 conf_data = load_json("creds.json", "tube")
-DB_HOST = conf_data.get("db_host", "localhost")
-DB_PORT = conf_data.get("db_port", "5432")
-DB_DATABASE = conf_data.get("db_database", "gdcdb")
-DB_USERNAME = conf_data.get("db_username", "peregrine")
-DB_PASSWORD = conf_data.get("db_password", "unknown")
-DB_USE_SSL = conf_data.get("db_use_ssl", False)  # optional property to db_use_ssl
-JDBC = (
-    "jdbc:postgresql://{}:{}/{}".format(DB_HOST, DB_PORT, DB_DATABASE)
-    if DB_USE_SSL is False
-    else "jdbc:postgresql://{}:{}/{}?sslmode=require".format(
-        DB_HOST, DB_PORT, DB_DATABASE
-    )
-)
+# Read from env var or fall back to conf_data
+DB_HOST = os.getenv("DB_HOST") or conf_data.get("db_host", "localhost")
+DB_PORT = os.getenv("DB_PORT") or conf_data.get("db_port", "5432")
+DB_DATABASE = os.getenv("DB_DATABASE") or conf_data.get("db_database", "sheepdog")
+DB_USERNAME = os.getenv("DB_USERNAME") or conf_data.get("db_username", "peregrine")
+DB_PASSWORD = os.getenv("DB_PASSWORD") or conf_data.get("db_password", "unknown")
+DB_USE_SSL = False
+# bool(os.getenv("DB_USE_SSL", False)) or conf_data.get(
+#     "db_use_ssl", False
+# )  # optional property to db_use_ssl
+JDBC = "jdbc:postgresql://{}:{}/{}".format(DB_HOST, DB_PORT, DB_DATABASE)
 PYDBC = "postgresql://{}:{}@{}:{}/{}".format(
     DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE
 )

@@ -16,9 +16,11 @@ def run_import():
     Define the spark context and parse agruments into config
     """
     try:
+        print("!!! Running import !!!")
         sql_to_hdfs = SqlToHDFS(config, BaseFormatter())
         stream = sql_to_hdfs.generate_import_all_tables()
         if stream is None:
+            print("WARNING: No data to import!!")
             return
         for line in stream:
             print(line.rstrip())
@@ -29,6 +31,7 @@ def run_import():
 
 
 def run_transform():
+    print("!!! Running transform !!!")
     try:
         sc = make_spark_context(config)
         translators = interpreter.create_translators(sc, config)

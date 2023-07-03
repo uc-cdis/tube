@@ -95,15 +95,15 @@ WORKDIR /tube
 # this will make sure than the dependencies is cached
 COPY poetry.lock pyproject.toml /tube/
 RUN python -m poetry config virtualenvs.create false \
-    && python -m poetry install -vv --no-root --only main --no-interaction \
+    && python -m poetry install -vv --only main --no-interaction \
     && python -m poetry show -v
 
 # copy source code ONLY after installing dependencies
 COPY . /tube
 
-RUN python -m poetry config virtualenvs.create false \
-    && python -m poetry install -vv --only main --no-interaction \
-    && python -m poetry show -v
+# RUN python -m poetry config virtualenvs.create false \
+#     && python -m poetry install -vv --only main --no-interaction \
+#     && python -m poetry show -v
 
 #ENV TINI_VERSION v0.18.0
 #ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
