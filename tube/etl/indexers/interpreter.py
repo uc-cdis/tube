@@ -36,6 +36,7 @@ def run_transform(translators):
     translator_to_translators = {}
 
     for translator in list(translators.values()):
+        print(translator)
         df = translator.translate()
         if df is None:
             continue
