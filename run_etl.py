@@ -90,11 +90,11 @@ def main():
 
     es_hosts = config.ES["es.nodes"]
     es_port = int(config.ES["es.port"])
-    es_schema = "https" if es_port == 443 or config.ES["es.use_ssl"] else "http"
+    es_scheme = "https" if es_port == 443 or config.ES["es.use_ssl"] else "http"
     es_config = {
         "host": es_hosts,
         "port": es_port,
-        "schema": es_schema,
+        "scheme": es_scheme,
     }
     if config.ES["es.http_auth.username"] is not None and config.ES["es.http_auth.password"] is not None:
         es_config["http_auth"] = (config.ES["es.http_auth.username"], config.ES["es.http_auth.password"])
