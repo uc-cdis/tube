@@ -90,7 +90,17 @@ def main():
 
     es_hosts = config.ES["es.nodes"]
     es_port = int(config.ES["es.port"])
-    es = Elasticsearch([{"host": es_hosts, "port": es_port, "schema": "http"}])
+    es_scheme = "https" if es_port == 443 or config.ES["es.use_ssl"] else "http"
+    es_config = {
+        "host": es_hosts,
+        "port": es_port,
+        "scheme": es_scheme,
+    }
+    es_is_basic_auth_used = bool(config.ES["es.http_auth.username"]) and bool(config.ES["es.http_auth.password"])
+    if es_is_basic_auth_used:
+        es_config["http_auth"] = (config.ES["es.http_auth.username"], config.ES["es.http_auth.password"])
+
+    es = Elasticsearch([es_config])
     index_names = interpreter.get_index_names(config)
 
     if args.force or check_to_run_etl(es, index_names):
