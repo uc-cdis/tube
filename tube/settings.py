@@ -36,6 +36,10 @@ DICTIONARY_URL = os.getenv(
     "https://s3.amazonaws.com/dictionary-artifacts/datadictionary/develop/schema.json",
 )
 ES_URL = os.getenv("ES_URL", "esproxy-service")
+ES_PORT = os.getenv("ES_PORT", "9200")
+ES_USE_SSL = bool(os.getenv("ES_USE_SSL", False))
+ES_AUTH_USERNAME = os.getenv("ES_AUTH_USERNAME")
+ES_AUTH_PASSWORD = os.getenv("ES_AUTH_PASSWORD")
 
 HDFS_DIR = "/result"
 # Three modes: Test, Dev, Prod
@@ -46,7 +50,10 @@ LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
 
 ES = {
     "es.nodes": ES_URL,
-    "es.port": "9200",
+    "es.port": ES_PORT,
+    "es.use_ssl": ES_USE_SSL,
+    "es.http_auth.username": ES_AUTH_USERNAME,
+    "es.http_auth.password": ES_AUTH_PASSWORD,
     "es.input.json": "yes",
     "es.nodes.client.only": "false",
     "es.nodes.discovery": "false",
