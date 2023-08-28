@@ -96,7 +96,8 @@ def main():
         "port": es_port,
         "scheme": es_scheme,
     }
-    if config.ES["es.http_auth.username"] is not None and config.ES["es.http_auth.password"] is not None:
+    es_is_basic_auth_used = bool(config.ES["es.http_auth.username"]) and bool(config.ES["es.http_auth.password"])
+    if es_is_basic_auth_used:
         es_config["http_auth"] = (config.ES["es.http_auth.username"], config.ES["es.http_auth.password"])
 
     es = Elasticsearch([es_config])
