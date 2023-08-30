@@ -23,10 +23,9 @@ DB_PORT = os.getenv("DB_PORT") or conf_data.get("db_port", "5432")
 DB_DATABASE = os.getenv("DB_DATABASE") or conf_data.get("db_database", "sheepdog")
 DB_USERNAME = os.getenv("DB_USERNAME") or conf_data.get("db_username", "peregrine")
 DB_PASSWORD = os.getenv("DB_PASSWORD") or conf_data.get("db_password", "unknown")
-DB_USE_SSL = False
-# bool(os.getenv("DB_USE_SSL", False)) or conf_data.get(
-#     "db_use_ssl", False
-# )  # optional property to db_use_ssl
+DB_USE_SSL = bool(os.getenv("DB_USE_SSL", False)) or conf_data.get(
+    "db_use_ssl", False
+)  # optional property to db_use_ssl
 JDBC = "jdbc:postgresql://{}:{}/{}".format(DB_HOST, DB_PORT, DB_DATABASE)
 PYDBC = "postgresql://{}:{}@{}:{}/{}".format(
     DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE
