@@ -5,16 +5,12 @@ from elasticsearch import Elasticsearch
 import tube.settings as config
 
 
+def get_es_connection():
+    return Elasticsearch([config.ES_CONNECTION_CONFIG])
+
+
 def get_item_from_elasticsearch(index, doc_type, item):
-    es = Elasticsearch(
-        [
-            {
-                "host": config.ES["es.nodes"],
-                "port": int(config.ES["es.port"]),
-                "scheme": "http",
-            }
-        ]
-    )
+    es = get_es_connection()
     search_results = es.search(
         index=index, body={"query": {"match": {"submitter_id": item}}}, size=9999
     )

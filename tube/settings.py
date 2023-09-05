@@ -30,13 +30,16 @@ JDBC = "jdbc:postgresql://{}:{}/{}".format(DB_HOST, DB_PORT, DB_DATABASE)
 PYDBC = "postgresql://{}:{}@{}:{}/{}".format(
     DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE
 )
+if DB_USE_SSL:
+    JDBC += "?sslmode=require"
+    PYDBC += "?sslmode=require"
 DICTIONARY_URL = os.getenv(
     "DICTIONARY_URL",
     "https://s3.amazonaws.com/dictionary-artifacts/datadictionary/develop/schema.json",
 )
 ES_URL = os.getenv("ES_URL", "esproxy-service")
 ES_PORT = os.getenv("ES_PORT", "9200")
-ES_USE_SSL = bool(os.getenv("ES_USE_SSL", False))
+ES_USE_SSL = bool(os.getenv("ES_USE_SSL", False)) or int(ES_PORT) == 443
 ES_AUTH_USERNAME = os.getenv("ES_AUTH_USERNAME")
 ES_AUTH_PASSWORD = os.getenv("ES_AUTH_PASSWORD")
 
@@ -47,18 +50,27 @@ RUNNING_MODE = os.getenv("RUNNING_MODE", enums.RUNNING_MODE_DEV)  # 'Prod' or 'D
 PARALLEL_JOBS = 1
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
 
-ES = {
+ES_SPARK_CONFIG = {
     "es.nodes": ES_URL,
     "es.port": ES_PORT,
-    "es.use_ssl": ES_USE_SSL,
-    "es.http_auth.username": ES_AUTH_USERNAME,
-    "es.http_auth.password": ES_AUTH_PASSWORD,
+    "es.net.ssl": ES_USE_SSL,
+    "es.net.http.auth.user": ES_AUTH_USERNAME,
+    "es.net.http.auth.pass": ES_AUTH_PASSWORD,
     "es.input.json": "yes",
     "es.nodes.client.only": "false",
     "es.nodes.discovery": "false",
     "es.nodes.data.only": "false",
     "es.nodes.wan.only": "true",
 }
+
+ES_CONNECTION_CONFIG = {
+    "host": ES_URL,
+    "port": int(ES_PORT),
+    "scheme": "https" if ES_USE_SSL else "http",
+}
+es_is_basic_auth_used = bool(ES_AUTH_USERNAME) and bool(ES_AUTH_PASSWORD)
+if es_is_basic_auth_used:
+    ES_CONNECTION_CONFIG["http_auth"] = (ES_AUTH_USERNAME, ES_AUTH_PASSWORD)
 
 HADOOP_HOME = os.getenv("HADOOP_HOME", "/usr/local/Cellar/hadoop/3.1.0/libexec/")
 JAVA_HOME = os.getenv(
