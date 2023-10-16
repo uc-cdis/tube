@@ -88,6 +88,7 @@ jobs:
         working-directory: ../compose-etl
         run: |
           BRANCH=${{ steps.extract_branch.outputs.branch }}
+          BRANCH=${BRANCH#"refs_tags_"}
           sed -i "s/tube:master/tube:${BRANCH//\//_}/g" docker-compose.yml
 
       - name: change max_map_count (needed for running Elasticsearch in container)
