@@ -84,7 +84,7 @@ jobs:
         run: |
           BRANCH=${{ github.head_ref || github.ref_name }}
           BRANCH=$(echo $BRANCH | tr / _)
-          sed -i "s/tube:master/tube:${BRANCH//\//_}/g" docker-compose.yml
+          sed -i "s/tube:master/tube:$BRANCH/g" docker-compose.yml
 
       - name: change max_map_count (needed for running Elasticsearch in container)
         working-directory: ../compose-etl
