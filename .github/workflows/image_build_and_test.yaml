@@ -69,7 +69,10 @@ jobs:
 
       - name: Extract branch name
         shell: bash
-        run: echo "branch=$(echo $(echo ${GITHUB_REF#refs/heads/} | tr / _))" >> $GITHUB_OUTPUT
+        run: |
+          BRANCH=${{ github.head_ref || github.ref_name }}
+          BRANCH=$(echo $BRANCH | tr / _)
+          echo "BRANCH=$BRANCH" >> $GITHUB_ENV
         id: extract_branch
 
       - name: Copy configuration files
@@ -87,9 +90,8 @@ jobs:
       - name: Replace tube branch
         working-directory: ../compose-etl
         run: |
-          BRANCH=${{ steps.extract_branch.outputs.branch }}
-          BRANCH=${BRANCH#"refs_tags_"}
-          sed -i "s/tube:master/tube:${BRANCH//\//_}/g" docker-compose.yml
+          BRANCH=${{ steps.extract_branch.outputs.BRANCH }}
+          sed -i "s/tube:master/tube:$BRANCH/g" docker-compose.yml
 
       - name: change max_map_count (needed for running Elasticsearch in container)
         working-directory: ../compose-etl
