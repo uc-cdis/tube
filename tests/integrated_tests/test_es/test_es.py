@@ -99,5 +99,6 @@ def test_get_list_from_path(doc_type):
         equal, diff = value_diff(results, value)
         if not equal:
             fails.append(diff)
+            print(diff)
 
     assert fails == []
