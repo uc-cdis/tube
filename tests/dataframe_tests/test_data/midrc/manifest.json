@@ -1,0 +1,93 @@
+{
+  "notes": [
+    "This is the dev environment manifest",
+    "That's all I have to say"
+  ],
+  "versions": {
+    "ambassador": "quay.io/datawire/ambassador:1.4.2",
+    "arborist": "707767160287.dkr.ecr.us-east-1.amazonaws.com/gen3/arborist:2023.10",
+    "aws-es-proxy": "quay.io/cdis/aws-es-proxy:v1.3.1",
+    "dashboard": "707767160287.dkr.ecr.us-east-1.amazonaws.com/gen3/gen3-statics:2023.10",
+    "dicom-viewer": "707767160287.dkr.ecr.us-east-1.amazonaws.com/gen3/ohif-viewer:gen3-0.1.2",
+    "dicom-server": "707767160287.dkr.ecr.us-east-1.amazonaws.com/gen3/gen3-orthanc:gen3-0.1.1",
+    "fence": "707767160287.dkr.ecr.us-east-1.amazonaws.com/gen3/fence:2023.10",
+    "fluentd": "fluent/fluentd-kubernetes-daemonset:v1.15.3-debian-cloudwatch-1.0",
+    "guppy": "707767160287.dkr.ecr.us-east-1.amazonaws.com/gen3/guppy:2023.10",
+    "indexd": "707767160287.dkr.ecr.us-east-1.amazonaws.com/gen3/indexd:2023.10",
+    "manifestservice": "707767160287.dkr.ecr.us-east-1.amazonaws.com/gen3/manifestservice:2023.10",
+    "metadata": "707767160287.dkr.ecr.us-east-1.amazonaws.com/gen3/metadata-service:2023.10",
+    "peregrine": "707767160287.dkr.ecr.us-east-1.amazonaws.com/gen3/peregrine:2023.10",
+    "portal": "707767160287.dkr.ecr.us-east-1.amazonaws.com/gen3/data-portal:5.16.0",
+    "frontend-framework": "quay.io/cdis/frontend-framework:feat_n3c",
+    "revproxy": "707767160287.dkr.ecr.us-east-1.amazonaws.com/gen3/nginx:2023.10",
+    "sheepdog": "707767160287.dkr.ecr.us-east-1.amazonaws.com/gen3/sheepdog:2023.10",
+    "spark": "707767160287.dkr.ecr.us-east-1.amazonaws.com/gen3/gen3-spark:2023.10",
+    "ssjdispatcher": "707767160287.dkr.ecr.us-east-1.amazonaws.com/gen3/ssjdispatcher:2023.10",
+    "tube": "707767160287.dkr.ecr.us-east-1.amazonaws.com/gen3/tube:fix_agg_reducer",
+    "wts": "707767160287.dkr.ecr.us-east-1.amazonaws.com/gen3/workspace-token-service:2023.10"
+  },
+  "arborist": {
+    "deployment_version": "2"
+  },
+  "indexd": {
+    "arborist": "true"
+  },
+  "jupyterhub": {
+    "enabled": "no"
+  },
+  "peregrine": {
+    "sidecar": "True"
+  },
+  "ssjdispatcher": {
+    "job_images": {
+      "indexing": "707767160287.dkr.ecr.us-east-1.amazonaws.com/gen3/indexs3client:2023.10"
+    }
+  },
+  "guppy": {
+    "indices": [
+      {
+        "index": "midrc_case",
+        "type": "case"
+      },
+      {
+        "index": "midrc_measurement",
+        "type": "measurement"
+      },
+      {
+        "index": "midrc_annotation",
+        "type": "annotation"
+      },
+      {
+        "index": "midrc_data_file",
+        "type": "data_file"
+      },
+      {
+        "index": "midrc_imaging_study",
+        "type": "imaging_study"
+      }
+    ],
+    "config_index": "midrc_array-config",
+    "auth_filter_field": "auth_resource_path"
+  },
+  "global": {
+    "environment": "qa-midrc",
+    "hostname": "qa-midrc.planx-pla.net",
+    "revproxy_arn": "arn:aws:acm:us-east-1:707767160287:certificate/c676c81c-9546-4e9a-9a72-725dd3912bc8",
+    "portal_app": "gitops",
+    "kube_bucket": "kube-qaplanetv2-gen3",
+    "logs_bucket": "logs-qaplanetv2-gen3",
+    "netpolicy": "on",
+    "public_datasets": true,
+    "tier_access_level": "libre",
+    "tier_access_limit": "2",
+    "useryaml_s3path": "s3://cdis-gen3-users/qa/user.yaml",
+    "dispatcher_job_num": "10",
+    "dictionary_url": "http://s3.amazonaws.com/dictionary-artifacts/midrc_dictionary/1.2.5/schema.json",
+    "sync_from_dbgap": "False",
+    "frontend_root": "portal",
+    "lb_type": "internal"
+  },
+  "canary": {
+    "default": 0
+  }
+}
