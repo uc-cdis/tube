@@ -215,10 +215,11 @@ class Parser(object):
         return a.get(src)
 
     def get_prop_type(self, fn, src, node_label=None, index=None):
+        if fn is not None and fn in ["count", "sum", "min", "max"]:
+            return (float,)
+
         if fn is not None and index is None:
-            if fn in ["count", "sum", "min", "max"]:
-                return (float,)
-            elif fn in ["set", "list"]:
+            if fn in ["set", "list"]:
                 if node_label is None or src == "id":
                     return (str,)
                 return self.get_type_of_item_for_list_type(node_label, src)

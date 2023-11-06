@@ -49,6 +49,8 @@ def value_diff(left, right):
                 left_type=type(left_val), right_type=type(right_val)
             )
             diffs.append(diff)
+            print(diff)
             diffs.append(types)
+            print(types)
 
     return equal, diffs

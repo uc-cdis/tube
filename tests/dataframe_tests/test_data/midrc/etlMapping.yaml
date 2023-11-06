@@ -31,8 +31,75 @@ mappings:
         fn: count
     parent_props:
       - path: datasets[dataset_submitter_id:submitter_id]
+    nested_props:
+      - name: case_annotations
+        path: annotations
+        props:
+          - name: annotation_method
+          - name: annotator_id
+      - name: imaging_study_annotations
+        path: imaging_studies.annotations
+        props:
+          - name: airspace_disease_grading
+          - name: class_covid19_pneumonia
+          - name: midrc_mRALE_score
+          - name: annotation_method
+          - name: annotator_id
+          - name: instance_uids
+      - name: measurements
+        path: measurements
+        props:
+          - name: test_days_from_index
+          - name: test_method
+          - name: test_name
+          - name: test_result_text
+      - name: medications
+        path: medications
+        props:
+          - name: days_to_medication_end
+          - name: days_to_medication_start
+          - name: dose_sequence_number
+          - name: medication_code
+          - name: medication_code_system
+          - name: medication_manufacturer
+          - name: medication_name
+          - name: medication_status
+          - name: medication_type
+      - name: conditions
+        path: conditions
+        props:
+          - name: condition_code
+          - name: condition_code_system
+          - name: condition_name
+          - name: days_to_condition_end
+          - name: days_to_condition_start
+      - name: procedures
+        path: procedures
+        props:
+          - name: breathing_support_type
+          - name: days_to_procedure_end
+          - name: days_to_procedure_start
+          - name: procedure_name
+      - name: imaging_studies
+        path: imaging_studies
+        props:
+          - name: age_at_imaging
+          - name: body_part_examined
+          - name: days_from_study_to_neg_covid_test
+          - name: days_from_study_to_pos_covid_test
+          - name: days_to_study
+          - name: loinc_code
+          - name: loinc_contrast
+          - name: loinc_long_common_name
+          - name: loinc_method
+          - name: loinc_system
+          - name: study_description
+          - name: study_location
+          - name: study_modality
+          - name: study_year
+          - name: study_uid
     joining_props:
-      - index: imaging_data_file
+      - index: data_file
         join_on: _case_id
         props:
           - name: object_id
@@ -59,6 +126,20 @@ mappings:
       - name: test_method
       - name: test_name
       - name: test_result_text
+  - name: midrc_annotation
+    doc_type: annotation
+    type: aggregator
+    root: annotation
+    props:
+      - name: project_id
+      - name: submitter_id
+      - name: case_ids
+      - name: airspace_disease_grading
+      - name: class_covid19_pneumonia
+      - name: midrc_mRALE_score
+      - name: annotation_method
+      - name: annotator_id
+      - name: instance_uids
   - name: midrc_imaging_study
     doc_type: imaging_study
     type: aggregator
@@ -83,6 +164,16 @@ mappings:
       - name: study_year
       - name: study_year_shifted
       - name: study_uid
+    nested_props:
+      - name: imaging_study_annotations
+        path: annotations
+        props:
+          - name: airspace_disease_grading
+          - name: class_covid19_pneumonia
+          - name: midrc_mRALE_score
+          - name: annotation_method
+          - name: annotator_id
+          - name: instance_uids
     aggregated_props:
       - name: _cr_series_file_count
         path: cr_series_files
@@ -99,7 +190,7 @@ mappings:
     parent_props:
       - path: cases[sex,race,age_at_index,index_event,zip,covid19_positive,ethnicity].datasets[dataset_submitter_id:submitter_id]
     joining_props:
-      - index: imaging_data_file
+      - index: data_file
         join_on: _imaging_study_id
         props:
           - name: object_id
@@ -114,12 +205,13 @@ mappings:
           - name: data_category
             src: data_category
             fn: set
-  - name: midrc_imaging_data_file
-    doc_type: imaging_data_file
+  - name: midrc_data_file
+    doc_type: data_file
     type: collector
     root: None
-    category: imaging_data_file
+    category: data_file
     props:
+      - name: source_node
       - name: project_id
       - name: submitter_id
       - name: series_uid
@@ -131,23 +223,39 @@ mappings:
       - name: data_format
       - name: data_type
       - name: data_category
+      - name: annotation_method
+      - name: annotation_name
+      - name: annotator_id
+      - name: instance_uids
+      - name: software_versions
       - name: acquisition_type
+      - name: angio_flag
       - name: contrast_bolus_agent
       - name: convolution_kernel
       - name: detector_type
+      - name: diffusion_b_value
+      - name: diffusion_gradient_orientation
+      - name: echo_number
+      - name: echo_time
+      - name: echo_train_length
       - name: exposure_modulation_type
       - name: image_type
+      - name: imaged_nucleus
       - name: imager_pixel_spacing
       - name: lossy_image_compression
       - name: manufacturer
       - name: manufacturer_model_name
       - name: modality
-      - name: multiframe_images
+      - name: number_of_temporal_positions
       - name: patient_position
       - name: pixel_spacing
       - name: radiopharmaceutical
+      - name: repetition_time
+      - name: scan_options
+      - name: sequence_variant
       - name: series_description
       - name: slice_thickness
+      - name: software_version
       - name: spacing_between_slices
       - name: spatial_resolution
       - name: transducer_type
@@ -156,6 +264,11 @@ mappings:
       dataset:
         props:
           - name: _dataset_id
+            src: id
+            fn: set
+      annotation:
+        props:
+          - name: _annotation_id
             src: id
             fn: set
       case:
@@ -168,6 +281,9 @@ mappings:
             fn: set
           - name: covid19_positive
             src: covid19_positive
+            fn: set
+          - name: ethnicity
+            src: ethnicity
             fn: set
           - name: index_event
             src: index_event
@@ -218,4 +334,19 @@ mappings:
             fn: set
           - name: study_uid
             src: study_uid
+            fn: set
+          - name: loinc_code
+            src: loinc_code
+            fn: set
+          - name: loinc_contrast
+            src: loinc_contrast
+            fn: set
+          - name: loinc_long_common_name
+            src: loinc_long_common_name
+            fn: set
+          - name: loinc_method
+            src: loinc_method
+            fn: set
+          - name: loinc_system
+            src: loinc_system
             fn: set
