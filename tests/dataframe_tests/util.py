@@ -71,8 +71,6 @@ def assert_schema(expected_df, checking_df, diff):
     for k, v in expected_fields.items():
         if k == "file_size":
             continue  # TODO remove (PXP-10941)
-        if k == "sample":
-            continue  # TODO correct this later with the new value running in QA environments
         if k not in checking_fields:
             diff.append(f"Schema field expected vs real value: {v} is not in checking value")
         elif v.dataType != checking_fields.get(k).dataType:
