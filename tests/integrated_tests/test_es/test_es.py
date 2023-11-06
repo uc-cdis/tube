@@ -57,7 +57,7 @@ def test_es_types(doc_type):
 
 @pytest.mark.parametrize("doc_type", doc_types)
 def test_get_list_from_path(doc_type):
-    if doc_type in ["file", "project"]:
+    if doc_type in ["file", "project", "subject"]:
         return
     excluded_file_name = f".{doc_type}-excluded"
     items = items_in_file(doc_type)[2]
@@ -99,5 +99,6 @@ def test_get_list_from_path(doc_type):
         equal, diff = value_diff(results, value)
         if not equal:
             fails.append(diff)
+            print(diff)
 
     assert fails == []

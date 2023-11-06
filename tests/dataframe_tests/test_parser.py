@@ -8,7 +8,7 @@ from tube.utils.general import get_node_id_name
 
 
 @pytest.mark.schema_midrc
-@pytest.mark.parametrize("translator", [("midrc", "imaging_data_file", "injection", [
+@pytest.mark.parametrize("translator", [("midrc", "data_file", "injection", [
     "edge_crseriesfilerelatedtoimagingstudy",
     "edge_xaseriesfilerelatedtoimagingstudy",
     "edge_ptseriesfilerelatedtoimagingstudy",

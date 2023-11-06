@@ -127,7 +127,7 @@ def test_get_leaves(translator):
     )
 
 @pytest.mark.schema_midrc
-@pytest.mark.parametrize("translator", [("midrc", "imaging_data_file", "injection", [
+@pytest.mark.parametrize("translator", [("midrc", "data_file", "injection", [
         "edge_crseriesfilerelatedtoimagingstudy", "edge_dxseriesfilerelatedtoimagingstudy",
         "edge_mrseriesfilerelatedtoimagingstudy", "edge_ctseriesfilerelatedtoimagingstudy",
         "edge_0c3e44da_crsefidafrcomeco", "edge_a4f04f84_dxsefidafrcomeco", "edge_d04a5ba2_mrsefidafrcomeco",
@@ -148,13 +148,13 @@ def test_flatten_nested_list(translator):
         get_spark_session(translator.sc),
         "midrc",
         [
-            "imaging_data_file__0_Translator.translate__collected_leaf_dfs",
-            "imaging_data_file__1_Translator.translate_final__translate_final"
+            "data_file__0_Translator.translate__collected_leaf_dfs",
+            "data_file__1_Translator.translate_final__translate_final"
         ]
     )
     aggregating_props = translator.get_aggregating_props()
     actual_final_df = translator.flatten_nested_list(collected_leaf_df, aggregating_props)
     print(f"Actual df: {actual_final_df}")
     assert_dataframe_equality(
-        final_df, actual_final_df, "_imaging_data_file_id"
+        final_df, actual_final_df, "_data_file_id"
     )
