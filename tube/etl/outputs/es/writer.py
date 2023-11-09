@@ -39,13 +39,13 @@ class Writer(SparkBase):
         :return:
         """
         es_hosts = self.es_config["es.nodes"]
-        es_port = self.es_config["es.port"]
-        return Elasticsearch([{"host": es_hosts, "port": es_port}])
+        es_port = int(self.es_config["es.port"])
+        return Elasticsearch([{"host": es_hosts, "port": es_port, "scheme": "http"}])
 
     def write_to_new_index(self, df, index, doc_type):
         df = df.map(lambda x: json_export(x, doc_type))
         es_config = self.es_config
-        es_config["es.resource"] = index + "/{}".format(doc_type)
+        es_config["es.resource"] = index
         df.saveAsNewAPIHadoopFile(
             path="-",
             outputFormatClass="org.elasticsearch.hadoop.mr.EsOutputFormat",
@@ -56,7 +56,7 @@ class Writer(SparkBase):
 
     def write_df_to_new_index(self, df, index, doc_type):
         es_config = self.es_config
-        es_config["es.resource"] = index + "/{}".format(doc_type)
+        es_config["es.resource"] = index
         df.coalesce(1).write.format("org.elasticsearch.spark.sql").option(
             "es.nodes", es_config["es.nodes"]
         ).option("es.port", es_config["es.port"]).option(
@@ -86,11 +86,9 @@ class Writer(SparkBase):
 
         mapping = {
             "mappings": {
-                "_doc": {
-                    "properties": {
-                        "timestamp": {"type": "date"},
-                        "array": {"type": "keyword"},
-                    }
+                "properties": {
+                    "timestamp": {"type": "date"},
+                    "array": {"type": "keyword"},
                 }
             }
         }
@@ -107,7 +105,7 @@ class Writer(SparkBase):
             index_to_write = self.versioning.create_new_index(
                 mapping, self.versioning.get_next_index_version(index)
             )
-            self.es.index(index_to_write, "_doc", id=etl_index_name, body=doc)
+            self.es.index(index_to_write, body=doc, id=etl_index_name)
             self.versioning.putting_new_version_tag(index_to_write, index)
             self.versioning.putting_new_version_tag(index_to_write, alias)
             putting_timestamp(self.es, index_to_write)
@@ -124,7 +122,8 @@ class Writer(SparkBase):
             df = plugin(df)
 
         index_to_write = self.versioning.create_new_index(
-            {"mappings": types}, self.versioning.get_next_index_version(index)
+            {"mappings": types.get(doc_type)},
+            self.versioning.get_next_index_version(index),
         )
         self.write_to_es(
             df, index_to_write, index, doc_type, self.write_df_to_new_index
