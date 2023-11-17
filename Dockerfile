@@ -1,5 +1,71 @@
 # To check running container: docker exec -it tube /bin/bash
-FROM quay.io/cdis/python:python3.9-buster-stable
+#FROM quay.io/cdis/python:python3.9-buster-stable 
+ARG AZLINUX_BASE_VERSION=master
+FROM 707767160287.dkr.ecr.us-east-1.amazonaws.com/gen3/python-build-base:${AZLINUX_BASE_VERSION} as base
+
+ENV appname=tube
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=off \
+    PIP_DISABLE_PIP_VERSION_CHECK=on \
+    PIP_DEFAULT_TIMEOUT=100 \
+    POETRY_HOME="/opt/poetry" \
+    POETRY_VIRTUALENVS_IN_PROJECT=true \
+    POETRY_NO_INTERACTION=1 \
+    PYSETUP_PATH="/opt/pysetup" \
+    VENV_PATH="/opt/pysetup/.venv"
+
+ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
+
+WORKDIR /${appname}
+
+# Builder stage
+FROM base as builder
+
+RUN python -m venv /venv
+
+COPY poetry.lock pyproject.toml /${appname}/
+RUN pip install poetry && \
+    poetry install --no-dev
+
+RUN git config --global --add safe.directory /${appname} && COMMIT=`git rev-parse HEAD` && echo "COMMIT=\"${COMMIT}\"" > /$appname/version_data.py \
+    && VERSION=`git describe --always --tags` && echo "VERSION=\"${VERSION}\"" >> /$appname/version_data.py
+
+
+WORKDIR /tube
+
+# this will make sure than the dependencies is cached
+COPY poetry.lock pyproject.toml /tube/
+RUN python -m poetry config virtualenvs.create false \
+    && python -m poetry install -vv --no-root --only main --no-interaction \
+    && python -m poetry show -v
+
+# copy source code ONLY after installing dependencies
+COPY . /tube    
+
+# Final stage
+FROM base
+
+COPY --from=builder /venv /venv
+COPY --from=builder /$appname /$appname
+
+
+# create gen3 user
+# Create a group 'gen3' with GID 1000 and a user 'gen3' with UID 1000
+RUN groupadd -g 1000 gen3 && \
+    useradd -m -s /bin/bash -u 1000 -g gen3 gen3  && \
+    chown -R gen3:gen3 /$appname
+
+# Switch to non-root user 'gen3' for the serving process
+USER gen3
+
+RUN . /venv/bin/activate
+# update PATH to include poetry
+ENV PATH="$POETRY_HOME/bin:$PATH"
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONIOENCODING=UTF-8
 
 ENV DEBIAN_FRONTEND=noninteractive \
     SQOOP_VERSION="1.4.7" \
@@ -23,27 +89,18 @@ ENV ES_HADOOP_HOME_VERSION="${ES_HADOOP_HOME}/elasticsearch-hadoop-${ES_HADOOP_V
 RUN mkdir -p /usr/share/man/man1
 RUN mkdir -p /usr/share/man/man7
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    openjdk-11-jdk-headless \
-    # dependency for pyscopg2 - which is dependency for sqlalchemy postgres engine
-    libpq-dev \
-    postgresql-client \
-    wget \
-    unzip \
-    git \
-    # dependency for cryptography
-    libffi-dev \
-    # dependency for cryptography
-    libssl-dev \
-    libssl1.1 \
-    libgnutls30 \
-    vim \
-    curl \
-    g++ \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN python -m pip install --upgrade pip poetry requests
+# install python build dependencies
+RUN dnf update \
+        --assumeyes \
+    && dnf install \
+        --assumeyes \
+        --setopt=install_weak_deps=False \
+        --setopt=tsflags=nodocs \
+        openjdk-11-jdk-headless \
+        postgresql-client \
+        git \
+    && dnf clean all \
+    && rm -rf /var/cache/yum
 
 RUN wget ${SQOOP_INSTALLATION_URL} \
     && mkdir -p $SQOOP_HOME \
@@ -89,25 +146,7 @@ RUN mkdir -p $ACCUMULO_HOME $HIVE_HOME $HBASE_HOME $HCAT_HOME $ZOOKEEPER_HOME
 
 ENV PATH=${SQOOP_HOME}/bin:${HADOOP_HOME}/sbin:$HADOOP_HOME/bin:${JAVA_HOME}/bin:${PATH}
 
-WORKDIR /tube
 
-# copy ONLY poetry artifact, install the dependencies but not fence
-# this will make sure than the dependencies is cached
-COPY poetry.lock pyproject.toml /tube/
-RUN python -m poetry config virtualenvs.create false \
-    && python -m poetry install -vv --no-root --only main --no-interaction \
-    && python -m poetry show -v
 
-# copy source code ONLY after installing dependencies
-COPY . /tube
-
-RUN python -m poetry config virtualenvs.create false \
-    && python -m poetry install -vv --only main --no-interaction \
-    && python -m poetry show -v
-
-#ENV TINI_VERSION v0.18.0
-#ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-#RUN chmod +x /tini
-#ENTRYPOINT ["/tini", "--"]
 
 ENV PYTHONUNBUFFERED 1
