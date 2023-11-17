@@ -85,7 +85,7 @@ def timestamp_from_transaction_time(dt):
 def get_timestamp_from_index(es, versioned_index):
     res = es.indices.get_alias(index=versioned_index, name="time_*")
     iso_str = list(res[versioned_index]["aliases"].keys())[0].replace("plus", "+")[5:]
-    return datetime.strptime(iso_str, "%Y-%m-%dT%H:%M:%S")
+    return datetime.strptime(iso_str, "%Y-%m-%dT%H-%M-%S")
 
 
 def putting_timestamp(es, index_to_write):
