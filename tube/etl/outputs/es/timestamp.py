@@ -38,7 +38,9 @@ def get_latest_utc_transaction_time():
         )
     else:
         latest_time = query_result_time[2]
-    return to_utc_time(latest_time)
+    return to_utc_time(
+        datetime.strptime(latest_time.strftime("%Y%m%dT%H%M%SZ"), "%Y%m%dT%H%M%SZ")
+    )
 
 
 def check_exists_all_indices(es, index_names):
@@ -72,7 +74,6 @@ def check_to_run_etl(es, index_names):
 
     time_from_es = get_latest_time_indices_built(es, index_names)
     latest_transaction_time = get_latest_utc_transaction_time()
-
     if time_from_es is None or time_from_es < latest_transaction_time:
         return True
     return False
@@ -85,7 +86,8 @@ def timestamp_from_transaction_time(dt):
 def get_timestamp_from_index(es, versioned_index):
     res = es.indices.get_alias(index=versioned_index, name="time_*")
     iso_str = list(res[versioned_index]["aliases"].keys())[0].replace("plus", "+")[5:]
-    return datetime.strptime(iso_str, "%Y%m%dT%H%M%SZ")
+    # return datetime.strptime(iso_str, "%Y%m%dT%H%M%SZ")
+    return to_utc_time(datetime.strptime(iso_str, "%Y%m%dT%H%M%SZ"))
 
 
 def putting_timestamp(es, index_to_write):
