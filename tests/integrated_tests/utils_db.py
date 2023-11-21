@@ -44,6 +44,7 @@ class SQLQuery:
             sql = SQL(" ").join([sql_select, sql_join, sql_where, group, SQL(";")])
         else:
             sql = SQL(" ").join([sql_select, sql_join, sql_where, SQL(";")])
+        print(f"SQL statement: {sql}")
         val = execute_sql_query_return_first_field(sql)
         return val
 
