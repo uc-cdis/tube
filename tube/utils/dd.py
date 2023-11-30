@@ -11,8 +11,6 @@ def init_dictionary(url):
     return d, md
 
 
-
-
 # There are two important things of a node in a model:
 # - label ( which does not include the prefix)
 # - table_name: includes the prefix and in plural
