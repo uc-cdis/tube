@@ -9,21 +9,28 @@ from pyspark.sql.types import ArrayType
 
 ResolverPair = namedtuple("ResolverPair", ["resolver", "source"])
 
+
 def load_from_local_file_to_dataframe(spark_session, file_path, schema=None):
     if schema is not None:
         return spark_session.read.schema(schema).parquet(file_path)
     return spark_session.read.parquet(file_path)
 
+
 def get_spark_session(spark_context):
     sql_context = SQLContext(spark_context)
     return sql_context.sparkSession
 
+
 MAPPING_FILE = "etlMapping.yaml"
 TEST_DATA_HOME = "./tests/dataframe_tests/test_data"
 
+
 def initialize_mappings(schema_name, mapping_name):
     mappings = {}
-    list_mappings = yaml.load(open(os.path.join(TEST_DATA_HOME, schema_name, MAPPING_FILE)), Loader=yaml.SafeLoader)
+    list_mappings = yaml.load(
+        open(os.path.join(TEST_DATA_HOME, schema_name, MAPPING_FILE)),
+        Loader=yaml.SafeLoader,
+    )
     for mapping in list_mappings["mappings"]:
         mappings[mapping.get("doc_type")] = mapping
     return mappings.get(mapping_name)
@@ -49,12 +56,14 @@ def get_dataframes_from_names(spark_session, schema_name, parquet_files, schemas
     for parquest_file in parquet_files:
         schema = None
         if schemas is not None:
-            schema=schemas.get(parquest_file)
-        dataframes.append(load_from_local_file_to_dataframe(
-            spark_session,
-            os.path.join(TEST_DATA_HOME, schema_name, "dataframe", parquest_file),
-            schema=schema
-        ))
+            schema = schemas.get(parquest_file)
+        dataframes.append(
+            load_from_local_file_to_dataframe(
+                spark_session,
+                os.path.join(TEST_DATA_HOME, schema_name, "dataframe", parquest_file),
+                schema=schema,
+            )
+        )
     return dataframes
 
 
@@ -72,29 +81,39 @@ def assert_schema(expected_df, checking_df, diff):
         if k == "file_size":
             continue  # TODO remove (PXP-10941)
         if k not in checking_fields:
-            diff.append(f"Schema field expected vs real value: {v} is not in checking value")
+            diff.append(
+                f"Schema field expected vs real value: {v} is not in checking value"
+            )
         elif v.dataType != checking_fields.get(k).dataType:
             checking_type = checking_fields.get(k).dataType
             # Dataframe loaded from an existing file will have some minor difference in schema
             # nullable vs not nullable for ArrayType field. This block is to resolve this minor difference
             if (
-                isinstance(v.dataType, ArrayType) and isinstance(checking_type, ArrayType)
+                isinstance(v.dataType, ArrayType)
+                and isinstance(checking_type, ArrayType)
                 and v.dataType.elementType == checking_type.elementType
             ):
                 continue
-            diff.append(f"Schema field expected vs real value: {v} != {checking_fields.get(k)}")
+            diff.append(
+                f"Schema field expected vs real value: {v} != {checking_fields.get(k)}"
+            )
     for k, v in checking_fields.items():
         if k not in expected_fields:
-            diff.append(f"Schema field expected vs real value: {v} is not in expected value")
+            diff.append(
+                f"Schema field expected vs real value: {v} is not in expected value"
+            )
 
 
 def assert_null(expected_df, checking_df, diff):
     if expected_df is None or checking_df is None:
         if checking_df is None:
-            diff.append(f"Expected dataframe vs real dataframe: {expected_df.collect()} != {checking_df}")
+            diff.append(
+                f"Expected dataframe vs real dataframe: {expected_df.collect()} != {checking_df}"
+            )
         if expected_df is None:
-            diff.append(f"Expected dataframe vs real dataframe: {expected_df} != {checking_df.collect()}")
-
+            diff.append(
+                f"Expected dataframe vs real dataframe: {expected_df} != {checking_df.collect()}"
+            )
 
 
 def assert_data(expected_df, checking_df, diff, key_column):
@@ -118,8 +137,8 @@ def assert_dataframe_equality(expected_df, checking_df, key_column):
         return
 
     assert_null(expected_df, checking_df, diff)
-    assert diff == [],  f"Differences: {diff}"
+    assert diff == [], f"Differences: {diff}"
 
     assert_schema(expected_df, checking_df, diff)
     assert_data(expected_df, checking_df, diff, key_column)
-    assert diff == [],  f"Differences: {diff}"
+    assert diff == [], f"Differences: {diff}"
