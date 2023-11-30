@@ -25,7 +25,7 @@ def json_export(x, doc_type):
 class Writer(SparkBase):
     def __init__(self, sc, config):
         super(Writer, self).__init__(sc, config)
-        self.es_config = self.config.ES
+        self.es_config = self.config.ES_SPARK_CONFIG
         self.es = self.get_es()
         self.es.indices.get_alias()
         self.versioning = Versioning(self.es)
@@ -38,9 +38,7 @@ class Writer(SparkBase):
         Create ElasticSearch instance
         :return:
         """
-        es_hosts = self.es_config["es.nodes"]
-        es_port = int(self.es_config["es.port"])
-        return Elasticsearch([{"host": es_hosts, "port": es_port, "scheme": "http"}])
+        return Elasticsearch([self.config.ES_CONNECTION_CONFIG])
 
     def write_to_new_index(self, df, index, doc_type):
         df = df.map(lambda x: json_export(x, doc_type))
