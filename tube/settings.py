@@ -26,13 +26,7 @@ ENV_DB_USE_SSL_BOOL = os.getenv("DB_USE_SSL", "false") in ('true', '1', 't')
 DB_USE_SSL = ENV_DB_USE_SSL_BOOL or conf_data.get(
     "db_use_ssl", False
 )  # optional property to db_use_ssl
-JDBC = (
-    "jdbc:postgresql://{}:{}/{}".format(DB_HOST, DB_PORT, DB_DATABASE)
-    if DB_USE_SSL is False
-    else "jdbc:postgresql://{}:{}/{}?sslmode=require".format(
-        DB_HOST, DB_PORT, DB_DATABASE
-    )
-)
+JDBC = "jdbc:postgresql://{}:{}/{}".format(DB_HOST, DB_PORT, DB_DATABASE)
 PYDBC = "postgresql://{}:{}@{}:{}/{}".format(
     DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE
 )
