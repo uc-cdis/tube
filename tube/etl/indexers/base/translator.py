@@ -5,7 +5,7 @@ import tube.enums as enums
 
 from pyspark.sql.context import SQLContext
 from pyspark.sql.types import StructType, StructField, StringType
-from pyspark.sql.functions import col, min, sum, count, collect_set, collect_list, first
+from pyspark.sql.functions import col, min, sum, count, collect_set, collect_list, first, when
 
 from .lambdas import (
     extract_link,
@@ -278,7 +278,7 @@ class Translator(object):
         if func_name == "count":
             if is_merging:
                 return sum(col(value)).alias(col_alias)
-            return count(col(value)).alias(col_alias)
+            return count(when(col(value).isNotNull(), 1)).alias(col_alias)
         if func_name == "sum":
             return sum(col(value)).alias(col_alias)
         if func_name == "set":
