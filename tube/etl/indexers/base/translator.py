@@ -25,7 +25,9 @@ from .parser import Parser
 
 from tube.utils.spark import save_rdd_of_dataframe, get_all_files, save_rdds
 from tube.utils.general import get_node_id_name
-
+from tube.etl.indexers.aggregation.nested.translator import (
+    Translator as NestedTranslator
+)
 
 def json_export_with_no_key(x, doc_type, root_name):
     x[1][get_node_id_name(doc_type)] = x[0]
@@ -53,6 +55,24 @@ class Translator(object):
         self.current_step = 0
         self.mapping_dictionary = {}
         self.mapping_broadcasted = None
+        nest_props = self.parser.mapping.get("nested_props")
+        self.nested_translator = (
+            NestedTranslator(
+                sc,
+                hdfs_path,
+                writer,
+                {
+                    "root": self.parser.mapping.get("root"),
+                    "doc_type": self.parser.mapping.get("doc_type"),
+                    "name": self.parser.mapping.get("name"),
+                    "nested_props": self.parser.mapping.get("nested_props"),
+                },
+                self.parser.model,
+                self.parser.dictionary,
+            )
+            if nest_props is not None
+            else None
+        )
 
     def update_types(self):
         self.parser.update_prop_types()
