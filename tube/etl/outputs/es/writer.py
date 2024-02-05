@@ -55,19 +55,10 @@ class Writer(SparkBase):
     def write_df_to_new_index(self, df, index, doc_type):
         es_config = self.es_config
         es_config["es.resource"] = index
-        df.coalesce(1).write.format("org.elasticsearch.spark.sql").option(
-            "es.nodes", es_config["es.nodes"]
-        ).option("es.port", es_config["es.port"]).option(
-            "es.nodes.wan.only", "true"
-        ).option(
-            "es.nodes.discovery", es_config["es.nodes.discovery"]
-        ).option(
-            "es.nodes.data.only", es_config["es.nodes.data.only"]
-        ).option(
-            "es.nodes.client.only", es_config["es.nodes.client.only"]
-        ).option(
-            "es.resource", es_config["es.resource"]
-        ).save(
+        df = df.coalesce(1).write.format("org.elasticsearch.spark.sql")
+        for key in es_config:
+            df = df.option(key, es_config[key])
+        df.save(
             index
         )
 
