@@ -67,6 +67,12 @@ class Writer(SparkBase):
             "es.nodes.client.only", es_config["es.nodes.client.only"]
         ).option(
             "es.resource", es_config["es.resource"]
+        ).option(
+            "es.net.ssl", es_config["es.net.ssl"]
+        ).option(
+            "es.net.http.auth.user", es_config["es.net.http.auth.user"]
+        ).option(
+            "es.net.http.auth.pass", es_config["es.net.http.auth.pass"]
         ).save(
             index
         )

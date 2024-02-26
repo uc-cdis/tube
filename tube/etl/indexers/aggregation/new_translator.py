@@ -20,7 +20,8 @@ from pyspark.sql.functions import (
     lit,
     sort_array,
     struct,
-    sum,
+    count,
+    when,
 )
 from copy import deepcopy
 
@@ -121,16 +122,18 @@ class Translator(BaseTranslator):
                 break
 
         node_id = get_node_id_name(node_name)
+        child_id = get_node_id_name(child.name)
         if count_reducer is None:
             # if there is no reducer, group by parent key and get out empty value
             count_df = edge_df.select(node_id).drop_duplicates([node_id])
         else:
             # if there is reducer, group by parent key and get out the number of children
             # only non-leaf nodes goes through this step
+            child_prop_name = count_reducer.prop.name
             count_df = (
                 edge_df.groupBy(node_id)
-                .count()
-                .select(node_id, col("count").alias(count_reducer.prop.name))
+                .agg(count(when(col(child_id).isNotNull(), 1)).alias(child_prop_name))
+                .select(node_id, col(child_prop_name))
             )
             count_reducer.done = True
         # combine value lists new counted dataframe to existing one
