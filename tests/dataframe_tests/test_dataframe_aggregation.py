@@ -2,6 +2,7 @@ import pytest
 from tests.dataframe_tests.util import (
     get_spark_session,
     assert_dataframe_equality,
+    assert_zero,
     get_dataframes_from_names,
 )
 from tube.utils.general import get_node_id_name
@@ -73,3 +74,21 @@ def test_translate_parent(translator):
     )
     result_df = translator.translate_parent(input_df)
     assert_dataframe_equality(expected_df, result_df, get_node_id_name("participant"))
+
+@pytest.mark.schema_midrc
+@pytest.mark.parametrize("translator", [("midrc", "imaging_study", "aggregation", [])], indirect=True)
+def test_translate_count_aggregation(translator):
+    [expected_df] = get_dataframes_from_names(
+        get_spark_session(translator.sc),
+        "midrc",
+        [
+            "imaging_study__0_Translator.aggregate_nested_properties"
+        ]
+    )
+    result_df = translator.aggregate_nested_properties()
+
+    print(result_df.show(truncate=False))
+    assert_dataframe_equality(expected_df, result_df, get_node_id_name("imaging_study"))
+    diff = []
+    assert_zero(result_df, diff, ["_dx_series_file_count", "_mr_series_file_count"])
+    assert diff == [], f"Differences: {diff}"

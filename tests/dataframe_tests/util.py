@@ -112,6 +112,18 @@ def assert_data(expected_df, checking_df, diff, key_column):
             diff.append(f"Datarow expected vs real value: {expected} != {checking}")
 
 
+def assert_zero(expected_df, diff, columns):
+    expected_collection = expected_df.collect()
+    for expected in expected_collection:
+        is_diff = False
+        for col in columns:
+            if expected.__getitem__(col) != 0:
+                is_diff = True
+                break
+        if is_diff:
+            diff.append(f"Datarow has real value: {expected} != 0")
+
+
 def assert_dataframe_equality(expected_df, checking_df, key_column):
     diff = []
     if expected_df is None and checking_df is None:
