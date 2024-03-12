@@ -1,0 +1,1 @@
+Original test data matching the MIDRC dictionary. These files are not used in the tests, but are used to generate the [dataframes](../dataframe) used in the tests. See [here](/tests/README.md#How-to-generate-test-dataframes) for details.

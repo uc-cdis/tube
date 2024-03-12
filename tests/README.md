@@ -16,7 +16,7 @@ Use `print(df.show(truncate=False))` to view the contents of a dataframe.
 
 ### How to generate test dataframes
 
-We need to submit the original test data file to Sheepdog in a QA environment or a Gen3 instance running in local. Make sure to use the approopriate data dictionary, for example use the MIDRC dictionary to run tests marked as `schema_midrc`.
+We need to submit the original test data files (copied [here](/tests/dataframe_tests/test_data/midrc/original_test_data) for reference) to Sheepdog in a QA environment or a Gen3 instance running in local. Make sure to use the approopriate data dictionary, for example use the MIDRC dictionary to run tests marked as `schema_midrc`.
 
 **Note:** all existing Sheepdog data must be cleared from the database before the test data is submitted.
 
