@@ -1,5 +1,5 @@
 import pytest
-from tests.dataframe_tests.util import (
+from tests.util import (
     get_spark_session,
     assert_dataframe_equality,
     get_dataframes_from_names,
