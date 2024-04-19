@@ -1,10 +1,11 @@
 import pytest
-import tube.settings as config
 
-from tube.utils.dd import init_dictionary
 from unittest.mock import patch
+
 from tests.util import mock_dictionary_url, initialize_mappings
 from tube.etl.indexers.injection.parser import Parser as InjectionParser
+import tube.settings as config
+from tube.utils.dd import init_dictionary
 
 @pytest.fixture(scope="function")
 @patch("tube.etl.indexers.injection.parser.Parser.get_edges_having_data")
