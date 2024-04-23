@@ -215,6 +215,8 @@ class Parser(object):
         return a.get(src)
 
     def get_prop_type(self, fn, src, node_label=None, index=None):
+        if src == "source_node":
+            return (str,)
         if fn is not None and fn in ["count", "sum", "min", "max"]:
             return (float,)
 
