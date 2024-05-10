@@ -272,7 +272,7 @@ class Translator(object):
 
     @staticmethod
     def reducer_to_agg_func_expr(
-        func_name, value, alias=None, is_merging=False, is_flattening=False
+        func_name, value, alias=None, is_merging=False, is_flattening=True
     ):
         col_alias = alias if alias is not None else value
         if func_name == "count":
