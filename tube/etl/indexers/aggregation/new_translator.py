@@ -448,7 +448,7 @@ class Translator(BaseTranslator):
             for prop in cur_props:
                 if prop.name in df.columns:
                     expr.append(
-                        self.reducer_to_agg_func_expr(p.fn, prop.name, is_merging=False)
+                        self.reducer_to_agg_func_expr(p.fn, prop.name, is_merging=True, is_flattening=True)
                     )
                 else:
                     expr.append(
