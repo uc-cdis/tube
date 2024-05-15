@@ -4,7 +4,7 @@ import tube.settings as config
 import tube.enums as enums
 
 from pyspark.sql.context import SQLContext
-from pyspark.sql.types import StructType, StructField, StringType
+from pyspark.sql.types import StructType, StructField, StringType, ArrayType
 from pyspark.sql.functions import col, min, sum, count, collect_set, collect_list, first, when
 
 from .lambdas import (
@@ -272,7 +272,7 @@ class Translator(object):
 
     @staticmethod
     def reducer_to_agg_func_expr(
-        func_name, value, alias=None, is_merging=False, is_flattening=False
+        func_name, value, alias=None, is_merging=False, is_flattening=False, data_type=None
     ):
         col_alias = alias if alias is not None else value
         if func_name == "count":
@@ -287,6 +287,8 @@ class Translator(object):
                     return f_collect_set_udf(collect_set(col(value))).alias(col_alias)
                 else:
                     return f_collect_set_udf(col(value)).alias(col_alias)
+            if isinstance(data_type, ArrayType):
+                return f_collect_set_udf(collect_set(col(value))).alias(col_alias)
             return collect_set(col(value)).alias(col_alias)
         if func_name == "list":
             if is_merging:
