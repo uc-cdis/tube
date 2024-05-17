@@ -135,3 +135,7 @@ def assert_dataframe_equality(expected_df, checking_df, key_column):
     assert_schema(expected_df, checking_df, diff)
     assert_data(expected_df, checking_df, diff, key_column)
     assert diff == [],  f"Differences: {diff}"
+
+
+def all_match(array, elements):
+    return all(item in array for item in elements) and all(element in elements for element in array)
