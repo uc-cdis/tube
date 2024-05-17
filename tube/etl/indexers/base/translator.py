@@ -288,6 +288,7 @@ class Translator(object):
                 else:
                     return f_collect_set_udf(col(value)).alias(col_alias)
             if isinstance(data_type, ArrayType):
+                # flatten nested arrays
                 return f_collect_set_udf(collect_set(col(value))).alias(col_alias)
             return collect_set(col(value)).alias(col_alias)
         if func_name == "list":
