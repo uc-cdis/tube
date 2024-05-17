@@ -101,7 +101,13 @@ def test_flatten_nested_array_parent_props(translator):
     """
     Test to ensure the created dataframe will not contains any array being nested in another array
     - input dataframe is the data of root_node (participant)
-    - we will test after callng translate_parent, it will produce the array field without nested array
+    - we will test after calling translate_parent, it will produce the array field without nested array
+    - based on the data that we have
+        participant with id: 80cc940b-414f-4361-ac9f-24a94279e379 recruited by
+        center with submitter_id: "4658f8c1-d50c-4651-99b6-4a934fe26783" has two projects
+         with code:  jenkins (which has data_type: ["csv", "json"], and test (which has data_type: ["tsv", "json"])
+    - expected data_type of participant 80cc940b-414f-4361-ac9f-24a94279e379 is ["csv", "tsv", "json"]
+
     :param translator:
     :return:
     """

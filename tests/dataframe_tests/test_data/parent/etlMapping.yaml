@@ -8,19 +8,6 @@ mappings:
       - name: project_id
     parent_props:
       - path: centers[country,name,investigator_name].projects[data_type]
-    flatten_props:
-      - path: demographics
-        props:
-          - name: gender
-          - name: race
-          - name: jewish
-          - name: hispanic
-      - path: diagnoses
-        props:
-          - name: ibd_affection_status
-          - name: diagnosis
-          - name: control
-        sorted_by: updated_datetime, desc
     aggregated_props:
       - name: _samples_count
         path: samples
