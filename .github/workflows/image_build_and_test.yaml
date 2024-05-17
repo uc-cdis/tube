@@ -155,6 +155,7 @@ jobs:
           python3.9 -m poetry run pytest -v tests/dataframe_tests -m "schema_ibdgc and not ssl" --cov=tube --cov-append --cov-report term-missing --cov-report xml
           python3.9 -m poetry run pytest -v tests/dataframe_tests -m "schema_midrc and not ssl" --cov=tube --cov-append --cov-report term-missing --cov-report xml
           python3.9 -m poetry run pytest -v tests/dataframe_tests -m "schema_jcoin and not ssl" --cov=tube --cov-append --cov-report term-missing --cov-report xml
+          python3.9 -m poetry run pytest -v tests/dataframe_tests -m "schema_parent and not ssl" --cov=tube --cov-append --cov-report term-missing --cov-report xml
         # python3.9 -m poetry run pytest -v tests/dataframe_tests -m "not ssl and not schema_ibdgc and not schema_midrc" --cov=tube --cov-append --cov-report term-missing --cov-report xml
 
       - name: Submit coverage report
