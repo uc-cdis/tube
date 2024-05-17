@@ -57,9 +57,6 @@ def get_dataframes_from_names(spark_session, schema_name, parquet_files, schemas
         ))
     return dataframes
 
-def generate_dataframe_from_jsons(translator, schema_name, node_name):
-    pass
-
 
 def schema_to_dict_fields(schema):
     dict_fs = {}

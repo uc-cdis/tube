@@ -100,8 +100,8 @@ def test_translate_count_aggregation(translator):
 def test_flatten_nested_array_parent_props(translator):
     """
     Test to ensure the created dataframe will not contains any array being nested in another array
-    - input dataframe with leaf nodes containing nested list
-    - expected dataframe with leaf nodes no longer containing nested list
+    - input dataframe is the data of root_node (participant)
+    - we will test after callng translate_parent, it will produce the array field without nested array
     :param translator:
     :return:
     """
