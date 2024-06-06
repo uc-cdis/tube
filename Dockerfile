@@ -37,6 +37,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     # dependency for cryptography
     libssl-dev \
     libssl1.1 \
+    dnsutils \
+    telnet \
     libgnutls30 \
     vim \
     curl \
