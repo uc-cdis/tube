@@ -36,5 +36,5 @@ moto="1.1.24"
 pyspark-stubs="*"
 
 [build-system]
-requires = ["setuptools=65.3.0","poetry>=1.1.0"]
+requires = ["setuptools==65.3.0","poetry>=1.1.0"]
 build-backend = "poetry.masonry.api"
