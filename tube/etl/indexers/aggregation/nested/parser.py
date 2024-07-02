@@ -101,7 +101,7 @@ class Parser(BaseParser):
         )
 
     def create_mapping_json(self, node, queue):
-        es_type = {str: "keyword", float: "float", int: "long"}
+        es_type = {str: "keyword", float: "float", int: "long", bool: "boolean"}
         prop_types = get_properties_types(self.model, node.name)
         id_prop = get_node_id_name(node.name)
         properties = {}
