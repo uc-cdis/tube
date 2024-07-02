@@ -71,3 +71,74 @@ def test_aggregate_with_nested_properties(translator):
     assert_dataframe_equality(
         expected_df, actual_df, get_node_id_name("imaging_study")
     )
+
+
+
+@pytest.mark.schema_parent
+@pytest.mark.parametrize("translator", [("parent", "participant", "aggregation", [])], indirect=True)
+def test_nested_boolean_props(translator):
+    """
+    Test to ensure the boolean type in nested properties will be treated as text
+    - input dataframe is the data of root_node (participant)
+    - based on the data that we should have following mapping of nested properties
+        {
+          "participant": {
+            "properties": {
+              "_participant_id": {
+                "type": "keyword",
+                "fields": {
+                  "analyzed": {
+                    "type": "text"
+                  }
+                }
+              },
+              "participant_visits": {
+                "properties": {
+                  "age_at_visit": {
+                    "type": "long"
+                  },
+                  "bmi": {
+                    "type": "float"
+                  },
+                  "ever_transferred": {
+                    "type": "keyword",
+                    "fields": {
+                      "analyzed": {
+                        "type": "text"
+                      }
+                    }
+                  },
+                  "height": {
+                    "type": "float"
+                  },
+                  "pregnancy_status": {
+                    "type": "keyword",
+                    "fields": {
+                      "analyzed": {
+                        "type": "text"
+                      }
+                    }
+                  },
+                  "_visit_id": {
+                    "type": "keyword",
+                    "fields": {
+                      "analyzed": {
+                        "type": "text"
+                      }
+                    }
+                  }
+                },
+                "type": "nested"
+              }
+            }
+          }
+        }
+    :param translator:
+    :return:
+    """
+    print("Start boolean type testing")
+    translator.update_types()
+    participant_types = translator.nested_translator.parser.types["participant"]
+    print("All of ES types")
+    print(participant_types)
+    assert participant_types["properties"]["participant_visits"]["properties"]["pregnancy_status"]["type"] == "keyword"
