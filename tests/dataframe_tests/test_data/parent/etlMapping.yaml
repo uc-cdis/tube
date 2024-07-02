@@ -12,3 +12,12 @@ mappings:
       - name: _samples_count
         path: samples
         fn: count
+    nested_props:
+      - name: participant_visits
+        path: visits
+        props:
+          - name: age_at_visit
+          - name: bmi
+          - name: ever_transferred
+          - name: height
+          - name: pregnancy_status
