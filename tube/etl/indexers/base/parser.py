@@ -10,6 +10,7 @@ from tube.utils.general import get_node_id_name
 from tube.utils.dd import get_properties_types, get_node_table_name
 from tube.utils.spark import get_hadoop_type_ignore_fn
 
+ES_TYPES = {str: "keyword", float: "float", int: "long", bool: "keyword"}
 
 class Parser(object):
     """
@@ -66,13 +67,11 @@ class Parser(object):
         :param field_types: dictionary of field and their types
         :return: JSON with proper mapping to be used in Elasticsearch
         """
-        es_type = {str: "keyword", float: "float", int: "long", bool: "keyword"}
-
         properties = {
-            k: {"type": es_type[v[0]]}
+            k: {"type": ES_TYPES[v[0]]}
             if v[0] is not str
             and v[0] is not bool  # the check of bool is for backward compatibility
-            else {"type": es_type[v[0]], "fields": {"analyzed": {"type": "text"}}}
+            else {"type": ES_TYPES[v[0]], "fields": {"analyzed": {"type": "text"}}}
             for k, v in list(field_types.items())
         }
 
