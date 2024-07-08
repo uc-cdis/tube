@@ -18,10 +18,13 @@ RUN python -m poetry config virtualenvs.create false \
 
 # copy source code ONLY after installing dependencies
 COPY tube /tube/
+COPY README.md setup.py /tube/
 
 RUN python -m poetry config virtualenvs.create false \
     && python -m poetry install -vv --only main --no-interaction \
     && python -m poetry show -v
+
+RUN python setup.py sdist bdist_wheel
 
 EXPOSE 8080 7077 6066
 
