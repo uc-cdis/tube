@@ -16,14 +16,16 @@ RUN python -m poetry config virtualenvs.create false \
     && python -m poetry show -v
 
 # copy source code ONLY after installing dependencies
-COPY tube /tube
+COPY . /tube
 COPY README.md setup.py /tube/
 
 RUN python -m poetry config virtualenvs.create false \
     && python -m poetry install -vv --only main --no-interaction \
+    && python -m poetry build \
     && python -m poetry show -v
 
-RUN pip install .
+RUN python -m pip install --upgrade pip
+RUN python -m pip install dist/tube-1.0.5-py3-none-any.whl
 
 EXPOSE 8081
 

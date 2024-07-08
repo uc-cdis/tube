@@ -9,6 +9,7 @@ repository = "https://github.com/uc-cdis/tube"
 include = [
   "NOTICE",
 ]
+packages = [{include = "tube"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -28,6 +29,7 @@ setuptools = "65.3.0"
 six = "1.16.0"
 Werkzeug = "3.0.3"
 toml="0.10.2"
+wheel="0.43.0"
 
 [tool.poetry.dev-dependencies]
 pytest="5.4.3"
