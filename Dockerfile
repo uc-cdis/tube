@@ -2,7 +2,9 @@
 FROM quay.io/cdis/python:python3.9-buster-stable
 
 ENV DEBIAN_FRONTEND=noninteractive \
+    HADOOP_SPARK_VERSION="3" \
     SQOOP_VERSION="1.4.7" \
+    SPARK_VERSION="3.3.0" \
     HADOOP_VERSION="3.3.2" \
     ES_HADOOP_VERSION="8.3.3" \
     MAVEN_ES_URL="https://search.maven.org/remotecontent?filepath=org/elasticsearch" \
@@ -11,9 +13,11 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 ENV MAVEN_ES_SPARK_VERSION="${MAVEN_ES_URL}/${ES_SPARK_30_2_12}/${ES_HADOOP_VERSION}/${ES_SPARK_30_2_12}-${ES_HADOOP_VERSION}"
 
-ENV SQOOP_INSTALLATION_URL="http://archive.apache.org/dist/sqoop/${SQOOP_VERSION}/sqoop-${SQOOP_VERSION}.bin__hadoop-2.6.0.tar.gz" \
+ENV SPARK_INSTALLATION_URL="http://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_SPARK_VERSION}.tgz" \
+    SQOOP_INSTALLATION_URL="http://archive.apache.org/dist/sqoop/${SQOOP_VERSION}/sqoop-${SQOOP_VERSION}.bin__hadoop-2.6.0.tar.gz" \
     HADOOP_INSTALLATION_URL="http://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz" \
     ES_HADOOP_INSTALLATION_URL="https://artifacts.elastic.co/downloads/elasticsearch-hadoop/elasticsearch-hadoop-${ES_HADOOP_VERSION}.zip" \
+    SPARK_HOME="/spark" \
     SQOOP_HOME="/sqoop" \
     HADOOP_HOME="/hadoop" \
     ES_HADOOP_HOME="/es-hadoop" \
@@ -63,6 +67,11 @@ RUN wget ${HADOOP_INSTALLATION_URL} \
     && rm hadoop-${HADOOP_VERSION}.tar.gz \
     && rm -rf $HADOOP_HOME/share/doc
 
+RUN wget $SPARK_INSTALLATION_URL \
+    && mkdir -p $SPARK_HOME \
+    && tar -xvf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_SPARK_VERSION}.tgz -C $SPARK_HOME --strip-components 1 \
+    && rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_SPARK_VERSION}.tgz
+
 RUN wget ${ES_HADOOP_INSTALLATION_URL} \
     && mkdir -p $ES_HADOOP_HOME \
     && unzip elasticsearch-hadoop-${ES_HADOOP_VERSION}.zip -d ${ES_HADOOP_HOME} \
@@ -100,14 +109,11 @@ RUN python -m poetry config virtualenvs.create false \
 
 # copy source code ONLY after installing dependencies
 COPY . /tube
+COPY log4j.properties /spark/conf/log4j.properties
+COPY log4j2.properties /spark/conf/log4j2.properties
 
 RUN python -m poetry config virtualenvs.create false \
     && python -m poetry install -vv --only main --no-interaction \
     && python -m poetry show -v
-
-#ENV TINI_VERSION v0.18.0
-#ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-#RUN chmod +x /tini
-#ENTRYPOINT ["/tini", "--"]
 
 ENV PYTHONUNBUFFERED 1

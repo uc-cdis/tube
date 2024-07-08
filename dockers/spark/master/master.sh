@@ -12,10 +12,6 @@ mkdir -p $SPARK_MASTER_LOG
 
 ln -sf /dev/stdout $SPARK_MASTER_LOG/spark-master.out
 
-cp /spark/conf/log4j2.properties.template /spark/conf/log4j2.properties
-sed -i 's/= info/= DEBUG/g' /spark/conf/log4j2.properties
-echo "logger.org.apache.spark=DEBUG" >> /spark/conf/log4j2.properties
-
 function addConfig() {
   local path=$1
   local name=$2
