@@ -21,7 +21,7 @@ def make_spark_context(tube_config):
         .set("spark.executor.memory", tube_config.SPARK_EXECUTOR_MEMORY)
         .set("spark.driver.memory", tube_config.SPARK_DRIVER_MEMORY)
         .set("spark.python.profile", "false")
-        # .set("spark.executor.extraJavaOptions", "-Dlog4j.configuration=file:/spark/conf/log4j.properties")
+        .set("spark.executor.extraJavaOptions", "-Dlog4j.configuration=file:/spark/conf/log4j.properties")
         # .set("spark.submit.pyFiles", "/tube")
         .setAppName(config.APP_NAME)
     )

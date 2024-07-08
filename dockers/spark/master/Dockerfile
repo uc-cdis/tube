@@ -24,7 +24,7 @@ RUN python -m poetry config virtualenvs.create false \
     && python -m poetry install -vv --only main --no-interaction \
     && python -m poetry show -v
 
-RUN python setup.py sdist bdist_wheel
+RUN pip install .
 
 EXPOSE 8080 7077 6066
 
