@@ -42,9 +42,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libssl-dev \
     libssl1.1 \
     libgnutls30 \
+    net-tools \
+    netcat \
+    gnupg \
+    dnsutils \
     vim \
     curl \
     g++ \
+    telnetd \
     && rm -rf /var/lib/apt/lists/*
 
 RUN python -m pip install --upgrade pip poetry requests
@@ -115,5 +120,7 @@ COPY log4j2.properties /spark/conf/log4j2.properties
 RUN python -m poetry config virtualenvs.create false \
     && python -m poetry install -vv --only main --no-interaction \
     && python -m poetry show -v
+
+EXPOSE 22 4040 7077 8020 8030 8031 8032 8042 8088 9000
 
 ENV PYTHONUNBUFFERED 1
