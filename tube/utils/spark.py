@@ -23,7 +23,7 @@ def make_spark_context(tube_config):
         .set("spark.driver.host", tube_config.SPARK_DRIVER_HOST)
         .set("spark.driver.port", "4040")
         .set("spark.python.profile", "false")
-        .set("spark.executor.extraJavaOptions", "-Dlog4j.configuration=file:/spark/conf/log4j.properties")
+        # .set("spark.executor.extraJavaOptions", "-Dlog4j.configuration=file:/spark/conf/log4j.properties")
         # .set("spark.submit.pyFiles", "/tube")
         .setAppName(config.APP_NAME)
     )
