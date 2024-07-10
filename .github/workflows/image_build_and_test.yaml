@@ -149,7 +149,7 @@ jobs:
 
       - name: Run ETL process
         working-directory: ../compose-etl
-        run: docker compose run tube bash -c "python run_config.py; python run_etl.py"
+        run: docker-compose run tube bash -c "python run_etl.py"
 
       - name: Run integrated tests
         # Run the tests that require Spark and ElasticSearch
