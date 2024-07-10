@@ -114,8 +114,8 @@ RUN python -m poetry config virtualenvs.create false \
 
 # copy source code ONLY after installing dependencies
 COPY . /tube
-COPY log4j.properties /spark/conf/log4j.properties
-COPY log4j2.properties /spark/conf/log4j2.properties
+COPY dockers/confs/log4j.properties /spark/conf/log4j.properties
+COPY dockers/confs/log4j2.properties /spark/conf/log4j2.properties
 
 RUN python -m poetry config virtualenvs.create false \
     && python -m poetry install -vv --only main --no-interaction \

@@ -30,7 +30,7 @@ RUN python -m pip install dist/tube-1.0.5-py3-none-any.whl
 EXPOSE 8081
 
 COPY dockers/spark/worker/worker.sh /
-COPY dockers/spark/worker/log4j.properties /spark/conf/log4j.properties
-COPY dockers/spark/worker/log4j2.properties /spark/conf/log4j2.properties
+COPY dockers/confs/log4j.properties /spark/conf/log4j.properties
+COPY dockers/confs/log4j2.properties /spark/conf/log4j2.properties
 
 CMD ["/bin/bash", "/worker.sh"]
