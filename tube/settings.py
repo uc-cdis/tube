@@ -85,7 +85,7 @@ PROJECT_TO_RESOURCE_PATH = get_resource_paths_from_yaml(USERYAML_FILE)
 SPARK_MASTER = os.getenv("SPARK_MASTER", "local[1]")  # 'spark-service'
 SPARK_EXECUTOR_MEMORY = os.getenv("SPARK_EXECUTOR_MEMORY", "2g")
 SPARK_DRIVER_MEMORY = os.getenv("SPARK_DRIVER_MEMORY", "512m")
-SPARK_DRIVER_HOST = os.getenv("SPARK_DRIVER_HOST", "tube")
+SPARK_DRIVER_HOST = os.getenv("SPARK_DRIVER_HOST", "localhost")
 APP_NAME = "Gen3 ETL"
 
 os.environ[
