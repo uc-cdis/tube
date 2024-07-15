@@ -31,7 +31,5 @@ RUN python -m pip install dist/tube-1.0.5-py3-none-any.whl
 EXPOSE 8080 7077 6066
 
 COPY dockers/spark/master/master.sh /
-COPY dockers/confs/log4j.properties /spark/conf/log4j.properties
-COPY dockers/confs/log4j2.properties /spark/conf/log4j2.properties
 
 CMD ["/bin/bash", "/master.sh"]
