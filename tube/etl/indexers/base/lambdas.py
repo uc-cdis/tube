@@ -311,7 +311,7 @@ def merge_aggregate_with_reducer(x, y):
 
 def flatmap_nested_list_rdd(x):
     res = []
-    for x0, x1, x2 in x:
+    for (x0, x1, x2) in x:
         if x0 in ["set", "list"] and len(x2) > 0:
             res.append((x0, x1, flatten_nested_list(x2)))
         else:
