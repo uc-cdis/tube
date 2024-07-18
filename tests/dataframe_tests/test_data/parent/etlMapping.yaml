@@ -1,0 +1,23 @@
+mappings:
+  - name: qa-ibd
+    doc_type: participant
+    type: aggregator
+    root: participant
+    props:
+      - name: submitter_id
+      - name: project_id
+    parent_props:
+      - path: centers[country,name,investigator_name].projects[data_type]
+    aggregated_props:
+      - name: _samples_count
+        path: samples
+        fn: count
+    nested_props:
+      - name: participant_visits
+        path: visits
+        props:
+          - name: age_at_visit
+          - name: bmi
+          - name: ever_transferred
+          - name: height
+          - name: pregnancy_status

@@ -1,11 +1,11 @@
 import pytest
-from tests.dataframe_tests.util import (
+from tests.util import (
     get_spark_session,
     assert_dataframe_equality,
     get_dataframes_from_names,
 )
 from tube.utils.general import get_node_id_name
-from pyspark.sql.types import StructType, StructField, StringType, LongType
+
 
 @pytest.mark.schema_ibdgc
 @pytest.mark.parametrize("translator", [("ibdgc", "file", "injection", [

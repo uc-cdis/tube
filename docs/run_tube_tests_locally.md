@@ -1,8 +1,11 @@
-# Run Tube tests locally
+# Run Tube integrated tests locally
 
 > NOTE: Tube local tests currently can not be configured with ARM based Mac computers (M1 or M2 Macs) due to limitations with old spark and elasticsearch docker container images. The document will be updated if and when they become available.
 
+> This doc is for running integrated tests. See https://github.com/uc-cdis/tube/blob/master/tests/README.md
+
 ## Initial Setup
+
 * Running tube locally requires `python 3.7`, `postgresql`, `docker` and `jq` installed on the local machine.
 *  It is recommended to create a python virtual environment to install all the required dependencies to avoid complications.
 * Tube uses poetry for dependency management, we install poetry in the virtual env using pip and then install all the dependencies using the following two commands

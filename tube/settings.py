@@ -85,7 +85,11 @@ ES_HADOOP_HOME_BIN = "{}/elasticsearch-hadoop-{}".format(
 HADOOP_HOST = os.getenv("HADOOP_HOST", "spark-service")
 # Searches same folders as load_json above
 
-MAPPING_FILE = find_paths("etlMapping.yaml", "tube")[0]
+try:
+    MAPPING_FILE = find_paths("etlMapping.yaml", "tube")[0]
+except:
+    MAPPING_FILE = None
+
 try:
     USERYAML_FILE = find_paths("user.yaml", "tube")[0]
 except IndexError:

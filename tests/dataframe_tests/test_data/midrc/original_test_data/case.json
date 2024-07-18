@@ -1,0 +1,147 @@
+[
+    {
+        "age_at_index": 74.26106344364219,
+        "age_at_index_gt89": null,
+        "case_ids": [
+            "Rimbaud's_sweltering",
+            "boobs_Yaroslavl"
+        ],
+        "country_of_residence": "steamroll_surety",
+        "covid19_positive": "No",
+        "datasets": {
+            "submitter_id": "dataset_decrees_sieved"
+        },
+        "ethnicity": "Not Reported",
+        "gen3_linked_subjects_available": false,
+        "icu_indicator": true,
+        "index_event": "multifarious_heaters",
+        "linked_external_data": [
+            "Anglican's_clergywoman"
+        ],
+        "race": null,
+        "sex": "Not Reported",
+        "site_id": "gulf_idolatry",
+        "submitter_id": "case_protesting_solely",
+        "token_record_id": "thwart's_prognostics",
+        "treatment_info": false,
+        "type": "case",
+        "ventilator_indicator": true,
+        "zip": "sorter's_ramps"
+    },
+    {
+        "age_at_index": 69.42946336484016,
+        "age_at_index_gt89": "Yes",
+        "case_ids": [
+            "accusatives_Deon's",
+            "Purim's_Gary"
+        ],
+        "country_of_residence": "raid_puffiest",
+        "covid19_positive": "No",
+        "datasets": {
+            "submitter_id": "dataset_decrees_sieved"
+        },
+        "ethnicity": null,
+        "gen3_linked_subjects_available": false,
+        "icu_indicator": false,
+        "index_event": "overweight_Kusch's",
+        "linked_external_data": [
+            "head's_jibs",
+            "languidly_Ustinov's"
+        ],
+        "race": "Black or African American",
+        "sex": "Female",
+        "site_id": "megaphone_rebelliously",
+        "submitter_id": "case_blessedly_heuristics",
+        "token_record_id": "pups_bouillon",
+        "treatment_info": false,
+        "type": "case",
+        "ventilator_indicator": true,
+        "zip": "throe's_adoption"
+    },
+    {
+        "age_at_index": 3.0237165418769214,
+        "age_at_index_gt89": "Yes",
+        "case_ids": [
+            "winners_Petrarch's",
+            "entrails's_Anthropocene"
+        ],
+        "country_of_residence": "fluency_piranha",
+        "covid19_positive": "Yes",
+        "datasets": {
+            "submitter_id": "dataset_decrees_sieved"
+        },
+        "ethnicity": "Not Hispanic or Latino",
+        "gen3_linked_subjects_available": true,
+        "icu_indicator": false,
+        "index_event": "creamer_freemen",
+        "linked_external_data": [
+            "forbearing_verisimilitude's"
+        ],
+        "race": null,
+        "sex": null,
+        "site_id": "factionalism_sandbag",
+        "submitter_id": "case_jingoism_Golconda",
+        "token_record_id": "exhausts_communist",
+        "treatment_info": false,
+        "type": "case",
+        "ventilator_indicator": true,
+        "zip": "glockenspiel's_contented"
+    },
+    {
+        "age_at_index": 52.45985742759234,
+        "age_at_index_gt89": "Yes",
+        "case_ids": [
+            "Brigham_symbolized",
+            "testicle_crooner"
+        ],
+        "country_of_residence": "contented_nerves",
+        "covid19_positive": "Not Reported",
+        "datasets": {
+            "submitter_id": "dataset_decrees_sieved"
+        },
+        "ethnicity": null,
+        "gen3_linked_subjects_available": false,
+        "icu_indicator": false,
+        "index_event": "sandiest_brethren",
+        "linked_external_data": [
+            "flute's_gobbed"
+        ],
+        "race": "White",
+        "sex": "Female",
+        "site_id": "propagandist_walling",
+        "submitter_id": "case_foul's_shillelagh's",
+        "token_record_id": "pan's_decay's",
+        "treatment_info": false,
+        "type": "case",
+        "ventilator_indicator": false,
+        "zip": "IRS_lifting"
+    },
+    {
+        "age_at_index": 78.19144593096271,
+        "age_at_index_gt89": null,
+        "case_ids": [
+            "infeasible_actinium's"
+        ],
+        "country_of_residence": "liquefaction's_compo",
+        "covid19_positive": "No",
+        "datasets": {
+            "submitter_id": "dataset_decrees_sieved"
+        },
+        "ethnicity": "Not Reported",
+        "gen3_linked_subjects_available": true,
+        "icu_indicator": false,
+        "index_event": "hardiness_encoded",
+        "linked_external_data": [
+            "inky_correctional"
+        ],
+        "race": "Native Hawaiian or other Pacific Islander",
+        "sex": "Female",
+        "site_id": "pewees_Romanov",
+        "submitter_id": "case_germinal's_chloroformed",
+        "token_record_id": "advertisements_occupy",
+        "treatment_info": true,
+        "type": "case",
+        "ventilator_indicator": true,
+        "zip": "eighteenth's_polyp's"
+    }
+]
