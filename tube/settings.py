@@ -55,8 +55,6 @@ ES_SPARK_CONFIG = {
     "es.nodes": ES_URL,
     "es.port": ES_PORT,
     "es.net.ssl": ES_USE_SSL,
-    "es.net.http.auth.user": ES_AUTH_USERNAME,
-    "es.net.http.auth.pass": ES_AUTH_PASSWORD,
     "es.input.json": "yes",
     "es.nodes.client.only": "false",
     "es.nodes.discovery": "false",
@@ -72,6 +70,8 @@ ES_CONNECTION_CONFIG = {
 es_is_basic_auth_used = bool(ES_AUTH_USERNAME) and bool(ES_AUTH_PASSWORD)
 if es_is_basic_auth_used:
     ES_CONNECTION_CONFIG["http_auth"] = (ES_AUTH_USERNAME, ES_AUTH_PASSWORD)
+    ES_SPARK_CONFIG["es.net.http.auth.user"] = ES_AUTH_USERNAME
+    ES_SPARK_CONFIG["es.net.http.auth.pass"] = ES_AUTH_PASSWORD
 
 HADOOP_HOME = os.getenv("HADOOP_HOME", "/usr/local/Cellar/hadoop/3.1.0/libexec/")
 JAVA_HOME = os.getenv(
