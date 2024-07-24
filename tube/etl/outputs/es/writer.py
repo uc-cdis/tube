@@ -55,7 +55,7 @@ class Writer(SparkBase):
     def write_df_to_new_index(self, df, index, doc_type):
         es_config = self.es_config
         es_config["es.resource"] = index
-        df.coalesce(1).write.format("org.elasticsearch.spark.sql").option(
+        df = df.coalesce(1).write.format("org.elasticsearch.spark.sql").option(
             "es.nodes", es_config["es.nodes"]
         ).option("es.port", es_config["es.port"]).option(
             "es.nodes.wan.only", "true"
@@ -69,11 +69,14 @@ class Writer(SparkBase):
             "es.resource", es_config["es.resource"]
         ).option(
             "es.net.ssl", es_config["es.net.ssl"]
-        ).option(
-            "es.net.http.auth.user", es_config["es.net.http.auth.user"]
-        ).option(
-            "es.net.http.auth.pass", es_config["es.net.http.auth.pass"]
-        ).save(
+        )
+        if es_config["es.net.http.auth.user"]:
+            df = df.option(
+                "es.net.http.auth.user", es_config["es.net.http.auth.user"]
+            ).option(
+                "es.net.http.auth.pass", es_config["es.net.http.auth.pass"]
+            )
+        df.save(
             index
         )
 
