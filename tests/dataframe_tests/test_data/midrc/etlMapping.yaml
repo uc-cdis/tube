@@ -260,6 +260,13 @@ mappings:
       - name: spatial_resolution
       - name: transducer_type
       - name: view_position
+    nested_props:
+      - name: file_annotations
+        path: annotations
+        props:
+          - name: annotation_method
+          - name: annotator_id
+          - name: airspace_disease_grading
     injecting_props:
       dataset:
         props:

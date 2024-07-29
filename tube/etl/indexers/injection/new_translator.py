@@ -2,6 +2,9 @@ from copy import copy
 from pyspark.sql import functions as fn
 from pyspark.sql.types import StructField, StructType
 
+from tube.etl.indexers.aggregation.nested.translator import (
+    Translator as NestedTranslator,
+)
 from tube.etl.indexers.base.prop import PropFactory
 from tube.etl.indexers.base.translator import Translator as BaseTranslator
 from tube.etl.indexers.injection.parser import Parser
@@ -23,6 +26,28 @@ class Translator(BaseTranslator):
         root_props = []
         for root in self.parser.roots:
             root_props.extend(root.props)
+
+        nest_props = mapping.get("nested_props")
+        self.nested_translator = (
+            NestedTranslator(
+                sc,
+                hdfs_path,
+                writer,
+                {
+                    "root": mapping.get("root"),
+                    "doc_type": mapping.get("doc_type"),
+                    "name": mapping.get("name"),
+                    "nested_props": mapping.get("nested_props"),
+                },
+                model,
+                dictionary,
+                root_names=[l.name for l in self.parser.leaves]
+            )
+            if nest_props is not None
+            else None
+        )
+
+
         self.root_props = list(set(root_props))
         self.parser.additional_props.append(
             PropFactory.add_additional_prop(self.parser.doc_type, "source_node", (str,))
@@ -265,6 +290,16 @@ class Translator(BaseTranslator):
         :return:
         """
         df = self.load_from_hadoop_to_dateframe()
+
+        nested_df = (
+            self.nested_translator.translate()
+            if self.nested_translator is not None
+            else None
+        )
+        self.update_types()
+        if self.nested_translator is not None:
+            df = self.join_two_dataframe(df, nested_df, how="left_outer")
+
         aggregating_props = self.get_aggregating_props()
         if len(aggregating_props) == 0:
             return df

@@ -48,6 +48,7 @@ class Translator(BaseTranslator):
                 },
                 model,
                 dictionary,
+                root_names=[mapping.get('root')]
             )
             if nest_props is not None
             else None

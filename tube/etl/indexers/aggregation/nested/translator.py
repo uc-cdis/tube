@@ -6,9 +6,9 @@ from tube.etl.indexers.base.logic import execute_filter
 
 
 class Translator(BaseTranslator):
-    def __init__(self, sc, hdfs_path, writer, mapping, model, dictionary):
+    def __init__(self, sc, hdfs_path, writer, mapping, model, dictionary, root_names):
         super(Translator, self).__init__(
-            sc, hdfs_path, writer, Parser(mapping, model, dictionary)
+            sc, hdfs_path, writer, Parser(mapping, model, dictionary, root_names)
         )
         self.collected_node_dfs = {}
         self.updated_types = False

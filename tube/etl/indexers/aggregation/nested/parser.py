@@ -9,18 +9,19 @@ class Parser(BaseParser):
     The main entry point into the index export process for the mutation indices
     """
 
-    def __init__(self, mapping, model, dictionary):
+    def __init__(self, mapping, model, dictionary, root_names):
         super(Parser, self).__init__(dictionary, mapping, model)
         self.leaves = []
         self.collectors = []
-        self.root_node = None
-        self.root_node = NestedNode(
-            self.root.name,
-            get_node_table_name(self.model, self.root.name),
-            self.root.name,
-            self.root.name,
-            props=[],
-        )
+        self.root_nodes = {}
+        for root_name in root_names:
+            self.root_nodes[root_name] = NestedNode(
+                root_name,
+                get_node_table_name(self.model, root_name),
+                root_name,
+                root_name,
+                props=[],
+            )
         self.get_nested_props(mapping)
         self.update_level()
         self.array_types = []
@@ -29,9 +30,10 @@ class Parser(BaseParser):
     def get_nested_props(self, mapping):
         nested_indices = mapping.get("nested_props", [])
         for n_idx in nested_indices:
-            self.root_node.children.add(
-                self.parse_nested_props(n_idx, self.root_node, self.root.name)
-            )
+            for root_name, root_node in self.root_nodes.items():
+                root_node.children.add(
+                    self.parse_nested_props(n_idx, root_node, root_name)
+                )
 
     def parse_nested_props(self, mapping, nested_parent_node, parent_label):
         path = mapping.get("path")
@@ -85,7 +87,10 @@ class Parser(BaseParser):
         level = 1
         assigned_levels = set([])
         just_assigned = set([])
-        for child in self.root_node.children:
+        if len(self.root_nodes) == 0:
+            return
+        first_key = next(iter(self.root_nodes))
+        for child in self.root_nodes[first_key].children:
             if child in just_assigned:
                 continue
             child.level = level
