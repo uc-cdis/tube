@@ -70,7 +70,8 @@ class Writer(SparkBase):
         ).option(
             "es.net.ssl", es_config["es.net.ssl"]
         )
-        if es_config["es.net.http.auth.user"]:
+        if ("es.net.http.auth.user" in es_config
+                and "es.net.http.auth.pass" in es_config):
             df = df.option(
                 "es.net.http.auth.user", es_config["es.net.http.auth.user"]
             ).option(
