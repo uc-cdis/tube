@@ -31,9 +31,11 @@ class Parser(BaseParser):
         nested_indices = mapping.get("nested_props", [])
         for n_idx in nested_indices:
             for root_name, root_node in self.root_nodes.items():
-                root_node.children.add(
-                    self.parse_nested_props(n_idx, root_node, root_name)
-                )
+                new_nested_child = self.parse_nested_props(n_idx, root_node, root_name)
+                if new_nested_child is not None:
+                    root_node.children.add(
+                        self.parse_nested_props(n_idx, root_node, root_name)
+                    )
 
     def parse_nested_props(self, mapping, nested_parent_node, parent_label):
         path = mapping.get("path")
@@ -46,9 +48,14 @@ class Parser(BaseParser):
             current_node_label, edge_up_tbl = get_edge_table(
                 self.model, current_parent_label, p
             )
+            if current_node_label is None or edge_up_tbl is None:
+                break
             parent_edge_up_tbls.append((current_parent_label, edge_up_tbl))
             current_parent_label = current_node_label
         parent_edge_up_tbls.reverse()
+
+        if current_node_label is None:
+            return None
 
         tbl_name = get_node_table_name(self.model, current_node_label)
 

@@ -26,7 +26,9 @@ def get_edge_table(models, node_label, edge_name):
     :return: (label of the source node, table name of edge specified by edge_name)
     """
     node = models.Node.get_subclass(node_label)
-    edge = getattr(node, edge_name)
+    edge = getattr(node, edge_name, None)
+    if edge is None:
+        return None, None
     parent_label = get_node_label(models, edge.target_class.__src_class__)
     if node_label == parent_label:
         parent_label = get_node_label(models, edge.target_class.__dst_class__)
