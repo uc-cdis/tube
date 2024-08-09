@@ -1,3 +1,4 @@
+ARG AZLINUX_BASE_VERSION=master
 # To check running container: docker exec -it tube /bin/bash
 FROM quay.io/cdis/python:python3.9-buster-stable
 
