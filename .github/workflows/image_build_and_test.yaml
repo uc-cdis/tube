@@ -106,14 +106,14 @@ jobs:
 
       - name: Run spark and ElasticSearch
         working-directory: ../compose-etl
-        run: docker-compose up -d spark elasticsearch
+        run: docker compose up -d spark elasticsearch
 
       - name: Wait for the container to be up and running
         run: sleep 60
 
       - name: Checking logs
         working-directory: ../compose-etl
-        run: docker-compose logs
+        run: docker compose logs
 
       - name: Check all containers
         run: docker ps
@@ -123,7 +123,7 @@ jobs:
 
       - name: Run ETL process
         working-directory: ../compose-etl
-        run: docker-compose run tube bash -c "python run_config.py; python run_etl.py"
+        run: docker compose run tube bash -c "python run_config.py; python run_etl.py"
 
       - name: Run integrated tests
         # Run the tests that require Spark and ElasticSearch
