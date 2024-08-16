@@ -93,12 +93,6 @@ jobs:
         working-directory: ../compose-etl
         run: echo "{\"db_host\":\"host.docker.internal\",\"db_username\":\"postgres\",\"db_password\":\"postgres\",\"db_database\":\"metadata_db\"}" > configs/creds.json
 
-      - name: Install docker-compose
-        working-directory: ../compose-etl
-        run: |
-          curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-          chmod +x /usr/local/bin/docker-compose
-
       - name: Replace tube branch
         working-directory: ../compose-etl
         run: |
@@ -112,14 +106,14 @@ jobs:
 
       - name: Run spark and ElasticSearch
         working-directory: ../compose-etl
-        run: docker-compose up -d spark elasticsearch
+        run: docker compose up -d spark elasticsearch
 
       - name: Wait for the container to be up and running
         run: sleep 60
 
       - name: Checking logs
         working-directory: ../compose-etl
-        run: docker-compose logs
+        run: docker compose logs
 
       - name: Check all containers
         run: docker ps
@@ -129,7 +123,7 @@ jobs:
 
       - name: Run ETL process
         working-directory: ../compose-etl
-        run: docker-compose run tube bash -c "python run_config.py; python run_etl.py"
+        run: docker compose run tube bash -c "python run_config.py; python run_etl.py"
 
       - name: Run integrated tests
         # Run the tests that require Spark and ElasticSearch
