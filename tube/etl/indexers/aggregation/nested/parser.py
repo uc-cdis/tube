@@ -14,6 +14,7 @@ class Parser(BaseParser):
         self.leaves = []
         self.collectors = []
         self.root_nodes = {}
+        self.all_nested_nodes = {}
         for root_name in root_names:
             self.root_nodes[root_name] = NestedNode(
                 root_name,
@@ -33,9 +34,7 @@ class Parser(BaseParser):
             for root_name, root_node in self.root_nodes.items():
                 new_nested_child = self.parse_nested_props(n_idx, root_node, root_name)
                 if new_nested_child is not None:
-                    root_node.children.add(
-                        self.parse_nested_props(n_idx, root_node, root_name)
-                    )
+                    root_node.children.add(new_nested_child)
 
     def parse_nested_props(self, mapping, nested_parent_node, parent_label):
         path = mapping.get("path")
@@ -63,21 +62,26 @@ class Parser(BaseParser):
             self.doc_type, mapping.get("props"), node_label=current_node_label
         )
 
-        current_nested_node = NestedNode(
-            current_node_label,
-            tbl_name,
-            path,
-            mapping.get("name", replace_dot_with_dash(path)),
-            props=props,
-            parent_node=nested_parent_node,
-            parent_edge_up_tbl=parent_edge_up_tbls,
-            json_filter=mapping.get("filter"),
-        )
+        if current_node_label not in self.all_nested_nodes:
+            current_nested_node = NestedNode(
+                current_node_label,
+                tbl_name,
+                path,
+                mapping.get("name", replace_dot_with_dash(path)),
+                props=props,
+                parent_node=nested_parent_node,
+                parent_edge_up_tbl=parent_edge_up_tbls,
+                json_filter=mapping.get("filter"),
+            )
+            self.all_nested_nodes[current_node_label] = current_nested_node
+        else:
+            current_nested_node = self.all_nested_nodes[current_node_label]
+            current_nested_node.add_parent(nested_parent_node)
         nested_idxes = mapping.get("nested_props", [])
         for n_idx in nested_idxes:
-            current_nested_node.children.add(
-                self.parse_nested_props(n_idx, current_nested_node, current_node_label)
-            )
+            new_nested_child = self.parse_nested_props(n_idx, current_nested_node, current_node_label)
+            if new_nested_child is not None:
+                current_nested_node.children.add(new_nested_child)
 
         if len(current_nested_node.children) == 0:
             self.leaves.append(current_nested_node)
@@ -133,11 +137,11 @@ class Parser(BaseParser):
                 if "type" not in child_types[child.display_name]:
                     child_types[child.display_name]["type"] = "nested"
                 properties.update(child_types)
-        parent = node.parent_node
-        if parent is not None:
-            parent.children_ready_to_nest_types.append(node)
-            if len(parent.children_ready_to_nest_types) == len(parent.children):
-                queue.append(parent)
+        for p in node.parent_nodes:
+            if p is not None:
+                p.children_ready_to_nest_types.append(node)
+                if len(p.children_ready_to_nest_types) == len(p.children):
+                    queue.append(p)
         return current_type
 
     def get_es_types(self):

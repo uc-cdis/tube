@@ -26,7 +26,7 @@ class NestedNode(BaseNode):
         self.parent_edge_up_tbl = (
             [] if parent_edge_up_tbl is None else parent_edge_up_tbl
         )
-        self.parent_node = parent_node
+        self.parent_nodes = [parent_node]
         self.non_leaf_children_count = 0
         self.children_ready_to_join = []
         self.children_ready_to_nest_types = []
@@ -36,6 +36,9 @@ class NestedNode(BaseNode):
         if self.parent_edge_up_tbl is not None and len(self.parent_edge_up_tbl) > 0:
             return self.name, self.parent_edge_up_tbl[0]
         return self.name
+
+    def add_parent(self, parent_node):
+        self.parent_nodes.append(parent_node)
 
     def __hash__(self):
         return hash(self.__key__())

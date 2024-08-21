@@ -56,11 +56,11 @@ class Translator(BaseTranslator):
             if edge_df is not None:
                 node_df = self.join_two_dataframe(edge_df, node_df)
             current_node_name = parent_label
-        parent = node.parent_node
-        if parent is not None:
-            parent.children_ready_to_join.append(node)
-            if len(parent.children_ready_to_join) == len(parent.children):
-                queue.append(parent)
+        for p in node.parent_nodes:
+            if p is not None:
+                p.children_ready_to_join.append(node)
+                if len(p.children_ready_to_join) == len(p.children):
+                    queue.append(p)
         return node_df
 
     def collect_structural_df(self, node_df, node_name, child_df, child):
