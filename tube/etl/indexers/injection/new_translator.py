@@ -53,6 +53,10 @@ class Translator(BaseTranslator):
             PropFactory.add_additional_prop(self.parser.doc_type, "source_node", (str,))
         )
 
+    def update_types(self):
+        es_mapping = super(Translator, self).update_types()
+        return self.call_to_child_update_types(self.nested_translator, es_mapping)
+
     def collect_leaf(self, child, edge_df, collected_leaf_dfs):
         if isinstance(child, LeafNode):
             key_name = self.parser.get_key_prop().name

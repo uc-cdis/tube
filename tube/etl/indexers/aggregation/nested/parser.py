@@ -4,6 +4,13 @@ from tube.etl.indexers.aggregation.nodes.nested_node import NestedNode
 from tube.etl.indexers.base.parser import Parser as BaseParser, ES_TYPES
 
 
+def is_node_in_set(node_set, node_to_check: NestedNode):
+    for node in node_set:
+        if node.__key__() == node_to_check.__key__():
+            return True
+    return False
+
+
 class Parser(BaseParser):
     """
     The main entry point into the index export process for the mutation indices
@@ -20,7 +27,7 @@ class Parser(BaseParser):
                 root_name,
                 get_node_table_name(self.model, root_name),
                 root_name,
-                root_name,
+                mapping.get("doc_type"),
                 props=[],
             )
         self.get_nested_props(mapping)
@@ -35,6 +42,11 @@ class Parser(BaseParser):
                 new_nested_child = self.parse_nested_props(n_idx, root_node, root_name)
                 if new_nested_child is not None:
                     root_node.children.add(new_nested_child)
+        self.root_nodes = {
+            root_name: root_node
+            for root_name, root_node in self.root_nodes.items()
+            if len(root_node.children) > 0.
+        }
 
     def parse_nested_props(self, mapping, nested_parent_node, parent_label):
         path = mapping.get("path")
@@ -62,7 +74,7 @@ class Parser(BaseParser):
             self.doc_type, mapping.get("props"), node_label=current_node_label
         )
 
-        if current_node_label not in self.all_nested_nodes:
+        if path not in self.all_nested_nodes:
             current_nested_node = NestedNode(
                 current_node_label,
                 tbl_name,
@@ -73,19 +85,21 @@ class Parser(BaseParser):
                 parent_edge_up_tbl=parent_edge_up_tbls,
                 json_filter=mapping.get("filter"),
             )
-            self.all_nested_nodes[current_node_label] = current_nested_node
+            self.all_nested_nodes[path] = current_nested_node
         else:
-            current_nested_node = self.all_nested_nodes[current_node_label]
-            current_nested_node.add_parent(nested_parent_node)
+            current_nested_node = self.all_nested_nodes[path]
+            current_nested_node.add_parent(nested_parent_node, parent_edge_up_tbls)
         nested_idxes = mapping.get("nested_props", [])
         for n_idx in nested_idxes:
             new_nested_child = self.parse_nested_props(n_idx, current_nested_node, current_node_label)
             if new_nested_child is not None:
                 current_nested_node.children.add(new_nested_child)
 
-        if len(current_nested_node.children) == 0:
+        if (not is_node_in_set(self.leaves, current_nested_node)
+                and len(current_nested_node.children) == 0):
             self.leaves.append(current_nested_node)
-        else:
+        elif (not is_node_in_set(self.collectors, current_nested_node)
+              and len(current_nested_node.children) > 0):
             self.collectors.append(current_nested_node)
 
         return current_nested_node

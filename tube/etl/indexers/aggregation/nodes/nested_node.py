@@ -23,8 +23,8 @@ class NestedNode(BaseNode):
         self.level = level
         self.path = path
         self.display_name = display_name
-        self.parent_edge_up_tbl = (
-            [] if parent_edge_up_tbl is None else parent_edge_up_tbl
+        self.parent_edge_up_tbls = (
+            [] if parent_edge_up_tbl is None else [parent_edge_up_tbl]
         )
         self.parent_nodes = [parent_node]
         self.non_leaf_children_count = 0
@@ -33,12 +33,13 @@ class NestedNode(BaseNode):
         self.filter = create_filter_from_json(json_filter)
 
     def __key__(self):
-        if self.parent_edge_up_tbl is not None and len(self.parent_edge_up_tbl) > 0:
-            return self.name, self.parent_edge_up_tbl[0]
+        if self.parent_edge_up_tbls is not None and len(self.parent_edge_up_tbls) > 0:
+            return self.name, ",".join([str(p[0]) for p in self.parent_edge_up_tbls]), self.path
         return self.name
 
-    def add_parent(self, parent_node):
+    def add_parent(self, parent_node, parent_edge_up_tbl):
         self.parent_nodes.append(parent_node)
+        self.parent_edge_up_tbls.append(parent_edge_up_tbl)
 
     def __hash__(self):
         return hash(self.__key__())

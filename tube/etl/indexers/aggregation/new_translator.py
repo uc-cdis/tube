@@ -41,14 +41,14 @@ class Translator(BaseTranslator):
                 hdfs_path,
                 writer,
                 {
-                    "root": mapping.get("root"),
+                    "root": mapping.get("doc_type"),
                     "doc_type": mapping.get("doc_type"),
                     "name": mapping.get("name"),
                     "nested_props": mapping.get("nested_props"),
                 },
                 model,
                 dictionary,
-                root_names=[mapping.get('root')]
+                root_names=[mapping.get('doc_type')]
             )
             if nest_props is not None
             else None
@@ -56,14 +56,7 @@ class Translator(BaseTranslator):
 
     def update_types(self):
         es_mapping = super(Translator, self).update_types()
-        properties = es_mapping.get(self.parser.doc_type).get("properties")
-        if self.nested_translator is not None:
-            nested_types = self.nested_translator.update_types()
-            for a in self.nested_translator.parser.array_types:
-                if a not in self.parser.array_types:
-                    self.parser.array_types.append(a)
-            properties.update(nested_types[self.parser.root.name]["properties"])
-        return es_mapping
+        return self.call_to_child_update_types(self.nested_translator, es_mapping)
 
     def aggregate_intermediate_data_frame(self, node_name, child, child_df, edge_df):
         """

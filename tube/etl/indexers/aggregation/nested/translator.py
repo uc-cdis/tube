@@ -35,7 +35,16 @@ class Translator(BaseTranslator):
                     df = execute_filter(df, queue[i].filter)
                 self.collected_node_dfs[queue[i].name] = df
             i += 1
-        return self.collected_node_dfs[queue[len(queue) - 1].name]
+        latest_queue_item = queue[-1]
+        final_df = self.collected_node_dfs[latest_queue_item.name]
+        root_id_field = get_node_id_name(self.parser.doc_type)
+        nested_props = [c_child.display_name for c_child in latest_queue_item.children]
+        cols = self.get_cols_from_node(latest_queue_item.name, latest_queue_item.props,
+                                       nested_props, final_df)
+        final_df = final_df.groupBy(root_id_field).agg(
+            collect_list(struct(*cols)).alias(latest_queue_item.display_name)
+        )
+        return final_df
 
     def collect_node(self, node, queue):
         node_df = self.translate_table_to_dataframe(node, node.props)
@@ -50,18 +59,30 @@ class Translator(BaseTranslator):
                     node_df = self.collect_structural_df(
                         node_df, node_name, child_df, child
                     )
-        current_node_name = node_name
-        for parent_label, edge_up_tbl in node.parent_edge_up_tbl:
-            edge_df = self.collect_edge(edge_up_tbl, current_node_name, parent_label)
-            if edge_df is not None:
-                node_df = self.join_two_dataframe(edge_df, node_df)
-            current_node_name = parent_label
+        up_df = None
+        for edge in node.parent_edge_up_tbls:
+            it_df = node_df
+            current_node_name = node_name
+            for parent_label, edge_up_tbl in edge:
+                edge_df = self.collect_edge(edge_up_tbl, current_node_name, parent_label)
+                if edge_df is not None:
+                    it_df = self.join_two_dataframe(edge_df, it_df)
+                current_node_name = parent_label
+            root_id_field = get_node_id_name(current_node_name)
+            if node.level is None or node.level == 1:
+                it_df = it_df.withColumnRenamed(root_id_field, get_node_id_name(self.parser.doc_type))
+            up_df = (
+                it_df
+                if up_df is None
+                else up_df.unionByName(it_df).distinct()
+            )
+
         for p in node.parent_nodes:
             if p is not None:
                 p.children_ready_to_join.append(node)
-                if len(p.children_ready_to_join) == len(p.children):
+                if p.level is not None and len(p.children_ready_to_join) == len(p.children):
                     queue.append(p)
-        return node_df
+        return up_df
 
     def collect_structural_df(self, node_df, node_name, child_df, child):
         id_field = get_node_id_name(node_name)
