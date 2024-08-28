@@ -262,11 +262,11 @@ mappings:
       - name: view_position
     nested_props:
       - name: file_annotations
-        path: annotations
+        path: annotation_files
         props:
           - name: annotation_method
           - name: annotator_id
-          - name: airspace_disease_grading
+          - name: annotation_name
     injecting_props:
       dataset:
         props:

@@ -4,6 +4,7 @@ from tests.util import (
     assert_dataframe_equality,
     get_dataframes_from_names,
 )
+from pyspark.sql.functions import col, expr
 from tube.utils.general import get_node_id_name
 
 
@@ -155,6 +156,50 @@ def test_flatten_nested_list(translator):
     aggregating_props = translator.get_aggregating_props()
     actual_final_df = translator.flatten_nested_list(collected_leaf_df, aggregating_props)
     print(f"Actual df: {actual_final_df}")
+    final_df = final_df.drop("file_annotations")
+
     assert_dataframe_equality(
         final_df, actual_final_df, "_data_file_id"
     )
+
+@pytest.mark.schema_midrc
+@pytest.mark.parametrize("translator", [("midrc", "data_file", "injection", [
+        "edge_annotationfilerelatedtocrseriesfile", "edge_annotationfilerelatedtoctseriesfile",
+        "edge_annotationfilerelatedtodxseriesfile", "edge_annotationfilerelatedtomrseriesfile",
+        "edge_crseriesfilerelatedtoimagingstudy", "edge_dxseriesfilerelatedtoimagingstudy",
+        "edge_mrseriesfilerelatedtoimagingstudy", "edge_ctseriesfilerelatedtoimagingstudy",
+        "edge_0c3e44da_crsefidafrcomeco", "edge_a4f04f84_dxsefidafrcomeco", "edge_d04a5ba2_mrsefidafrcomeco",
+        "edge_0b8a28a9_ctsefidafrcomeco", "edge_9197510c_comecodafrpr", "edge_casememberofdataset",
+        "edge_ctscanrelatedtoimagingstudy", "edge_ctscanrelatedtosubject", "edge_ctseriesrelatedtoctscan",
+        "edge_datareleasedescribesroot", "edge_datasetperformedforproject", "edge_ef9975fc_cotofidafrimex",
+        "edge_imagingstudyrelatedtocase", "edge_projectmemberofprogram",
+    ])], indirect=True)
+def test_nested_props_injection(translator):
+    [collected_leaf_df, final_df] = get_dataframes_from_names(
+        get_spark_session(translator.sc),
+        "midrc",
+        [
+            "data_file__0_Translator.translate__collected_leaf_dfs",
+            "data_file__1_Translator.translate_final__translate_final"
+        ]
+    )
+    nested_df = translator.nested_translator.translate()
+    assert nested_df.count() == 2
+
+    df = translator.join_two_dataframe(collected_leaf_df, nested_df, how="left_outer")
+    group_df = df.groupby("data_category").count()
+    group_df.show()
+    assert df.count() == 98
+    assert df.filter(nested_df.file_annotations.isNotNull()).count() == 2
+    sorted_annotation_name_df = df.withColumn(
+        "sorted_annotation_names",
+        expr("transform(array_sort(transform(file_annotations, x -> x.annotation_name)), x -> x)")
+    ).orderBy("_data_file_id")
+    expected_annotation_names = [["midrc_bpr_regions", "midrc_mdai_chestxr"],
+                                 ["mRALE_Mastermind_Challenge", "midrc_lung_segs"]]
+    counter = 0
+    for row in sorted_annotation_name_df.collect():
+        annotation_names = row["sorted_annotation_names"]
+        if annotation_names is not None:
+            assert annotation_names == expected_annotation_names[counter]
+            counter += 1
