@@ -61,6 +61,16 @@ class Translator(object):
     def add_some_additional_props(self, keep_props):
         keep_props.append(self.parser.get_key_prop().name)
 
+    def call_to_child_update_types(self, child_translator, es_mapping):
+        properties = es_mapping.get(self.parser.doc_type).get("properties")
+        if child_translator is not None:
+            nested_types = child_translator.update_types()
+            for a in child_translator.parser.array_types:
+                if a not in self.parser.array_types:
+                    self.parser.array_types.append(a)
+            properties.update(nested_types[self.parser.doc_type]["properties"])
+        return es_mapping
+
     def remove_unnecessary_columns(self, df):
         props = list(PropFactory.get_prop_by_doc_name(self.parser.doc_type).values())
         keep_props = [p.name for p in props]

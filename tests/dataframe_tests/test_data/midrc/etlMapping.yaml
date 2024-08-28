@@ -260,6 +260,13 @@ mappings:
       - name: spatial_resolution
       - name: transducer_type
       - name: view_position
+    nested_props:
+      - name: file_annotations
+        path: annotation_files
+        props:
+          - name: annotation_method
+          - name: annotator_id
+          - name: annotation_name
     injecting_props:
       dataset:
         props:

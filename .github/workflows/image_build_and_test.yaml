@@ -12,6 +12,32 @@ jobs:
       ECR_AWS_SECRET_ACCESS_KEY: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
       QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
       QUAY_ROBOT_TOKEN: ${{ secrets.QUAY_ROBOT_TOKEN }}
+  build-master:
+    name: spark master
+    uses: uc-cdis/.github/.github/workflows/image_build_push.yaml@master
+    with:
+      OVERRIDE_REPO_NAME: spark-master
+      OVERRIDE_TAG_NAME: 3.3.0-hadoop3.3
+      DOCKERFILE_LOCATION: "./dockers/spark/master/Dockerfile"
+      USE_QUAY_ONLY: true
+    secrets:
+      ECR_AWS_ACCESS_KEY_ID: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
+      ECR_AWS_SECRET_ACCESS_KEY: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
+      QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
+      QUAY_ROBOT_TOKEN: ${{ secrets.QUAY_ROBOT_TOKEN }}
+  build-worker:
+    name: spark worker
+    uses: uc-cdis/.github/.github/workflows/image_build_push.yaml@master
+    with:
+      OVERRIDE_REPO_NAME: spark-worker
+      OVERRIDE_TAG_NAME: 3.3.0-hadoop3.3
+      DOCKERFILE_LOCATION: "./dockers/spark/worker/Dockerfile"
+      USE_QUAY_ONLY: true
+    secrets:
+      ECR_AWS_ACCESS_KEY_ID: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
+      ECR_AWS_SECRET_ACCESS_KEY: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
+      QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
+      QUAY_ROBOT_TOKEN: ${{ secrets.QUAY_ROBOT_TOKEN }}
 
   # then run the tests
   test:
@@ -55,7 +81,7 @@ jobs:
 
       - name: Make dir cor compose-etl
         working-directory: ..
-        run: git clone https://github.com/uc-cdis/compose-etl.git --branch master --single-branch
+        run: git clone https://github.com/uc-cdis/compose-etl.git --branch feat/driver-host --single-branch
 
       - name: List all files and current directory
         run: |
@@ -123,7 +149,7 @@ jobs:
 
       - name: Run ETL process
         working-directory: ../compose-etl
-        run: docker compose run tube bash -c "python run_config.py; python run_etl.py"
+        run: docker-compose run tube bash -c "python run_config.py; python run_etl.py"
 
       - name: Run integrated tests
         # Run the tests that require Spark and ElasticSearch

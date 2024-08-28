@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tube"
-version = "0.6.4"
+version = "1.0.5"
 description = "Gen3 ETL Service"
 authors = ["CTDS UChicago <cdis@uchicago.edu>"]
 license = "Apache-2.0"
@@ -9,6 +9,7 @@ repository = "https://github.com/uc-cdis/tube"
 include = [
   "NOTICE",
 ]
+packages = [{include = "tube"}]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -27,6 +28,8 @@ requests = "^2.28.1"
 setuptools = "65.3.0"
 six = "1.16.0"
 Werkzeug = "3.0.3"
+toml="0.10.2"
+wheel="0.43.0"
 
 [tool.poetry.dev-dependencies]
 pytest="5.4.3"
@@ -36,5 +39,5 @@ moto="1.1.24"
 pyspark-stubs="*"
 
 [build-system]
-requires = ["setuptools=65.3.0","poetry>=1.1.0"]
+requires = ["setuptools==65.3.0","poetry>=1.1.0"]
 build-backend = "poetry.masonry.api"
