@@ -1,0 +1,174 @@
+[
+  {
+    "cases": [
+      {
+        "submitter_id": "case_protesting_solely"
+      }
+    ],
+    "core_metadata_collections": [],
+    "cr_series_files": [],
+    "ct_series_files": [
+      {
+        "submitter_id": "ct_series_file_exiling_fineness's"
+      }
+    ],
+    "datasets": [],
+    "dx_series_files": [],
+    "imaging_studies": [
+      {
+        "submitter_id": "imaging_study_traffic's_Kaohsiung"
+      }
+    ],
+    "mg_series_files": [],
+    "mr_series_files": [],
+    "nm_series_files": [],
+    "pt_series_files": [],
+    "rf_series_files": [],
+    "us_series_files": [],
+    "xa_series_files": [],
+    "type": "annotation_file",
+    "submitter_id": "A_Kp7X9r_1.2.827.1.3",
+    "annotation_name": "midrc_mdai_chestxr",
+    "data_category": "annotation_file",
+    "data_format": "JSON",
+    "data_type": "MIDRC Annotation",
+    "file_name": "annotation_file_773863174424.json",
+    "file_size": 702,
+    "md5sum": "5d33e550c40249120481045352342345",
+    "annotation_method": "Clinically_derived",
+    "case_ids": [
+      "Rimbaud's_sweltering",
+      "boobs_Yaroslavl"
+    ],
+    "object_id": "dg.MD1R/0fc28986-0bb2-b12c-ad4c-a32a5d0201f9"
+  },
+  {
+    "cases": [
+      {
+        "submitter_id": "case_protesting_solely"
+      }
+    ],
+    "core_metadata_collections": [],
+    "cr_series_files": [],
+    "ct_series_files": [
+      {
+        "submitter_id": "ct_series_file_exiling_fineness's"
+      }
+    ],
+    "datasets": [],
+    "dx_series_files": [],
+    "imaging_studies": [
+      {
+        "submitter_id": "imaging_study_traffic's_Kaohsiung"
+      }
+    ],
+    "mg_series_files": [],
+    "mr_series_files": [],
+    "nm_series_files": [],
+    "pt_series_files": [],
+    "rf_series_files": [],
+    "us_series_files": [],
+    "xa_series_files": [],
+    "type": "annotation_file",
+    "submitter_id": "A_Kp7X9r_1.2.827.1.2",
+    "annotation_name": "midrc_bpr_regions",
+    "data_category": "annotation_file",
+    "data_format": "JSON",
+    "data_type": "Other Annotation",
+    "file_name": "annotation_file_773863174425.json",
+    "file_size": 702,
+    "md5sum": "5d33e550c40249120481045352342543",
+    "annotation_method": "Retrospective_auto",
+    "case_ids": [
+      "Rimbaud's_sweltering",
+      "boobs_Yaroslavl"
+    ],
+    "object_id": "dg.MD1R/0fc28986-0bb2-c12e-ad4c-a32a5d0201f9"
+  },
+  {
+    "cases": [
+      {
+        "submitter_id": "case_blessedly_heuristics"
+      }
+    ],
+    "core_metadata_collections": [],
+    "cr_series_files": [],
+    "ct_series_files": [
+      {
+        "submitter_id": "ct_series_file_oiliest_distributions"
+      }
+    ],
+    "datasets": [],
+    "dx_series_files": [],
+    "imaging_studies": [
+      {
+        "submitter_id": "imaging_study_sriracha_unsolicited"
+      }
+    ],
+    "mg_series_files": [],
+    "mr_series_files": [],
+    "nm_series_files": [],
+    "pt_series_files": [],
+    "rf_series_files": [],
+    "us_series_files": [],
+    "xa_series_files": [],
+    "type": "annotation_file",
+    "submitter_id": "A_Kp7X9r_1.2.827.4.3",
+    "annotation_name": "midrc_lung_segs",
+    "data_category": "annotation_file",
+    "data_format": "JSON",
+    "data_type": "MIDRC Annotation",
+    "file_name": "annotation_file_773863174424.json",
+    "file_size": 702,
+    "md5sum": "5d33e550c40249120481045352342456",
+    "annotation_method": "Retrospective_expert",
+    "case_ids": [
+      "accusatives_Deon's",
+      "Purim's_Gary"
+    ],
+    "object_id": "dg.MD1R/0fc28986-0bb2-d12f-ad4c-a32a5d0201f9"
+  },
+  {
+    "cases": [
+      {
+        "submitter_id": "case_blessedly_heuristics"
+      }
+    ],
+    "core_metadata_collections": [],
+    "cr_series_files": [],
+    "ct_series_files": [
+      {
+        "submitter_id": "ct_series_file_oiliest_distributions"
+      }
+    ],
+    "datasets": [],
+    "dx_series_files": [],
+    "imaging_studies": [
+      {
+        "submitter_id": "imaging_study_sriracha_unsolicited"
+      }
+    ],
+    "mg_series_files": [],
+    "mr_series_files": [],
+    "nm_series_files": [],
+    "pt_series_files": [],
+    "rf_series_files": [],
+    "us_series_files": [],
+    "xa_series_files": [],
+    "type": "annotation_file",
+    "submitter_id": "A_Kp7X9r_1.2.827.6.7",
+    "annotation_name": "mRALE_Mastermind_Challenge",
+    "data_category": "annotation_file",
+    "data_format": "JSON",
+    "data_type": "Other Annotation",
+    "file_name": "annotation_file_773863174425.json",
+    "file_size": 702,
+    "md5sum": "5d33e550c40249120481045352342765",
+    "annotation_method": "Retrospective_general",
+    "case_ids": [
+      "accusatives_Deon's",
+      "Purim's_Gary"
+    ],
+    "object_id": "dg.MD1R/0fc28986-0bb2-a12b-ad4c-a32a5d0201f9"
+  }
+]

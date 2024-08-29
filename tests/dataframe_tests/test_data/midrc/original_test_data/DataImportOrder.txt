@@ -8,3 +8,4 @@ ct_series_file
 dx_series_file
 mr_series_file
 rf_series_file
+annotation_file
