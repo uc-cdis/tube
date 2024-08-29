@@ -1,11 +1,15 @@
 import os
 import json
+import sys
+
+from pyspark.sql import Column
+
 import tube.settings as config
 import tube.enums as enums
 
 from pyspark.sql.context import SQLContext
-from pyspark.sql.types import StructType, StructField, StringType, ArrayType
-from pyspark.sql.functions import col, min, sum, count, collect_set, collect_list, first, when
+from pyspark.sql.types import StructType, StructField, StringType, ArrayType, IntegerType, FloatType, DoubleType
+from pyspark.sql.functions import array, col, collect_list, collect_set, count, first, lit, min, size, sum, struct, when
 
 from .lambdas import (
     extract_link,
@@ -36,6 +40,94 @@ def json_export_with_no_key(x, doc_type, root_name):
 
 
 cached_dataframe = {}
+STRING_NULL_VAL = "unknown"
+NUMERIC_NULL_VAL = -sys.maxsize - 1
+
+
+def get_dict_fill_null_value(df):
+    string_fill = STRING_NULL_VAL
+    # Using a large negative number for numeric columns
+    numeric_fill = NUMERIC_NULL_VAL
+
+    # Create a fill dictionary dynamically based on column types
+    fill_dict = {}
+    for field in df.schema.fields:
+        if (not field.nullable
+                or isinstance(field.dataType, StructType)
+                or isinstance(field.dataType, ArrayType)):
+            continue
+        if isinstance(field.dataType, StringType):
+            fill_dict[field.name] = string_fill
+        elif isinstance(field.dataType, (IntegerType, FloatType, DoubleType)):
+            fill_dict[field.name] = numeric_fill
+    return fill_dict
+
+
+def create_empty_struct(field: StructType) -> Column:
+    """
+    Create an empty struct column with the same structure as the given schema.
+    This function handles arbitrarily nested StructTypes.
+    """
+    fields = [
+        create_empty_struct(f.dataType).alias(f.name)
+        if isinstance(f.dataType, StructType)
+        else lit(None).cast(f.dataType).alias(f.name)
+        for f in field.fields
+    ]
+    return struct(*fields)
+
+
+
+def handle_array_struct_type(df):
+    df_replaced = df
+    for field in df_replaced.schema.fields:
+        if isinstance(field.dataType, ArrayType):
+            df_replaced = df_replaced.withColumn(
+                field.name,
+                when(col(field.name).isNull(), array().cast(field.dataType))
+                .otherwise(col(field.name)).alias(field.name)
+            )
+        elif isinstance(field.dataType, StructType):
+            # Create an empty struct using struct() and cast to the StructType of the column
+            empty_struct = create_empty_struct(field)
+            df_replaced = df_replaced.withColumn(
+                field.name,
+                when(col(field.name).isNull(), empty_struct.cast(field.dataType)).otherwise(col(field.name))
+            )
+    return df_replaced
+
+
+def restore_null_value(df_filled):
+    df_restored = df_filled
+    for field in df_restored.schema.fields:
+        if isinstance(field.dataType, StringType):
+            df_restored = df_restored.withColumn(
+                field.name,
+                when(col(field.name) == STRING_NULL_VAL, lit(None))
+                .otherwise(col(field.name))
+            )
+        elif isinstance(field.dataType, (IntegerType, FloatType, DoubleType)):
+            df_restored = df_restored.withColumn(
+                field.name,
+                when(col(field.name) == NUMERIC_NULL_VAL, lit(None))
+                .otherwise(col(field.name))
+            )
+        elif isinstance(field.dataType, ArrayType):
+            df_restored = df_restored.withColumn(
+                field.name,
+                when(size(col(field.name)) == 0, lit(None))
+                .otherwise(col(field.name))
+            )
+        elif isinstance(field.dataType, StructType):
+            df_restored = df_restored.withColumn(
+                field.name,
+                when(size(col(field.name)) == 0, lit(None))
+                .otherwise(col(field.name))
+            )
+    # Re-create the DataFrame from the temporary view to simplify the expressions
+    df_simple = df_restored.cache()
+    df_simple.count()
+    return df_simple
 
 
 class Translator(object):
@@ -380,7 +472,17 @@ class Translator(object):
         join_on_props = [p for p in df1.schema.names if p in df2.schema.names]
         if len(join_on_props) == 0:
             return self.get_empty_dataframe_with_columns([])
-        res_df = df1.join(df2, on=join_on_props, how=how).drop_duplicates()
+
+        fill_dict_df1 = get_dict_fill_null_value(df1)
+        fill_dict_df2 = get_dict_fill_null_value(df2)
+
+        # Replace null values with "unknown" for all nullable columns
+        df1_filled = df1.fillna(fill_dict_df1)
+        df2_filled = df2.fillna(fill_dict_df2)
+        df1_filled = handle_array_struct_type(df1_filled)
+        df2_filled = handle_array_struct_type(df2_filled)
+        res_df = df1_filled.join(df2_filled, on=join_on_props, how=how).drop_duplicates()
+        res_df = restore_null_value(res_df)
         df1.unpersist()
         df2.unpersist()
         return res_df

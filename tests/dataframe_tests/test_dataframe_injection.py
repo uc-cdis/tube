@@ -228,8 +228,8 @@ def test_nested_props_injection(translator):
     df = translator.join_two_dataframe(collected_leaf_df, nested_df, how="left_outer")
     group_df = df.groupby("data_category").count()
     group_df.show()
-    assert df.count() == 98
-    assert df.filter(nested_df.file_annotations.isNotNull()).count() == 2
+    assert df.count() == 94
+    assert df.filter(df.file_annotations.isNotNull()).count() == 2
     sorted_annotation_name_df = df.withColumn(
         "sorted_annotation_names",
         expr("transform(array_sort(transform(file_annotations, x -> x.annotation_name)), x -> x)")
