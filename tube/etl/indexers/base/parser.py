@@ -103,9 +103,9 @@ class Parser(object):
         if array_type_condition:
             if array_types is not None and p.name not in array_types:
                 array_types.append(p.name)
-            return (self.select_widest_type(p.type), 1)
+            return self.select_widest_type(p.type), 1
         else:
-            return (self.select_widest_type(p.type), 0)
+            return self.select_widest_type(p.type), 0
 
     def get_es_types(self):
         types = {}
