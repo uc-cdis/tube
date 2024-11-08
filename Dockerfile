@@ -4,7 +4,7 @@ ARG AZLINUX_BASE_VERSION=master
 FROM quay.io/cdis/python-build-base:${AZLINUX_BASE_VERSION} AS base
 
 
-ENV appname=cedar-wrapper-service
+ENV appname=tube
 ENV POETRY_NO_INTERACTION=1 \
     POETRY_VIRTUALENVS_IN_PROJECT=1 \
     POETRY_VIRTUALENVS_CREATE=1
