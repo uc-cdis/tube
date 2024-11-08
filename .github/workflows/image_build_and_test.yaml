@@ -3,21 +3,21 @@ on: push
 
 jobs:
 
-  # first, build the image
-  build:
-    name: Build and push image
-    uses: uc-cdis/.github/.github/workflows/image_build_push.yaml@master
-    secrets:
-      ECR_AWS_ACCESS_KEY_ID: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
-      ECR_AWS_SECRET_ACCESS_KEY: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
-      QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
-      QUAY_ROBOT_TOKEN: ${{ secrets.QUAY_ROBOT_TOKEN }}
+  # # first, build the image
+  # build:
+  #   name: Build and push image
+  #   uses: uc-cdis/.github/.github/workflows/image_build_push.yaml@master
+  #   secrets:
+  #     ECR_AWS_ACCESS_KEY_ID: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
+  #     ECR_AWS_SECRET_ACCESS_KEY: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
+  #     QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
+  #     QUAY_ROBOT_TOKEN: ${{ secrets.QUAY_ROBOT_TOKEN }}
 
   # then run the tests
   test:
     name: Run tests
     runs-on: ubuntu-20.04
-    needs: build
+    # needs: build
 
     services:
       postgres:
@@ -123,7 +123,7 @@ jobs:
 
       - name: Run ETL process
         working-directory: ../compose-etl
-        run: docker compose run tube bash -c "python run_config.py; python run_etl.py"
+        run: docker compose run tube bash -c "python run_config.py && python run_etl.py"
 
       - name: Run integrated tests
         # Run the tests that require Spark and ElasticSearch

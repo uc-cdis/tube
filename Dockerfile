@@ -71,6 +71,7 @@ RUN mkdir -p /usr/share/man/man7
 RUN dnf -y update
 RUN dnf -y install \
     wget tar unzip vim
+RUN dnf -y install java-11-amazon-corretto
 
 
 RUN wget ${SQOOP_INSTALLATION_URL} \
