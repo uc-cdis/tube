@@ -61,7 +61,7 @@ ENV SQOOP_INSTALLATION_URL="http://archive.apache.org/dist/sqoop/${SQOOP_VERSION
     SQOOP_HOME="/sqoop" \
     HADOOP_HOME="/hadoop" \
     ES_HADOOP_HOME="/es-hadoop" \
-    JAVA_HOME="/usr/bin/java/"
+    JAVA_HOME="/usr"
 ENV ES_HADOOP_HOME_VERSION="${ES_HADOOP_HOME}/elasticsearch-hadoop-${ES_HADOOP_VERSION}"
 
 RUN mkdir -p /usr/share/man/man1
