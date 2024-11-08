@@ -36,10 +36,10 @@ def load_json(file_name, app_name, search_folders=None):
     """
     json.load(file_name) after finding file_name in search_folders
 
-    return the loaded json data or None if file not found
+    return the loaded json data or empty dictionary if file not found
     """
     actual_files = find_paths(file_name, app_name, search_folders)
     if not actual_files:
-        return None
+        return {}
     with open(actual_files[0], "r") as reader:
         return json.load(reader)
