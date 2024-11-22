@@ -118,7 +118,7 @@ ENV HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop \
 RUN mkdir -p $ACCUMULO_HOME $HIVE_HOME $HBASE_HOME $HCAT_HOME $ZOOKEEPER_HOME
 RUN chown -R gen3:gen3 $HADOOP_HOME
 RUN mkdir -p /result && chown -R gen3:gen3 /result && chmod -R 700 /result
-RUN hdfs dfs -chown gen3 /result
+#RUN hdfs dfs -chown gen3 /result
 
 ENV PATH=${SQOOP_HOME}/bin:${HADOOP_HOME}/sbin:$HADOOP_HOME/bin:${JAVA_HOME}/bin:${PATH}
 
