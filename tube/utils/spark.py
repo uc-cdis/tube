@@ -52,6 +52,8 @@ def get_hdfs_file_handler(sc=None):
 
 def make_sure_hdfs_path_exist(path, sc=None):
     fs, opath, sc = get_hdfs_file_handler(sc)
+    print(f"make_sure_hdfs_path_exist", path)
+    print(f"make_sure_hdfs_path_exist", opath(path))
     fs.delete(opath(path), True)
     fs.mkdirs(opath(path))
     sc.stop()
