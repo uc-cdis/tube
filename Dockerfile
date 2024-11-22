@@ -105,6 +105,7 @@ ENV HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop \
     HADOOP_MAPRED_HOME=$HADOOP_HOME \
     HADOOP_COMMON_HOME=$HADOOP_HOME \
     HADOOP_HDFS_HOME=$HADOOP_HOME \
+    HADOOP_USER_NAME=gen3 \
     YARN_HOME=$HADOOP_HOME \
     ACCUMULO_HOME=/accumulo \
     HIVE_HOME=/hive \
@@ -117,6 +118,7 @@ ENV HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop \
 RUN mkdir -p $ACCUMULO_HOME $HIVE_HOME $HBASE_HOME $HCAT_HOME $ZOOKEEPER_HOME
 RUN chown -R gen3:gen3 $HADOOP_HOME
 RUN mkdir /result && chown -R gen3:gen3 /result
+RUN hdfs dfs -chown gen3 /result
 
 ENV PATH=${SQOOP_HOME}/bin:${HADOOP_HOME}/sbin:$HADOOP_HOME/bin:${JAVA_HOME}/bin:${PATH}
 
