@@ -44,7 +44,6 @@ FROM base
 COPY --from=builder /venv /venv
 COPY --from=builder /${appname} /${appname}
 
-
 ENV DEBIAN_FRONTEND=noninteractive \
     SQOOP_VERSION="1.4.7" \
     HADOOP_VERSION="3.3.2" \
@@ -67,12 +66,14 @@ ENV ES_HADOOP_HOME_VERSION="${ES_HADOOP_HOME}/elasticsearch-hadoop-${ES_HADOOP_V
 RUN mkdir -p /usr/share/man/man1
 RUN mkdir -p /usr/share/man/man7
 
-
 RUN dnf -y update
 RUN dnf -y install \
-    wget tar unzip vim
-RUN dnf -y install java-11-amazon-corretto postgresql15
-
+    java-11-amazon-corretto \
+    postgresql15 \
+    tar \
+    unzip \
+    vim \
+    wget
 
 RUN wget ${SQOOP_INSTALLATION_URL} \
     && mkdir -p $SQOOP_HOME \
@@ -116,17 +117,11 @@ ENV HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop \
     LD_LIBRARY_PATH=$HADOOP_HOME/lib/native:$LD_LIBRARY_PATH
 
 RUN mkdir -p $ACCUMULO_HOME $HIVE_HOME $HBASE_HOME $HCAT_HOME $ZOOKEEPER_HOME
-RUN chown -R gen3:gen3 $HADOOP_HOME
-RUN mkdir -p /result && chown -R gen3:gen3 /result && chmod -R 700 /result
-#RUN hdfs dfs -chown gen3 /result
 
 ENV PATH=${SQOOP_HOME}/bin:${HADOOP_HOME}/sbin:$HADOOP_HOME/bin:${JAVA_HOME}/bin:${PATH}
 
-
 # Switch to non-root user 'gen3' for the serving process
 USER gen3
-
-RUN source /venv/bin/activate
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONIOENCODING=UTF-8
