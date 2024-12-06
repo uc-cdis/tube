@@ -21,6 +21,7 @@ def configure_hdfs_site():
     tree = et.parse(core_site_path)
     root = tree.getroot()
     root.append(create_property("dfs.replication", "1"))
+    root.append(create_property("dfs.permissions", "false"))
     tree.write(core_site_path)
 
 
