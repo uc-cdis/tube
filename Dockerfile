@@ -124,5 +124,8 @@ ENV PATH=${SQOOP_HOME}/bin:${HADOOP_HOME}/sbin:$HADOOP_HOME/bin:${JAVA_HOME}/bin
 # Switch to non-root user 'gen3' for the serving process
 USER gen3
 
+ENV PATH="/venv/bin:$PATH" \
+    VIRTUAL_ENV="/venv"
+
 ENV PYTHONUNBUFFERED=1 \
     PYTHONIOENCODING=UTF-8
