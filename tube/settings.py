@@ -98,7 +98,8 @@ from pwd import getpwnam
 
 try:
     uid = getpwnam("gen3").pw_uid
+    gid = getpwnam("gen3").pw_gid
     os.chown("/result", uid)
-    os.chmod("/result", 700)
+    os.chmod("/result", gid)
 except Exception as e:
     print(f"Could not update access: {e}")
