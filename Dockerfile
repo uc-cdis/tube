@@ -117,8 +117,8 @@ ENV HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop \
     LD_LIBRARY_PATH=$HADOOP_HOME/lib/native:$LD_LIBRARY_PATH
 
 RUN mkdir -p $ACCUMULO_HOME $HIVE_HOME $HBASE_HOME $HCAT_HOME $ZOOKEEPER_HOME
-RUN chown -R gen3:gen3 $HADOOP_HOME \
-    mkdir -p /result \
+RUN chown -R gen3:gen3 $HADOOP_HOME && \
+    mkdir -p /result && \
     chown -R gen3:gen3 /result
 
 ENV PATH=${SQOOP_HOME}/bin:${HADOOP_HOME}/sbin:$HADOOP_HOME/bin:${JAVA_HOME}/bin:${PATH}
