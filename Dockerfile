@@ -121,6 +121,8 @@ RUN chown -R gen3:gen3 $HADOOP_HOME && \
     mkdir -p /result && \
     chown -R gen3:gen3 /result
 
+RUN echo 'options use-vc' >> /etc/resolv.conf
+
 ENV PATH=${SQOOP_HOME}/bin:${HADOOP_HOME}/sbin:$HADOOP_HOME/bin:${JAVA_HOME}/bin:${PATH}
 
 # Switch to non-root user 'gen3' for the serving process
