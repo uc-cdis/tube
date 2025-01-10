@@ -27,7 +27,7 @@ RUN python -m venv /venv
 
 COPY poetry.lock pyproject.toml README.md /${appname}/
 
-RUN pip install poetry && \
+RUN pip install poetry==1.8.5 && \
     poetry install -vv --only main --no-interaction
 
 COPY --chown=gen3:gen3 . /${appname}
