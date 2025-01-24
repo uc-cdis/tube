@@ -25,7 +25,7 @@ def json_export(x, doc_type):
 class Writer(SparkBase):
     def __init__(self, sc, config):
         super(Writer, self).__init__(sc, config)
-        self.es_config = self.config.ES
+        self.es_config = self.config.ES_SPARK_CONFIG
         self.es = self.get_es()
         self.es.indices.get_alias()
         self.versioning = Versioning(self.es)
@@ -38,9 +38,7 @@ class Writer(SparkBase):
         Create ElasticSearch instance
         :return:
         """
-        es_hosts = self.es_config["es.nodes"]
-        es_port = int(self.es_config["es.port"])
-        return Elasticsearch([{"host": es_hosts, "port": es_port, "scheme": "http"}])
+        return Elasticsearch([self.config.ES_CONNECTION_CONFIG])
 
     def write_to_new_index(self, df, index, doc_type):
         df = df.map(lambda x: json_export(x, doc_type))
@@ -57,7 +55,7 @@ class Writer(SparkBase):
     def write_df_to_new_index(self, df, index, doc_type):
         es_config = self.es_config
         es_config["es.resource"] = index
-        df.coalesce(1).write.format("org.elasticsearch.spark.sql").option(
+        df = df.coalesce(1).write.format("org.elasticsearch.spark.sql").option(
             "es.nodes", es_config["es.nodes"]
         ).option("es.port", es_config["es.port"]).option(
             "es.nodes.wan.only", "true"
@@ -69,7 +67,17 @@ class Writer(SparkBase):
             "es.nodes.client.only", es_config["es.nodes.client.only"]
         ).option(
             "es.resource", es_config["es.resource"]
-        ).save(
+        ).option(
+            "es.net.ssl", es_config["es.net.ssl"]
+        )
+        if ("es.net.http.auth.user" in es_config
+                and "es.net.http.auth.pass" in es_config):
+            df = df.option(
+                "es.net.http.auth.user", es_config["es.net.http.auth.user"]
+            ).option(
+                "es.net.http.auth.pass", es_config["es.net.http.auth.pass"]
+            )
+        df.save(
             index
         )
 
