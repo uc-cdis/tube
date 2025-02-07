@@ -6,11 +6,9 @@ def init_dictionary(url):
     dictionary.init(d)
     # the gdcdatamodel expects dictionary initiated on load, so this can't be
     # imported on module level
-    from gdcdatamodel import models as md
+    from gen3datamodel import models as md
 
     return d, md
-
-
 
 
 # There are two important things of a node in a model:
