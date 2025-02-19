@@ -85,9 +85,7 @@ def config_by_args():
 def main():
     args = config_by_args()
 
-    es_hosts = config.ES["es.nodes"]
-    es_port = int(config.ES["es.port"])
-    es = Elasticsearch([{"host": es_hosts, "port": es_port, "schema": "http"}])
+    es = Elasticsearch([config.ES_CONNECTION_CONFIG])
     index_names = interpreter.get_index_names(config)
 
     if args.force or check_to_run_etl(es, index_names):
