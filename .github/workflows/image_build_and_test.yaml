@@ -18,7 +18,7 @@ jobs:
   # then run the tests
   test:
     name: Run tests
-    runs-on: ubuntu-newest
+    runs-on: ubuntu-latest
     needs: build
 
     services:
