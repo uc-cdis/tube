@@ -11,9 +11,9 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.9.2, <4.0"
 cdislogging = "1.1.1"
-cryptography = ">=41.0.5,<44"
+cryptography = "^44.0.1"
 dictionaryutils = "^3.4.10"
 elasticsearch = "7.10.0"
 gen3dictionary = "2.0.3"
