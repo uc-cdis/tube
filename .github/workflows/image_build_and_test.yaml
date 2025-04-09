@@ -18,11 +18,7 @@ jobs:
   # then run the tests
   test:
     name: Run tests
-<<<<<<< HEAD
-    runs-on: ubuntu-latest
-=======
     runs-on: ubuntu-23.04
->>>>>>> c8c56dc (address workflow ubuntu version issue)
     needs: build
 
     services:
