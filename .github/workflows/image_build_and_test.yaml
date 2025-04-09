@@ -18,7 +18,7 @@ jobs:
   # then run the tests
   test:
     name: Run tests
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-23.04
     needs: build
 
     services:
@@ -44,6 +44,7 @@ jobs:
 
       - name: Installing dependencies
         run: |
+          sudo add-apt-repository ppa:deadsnakes/ppa
           sudo apt-get update
           sudo apt-get install --yes --no-install-recommends jq postgresql-client python3.9 python3-pip
           sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
