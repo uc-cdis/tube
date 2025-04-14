@@ -4,6 +4,7 @@ from tests.util import (
     assert_dataframe_equality,
     get_dataframes_from_names,
 )
+from pyspark.sql.functions import col, expr
 from tube.utils.general import get_node_id_name
 
 
@@ -155,6 +156,89 @@ def test_flatten_nested_list(translator):
     aggregating_props = translator.get_aggregating_props()
     actual_final_df = translator.flatten_nested_list(collected_leaf_df, aggregating_props)
     print(f"Actual df: {actual_final_df}")
+    final_df = final_df.drop("file_annotations")
+
     assert_dataframe_equality(
         final_df, actual_final_df, "_data_file_id"
     )
+
+@pytest.mark.schema_midrc
+@pytest.mark.parametrize("translator", [("midrc", "data_file", "injection", [
+        "edge_annotationfilerelatedtocrseriesfile", "edge_annotationfilerelatedtoctseriesfile",
+        "edge_annotationfilerelatedtodxseriesfile", "edge_annotationfilerelatedtomrseriesfile",
+        "edge_crseriesfilerelatedtoimagingstudy", "edge_dxseriesfilerelatedtoimagingstudy",
+        "edge_mrseriesfilerelatedtoimagingstudy", "edge_ctseriesfilerelatedtoimagingstudy",
+        "edge_0c3e44da_crsefidafrcomeco", "edge_a4f04f84_dxsefidafrcomeco", "edge_d04a5ba2_mrsefidafrcomeco",
+        "edge_0b8a28a9_ctsefidafrcomeco", "edge_9197510c_comecodafrpr", "edge_casememberofdataset",
+        "edge_ctscanrelatedtoimagingstudy", "edge_ctscanrelatedtosubject", "edge_ctseriesrelatedtoctscan",
+        "edge_datareleasedescribesroot", "edge_datasetperformedforproject", "edge_ef9975fc_cotofidafrimex",
+        "edge_imagingstudyrelatedtocase", "edge_projectmemberofprogram",
+    ])], indirect=True)
+def test_nested_props_injection(translator):
+    """
+    Tset to ensure that the nested dataframe has structure like below
+    data = [
+        {
+            "_data_file_id":"cfd912e8-f9e1-40cc-abd3-6dcb3a16e0b6",
+            "file_annotations":[
+                {
+                    "annotation_method":"Retrospective_auto",
+                    "annotation_name":"midrc_bpr_regions",
+                    "_annotation_file_id":"0c7e701e-cb27-4cbf-a996-eaa9142b633f"
+                },
+                {
+                    "annotation_method":"Clinically_derived",
+                    "annotation_name":"midrc_mdai_chestxr",
+                    "_annotation_file_id":
+                    "f7648cd4-19cc-4e49-8100-f99b15e28e56"
+                }
+            ]
+        },
+        {
+            "_data_file_id":"effe5932-2c26-4919-8544-0d4cb62d20f9",
+            "file_annotations":[
+                {
+                    "annotation_method":"Retrospective_expert",
+                    "annotation_name":"midrc_lung_segs",
+                    "_annotation_file_id":"82bcca4b-cebc-4062-a614-7ef0072d152f"
+                },
+                {
+                    "annotation_method":"Retrospective_general",
+                    "annotation_name":"mRALE_Mastermind_Challenge",
+                    "_annotation_file_id":"8c8558f4-aa4f-487f-b00a-ee4f14b871f6"
+                }
+            ]
+        }
+    ]
+
+    :param translator:
+    :return:
+    """
+    [collected_leaf_df, final_df] = get_dataframes_from_names(
+        get_spark_session(translator.sc),
+        "midrc",
+        [
+            "data_file__0_Translator.translate__collected_leaf_dfs",
+            "data_file__1_Translator.translate_final__translate_final"
+        ]
+    )
+    nested_df = translator.nested_translator.translate()
+    assert nested_df.count() == 2
+
+    df = translator.join_two_dataframe(collected_leaf_df, nested_df, how="left_outer")
+    group_df = df.groupby("data_category").count()
+    group_df.show()
+    assert df.count() == 94
+    assert df.filter(df.file_annotations.isNotNull()).count() == 2
+    sorted_annotation_name_df = df.withColumn(
+        "sorted_annotation_names",
+        expr("transform(array_sort(transform(file_annotations, x -> x.annotation_name)), x -> x)")
+    ).orderBy("_data_file_id")
+    expected_annotation_names = [["midrc_bpr_regions", "midrc_mdai_chestxr"],
+                                 ["mRALE_Mastermind_Challenge", "midrc_lung_segs"]]
+    counter = 0
+    for row in sorted_annotation_name_df.collect():
+        annotation_names = row["sorted_annotation_names"]
+        if annotation_names is not None:
+            assert annotation_names == expected_annotation_names[counter]
+            counter += 1
