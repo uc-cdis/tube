@@ -6,7 +6,7 @@ import tube.settings as config
 from tube.etl.indexers.interpreter import create_translators
 from tests.integrated_tests.utils import items_in_file
 from tests.integrated_tests.utils_db import SQLQuery
-from tests.integrated_tests.utils_es import get_names
+from tests.integrated_tests.utils_es import get_names, get_es_connection
 from tests.integrated_tests.value.aggregator_value import AggregatorValue
 from tests.integrated_tests.value.es_value import ESValue
 from tests.integrated_tests.value.value import value_diff
@@ -21,15 +21,7 @@ def test_auth_resource_path_exist(doc_type):
     Check that the field "auth_resource_path" exist
     """
     parser = dict_translators[doc_type].parser
-    es = Elasticsearch(
-        [
-            {
-                "host": config.ES["es.nodes"],
-                "port": int(config.ES["es.port"]),
-                "scheme": "http",
-            }
-        ]
-    )
+    es = get_es_connection()
     response = es.search(
         index=parser.name, body={"query": {"match_all": {}}}, size=9999
     )
@@ -46,15 +38,7 @@ def test_es_types(doc_type):
     Check that no field have "text" type
     """
     parser = dict_translators[doc_type].parser
-    es = Elasticsearch(
-        [
-            {
-                "host": config.ES["es.nodes"],
-                "port": int(config.ES["es.port"]),
-                "scheme": "http",
-            }
-        ]
-    )
+    es = get_es_connection()
 
     indices = client.IndicesClient(es)
     index_name = list(indices.get_alias(name=parser.name).keys())[0]
