@@ -1,8 +1,39 @@
-# To check running container: docker exec -it tube /bin/bash
-FROM quay.io/cdis/python:python3.9-buster-stable
+ARG AZLINUX_BASE_VERSION=master
+FROM quay.io/cdis/python-build-base:${AZLINUX_BASE_VERSION} AS base
 
-ENV DEBIAN_FRONTEND=noninteractive \
-    SQOOP_VERSION="1.4.7" \
+ENV appname=tube
+ENV POETRY_NO_INTERACTION=1 \
+    POETRY_VIRTUALENVS_IN_PROJECT=1 \
+    POETRY_VIRTUALENVS_CREATE=1
+
+WORKDIR /${appname}
+
+RUN groupadd -g 1000 gen3 && \
+    useradd -m -s /bin/bash -u 1000 -g gen3 gen3  && \
+    chown -R gen3:gen3 /${appname} && \
+    chown -R gen3:gen3 /venv
+
+USER gen3
+
+RUN python -m venv /venv
+
+COPY poetry.lock pyproject.toml README.md /${appname}/
+
+RUN pip install --no-cache-dir 'poetry<2.0' && \
+    poetry install -vv --only main --no-interaction
+
+COPY --chown=gen3:gen3 . /${appname}
+
+RUN poetry install --without dev --no-interaction
+
+FROM base
+
+USER root
+
+COPY --from=base /venv /venv
+COPY --from=base /${appname} /${appname}
+
+ENV SQOOP_VERSION="1.4.7" \
     HADOOP_VERSION="3.3.2" \
     ES_HADOOP_VERSION="8.3.3" \
     MAVEN_ES_URL="https://search.maven.org/remotecontent?filepath=org/elasticsearch" \
@@ -17,65 +48,13 @@ ENV SQOOP_INSTALLATION_URL="http://archive.apache.org/dist/sqoop/${SQOOP_VERSION
     SQOOP_HOME="/sqoop" \
     HADOOP_HOME="/hadoop" \
     ES_HADOOP_HOME="/es-hadoop" \
-    JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/"
-ENV ES_HADOOP_HOME_VERSION="${ES_HADOOP_HOME}/elasticsearch-hadoop-${ES_HADOOP_VERSION}"
-
-RUN mkdir -p /usr/share/man/man1
-RUN mkdir -p /usr/share/man/man7
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    openjdk-11-jdk-headless \
-    # dependency for pyscopg2 - which is dependency for sqlalchemy postgres engine
-    libpq-dev \
-    postgresql-client \
-    wget \
-    unzip \
-    git \
-    # dependency for cryptography
-    libffi-dev \
-    # dependency for cryptography
-    libssl-dev \
-    libssl1.1 \
-    libgnutls30 \
-    vim \
-    curl \
-    g++ \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN python -m pip install --upgrade pip poetry requests
-
-RUN wget ${SQOOP_INSTALLATION_URL} \
-    && mkdir -p $SQOOP_HOME \
-    && tar -xvf sqoop-${SQOOP_VERSION}.bin__hadoop-2.6.0.tar.gz -C ${SQOOP_HOME} --strip-components 1 \
-    && rm sqoop-${SQOOP_VERSION}.bin__hadoop-2.6.0.tar.gz \
-    && rm -rf $SQOOP_HOME/docs
-
-RUN wget https://jdbc.postgresql.org/download/postgresql-42.2.4.jar -O $SQOOP_HOME/lib/postgresql-42.2.4.jar
-RUN wget https://dlcdn.apache.org//commons/lang/binaries/commons-lang-2.6-bin.tar.gz \
-    && tar -xvf commons-lang-2.6-bin.tar.gz \
-    && rm commons-lang-2.6-bin.tar.gz \
-    && mv commons-lang-2.6/commons-lang-2.6.jar $SQOOP_HOME/lib/
-
-RUN wget ${HADOOP_INSTALLATION_URL} \
-    && mkdir -p $HADOOP_HOME \
-    && tar -xvf hadoop-${HADOOP_VERSION}.tar.gz -C ${HADOOP_HOME} --strip-components 1 \
-    && rm hadoop-${HADOOP_VERSION}.tar.gz \
-    && rm -rf $HADOOP_HOME/share/doc
-
-RUN wget ${ES_HADOOP_INSTALLATION_URL} \
-    && mkdir -p $ES_HADOOP_HOME \
-    && unzip elasticsearch-hadoop-${ES_HADOOP_VERSION}.zip -d ${ES_HADOOP_HOME} \
-    && rm elasticsearch-hadoop-${ES_HADOOP_VERSION}.zip
-
-RUN wget ${MAVEN_ES_SPARK_VERSION}.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${ES_SPARK_20_2_11}-${ES_HADOOP_VERSION}.jar
-RUN wget ${MAVEN_ES_SPARK_VERSION}-javadoc.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${ES_SPARK_20_2_11}-${ES_HADOOP_VERSION}-javadoc.jar
-RUN wget ${MAVEN_ES_SPARK_VERSION}-sources.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${ES_SPARK_20_2_11}-${ES_HADOOP_VERSION}-sources.jar
-
-ENV HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop \
+    JAVA_HOME="/usr"
+ENV ES_HADOOP_HOME_VERSION="${ES_HADOOP_HOME}/elasticsearch-hadoop-${ES_HADOOP_VERSION}" \
+    HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop \
     HADOOP_MAPRED_HOME=$HADOOP_HOME \
     HADOOP_COMMON_HOME=$HADOOP_HOME \
     HADOOP_HDFS_HOME=$HADOOP_HOME \
+    HADOOP_USER_NAME=gen3 \
     YARN_HOME=$HADOOP_HOME \
     ACCUMULO_HOME=/accumulo \
     HIVE_HOME=/hive \
@@ -85,29 +64,53 @@ ENV HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop \
     HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native \
     LD_LIBRARY_PATH=$HADOOP_HOME/lib/native:$LD_LIBRARY_PATH
 
-RUN mkdir -p $ACCUMULO_HOME $HIVE_HOME $HBASE_HOME $HCAT_HOME $ZOOKEEPER_HOME
+RUN dnf -y update \
+    && dnf -y install \
+    java-11-amazon-corretto \
+    postgresql15 \
+    tar \
+    unzip \
+    vim \
+    wget && \
+    dnf clean all
+
+RUN wget --quiet --no-verbose ${SQOOP_INSTALLATION_URL} \
+    && mkdir -p $SQOOP_HOME \
+    && tar -xvf sqoop-${SQOOP_VERSION}.bin__hadoop-2.6.0.tar.gz -C ${SQOOP_HOME} --strip-components 1 \
+    && rm sqoop-${SQOOP_VERSION}.bin__hadoop-2.6.0.tar.gz \
+    && rm -rf $SQOOP_HOME/docs
+
+RUN wget --quiet --no-verbose https://jdbc.postgresql.org/download/postgresql-42.2.4.jar -O $SQOOP_HOME/lib/postgresql-42.2.4.jar \
+    && wget --quiet --no-verbose https://dlcdn.apache.org//commons/lang/binaries/commons-lang-2.6-bin.tar.gz \
+    && tar -xvf commons-lang-2.6-bin.tar.gz \
+    && rm commons-lang-2.6-bin.tar.gz \
+    && mv commons-lang-2.6/commons-lang-2.6.jar $SQOOP_HOME/lib/
+
+RUN wget --quiet --no-verbose ${HADOOP_INSTALLATION_URL} \
+    && mkdir -p $HADOOP_HOME \
+    && tar -xvf hadoop-${HADOOP_VERSION}.tar.gz -C ${HADOOP_HOME} --strip-components 1 \
+    && rm hadoop-${HADOOP_VERSION}.tar.gz \
+    && rm -rf $HADOOP_HOME/share/doc
+
+RUN wget --quiet --no-verbose ${ES_HADOOP_INSTALLATION_URL} \
+    && mkdir -p $ES_HADOOP_HOME \
+    && unzip elasticsearch-hadoop-${ES_HADOOP_VERSION}.zip -d ${ES_HADOOP_HOME} \
+    && rm elasticsearch-hadoop-${ES_HADOOP_VERSION}.zip
+
+RUN wget --quiet --no-verbose ${MAVEN_ES_SPARK_VERSION}.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${ES_SPARK_20_2_11}-${ES_HADOOP_VERSION}.jar \
+    && wget --quiet --no-verbose ${MAVEN_ES_SPARK_VERSION}-javadoc.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${ES_SPARK_20_2_11}-${ES_HADOOP_VERSION}-javadoc.jar \
+    && wget --quiet --no-verbose ${MAVEN_ES_SPARK_VERSION}-sources.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${ES_SPARK_20_2_11}-${ES_HADOOP_VERSION}-sources.jar
+
+RUN mkdir -p $ACCUMULO_HOME $HIVE_HOME $HBASE_HOME $HCAT_HOME $ZOOKEEPER_HOME && \
+    chown -R gen3:gen3 $HADOOP_HOME && \
+    mkdir -p /result && \
+    chown -R gen3:gen3 /result
 
 ENV PATH=${SQOOP_HOME}/bin:${HADOOP_HOME}/sbin:$HADOOP_HOME/bin:${JAVA_HOME}/bin:${PATH}
 
-WORKDIR /tube
+USER gen3
 
-# copy ONLY poetry artifact, install the dependencies but not fence
-# this will make sure than the dependencies is cached
-COPY poetry.lock pyproject.toml /tube/
-RUN python -m poetry config virtualenvs.create false \
-    && python -m poetry install -vv --no-root --only main --no-interaction \
-    && python -m poetry show -v
-
-# copy source code ONLY after installing dependencies
-COPY . /tube
-
-RUN python -m poetry config virtualenvs.create false \
-    && python -m poetry install -vv --only main --no-interaction \
-    && python -m poetry show -v
-
-#ENV TINI_VERSION v0.18.0
-#ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-#RUN chmod +x /tini
-#ENTRYPOINT ["/tini", "--"]
-
-ENV PYTHONUNBUFFERED 1
+ENV PATH="/venv/bin:$PATH" \
+    VIRTUAL_ENV="/venv" \
+    PYTHONUNBUFFERED=1 \
+    PYTHONIOENCODING=UTF-8

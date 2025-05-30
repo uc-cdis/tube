@@ -107,3 +107,13 @@ os.environ[
     ES_HADOOP_HOME_BIN, ES_HADOOP_VERSION
 )
 os.environ["HADOOP_CLIENT_OPTS"] = os.getenv("HADOOP_CLIENT_OPTS", "")
+
+from pwd import getpwnam
+
+try:
+    uid = getpwnam("gen3").pw_uid
+    gid = getpwnam("gen3").pw_gid
+    os.chown("/result", uid, gid)
+    os.chmod("/result", 700)
+except Exception as e:
+    print(f"Could not update access: {e}")
