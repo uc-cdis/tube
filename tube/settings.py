@@ -21,7 +21,7 @@ DB_PORT = os.getenv("DB_PORT") or conf_data.get("db_port", "5432")
 DB_DATABASE = os.getenv("DB_DATABASE") or conf_data.get("db_database", "sheepdog")
 DB_USERNAME = os.getenv("DB_USERNAME") or conf_data.get("db_username", "peregrine")
 DB_PASSWORD = os.getenv("DB_PASSWORD") or conf_data.get("db_password", "unknown")
-ENV_DB_USE_SSL_BOOL = os.getenv("DB_USE_SSL", "false") in ('true', '1', 't')
+ENV_DB_USE_SSL_BOOL = os.getenv("DB_USE_SSL", "false").lower() in ('true', '1', 't')
 
 DB_USE_SSL = ENV_DB_USE_SSL_BOOL or conf_data.get(
     "db_use_ssl", False
