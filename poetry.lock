@@ -488,17 +488,19 @@ test-randomorder = ["pytest-randomly"]
 
 [[package]]
 name = "dictionaryutils"
-version = "3.4.11"
+version = "3.5.0"
 description = "Python wrapper and metaschema for datadictionary."
 optional = false
 python-versions = "<4,>=3.9"
 groups = ["main"]
 files = [
-    {file = "dictionaryutils-3.4.11.tar.gz", hash = "sha256:a63ae34b4c0130cd94e4ca685cbb18155c225f9bface32ed1d503393d0dd39cf"},
+    {file = "dictionaryutils-3.5.0-py3-none-any.whl", hash = "sha256:91bbf296dd8141a844d622a349a648cf0e002f816ae635ea0edf6bd627849acb"},
+    {file = "dictionaryutils-3.5.0.tar.gz", hash = "sha256:680118a8fe24f5f512169c85c99334b9a0d9e830d73a70db9b3f55903cab11e6"},
 ]
 
 [package.dependencies]
 cdislogging = "*"
+gen3dictionary = ">=2.0.4,<3.0.0"
 jsonschema = "<=4.23.0"
 PyYAML = "*"
 requests = "*"
@@ -561,19 +563,19 @@ requests = ["requests (>=2.4.0,<3.0.0)"]
 
 [[package]]
 name = "gen3datamodel"
-version = "3.2.3"
+version = "3.2.4"
 description = ""
 optional = false
 python-versions = "<4.0,>=3.9"
 groups = ["main"]
 files = [
-    {file = "gen3datamodel-3.2.3-py3-none-any.whl", hash = "sha256:1d892e399282e8a1d3f471a7905c62f59e9deb57568d20aba15e7d9df276a678"},
-    {file = "gen3datamodel-3.2.3.tar.gz", hash = "sha256:df2bda8be42879d0b25df13665aaacee854037b1509b62dc2a21df8e25f07d16"},
+    {file = "gen3datamodel-3.2.4-py3-none-any.whl", hash = "sha256:21431ccf3078220b2c83d48f50851b1cefc1cf6c450c1aec07bc493a4ff78653"},
+    {file = "gen3datamodel-3.2.4.tar.gz", hash = "sha256:347e782f1b1d8c6f9ffba81cabb887fe24584bcd2d7bb3dffa7684572f5d125f"},
 ]
 
 [package.dependencies]
 cdislogging = "*"
-dictionaryutils = ">=3.4.11"
+dictionaryutils = ">=3.5"
 jsonschema = "*"
 psqlgraph = ">=3.0,<4.0"
 psycopg2-binary = ">=2.8.2,<2.9.0"
@@ -584,13 +586,13 @@ strict-rfc3339 = "0.7"
 
 [[package]]
 name = "gen3dictionary"
-version = "2.0.3"
+version = "2.0.4"
 description = ""
 optional = false
-python-versions = ">=3.9,<4.0"
+python-versions = "<4.0,>=3.9"
 groups = ["main"]
 files = [
-    {file = "gen3dictionary-2.0.3.tar.gz", hash = "sha256:46a704e202a79be96ec08969d28885794d4825b94394103dca08e3637bd6cb82"},
+    {file = "gen3dictionary-2.0.4.tar.gz", hash = "sha256:6a798008f32c4a5c1833fbc03e841ebe12bb5b743812ec7c00211c0268f15c05"},
 ]
 
 [package.dependencies]
@@ -877,6 +879,26 @@ requests = ">=2.5,<3.0"
 six = ">=1.12.0"
 sqlalchemy = ">=1.3,<2.0"
 xlocal = ">=0.5,<1.0"
+
+[[package]]
+name = "psycopg2"
+version = "2.9.10"
+description = "psycopg2 - Python-PostgreSQL Database Adapter"
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+files = [
+    {file = "psycopg2-2.9.10-cp310-cp310-win32.whl", hash = "sha256:5df2b672140f95adb453af93a7d669d7a7bf0a56bcd26f1502329166f4a61716"},
+    {file = "psycopg2-2.9.10-cp310-cp310-win_amd64.whl", hash = "sha256:c6f7b8561225f9e711a9c47087388a97fdc948211c10a4bccbf0ba68ab7b3b5a"},
+    {file = "psycopg2-2.9.10-cp311-cp311-win32.whl", hash = "sha256:47c4f9875125344f4c2b870e41b6aad585901318068acd01de93f3677a6522c2"},
+    {file = "psycopg2-2.9.10-cp311-cp311-win_amd64.whl", hash = "sha256:0435034157049f6846e95103bd8f5a668788dd913a7c30162ca9503fdf542cb4"},
+    {file = "psycopg2-2.9.10-cp312-cp312-win32.whl", hash = "sha256:65a63d7ab0e067e2cdb3cf266de39663203d38d6a8ed97f5ca0cb315c73fe067"},
+    {file = "psycopg2-2.9.10-cp312-cp312-win_amd64.whl", hash = "sha256:4a579d6243da40a7b3182e0430493dbd55950c493d8c68f4eec0b302f6bbf20e"},
+    {file = "psycopg2-2.9.10-cp313-cp313-win_amd64.whl", hash = "sha256:91fd603a2155da8d0cfcdbf8ab24a2d54bca72795b90d2a3ed2b6da8d979dee2"},
+    {file = "psycopg2-2.9.10-cp39-cp39-win32.whl", hash = "sha256:9d5b3b94b79a844a986d029eee38998232451119ad653aea42bb9220a8c5066b"},
+    {file = "psycopg2-2.9.10-cp39-cp39-win_amd64.whl", hash = "sha256:88138c8dedcbfa96408023ea2b0c369eda40fe5d75002c0964c78f46f11fa442"},
+    {file = "psycopg2-2.9.10.tar.gz", hash = "sha256:12ec0b40b0273f95296233e8750441339298e6a572f7039da5b260e3c8b60e11"},
+]
 
 [[package]]
 name = "psycopg2-binary"
@@ -1496,4 +1518,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9.2, <4.0"
-content-hash = "d9826487fba91f3006cf2545ee19379de922880b5faa94fb5fa10df370fd38ac"
+content-hash = "b38703f2e5a082d84fea66d502f2e97869cb133343e55f6ee2d883d46aced404"
