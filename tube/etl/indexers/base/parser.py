@@ -97,9 +97,18 @@ class Parser(object):
                 p.update_type(prop.type)
 
     def get_python_type_of_prop(self, p, array_types):
+        # Handle None type early
+        if p.type is None:
+            print(f"WARNING: Property {p.name} has no type information, defaulting to string")
+            if p.fn is not None and p.fn in ["set", "list"]:
+                return ("string", 1)
+            else:
+                return ("string", 0)
+        
         is_array_type = p.type[0] == list
         has_array_agg_fn = p.fn is not None and p.fn in ["set", "list"]
         array_type_condition = is_array_type or has_array_agg_fn
+        
         if array_type_condition:
             if array_types is not None and p.name not in array_types:
                 array_types.append(p.name)
@@ -125,6 +134,9 @@ class Parser(object):
 
     @staticmethod
     def select_widest_type(types):
+        if types is None:
+            print(f"WARNING: No types provided, defaulting to 'string'")
+            return "string"
         if float in types:
             return float
         elif int in types:
