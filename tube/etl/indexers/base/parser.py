@@ -142,7 +142,7 @@ class Parser(object):
     def select_widest_type(types):
         if types is None:
             print(f"WARNING: No types provided, defaulting to 'string'")
-            return "string"
+            return str
         if float in types:
             return float
         elif int in types:
