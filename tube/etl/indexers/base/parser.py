@@ -97,6 +97,12 @@ class Parser(object):
                 p.update_type(prop.type)
 
     def get_python_type_of_prop(self, p, array_types):
+        # Debug logging for property p
+        print(f"=== DEBUG get_python_type_of_prop ===")
+        print(f"Property object: {p}")
+        print(f"Property type: {type(p)}")
+        print(f"Property attributes: {dir(p)}")
+
         # Handle None type early
         if p.type is None:
             print(f"WARNING: Property {p.name} has no type information, defaulting to string")
