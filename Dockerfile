@@ -13,6 +13,7 @@ RUN groupadd -g 1000 gen3 && \
     chown -R gen3:gen3 /${appname} && \
     chown -R gen3:gen3 /venv
 
+# Adding this specifically to get Tube dependencies to build properly for ARM images only.
 RUN dnf -y update && \
     dnf -y groupinstall "Development Tools" && \
     dnf -y install \
