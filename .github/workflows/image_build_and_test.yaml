@@ -5,7 +5,7 @@ jobs:
 
   # first, build the image
   build:
-    name: Build and push image
+    name: Build and push image native
     uses: uc-cdis/.github/.github/workflows/image_build_push_native.yaml@master
     secrets:
       ECR_AWS_ACCESS_KEY_ID: ${{ secrets.ECR_AWS_ACCESS_KEY_ID }}
