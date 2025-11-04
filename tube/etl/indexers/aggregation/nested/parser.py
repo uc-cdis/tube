@@ -2,6 +2,7 @@ from tube.utils.dd import get_edge_table, get_node_table_name, get_properties_ty
 from tube.utils.general import replace_dot_with_dash, get_node_id_name
 from tube.etl.indexers.aggregation.nodes.nested_node import NestedNode
 from tube.etl.indexers.base.parser import Parser as BaseParser, ES_TYPES
+from tube.settings import logger
 
 
 class Parser(BaseParser):
@@ -104,7 +105,9 @@ class Parser(BaseParser):
         prop_types = get_properties_types(self.model, node.name)
         id_prop = get_node_id_name(node.name)
         properties = {}
+        logger.info(prop_types)
         for p in node.props:
+            logger.info(p.src)
             p_type = self.select_widest_type(prop_types.get(p.src))
             properties[p.name] = {"type": ES_TYPES.get(p_type)}
             if p_type is str or p_type is bool:
