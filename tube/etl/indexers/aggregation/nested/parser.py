@@ -106,7 +106,7 @@ class Parser(BaseParser):
         prop_types = get_properties_types(self.model, node.name)
         id_prop = get_node_id_name(node.name)
         properties = {}
-        logger.info(json.dumps(prop_types, indent=2))
+        logger.info(prop_types)
         for p in node.props:
             logger.info(p.src)
             p_type = self.select_widest_type(prop_types.get(p.src))
