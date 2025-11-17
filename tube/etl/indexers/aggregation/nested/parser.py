@@ -147,11 +147,17 @@ class Parser(BaseParser):
 
     def update_path_for_a_type(self, p_type, current_path):
         for k, v in p_type.get("properties").items():
+            logger.info("properties")
+            logger.info(p_type.get("properties"))
+            logger.info("current_path")
+            logger.info(current_path)
             if v.get("type") == "nested":
                 path_to_add = ".".join([p for p in (current_path, k) if p != ""])
                 self.array_types.append(path_to_add)
                 self.update_path_for_a_type(v, path_to_add)
 
     def update_array_types(self):
+        logger.info("self.types")
+        logger.info(self.types)
         for k, v in self.types.items():
             self.update_path_for_a_type(v, "")
