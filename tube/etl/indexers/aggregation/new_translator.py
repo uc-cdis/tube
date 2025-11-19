@@ -12,6 +12,7 @@ from tube.etl.indexers.aggregation.parser import Parser
 from tube.etl.indexers.aggregation.nested.translator import (
     Translator as NestedTranslator,
 )
+from tube.settings import logger
 from tube.etl.indexers.base.logic import execute_filter
 from pyspark.sql.functions import (
     col,
@@ -62,6 +63,8 @@ class Translator(BaseTranslator):
                 if a not in self.parser.array_types:
                     self.parser.array_types.append(a)
             properties.update(nested_types[self.parser.root.name]["properties"])
+            logger.info("self.array_types in update_types")
+            logger.info(self.parser.array_types)
         return es_mapping
 
     def aggregate_intermediate_data_frame(self, node_name, child, child_df, edge_df):

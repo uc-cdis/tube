@@ -9,6 +9,8 @@ from tube.etl.indexers.base.prop import PropFactory
 from tube.utils.general import get_node_id_name
 from tube.utils.dd import get_properties_types, get_node_table_name
 from tube.utils.spark import get_hadoop_type_ignore_fn
+from tube.settings import logger
+
 
 ES_TYPES = {str: "keyword", float: "float", int: "long", bool: "keyword"}
 
@@ -103,6 +105,10 @@ class Parser(object):
         if array_type_condition:
             if array_types is not None and p.name not in array_types:
                 array_types.append(p.name)
+                logger.info("p.name in get_python_type_of_prop")
+                logger.info(p.name)
+                logger.info("self.array_types in get_python_type_of_prop")
+                logger.info(self.array_types)
             return (self.select_widest_type(p.type), 1)
         else:
             return (self.select_widest_type(p.type), 0)

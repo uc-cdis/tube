@@ -155,6 +155,8 @@ class Parser(BaseParser):
                 path_to_add = ".".join([p for p in (current_path, k) if p != ""])
                 self.array_types.append(path_to_add)
                 self.update_path_for_a_type(v, path_to_add)
+            logger.info("self.array_types")
+            logger.info(self.array_types)
 
     def update_array_types(self):
         logger.info("self.types")
