@@ -118,3 +118,9 @@ ENV PATH="/venv/bin:$PATH" \
     VIRTUAL_ENV="/venv" \
     PYTHONUNBUFFERED=1 \
     PYTHONIOENCODING=UTF-8
+
+
+WORKDIR /${appname}
+
+# install the app
+RUN poetry install --without dev --no-interaction
