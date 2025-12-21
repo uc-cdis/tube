@@ -71,6 +71,7 @@ jobs:
           ls ../..
           ls ..
           pwd
+          ls ./
 
       - name: Copy configuration files
         run: |
