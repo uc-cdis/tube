@@ -131,6 +131,9 @@ jobs:
       - name: Check all docker networks
         run: docker network ls
 
+      - name: Check path
+        run: echo $PATH
+
       - name: Run ETL process
         working-directory: ../compose-etl
         run: docker compose run tube bash -c "python run_config.py && python run_etl.py"
