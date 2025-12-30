@@ -1,17 +1,14 @@
-ARG AZLINUX_BASE_VERSION=master
-FROM quay.io/cdis/python-build-base:${AZLINUX_BASE_VERSION} AS base
+ARG AZLINUX_BASE_VERSION=feat_python3.11
+FROM quay.io/cdis/python-nginx-al:${AZLINUX_BASE_VERSION} AS base
+
 
 ENV appname=tube
 ENV POETRY_NO_INTERACTION=1 \
-    POETRY_VIRTUALENVS_IN_PROJECT=1 \
-    POETRY_VIRTUALENVS_CREATE=1
+    POETRY_VIRTUALENVS_IN_PROJECT=false \
+    POETRY_VIRTUALENVS_CREATE=1 \
+    POETRY_VIRTUALENVS_PATH=/venv
 
 WORKDIR /${appname}
-
-RUN groupadd -g 1000 gen3 && \
-    useradd -m -s /bin/bash -u 1000 -g gen3 gen3  && \
-    chown -R gen3:gen3 /${appname} && \
-    chown -R gen3:gen3 /venv
 
 # Adding this specifically to get Tube dependencies to build properly for ARM images only.
 RUN dnf -y update && \
@@ -21,14 +18,15 @@ RUN dnf -y update && \
       postgresql-devel \
     && dnf clean all
 
-USER gen3
+RUN mkdir -p /venv && chown gen3:gen3 /venv
+RUN python3.11 -m venv /venv
 
-RUN python -m venv /venv
+USER gen3
 
 COPY poetry.lock pyproject.toml README.md /${appname}/
 
-RUN pip install --no-cache-dir 'poetry<2.0' && \
-    poetry install -vv --only main --no-interaction
+ENV PATH="/home/gen3/.local/bin:$PATH" 
+RUN poetry install -vv --only main --no-interaction
 
 COPY --chown=gen3:gen3 . /${appname}
 
@@ -38,7 +36,6 @@ FROM base
 
 USER root
 
-COPY --from=base /venv /venv
 COPY --from=base /${appname} /${appname}
 
 ENV SQOOP_VERSION="1.4.7" \
@@ -116,9 +113,17 @@ RUN mkdir -p $ACCUMULO_HOME $HIVE_HOME $HBASE_HOME $HCAT_HOME $ZOOKEEPER_HOME &&
 
 ENV PATH=${SQOOP_HOME}/bin:${HADOOP_HOME}/sbin:$HADOOP_HOME/bin:${JAVA_HOME}/bin:${PATH}
 
+COPY --from=base /venv /venv
+RUN chown -R gen3:gen3 /venv
+
 USER gen3
 
 ENV PATH="/venv/bin:$PATH" \
     VIRTUAL_ENV="/venv" \
     PYTHONUNBUFFERED=1 \
     PYTHONIOENCODING=UTF-8
+
+WORKDIR /${appname}
+
+# install the app
+RUN poetry install --without dev --no-interaction
