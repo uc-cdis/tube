@@ -1,4 +1,4 @@
-from tests.integrated_tests.utils_es import get_item_from_elasticsearch
+from tests.integrated_tests.utils_es import get_item_from_opensearch
 from tests.integrated_tests.value.value import Value
 
 
@@ -15,7 +15,7 @@ class ESValue(Value):
         return self.val.get(item) if self.val and item in self.val else None
 
     def value(self):
-        results = get_item_from_elasticsearch(
+        results = get_item_from_opensearch(
             self.parser.name, self.doc_type, self.submitter_id
         )
         result = results[0] if len(results) > 0 else None

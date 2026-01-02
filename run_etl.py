@@ -7,7 +7,7 @@ from tube.importers.sql_to_hdfs import SqlToHDFS
 from tube.formatters import BaseFormatter
 from tube.utils.spark import make_spark_context
 from tube.etl.outputs.es.timestamp import check_to_run_etl
-from elasticsearch import Elasticsearch
+from opensearchpy import OpenSearch
 from py4j.protocol import Py4JJavaError
 
 
@@ -85,7 +85,7 @@ def config_by_args():
 def main():
     args = config_by_args()
 
-    es = Elasticsearch([config.ES_CONNECTION_CONFIG])
+    es = OpenSearch([config.ES_CONNECTION_CONFIG])
     index_names = interpreter.get_index_names(config)
 
     if args.force or check_to_run_etl(es, index_names):

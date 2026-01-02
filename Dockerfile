@@ -40,21 +40,23 @@ COPY --from=base /${appname} /${appname}
 
 ENV SQOOP_VERSION="1.4.7" \
     HADOOP_VERSION="3.3.2" \
-    ES_HADOOP_VERSION="8.3.3" \
-    MAVEN_ES_URL="https://search.maven.org/remotecontent?filepath=org/elasticsearch" \
-    ES_SPARK_30_2_12="elasticsearch-spark-30_2.12" \
-    ES_SPARK_20_2_11="elasticsearch-spark-20_2.11"
+    OPENSEARCH_HADOOP_VERSION="1.0.1" \
+    MAVEN_OPENSEARCH_URL="https://search.maven.org/remotecontent?filepath=org/opensearch" \
+    OPENSEARCH_SPARK_30_2_12="opensearch-spark-30_2.12" \
+    OPENSEARCH_SPARK_20_2_11="opensearch-spark-20_2.11"
 
-ENV MAVEN_ES_SPARK_VERSION="${MAVEN_ES_URL}/${ES_SPARK_30_2_12}/${ES_HADOOP_VERSION}/${ES_SPARK_30_2_12}-${ES_HADOOP_VERSION}"
+# ENV MAVEN_OPENSEARCH_SPARK_VERSION="${MAVEN_OPENSEARCH_URL}/${OPENSEARCH_SPARK_30_2_12}/${OPENSEARCH_HADOOP_VERSION}/${OPENSEARCH_SPARK_30_2_12}-${OPENSEARCH_HADOOP_VERSION}"
+ENV MAVEN_OPENSEARCH_SPARK_VERSION="https://repo1.maven.org/maven2/org/opensearch/client/${OPENSEARCH_SPARK_30_2_12}/${OPENSEARCH_HADOOP_VERSION}/${OPENSEARCH_SPARK_30_2_12}-${OPENSEARCH_HADOOP_VERSION}"
+
 
 ENV SQOOP_INSTALLATION_URL="http://archive.apache.org/dist/sqoop/${SQOOP_VERSION}/sqoop-${SQOOP_VERSION}.bin__hadoop-2.6.0.tar.gz" \
     HADOOP_INSTALLATION_URL="http://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz" \
-    ES_HADOOP_INSTALLATION_URL="https://artifacts.elastic.co/downloads/elasticsearch-hadoop/elasticsearch-hadoop-${ES_HADOOP_VERSION}.zip" \
-    SQOOP_HOME="/sqoop" \
+    OPENSEARCH_HADOOP_INSTALLATION_URL="https://github.com/opensearch-project/opensearch-hadoop/archive/refs/tags/v${OPENSEARCH_HADOOP_VERSION}.zip" \
+    OPENSEARCH_HADOOP_HOME="/opensearch-hadoop"    SQOOP_HOME="/sqoop" \
     HADOOP_HOME="/hadoop" \
-    ES_HADOOP_HOME="/es-hadoop" \
+    OPENSEARCH_HADOOP_HOME="/opensearch-hadoop" \
     JAVA_HOME="/usr"
-ENV ES_HADOOP_HOME_VERSION="${ES_HADOOP_HOME}/elasticsearch-hadoop-${ES_HADOOP_VERSION}" \
+ENV OPENSEARCH_HADOOP_HOME_VERSION="${OPENSEARCH_HADOOP_HOME}/opensearch-hadoop-${OPENSEARCH_HADOOP_VERSION}" \
     HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop \
     HADOOP_MAPRED_HOME=$HADOOP_HOME \
     HADOOP_COMMON_HOME=$HADOOP_HOME \
@@ -97,14 +99,18 @@ RUN wget --quiet --no-verbose ${HADOOP_INSTALLATION_URL} \
     && rm hadoop-${HADOOP_VERSION}.tar.gz \
     && rm -rf $HADOOP_HOME/share/doc
 
-RUN wget --quiet --no-verbose ${ES_HADOOP_INSTALLATION_URL} \
-    && mkdir -p $ES_HADOOP_HOME \
-    && unzip elasticsearch-hadoop-${ES_HADOOP_VERSION}.zip -d ${ES_HADOOP_HOME} \
-    && rm elasticsearch-hadoop-${ES_HADOOP_VERSION}.zip
+RUN wget --quiet --no-verbose ${OPENSEARCH_HADOOP_INSTALLATION_URL} \
+    && mkdir -p $OPENSEARCH_HADOOP_HOME \
+    && unzip v${OPENSEARCH_HADOOP_VERSION}.zip -d ${OPENSEARCH_HADOOP_HOME} \
+    && rm v${OPENSEARCH_HADOOP_VERSION}.zip
 
-RUN wget --quiet --no-verbose ${MAVEN_ES_SPARK_VERSION}.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${ES_SPARK_20_2_11}-${ES_HADOOP_VERSION}.jar \
-    && wget --quiet --no-verbose ${MAVEN_ES_SPARK_VERSION}-javadoc.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${ES_SPARK_20_2_11}-${ES_HADOOP_VERSION}-javadoc.jar \
-    && wget --quiet --no-verbose ${MAVEN_ES_SPARK_VERSION}-sources.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${ES_SPARK_20_2_11}-${ES_HADOOP_VERSION}-sources.jar
+RUN ls $OPENSEARCH_HADOOP_HOME
+RUN echo ${MAVEN_OPENSEARCH_SPARK_VERSION}
+RUN echo ${OPENSEARCH_HADOOP_HOME_VERSION}
+
+RUN wget --quiet --no-verbose ${MAVEN_OPENSEARCH_SPARK_VERSION}.jar -O ${OPENSEARCH_HADOOP_HOME_VERSION}/dist/${OPENSEARCH_SPARK_20_2_11}-${OPENSEARCH_HADOOP_VERSION}.jar \
+    && wget --quiet --no-verbose ${MAVEN_OPENSEARCH_SPARK_VERSION}-javadoc.jar -O ${OPENSEARCH_HADOOP_HOME_VERSION}/dist/${OPENSEARCH_SPARK_20_2_11}-${OPENSEARCH_HADOOP_VERSION}-javadoc.jar \
+    && wget --quiet --no-verbose ${MAVEN_OPENSEARCH_SPARK_VERSION}-sources.jar -O ${OPENSEARCH_HADOOP_HOME_VERSION}/dist/${OPENSEARCH_SPARK_20_2_11}-${OPENSEARCH_HADOOP_VERSION}-sources.jar
 
 RUN mkdir -p $ACCUMULO_HOME $HIVE_HOME $HBASE_HOME $HCAT_HOME $ZOOKEEPER_HOME && \
     chown -R gen3:gen3 $HADOOP_HOME && \
@@ -115,6 +121,7 @@ ENV PATH=${SQOOP_HOME}/bin:${HADOOP_HOME}/sbin:$HADOOP_HOME/bin:${JAVA_HOME}/bin
 
 COPY --from=base /venv /venv
 RUN chown -R gen3:gen3 /venv
+RUN chown -R gen3:gen3 /${appname}
 
 USER gen3
 

@@ -5,7 +5,16 @@ import tube.enums as enums
 
 from pyspark.sql.context import SQLContext
 from pyspark.sql.types import StructType, StructField, StringType, ArrayType
-from pyspark.sql.functions import col, min, sum, count, collect_set, collect_list, first, when
+from pyspark.sql.functions import (
+    col,
+    min,
+    sum,
+    count,
+    collect_set,
+    collect_list,
+    first,
+    when,
+)
 
 from .lambdas import (
     extract_link,
@@ -174,10 +183,13 @@ class Translator(object):
                 node_tbl_name, self.get_empty_dataframe_with_name
             )
             if is_empty:
+                print("Returning empty df")
                 return df
+            print("Ready to map df")
             df = df.map(lambda x: extract_metadata_to_json(x, node_name))
             if get_zero_frame and (df is None or df.isEmpty()):
                 return self.get_empty_dataframe_with_name(node, key_name=key_name)
+            print("Ready to make new df")
             new_df = self.sql_context.read.json(df, schema=schema)
             df.unpersist()
             if props is not None and not new_df.rdd.isEmpty():
@@ -272,7 +284,12 @@ class Translator(object):
 
     @staticmethod
     def reducer_to_agg_func_expr(
-        func_name, value, alias=None, is_merging=False, is_flattening=False, data_type=None
+        func_name,
+        value,
+        alias=None,
+        is_merging=False,
+        is_flattening=False,
+        data_type=None,
     ):
         col_alias = alias if alias is not None else value
         if func_name == "count":
