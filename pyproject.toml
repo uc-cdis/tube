@@ -11,11 +11,11 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.11,<4.0"
+python = ">=3.10,<4.0"
 cdislogging = "1.1.1"
 cryptography = "^44.0.1"
 dictionaryutils = "^3.4.10"
-opensearch-py = "*"
+opensearch-py = ">=2.0.0,<3"
 gen3dictionary = ">=2.0.4"
 gen3datamodel = ">=3.2.7"
 hdfs = "2.7.0"

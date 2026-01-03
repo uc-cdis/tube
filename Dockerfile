@@ -1,4 +1,4 @@
-ARG AZLINUX_BASE_VERSION=feat_python3.11
+ARG AZLINUX_BASE_VERSION=feat_python3.10
 FROM quay.io/cdis/python-nginx-al:${AZLINUX_BASE_VERSION} AS base
 
 
@@ -19,7 +19,7 @@ RUN dnf -y update && \
     && dnf clean all
 
 RUN mkdir -p /venv && chown gen3:gen3 /venv
-RUN python3.11 -m venv /venv
+RUN python3.10 -m venv /venv
 
 USER gen3
 
