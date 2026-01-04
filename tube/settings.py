@@ -78,9 +78,10 @@ JAVA_HOME = os.getenv(
     "JAVA_HOME", "/Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home"
 )
 HADOOP_URL = os.getenv("HADOOP_URL", "http://spark-service:9000")
-ES_HADOOP_VERSION = os.getenv("OPENSEARCH_HADOOP_VERSION", "")
-ES_HADOOP_HOME_BIN = "{}/opensearch-hadoop-{}".format(
-    os.getenv("OPENSEARCH_HADOOP_HOME", ""), os.getenv("OPENSEARCH_HADOOP_VERSION", "")
+ES_HADOOP_VERSION = os.getenv("ES_HADOOP_VERSION", "")
+OPENSEARCH_HADOOP_VERSION = os.getenv("OPENSEARCH_HADOOP_VERSION", "1.0.1")
+ES_HADOOP_HOME_BIN = "{}/elasticsearch-hadoop-{}".format(
+    os.getenv("ES_HADOOP_HOME", ""), os.getenv("ES_HADOOP_VERSION", "")
 )
 HADOOP_HOST = os.getenv("HADOOP_HOST", "spark-service")
 # Searches same folders as load_json above
@@ -107,7 +108,7 @@ APP_NAME = "Gen3 ETL"
 os.environ[
     "PYSPARK_SUBMIT_ARGS"
 ] = "--jars {}/dist/opensearch-spark-20_2.11-{}.jar pyspark-shell".format(
-    ES_HADOOP_HOME_BIN, ES_HADOOP_VERSION
+    ES_HADOOP_HOME_BIN, OPENSEARCH_HADOOP_VERSION
 )
 os.environ["HADOOP_CLIENT_OPTS"] = os.getenv("HADOOP_CLIENT_OPTS", "")
 
