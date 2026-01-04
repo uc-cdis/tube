@@ -46,9 +46,9 @@ class Writer(SparkBase):
         es_config["es.resource"] = index
         df.saveAsNewAPIHadoopFile(
             path="-",
-            outputFormatClass="org.opensearch.hadoop.mr.EsOutputFormat",
+            outputFormatClass="org.elasticsearch.hadoop.mr.EsOutputFormat",
             keyClass="org.apache.hadoop.io.NullWritable",
-            valueClass="org.opensearch.hadoop.mr.LinkedMapWritable",
+            valueClass="org.elasticsearch.hadoop.mr.LinkedMapWritable",
             conf=es_config,
         )
 
@@ -57,7 +57,7 @@ class Writer(SparkBase):
         es_config["es.resource"] = index
         df = (
             df.coalesce(1)
-            .write.format("org.opensearch.spark.sql")
+            .write.format("org.elasticsearch.spark.sql")
             .option("es.nodes", es_config["es.nodes"])
             .option("es.port", es_config["es.port"])
             .option("es.nodes.wan.only", "true")
@@ -124,9 +124,12 @@ class Writer(SparkBase):
         for plugin in post_process_plugins_on_dataframe:
             df = plugin(df)
 
+        next_versioned_index = self.versioning.get_next_index_version(index)
+        print(f"WRITER first index for {index} - {next_versioned_index}")
+        print(f"WRITER Ready to try dataframe index for {next_versioned_index}")
         index_to_write = self.versioning.create_new_index(
             {"mappings": types.get(doc_type)},
-            self.versioning.get_next_index_version(index),
+            next_versioned_index,
         )
         self.write_to_es(
             df, index_to_write, index, doc_type, self.write_df_to_new_index
