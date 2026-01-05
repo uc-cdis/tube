@@ -86,8 +86,6 @@ ES_HADOOP_HOME_BIN = "{}/elasticsearch-hadoop-{}".format(
 HADOOP_HOST = os.getenv("HADOOP_HOST", "spark-service")
 # Searches same folders as load_json above
 
-print(f"ES_HADOOP_VERSION {ES_HADOOP_VERSION}")
-print(f"ES_HADOOP_HOME_BIN {ES_HADOOP_HOME_BIN}")
 
 try:
     MAPPING_FILE = find_paths("etlMapping.yaml", "tube")[0]
