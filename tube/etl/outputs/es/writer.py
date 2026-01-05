@@ -125,8 +125,6 @@ class Writer(SparkBase):
             df = plugin(df)
 
         next_versioned_index = self.versioning.get_next_index_version(index)
-        print(f"WRITER first index for {index} - {next_versioned_index}")
-        print(f"WRITER Ready to try dataframe index for {next_versioned_index}")
         index_to_write = self.versioning.create_new_index(
             {"mappings": types.get(doc_type)},
             next_versioned_index,

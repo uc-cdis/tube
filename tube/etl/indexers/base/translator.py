@@ -183,13 +183,10 @@ class Translator(object):
                 node_tbl_name, self.get_empty_dataframe_with_name
             )
             if is_empty:
-                print("Returning empty df")
                 return df
-            print("Ready to map df")
             df = df.map(lambda x: extract_metadata_to_json(x, node_name))
             if get_zero_frame and (df is None or df.isEmpty()):
                 return self.get_empty_dataframe_with_name(node, key_name=key_name)
-            print("Ready to make new df")
             new_df = self.sql_context.read.json(df, schema=schema)
             df.unpersist()
             if props is not None and not new_df.rdd.isEmpty():
