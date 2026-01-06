@@ -1,6 +1,6 @@
 import json
 
-from elasticsearch import Elasticsearch
+from opensearchpy import OpenSearch
 
 from tube.etl.outputs.es.timestamp import (
     putting_timestamp,
@@ -35,10 +35,10 @@ class Writer(SparkBase):
 
     def get_es(self):
         """
-        Create ElasticSearch instance
+        Create OpenSearch instance
         :return:
         """
-        return Elasticsearch([self.config.ES_CONNECTION_CONFIG])
+        return OpenSearch([self.config.ES_CONNECTION_CONFIG])
 
     def write_to_new_index(self, df, index, doc_type):
         df = df.map(lambda x: json_export(x, doc_type))
@@ -55,31 +55,26 @@ class Writer(SparkBase):
     def write_df_to_new_index(self, df, index, doc_type):
         es_config = self.es_config
         es_config["es.resource"] = index
-        df = df.coalesce(1).write.format("org.elasticsearch.spark.sql").option(
-            "es.nodes", es_config["es.nodes"]
-        ).option("es.port", es_config["es.port"]).option(
-            "es.nodes.wan.only", "true"
-        ).option(
-            "es.nodes.discovery", es_config["es.nodes.discovery"]
-        ).option(
-            "es.nodes.data.only", es_config["es.nodes.data.only"]
-        ).option(
-            "es.nodes.client.only", es_config["es.nodes.client.only"]
-        ).option(
-            "es.resource", es_config["es.resource"]
-        ).option(
-            "es.net.ssl", es_config["es.net.ssl"]
+        df = (
+            df.coalesce(1)
+            .write.format("org.elasticsearch.spark.sql")
+            .option("es.nodes", es_config["es.nodes"])
+            .option("es.port", es_config["es.port"])
+            .option("es.nodes.wan.only", "true")
+            .option("es.nodes.discovery", es_config["es.nodes.discovery"])
+            .option("es.nodes.data.only", es_config["es.nodes.data.only"])
+            .option("es.nodes.client.only", es_config["es.nodes.client.only"])
+            .option("es.resource", es_config["es.resource"])
+            .option("es.net.ssl", es_config["es.net.ssl"])
         )
-        if ("es.net.http.auth.user" in es_config
-                and "es.net.http.auth.pass" in es_config):
+        if (
+            "es.net.http.auth.user" in es_config
+            and "es.net.http.auth.pass" in es_config
+        ):
             df = df.option(
                 "es.net.http.auth.user", es_config["es.net.http.auth.user"]
-            ).option(
-                "es.net.http.auth.pass", es_config["es.net.http.auth.pass"]
-            )
-        df.save(
-            index
-        )
+            ).option("es.net.http.auth.pass", es_config["es.net.http.auth.pass"])
+        df.save(index)
 
     def create_guppy_array_config(self, parser):  # etl_index_name, types, array_types):
         """

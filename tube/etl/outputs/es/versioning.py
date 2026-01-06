@@ -1,7 +1,7 @@
 import json
 import re
 
-from elasticsearch import helpers
+from opensearchpy import helpers
 
 
 def get_index_name(index, version):
