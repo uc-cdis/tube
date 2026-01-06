@@ -18,8 +18,10 @@ RUN dnf -y update && \
       postgresql-devel \
     && dnf clean all
 
-RUN mkdir /venv && \
+RUN rm -rf /venv/* && \
     chown -R gen3:gen3 /venv
+# RUN mkdir /venv && \
+#     chown -R gen3:gen3 /venv
 
 USER gen3
 
