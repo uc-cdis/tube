@@ -44,7 +44,9 @@ COPY --from=base /${appname} /${appname}
 ENV SQOOP_VERSION="1.4.7" \
     HADOOP_VERSION="3.3.2" \
     ES_HADOOP_VERSION="8.3.3" \
+    OPENSEARCH_HADOOP_VERSION="1.0.1" \
     MAVEN_ES_URL="https://search.maven.org/remotecontent?filepath=org/elasticsearch" \
+    MAVEN_OPENSEARCH_URL="https://search.maven.org/remotecontent?filepath=org/opensearch" \
     ES_SPARK_30_2_12="elasticsearch-spark-30_2.12" \
     ES_SPARK_20_2_11="elasticsearch-spark-20_2.11"
 
