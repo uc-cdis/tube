@@ -34,7 +34,7 @@ py4j = ">=0.10.9.5"
 pytest=">=6.0"
 pytest-cov="3.0.0"
 mock="4.0.3"
-moto="1.1.24"
+# moto="1.1.24"
 pyspark-stubs="*"
 
 [build-system]

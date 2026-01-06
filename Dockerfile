@@ -1,6 +1,6 @@
 ARG AZLINUX_BASE_VERSION=feat_python3.10
 FROM quay.io/cdis/python-nginx-al:${AZLINUX_BASE_VERSION} AS base
-
+# FROM python_nginx_310 AS base
 
 ENV appname=tube
 ENV POETRY_NO_INTERACTION=1 \
@@ -18,12 +18,13 @@ RUN dnf -y update && \
       postgresql-devel \
     && dnf clean all
 
-RUN mkdir -p /venv && chown gen3:gen3 /venv
-RUN python3.10 -m venv /venv
+RUN mkdir /venv && \
+    chown -R gen3:gen3 /venv
 
 USER gen3
 
 COPY poetry.lock pyproject.toml README.md /${appname}/
+RUN python3.10 -m venv /venv
 
 ENV PATH="/home/gen3/.local/bin:$PATH" 
 RUN poetry install -vv --only main --no-interaction
@@ -108,9 +109,6 @@ RUN ls $ES_HADOOP_HOME
 RUN echo ${MAVEN_OPENSEARCH_SPARK_VERSION}
 RUN echo ${ES_HADOOP_HOME_VERSION}
 
-# RUN wget --quiet --no-verbose ${MAVEN_OPENSEARCH_SPARK_VERSION}.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${OPENSEARCH_SPARK_20_2_11}-${OPENSEARCH_HADOOP_VERSION}.jar \
-#     && wget --quiet --no-verbose ${MAVEN_OPENSEARCH_SPARK_VERSION}-javadoc.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${OPENSEARCH_SPARK_20_2_11}-${OPENSEARCH_HADOOP_VERSION}-javadoc.jar \
-#     && wget --quiet --no-verbose ${MAVEN_OPENSEARCH_SPARK_VERSION}-sources.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${OPENSEARCH_SPARK_20_2_11}-${OPENSEARCH_HADOOP_VERSION}-sources.jar
 RUN wget --quiet --no-verbose ${MAVEN_ES_SPARK_VERSION}.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${ES_SPARK_20_2_11}-${ES_HADOOP_VERSION}.jar \
     && wget --quiet --no-verbose ${MAVEN_ES_SPARK_VERSION}-javadoc.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${ES_SPARK_20_2_11}-${ES_HADOOP_VERSION}-javadoc.jar \
     && wget --quiet --no-verbose ${MAVEN_ES_SPARK_VERSION}-sources.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${ES_SPARK_20_2_11}-${ES_HADOOP_VERSION}-sources.jar
@@ -131,7 +129,8 @@ USER gen3
 ENV PATH="/venv/bin:$PATH" \
     VIRTUAL_ENV="/venv" \
     PYTHONUNBUFFERED=1 \
-    PYTHONIOENCODING=UTF-8
+    PYTHONIOENCODING=UTF-8 \
+    POETRY_VIRTUALENVS_PATH=/venv
 
 WORKDIR /${appname}
 
