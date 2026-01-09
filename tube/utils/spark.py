@@ -1,6 +1,6 @@
 import os
 
-from pyspark import SparkConf, SparkContext
+from pyspark.sql import SparkSession
 from pyspark.sql.types import (
     StringType,
     ArrayType,
@@ -12,32 +12,40 @@ import tube.settings as config
 import tube.enums as enums
 
 
-def make_spark_context(tube_config):
+def make_spark_session(tube_config):
     """
-    Makes a spark and sqlContext
+    Makes a SparkSession
     """
-    conf = (
-        SparkConf()
-        .set("spark.executor.memory", tube_config.SPARK_EXECUTOR_MEMORY)
-        .set("spark.driver.memory", tube_config.SPARK_DRIVER_MEMORY)
-        .set("spark.python.profile", "false")
-        .setAppName(config.APP_NAME)
+    builder = (
+        SparkSession.builder.appName(config.APP_NAME)
+        .config("spark.executor.memory", tube_config.SPARK_EXECUTOR_MEMORY)
+        .config("spark.driver.memory", tube_config.SPARK_DRIVER_MEMORY)
+        .config("spark.python.profile", "false")
     )
+
     if tube_config.RUNNING_MODE == enums.RUNNING_MODE_DEV:
-        # We should only use the value of `config.spark_master` in
-        # a test context. Production runs need to set the Spark Master
-        # to 'yarn'. This is done in the arguments to `spark-submit`.
-        conf = conf.setMaster(tube_config.SPARK_MASTER)
-    sc = SparkContext.getOrCreate(conf=conf)
+        builder = builder.master(tube_config.SPARK_MASTER)
+
+    spark = builder.getOrCreate()
 
     # Configure logging
-    log4j = sc._jvm.org.apache.log4j
+    log4j = spark._jvm.org.apache.log4j
     if config.LOG_LEVEL == "WARN":
         log4j.LogManager.getRootLogger().setLevel(log4j.Level.WARN)
     else:
         log4j.LogManager.getRootLogger().setLevel(log4j.Level.INFO)
 
-    return sc
+    return spark
+
+
+def make_spark_context(tube_config):
+    """
+    Makes a spark Context
+    """
+
+    spark = make_spark_session(tube_config)
+    spark_context = spark.sparkContext
+    return spark_context
 
 
 def get_hdfs_file_handler(sc=None):
