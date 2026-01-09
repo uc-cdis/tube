@@ -13,9 +13,9 @@ include = [
 [tool.poetry.dependencies]
 python = ">=3.9.2, <4.0"
 cdislogging = "1.1.1"
-dictionaryutils = ">=3.4.10"
-gen3dictionary = ">=2.0.3"
-gen3datamodel = ">=3.2.3"
+dictionaryutils = "^3.4.10"
+gen3dictionary = "2.0.3"
+gen3datamodel = "3.2.3"
 hdfs = "2.7.0"
 opensearch-py = ">=2.0.0,<3"
 psqlgraph = "3.0.1"
