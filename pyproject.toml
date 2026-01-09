@@ -36,6 +36,9 @@ pytest-cov="3.0.0"
 mock="4.0.3"
 pyspark-stubs="*"
 
+[tool.poetry.group.dev.dependencies]
+deptry = "0.23.1"
+
 [build-system]
 requires = ["setuptools=65.3.0","poetry>=1.1.0"]
 build-backend = "poetry.masonry.api"
