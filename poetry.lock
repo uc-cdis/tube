@@ -12,21 +12,6 @@ files = [
 ]
 
 [[package]]
-name = "avro"
-version = "1.12.1"
-description = "Avro is a serialization and RPC framework."
-optional = false
-python-versions = ">=3.9"
-files = [
-    {file = "avro-1.12.1-py2.py3-none-any.whl", hash = "sha256:970475dd6457924533966fe761be607c759d5a48390cc8fbed472f7c9a8868f2"},
-    {file = "avro-1.12.1.tar.gz", hash = "sha256:c5b8dd2dd4c10816f0dc127cc29cfd43b5e405cf7e6840e89460a024bf3d098d"},
-]
-
-[package.extras]
-snappy = ["python-snappy"]
-zstandard = ["zstandard"]
-
-[[package]]
 name = "cdislogging"
 version = "1.1.1"
 description = "Standardized logging tool and format for cdis applications"
@@ -347,16 +332,18 @@ tomli = {version = ">=2.0.1", markers = "python_full_version < \"3.11\""}
 
 [[package]]
 name = "dictionaryutils"
-version = "3.4.11"
+version = "3.5.1"
 description = "Python wrapper and metaschema for datadictionary."
 optional = false
 python-versions = "<4,>=3.9"
 files = [
-    {file = "dictionaryutils-3.4.11.tar.gz", hash = "sha256:a63ae34b4c0130cd94e4ca685cbb18155c225f9bface32ed1d503393d0dd39cf"},
+    {file = "dictionaryutils-3.5.1-py3-none-any.whl", hash = "sha256:a6d9b5cd81e3b29a087cb5deca8fef788a46a1e576a82b240bafd78cba37e8fb"},
+    {file = "dictionaryutils-3.5.1.tar.gz", hash = "sha256:c63a47479f671881f0f00aa7f647751239f02cbc930536246a30d349bc1ea34b"},
 ]
 
 [package.dependencies]
 cdislogging = "*"
+gen3dictionary = ">=2.0.4,<3.0.0"
 jsonschema = "<=4.23.0"
 PyYAML = "*"
 requests = "*"
@@ -422,12 +409,12 @@ strict-rfc3339 = "0.7"
 
 [[package]]
 name = "gen3dictionary"
-version = "2.0.3"
+version = "2.0.4"
 description = ""
 optional = false
-python-versions = ">=3.9,<4.0"
+python-versions = "<4.0,>=3.9"
 files = [
-    {file = "gen3dictionary-2.0.3.tar.gz", hash = "sha256:46a704e202a79be96ec08969d28885794d4825b94394103dca08e3637bd6cb82"},
+    {file = "gen3dictionary-2.0.4.tar.gz", hash = "sha256:6a798008f32c4a5c1833fbc03e841ebe12bb5b743812ec7c00211c0268f15c05"},
 ]
 
 [package.dependencies]
@@ -607,33 +594,22 @@ dev = ["pre-commit", "tox"]
 testing = ["coverage", "pytest", "pytest-benchmark"]
 
 [[package]]
-name = "progressbar"
-version = "2.5"
-description = "Text progress bar library for Python."
-optional = false
-python-versions = "*"
-files = [
-    {file = "progressbar-2.5.tar.gz", hash = "sha256:5d81cb529da2e223b53962afd6c8ca0f05c6670e40309a7219eacc36af9b6c63"},
-]
-
-[[package]]
 name = "psqlgraph"
-version = "3.0.1"
+version = "3.1.1"
 description = ""
 optional = false
-python-versions = "*"
+python-versions = "<4,>=3.9"
 files = [
-    {file = "psqlgraph-3.0.1.tar.gz", hash = "sha256:de0f0b2170c92d483b0c76f4a3a29ed83a8d4b05e82eb86964a622b0f79559a0"},
+    {file = "psqlgraph-3.1.1-py3-none-any.whl", hash = "sha256:7dabef92137abfea7dff94f618a78b5beb4d305987bd80917b8f4a6bca49ae1a"},
+    {file = "psqlgraph-3.1.1.tar.gz", hash = "sha256:9bb72ee1206ac04b5546be8ef099617c8254788dbd52cf1226f19169a1f14b09"},
 ]
 
 [package.dependencies]
-avro = ">=1.7,<2.0"
-progressbar = "*"
-psycopg2-binary = ">=2.8,<3.0"
-requests = ">=2.5,<3.0"
+psycopg2-binary = ">=2.8.2,<3"
+rstr = ">=2.2.6"
 six = ">=1.12.0"
-sqlalchemy = ">=1.3,<2.0"
-xlocal = ">=0.5,<1.0"
+sqlalchemy = ">=1.3.3,<2"
+xlocal = "0.5"
 
 [[package]]
 name = "psycopg2-binary"
@@ -1111,6 +1087,17 @@ files = [
 ]
 
 [[package]]
+name = "rstr"
+version = "3.2.2"
+description = "Generate random strings in Python"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "rstr-3.2.2-py3-none-any.whl", hash = "sha256:f39195d38da1748331eeec52f1276e71eb6295e7949beea91a5e9af2340d7b3b"},
+    {file = "rstr-3.2.2.tar.gz", hash = "sha256:c4a564d4dfb4472d931d145c43d1cf1ad78c24592142e7755b8866179eeac012"},
+]
+
+[[package]]
 name = "setuptools"
 version = "65.3.0"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
@@ -1261,4 +1248,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9.2, <4.0"
-content-hash = "54c538a789a9f04ee9926aba50eaff8237ac902029b0e14ccc8a524bac2d5fd0"
+content-hash = "d2344569b39a30524716cc7155a6dca0dfd150812d1669ef96bf92d8169849c9"
