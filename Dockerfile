@@ -1,18 +1,18 @@
-ARG AZLINUX_BASE_VERSION=master
-FROM quay.io/cdis/python-build-base:${AZLINUX_BASE_VERSION} AS base
+ARG AZLINUX_BASE_VERSION=3.13-pythonnginx
+
+FROM quay.io/cdis/amazonlinux-base:${AZLINUX_BASE_VERSION} AS base
 
 ENV appname=tube
-ENV POETRY_NO_INTERACTION=1 \
-    POETRY_VIRTUALENVS_IN_PROJECT=1 \
-    POETRY_VIRTUALENVS_CREATE=1
 
 WORKDIR /${appname}
 
-RUN groupadd -g 1000 gen3 && \
-    useradd -m -s /bin/bash -u 1000 -g gen3 gen3  && \
-    chown -R gen3:gen3 /${appname} && \
-    chown -R gen3:gen3 /venv
+RUN chown -R gen3:gen3 /${appname}
+# RUN chown -R gen3:gen3 /venv
 
+# Builder stage
+FROM base AS builder
+
+USER root
 # Adding this specifically to get Tube dependencies to build properly for ARM images only.
 RUN dnf -y update && \
     dnf -y groupinstall "Development Tools" && \
@@ -21,32 +21,36 @@ RUN dnf -y update && \
       postgresql-devel \
     && dnf clean all
 
+RUN chown -R gen3:gen3 /venv
+
 USER gen3
 
-RUN python -m venv /venv
+# RUN chown -R gen3:gen3 /venv
+
+ENV PATH="/venv/bin:$PATH" \
+    VIRTUAL_ENV="/venv" \
+    PYTHONUNBUFFERED=1 \
+    PYTHONIOENCODING=UTF-8
 
 COPY poetry.lock pyproject.toml README.md /${appname}/
 
-RUN pip install --no-cache-dir 'poetry<2.0' && \
-    poetry install -vv --only main --no-interaction
+RUN poetry install -vv --only main --no-interaction
 
 COPY --chown=gen3:gen3 . /${appname}
 
+# Install the app
 RUN poetry install --without dev --no-interaction
 
 FROM base
 
 USER root
 
-COPY --from=base /venv /venv
-COPY --from=base /${appname} /${appname}
+COPY --from=builder /${appname} /${appname}
 
 ENV SQOOP_VERSION="1.4.7" \
     HADOOP_VERSION="3.3.2" \
     ES_HADOOP_VERSION="8.3.3" \
-    OPENSEARCH_HADOOP_VERSION="1.0.1" \
     MAVEN_ES_URL="https://search.maven.org/remotecontent?filepath=org/elasticsearch" \
-    MAVEN_OPENSEARCH_URL="https://search.maven.org/remotecontent?filepath=org/opensearch" \
     ES_SPARK_30_2_12="elasticsearch-spark-30_2.12" \
     ES_SPARK_20_2_11="elasticsearch-spark-20_2.11"
 
@@ -118,9 +122,18 @@ RUN mkdir -p $ACCUMULO_HOME $HIVE_HOME $HBASE_HOME $HCAT_HOME $ZOOKEEPER_HOME &&
 
 ENV PATH=${SQOOP_HOME}/bin:${HADOOP_HOME}/sbin:$HADOOP_HOME/bin:${JAVA_HOME}/bin:${PATH}
 
+COPY --from=base /venv /venv
+RUN chown -R gen3:gen3 /venv
+
 USER gen3
 
 ENV PATH="/venv/bin:$PATH" \
     VIRTUAL_ENV="/venv" \
     PYTHONUNBUFFERED=1 \
     PYTHONIOENCODING=UTF-8
+
+
+WORKDIR /${appname}
+
+# install the app
+RUN poetry install --without dev --no-interaction

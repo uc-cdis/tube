@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tube"
-version = "1.8.0"
+version = "2.0.0"
 description = "Gen3 ETL Service"
 authors = ["CTDS UChicago <cdis@uchicago.edu>"]
 license = "Apache-2.0"
@@ -11,14 +11,14 @@ include = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.9.2, <4.0"
-cdislogging = "1.1.1"
-dictionaryutils = "^3.4.10"
-gen3datamodel = "3.2.3"
+python = ">=3.13, <4"
+cdislogging = ">=1.1.1"
+dictionaryutils = ">=3"
+gen3datamodel = ">=3"
 hdfs = "2.7.0"
 opensearch-py = ">=2.0.0,<3"
 # psqlgraph = "3.0.1"
-pyspark = ">=3.3.0,<4"
+pyspark = ">=3,<4"
 urllib3 = ">=2.6.0,<3"
 setuptools = "65.3.0"
 pyyaml = "^6.0.2"
@@ -29,7 +29,7 @@ mock=">=4.0"
 pytest=">=6.0"
 pytest-cov="3.0.0"
 pyspark-stubs="*"
-deptry = "0.23.1"
+# deptry = "^0.24.1"
 
 [build-system]
 requires = ["setuptools=65.3.0","poetry>=1.1.0"]
