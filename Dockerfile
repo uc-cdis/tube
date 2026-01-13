@@ -80,7 +80,7 @@ ENV ES_HADOOP_HOME_VERSION="${ES_HADOOP_HOME}/elasticsearch-hadoop-${ES_HADOOP_V
 
 RUN dnf -y update \
     && dnf -y install \
-    java-11-amazon-corretto \
+    java-17-amazon-corretto \
     postgresql15 \
     tar \
     unzip \
