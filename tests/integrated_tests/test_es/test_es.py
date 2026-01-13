@@ -1,6 +1,5 @@
 import pytest
-from elasticsearch import Elasticsearch
-from elasticsearch import client
+from opensearchpy import OpenSearch, client
 
 import tube.settings as config
 from tube.etl.indexers.interpreter import create_translators

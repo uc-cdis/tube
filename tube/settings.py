@@ -21,7 +21,7 @@ DB_PORT = os.getenv("DB_PORT") or conf_data.get("db_port", "5432")
 DB_DATABASE = os.getenv("DB_DATABASE") or conf_data.get("db_database", "sheepdog")
 DB_USERNAME = os.getenv("DB_USERNAME") or conf_data.get("db_username", "peregrine")
 DB_PASSWORD = os.getenv("DB_PASSWORD") or conf_data.get("db_password", "unknown")
-ENV_DB_USE_SSL_BOOL = os.getenv("DB_USE_SSL", "false").lower() in ('true', '1', 't')
+ENV_DB_USE_SSL_BOOL = os.getenv("DB_USE_SSL", "false").lower() in ("true", "1", "t")
 
 DB_USE_SSL = ENV_DB_USE_SSL_BOOL or conf_data.get(
     "db_use_ssl", False
@@ -39,7 +39,7 @@ DICTIONARY_URL = os.getenv(
 )
 ES_URL = os.getenv("ES_URL", "esproxy-service")
 ES_PORT = os.getenv("ES_PORT", "9200")
-ENV_ES_USE_SSL_BOOL = os.getenv("ES_USE_SSL", 'false').lower() in ('true', '1', 't')
+ENV_ES_USE_SSL_BOOL = os.getenv("ES_USE_SSL", "false").lower() in ("true", "1", "t")
 ES_USE_SSL = ENV_ES_USE_SSL_BOOL or int(ES_PORT) == 443
 ES_AUTH_USERNAME = os.getenv("ES_AUTH_USERNAME")
 ES_AUTH_PASSWORD = os.getenv("ES_AUTH_PASSWORD")
@@ -79,6 +79,7 @@ JAVA_HOME = os.getenv(
 )
 HADOOP_URL = os.getenv("HADOOP_URL", "http://spark-service:9000")
 ES_HADOOP_VERSION = os.getenv("ES_HADOOP_VERSION", "")
+OPENSEARCH_HADOOP_VERSION = os.getenv("OPENSEARCH_HADOOP_VERSION", "1.0.1")
 ES_HADOOP_HOME_BIN = "{}/elasticsearch-hadoop-{}".format(
     os.getenv("ES_HADOOP_HOME", ""), os.getenv("ES_HADOOP_VERSION", "")
 )

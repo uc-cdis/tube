@@ -1,12 +1,12 @@
 from itertools import chain
 
-from elasticsearch import Elasticsearch
+from opensearchpy import OpenSearch
 
 import tube.settings as config
 
 
 def get_es_connection():
-    return Elasticsearch([config.ES_CONNECTION_CONFIG])
+    return OpenSearch([config.ES_CONNECTION_CONFIG])
 
 
 def get_item_from_elasticsearch(index, doc_type, item):
