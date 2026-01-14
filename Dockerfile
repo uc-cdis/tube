@@ -51,10 +51,11 @@ ENV SQOOP_VERSION="1.4.7" \
     HADOOP_VERSION="3.3.2" \
     ES_HADOOP_VERSION="8.3.3" \
     MAVEN_ES_URL="https://search.maven.org/remotecontent?filepath=org/elasticsearch" \
+    ES_SPARK_30_2_13="elasticsearch-spark-30_2.13" \
     ES_SPARK_30_2_12="elasticsearch-spark-30_2.12" \
     ES_SPARK_20_2_11="elasticsearch-spark-20_2.11"
 
-ENV MAVEN_ES_SPARK_VERSION="${MAVEN_ES_URL}/${ES_SPARK_30_2_12}/${ES_HADOOP_VERSION}/${ES_SPARK_30_2_12}-${ES_HADOOP_VERSION}"
+ENV MAVEN_ES_SPARK_VERSION="${MAVEN_ES_URL}/${ES_SPARK_30_2_13}/${ES_HADOOP_VERSION}/${ES_SPARK_30_2_13}-${ES_HADOOP_VERSION}"
 
 ENV SQOOP_INSTALLATION_URL="http://archive.apache.org/dist/sqoop/${SQOOP_VERSION}/sqoop-${SQOOP_VERSION}.bin__hadoop-2.6.0.tar.gz" \
     HADOOP_INSTALLATION_URL="http://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz" \
