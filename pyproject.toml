@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tube"
-version = "1.7.0"
+version = "1.7.1"
 description = "Gen3 ETL Service"
 authors = ["CTDS UChicago <cdis@uchicago.edu>"]
 license = "Apache-2.0"
@@ -13,7 +13,7 @@ include = [
 [tool.poetry.dependencies]
 python = ">=3.9.2, <4.0"
 cdislogging = "1.1.1"
-cryptography = "^44.0.1"
+cryptography = "^46.0.5"
 dictionaryutils = "^3.4.10"
 gen3dictionary = "2.0.3"
 gen3datamodel = "3.2.3"
