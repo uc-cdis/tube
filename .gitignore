@@ -109,3 +109,4 @@ tests/resources/keys/*.pem
 
 # PyCharm
 .idea
+.vscode/settings.json
