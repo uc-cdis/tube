@@ -27,7 +27,7 @@ RUN python -m venv /venv
 
 COPY poetry.lock pyproject.toml README.md /${appname}/
 
-RUN pip install --no-cache-dir 'poetry<2.0' && \
+RUN pip install --no-cache-dir 'poetry' && \
     poetry install -vv --only main --no-interaction
 
 COPY --chown=gen3:gen3 . /${appname}
