@@ -152,6 +152,22 @@ class Translator(object):
             cols.append(key_name)
         return cols
 
+    def select_cols_from_node(self, df, node_name, props, key_name=None):
+        """
+        Project a node dataframe onto the requested props, renaming src -> name.
+        Must be applied to empty dataframes too: they are built from the node
+        schema, which carries the source column names, and the aggregation steps
+        downstream address the columns by their mapped names.
+        :param df: dataframe of the node
+        :param node_name: name of the node
+        :param props: subset of properties to be extracted. None means get all.
+        :param key_name:
+        :return:
+        """
+        if props is None:
+            return df
+        return df.select(*self.get_cols_from_node(node_name, props, [], df, key_name))
+
     def translate_table_to_dataframe(
         self, node, get_zero_frame=None, props=None, key_name=None
     ):
@@ -171,18 +187,22 @@ class Translator(object):
             print(f"With props: {node.props}")
             schema = self.parser.create_schema(node)
             df, is_empty = self.read_text_files_of_table(
-                node_tbl_name, self.get_empty_dataframe_with_name
+                node_tbl_name,
+                lambda: self.get_empty_dataframe_with_name(node, key_name=key_name),
             )
             if is_empty:
-                return df
+                return self.select_cols_from_node(df, node_name, props, key_name)
             df = df.map(lambda x: extract_metadata_to_json(x, node_name))
             if get_zero_frame and (df is None or df.isEmpty()):
-                return self.get_empty_dataframe_with_name(node, key_name=key_name)
+                return self.select_cols_from_node(
+                    self.get_empty_dataframe_with_name(node, key_name=key_name),
+                    node_name,
+                    props,
+                    key_name,
+                )
             new_df = self.sql_context.read.json(df, schema=schema)
             df.unpersist()
-            if props is not None and not new_df.rdd.isEmpty():
-                cols = self.get_cols_from_node(node_name, props, [], new_df, key_name)
-                new_df = new_df.select(*cols)
+            new_df = self.select_cols_from_node(new_df, node_name, props, key_name)
             return self.return_dataframe(
                 new_df,
                 f"{Translator.translate_table_to_dataframe.__qualname__}__{node.name}",
