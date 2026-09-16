@@ -13,7 +13,7 @@ include = [
 [tool.poetry.dependencies]
 python = ">=3.9.2, <4.0"
 cdislogging = "1.1.1"
-cryptography = ">=48.0.1"
+cryptography = ">=50.0.0"
 dictionaryutils = "^3.4.10"
 gen3dictionary = "2.0.3"
 gen3datamodel = "3.2.3"
