@@ -17,6 +17,7 @@ from pyspark.sql.functions import (
     col,
     collect_list,
     concat_ws,
+    countDistinct,
     lit,
     sort_array,
     struct,
@@ -317,29 +318,65 @@ class Translator(BaseTranslator):
                 props_with_fn.append({"src": src_prop, "dst": dst_prop})
         return props_with_fn, props_without_fn
 
-    def join_and_aggregate(self, df, joining_df, dual_props, joining_node):
+    def joining_prop_to_agg_func_expr(self, prop, joining_key):
+        """
+        Aggregation expression for one prop taken from another index.
+        The joining index is read at its intermediate step, before its own
+        translate_final flattens it to one row per document, so a document linked to
+        several parents appears there once per link. 'count' must therefore count
+        documents of the joining index, not rows of it.
+        :param prop: prop of this index, as declared under joining_props
+        :param joining_key: name of the column holding the key of the joining index,
+                            None when this index does not carry it
+        :return: the aggregation expression, aliased to the name of the prop
+        """
+        if prop.fn != "count":
+            return self.reducer_to_agg_func_expr(
+                prop.fn, prop.src, alias=prop.name, is_merging=False
+            )
+        if joining_key is None:
+            # without the key there is no way to tell the documents of the joining
+            # index apart, so fall back to counting its rows
+            return count(when(col(prop.src).isNotNull(), 1)).alias(prop.name)
+        return countDistinct(when(col(prop.src).isNotNull(), col(joining_key))).alias(
+            prop.name
+        )
+
+    def join_and_aggregate(
+        self, df, joining_df, dual_props, joining_node, joining_key=None
+    ):
         src_col_names = [p.get("src").name for p in dual_props]
         src_col_names.extend(joining_node.joining_fields)
         all_expr = [lit(None) for c in src_col_names if c not in joining_df.columns]
         all_expr.extend(src_col_names)
+        if joining_key is not None and joining_key not in joining_df.columns:
+            joining_key = None
+        if joining_key is not None and joining_key not in src_col_names:
+            all_expr.append(joining_key)
         joining_df = joining_df.select(*all_expr)
+        if joining_key is not None:
+            # Rows of one document differ only in the parent columns dropped just
+            # above, so they collapse here while two documents never can, their key
+            # being part of the projection. Only safe with that key: without it this
+            # would merge documents that happen to share the projected values.
+            joining_df = joining_df.drop_duplicates()
 
         expr = [
-            self.reducer_to_agg_func_expr(
-                p.fn, p.prop.src, alias=p.prop.name, is_merging=False
-            )
-            for p in joining_node.getting_fields
+            self.joining_prop_to_agg_func_expr(p.get("dst"), joining_key)
+            for p in dual_props
         ]
         tmp_df = joining_df.groupBy(joining_node.joining_fields).agg(*expr)
-        rm_props = [p for p in src_col_names if p not in joining_node.joining_fields]
-        joining_df = joining_df.drop(*rm_props).join(
-            tmp_df, on=joining_node.joining_fields
-        )
-        tmp_df.unpersist()
-
-        res_df = df.join(joining_df, on=joining_node.joining_fields, how="left_outer")
-        df.unpersist()
         joining_df.unpersist()
+
+        res_df = df.join(tmp_df, on=joining_node.joining_fields, how="left_outer")
+        count_props = [
+            p.get("dst").name for p in dual_props if p.get("dst").fn == "count"
+        ]
+        if len(count_props) > 0:
+            # a group with no matching document counted zero of them, not null
+            res_df = res_df.fillna(0, subset=count_props)
+        df.unpersist()
+        tmp_df.unpersist()
         return self.return_dataframe(res_df, Translator.join_and_aggregate.__qualname__)
 
     def join_no_aggregate(self, df, joining_df, dual_props, joining_node):
@@ -364,7 +401,13 @@ class Translator(BaseTranslator):
             translator, joining_node
         )
         if len(props_with_fn) > 0:
-            df = self.join_and_aggregate(df, joining_df, props_with_fn, joining_node)
+            df = self.join_and_aggregate(
+                df,
+                joining_df,
+                props_with_fn,
+                joining_node,
+                get_node_id_name(translator.parser.doc_type),
+            )
         if len(props_without_fn) > 0:
             df = self.join_no_aggregate(df, joining_df, props_without_fn, joining_node)
         return self.return_dataframe(df, Translator.join_to_an_index.__qualname__)
