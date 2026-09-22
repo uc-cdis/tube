@@ -55,7 +55,7 @@ def run_transform(translators):
         v.current_step += 1
 
     for t in list(translators.values()):
-        print(t.__dict__)
+        print("Finalizing index: {}".format(t.parser.doc_type))
         if t.current_step <= 0:
             continue
         df = t.translate_final()

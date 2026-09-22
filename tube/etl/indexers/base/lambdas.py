@@ -1,6 +1,6 @@
 import ast
 import json
-import collections
+import collections.abc
 import functools
 import pyspark.sql.types as t
 import pyspark.sql.functions as f
@@ -99,7 +99,7 @@ def swap_key_value(df):
 def get_props(names, values):
     return lambda x: {
         p_id: values[src][p_id][v]
-        if isinstance(v, collections.Hashable)
+        if isinstance(v, collections.abc.Hashable)
         and src in values
         and v in values[src][p_id]
         else v

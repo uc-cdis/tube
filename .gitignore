@@ -110,3 +110,7 @@ tests/resources/keys/*.pem
 # PyCharm
 .idea
 .vscode/settings.json
+
+# Vendored es-hadoop artifacts (downloaded in Dockerfile)
+elasticsearch-hadoop-*/
+elasticsearch-hadoop-*.zip

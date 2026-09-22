@@ -1,4 +1,34 @@
+# Negations must come first so later patterns don't re-exclude them.
 !.git/**
 !.git
 !.gitignore
 !.github/**
+
+# Version control and CI
+.git
+.github
+azure-devops-pipeline.yaml
+
+# Large vendored artifacts (re-downloaded in the Dockerfile)
+elasticsearch-hadoop-*.zip
+elasticsearch-hadoop-*/
+*.jar
+
+# Test fixtures (thousands of parquet files)
+tests/
+.secrets.baseline
+
+# Python build/cache artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+.venv/
+venv/
+
+# Local dev and editor cruft
+.DS_Store
+docker-compose.yaml
+docs/
