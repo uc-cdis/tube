@@ -24,6 +24,7 @@ from pyspark.sql.functions import (
     when,
 )
 from copy import deepcopy
+from pyspark import StorageLevel
 
 
 class Translator(BaseTranslator):
@@ -158,7 +159,7 @@ class Translator(BaseTranslator):
         )
 
         temp_df = self.join_two_dataframe(edge_df, child_df, how="left_outer")
-        if temp_df.rdd.isEmpty():
+        if len(temp_df.head(1)) == 0:
             return df
         expr = [
             self.reducer_to_agg_func_expr(rd.fn, rd.prop.name, is_merging=False)
@@ -184,6 +185,8 @@ class Translator(BaseTranslator):
         for n in self.parser.aggregated_nodes:
             df = None
             key_df = self.translate_table_to_dataframe(n, get_zero_frame=True, props=[])
+            # Loop-invariant: joined once per child below.
+            key_df = key_df.persist(StorageLevel.MEMORY_AND_DISK)
             for child in n.children:
                 if child.no_children_to_map == 0:
                     # Read all associations from edge table that link between parent and child one
@@ -194,10 +197,15 @@ class Translator(BaseTranslator):
                         ),
                         how="left_outer",
                     )
+                    # Consumed up to three times below (count agg, child-table
+                    # agg, intermediate rollup); without persisting, the edge
+                    # read and parse is redone for each.
+                    edge_df = edge_df.persist(StorageLevel.MEMORY_AND_DISK)
                     df = self.aggregate_with_count_on_edge_tbl(
                         n.name, df, edge_df, child
                     )
-                    if df.rdd.isEmpty():
+                    if len(df.head(1)) == 0:
+                        edge_df.unpersist()
                         continue
                     no_of_remaining_reducers = len(
                         [r for r in child.reducers if not r.done]
@@ -253,7 +261,12 @@ class Translator(BaseTranslator):
 
             child_df = self.translate_table_to_dataframe(n, props=additional_props)
             child_by_root = self.join_two_dataframe(edge_df, child_df)
-            if child_by_root.rdd.isEmpty():
+            # Reused up to three times below (sort/select/join). Without this the
+            # emptiness check forces a job and every later use recomputes the
+            # whole lineage from the text files again.
+            child_by_root = child_by_root.persist(StorageLevel.MEMORY_AND_DISK)
+            if len(child_by_root.head(1)) == 0:
+                child_by_root.unpersist()
                 continue
             if n.sorted_by is not None:
                 sorted_cols = []
@@ -281,8 +294,14 @@ class Translator(BaseTranslator):
             child_by_root = self.select_existing_field_from_df(
                 child_by_root, props, [root_id]
             )
-            root_df = self.join_two_dataframe(root_df, child_by_root, how="left_outer")
-            child_df.unpersist()
+            new_root_df = self.join_two_dataframe(
+                root_df, child_by_root, how="left_outer"
+            )
+            # root_df is the loop accumulator: its lineage grows with every
+            # flatten_prop, so persist each generation and release the previous.
+            new_root_df = new_root_df.persist(StorageLevel.MEMORY_AND_DISK)
+            root_df.unpersist()
+            root_df = new_root_df
             child_by_root.unpersist()
         return self.return_dataframe(
             root_df, Translator.get_direct_children.__qualname__
@@ -387,14 +406,14 @@ class Translator(BaseTranslator):
         root_df = self.translate_table_to_dataframe(
             self.parser.root, props=self.parser.props
         )
-        if root_df.rdd.isEmpty():
+        if len(root_df.head(1)) == 0:
             return root_df
         root_df = self.translate_parent(root_df)
         root_df = self.get_direct_children(root_df)
         root_df = root_df.drop_duplicates()
         root_df = self.ensure_project_id_exist(root_df)
         agg_df = self.aggregate_nested_properties()
-        if agg_df is not None and not agg_df.rdd.isEmpty():
+        if agg_df is not None and len(agg_df.head(1)) > 0:
             root_id = get_node_id_name(self.parser.root.name)
             rm_props = [
                 p
@@ -449,7 +468,12 @@ class Translator(BaseTranslator):
                 if prop.name in df.columns:
                     field = df.schema[prop.name]
                     expr.append(
-                        self.reducer_to_agg_func_expr(p.fn, prop.name, is_flattening=True, data_type=field.dataType)
+                        self.reducer_to_agg_func_expr(
+                            p.fn,
+                            prop.name,
+                            is_flattening=True,
+                            data_type=field.dataType,
+                        )
                     )
                 else:
                     expr.append(

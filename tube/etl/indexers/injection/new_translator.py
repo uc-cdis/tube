@@ -1,4 +1,5 @@
 from copy import copy
+from pyspark import StorageLevel
 from pyspark.sql import functions as fn
 from pyspark.sql.types import StructField, StructType
 
@@ -106,7 +107,7 @@ class Translator(BaseTranslator):
             ).drop(*rm_props)
         self.return_dataframe(
             collected_collecting_dfs[child.name],
-            f"{Translator.collect_collecting_child.__qualname__}__collected_collecting_dfs__{child.name}"
+            f"{Translator.collect_collecting_child.__qualname__}__collected_collecting_dfs__{child.name}",
         )
 
     def merge_project(self, child, edge_df, collected_collecting_dfs):
@@ -122,15 +123,17 @@ class Translator(BaseTranslator):
         )
         collected_collecting_dfs[child.name] = self.return_dataframe(
             child_df,
-            f"{Translator.merge_project.__qualname__}__collected_collecting_dfs__{child.name}"
+            f"{Translator.merge_project.__qualname__}__collected_collecting_dfs__{child.name}",
         )
 
     def join_program_to_project(self):
         collected_collecting_dfs = {}
         for root in self.parser.roots:
             df = self.translate_table_to_dataframe(root, props=root.props)
-            if df.rdd.isEmpty():
+            if len(df.head(1)) == 0:
                 return collected_collecting_dfs
+            # Loop-invariant: joined once per child below.
+            df = df.persist(StorageLevel.MEMORY_AND_DISK)
             for child in root.children:
                 edge_tbl = child.parents[root.name]
                 child_df = self.translate_edge_to_dataframe(
@@ -208,8 +211,7 @@ class Translator(BaseTranslator):
         else:
             final_df = self.create_empty_dataframe()
         return self.return_dataframe(
-            final_df,
-            f"{Translator.translate.__qualname__}__collected_leaf_dfs"
+            final_df, f"{Translator.translate.__qualname__}__collected_leaf_dfs"
         )
 
     def clone_prop_with_iterator_fn(self, p):
@@ -271,6 +273,5 @@ class Translator(BaseTranslator):
 
         final_df = self.flatten_nested_list(df, aggregating_props)
         return self.return_dataframe(
-            final_df,
-            f"{Translator.translate_final.__qualname__}__translate_final"
+            final_df, f"{Translator.translate_final.__qualname__}__translate_final"
         )

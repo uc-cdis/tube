@@ -21,12 +21,35 @@ def make_spark_context(tube_config):
         .set("spark.executor.memory", tube_config.SPARK_EXECUTOR_MEMORY)
         .set("spark.driver.memory", tube_config.SPARK_DRIVER_MEMORY)
         .set("spark.python.profile", "false")
+        .set(
+            "spark.sql.shuffle.partitions",
+            getattr(tube_config, "SPARK_SHUFFLE_PARTITIONS", "16"),
+        )
+        .set(
+            "spark.sql.adaptive.enabled",
+            getattr(tube_config, "SPARK_ADAPTIVE_ENABLED", "true"),
+        )
+        .set(
+            "spark.sql.adaptive.coalescePartitions.enabled",
+            getattr(tube_config, "SPARK_ADAPTIVE_ENABLED", "true"),
+        )
+        .set(
+            "spark.serializer",
+            getattr(
+                tube_config,
+                "SPARK_SERIALIZER",
+                "org.apache.spark.serializer.KryoSerializer",
+            ),
+        )
         .setAppName(config.APP_NAME)
     )
-    if tube_config.RUNNING_MODE == enums.RUNNING_MODE_DEV:
-        # We should only use the value of `config.spark_master` in
-        # a test context. Production runs need to set the Spark Master
-        # to 'yarn'. This is done in the arguments to `spark-submit`.
+    # Previously this only applied in Dev mode, on the assumption that
+    # production sets the master via spark-submit arguments. Nothing in this
+    # repo ever invokes spark-submit, so in every other mode SPARK_MASTER was
+    # silently ignored and Spark fell back to its own default. Honour it
+    # whenever it is set; leave the master unset otherwise so an external
+    # spark-submit can still win.
+    if tube_config.SPARK_MASTER:
         conf = conf.setMaster(tube_config.SPARK_MASTER)
     sc = SparkContext.getOrCreate(conf=conf)
 

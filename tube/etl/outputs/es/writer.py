@@ -53,11 +53,18 @@ class Writer(SparkBase):
         )
 
     def write_df_to_new_index(self, df, index, doc_type):
-        es_config = self.es_config
+        # Copy: self.es_config is the module-level ES_SPARK_CONFIG dict, and
+        # mutating it here leaks es.resource into every subsequent index write.
+        es_config = dict(self.es_config)
         es_config["es.resource"] = index
+        # coalesce() adds no shuffle, so coalesce(1) collapsed the upstream
+        # narrow-dependency stages to a single task as well -- it serialized far
+        # more than the write itself. 0 means "leave partitioning alone".
+        write_partitions = getattr(self.config, "ES_WRITE_PARTITIONS", 0)
+        if write_partitions > 0:
+            df = df.repartition(write_partitions)
         df = (
-            df.coalesce(1)
-            .write.format("org.elasticsearch.spark.sql")
+            df.write.format("org.elasticsearch.spark.sql")
             .option("es.nodes", es_config["es.nodes"])
             .option("es.port", es_config["es.port"])
             .option("es.nodes.wan.only", "true")
@@ -66,6 +73,20 @@ class Writer(SparkBase):
             .option("es.nodes.client.only", es_config["es.nodes.client.only"])
             .option("es.resource", es_config["es.resource"])
             .option("es.net.ssl", es_config["es.net.ssl"])
+            # es-hadoop defaults this to true: an ES refresh after EVERY bulk
+            # batch. Disabling it is one of the largest bulk-indexing wins.
+            .option(
+                "es.batch.write.refresh",
+                getattr(self.config, "ES_BATCH_WRITE_REFRESH", "false"),
+            )
+            .option(
+                "es.batch.size.entries",
+                getattr(self.config, "ES_BATCH_SIZE_ENTRIES", "5000"),
+            )
+            .option(
+                "es.batch.size.bytes",
+                getattr(self.config, "ES_BATCH_SIZE_BYTES", "10mb"),
+            )
         )
         if (
             "es.net.http.auth.user" in es_config

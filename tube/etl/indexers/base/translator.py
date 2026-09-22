@@ -190,7 +190,7 @@ class Translator(object):
                 return self.get_empty_dataframe_with_name(node, key_name=key_name)
             new_df = self.sql_context.read.json(df, schema=schema)
             df.unpersist()
-            if props is not None and not new_df.rdd.isEmpty():
+            if props is not None and len(new_df.head(1)) > 0:
                 cols = self.get_cols_from_node(node_name, props, [], new_df, key_name)
                 new_df = new_df.select(*cols)
             return self.return_dataframe(
@@ -381,13 +381,23 @@ class Translator(object):
             self.get_path_from_step(self.current_step - 1)
         )
 
-    def join_two_dataframe(self, df1, df2, how="inner"):
+    def join_two_dataframe(self, df1, df2, how="inner", dedup=True):
+        """
+        Join two dataframes on their common column names.
+
+        :param dedup: apply drop_duplicates() to the result. This is a full
+            shuffle over every column and is unnecessary when joining on a key
+            that is already unique, so callers that know better can opt out.
+        """
         join_on_props = [p for p in df1.schema.names if p in df2.schema.names]
         if len(join_on_props) == 0:
             return self.get_empty_dataframe_with_columns([])
-        res_df = df1.join(df2, on=join_on_props, how=how).drop_duplicates()
-        df1.unpersist()
-        df2.unpersist()
+        res_df = df1.join(df2, on=join_on_props, how=how)
+        if dedup:
+            res_df = res_df.drop_duplicates()
+        # NOTE: deliberately does not unpersist df1/df2. It cannot know whether
+        # the caller still needs them, and doing so silently discarded every
+        # persist() the callers set up. Lifetime is the caller's business.
         return res_df
 
     def translate_joining_props(self, translators):

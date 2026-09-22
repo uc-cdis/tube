@@ -97,9 +97,24 @@ except IndexError:
     USERYAML_FILE = None
 PROJECT_TO_RESOURCE_PATH = get_resource_paths_from_yaml(USERYAML_FILE)
 
-SPARK_MASTER = os.getenv("SPARK_MASTER", "local[1]")  # 'spark-service'
+SPARK_MASTER = os.getenv("SPARK_MASTER", "local[*]")  # 'spark-service'
 SPARK_EXECUTOR_MEMORY = os.getenv("SPARK_EXECUTOR_MEMORY", "2g")
 SPARK_DRIVER_MEMORY = os.getenv("SPARK_DRIVER_MEMORY", "512m")
+# Default 200 shuffle partitions is far too high for typical commons-sized data;
+# it produces hundreds of tiny tasks whose scheduling cost dwarfs their work.
+SPARK_SHUFFLE_PARTITIONS = os.getenv("SPARK_SHUFFLE_PARTITIONS", "16")
+SPARK_ADAPTIVE_ENABLED = os.getenv("SPARK_ADAPTIVE_ENABLED", "true")
+SPARK_SERIALIZER = os.getenv(
+    "SPARK_SERIALIZER", "org.apache.spark.serializer.KryoSerializer"
+)
+# Number of output partitions for the Elasticsearch write. "0" keeps the
+# DataFrame's existing partitioning (no coalesce/repartition at all).
+ES_WRITE_PARTITIONS = int(os.getenv("ES_WRITE_PARTITIONS", "0"))
+# es-hadoop defaults es.batch.write.refresh to true, forcing an ES refresh after
+# every bulk batch. Disabling it is one of the largest bulk-indexing wins.
+ES_BATCH_WRITE_REFRESH = os.getenv("ES_BATCH_WRITE_REFRESH", "false")
+ES_BATCH_SIZE_ENTRIES = os.getenv("ES_BATCH_SIZE_ENTRIES", "5000")
+ES_BATCH_SIZE_BYTES = os.getenv("ES_BATCH_SIZE_BYTES", "10mb")
 APP_NAME = "Gen3 ETL"
 
 os.environ[
