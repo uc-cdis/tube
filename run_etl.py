@@ -61,12 +61,10 @@ def run_transform():
         interpreter.run_transform(translators)
 
     except Py4JJavaError as py4J_ex:
-        print(
-            "ERROR when connecting to spark. "
-            "Please roll spark"
-        )
+        print("ERROR during Spark transformation")
         print(py4J_ex)
         print(traceback.format_exc())
+        raise
 
     except Exception as ex:
         print("ERROR when running transformation")

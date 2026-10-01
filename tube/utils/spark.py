@@ -97,15 +97,41 @@ def save_rdds(df, path, sc):
 def get_all_files_from_hdfs(path, sc):
     fs, opath, sc = get_hdfs_file_handler(sc)
     status = fs.listStatus(opath(path))
+
     files = []
+
     for p in status:
-        files.append(p.getPath().toString())
+        if not p.isFile():
+            continue
+
+        file_path = p.getPath()
+        file_name = file_path.getName()
+
+        if file_name.startswith("_") or file_name.startswith("."):
+            continue
+
+        files.append(file_path.toString())
+
     return files
 
 
 def get_all_files(path, sc):
     if config.RUNNING_MODE.lower() == enums.RUNNING_MODE_TEST.lower():
-        return [os.path.abspath(os.path.join(path, f)) for f in os.listdir(path)]
+        files = []
+
+        for file_name in os.listdir(path):
+            if file_name.startswith("_") or file_name.startswith("."):
+                continue
+
+            file_path = os.path.abspath(
+                os.path.join(path, file_name)
+            )
+
+            if os.path.isfile(file_path):
+                files.append(file_path)
+
+        return files
+
     return get_all_files_from_hdfs(path, sc)
 
 
