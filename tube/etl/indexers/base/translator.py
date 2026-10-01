@@ -3,10 +3,20 @@ import json
 import tube.settings as config
 import tube.enums as enums
 
+from pyspark import StorageLevel
 from pyspark.sql.context import SQLContext
 from pyspark.sql.types import StructType, StructField, StringType, ArrayType
-from pyspark.sql.functions import col, min, sum, count, collect_set, collect_list, first, when
-
+from pyspark.sql.functions import (
+    col,
+    min,
+    sum,
+    count,
+    collect_set,
+    collect_list,
+    first,
+    when,
+    from_json,
+)
 from .lambdas import (
     extract_link,
     extract_link_reverse,
@@ -36,6 +46,16 @@ def json_export_with_no_key(x, doc_type, root_name):
 
 
 cached_dataframe = {}
+jdbc_table_cache = {}
+
+
+def clear_jdbc_table_cache():
+    for df in jdbc_table_cache.values():
+        try:
+            df.unpersist()
+        except Exception:
+            pass
+    jdbc_table_cache.clear()
 
 
 class Translator(object):
@@ -53,6 +73,75 @@ class Translator(object):
         self.current_step = 0
         self.mapping_dictionary = {}
         self.mapping_broadcasted = None
+
+    def is_direct_jdbc_mode(self):
+        return config.DB_IMPORT_MODE.lower() == "spark-jdbc-direct"
+
+    def _jdbc_properties(self):
+        return {
+            "user": config.DB_USERNAME,
+            "password": config.DB_PASSWORD,
+            "driver": "org.postgresql.Driver",
+            "fetchsize": str(config.JDBC_FETCH_SIZE),
+        }
+
+    @staticmethod
+    def _jdbc_hash_predicates(column_name, partitions):
+        return [
+            (
+                "mod(abs(hashtext(CAST(\"{}\" AS text))::bigint), {}) = {}".format(
+                    column_name,
+                    partitions,
+                    partition,
+                )
+            )
+            for partition in range(partitions)
+        ]
+
+    def get_jdbc_table(self, table_name, columns, partition_column):
+        cache_key = (table_name, tuple(columns))
+        if cache_key in jdbc_table_cache:
+            return jdbc_table_cache[cache_key]
+
+        print(
+            "Reading {} directly from PostgreSQL with {} JDBC partition(s)".format(
+                table_name,
+                config.JDBC_READ_PARTITIONS,
+            )
+        )
+
+        reader = self.sql_context.sparkSession.read
+        quoted_table = '"{}"'.format(table_name)
+        properties = self._jdbc_properties()
+
+        if config.JDBC_READ_PARTITIONS > 1:
+            predicates = self._jdbc_hash_predicates(
+                partition_column,
+                config.JDBC_READ_PARTITIONS,
+            )
+            df = reader.jdbc(
+                url=config.JDBC,
+                table=quoted_table,
+                predicates=predicates,
+                properties=properties,
+            )
+        else:
+            df = reader.jdbc(
+                url=config.JDBC,
+                table=quoted_table,
+                properties=properties,
+            )
+
+        # Select only the fields Tube actually uses. Spark's JDBC source can push
+        # this projection into PostgreSQL, reducing DB/network traffic.
+        df = df.select(*columns)
+
+        # Persist source tables on executor-local disk rather than heap. This
+        # prevents repeated Aurora reads when a table is reused by multiple
+        # paths/mappings without increasing executor memory pressure much.
+        df = df.persist(StorageLevel.DISK_ONLY)
+        jdbc_table_cache[cache_key] = df
+        return df
 
     def update_types(self):
         self.parser.update_prop_types()
@@ -105,7 +194,6 @@ class Translator(object):
             if is_empty:
                 return rdd
             rdd = rdd.map(extract_metadata_to_tuple)
-
             if get_zero_frame:
                 if rdd.isEmpty():
                     rdd = self.sc.parallelize(
@@ -152,6 +240,55 @@ class Translator(object):
             cols.append(key_name)
         return cols
 
+    def translate_jdbc_table_to_dataframe(
+        self, node, get_zero_frame=None, props=None, key_name=None
+    ):
+        node_name = node.name
+        node_id_name = get_node_id_name(node_name)
+        props = props if props is not None else node.props
+
+        print(f"Create scheme for node: {node.name}")
+        print(f"With props: {node.props}")
+
+        schema = self.parser.create_schema(node)
+        props_schema = StructType(
+            [field for field in schema.fields if field.name != node_id_name]
+        )
+
+        source_df = self.get_jdbc_table(
+            node.tbl_name,
+            columns=["node_id", "_props"],
+            partition_column="node_id",
+        )
+
+        parsed_df = source_df.select(
+            col("node_id").cast("string").alias(node_id_name),
+            from_json(col("_props").cast("string"), props_schema).alias(
+                "_tube_props"
+            ),
+        )
+
+        prop_columns = [
+            col("_tube_props.{}".format(field.name)).alias(field.name)
+            for field in props_schema.fields
+        ]
+
+        new_df = parsed_df.select(
+            col(node_id_name),
+            *prop_columns,
+        )
+
+        # The DataFrame already has the correct schema when empty, so unlike the
+        # legacy text/RDD path we do not need an isEmpty() action here.
+        if props is not None:
+            cols = self.get_cols_from_node(node_name, props, [], new_df, key_name)
+            new_df = new_df.select(*cols)
+
+        return self.return_dataframe(
+            new_df,
+            f"{Translator.translate_table_to_dataframe.__qualname__}__{node.name}",
+        )
+
     def translate_table_to_dataframe(
         self, node, get_zero_frame=None, props=None, key_name=None
     ):
@@ -163,6 +300,14 @@ class Translator(object):
         :param key_name:
         :return:
         """
+        if self.is_direct_jdbc_mode():
+            return self.translate_jdbc_table_to_dataframe(
+                node,
+                get_zero_frame=get_zero_frame,
+                props=props,
+                key_name=key_name,
+            )
+
         node_tbl_name = node.tbl_name
         node_name = node.name
         props = props if props is not None else node.props
@@ -228,6 +373,18 @@ class Translator(object):
     def translate_edge_to_dataframe(self, table_name, src, dst):
         src_id_name = get_node_id_name(src)
         dst_id_name = get_node_id_name(dst)
+
+        if self.is_direct_jdbc_mode():
+            source_df = self.get_jdbc_table(
+                table_name,
+                columns=["src_id", "dst_id"],
+                partition_column="src_id",
+            )
+            return source_df.select(
+                col("src_id").cast("string").alias(src_id_name),
+                col("dst_id").cast("string").alias(dst_id_name),
+            )
+
         df = self.translate_edge(table_name, reversed=False)
         df = df.map(lambda x: json.dumps({src_id_name: x[0], dst_id_name: x[1]}))
         if df is None or df.isEmpty():
@@ -253,7 +410,7 @@ class Translator(object):
         # values = {
         #   "gender": {
         #       1: {"male": "M", "female": "F"},
-        #       2: {"male": "Male", "female": "Female}
+        #       2: {"male": "Male", "female": "Female"}
         #   },
         #   "project_name": {3: {}}
         # }
@@ -267,12 +424,16 @@ class Translator(object):
             for m in p.value_mappings:
                 v[p.id][m.original] = m.final
             values[p.src] = v
-
         return df.mapValues(get_props(names, values))
 
     @staticmethod
     def reducer_to_agg_func_expr(
-        func_name, value, alias=None, is_merging=False, is_flattening=False, data_type=None
+        func_name,
+        value,
+        alias=None,
+        is_merging=False,
+        is_flattening=False,
+        data_type=None,
     ):
         col_alias = alias if alias is not None else value
         if func_name == "count":

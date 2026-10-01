@@ -220,65 +220,65 @@ class SqlToHDFS(object):
             .csv(output_path)
         )
 
-def generate_import_all_tables_jdbc(self):
-    sc = None
-    spark = None
+    def generate_import_all_tables_jdbc(self):
+        sc = None
+        spark = None
 
-    try:
-        sc = make_spark_context(self.config)
+        try:
+            sc = make_spark_context(self.config)
 
-        spark = SparkSession.builder.getOrCreate()
+            spark = SparkSession.builder.getOrCreate()
 
-        make_sure_hdfs_path_exist(
-            self.config.HDFS_DIR,
-            sc=sc,
-        )
-
-        tables = self.get_all_tables()
-
-        yield self.formatter.format_line(
-            "Spark JDBC import: {} tables".format(
-                len(tables)
+            make_sure_hdfs_path_exist(
+                self.config.HDFS_DIR,
+                sc=sc,
             )
-        )
 
-        for table_name in tables:
-            if not (
-                table_name.startswith("node_")
-                or table_name.startswith("edge_")
-            ):
-                continue
+            tables = self.get_all_tables()
 
             yield self.formatter.format_line(
-                "Importing {} with Spark JDBC".format(
-                    table_name
+                "Spark JDBC import: {} tables".format(
+                    len(tables)
                 )
             )
 
-            df = self._read_table_with_jdbc(
-                spark,
-                table_name,
-            )
+            for table_name in tables:
+                if not (
+                    table_name.startswith("node_")
+                    or table_name.startswith("edge_")
+                ):
+                    continue
 
-            output_path = "{}/{}".format(
-                self.config.HDFS_DIR.rstrip("/"),
-                table_name,
-            )
+                yield self.formatter.format_line(
+                    "Importing {} with Spark JDBC".format(
+                        table_name
+                    )
+                )
 
-            self._write_sqoop_compatible_text(
-                df,
-                output_path,
-            )
+                df = self._read_table_with_jdbc(
+                    spark,
+                    table_name,
+                )
 
-            yield self.formatter.format_line(
-                "Finished {}".format(table_name)
-            )
+                output_path = "{}/{}".format(
+                    self.config.HDFS_DIR.rstrip("/"),
+                    table_name,
+                )
 
-    finally:
-        if spark is not None:
-            spark.stop()
-        SparkSession._instantiatedSession = None
-        SparkSession._activeSession = None            
+                self._write_sqoop_compatible_text(
+                    df,
+                    output_path,
+                )
+
+                yield self.formatter.format_line(
+                    "Finished {}".format(table_name)
+                )
+
+        finally:
+            if spark is not None:
+                spark.stop()
+            SparkSession._instantiatedSession = None
+            SparkSession._activeSession = None            
 
     def generate_import_all_tables_sqoop(self):
         config = get_sql_to_hdfs_config(

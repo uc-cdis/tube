@@ -8,14 +8,15 @@ from tube.importers.sql_to_hdfs import SqlToHDFS
 from tube.formatters import BaseFormatter
 from tube.utils.spark import make_spark_context
 from tube.etl.outputs.es.timestamp import check_to_run_etl
+from tube.etl.indexers.base.translator import clear_jdbc_table_cache
 from opensearchpy import OpenSearch
 from py4j.protocol import Py4JJavaError
+
 
 def run_import():
     """
     Import PostgreSQL data into Hadoop.
     """
-
     started_at = time.monotonic()
 
     try:
@@ -24,9 +25,7 @@ def run_import():
             BaseFormatter(),
         )
 
-        stream = (
-            sql_to_hdfs.generate_import_all_tables()
-        )
+        stream = sql_to_hdfs.generate_import_all_tables()
 
         if stream is None:
             return
@@ -38,15 +37,10 @@ def run_import():
         print("ERROR when running import to hadoop")
         print(traceback.format_exc())
         raise
-
     finally:
         elapsed = time.monotonic() - started_at
 
-        print(
-            "Import completed in {:.2f} seconds".format(
-                elapsed
-            )
-        )
+        print("Import completed in {:.2f} seconds".format(elapsed))
 
 
 def run_transform():
@@ -59,7 +53,6 @@ def run_transform():
             config,
         )
         interpreter.run_transform(translators)
-
     except Py4JJavaError as py4J_ex:
         print("ERROR during Spark transformation")
         print(py4J_ex)
@@ -73,6 +66,9 @@ def run_transform():
         raise
 
     finally:
+        if config.DB_IMPORT_MODE.lower() == "spark-jdbc-direct":
+            clear_jdbc_table_cache()
+
         if sc is not None:
             sc.stop()
 
@@ -107,7 +103,6 @@ def config_by_args():
         help="Force ETL run when there is no new data",
         action="store_true",
     )
-
     args = parser.parse_args()
     config.RUNNING_MODE = args.config
     return args
@@ -118,13 +113,18 @@ def main():
 
     es = OpenSearch([config.ES_CONNECTION_CONFIG])
     index_names = interpreter.get_index_names(config)
-
     if args.force or check_to_run_etl(es, index_names):
         if (
             args.step == enums.RUNNING_STEP_IMPORT
             or args.step == enums.RUNNING_STEP_ALL
         ):
-            run_import()
+            if config.DB_IMPORT_MODE.lower() != "spark-jdbc-direct":
+                run_import()
+            else:
+                print(
+                    "Skipping import stage: Spark JDBC direct mode reads "
+                    "PostgreSQL during transformation"
+                )
         if (
             args.step == enums.RUNNING_STEP_TRANSFORM
             or args.step == enums.RUNNING_STEP_ALL
