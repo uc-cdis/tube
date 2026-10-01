@@ -16,6 +16,7 @@ def make_spark_context(tube_config):
     """
     Makes a spark and sqlContext
     """
+
     conf = (
         SparkConf()
         .set("spark.executor.memory", tube_config.SPARK_EXECUTOR_MEMORY)
@@ -23,15 +24,32 @@ def make_spark_context(tube_config):
         .set("spark.python.profile", "false")
         .setAppName(config.APP_NAME)
     )
+
+    if tube_config.SPARK_SQL_SHUFFLE_PARTITIONS:
+        conf = conf.set(
+            "spark.sql.shuffle.partitions",
+            tube_config.SPARK_SQL_SHUFFLE_PARTITIONS,
+        )
+
+    if tube_config.SPARK_DEFAULT_PARALLELISM:
+        conf = conf.set(
+            "spark.default.parallelism",
+            tube_config.SPARK_DEFAULT_PARALLELISM,
+        )
+
+    if tube_config.SPARK_PYSPARK_MEMORY:
+        conf = conf.set(
+            "spark.executor.pyspark.memory",
+            tube_config.SPARK_PYSPARK_MEMORY,
+        )
+
     if tube_config.RUNNING_MODE == enums.RUNNING_MODE_DEV:
-        # We should only use the value of `config.spark_master` in
-        # a test context. Production runs need to set the Spark Master
-        # to 'yarn'. This is done in the arguments to `spark-submit`.
         conf = conf.setMaster(tube_config.SPARK_MASTER)
+
     sc = SparkContext.getOrCreate(conf=conf)
 
-    # Configure logging
     log4j = sc._jvm.org.apache.log4j
+
     if config.LOG_LEVEL == "WARN":
         log4j.LogManager.getRootLogger().setLevel(log4j.Level.WARN)
     else:
@@ -51,10 +69,16 @@ def get_hdfs_file_handler(sc=None):
 
 
 def make_sure_hdfs_path_exist(path, sc=None):
+    owns_sc = sc is None
+
     fs, opath, sc = get_hdfs_file_handler(sc)
+
     fs.delete(opath(path), True)
     fs.mkdirs(opath(path))
-    sc.stop()
+
+    if owns_sc:
+        sc.stop()
+
     return path
 
 

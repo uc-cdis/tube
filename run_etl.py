@@ -1,4 +1,5 @@
 import argparse
+import time
 import tube.settings as config
 import tube.enums as enums
 import tube.etl.indexers.interpreter as interpreter
@@ -10,22 +11,42 @@ from tube.etl.outputs.es.timestamp import check_to_run_etl
 from opensearchpy import OpenSearch
 from py4j.protocol import Py4JJavaError
 
-
 def run_import():
     """
-    Define the spark context and parse agruments into config
+    Import PostgreSQL data into Hadoop.
     """
+
+    started_at = time.monotonic()
+
     try:
-        sql_to_hdfs = SqlToHDFS(config, BaseFormatter())
-        stream = sql_to_hdfs.generate_import_all_tables()
+        sql_to_hdfs = SqlToHDFS(
+            config,
+            BaseFormatter(),
+        )
+
+        stream = (
+            sql_to_hdfs.generate_import_all_tables()
+        )
+
         if stream is None:
             return
+
         for line in stream:
             print(line.rstrip())
-    except Exception as ex:
+
+    except Exception:
         print("ERROR when running import to hadoop")
         print(traceback.format_exc())
         raise
+
+    finally:
+        elapsed = time.monotonic() - started_at
+
+        print(
+            "Import completed in {:.2f} seconds".format(
+                elapsed
+            )
+        )
 
 
 def run_transform():

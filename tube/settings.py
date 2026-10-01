@@ -48,8 +48,39 @@ HDFS_DIR = "/result"
 # Three modes: Test, Dev, Prod
 RUNNING_MODE = os.getenv("RUNNING_MODE", enums.RUNNING_MODE_DEV)  # 'Prod' or 'Dev'
 
-PARALLEL_JOBS = 1
+PARALLEL_JOBS = int(os.getenv("PARALLEL_JOBS", "1"))
+
+ES_WRITE_PARTITIONS = int(
+    os.getenv("ES_WRITE_PARTITIONS", "0")
+)
+
+ES_BATCH_SIZE_BYTES = os.getenv(
+    "ES_BATCH_SIZE_BYTES",
+    "1mb",
+)
+
+ES_BATCH_SIZE_ENTRIES = os.getenv(
+    "ES_BATCH_SIZE_ENTRIES",
+    "1000",
+)
+
+SPARK_SQL_SHUFFLE_PARTITIONS = os.getenv(
+    "SPARK_SQL_SHUFFLE_PARTITIONS",
+    "",
+)
+
+SPARK_DEFAULT_PARALLELISM = os.getenv(
+    "SPARK_DEFAULT_PARALLELISM",
+    "",
+)
+
+SPARK_PYSPARK_MEMORY = os.getenv(
+    "SPARK_PYSPARK_MEMORY",
+    "",
+)
+
 LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
+
 
 ES_SPARK_CONFIG = {
     "es.nodes": ES_URL,
@@ -60,6 +91,8 @@ ES_SPARK_CONFIG = {
     "es.nodes.discovery": "false",
     "es.nodes.data.only": "false",
     "es.nodes.wan.only": "true",
+    "es.batch.size.bytes": ES_BATCH_SIZE_BYTES,
+    "es.batch.size.entries": ES_BATCH_SIZE_ENTRIES,
 }
 
 ES_CONNECTION_CONFIG = {

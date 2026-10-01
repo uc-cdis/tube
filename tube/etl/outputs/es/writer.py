@@ -55,9 +55,15 @@ class Writer(SparkBase):
     def write_df_to_new_index(self, df, index, doc_type):
         es_config = self.es_config
         es_config["es.resource"] = index
-        df = (
-            df.coalesce(1)
-            .write.format("org.elasticsearch.spark.sql")
+
+        if self.config.ES_WRITE_PARTITIONS > 0:
+            current_partitions = df.rdd.getNumPartitions()
+
+            if current_partitions > self.config.ES_WRITE_PARTITIONS:
+                df = df.coalesce(self.config.ES_WRITE_PARTITIONS)
+
+        writer = (
+            df.write.format("org.elasticsearch.spark.sql")
             .option("es.nodes", es_config["es.nodes"])
             .option("es.port", es_config["es.port"])
             .option("es.nodes.wan.only", "true")
@@ -66,15 +72,29 @@ class Writer(SparkBase):
             .option("es.nodes.client.only", es_config["es.nodes.client.only"])
             .option("es.resource", es_config["es.resource"])
             .option("es.net.ssl", es_config["es.net.ssl"])
+            .option(
+                "es.batch.size.bytes",
+                es_config["es.batch.size.bytes"],
+            )
+            .option(
+                "es.batch.size.entries",
+                es_config["es.batch.size.entries"],
+            )
         )
+
         if (
             "es.net.http.auth.user" in es_config
             and "es.net.http.auth.pass" in es_config
         ):
-            df = df.option(
-                "es.net.http.auth.user", es_config["es.net.http.auth.user"]
-            ).option("es.net.http.auth.pass", es_config["es.net.http.auth.pass"])
-        df.save(index)
+            writer = writer.option(
+                "es.net.http.auth.user",
+                es_config["es.net.http.auth.user"],
+            ).option(
+                "es.net.http.auth.pass",
+                es_config["es.net.http.auth.pass"],
+            )
+
+        writer.save(index)        
 
     def create_guppy_array_config(self, parser):  # etl_index_name, types, array_types):
         """
