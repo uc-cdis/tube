@@ -50,21 +50,33 @@ def run_import():
 
 
 def run_transform():
+    sc = None
+
     try:
         sc = make_spark_context(config)
-        translators = interpreter.create_translators(sc, config)
+        translators = interpreter.create_translators(
+            sc,
+            config,
+        )
         interpreter.run_transform(translators)
+
     except Py4JJavaError as py4J_ex:
-        print("ERROR when connecting to spark. Please roll spark")
+        print(
+            "ERROR when connecting to spark. "
+            "Please roll spark"
+        )
         print(py4J_ex)
         print(traceback.format_exc())
+
     except Exception as ex:
         print("ERROR when running transformation")
         print(ex)
         print(traceback.format_exc())
         raise
+
     finally:
-        sc.stop()
+        if sc is not None:
+            sc.stop()
 
 
 def config_by_args():

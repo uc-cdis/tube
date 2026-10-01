@@ -48,6 +48,20 @@ HDFS_DIR = "/result"
 # Three modes: Test, Dev, Prod
 RUNNING_MODE = os.getenv("RUNNING_MODE", enums.RUNNING_MODE_DEV)  # 'Prod' or 'Dev'
 
+DB_IMPORT_MODE = os.getenv(
+    "DB_IMPORT_MODE",
+    "sqoop",
+)
+
+JDBC_FETCH_SIZE = int(
+    os.getenv("JDBC_FETCH_SIZE", "5000")
+)
+
+POSTGRES_JDBC_JAR = os.getenv(
+    "POSTGRES_JDBC_JAR",
+    "/opt/jdbc/postgresql.jar",
+)
+
 PARALLEL_JOBS = int(os.getenv("PARALLEL_JOBS", "1"))
 
 ES_WRITE_PARTITIONS = int(
@@ -135,10 +149,18 @@ SPARK_EXECUTOR_MEMORY = os.getenv("SPARK_EXECUTOR_MEMORY", "2g")
 SPARK_DRIVER_MEMORY = os.getenv("SPARK_DRIVER_MEMORY", "512m")
 APP_NAME = "Gen3 ETL"
 
-os.environ[
-    "PYSPARK_SUBMIT_ARGS"
-] = "--jars {}/dist/elasticsearch-spark-20_2.11-{}.jar pyspark-shell".format(
-    ES_HADOOP_HOME_BIN, ES_HADOOP_VERSION
+ES_SPARK_JAR = (
+    "{}/dist/elasticsearch-spark-20_2.11-{}.jar".format(
+        ES_HADOOP_HOME_BIN,
+        ES_HADOOP_VERSION,
+    )
+)
+
+os.environ["PYSPARK_SUBMIT_ARGS"] = (
+    "--jars {},{} pyspark-shell".format(
+        ES_SPARK_JAR,
+        POSTGRES_JDBC_JAR,
+    )
 )
 os.environ["HADOOP_CLIENT_OPTS"] = os.getenv("HADOOP_CLIENT_OPTS", "")
 

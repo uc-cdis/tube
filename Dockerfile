@@ -42,6 +42,8 @@ COPY --from=base /venv /venv
 COPY --from=base /${appname} /${appname}
 
 ENV SQOOP_VERSION="1.4.7" \
+    POSTGRES_JDBC_VERSION="42.7.8" \
+    POSTGRES_JDBC_JAR="/opt/jdbc/postgresql.jar" \
     HADOOP_VERSION="3.3.2" \
     ES_HADOOP_VERSION="8.3.3" \
     OPENSEARCH_HADOOP_VERSION="1.0.1" \
@@ -90,7 +92,11 @@ RUN wget --quiet --no-verbose ${SQOOP_INSTALLATION_URL} \
     && rm sqoop-${SQOOP_VERSION}.bin__hadoop-2.6.0.tar.gz \
     && rm -rf $SQOOP_HOME/docs
 
-RUN wget --quiet --no-verbose https://jdbc.postgresql.org/download/postgresql-42.2.4.jar -O $SQOOP_HOME/lib/postgresql-42.2.4.jar \
+RUN mkdir -p /opt/jdbc \
+    && wget --quiet --no-verbose \
+      "https://jdbc.postgresql.org/download/postgresql-${POSTGRES_JDBC_VERSION}.jar" \
+      -O "${POSTGRES_JDBC_JAR}" \
+    && cp "${POSTGRES_JDBC_JAR}" "$SQOOP_HOME/lib/postgresql.jar" \
     && wget --quiet --no-verbose https://dlcdn.apache.org//commons/lang/binaries/commons-lang-2.6-bin.tar.gz \
     && tar -xvf commons-lang-2.6-bin.tar.gz \
     && rm commons-lang-2.6-bin.tar.gz \
