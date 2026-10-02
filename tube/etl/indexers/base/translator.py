@@ -71,6 +71,8 @@ class Translator(object):
         self.hdfs_path = hdfs_path
         self.parser = parser
         self.current_step = 0
+        self.current_df = None
+        self._persisted_current_dfs = []
         self.mapping_dictionary = {}
         self.mapping_broadcasted = None
 
@@ -493,7 +495,43 @@ class Translator(object):
             self.hdfs_path, "output", "{}__{}".format(self.parser.doc_type, str(step))
         )
 
+    def set_current_dataframe(self, df):
+        """Keep an intermediate DataFrame in-process without consuming executor heap.
+
+        DISK_ONLY avoids the HDFS/Parquet write-read round trip while keeping large
+        transformed datasets out of executor memory. Older persisted versions are
+        retained until the ETL finishes because newer DataFrames may still reference
+        them through Spark lineage.
+        """
+        if df is None:
+            self.current_df = None
+            return None
+
+        persisted_df = df.persist(StorageLevel.DISK_ONLY)
+        self.current_df = persisted_df
+        self._persisted_current_dfs.append(persisted_df)
+        return persisted_df
+
+    def get_current_dataframe(self):
+        return self.current_df
+
+    def clear_current_dataframes(self):
+        seen = set()
+        for df in self._persisted_current_dfs:
+            try:
+                key = id(df)
+                if key in seen:
+                    continue
+                seen.add(key)
+                df.unpersist()
+            except Exception:
+                pass
+        self._persisted_current_dfs = []
+        self.current_df = None
+
     def save_dataframe_to_hadoop(self, df):
+        # Legacy compatibility path. The optimized interpreter uses
+        # set_current_dataframe() instead.
         save_rdd_of_dataframe(df, self.get_path_from_step(self.current_step), self.sc)
         df.unpersist()
 
@@ -523,17 +561,30 @@ class Translator(object):
         return self.sc.pickleFile(self.get_path_from_step(self.current_step - 1))
 
     def load_from_hadoop_to_dateframe(self):
+        # Optimized path: translator intermediates stay in-process on executor-local
+        # disk. Fall back to HDFS for compatibility with older execution paths.
+        if self.current_df is not None:
+            return self.current_df
         return self.sql_context.sparkSession.read.parquet(
             self.get_path_from_step(self.current_step - 1)
         )
 
-    def join_two_dataframe(self, df1, df2, how="inner"):
+    def join_two_dataframe(self, df1, df2, how="inner", deduplicate=None):
         join_on_props = [p for p in df1.schema.names if p in df2.schema.names]
         if len(join_on_props) == 0:
             return self.get_empty_dataframe_with_columns([])
-        res_df = df1.join(df2, on=join_on_props, how=how).drop_duplicates()
-        df1.unpersist()
-        df2.unpersist()
+
+        res_df = df1.join(df2, on=join_on_props, how=how)
+
+        if deduplicate is None:
+            deduplicate = config.DEDUPLICATE_AFTER_JOIN
+
+        if deduplicate:
+            res_df = res_df.drop_duplicates()
+
+        # Do not implicitly unpersist inputs here. They may be shared JDBC source
+        # tables or translator intermediates reused by later joins. Lifecycle cleanup
+        # is handled explicitly after the ETL completes.
         return res_df
 
     def translate_joining_props(self, translators):

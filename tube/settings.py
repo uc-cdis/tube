@@ -35,6 +35,10 @@ if DB_USE_SSL:
 DB_IMPORT_MODE = os.getenv("DB_IMPORT_MODE", "sqoop")
 JDBC_FETCH_SIZE = int(os.getenv("JDBC_FETCH_SIZE", "5000"))
 JDBC_READ_PARTITIONS = int(os.getenv("JDBC_READ_PARTITIONS", "1"))
+
+DEDUPLICATE_AFTER_JOIN = os.getenv(
+    "DEDUPLICATE_AFTER_JOIN", "true"
+).lower() in ("1", "true", "yes", "on")
 POSTGRES_JDBC_JAR = os.getenv(
     "POSTGRES_JDBC_JAR",
     "/opt/jdbc/postgresql.jar",
