@@ -111,14 +111,23 @@ RUN wget --quiet --no-verbose ${MAVEN_ES_SPARK_VERSION}.jar -O ${ES_HADOOP_HOME_
     && wget --quiet --no-verbose ${MAVEN_ES_SPARK_VERSION}-javadoc.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${ES_SPARK_20_2_11}-${ES_HADOOP_VERSION}-javadoc.jar \
     && wget --quiet --no-verbose ${MAVEN_ES_SPARK_VERSION}-sources.jar -O ${ES_HADOOP_HOME_VERSION}/dist/${ES_SPARK_20_2_11}-${ES_HADOOP_VERSION}-sources.jar
 
+# OpenShift runs containers with an arbitrary UID in the root group (GID 0), so everything the
+# ETL writes to (hadoop/spark config rewritten by run_config.py, /tube, /result) must be owned by
+# GID 0 and group-writable. Done in the same layer as creation to avoid duplicating /hadoop.
+# /etc/passwd is group-writable so the chart can add an entry for the random UID at startup.
 RUN mkdir -p $ACCUMULO_HOME $HIVE_HOME $HBASE_HOME $HCAT_HOME $ZOOKEEPER_HOME && \
-    chown -R gen3:gen3 $HADOOP_HOME && \
     mkdir -p /result && \
-    chown -R gen3:gen3 /result
+    chown -R gen3:0 $HADOOP_HOME /result /tube && \
+    chmod -R g=u $HADOOP_HOME /result /tube && \
+    chmod g=u /etc/passwd
 
 ENV PATH=${SQOOP_HOME}/bin:${HADOOP_HOME}/sbin:$HADOOP_HOME/bin:${JAVA_HOME}/bin:${PATH}
 
-USER gen3
+# Arbitrary UIDs have no home directory
+ENV HOME=/tmp
+
+# Numeric UID:GID 0; OpenShift overrides the UID but keeps GID 0
+USER 1000:0
 
 ENV PATH="/venv/bin:$PATH" \
     VIRTUAL_ENV="/venv" \
