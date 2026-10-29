@@ -32,3 +32,14 @@ def test_create_prop_from_json():
     parser = InjectionParser(mapping, model, dictionary)
     for prop in parser.props:
         assert prop.type is not None
+
+
+def test_select_widest_type():
+    """Props without type info (not in the dictionary) default to str instead of raising."""
+    from tube.etl.indexers.base.parser import Parser
+
+    assert Parser.select_widest_type(None) is str
+    assert Parser.select_widest_type([]) is str
+    assert Parser.select_widest_type([str, int]) is int
+    assert Parser.select_widest_type([int, float]) is float
+    assert Parser.select_widest_type([bool]) is bool

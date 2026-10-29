@@ -125,6 +125,10 @@ class Parser(object):
 
     @staticmethod
     def select_widest_type(types):
+        # Mapping props that are not in the dictionary (e.g. derived names such as
+        # `portion_submitter_id`) have no type information: default them to str.
+        if not types:
+            return str
         if float in types:
             return float
         elif int in types:
