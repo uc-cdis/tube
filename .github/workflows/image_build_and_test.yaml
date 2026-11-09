@@ -113,12 +113,18 @@ jobs:
         working-directory: ../compose-etl
         run: sudo sysctl -w vm.max_map_count=262144
 
-        # Workaround: missing ps in gen3-spark
-      - name: Tolerate daemon start exit codes
+        # Workaround: missing 'ps' in gen3-spark - remove this block when 'ps' is installed
+      # - name: Tolerate daemon start exit codes
+      #   working-directory: ../compose-etl
+      #   run: |
+      #     sed -i -E 's/((hdfs|yarn) --daemon start [a-z]+)/\1 || true/g' docker-compose.yml
+      #     grep command: docker-compose.yml
+
+      - name: Use gen3-spark test branch
         working-directory: ../compose-etl
         run: |
-          sed -i -E 's/((hdfs|yarn) --daemon start [a-z]+)/\1 || true/g' docker-compose.yml
-          grep command: docker-compose.yml
+          sed -i "s/gen3-spark:master/gen3-spark:fix_add-ps/g" docker-compose.yml
+          grep -n "gen3-spark" docker-compose.yml
 
       - name: Run spark and ElasticSearch
         working-directory: ../compose-etl
@@ -192,25 +198,37 @@ jobs:
           coveralls
 
   # temporary diagnostic job
+  # spark-smoke:
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       os: [ubuntu-22.04]
+  #   runs-on: ${{ matrix.os }}
+  #   steps:
+  #     - run: git clone https://github.com/uc-cdis/compose-etl.git --branch master --single-branch
+  #     - working-directory: compose-etl
+  #       run: |
+  #         docker run --rm quay.io/cdis/gen3-spark:master bash -c 'which ps || echo "ps MISSING"'
+  #         docker version --format 'docker={{.Server.Version}}'
+  #         docker run --rm -e HADOOP_URL=hdfs://0.0.0.0:9000 -e HADOOP_HOST=0.0.0.0 \
+  #           quay.io/cdis/gen3-spark:master bash -c '
+  #           python run_config.py && hdfs namenode -format >/dev/null 2>&1
+  #           hdfs --daemon start namenode; echo "namenode exit=$?"
+  #           hdfs --daemon start datanode; echo "datanode exit=$?"'
+
   spark-smoke:
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-22.04, ubuntu-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-22.04
     steps:
-      - run: git clone https://github.com/uc-cdis/compose-etl.git --branch master --single-branch
-      - working-directory: compose-etl
-        run: |
-          docker run --rm quay.io/cdis/gen3-spark:master bash -c 'which ps || echo "ps MISSING"'
-          docker version --format 'docker={{.Server.Version}}'
+      - run: |
+          docker run --rm quay.io/cdis/gen3-spark:fix_add-ps bash -c 'which ps || echo "ps MISSING"'
           docker run --rm -e HADOOP_URL=hdfs://0.0.0.0:9000 -e HADOOP_HOST=0.0.0.0 \
-            quay.io/cdis/gen3-spark:master bash -c '
+            quay.io/cdis/gen3-spark:fix_add-ps bash -c '
             python run_config.py && hdfs namenode -format >/dev/null 2>&1
             hdfs --daemon start namenode; echo "namenode exit=$?"
             hdfs --daemon start datanode; echo "datanode exit=$?"'
 
-      - name: Dump compose logs on failure
-        if: failure()
-        working-directory: ../compose-etl
-        run: docker compose logs --no-color
+
+      # - name: Dump compose logs on failure
+      #   if: failure()
+      #   working-directory: ../compose-etl
+      #   run: docker compose logs --no-color
