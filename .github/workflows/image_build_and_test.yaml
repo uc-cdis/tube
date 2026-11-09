@@ -143,9 +143,10 @@ jobs:
         working-directory: ../compose-etl
         run: |
           docker ps -a
-          docker inspect --format 'status={{.State.Status}} exit={{.State.ExitCode}} oom={{.State.OOMKilled}}' compose-etl-spark-1 || true
-          docker compose exec -T spark bash -c 'which ps || echo "ps MISSING"; ls /hadoop/logs; tail -n 30 /hadoop/logs/*namenode*.log' || true
-          docker compose exec -T spark hdfs dfs -ls / || true
+          docker inspect --format 'status={{.State.Status}} exit={{.State.ExitCode}}' compose-etl-spark-1 || true
+          docker cp compose-etl-spark-1:/hadoop/logs /tmp/hadoop-logs || true
+          ls /tmp/hadoop-logs || true
+          tail -n 40 /tmp/hadoop-logs/*resourcemanager* /tmp/hadoop-logs/*nodemanager* || true
 
       - name: Check all containers
         run: docker ps
@@ -216,17 +217,33 @@ jobs:
   #           hdfs --daemon start namenode; echo "namenode exit=$?"
   #           hdfs --daemon start datanode; echo "datanode exit=$?"'
 
+  # spark-smoke:
+  #   runs-on: ubuntu-22.04
+  #   steps:
+  #     - run: |
+  #         docker run --rm quay.io/cdis/gen3-spark:fix_add-ps bash -c 'which ps || echo "ps MISSING"'
+  #         docker run --rm -e HADOOP_URL=hdfs://0.0.0.0:9000 -e HADOOP_HOST=0.0.0.0 \
+  #           quay.io/cdis/gen3-spark:fix_add-ps bash -c '
+  #           python run_config.py && hdfs namenode -format >/dev/null 2>&1
+  #           hdfs --daemon start namenode; echo "namenode exit=$?"
+  #           hdfs --daemon start datanode; echo "datanode exit=$?"'
+
   spark-smoke:
     runs-on: ubuntu-22.04
     steps:
       - run: |
-          docker run --rm quay.io/cdis/gen3-spark:fix_add-ps bash -c 'which ps || echo "ps MISSING"'
           docker run --rm -e HADOOP_URL=hdfs://0.0.0.0:9000 -e HADOOP_HOST=0.0.0.0 \
             quay.io/cdis/gen3-spark:fix_add-ps bash -c '
             python run_config.py && hdfs namenode -format >/dev/null 2>&1
             hdfs --daemon start namenode; echo "namenode exit=$?"
-            hdfs --daemon start datanode; echo "datanode exit=$?"'
-
+            hdfs --daemon start datanode; echo "datanode exit=$?"
+            yarn --daemon start resourcemanager; echo "rm exit=$?"
+            yarn --daemon start nodemanager; echo "nm exit=$?"
+            hdfs dfsadmin -safemode leave; echo "safemode exit=$?"
+            hdfs dfs -mkdir /result; echo "mkdir exit=$?"
+            sleep 5
+            tail -n 40 /hadoop/logs/*resourcemanager*.log /hadoop/logs/*resourcemanager*.out
+            tail -n 40 /hadoop/logs/*nodemanager*.log /hadoop/logs/*nodemanager*.out'
 
       # - name: Dump compose logs on failure
       #   if: failure()
