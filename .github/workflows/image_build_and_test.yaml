@@ -237,6 +237,7 @@ jobs:
             python run_config.py && hdfs namenode -format >/dev/null 2>&1
             hdfs --daemon start namenode; echo "namenode exit=$?"
             hdfs --daemon start datanode; echo "datanode exit=$?"
+            curl -sSL -o /hadoop/share/hadoop/yarn/lib/javax.activation-api-1.2.0.jar https://repo1.maven.org/maven2/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar
             yarn --daemon start resourcemanager; echo "rm exit=$?"
             yarn --daemon start nodemanager; echo "nm exit=$?"
             hdfs dfsadmin -safemode leave; echo "safemode exit=$?"
