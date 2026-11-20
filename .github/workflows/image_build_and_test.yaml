@@ -16,7 +16,7 @@ jobs:
   # then run the tests
   test:
     name: Run tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: build
 
     services:
@@ -173,3 +173,19 @@ jobs:
         run: |
           pip install coveralls
           coveralls
+
+        # Catch diagnostics on failure
+      - name: Spark diagnostics
+        if: failure()
+        working-directory: ../compose-etl
+        run: |
+          docker ps -a
+          docker inspect --format 'status={{.State.Status}} exit={{.State.ExitCode}}' compose-etl-spark-1 || true
+          docker cp compose-etl-spark-1:/hadoop/logs /tmp/hadoop-logs || true
+          ls /tmp/hadoop-logs || true
+          tail -n 40 /tmp/hadoop-logs/*resourcemanager* /tmp/hadoop-logs/*nodemanager* || true
+
+      - name: Dump compose logs on failure
+        if: failure()
+        working-directory: ../compose-etl
+        run: docker compose logs --no-color
